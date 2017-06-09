@@ -22,10 +22,11 @@
     "cross-env": "^5.0.1",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
+    "sass": "^1.0.0-beta.1",
     "vue": "^2.3.4",
-    "vuex": "^2.3.1",
-    "vue-template-compiler": "^2.1.0",
     "vue-loader": "^10.0.0",
+    "vue-template-compiler": "^2.1.0",
+    "vuex": "^2.3.1",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.1.0-beta.0"
   }
