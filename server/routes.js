@@ -16,6 +16,8 @@ routes.post('/signup', userController.post);
 // Group routes
 routes.post('/addgroup', groupController.post);
 routes.delete('/deletegroup', groupController.delete);
-routes.patch('/updategroup', groupController.update);
+routes.patch('/updategroup', groupController.addStudent);
+routes.get('/getgroups/:id', groupController.getGroups);
+routes.get('/group/:id', groupController.getGroup);
 
 export default routes;
