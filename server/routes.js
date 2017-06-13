@@ -1,4 +1,7 @@
 import express from 'express';
+import expressJWT from 'express-jwt';
+
+import secret from './secret';
 
 // Controller imports
 import basicConstroller from './controllers/basicController';
@@ -11,13 +14,14 @@ const routes = express();
 routes.get('/', basicConstroller.get);
 
 // User routes
-routes.post('/signup', userController.post);
+routes.post('/signup', expressJWT({secret}), userController.post);
+routes.post('/login', userController.login);
 
 // Group routes
-routes.post('/addgroup', groupController.post);
-routes.delete('/deletegroup', groupController.delete);
-routes.patch('/updategroup', groupController.addStudent);
-routes.get('/getgroups/:id', groupController.getGroups);
-routes.get('/group/:id', groupController.getGroup);
+routes.post('/addgroup', expressJWT({secret}), groupController.post);
+routes.delete('/deletegroup', expressJWT({secret}), groupController.delete);
+routes.patch('/updategroup', expressJWT({secret}), groupController.addStudent);
+routes.post('/getgroups', expressJWT({secret}), groupController.getGroups);
+routes.post('/group', expressJWT({secret}), groupController.getGroup);
 
 export default routes;

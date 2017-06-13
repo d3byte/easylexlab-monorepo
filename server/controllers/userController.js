@@ -1,3 +1,7 @@
+import verifyPassword from 'mongoose-bcrypt';
+import jwt from 'jsonwebtoken';
+import secret from './../secret';
+
 import db from './../models';
 
 const userController = {};
@@ -9,8 +13,6 @@ userController.post = (req, res) => {
     group,
     permissions
   } = req.body;
-
-  // Validation
 
   const user = new db.User({
     username,
@@ -29,7 +31,49 @@ userController.post = (req, res) => {
       message: err
     });
   });
-  
+
+};
+
+userController.login = (req, res) => {
+  const { username, password } = req.body;
+
+  db.User.findOne({username: username}).then((user) => {
+    user.verifyPassword(password).then((valid) => {
+      if(valid) {
+        console.log('Valid promise');
+        console.log(user);
+        const token = jwt.sign(
+          {
+            username: user.username,
+            id: user._id,
+            permissions: user.permissions,
+            group: user._group
+          },
+          secret,
+          { expiresIn: '2 days' }
+      );
+      res.status(200).json({
+        success: valid,
+        token
+      });
+      } else {
+        console.log('Invalid promise');
+        res.status(200).json({
+          success: valid
+        });
+      }
+    }).catch((err) => {
+      console.log('Error');
+      res.status(500).json({
+        message: err
+      });
+    });
+  }).catch((err) => {
+    res.status(500).json({
+      message: err
+    });
+  });
+
 };
 
 export default userController;

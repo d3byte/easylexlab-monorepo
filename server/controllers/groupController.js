@@ -1,15 +1,16 @@
 import db from './../models';
+import secret from './../secret';
 
 const groupController = {};
 
 // New group
 groupController.post = (req, res) => {
   const {
-    userId,
     name,
-    grade,
-    teacher
+    grade
   } = req.body;
+
+  const userId = req.user.id;
 
   db.User.findById(userId, (err, user) => {
     if (err)
@@ -23,7 +24,7 @@ groupController.post = (req, res) => {
         const group = new db.Group({
           name,
           grade,
-          _teacher: teacher
+          _teacher: userId
         });
 
         group.save().then((newGroup) => {
@@ -51,10 +52,8 @@ groupController.post = (req, res) => {
 
 // Remove group
 groupController.delete = (req, res) => {
-  const {
-    userId,
-    groupId
-  } = req.body;
+  const groupId = req.body;
+  const userId = req.user.id;
 
   db.User.findById(userId, (err, user) => {
     if (err)
@@ -92,10 +91,11 @@ groupController.delete = (req, res) => {
 // Add student
 groupController.addStudent = (req, res) => {
   const {
-    userId,
     groupId,
     studentId
   } = req.body;
+
+  const userId = req.user.id;
 
   db.User.findById(userId, (err, user) => {
     if (err)
@@ -133,7 +133,8 @@ groupController.addStudent = (req, res) => {
 
 // Get groups of teacher
 groupController.getGroups = (req, res) => {
-  const userId = req.params.id;
+  const userId = req.user.id;
+
   db.Group.find({_teacher: userId}).populate({
     path: '_teacher',
     select: 'username createdAt -_id',
@@ -146,7 +147,7 @@ groupController.getGroups = (req, res) => {
     return res.status(200).json({
       success: true,
       data: groups
-    })
+    });
   }).catch((err) => {
     res.status(500).json({
       message: err
@@ -155,9 +156,10 @@ groupController.getGroups = (req, res) => {
 
 };
 
-// Watch exact one group
+// Watch one exact group
 groupController.getGroup = (req, res) => {
-  const groupId = req.params.id;
+  const groupId = req.body.id;
+
   db.Group.findById(groupId).populate({
     path: '_students',
     select: 'username createdAt',
