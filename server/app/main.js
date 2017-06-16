@@ -14,5 +14,6 @@ const router = new VueRouter({routes, mode: 'history'});
 new Vue({
   el: "#app",
   router,
+  store,
   render: h => h(App)
 });
