@@ -3,7 +3,7 @@
     <nav class="header">
       <div class="left">
         <h3 class="naming">
-          <router-link to="/" tabindex="-1">EasyLexLab</router-link>
+          <router-link to="/" tabindex="-1">EasyFlexLab</router-link>
         </h3>
       </div>
       <div class="right">
@@ -48,7 +48,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout');
-
+      localStorage.clear();
       this.$router.push({ path: '/' });
     }
   }

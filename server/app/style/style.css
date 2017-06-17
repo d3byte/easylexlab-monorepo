@@ -132,3 +132,7 @@ a {
 .errormsg {
   color: #DB5461 !important;
 }
+
+.sendmail {
+  margin-top: 250px;
+}
