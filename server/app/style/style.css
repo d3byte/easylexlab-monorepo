@@ -62,6 +62,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 100vh;
   background: #565554;
 }
@@ -74,13 +75,13 @@ a {
   border: none;
   color: white;
   font-size: 20px;
+  transition: 1s;
 } .login-form input, .login-form label {
   margin-left: 10px;
 } .login-form input:active,
   .login-form input:focus {
     outline: none;
-} .password input {
-  font-size: 16px;
+    border-bottom: 1px solid black;
 }
 
 .login-form .username {
@@ -93,9 +94,9 @@ a {
   content: " ";
   position: absolute;
   width: 4px;
-  height: 40px;
+  height: 45px;
   left: 0;
-  bottom: 10px;
+  bottom: 5px;
   background: #FCA311;
   border-radius: 15px;
   box-shadow: 0px 0px 5px #FCA311;
@@ -106,6 +107,7 @@ a {
   color: #FCA311;
   font-size: 26px;
   transition: 0.2s;
+  margin-top: 20px;
 } .login-form .btn:hover {
   color: #CCDAD1;
   cursor: pointer;
@@ -125,4 +127,8 @@ a {
 } .recover:hover {
   color: #FCA311;
   text-decoration: none;
+}
+
+.errormsg {
+  color: #DB5461 !important;
 }
