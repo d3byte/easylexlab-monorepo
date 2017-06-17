@@ -11,6 +11,7 @@ import Profile from './components/Profile.vue';
 import Settings from './components/Settings.vue';
 import NewGroup from './components/NewGroup.vue';
 import NewTask from './components/NewTask.vue';
+import Groups from './components/Groups.vue';
 
 
 Vue.use(VueRouter);
@@ -33,6 +34,10 @@ const routes = [
       {
         path: 'newtask',
         component: NewTask
+      },
+      {
+        path: '',
+        component: Groups
       }
     ]
   }

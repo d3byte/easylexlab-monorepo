@@ -10,7 +10,7 @@
         <h3 class="login">
           <router-link v-if="!logged" class="login" to="/login">Вход</router-link>
           <div v-else>
-            <router-link class="login" to="/profile" tabindex="-1">Привет, <b>{{ username }}</b>!</router-link><br>
+            <router-link class="login" to="/profile" tabindex="-1">Профиль</router-link><br>
             <span @click="logout" class="login logout" tabindex="-1">Выход</span>
           </div>
         </h3>
@@ -40,9 +40,6 @@ export default {
   computed: {
     logged() {
       return this.$store.getters.loginState;
-    },
-    username() {
-      return jwtDecode(this.$store.getters.userToken).username;
     }
   },
   methods: {

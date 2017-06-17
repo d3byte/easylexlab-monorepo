@@ -7,11 +7,11 @@
         </div>
         <form class="login-form" onsubmit="return false">
           <div class="username">
-            <label>Имя пользователя</label><br>
+            <label><i class="fa fa-id-card" aria-hidden="true"></i> Имя пользователя</label><br>
             <input v-model="username" required type="text" name="username" tabindex="1">
           </div>
           <div class="password">
-            <label>Пароль</label><br>
+            <label><i class="fa fa-lock" aria-hidden="true"></i> Пароль</label><br>
             <input v-model="password" required type="password" name="password" tabindex="2">
           </div>
           <router-link class="recover" to="/recover" tabindex="-1">Забыли пароль?</router-link>

@@ -1,20 +1,22 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-6">
+        <h5>Личная страница</h5>
         <h3 class="name">{{ user.username }}</h3>
-        <h5 class="role">Учитель</h5>
       </div>
-      <div class="col-lg-2">
-        <router-link class="login" to="/profile/settings">Настройки аккаунта</router-link>
+      <div class="col-lg-3">
+        <router-link to="/profile/settings">
+          <button class="btn"><i class="fa fa-cogs" aria-hidden="true"></i> Настройки</button>
+        </router-link>
       </div>
-      <div class="col-lg-2">
-        <router-link class="login" to="/profile/newgroup">Создать группу</router-link>
-      </div>
-      <div class="col-lg-2">
-        <router-link class="login" to="/profile/newtask">Создать задание</router-link>
+      <div class="col-lg-3">
+        <router-link to="/profile/newgroup">
+          <button class="btn"><i class="fa fa-pencil" aria-hidden="true"></i> Создать группу</button>
+        </router-link>
       </div>
     </div>
+    <hr>
     <router-view></router-view>
   </div>
 </template>
@@ -30,4 +32,21 @@ export default {
 </script>
 
 <style lang="css">
+  .col-lg-3:first-of-type {
+    text-align: center;
+  } .col-lg-3:first-of-type h5:first-of-type,
+   .col-lg-3:first-of-type h3 {
+    margin: 5px;
+  }
+  .col-lg-4 {
+    text-align: center;
+  } a {
+    margin-right: 25px;
+  }
+
+  .btn {
+    transition: 0.3s;
+  } .btn:hover {
+    background: #FCA311;
+  }
 </style>
