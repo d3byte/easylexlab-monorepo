@@ -47,5 +47,8 @@
     "vue-template-compiler": "^2.1.0",
     "vuex": "^2.3.1",
     "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "nodemailer": "^4.0.1"
   }
 }
