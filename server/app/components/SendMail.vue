@@ -29,6 +29,11 @@ export default {
       name: '',
       email: ''
     }
+  },
+  methods: {
+    send() {
+
+    }
   }
 }
 </script>

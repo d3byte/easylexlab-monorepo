@@ -27,6 +27,15 @@ app.get('/login', (req, res) => {
 app.get('/profile', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/profile/settings', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+app.get('/profile/newgroup', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+app.get('/profile/newtask', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
 app.get('/logout', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });

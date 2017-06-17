@@ -136,3 +136,9 @@ a {
 .sendmail {
   margin-top: 250px;
 }
+
+.role {
+  color: #FCA311;
+} .name {
+  color: white !important;
+}
