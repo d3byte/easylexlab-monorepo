@@ -2,15 +2,13 @@
 
 * {
   font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
 }
 
 body {
   padding: 0;
   margin: 0;
-}
-
-#app {
-  padding-top: 50px;
+  background: #565554;
 }
 
 h1, h2, h3, h4, h5, h6, hr {
@@ -18,7 +16,12 @@ h1, h2, h3, h4, h5, h6, hr {
   background: transparent;
 }
 
+.naming:hover {
+  cursor: default !important;
+}
+
 .header {
+  box-shadow: 0px 1px 5px black;
   position: fixed;
   top: 0;
   min-width: 100%;
@@ -30,26 +33,96 @@ h1, h2, h3, h4, h5, h6, hr {
 } .left {
   float: left;
   width: auto;
+  font-size: 18px;
 } .left,
   .right {
     background: transparent;
-  }
+} .right {
+  float: right;
+  width: 15%;
+  text-align: left;
+}
 .scrolling {
   position: fixed;
   top: 0;
   z-index: 5;
-  border-bottom: 1px solid darkgray;
-  box-shadow: 2px 0 2px rgba(0, 0, 0, 0.5);
   background: #11213D;
-  font-size: 12px;
 }
 
-.login {
+a {
   transition: 0.2s;
   color: inherit;
+} a:hover, a:active, a:focus {
+  color: #CCDAD1;
+  text-decoration: none;
 }
 
-.login:hover {
+.parent-login {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #565554;
+}
+
+.login-form label {
+  color: #ccc;
+  font-size: 16px;
+} .login-form input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+} .login-form input, .login-form label {
+  margin-left: 10px;
+} .login-form input:active,
+  .login-form input:focus {
+    outline: none;
+} .password input {
+  font-size: 16px;
+}
+
+.login-form .username {
+  position: relative;
+  margin-bottom: 25px;
+} .login-form .password {
+  position: relative;
+} .login-form .username::before,
+  .login-form .password::before {
+  content: " ";
+  position: absolute;
+  width: 4px;
+  height: 40px;
+  left: 0;
+  bottom: 10px;
+  background: #FCA311;
+  border-radius: 15px;
+  box-shadow: 0px 0px 5px #FCA311;
+}
+
+.login-form .btn {
+  background: transparent;
+  color: #FCA311;
+  font-size: 26px;
+  transition: 0.2s;
+} .login-form .btn:hover {
   color: #CCDAD1;
+  cursor: pointer;
+}
+
+.logout {
+  font-size: 14px;
+} .logout:hover {
+  cursor: pointer;
+}
+
+.recover {
+  transition: 0.2s;
+  color: darkgray;
+  margin-left: 15px;
+  font-size: 12px;
+} .recover:hover {
+  color: #FCA311;
   text-decoration: none;
 }

@@ -21,11 +21,22 @@ const folder = __dirname + "/app/";
 app.get('/', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+app.get('/profile', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+app.get('/logout', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+
+
 
 app.use('/', express.static(folder));
 
 // Middleware
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 app.use('/api', routes);
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
 
