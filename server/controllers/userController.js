@@ -14,22 +14,30 @@ userController.post = (req, res) => {
     permissions
   } = req.body;
 
-  const user = new db.User({
-    username,
-    password,
-    _group: group,
-    permissions
-  });
+  db.findOne({username}, (err, user) => {
+    if(err)
+      throw err;
+    else if(user)
+      res.json({success: false});
+    else {
+      const user = new db.User({
+        username,
+        password,
+        _group: group,
+        permissions
+      });
 
-  user.save().then((newUser) => {
-    res.status(200).json({
-      success: true,
-      data: newUser
-    });
-  }).catch((err) => {
-    res.status(500).json({
-      message: err
-    });
+      user.save().then((newUser) => {
+        res.status(200).json({
+          success: true,
+          data: newUser
+        });
+      }).catch((err) => {
+        res.status(500).json({
+          message: err
+        });
+      });
+    }
   });
 
 };

@@ -40,17 +40,12 @@ app.get('/logout', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 
-
-
 app.use('/', express.static(folder));
+app.use('/profile', express.static(folder));
 
 // Middleware
 app.use(bodyParser.json());
 app.use('/api', routes);
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
 
 export default app;
