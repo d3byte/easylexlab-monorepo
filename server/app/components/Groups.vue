@@ -4,11 +4,13 @@
       <table>
         <tr>
           <th>Название</th>
+          <th>Класс</th>
           <th>Ученики</th>
           <th>Подробнее</th>
         </tr>
         <tr v-for="group in groups">
           <td>{{ group.name }}</td>
+          <td>{{ group.grade }}</td>
           <td>{{ group._students.length }}</td>
           <td>
             <router-link to="profile/group/ + group._id">Посмотреть</router-link>

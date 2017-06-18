@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style lang="css">
+  .row {
+    vertical-align: center;
+  }
   .col-lg-3:first-of-type {
     text-align: center;
   } .col-lg-3:first-of-type h5:first-of-type,

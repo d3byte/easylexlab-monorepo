@@ -45,8 +45,8 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout');
-      localStorage.clear();
       this.$router.push({ path: '/' });
+      localStorage.clear();
     }
   }
 }
