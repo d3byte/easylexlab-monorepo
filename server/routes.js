@@ -22,6 +22,6 @@ routes.post('/addgroup', expressJWT({secret}), groupController.post);
 routes.delete('/deletegroup', expressJWT({secret}), groupController.delete);
 routes.patch('/addstudent', expressJWT({secret}), groupController.addStudent);
 routes.post('/getgroups', expressJWT({secret}), groupController.getGroups);
-routes.post('/group', expressJWT({secret}), groupController.getGroup);
+routes.get('/group/:id', expressJWT({secret}), groupController.getGroup);
 
 export default routes;

@@ -13,7 +13,7 @@
           <td>{{ group.grade }}</td>
           <td>{{ group._students.length }}</td>
           <td>
-            <router-link to="profile/group/ + group._id">Посмотреть</router-link>
+            <span class="link" @click="goto(group._id)">Посмотреть</span>
           </td>
         </tr>
       </table>
@@ -32,6 +32,12 @@ export default {
   },
   http: {
     root: '/api'
+  },
+  methods: {
+    goto(id) {
+      const path = '/profile/group/' + id;
+      this.$router.push({ path, alias: '/watch' });
+    }
   },
   created() {
     this.$http.post('getgroups', {'id': this.user.id},
@@ -55,5 +61,12 @@ table {
 } td {
   padding: 10px;
   text-align: center;
+}
+
+.link {
+  transition: 0.3s;
+} .link:hover {
+  cursor: pointer;
+  color: #FCA311;
 }
 </style>

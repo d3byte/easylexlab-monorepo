@@ -4,7 +4,7 @@
       <h3>Создание группы</h3>
       <h5 class="success" v-if="success">
         Группа успешно создана!
-        <router-link to="/profile">Перейти</router-link>
+        <span class="link" @click="goto(group._id)"> Перейти</span>
       </h5>
       <h5 class="errormsg" v-if="error">
         Группа с таким именем уже существует.
@@ -40,6 +40,10 @@ export default {
     root: '/api'
   },
   methods: {
+    goto(id) {
+      const path = '/profile/group/' + id;
+      this.$router.push({ path });
+    },
     create() {
       if(this.name.length > 0 && this.grade > 0) {
         const body = {
@@ -79,5 +83,12 @@ export default {
 .name input,
 .grade input {
   border-bottom: 1px solid white;
+}
+
+.link {
+  transition: 0.3s;
+} .link:hover {
+  cursor: pointer;
+  color: #FCA311;
 }
 </style>

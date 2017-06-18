@@ -27,6 +27,9 @@ app.get('/login', (req, res) => {
 app.get('/profile', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/profile/group/:id', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
 app.get('/profile/settings', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
@@ -42,6 +45,7 @@ app.get('/logout', (req, res) => {
 
 app.use('/', express.static(folder));
 app.use('/profile', express.static(folder));
+app.use('/profile/group', express.static(folder));
 
 // Middleware
 app.use(bodyParser.json());

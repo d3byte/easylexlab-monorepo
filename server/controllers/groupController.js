@@ -166,7 +166,7 @@ groupController.getGroups = (req, res) => {
 
 // Watch one exact group
 groupController.getGroup = (req, res) => {
-  const groupId = req.body.id;
+  const groupId = req.params.id;
 
   db.Group.findById(groupId).populate({
     path: '_students',
