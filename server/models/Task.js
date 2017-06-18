@@ -5,12 +5,9 @@ const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
 const taskSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  _group: { type: Schema.ObjectId, ref: 'Group' },
-  content: [{type: String, required: true }]
+  name: { type: String, required: true },
+  repeat: { type: Number, default: 1 },
+  content: [{type: Object, required: true }]
 });
 
 const Task = mongoose.model('Task', taskSchema);
