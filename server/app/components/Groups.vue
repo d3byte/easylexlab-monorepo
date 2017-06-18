@@ -41,7 +41,12 @@ export default {
   },
   created() {
     this.$http.post('getgroups', {'id': this.user.id},
-    {headers: { 'Authorization': 'Bearer ' + this.token }}).then(res => {
+    {
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + this.token
+      }
+    }).then(res => {
       this.groups = res.body.data;
     }).catch(err => {
       throw err;

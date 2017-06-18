@@ -4,10 +4,10 @@
       <h3>Создание группы</h3>
       <h5 class="success" v-if="success">
         Группа успешно создана!
-        <span class="link" @click="goto(group._id)"> Перейти</span>
+        <span class="link" @click="goto(newGroupId)"> Перейти</span>
       </h5>
       <h5 class="errormsg" v-if="error">
-        Группа с таким именем уже существует.
+        {{ this.errormsg }}
       </h5>
       <form class="login-form" onsubmit="return false">
         <div class="name">
@@ -16,7 +16,7 @@
         </div>
         <div class="grade">
           <label>Класс</label><br>
-          <input v-model="grade" required type="number" name="grade" tabindex="2" min="1">
+          <input v-model="grade" required type="number" name="grade" tabindex="2" min="1" max="11">
         </div>
         <center><button @click="create" class="btn" name="create" tabindex="3">Создать</button></center>
       </form>
@@ -33,6 +33,7 @@ export default {
       grade: null,
       success: false,
       error: false,
+      errormsg: '',
       newGroupId: ''
     }
   },
@@ -45,7 +46,7 @@ export default {
       this.$router.push({ path });
     },
     create() {
-      if(this.name.length > 0 && this.grade > 0) {
+      if(this.name.length > 0 && this.grade >= 1 && this.grade <= 11) {
         const body = {
           'name': this.name,
           'grade': this.grade
@@ -63,6 +64,7 @@ export default {
         }).catch(err => {
           this.success = false;
           this.error = true;
+          this.errormsg = err;
           throw err;
         });
       }

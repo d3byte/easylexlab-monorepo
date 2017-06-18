@@ -5,7 +5,9 @@
 <script>
 export default {
   data() {
-    group: {}
+    return {
+      group: {}
+    }
   }
 }
 </script>
