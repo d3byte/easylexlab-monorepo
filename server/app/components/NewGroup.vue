@@ -42,8 +42,8 @@ export default {
   },
   methods: {
     goto(id) {
-      const path = '/profile/group/' + id;
-      this.$router.push({ path });
+      const path = '/group/' + id;
+      this.$router.push({ path, alias: '/group' });
     },
     create() {
       if(this.name.length > 0 && this.grade >= 1 && this.grade <= 11) {

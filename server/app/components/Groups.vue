@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     goto(id) {
-      const path = '/profile/group/' + id;
-      this.$router.push({ path, alias: '/watch' });
+      const path = '/group/' + id;
+      this.$router.push({ path, alias: '/group' });
     }
   },
   created() {

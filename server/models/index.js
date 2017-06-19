@@ -1,9 +1,9 @@
 import User from './User';
 import Group from './Group';
-import Task from './Task';
+import Stack from './Stack';
 
 export default {
   User,
   Group,
-  Task
+  Stack
 };

@@ -27,7 +27,10 @@ app.get('/login', (req, res) => {
 app.get('/profile', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
-app.get('/profile/group/:id', (req, res) => {
+app.get('/group/:id', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+app.get('/group/:id/newtask', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 app.get('/profile/settings', (req, res) => {
@@ -36,16 +39,14 @@ app.get('/profile/settings', (req, res) => {
 app.get('/profile/newgroup', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
-app.get('/profile/newtask', (req, res) => {
-    res.sendFile(path.join(folder + "index.html"));
-});
 app.get('/logout', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 
 app.use('/', express.static(folder));
 app.use('/profile', express.static(folder));
-app.use('/profile/group', express.static(folder));
+app.use('/group', express.static(folder));
+app.use('/group/:id', express.static(folder));
 
 // Middleware
 app.use(bodyParser.json());

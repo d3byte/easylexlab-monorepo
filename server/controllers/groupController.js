@@ -158,8 +158,8 @@ groupController.getGroups = (req, res) => {
 
 // Watch one exact group
 groupController.getGroup = (req, res) => {
-  const groupId = req.params.id;
-
+  const groupId = req.body.groupId;
+  console.log(groupId);
   db.Group.findById(groupId).populate({
     path: '_students',
     select: 'username createdAt',
@@ -167,12 +167,12 @@ groupController.getGroup = (req, res) => {
   }).then((group) => {
     return res.status(200).json({
       success: true,
-      data: group
-    })
+      group
+    });
   }).catch((err) => {
     res.status(500).json({
       message: err
-    })
+    });
   });
 
 };

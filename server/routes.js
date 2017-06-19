@@ -7,6 +7,7 @@ import secret from './secret';
 import basicConstroller from './controllers/basicController';
 import userController from './controllers/userController';
 import groupController from './controllers/groupController';
+import stackController from './controllers/stackController';
 
 const routes = express();
 
@@ -22,6 +23,9 @@ routes.post('/addgroup', expressJWT({secret}), groupController.post);
 routes.delete('/deletegroup', expressJWT({secret}), groupController.delete);
 routes.patch('/addstudent', expressJWT({secret}), groupController.addStudent);
 routes.post('/getgroups', expressJWT({secret}), groupController.getGroups);
-routes.get('/group/:id', expressJWT({secret}), groupController.getGroup);
+routes.post('/getgroup', expressJWT({secret}), groupController.getGroup);
+
+// Stack routes
+routes.post('/newstack', expressJWT({secret}), stackController.post);
 
 export default routes;

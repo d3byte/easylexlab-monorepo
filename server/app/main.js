@@ -13,6 +13,7 @@ import NewGroup from './components/NewGroup.vue';
 import NewTask from './components/NewTask.vue';
 import Groups from './components/Groups.vue';
 import Group from './components/Group.vue';
+import Students from './components/Students.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -24,10 +25,6 @@ const routes = [
     path: '/profile', component: Profile,
     children: [
       {
-        path: 'group/:id',
-        component: Group
-      },
-      {
         path: 'settings',
         component: Settings
       },
@@ -36,12 +33,22 @@ const routes = [
         component: NewGroup
       },
       {
-        path: 'newtask',
-        component: NewTask
-      },
-      {
         path: '',
         component: Groups
+      }
+    ]
+  },
+  {
+    path: '/group/:id',
+    component: Group,
+    children: [
+      {
+        path: '',
+        component: Students
+      },
+      {
+        path: 'newtask',
+        component: NewTask
       }
     ]
   }
