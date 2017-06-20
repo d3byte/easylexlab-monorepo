@@ -26,6 +26,21 @@ function count(array) {
   return length;
 }
 
+// function checkContents(tasks) {
+//   var allGood = true;
+//   for(var task of tasks) {
+//     if(!allGood)
+//       break;
+//     for(var pair of task.content) {
+//       if(pair.key.trim().length == 0 || pair.value.trim().length == 0) {
+//         allGood = false;
+//         break;
+//       }
+//     }
+//   }
+//   return allGood;
+// }
+
 stackController.post = (req, res) => {
   const {
     name,
@@ -40,42 +55,40 @@ stackController.post = (req, res) => {
 
     var length = count(tasks);
     var indexes = randomIndexes(length);
+    var checked = checkContents(tasks);
 
-    console.log(tasks.length);
-
-    var test = [];
-    for(var task of tasks) {
-      console.log('Pairs: ');
-      for(var pair of task.content) {
-        console.log(pair);
-        for(let ind of indexes) {
-          if(task.content.indexOf(pair) == ind) {
-            test.push(pair);
-            break;
+    if(checked) {
+      var test = [];
+      for(var task of tasks) {
+        for(var pair of task.content) {
+          for(let ind of indexes) {
+            if(task.content.indexOf(pair) == ind) {
+              test.push(pair);
+              break;
+            }
           }
         }
       }
-    }
 
-    console.log('Test:\n', test, '\nLength:', test.length);
-
-    const stack = new db.Stack({
-      name,
-      tasks,
-      test,
-      timeToDo,
-      _group: groupId
-    });
-
-    stack.save().then(stack => {
-      res.status(200).json({
-        success: true,
-        stack
+      const stack = new db.Stack({
+        name,
+        tasks,
+        test,
+        timeToDo,
+        _group: groupId
       });
-    }).catch(err => {
-      res.status(500).json({err});
-    });
-  } else res.status(501).json({"error":"No permissions for this action"});
+
+      stack.save().then(stack => {
+        res.status(200).json({
+          success: true,
+          stack
+        });
+      }).catch(err => {
+        res.status(500).json({err});
+      });
+    } else res.status(502).json({'allFilled': false});
+
+  } else res.status(501).json({'error':'No permissions for this action'});
 
 };
 

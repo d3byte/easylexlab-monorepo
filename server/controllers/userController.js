@@ -45,7 +45,7 @@ userController.post = (req, res) => {
 userController.login = (req, res) => {
   const { username, password } = req.body;
 
-  db.User.findOne({username: username}).then((user) => {
+  db.User.findOne({username}).then((user) => {
     user.verifyPassword(password).then((valid) => {
       if(valid) {
         console.log('Valid promise');
