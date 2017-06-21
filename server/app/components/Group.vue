@@ -39,6 +39,8 @@ export default {
     'app-header': Header
   },
   created() {
+    if(!this.$store.getters.loginState)
+      this.$router.push('/login');
     const body = {
       'groupId': this.$route.params.id
     };

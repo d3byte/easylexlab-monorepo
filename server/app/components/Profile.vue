@@ -12,18 +12,20 @@ import Header from './Header.vue';
 import Teacher from './Teacher.vue';
 import Student from './Student.vue';
 import Admin from './Admin.vue';
+import jwtDecode from 'jwt-decode';
 
 export default {
+
   data() {
     return {
-      isAdmin: (this.$store.getters.user.permissions == 'admin' ? true : false),
-      isTeacher: (this.$store.getters.user.permissions == 'teacher' ? true : false),
-      isStudent: (this.$store.getters.user.permissions == 'student' ? true : false)
+      isAdmin: '',
+      isTeacher: '',
+      isStudent: ''
     }
   },
   computed: {
     user() {
-      return this.$store.getters.user;
+      return jwtDecode(this.$store.getters.userToken);
     }
   },
   components: {
@@ -35,6 +37,9 @@ export default {
   created() {
     if(!this.$store.getters.loginState)
       this.$router.push('/login');
+    this.isAdmin = (this.user.permissions == 'admin' ? true : false);
+    this.isTeacher = (this.user.permissions == 'teacher' ? true : false);
+    this.isStudent = (this.user.permissions == 'student' ? true : false);
   }
 }
 </script>

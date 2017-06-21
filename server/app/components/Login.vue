@@ -42,10 +42,14 @@ export default {
         "password": password
       };
       this.$http.post('login', body).then(res => {
-        this.$store.dispatch('login', res.body.token);
-        this.$router.push({ path: '/profile' });
+        if(res.body.success) {
+          this.$store.dispatch('login', res.body.token);
+          this.$router.push({ path: '/profile' });
+        } else {
+          this.error = 'Неверный пароль.';
+        }
       }).catch(err => {
-        this.error = 'Неверный логин или пароль.';
+        this.error = 'Неверный логин.';
         throw err;
       });
     },

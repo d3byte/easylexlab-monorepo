@@ -51,6 +51,10 @@ const routes = [
         component: NewTask
       }
     ]
+  },
+  {
+    path: '/group',
+    redirect: '/profile'
   }
 ];
 

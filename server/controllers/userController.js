@@ -47,6 +47,7 @@ userController.login = (req, res) => {
 
   db.User.findOne({username}).then((user) => {
     user.verifyPassword(password).then((valid) => {
+      console.log(valid);
       if(valid) {
         console.log('Valid promise');
         console.log(user);

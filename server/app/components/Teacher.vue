@@ -22,10 +22,12 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
+
 export default {
   computed: {
     user() {
-      return this.$store.getters.user;
+      return jwtDecode(this.$store.getters.userToken);
     }
   }
 }
