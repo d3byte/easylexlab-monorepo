@@ -12,6 +12,7 @@ const groupSchema = new Schema({
   grade: { type: Number, required: true },
   _teacher: { type: Schema.ObjectId, ref: 'User', required: true },
   _students: [{ type: Schema.ObjectId, ref: 'User'}],
+  _tests: [{ type: Schema.ObjectId, ref: 'Stack' }],
   createdAt: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false }
 });

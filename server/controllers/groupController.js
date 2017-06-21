@@ -159,7 +159,6 @@ groupController.getGroups = (req, res) => {
 // Watch one exact group
 groupController.getGroup = (req, res) => {
   const groupId = req.body.groupId;
-  console.log(groupId);
   db.Group.findById(groupId).populate({
     path: '_students',
     select: 'username createdAt',
@@ -174,6 +173,34 @@ groupController.getGroup = (req, res) => {
       message: err
     });
   });
+
+};
+
+// Stick test to group
+groupController.addTest = (req, res) => {
+  const {
+    groupId,
+    stackId
+  } = req.body;
+
+  const user = req.user;
+
+  if(user.permissions == 'teacher' || user.permissions == 'admin') {
+    db.Stack.findById(stackId).then(stack => {
+      db.Group.findById(groupId).then(group => {
+        group._tests.push(stack._id);
+        group.save().then(suc => {
+          res.status(200).json({ success: true });
+        }).catch(error => {
+          throw error;
+        });
+      }).catch(err => {
+        throw err;
+      });
+    }).catch(err => {
+      throw err;
+    });
+  } else res.status(501).json({'error':'No permissions for this action'});
 
 };
 

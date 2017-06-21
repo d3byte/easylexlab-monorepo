@@ -47,7 +47,7 @@
                 </form>
               </div>
             </div>
-            <h4 v-if="this.success" class="success">Задание успешно создано!</h4>
+            <h4 v-if="this.success" class="success">Задание успешно создано! <span class="link" @click="goto(groupid)">Вернуться</span></h4>
             <div class="login-form" v-if="this.showPost">
               <label>
                 Имя теста<br>
@@ -157,10 +157,29 @@ export default {
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }
       }).then(res => {
+        var testId = res.body.stack._id;
         this.success = true;
+        const body = {
+          'groupId': this.groupid,
+          'stackId': testId
+        };
+
+        this.$http.post('addtest', body, {
+          headers: {
+            'Content-type' : 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(response => {}).catch(error => {
+          throw error;
+        });
+
       }).catch(err => {
         throw err;
       });
+    },
+    goto(id) {
+      const path = '/group/' + id;
+      this.$router.push({ path, alias: '/group' });
     }
   }
 }
