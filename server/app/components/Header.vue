@@ -6,14 +6,12 @@
           <router-link to="/" tabindex="-1">EasyFlexLab</router-link>
         </h3>
       </div>
-      <div class="right">
-        <h3 class="login">
-          <router-link v-if="!logged" class="login" to="/login">Вход</router-link>
-          <div v-else>
-            <router-link class="login" to="/profile" tabindex="-1">Профиль</router-link><br>
-            <span @click="logout" class="login logout" tabindex="-1">Выход</span>
-          </div>
-        </h3>
+      <div class="right login">
+        <router-link v-if="!logged" class="login" to="/login">Вход</router-link>
+        <div v-else>
+          <router-link class="login" to="/profile" tabindex="-1">Профиль</router-link>
+          <span @click="logout" class="login logout" tabindex="-1">Выход</span>
+        </div>
       </div>
     </nav>
   </div>
@@ -54,4 +52,18 @@ export default {
 </script>
 
 <style lang="css">
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+.login, .logout {
+  font-size: 20px;
+}
+
+.logout {
+  transition: 0.2s;
+}.logout:hover {
+  color: #CCDAD1;
+  text-decoration: none;
+}
 </style>
