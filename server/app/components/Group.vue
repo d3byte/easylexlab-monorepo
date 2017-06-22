@@ -8,8 +8,8 @@
             <h4 class="name">{{ this.group.name }}</h4>
         </div>
         <div class="col-lg-8">
-          <button class="btn" name="reg"><i class="fa fa-plug" aria-hidden="true"></i> Ссылка на регистрацию</button>
-            <button @click="goto(group._id)" class="btn" name="newtask"><i class="fa fa-pencil" aria-hidden="true"></i> Создать задание</button>
+          <button @click="generateLink(group._id)" class="btn" name="reg"><i class="fa fa-plug" aria-hidden="true"></i> Ссылка на регистрацию</button>
+          <button @click="goto(group._id)" class="btn" name="newtask"><i class="fa fa-pencil" aria-hidden="true"></i> Создать задание</button>
         </div>
       </div>
       <hr>
@@ -30,6 +30,17 @@ export default {
     goto(id) {
       const path = '/group/' + id + '/newtask';
       this.$router.push({ path });
+    },
+    generateLink(id) {
+      const body = {
+        'groupId': id
+      };
+      this.$http.post('reglink', body, {
+        headers: {
+          'Content-type' : 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {}).catch(err => {throw err});
     }
   },
   http: {

@@ -204,4 +204,23 @@ groupController.addTest = (req, res) => {
 
 };
 
+// Registration link
+groupController.regLink = (req, res) => {
+  const groupId = req.body.groupId;
+  const user = req.user;
+
+  if(user.permissions == 'teacher' || user.permissions == 'admin') {
+    var url = 'reg&id=' + groupId;
+    // Encoding
+    url = encodeURI(url);
+    var b = new Buffer(url);
+    var encUri = b.toString('base64');
+    console.log('Encoded: ', encUri);
+    // Decoding
+    var bd = new Buffer(encUri, 'base64');
+    var decoded = bd.toString();
+    console.log('Decoded: ', decoded);
+  }
+};
+
 export default groupController;
