@@ -2,7 +2,7 @@
   <div>
     <app-header></app-header>
     <div class="parent-login">
-        <div v-if="this.error.length > 0" class="errors">
+        <div v-if="!!this.error" class="errors">
           <h4 class="errormsg">{{ this.error }}</h4>
         </div>
         <form class="login-form" onsubmit="return false">

@@ -5,7 +5,7 @@
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 container">
         <center>
-          <h4 v-if="this.errorMsg.length > 0" class="errormsg">{{ this.errorMsg }}</h4>
+          <h4 v-if="!!this.errorMsg" class="errormsg">{{ this.errorMsg }}</h4>
             <div v-if="this.showEditor" class="row nav">
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" v-for="(task, index) in tasks">
                     <h3 class="nav-item active" v-if="task.active"><i class="fa fa-thumb-tack" aria-hidden="true"></i></h3>
