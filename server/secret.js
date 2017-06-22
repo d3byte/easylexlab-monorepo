@@ -1,7 +1,9 @@
-import uuid from 'node-uuid';
+// import uuid from 'node-uuid';
 
-const secret = uuid.v4();
+// const secret = uuid.v4();
 
 // Secret is randomly generated
+
+const secret = 'AsupercoolSecret';
 
 export default secret;
