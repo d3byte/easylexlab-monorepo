@@ -1,5 +1,7 @@
-const secret = 'supercoolsecret';
+import uuid from 'node-uuid';
 
-// Add encryption here
+const secret = uuid.v4();
+
+// Secret is randomly generated
 
 export default secret;
