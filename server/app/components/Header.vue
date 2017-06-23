@@ -31,6 +31,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout');
+      this.$store.dispatch('hideOrShowLogin');
       this.$router.push({ path: '/' });
       localStorage.clear();
     },
