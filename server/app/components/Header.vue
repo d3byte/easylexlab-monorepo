@@ -9,10 +9,8 @@
         <login v-if="showLogin && !logged"></login>
         <button v-if="!logged && !showLogin" @click="show" class="login-btn">Вход</button>
         <button v-if="!logged && !showLogin" class="contact-btn">Связаться с нами</button>
-        <div v-if="logged">
-          <router-link class="login" to="/profile" tabindex="-1">Профиль</router-link>
-          <span @click="logout" class="login logout" tabindex="-1">Выход</span>
-        </div>
+        <router-link v-if="logged" class="login" to="/profile" tabindex="-1">Профиль</router-link>
+        <span v-if="logged" @click="logout" class="login logout" tabindex="-1">Выход</span>
       </div>
   </div>
 </template>
@@ -67,7 +65,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .login, .logout {
-  font-size: 20px;
+  font-size: 16px;
+} .logout {
+  margin-right: 20px;
 }
 
 .login-btn {
