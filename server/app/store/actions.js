@@ -4,5 +4,8 @@ export default {
   },
   logout({ commit }) {
     commit('logout');
+  },
+  hideOrShowLogin({ commit }) {
+    commit('hideOrShowLogin');
   }
 }

@@ -1,29 +1,23 @@
 <template>
-  <div>
-    <app-header></app-header>
-    <div class="parent-login">
-        <div v-if="!!this.error" class="errors">
-          <h4 class="errormsg">{{ this.error }}</h4>
-        </div>
-        <form class="login-form" onsubmit="return false">
-          <div class="username">
-            <label><i class="fa fa-id-card" aria-hidden="true"></i> Имя пользователя</label><br>
-            <input v-model="username" required type="text" name="username" tabindex="1">
-          </div>
-          <div class="password">
-            <label><i class="fa fa-lock" aria-hidden="true"></i> Пароль</label><br>
-            <input v-model="password" required type="password" name="password" tabindex="2">
-          </div>
-          <router-link class="recover" to="/recover" tabindex="-1">Забыли пароль?</router-link>
-          <center><button @click="check" class="btn" name="login" tabindex="3">Войти</button></center>
-        </form>
+  <div class="login-form">
+    <div v-if="!!this.error" class="errors">
+      {{ this.error }}
     </div>
+    <form class="login-form" onsubmit="return false">
+      <div class="username">
+        <input v-model="username" required type="text" tabindex="1" placeholder="Логин">
+      </div>
+      <div class="password">
+        <input v-model="password" required type="password" tabindex="2" placeholder="Пароль">
+      </div>
+      <router-link class="recover" to="/recover" tabindex="-1">Забыли пароль?</router-link>
+      <button @click="check" class="login-btn" tabindex="3">Войти</button>
+    </form>
+    <button @click="hide" class="contact-btn" tabindex="3">Отмена</button>
   </div>
 </template>
 
 <script>
-import Header from './Header.vue';
-
 export default {
   data() {
     return {
@@ -46,23 +40,49 @@ export default {
           this.$store.dispatch('login', res.body.token);
           this.$router.push({ path: '/profile' });
         } else {
-          this.error = 'Неверный пароль.';
+          this.error = 'Неверный пароль';
         }
       }).catch(err => {
-        this.error = 'Неверный логин.';
+        this.error = 'Неверный логин';
         throw err;
       });
     },
     check() {
-      if(this.username.trim().length > 0 && this.password.trim().length > 0)
+      if(!!this.username.trim() && !!this.password.trim())
         this.submitLogin(this.username, this.password);
     },
-  },
-  components: {
-    'app-header': Header
+    hide() {
+      this.$store.dispatch('hideOrShowLogin');
+    }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+.login-form {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login-form input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  border-bottom: 1px solid white;
+  margin-right: 10px;
+} .login-form input:active,
+  .login-form input:focus {
+    outline: none;
+    border-color: #5688C7;
+}
+
+.errors {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #DB5461;
+}
 </style>

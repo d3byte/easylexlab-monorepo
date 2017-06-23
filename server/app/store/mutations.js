@@ -8,5 +8,8 @@ export default {
     state.user.logged = false;
     state.user.token = '';
     localStorage.token = '';
+  },
+  hideOrShowLogin(state) {
+    state.header.showLogin = !state.header.showLogin;
   }
 }

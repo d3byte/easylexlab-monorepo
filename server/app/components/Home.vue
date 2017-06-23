@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-header></app-header>
-    <mail></mail>
+    <!-- <mail></mail> -->
   </div>
 </template>
 

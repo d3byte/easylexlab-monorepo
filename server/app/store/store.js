@@ -10,8 +10,11 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     user: {
-      logged: (localStorage.token ? true: false),
+      logged: (localStorage.token ? true : false),
       token: (localStorage.token ? localStorage.token : '')
+    },
+    header: {
+      showLogin: false
     }
   },
   getters,
