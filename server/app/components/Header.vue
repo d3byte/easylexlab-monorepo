@@ -6,7 +6,7 @@
         </h3>
       </div>
       <div class="right login">
-        <login v-if="showLogin"></login>
+        <login v-if="showLogin && !logged"></login>
         <button v-if="!logged && !showLogin" @click="show" class="login-btn">Вход</button>
         <button v-if="!logged && !showLogin" class="contact-btn">Связаться с нами</button>
         <div v-if="logged">
