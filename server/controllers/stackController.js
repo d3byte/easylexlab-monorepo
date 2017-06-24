@@ -4,43 +4,11 @@ import secret from './../secret';
 
 import db from './../models';
 
+import helper from './helperFunctions';
+
 const stackController = {};
 
-function randomIndexes(max) {
-  var array = [];
-  if(max != 1) {
-    for(let i = 0; i < 6; i++) {
-      let index = Math.floor(Math.random() * max + 1);
-      array.push(index);
-    }
-  } else array.push(0);
-  return array;
-}
-
-function count(array) {
-  var length = 0;
-  for(var item of array) {
-    length += item.content.length;
-  }
-  length = length / array.length;
-  return length;
-}
-
-function checkContents(tasks) {
-  var allGood = true;
-  for(var task of tasks) {
-    if(!allGood)
-      break;
-    for(var pair of task.content) {
-      if(pair.key.trim().length == 0 || pair.value.trim().length == 0) {
-        allGood = false;
-        break;
-      }
-    }
-  }
-  return allGood;
-}
-
+// New stack
 stackController.post = (req, res) => {
   const {
     name,
@@ -53,9 +21,9 @@ stackController.post = (req, res) => {
 
   if(user.permissions == "teacher") {
 
-    var length = count(tasks);
-    var indexes = randomIndexes(length);
-    var checked = checkContents(tasks);
+    var length = helper.count(tasks);
+    var indexes = helper.randomIndexes(length);
+    var checked = hepler.checkContents(tasks);
 
     if(checked) {
       var test = [];
@@ -92,6 +60,7 @@ stackController.post = (req, res) => {
 
 };
 
+// Get stacks of one exact group
 stackController.getTests = (req, res) => {
   const groupId = req.body.groupId;
   const user = req.user;

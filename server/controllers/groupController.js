@@ -10,81 +10,53 @@ groupController.post = (req, res) => {
     grade
   } = req.body;
 
-  const userId = req.user.id;
+  const user = req.user;
 
-  db.User.findById(userId, (err, user) => {
-    if (err)
-      res.json({message: err});
-    if (user) {
-      let userPerm = user.permissions;
+  if(user.permissions == "admin" || user.permissions == "teacher") {
+    const group = new db.Group({
+      name,
+      grade,
+      _teacher: userId
+    });
 
-      let checked = (userPerm == "admin" || userPerm == "teacher" ? true : false);
-
-      if(checked) {
-        const group = new db.Group({
-          name,
-          grade,
-          _teacher: userId
-        });
-
-        group.save().then((newGroup) => {
-          return res.status(200).json({
-            success: true,
-            data: newGroup
-          });
-        }).catch((err) => {
-          return res.status(500).json({
-            message: err
-          });
-        });
-
-      } else {
-        return res.status(501).json({
-          message: 'Access denied'
-        });
-
-      }
-    } else
-      console.log("No users found with that ID");
-  });
+    group.save().then((newGroup) => {
+      return res.status(200).json({
+        success: true,
+        data: newGroup
+      });
+    }).catch((err) => {
+      return res.status(500).json({
+        message: err
+      });
+    });
+  } else {
+    return res.status(501).json({
+      message: 'Access denied'
+    });
+  }
 
 };
 
 // Remove group
 groupController.delete = (req, res) => {
   const groupId = req.body.groupId;
-  const userId = req.user.id;
+  const user = req.user;
 
-  db.User.findById(userId, (err, user) => {
-    if (err)
-      res.json({message: err});
-    if (user) {
-      let userPerm = user.permissions;
-
-      let checked = (userPerm == "admin" || userPerm == "teacher" ? true : false);
-
-      if(checked) {
-        db.Group.findByIdAndRemove(groupId).then(() => {
-          return res.status(200).json({
-            success: true
-          });
-
-        }).catch((err) => {
-          return res.status(500).json({
-            message: err
-          });
-
-        });
-
-      } else {
-        return res.status(501).json({
-          message: 'Access denied'
-        });
-
-      }
-    } else
-      console.log("No users found with that ID");
-  });
+  if(user.permissions == "admin" || user.permissions == "teacher") {
+    db.Group.findByIdAndRemove(groupId).then(() => {
+      return res.status(200).json({
+        success: true
+      });
+    }).catch((err) => {
+      return res.status(500).json({
+        message: err
+      });
+    });
+  } else {
+    return res.status(501).json({
+      message: 'Access denied'
+    });
+  }
 
 };
 
@@ -95,39 +67,27 @@ groupController.addStudent = (req, res) => {
     studentId
   } = req.body;
 
-  const userId = req.user.id;
+  const user = req.user;
 
-  db.User.findById(userId, (err, user) => {
-    if (err)
-      res.json({message: err});
-    if (user) {
-      let userPerm = user.permissions;
-
-      let checked = (userPerm == "admin" || userPerm == "teacher" ? true : false);
-
-      if(checked) {
-          db.Group.findByIdAndUpdate(
-            groupId,
-            { $push: {'_students': studentId }},
-          ).then((existingGroup) => {
-            return res.status(200).json({
-              success: true,
-              existingGroup
-            });
-          }).catch((err) => {
-            return res.status(500).json({
-              message: err
-            });
-          });
-      } else {
-        return res.status(501).json({
-          message: 'Access denied'
-        });
-
-      }
-    } else
-      console.log("No users found with that ID");
-  });
+  if(user.permissions == "admin" || user.permissions == "teacher") {
+    db.Group.findByIdAndUpdate(
+      groupId,
+      { $push: {'_students': studentId }},
+    ).then((existingGroup) => {
+      return res.status(200).json({
+        success: true,
+        existingGroup
+      });
+    }).catch((err) => {
+      return res.status(500).json({
+        message: err
+      });
+    });
+  } else {
+    return res.status(501).json({
+      message: 'Access denied'
+    });
+  }
 
 };
 
