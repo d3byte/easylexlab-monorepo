@@ -5,6 +5,7 @@ export default {
     localStorage.token = token;
   },
   logout(state) {
+    state.header.showLogin = false;
     state.user.logged = false;
     state.user.token = '';
     localStorage.token = '';

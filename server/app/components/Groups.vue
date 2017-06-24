@@ -59,7 +59,7 @@ export default {
 
 <style lang="css">
 table {
-  color: white;
+  color: #293132;
 } th {
   margin-bottom: 5px;
   padding: 10px;
@@ -74,6 +74,6 @@ table {
   transition: 0.3s;
 } .link:hover {
   cursor: pointer;
-  color: #FCA311;
+  color: #5688C7;
 }
 </style>

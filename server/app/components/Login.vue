@@ -66,18 +66,8 @@ export default {
   align-items: center;
 }
 
-.login-form input {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 16px;
-  transition: 0.4s;
-  border-bottom: 1px solid white;
+.login-form input:first-of-type {
   margin-right: 10px;
-} .login-form input:active,
-  .login-form input:focus {
-    outline: none;
-    border-color: #5688C7;
 }
 
 .errors {

@@ -68,7 +68,6 @@
 
 <script>
 export default {
-  props: ['groupid'],
   data() {
     return {
       tasks: [],
@@ -187,13 +186,14 @@ export default {
 
 <style lang="css" scoped>
 .nav {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid black;
 } .nav-item {
   transition: 0.3s;
+  color: #808080;
 } .active {
-  color: white;
-} .edittask:hover {
-
+  color: #293132;
+} .nav-item:hover {
+  color: #293132;
 }
 
 .add:hover, .active:hover, .edittask:hover {
@@ -213,15 +213,25 @@ table {
   border: none;
 }
 
-input {
-  border-bottom: 1px solid white;
-}
-
 .newpair:hover {
   cursor: pointer;
 }
 
 .success {
   color: #307351;
+}
+
+.login-form input {
+  background: transparent;
+  border: none;
+  color: #293132;
+  font-size: 16px;
+  transition: 0.4s;
+  border-bottom: 1px solid black;
+  margin-right: 10px;
+} .login-form input:active,
+  .login-form input:focus {
+    outline: none;
+    border-color: #5688C7;
 }
 </style>

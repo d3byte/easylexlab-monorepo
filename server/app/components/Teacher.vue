@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
   .row {
     vertical-align: center;
   }
@@ -47,11 +47,5 @@ export default {
     text-align: center;
   } a {
     margin-right: 25px;
-  }
-
-  .btn {
-    transition: 0.3s;
-  } .btn:hover {
-    background: #FCA311;
   }
 </style>

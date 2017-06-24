@@ -2,7 +2,6 @@
 
 * {
   font-family: 'Poppins', sans-serif;
-  box-sizing: border-box;
 }
 
 button {
@@ -19,14 +18,12 @@ body {
 
 h1, h2, h3, h4, h5, h6, hr {
   background: transparent;
-  color: black;
 }
 
 a {
   transition: 0.2s;
-  color: inherit;
 } a:hover, a:active, a:focus {
-  color: #CCDAD1;
+  color: #5688C7;
   text-decoration: none;
 }
 
@@ -34,16 +31,6 @@ a {
   font-size: 14px;
 } .logout:hover {
   cursor: pointer;
-}
-
-.recover {
-  transition: 0.2s;
-  color: darkgray;
-  margin-left: 15px;
-  font-size: 12px;
-} .recover:hover {
-  color: #FCA311;
-  text-decoration: none;
 }
 
 .errormsg {
@@ -54,8 +41,26 @@ a {
   margin-top: 250px;
 }
 
-.role {
-  color: #FCA311;
-} .name {
-  color: white !important;
+.btn {
+  transition: 0.3s;
+  color: black;
+} .btn:hover {
+  background: #5688C7;
+}
+
+.name {
+  color: #293132;
+}
+
+.login-form input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s;
+  border-bottom: 1px solid black;
+} .login-form input:active,
+  .login-form input:focus {
+    outline: none;
+    border-color: #5688C7;
 }

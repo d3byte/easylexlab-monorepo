@@ -1,9 +1,9 @@
 <template>
   <div>
-    <app-header style="margin-bottom: 150px;"></app-header>
-    <admin v-if="this.isAdmin"></admin>
-    <teacher v-if="this.isTeacher"></teacher>
-    <student v-if="this.isStudent"></student>
+    <app-header style="margin-bottom: 80px;"/>
+    <admin v-if="this.isAdmin" />
+    <teacher v-if="this.isTeacher" />
+    <student v-if="this.isStudent" />
   </div>
 </template>
 

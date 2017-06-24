@@ -31,7 +31,6 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout');
-      this.$store.dispatch('hideOrShowLogin');
       this.$router.push({ path: '/' });
       localStorage.clear();
     },
@@ -67,8 +66,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .login, .logout {
   font-size: 16px;
-} .logout {
   margin-right: 20px;
+  color: white;
 }
 
 .login-btn {
@@ -102,14 +101,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .logout {
   transition: 0.2s;
-}.logout:hover {
-  color: #CCDAD1;
-  text-decoration: none;
 }
 
-.naming {
+.naming a {
   color: white;
 } .naming:hover {
   cursor: default;
+}
+
+.recover {
+  transition: 0.2s;
+  color: darkgray;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 12px;
 }
 </style>
