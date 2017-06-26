@@ -9,8 +9,8 @@
       <button v-if="!showLogin" class="contact-btn">Связаться с нами</button>
     </div>
     <div v-if="logged" class="logged">
-      <button class="nav-item flat-btn">Статистика</button>
-      <button class="nav-item flat-btn">Новая группа</button>
+      <button class="nav-item flat-btn"><router-link to="/profile/stats">Статистика</router-link></button>
+      <button class="nav-item flat-btn"><router-link to="/profile/newgroup">Новая группа</router-link></button>
       <i class="nav-item notifications material-icons">notifications</i>
       <div class="nav-item profile dropdown">
         <button class="avatar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
