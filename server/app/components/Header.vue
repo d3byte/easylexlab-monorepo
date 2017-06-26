@@ -16,10 +16,10 @@
         <button class="avatar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li class="dropdown-header">Меню</li>
-              <li><a href="#">Профиль</a></li>
-              <li><a href="#">Настройки</a></li>
+              <li><router-link to="/profile">Профиль</router-link></li>
+              <li><router-link to="profile/settings">Настройки</router-link></li>
               <li role="separator" class="divider"></li>
-              <li><router-link to="/logout">Выйти</router-link></li>
+              <li><span @click="logout">Выйти</span></li>
             </ul>
         </button>
       </div>
