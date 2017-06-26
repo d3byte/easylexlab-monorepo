@@ -9,7 +9,7 @@ const stackSchema = new Schema({
   tasks: {type: Array, required: true},
   test: { type: Array, required: true },
   timeToDo: { type: Number, default: 1 },
-  _group: { type: Schema.ObjectId, required: true },
+  _group: { type: Schema.ObjectId, ref:'Group', required: true },
   results: [{type: Object, default: null}],
   createdAt: { type: Date, default: Date.now }
 });
