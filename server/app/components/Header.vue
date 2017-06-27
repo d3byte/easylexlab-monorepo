@@ -14,14 +14,14 @@
       <i class="nav-item notifications material-icons">notifications</i>
       <div class="nav-item profile dropdown">
         <button class="avatar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li class="dropdown-header">Меню</li>
-              <li><router-link to="/profile">Профиль</router-link></li>
-              <li><router-link to="profile/settings">Настройки</router-link></li>
-              <li role="separator" class="divider"></li>
-              <li><span @click="logout">Выйти</span></li>
-            </ul>
         </button>
+        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+            <li class="dropdown-header">Меню</li>
+            <li><router-link to="/profile">Профиль</router-link></li>
+            <li><router-link to="profile/settings">Настройки</router-link></li>
+            <li role="separator" class="divider"></li>
+            <li><span @click="logout">Выйти</span></li>
+          </ul>
       </div>
     </div>
   </div>
@@ -156,6 +156,9 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
 } .avatar {
   border: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
 .notifications {
