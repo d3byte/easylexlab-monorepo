@@ -54,7 +54,8 @@ userController.login = (req, res) => {
             username: user.username,
             id: user._id,
             permissions: user.permissions,
-            group: user._group
+            group: user._group,
+            school: user.school
           },
           secret,
           { expiresIn: '2 days' }

@@ -1,19 +1,15 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-6">
-        <h5>Личная страница</h5>
-        <h3 class="name">{{ user.username }}</h3>
+      <div class="ava col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div class="avatar">
+
+        </div>
       </div>
-      <div class="col-lg-3">
-        <router-link to="/profile/settings">
-          <button class="btn"><i class="fa fa-cogs" aria-hidden="true"></i> Настройки</button>
-        </router-link>
-      </div>
-      <div class="col-lg-3">
-        <router-link to="/profile/newgroup">
-          <button class="btn"><i class="fa fa-pencil" aria-hidden="true"></i> Создать группу</button>
-        </router-link>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 userinfo">
+        <h2 class="name">{{ user.username }}</h2>
+        <h5 class="school">{{ user.school }}</h5>
+        
       </div>
     </div>
     <hr>
@@ -34,18 +30,27 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  .row {
-    vertical-align: center;
-  }
-  .col-lg-3:first-of-type {
-    text-align: center;
-  } .col-lg-3:first-of-type h5:first-of-type,
-   .col-lg-3:first-of-type h3 {
-    margin: 5px;
-  }
-  .col-lg-4 {
-    text-align: center;
-  } a {
-    margin-right: 25px;
-  }
+.ava {
+  padding-right: 20px;
+}
+
+.avatar {
+  width: 170px;
+  height: 170px;
+  border: 7px solid #6D696A;
+  border-radius: 50%;
+  background: #ADA8A8;
+  float: right;
+}
+
+.userinfo {
+  padding-left: 40px;
+}
+
+.name, .school {
+  color: #6D696A;
+  font-weight: bold;
+} .school {
+  opacity: 0.75;
+}
 </style>

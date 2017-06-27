@@ -16,12 +16,12 @@
         <button class="avatar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         </button>
         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-            <li class="dropdown-header">Меню</li>
-            <li><router-link to="/profile">Профиль</router-link></li>
-            <li><router-link to="profile/settings">Настройки</router-link></li>
-            <li role="separator" class="divider"></li>
-            <li><span @click="logout">Выйти</span></li>
-          </ul>
+          <li class="dropdown-header">Меню</li>
+          <li><router-link to="/profile">Профиль</router-link></li>
+          <li><router-link to="profile/settings">Настройки</router-link></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#" @click="logout">Выйти</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -76,10 +76,12 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 5;
 }
 
-.login, .logout {
+.login {
   font-size: 16px;
   margin-right: 20px;
   color: white;
+} .exit {
+  color: black;
 }
 
 .login-btn {
@@ -109,10 +111,6 @@ h1, h2, h3, h4, h5, h6 {
 } .contact-btn:hover {
   background: #176087;
   border: 1px solid #ccc;
-}
-
-.logout {
-  transition: 0.2s;
 }
 
 .naming {
@@ -204,13 +202,11 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 1px 4px black;
   background: white;
   border-radius: 2px;
-} .nav-item::after:hover,
-  .nav-item::before:hover {
-    cursor: default;
 } .nav-item:nth-child(3)::before,
   .nav-item:nth-child(3)::after {
   top: 3px;
+} .nav-item a {
+  color: white;
 }
-
 
 </style>

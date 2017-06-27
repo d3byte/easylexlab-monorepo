@@ -23,12 +23,6 @@ a {
   text-decoration: none;
 }
 
-.logout {
-  font-size: 14px;
-} .logout:hover {
-  cursor: pointer;
-}
-
 .errormsg {
   color: #DB5461;
 }

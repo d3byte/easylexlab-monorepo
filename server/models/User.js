@@ -16,7 +16,9 @@ const userSchema = new Schema({
     minlength: [8, 'Пароль должен состоять хотя бы из 8 символов.'],
     bcrypt: true
   },
+  school: { type: String, default: null },
   _group: { type: Schema.ObjectId, ref: 'Group' },
+  notifications: [{ type: Object, default: null }],
   permissions: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false }
