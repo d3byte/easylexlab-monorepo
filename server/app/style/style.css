@@ -71,3 +71,8 @@ a {
 .avatar {
   border-radius: 50%;
 }
+
+.nav-item::before:hover,
+.nav-item::after:hover {
+    color: black;
+}

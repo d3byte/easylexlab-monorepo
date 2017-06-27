@@ -9,10 +9,16 @@
       <button v-if="!showLogin" class="contact-btn">Связаться с нами</button>
     </div>
     <div v-if="logged" class="logged">
-      <button class="nav-item flat-btn"><router-link to="/profile/stats">Статистика</router-link></button>
-      <button class="nav-item flat-btn"><router-link to="/profile/newgroup">Новая группа</router-link></button>
-      <i class="nav-item notifications material-icons">notifications</i>
-      <div class="nav-item profile dropdown">
+      <div class="nav-item">
+        <button class="flat-btn"><router-link to="/profile/stats">Статистика</router-link></button>
+      </div>
+      <div class="nav-item">
+        <button class="flat-btn"><router-link to="/profile/newgroup">Новая группа</router-link></button>
+      </div>
+      <div class="nav-item">
+        <i class="notifications material-icons">notifications</i>
+      </div>
+      <div class="profile dropdown nav-item">
         <button class="avatar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         </button>
         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
@@ -172,16 +178,19 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+} .nav-item:nth-child(2) {
+  padding: 1px 20px;
 } .nav-item {
-  margin-right: 20px;
-  padding-left: 20px;
+  padding: 0 20px;
   position: relative;
 } .nav-item:last-child {
-  padding-left: 0;
+  padding: 0;
+  margin: 0 20px;
 } .nav-item:last-child:hover {
   cursor: pointer;
 } .nav-item:nth-child(3) {
   padding: 0 20px;
+  padding-top: 5px;
 } .nav-item:nth-child(2)::before,
   .nav-item:nth-child(3)::before {
   content: " ";
@@ -189,7 +198,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 2px;
   height: 25px;
   left: 0;
-  top: 0;
+  top: 0px;
   box-shadow: 0 1px 4px black;
   background: white;
   border-radius: 2px;
@@ -204,7 +213,8 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 2px;
 } .nav-item:nth-child(3)::before,
   .nav-item:nth-child(3)::after {
-  top: 3px;
+  bottom: 0;
+  top: 7px;
 } .nav-item a {
   color: white;
 }
