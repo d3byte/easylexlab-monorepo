@@ -52,7 +52,7 @@ a {
 } .login-form input:active,
   .login-form input:focus {
     outline: none;
-    border-color: #5688C7;
+    border-color: white;
 }
 
 .naming a {
@@ -75,4 +75,33 @@ a {
 .nav-item::before:hover,
 .nav-item::after:hover {
     color: black;
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.preloader {
+  animation-name: spin;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  vertical-align: middle;
+  font-size: 25px;
+}
+
+.slide-enter-active, .slide-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+.slide-enter, .slide-leave-to {
+  transform: translateX(400px);
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
     <app-header></app-header>
+    <h1>Landing page</h1>
     <!-- <mail></mail> -->
   </div>
 </template>

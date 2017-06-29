@@ -1,7 +1,8 @@
 <template>
   <div>
+    <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
     <center>
-      <table>
+      <table v-if="!showPreloader">
         <tr>
           <th>Название</th>
           <th>Класс</th>
@@ -29,7 +30,8 @@ export default {
     return {
       user: jwtDecode(this.$store.getters.userToken),
       token: this.$store.getters.userToken,
-      groups: []
+      groups: [],
+      showPreloader: true
     }
   },
   http: {
@@ -49,7 +51,11 @@ export default {
         'Authorization': 'Bearer ' + this.token
       }
     }).then(res => {
-      this.groups = res.body.data;
+      // TODO: delete timeout
+      setTimeout(() => {
+        this.showPreloader = false;
+        this.groups = res.body.data;
+      }, 1000);
     }).catch(err => {
       throw err;
     });
@@ -57,7 +63,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 table {
   color: #293132;
 } th {
@@ -75,5 +81,9 @@ table {
 } .link:hover {
   cursor: pointer;
   color: #5688C7;
+}
+
+.preloader {
+  color: black;
 }
 </style>

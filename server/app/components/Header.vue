@@ -4,9 +4,14 @@
       <router-link to="/" tabindex="-1">The Lexach</router-link>
     </h3>
     <div v-if="!logged" class="login">
+
       <login v-if="showLogin"></login>
-      <button v-if="!showLogin" @click="show" class="login-btn">Вход</button>
-      <button v-if="!showLogin" class="contact-btn">Связаться с нами</button>
+      <transition name="fade" mode="out-in">
+        <div>
+          <button v-if="!showLogin" @click="show" class="login-btn">Вход</button>
+          <button v-if="!showLogin" class="contact-btn">Связаться с нами</button>
+        </div>
+      </transition>
     </div>
     <div v-if="logged" class="logged">
       <div class="nav-item">
@@ -226,5 +231,13 @@ h1, h2, h3, h4, h5, h6 {
   color: black;
 } .item:hover {
   color: black;
+}
+
+.preloader {
+  color: white;
+}
+
+[login] {
+  transform: translateX(-400px);
 }
 </style>
