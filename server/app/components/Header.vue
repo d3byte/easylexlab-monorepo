@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="navigator">
     <h3 class="naming">
       <router-link to="/" tabindex="-1">The Lexach</router-link>
     </h3>
@@ -18,16 +18,16 @@
       <div class="nav-item">
         <i class="notifications material-icons">notifications</i>
       </div>
-      <div class="profile dropdown nav-item">
-        <button class="avatar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <div class="ui right pointing dropdown nav-item profile">
+        <button class="avatar">
         </button>
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-          <li class="dropdown-header">Меню</li>
-          <li><router-link to="/profile">Профиль</router-link></li>
-          <li><router-link to="profile/settings">Настройки</router-link></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#" @click="logout">Выйти</a></li>
-        </ul>
+        <div class="menu">
+          <div class="header">Меню</div>
+          <div class="item"><router-link to="/profile">Профиль</router-link></div>
+          <div class="item"><router-link to="/profile/settings">Настройки</router-link></div>
+          <div class="ui divider"></div>
+          <div class="item" @click="logout">Выход</div>
+        </div>
       </div>
     </div>
   </div>
@@ -56,6 +56,9 @@ export default {
       this.$store.dispatch('hideOrShowLogin');
     }
   },
+  mounted() {
+    $('.ui.dropdown').dropdown();
+  },
   components: {
     'login': Login
   }
@@ -68,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-.header {
+.navigator {
   box-shadow: 0 3px 8px black;
   display: flex;
   flex-direction: row;
@@ -219,4 +222,9 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
 }
 
+.item a {
+  color: black;
+} .item:hover a {
+  color: black;
+}
 </style>

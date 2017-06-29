@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="ava col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <div class="avatar">
@@ -9,7 +9,6 @@
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 userinfo">
         <h2 class="name">{{ user.username }}</h2>
         <h5 class="school">{{ user.school }}</h5>
-        
       </div>
     </div>
     <hr>
