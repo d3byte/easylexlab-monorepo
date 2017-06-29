@@ -23,8 +23,8 @@
         </button>
         <div class="menu">
           <div class="header">Меню</div>
-          <div class="item"><router-link to="/profile">Профиль</router-link></div>
-          <div class="item"><router-link to="/profile/settings">Настройки</router-link></div>
+          <router-link class="item" to="/profile">Профиль</router-link>
+          <router-link class="item" to="/profile/settings">Настройки</router-link>
           <div class="ui divider"></div>
           <div class="item" @click="logout">Выход</div>
         </div>
@@ -222,9 +222,9 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
 }
 
-.item a {
+.item {
   color: black;
-} .item:hover a {
+} .item:hover {
   color: black;
 }
 </style>
