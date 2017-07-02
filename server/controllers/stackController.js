@@ -16,14 +16,14 @@ stackController.post = (req, res) => {
     timeToDo,
     groupId
   } = req.body;
-
+  console.log('Group id: ', groupId);
   const user = req.user;
 
   if(user.permissions == "teacher") {
 
     var length = helper.count(tasks);
     var indexes = helper.randomIndexes(length);
-    var checked = hepler.checkContents(tasks);
+    var checked = helper.checkContents(tasks);
 
     if(checked) {
       var test = [];
@@ -45,14 +45,14 @@ stackController.post = (req, res) => {
         timeToDo,
         _group: groupId
       });
-
+      console.log(stack);
       stack.save().then(stack => {
         res.status(200).json({
           success: true,
           stack
         });
       }).catch(err => {
-        res.status(500).json({err});
+        res.status(500).json({err: 'lel'});
       });
     } else res.status(502).json({'allFilled': false});
 

@@ -16,7 +16,7 @@ groupController.post = (req, res) => {
     const group = new db.Group({
       name,
       grade,
-      _teacher: userId
+      _teacher: user._id
     });
 
     group.save().then((newGroup) => {

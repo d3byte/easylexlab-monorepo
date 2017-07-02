@@ -47,7 +47,7 @@
                 </form>
               </div>
             </div>
-            <h4 v-if="this.success" class="success">Задание успешно создано! <span class="link" @click="goto(groupid)">Вернуться</span></h4>
+            <h4 v-if="this.success" class="success">Задание успешно создано! <span class="link" @click="goto(this.groupId)">Вернуться</span></h4>
             <div class="login-form" v-if="this.showPost">
               <label>
                 Имя теста<br>
@@ -76,7 +76,8 @@ export default {
       errorMsg: '',
       timeToDo: 1,
       name: '',
-      success: false
+      success: false,
+      groupId: this.$route.params.id
     }
   },
   created() {
@@ -143,11 +144,12 @@ export default {
       }
     },
     post() {
+      console.log(this.$route.params.id);
       const body = {
         'name': this.name,
         'tasks': this.tasks,
         'timeToDo': this.timeToDo,
-        'groupId': this.groupid
+        'groupId': this.$route.params.id
       };
 
       this.$http.post('newstack', body, {
@@ -159,7 +161,7 @@ export default {
         var testId = res.body.stack._id;
         this.success = true;
         const body = {
-          'groupId': this.groupid,
+          'groupId': this.$route.params.id,
           'stackId': testId
         };
 
