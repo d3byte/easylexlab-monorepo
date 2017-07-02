@@ -2,13 +2,16 @@
   <div>
     <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
     <center>
-      <table v-if="!showPreloader">
-        <tr>
+      <table class="table table-striped table-hover" v-if="!showPreloader">
+        <thead>
+          <tr>
           <th>Название</th>
           <th>Класс</th>
           <th>Ученики</th>
           <th>Подробнее</th>
         </tr>
+        </thead>
+        <tbody>
         <tr v-for="group in groups">
           <td>{{ group.name }}</td>
           <td>{{ group.grade }}</td>
@@ -17,6 +20,7 @@
             <span class="link" @click="goto(group._id)">Посмотреть</span>
           </td>
         </tr>
+      </tbody>
       </table>
     </center>
   </div>
