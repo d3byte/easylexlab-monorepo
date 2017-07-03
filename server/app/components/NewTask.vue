@@ -47,7 +47,7 @@
                 </form>
               </div>
             </div>
-            <h4 v-if="this.success" class="success">Задание успешно создано! <span class="link" @click="goto(this.groupId)">Вернуться</span></h4>
+            <h4 v-if="this.success" class="success">Задание успешно создано! <span class="link" @click="goto(groupId)">Вернуться</span></h4>
             <div class="login-form" v-if="this.showPost">
               <label>
                 Имя теста<br>

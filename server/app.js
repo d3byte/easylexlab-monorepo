@@ -9,7 +9,7 @@ import secret from './secret';
 
 import routes from './routes';
 
-mongoose.connect('mongodb://localhost:27017/b', () => {
+mongoose.connect('mongodb://localhost:27017/eng_proj', () => {
   console.log('Connected to mongodb');
 });
 
