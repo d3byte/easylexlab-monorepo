@@ -14,13 +14,14 @@ import NewTask from './components/NewTask.vue';
 import Groups from './components/Groups.vue';
 import Group from './components/Group.vue';
 import Students from './components/Students.vue';
+import Signup from './components/Signup.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/login', component: Login },
+  { path: '/signup', component: Signup },
   {
     path: '/profile', component: Profile,
     children: [

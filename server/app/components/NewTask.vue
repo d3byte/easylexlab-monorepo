@@ -219,10 +219,6 @@ table {
   cursor: pointer;
 }
 
-.success {
-  color: #307351;
-}
-
 .login-form input {
   background: transparent;
   border: none;

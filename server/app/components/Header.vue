@@ -1,7 +1,7 @@
 <template>
   <div class="navigator">
     <h3 class="naming">
-      <router-link to="/" tabindex="-1">The Lexach</router-link>
+      <router-link to="/" tabindex="-1">EasyLexLab</router-link>
     </h3>
     <div v-if="!logged" class="login">
 

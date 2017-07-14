@@ -21,7 +21,7 @@ const folder = __dirname + "/app/";
 app.get('/', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
-app.get('/login', (req, res) => {
+app.get('/signup', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 app.get('/profile', (req, res) => {
