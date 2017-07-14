@@ -18,7 +18,10 @@
           <label>Класс</label><br>
           <input v-model="grade" required type="number" tabindex="2" min="1" max="11">
         </div>
-        <center><button @click="create" class="btn" tabindex="3">Создать</button></center>
+        <center>
+          <button @click="create" class="btn" tabindex="3">Создать</button>
+          <button class="btn"><router-link class="" to="/profile">Отменить</router-link></button>
+        </center>
       </form>
     </center>
   </div>
