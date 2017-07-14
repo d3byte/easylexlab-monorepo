@@ -8,10 +8,13 @@ const userController = {};
 
 userController.post = (req, res) => {
   const {
+    name,
     username,
+    email,
     password,
+    permissions,
     group,
-    permissions
+    school
   } = req.body;
 
   db.findOne({username}, (err, user) => {
@@ -21,10 +24,13 @@ userController.post = (req, res) => {
       res.json({success: false});
     else {
       const user = new db.User({
+        name,
         username,
+        email,
         password,
-        _group: group,
-        permissions
+        permissions,
+        _groups: group,
+        school
       });
 
       user.save().then((newUser) => {
@@ -54,7 +60,7 @@ userController.login = (req, res) => {
             username: user.username,
             id: user._id,
             permissions: user.permissions,
-            group: user._group,
+            groups: user._groups,
             school: user.school
           },
           secret,

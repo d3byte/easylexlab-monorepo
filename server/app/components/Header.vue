@@ -17,7 +17,7 @@
       <div class="nav-item">
         <button class="flat-btn"><router-link to="/profile/stats">Статистика</router-link></button>
       </div>
-      <div class="nav-item">
+      <div v-if="user.permissions == 'teacher'" class="nav-item">
         <button class="flat-btn"><router-link to="/profile/newgroup">Новая группа</router-link></button>
       </div>
       <div class="nav-item">
@@ -49,6 +49,9 @@ export default {
     },
     showLogin() {
       return this.$store.getters.showLogin
+    },
+    user() {
+      return jwtDecode(this.$store.getters.userToken)
     }
   },
   methods: {

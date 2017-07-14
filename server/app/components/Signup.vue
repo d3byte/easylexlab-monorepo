@@ -24,6 +24,9 @@
             <option value="student">Ученик</option>
             <option value="teacher">Учитель</option>
           </select>
+          <div class="school">
+            <input type="text" v-model="school" placeholder="Школа №1">
+          </div>
           <div v-if="role == 'student'" class="groupcode">
             <input type="text" v-model="groupCode" placeholder="Код группы (необязательно)">
           </div>
@@ -51,6 +54,7 @@ export default {
       password:'',
       role: '',
       groupCode: '',
+      school: '',
       success: false
     }
   },
@@ -59,13 +63,14 @@ export default {
   },
   methods: {
     check() {
-      if(!!this.role.length && !!this.name.length !!this.username.length !!this.email.length !!this.password.length) {
+      if(!!this.role.length && !!this.name.length && !!this.username.length && !!this.email.length && !!this.password.length && !!this.school.length) {
         const body = {
           name: this.name,
           username: this.username,
           email: this.email,
-          role: this.role,
-          group: this.groupCode
+          permissions: this.role,
+          group: this.groupCode,
+          school: this.school
         };
         this.$http.post('signup', body).then(res => {
           console.log(res);

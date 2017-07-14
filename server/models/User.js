@@ -5,10 +5,18 @@ const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
 const userSchema = new Schema({
+  name : {
+    type: String,
+    required: true
+  },
   username: {
     type: String,
     required: true,
     minlength: [5, 'Логин должен состоять хотя бы из 5 символов.']
+  },
+  email: {
+    type: String,
+    required: true
   },
   password: {
     type: String,
@@ -20,6 +28,7 @@ const userSchema = new Schema({
   _groups: [{ type: Schema.ObjectId, ref: 'Group' }],
   notifications: [{ type: Object, default: null }],
   permissions: { type: String, required: true },
+  social: [{ type: Object, default: null }],
   createdAt: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false }
 });
