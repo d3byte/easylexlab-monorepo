@@ -15,7 +15,7 @@ const routes = express();
 routes.get('/', basicConstroller.get);
 
 // User routes
-routes.post('/signup', expressJWT({secret}), userController.post);
+routes.post('/signup', userController.post);
 routes.post('/login', userController.login);
 
 // Group routes
