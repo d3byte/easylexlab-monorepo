@@ -17,8 +17,16 @@
       <div class="nav-item">
         <button class="flat-btn"><router-link to="/profile/stats">Статистика</router-link></button>
       </div>
-      <div v-if="user.permissions == 'teacher'" class="nav-item">
-        <button class="flat-btn"><router-link to="/profile/newgroup">Новая группа</router-link></button>
+      <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
+        <button v-if="user.permissions == 'teacher'" class="flat-btn"><router-link to="/profile/newgroup">Новая группа</router-link></button>
+        <div v-if="user.permissions == 'student'" class="ui selection dropdown list">
+          <input type="hidden" name="group" v-model="this.$store.state.currentGroup">
+          <i class="dropdown icon"></i>
+          <div class="default text">Выбор группы</div>
+          <div class="menu">
+            <div v-for="group in user.groups" :data-value="group.name">{{ group.name }}</div>
+          </div>
+        </div>
       </div>
       <div class="nav-item">
         <i class="notifications material-icons">notifications</i>
@@ -242,5 +250,15 @@ h1, h2, h3, h4, h5, h6 {
 
 [login] {
   transform: translateX(-400px);
+}
+
+.select::before {
+  top: 10px !important;
+}
+
+.list {
+  background: transparent;
+} .list > option:first-of-type {
+  color: white !important
 }
 </style>

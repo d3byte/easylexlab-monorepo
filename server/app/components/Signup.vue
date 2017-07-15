@@ -3,7 +3,7 @@
     <app-header></app-header>
     <div class="signup-container">
       <div v-if="success" class="signup">
-        <h2 class="success">Вы успешно зарегистрировались!</h2>
+        <h3 class="success">Вы успешно зарегистрировались!</h3>
       </div>
       <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
       <form v-if="!success && !showPreloader" class="signup" onsubmit="return false">

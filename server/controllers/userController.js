@@ -90,6 +90,8 @@ userController.login = (req, res) => {
         const token = jwt.sign(
           {
             username: user.username,
+            name: user.name,
+            notifications: user.notifications,
             id: user._id,
             permissions: user.permissions,
             groups: user._groups,

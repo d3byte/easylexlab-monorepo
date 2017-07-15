@@ -108,3 +108,23 @@ input {
 .slide-enter, .slide-leave-to {
   transform: translateX(400px);
 }
+
+.vertical-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list {
+  background: transparent !important;
+  border: none !important;
+  vertical-align: middle !important;
+  color: white !important;
+  text-shadow: 0 1px 1px black;
+  padding-top: 14px !important;
+  font-size: 12 !important;
+  width: 25px !important;
+} .default.text {
+  color: white !important;
+  text-shadow: 0 1px 1px black;
+}

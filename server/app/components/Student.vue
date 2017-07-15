@@ -2,17 +2,17 @@
   <div class="container">
     <div class="row">
       <div class="box">
-        <div class="ava col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="avatar" style="margin-top:50px;"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 vertical-center ava">
+          <div class="avatar"></div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 userinfo">
-          <h1 class="name">{{ user.name }}</h1>
-          <h2 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h2>
-          <h2 class="school">{{ user.school }}</h2>
+          <h2 class="name">{{ user.name }}</h2>
+          <h3 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h3>
+          <h3 class="school">{{ user.school }}</h3>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
           <center>
-            <h1> Социальные сети </h1>
+            <h2> Социальные сети </h2>
             <br>
             <div class="col-lg-6"><a href="https://vk.com/dierk" target="_blank" class="btn-social btn-vk"><i class="fa fa-vk"></i></a></div>
             <div class="col-lg-6"><a href="http://facebook.com/" target="_blank" class="btn-social btn-facebook"><i class="fa fa-facebook"></i></a></div>
@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+    <router-view />
   </div>
 </template>
 
@@ -40,13 +41,8 @@ export default {
 
 <style lang="css" scoped>
 .ava {
-  padding-right: 20px;
-}
-
-.cntr{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  min-height: 220px;
 }
 
 .avatar {
@@ -70,88 +66,17 @@ export default {
 
 .box {
   background-color:#fff;
-  min-height:300px;
+  min-height:220px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
   border-radius: 2px;
 }
 
-
-a.btn-social,
-.btn-social {
-  border-radius: 50%;
-  color: #ffffff !important;
-  display: inline-block;
-  height: 54px;
-  line-height: 54px;
-  margin: 8px 4px;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color .3s;
-  webkit-transition: background-color .3s;
-  width: 54px;
+.row:first-of-type {
+  margin-bottom: 25px;
 }
 
-.btn-social .fa,.btn-social i {
-  backface-visibility: hidden;
-  moz-backface-visibility: hidden;
-  ms-transform: scale(1);
-  o-transform: scale(1);
-  transform: scale(1);
-  transition: all .25s;
-  webkit-backface-visibility: hidden;
-  webkit-transform: scale(1);
-  webkit-transition: all .25s;
-} .btn-social:hover,.btn-social:focus {
-  color: #fff;
-  outline: none;
-  text-decoration: none;
-} .btn-social:hover .fa,.btn-social:focus .fa,.btn-social:hover i,.btn-social:focus i {
-  ms-transform: scale(1.3);
-  o-transform: scale(1.3);
-  transform: scale(1.3);
-  webkit-transform: scale(1.3);
-} .btn-social.btn-xs {
-  font-size: 9px;
-  height: 24px;
-  line-height: 13px;
-  margin: 6px 2px;
-  width: 24px;
-} .btn-social.btn-sm {
-  font-size: 13px;
-  height: 36px;
-  line-height: 18px;
-  margin: 6px 2px;
-  width: 36px;
-} .btn-social.btn-lg {
-  font-size: 22px;
-  height: 72px;
-  line-height: 40px;
-  margin: 10px 6px;
-  width: 72px;
-}
-
-.btn-twitter {
-  background-color: #55acee;
-} .btn-twitter:hover {
-  background-color: #83c3f3;
-}
-
-.btn-vk {
-  background-color: #45668e;
-} .btn-vk:hover {
-  background-color: #587fae;
-}
-
-.btn-instagram {
-  background-color: #3f729b;
-} .btn-instagram:hover {
-  background-color: #548cb9;
-}
-
-.btn-facebook {
-  background-color: #3b5998;
-}
-.btn-facebook:hover {
-  background-color: #4c70ba;
+.row:nth-of-type(2) {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

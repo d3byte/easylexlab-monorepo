@@ -15,7 +15,8 @@ export const store = new Vuex.Store({
     },
     header: {
       showLogin: false
-    }
+    },
+    currentGroup: ''
   },
   getters,
   mutations,
