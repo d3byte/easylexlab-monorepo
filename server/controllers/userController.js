@@ -1,6 +1,7 @@
 import verifyPassword from 'mongoose-bcrypt';
 import jwt from 'jsonwebtoken';
 import secret from './../secret';
+import helper from './helperFunctions';
 
 import db from './../models';
 
@@ -13,15 +14,17 @@ userController.post = (req, res) => {
     email,
     password,
     permissions,
-    group,
+    groupCode,
     school
   } = req.body;
 
-  db.findOne({username}, (err, user) => {
+  const groupId = [ helper.crypt(groupCode, '123') ];
+
+  db.findOne({ username }, (err, user) => {
     if(err)
       throw err;
     else if(user)
-      res.json({success: false});
+      res.json({ success: false });
     else {
       const user = new db.User({
         name,
@@ -29,14 +32,13 @@ userController.post = (req, res) => {
         email,
         password,
         permissions,
-        _groups: group,
+        _groups: groupId,
         school
       });
-
       user.save().then((newUser) => {
         res.status(200).json({
           success: true,
-          data: newUser
+          userId: newUser._id
         });
       }).catch((err) => {
         res.status(500).json({
@@ -45,7 +47,24 @@ userController.post = (req, res) => {
       });
     }
   });
+};
 
+userController.addGroup = (req, res) => {
+  const {
+    studentId,
+    groupId
+  } = req.body;
+
+  const teacher = req.user;
+
+  db.User.findByIdAndUpdate(
+    studentId,
+    { $push: { '_groups': groupId }},
+  ).then(user => {
+    res.json({ success: true });
+  }).catch(err => {
+    throw err;
+  });
 };
 
 userController.login = (req, res) => {
@@ -87,7 +106,7 @@ userController.login = (req, res) => {
       message: err
     });
   });
-
 };
+
 
 export default userController;

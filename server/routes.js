@@ -19,7 +19,7 @@ routes.post('/signup', userController.post);
 routes.post('/login', userController.login);
 
 // Group routes
-routes.post('/reglink', expressJWT({secret}), groupController.regLink);
+routes.post('/reglink', expressJWT({secret}), groupController.regCode);
 routes.post('/addgroup', expressJWT({secret}), groupController.post);
 routes.delete('/deletegroup', expressJWT({secret}), groupController.delete);
 routes.patch('/addstudent', expressJWT({secret}), groupController.addStudent);

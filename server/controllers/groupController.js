@@ -1,5 +1,6 @@
 import db from './../models';
 import secret from './../secret';
+import helper from './helperFunctions';
 
 const groupController = {};
 
@@ -63,31 +64,24 @@ groupController.delete = (req, res) => {
 // Add student
 groupController.addStudent = (req, res) => {
   const {
-    groupId,
+    groupCode,
     studentId
   } = req.body;
 
-  const user = req.user;
+  const groupId = helper.crypt(groupCode, '123');
 
-  if(user.permissions == "admin" || user.permissions == "teacher") {
-    db.Group.findByIdAndUpdate(
-      groupId,
-      { $push: {'_students': studentId }},
-    ).then((existingGroup) => {
-      return res.status(200).json({
-        success: true,
-        existingGroup
-      });
-    }).catch((err) => {
-      return res.status(500).json({
-        message: err
-      });
+  db.Group.findByIdAndUpdate(
+    groupId,
+    { $push: { '_students': studentId }},
+  ).then((existingGroup) => {
+    return res.status(200).json({
+      success: true
     });
-  } else {
-    return res.status(501).json({
-      message: 'Access denied'
+  }).catch((err) => {
+    return res.status(500).json({
+      message: err
     });
-  }
+  });
 
 };
 
@@ -165,21 +159,19 @@ groupController.addTest = (req, res) => {
 };
 
 // Registration link
-groupController.regLink = (req, res) => {
+groupController.regCode = (req, res) => {
   const groupId = req.body.groupId;
   const user = req.user;
 
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
-    var url = 'reg&id=' + groupId;
-    // Encoding
-    url = encodeURI(url);
-    var b = new Buffer(url);
-    var encUri = b.toString('base64');
-    console.log('Encoded: ', encUri);
-    // Decoding
-    var bd = new Buffer(encUri, 'base64');
-    var decoded = bd.toString();
-    console.log('Decoded: ', decoded);
+    let groupCode = helper.crypt(groupId, '123');
+    console.log(groupCode);
+    let decoded = helper.crypt(groupCode, '123');
+    console.log(decoded);
+    res.status(200).json({
+      success: true,
+      groupCode
+    });
   }
 };
 

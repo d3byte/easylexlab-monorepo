@@ -73,11 +73,17 @@ export default {
           school: this.school
         };
         this.$http.post('signup', body).then(res => {
-          console.log(res);
-          this.success = res.body.success;
+          this.$http.post('addstudent', {
+            groupCode: this.groupCode,
+            studentId: res.body.userId
+          }).then( res => {
+            this.success = res.body.success;
+          }).catch(err => {
+            throw err;
+          });
         }).catch(err => {
           throw err;
-        })
+        });
       }
     }
   },
