@@ -165,9 +165,6 @@ groupController.regCode = (req, res) => {
 
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
     let groupCode = helper.crypt(groupId, '123');
-    console.log(groupCode);
-    let decoded = helper.crypt(groupCode, '123');
-    console.log(decoded);
     res.status(200).json({
       success: true,
       groupCode

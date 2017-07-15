@@ -8,7 +8,8 @@
             <h3 class="name">{{ this.group.name }}</h3>
         </div>
         <div class="col-lg-8">
-          <button @click="generateLink(group._id)" class="btn" name="reg"><i class="fa fa-plug" aria-hidden="true"></i> Ссылка на регистрацию</button>
+          <button v-if="!showCode" @click="generateLink(group._id)" class="btn btn-first" name="reg"><i class="fa fa-plug" aria-hidden="true"></i> Ссылка на регистрацию</button>
+          <p v-if="showCode" class="groupCode">{{ groupCode }}</p>
           <button @click="goto(group._id)" class="btn" name="newtask"><i class="fa fa-pencil" aria-hidden="true"></i> Создать задание</button>
         </div>
       </div>
@@ -23,7 +24,9 @@ import Header from './Header.vue';
 export default {
   data() {
     return {
-      group: {}
+      group: {},
+      groupCode: '',
+      showCode: ''
     }
   },
   methods: {
@@ -40,7 +43,10 @@ export default {
           'Content-type' : 'application/json',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }
-      }).then(res => console.log(res)).catch(err => {throw err});
+      }).then(res => {
+        this.groupCode = res.body.groupCode;
+        this.showCode = true;
+      }).catch(err => {throw err});
     }
   },
   http: {
@@ -75,8 +81,13 @@ export default {
   }
 
   .col-lg-8 {
-    text-align: center;
-  } .col-lg-8 > button:first-of-type {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .groupCode, .btn-first {
     margin-right: 50px;
   }
 </style>

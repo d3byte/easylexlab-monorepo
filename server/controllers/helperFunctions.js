@@ -40,17 +40,14 @@ helper.checkContents = tasks => {
   return allGood;
 };
 
-helper.crypt = (s, k) => {
+helper.crypt = (str, k) => {
   var enc = "";
-  var str = "";
-  // make sure that input is string
-  str = s.toString();
-  for (var i = 0; i < s.length; i++) {
+  for (var i = 0; i < str.length; i++) {
     // create block
-    var a = s.charCodeAt(i);
+    var a = str.charCodeAt(i);
     // bitwise XOR
     var b = a ^ k;
-    enc = enc + String.fromCharCode(b);
+    enc += String.fromCharCode(b);
   }
   return enc;
 };
