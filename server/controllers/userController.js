@@ -18,32 +18,45 @@ userController.post = (req, res) => {
     school
   } = req.body;
 
-  const groupId = [ helper.crypt(groupCode, '123') ];
+  const groupId =
+    groupCode ?
+    [helper.crypt(groupCode, '123')] :
+    [];
 
-  db.findOne({ username }, (err, user) => {
+  db.User.findOne({ username }, (err, user) => {
     if(err)
       throw err;
     else if(user)
-      res.json({ success: false });
+      res.json({ error: 'Даный логин уже занят' });
     else {
-      const user = new db.User({
-        name,
-        username,
-        email,
-        password,
-        permissions,
-        _groups: groupId,
-        school
-      });
-      user.save().then((newUser) => {
-        res.status(200).json({
-          success: true,
-          userId: newUser._id
-        });
-      }).catch((err) => {
-        res.status(500).json({
-          message: err
-        });
+      db.User.findOne({email}, (err, user) => {
+        if(err)
+          throw err;
+        else if(user)
+          res.json({error: 'Данная электронная почта уже занята'});
+        else {
+          const user = new db.User({
+            name,
+            username,
+            email,
+            password,
+            permissions,
+            _groups: groupId,
+            school
+          });
+          user.save().then(newUser => {
+            console.log('Success:\n', newUser);
+            res.status(200).json({
+              success: true,
+              userId: newUser._id
+            });
+          }).catch(err => {
+            console.log('Error:\n', err)
+            res.status(500).json({
+              message: err
+            });
+          });
+        }
       });
     }
   });

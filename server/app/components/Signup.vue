@@ -5,8 +5,10 @@
       <div v-if="success" class="signup">
         <h2 class="success">Вы успешно зарегистрировались!</h2>
       </div>
-      <form v-if="!success" class="signup" onsubmit="return false">
+      <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
+      <form v-if="!success && !showPreloader" class="signup" onsubmit="return false">
           <h2>Форма регистрации</h2>
+          <h4 v-if="error" class="errormsg">{{ errorMsg }}</h4>
           <div class="name">
             <input v-model="name" required type="text" tabindex="1" placeholder="Как к вам обращаться?">
           </div>
@@ -55,7 +57,10 @@ export default {
       role: '',
       groupCode: '',
       school: '',
-      success: false
+      success: false,
+      error: false,
+      errorMsg: '',
+      showPreloader: false
     }
   },
   http: {
@@ -64,24 +69,42 @@ export default {
   methods: {
     check() {
       if(!!this.role.length && !!this.name.length && !!this.username.length && !!this.email.length && !!this.password.length && !!this.school.length) {
+        this.showPreloader = true;
         const body = {
           name: this.name,
           username: this.username,
           email: this.email,
+          password: this.password,
           permissions: this.role,
-          group: this.groupCode,
+          groupCode: this.groupCode,
           school: this.school
         };
         this.$http.post('signup', body).then(res => {
-          this.$http.post('addstudent', {
-            groupCode: this.groupCode,
-            studentId: res.body.userId
-          }).then( res => {
-            this.success = res.body.success;
-          }).catch(err => {
-            throw err;
-          });
+          if(res.body.success) {
+            if(!!this.groupCode) {
+              this.$http.post('addstudent', {
+                groupCode: this.groupCode,
+                studentId: res.body.userId
+              }).then( res => {
+                !!res.body.error ? this.errorMsg = res.body.error : this.errorMsg = '';
+                this.success = res.body.success;
+                this.showPreloader = false;
+              }).catch(err => {
+                this.showPreloader = false;
+                throw err;
+              });
+            } else {
+              !!res.body.error ? this.errorMsg = res.body.error : this.errorMsg = '';
+              this.success = res.body.success;
+              this.showPreloader = false;
+            }
+          } else {
+            !!res.body.error ? this.errorMsg = res.body.error : this.errorMsg = '';
+            this.error = true;
+            this.showPreloader = false;
+          }
         }).catch(err => {
+          this.showPreloader = false;
           throw err;
         });
       }
@@ -144,5 +167,14 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+
+  .preloader {
+    color: black;
+    font-size: 30px;
+  }
+
+  .errormsg {
+    margin-bottom: 5px;
   }
 </style>

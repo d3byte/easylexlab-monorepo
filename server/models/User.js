@@ -21,11 +21,11 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: [8, 'Пароль должен состоять хотя бы из 8 символов.'],
+    minlength: [6, 'Пароль должен состоять хотя бы из 6 символов.'],
     bcrypt: true
   },
   school: { type: String, default: null },
-  _groups: [{ type: Schema.ObjectId, ref: 'Group' }],
+  _groups: [{ type: Schema.ObjectId, ref: 'Group', default: null }],
   notifications: [{ type: Object, default: null }],
   permissions: { type: String, required: true },
   social: [{ type: Object, default: null }],
