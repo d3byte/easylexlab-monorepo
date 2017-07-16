@@ -140,9 +140,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .naming {
   margin: 0;
+  margin-left: 60px;
   padding: 0;
   position: relative;
-  padding-left: 32px;
+  padding-left: 37px;
 } .naming a {
   color: white;
   font-family: 'Patrick Hand SC', cursive;
@@ -152,12 +153,13 @@ h1, h2, h3, h4, h5, h6 {
 } .naming::before {
   content: ' ';
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   left: 0;
-  top: 4px;
-  border-radius: 2px;
-  background: #D8D8D8;
+  bottom: 0;
+  border-radius: 50%;
+  background: url('../components/pics/logo1.png') center center no-repeat;
+  background-size: cover;
 }
 
 .recover {
