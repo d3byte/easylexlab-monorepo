@@ -2,21 +2,40 @@
   <div>
     <app-header style="margin-bottom: 80px;" />
     <div class="container-fluid">
+      <div class="box">
       <div class="row">
-        <div class="col-lg-4">
-            <h5>Страница группы</h5>
-            <h3 class="name">{{ this.group.name }}</h3>
-        </div>
-        <div class="col-lg-8">
-          <button v-if="!showCode" @click="generateLink(group._id)" class="btn btn-first" name="reg"><i class="fa fa-plug" aria-hidden="true"></i> Ссылка на регистрацию</button>
-          <p v-if="showCode" class="groupCode">{{ groupCode }}</p>
-          <button @click="goto(group._id)" class="btn" name="newtask"><i class="fa fa-pencil" aria-hidden="true"></i> Создать задание</button>
+        <div class="col-lg-12">
+          <center>
+            <h3>Страница группы</h3>
+            <h1 class="name">{{ this.group.name }}</h1>
+          </center>
         </div>
       </div>
+      <div class="row fl">
+        <center>
+        <div class="col-lg-4">
+          <button v-if="!showCode" @click="generateLink(group._id)" class="btn btn-first" name="reg"> Ссылка на регистрацию</button>
+          <p v-if="showCode" class="groupCode">{{ groupCode }}</p>
+        </div>
+        <div class="col-lg-4">
+          <button @click="goto(group._id)" class="btn" name="newtask"> Создать задание</button>
+        </div>
+        <div class="col-lg-4">
+          <button class="btn" name="newmember"> Добавить участника </button>
+        </div>
+      </center>
+      </div>
       <hr>
-      <router-view :group="this.group" :groupid="this.$route.params.id"></router-view>
+      <br>
     </div>
   </div>
+  <br>
+  <div class="container-fluid">
+    <div class="box">
+    <router-view :group="this.group" :groupid="this.$route.params.id"></router-view>
+  </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -80,6 +99,11 @@ export default {
     vertical-align: middle;
   }
 
+  .fl{
+    display: flex;
+    justify-content: space-around;
+  }
+
   .col-lg-8 {
     display: inline-flex;
     flex-direction: row;
@@ -89,5 +113,12 @@ export default {
 
   .groupCode, .btn-first {
     margin-right: 50px;
+  }
+
+  .box {
+    background-color:#fff;
+    min-height:300px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
+    border-radius: 2px;
   }
 </style>
