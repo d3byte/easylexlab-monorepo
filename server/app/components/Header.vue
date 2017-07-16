@@ -9,7 +9,7 @@
       <transition name="fade" mode="out-in">
         <div>
           <button v-if="!showLogin" @click="show" class="login-btn">Вход</button>
-          <button v-if="!showLogin" class="contact-btn">Связаться с нами</button>
+          <button v-if="!showLogin" class="contact-btn">Зарегистрироваться</button>
         </div>
       </transition>
     </div>

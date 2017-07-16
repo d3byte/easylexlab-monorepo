@@ -12,23 +12,23 @@
           <div class="name">
             <input v-model="name" required type="text" tabindex="1" placeholder="Как к вам обращаться?">
           </div>
-          <div class="username">
-            <input v-model="username" required type="text" tabindex="2" placeholder="Логин">
-          </div>
           <div class="email">
             <input v-model="email" required type="email" tabindex="3" placeholder="Электронная почта для связи">
           </div>
+          <div class="username">
+            <input v-model="username" required type="text" tabindex="2" placeholder="Логин">
+          </div>
           <div class="password">
             <input v-model="password" required type="password" tabindex="4" placeholder="Пароль">
+          </div>
+          <div class="school">
+            <input type="text" v-model="school" placeholder="Название учебного заведения">
           </div>
           <select v-model="role" class="ui dropdown">
             <option value="">Кто вы?</option>
             <option value="student">Ученик</option>
             <option value="teacher">Учитель</option>
           </select>
-          <div class="school">
-            <input type="text" v-model="school" placeholder="Школа №1">
-          </div>
           <div v-if="role == 'student'" class="groupcode">
             <input type="text" v-model="groupCode" placeholder="Код группы (необязательно)">
           </div>
@@ -37,7 +37,7 @@
             <label for="agree">Даю согласие на обработку персональных данных</label>
           </div>
         <center>
-          <button @click="check" class="material-btn" tabindex="6">Отправить заявку</button>
+          <button @click="check" class="btn" tabindex="6">Отправить заявку</button>
         </center>
       </form>
     </div>
@@ -172,6 +172,11 @@ export default {
   .preloader {
     color: black;
     font-size: 30px;
+  }
+
+  .mrg{
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .errormsg {
