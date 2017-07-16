@@ -11,7 +11,7 @@ import Profile from './components/Profile.vue';
 import Settings from './components/Settings.vue';
 import NewGroup from './components/NewGroup.vue';
 import NewTask from './components/NewTask.vue';
-import Groups from './components/Groups.vue';
+import ProfileFooter from './components/ProfileFooter.vue';
 import Group from './components/Group.vue';
 import Students from './components/Students.vue';
 import Signup from './components/Signup.vue';
@@ -35,7 +35,7 @@ const routes = [
       },
       {
         path: '',
-        component: Groups
+        component: ProfileFooter
       }
     ]
   },

@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="box">
-      <div class="ava col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <div class="avatar" style="margin-top:50px;"></div>
+      <div class="cntr ava col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div class="avatar"></div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 userinfo">
         <h1 class="name">{{ user.name }}</h1>
@@ -47,7 +47,8 @@ export default {
 
 <style lang="css" scoped>
 .ava {
-  padding-right: 20px;
+  justify-content: center;
+  min-height: 230px;
 }
 
 .cntr {
@@ -77,7 +78,7 @@ export default {
 
 .box {
   background-color:#fff;
-  min-height:300px;
+  min-height:230px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
   border-radius: 2px;
 }
