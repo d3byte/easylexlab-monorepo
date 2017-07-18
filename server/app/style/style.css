@@ -5,10 +5,10 @@ body {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-button {
+/*button {
   padding: 0;
   text-align: center;
-}
+}*/
 
 body {
   padding: 0;
@@ -35,12 +35,12 @@ a {
   margin-top: 250px;
 }
 
-.btn {
+/*.btn {
   transition: 0.3s;
   color: black;
 } .btn:hover {
   background: #5688C7;
-}
+}*/
 
 .name {
   color: #293132;
@@ -63,13 +63,13 @@ input {
   font-family: 'Patrick Hand SC', cursive;
 }
 
-.flat-btn {
+/*.flat-btn {
   padding-top: 0;
   padding-bottom: 0;
   border: none;
   background: transparent;
   text-shadow: 0 1px 1px black;
-}
+}*/
 
 .avatar {
   border-radius: 50%;

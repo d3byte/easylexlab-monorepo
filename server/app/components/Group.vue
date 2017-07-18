@@ -13,14 +13,12 @@
       </div>
       <div class="row fl">
         <center>
-        <div class="col-lg-4 fl">
-          <button v-if="!showCode" @click="generateLink(group._id)" class="btn btn-first" name="reg">Добавить участника</button>
+        <div class="col-lg-6 fl">
+          <button v-if="!showCode" @click="generateLink(group._id)" class="btn btn-primary" name="reg">Код регистрации</button>
           <p v-if="showCode" class="groupCode">{{ groupCode }}</p>
         </div>
-        <div class="col-lg-4 fl">
-        </div>
-        <div class="col-lg-4 fl">
-          <button @click="goto(group._id)" class="btn" name="newtask"> Создать задание</button>
+        <div class="col-lg-6 fl">
+          <button @click="goto(group._id)" class="btn btn-primary" name="newtask"> Создать задание</button>
         </div>
       </center>
       </div>

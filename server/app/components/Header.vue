@@ -8,17 +8,17 @@
       <login v-if="showLogin"></login>
       <transition name="fade" mode="out-in">
         <div>
-          <button v-if="!showLogin" @click="show" class="login-btn">Вход</button>
-          <button v-if="!showLogin" class="contact-btn">Зарегистрироваться</button>
+          <button v-if="!showLogin" @click="show" class="btn btn-default">Вход</button>
+          <button v-if="!showLogin" class="btn btn-default">Зарегистрироваться</button>
         </div>
       </transition>
     </div>
     <div v-if="logged" class="logged">
       <div class="nav-item">
-        <button class="flat-btn"><router-link to="/profile/stats">Статистика</router-link></button>
+        <button class="btn btn-default"><router-link to="/profile/stats">Статистика</router-link></button>
       </div>
       <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
-        <button v-if="user.permissions == 'teacher'" class="flat-btn"><router-link to="/profile/newgroup">Новая группа</router-link></button>
+        <button v-if="user.permissions == 'teacher'" class="btn btn-default"><router-link to="/profile/newgroup">Новая группа</router-link></button>
         <div v-if="user.permissions == 'student'" class="ui selection dropdown list">
           <input type="hidden" name="group" v-model="this.$store.state.currentGroup">
           <i class="dropdown icon"></i>
@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
   color: black;
 }
 
-.login-btn {
+/*.login-btn {
   text-align: center;
   border-radius: 2px;
   background: transparent;
@@ -120,11 +120,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 25px;
   margin-right: 15px;
 } .login-btn:hover {
-  background: white;
-  color: #2B303A;
-}
+  /*background: white;*/
+  /*color: black;*/
 
-.contact-btn {
+
+/*.contact-btn {
   text-align: center;
   border: 1px solid transparent;
   border-radius: 2px;
@@ -134,16 +134,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 10px;
   padding-right: 10px;
 } .contact-btn:hover {
-  background: #176087;
-  border: 1px solid #ccc;
-}
+  /*background: #176087;*/
+  /*border: 1px solid #ccc;*/
+
 
 .naming {
   margin: 0;
-  margin-left: 60px;
   padding: 0;
   position: relative;
-  padding-left: 37px;
+  padding-left: 32px;
 } .naming a {
   color: white;
   font-family: 'Patrick Hand SC', cursive;
@@ -153,13 +152,12 @@ h1, h2, h3, h4, h5, h6 {
 } .naming::before {
   content: ' ';
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   left: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background: url('../components/pics/logo1.png') center center no-repeat;
-  background-size: cover;
+  top: 4px;
+  border-radius: 2px;
+  background: #D8D8D8;
 }
 
 .recover {
@@ -219,7 +217,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 2px;
   height: 25px;
   left: 0;
-  top: 0px;
+  top: 8px;
   box-shadow: 0 1px 4px black;
   background: white;
   border-radius: 2px;
@@ -237,7 +235,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
   top: 7px;
 } .nav-item a {
-  color: white;
+  /*color: white;*/
 }
 
 .item {
@@ -263,4 +261,6 @@ h1, h2, h3, h4, h5, h6 {
 } .list > option:first-of-type {
   color: white !important
 }
+
+
 </style>

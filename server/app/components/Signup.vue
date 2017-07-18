@@ -7,22 +7,23 @@
       </div>
       <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
       <form v-if="!success && !showPreloader" class="signup" onsubmit="return false">
+        <center>
           <h2>Форма регистрации</h2>
           <h4 v-if="error" class="errormsg">{{ errorMsg }}</h4>
           <div class="name">
             <input v-model="name" required type="text" tabindex="1" placeholder="Как к вам обращаться?">
           </div>
           <div class="email">
-            <input v-model="email" required type="email" tabindex="3" placeholder="Электронная почта для связи">
+            <input v-model="email" required type="email" tabindex="2" placeholder="Электронная почта для связи">
           </div>
           <div class="username">
-            <input v-model="username" required type="text" tabindex="2" placeholder="Логин">
+            <input v-model="username" required type="text" tabindex="3" placeholder="Логин">
           </div>
           <div class="password">
             <input v-model="password" required type="password" tabindex="4" placeholder="Пароль">
           </div>
           <div class="school">
-            <input type="text" v-model="school" placeholder="Название учебного заведения">
+            <input type="text" v-model="school" tabindex="5" placeholder="Название учебного заведения">
           </div>
           <select v-model="role" class="ui dropdown">
             <option value="">Кто вы?</option>
@@ -33,12 +34,11 @@
             <input type="text" v-model="groupCode" placeholder="Код группы (необязательно)">
           </div>
           <div class="agree">
-            <input required type="checkbox" tabindex="5" id="agree">
-            <label for="agree">Даю согласие на обработку персональных данных</label>
+            <input required type="checkbox" tabindex="6" id="agree">
+            <label for="agree">Разрешаю обработку своих персональных данных</label>
           </div>
-        <center>
-          <button @click="check" class="btn" tabindex="6">Отправить заявку</button>
-        </center>
+          <button @click="check" class="btn btn-primary" tabindex="7">Зарегистрироваться</button>
+      </center>
       </form>
     </div>
   </div>
@@ -163,7 +163,9 @@ export default {
   }
 
   .agree {
-    font-size: 14px;
+    margin-top: 10px;
+    margin-right: 15px;
+    font-size: 12px;
     display: flex;
     flex-direction: row;
     align-items: center;

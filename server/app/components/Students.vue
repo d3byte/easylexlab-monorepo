@@ -1,15 +1,21 @@
 <template lang="html">
   <center>
-    <table>
+    <table class="table table-striped table-hover" v-if="!showPreloader">
+      <thead>
       <tr>
-        <th>№</th>
-        <th>Имя</th>
+        <th>Номер ученика</th>
+        <th>Имя ученика</th>
+        <th>Название задания</th>
         <th v-for="test in tests">{{ test.name }}</th>
       </tr>
+    </thead>
+    <tbody>
       <tr v-for="(student, index) in group._students">
         <td>{{ index + 1 }}</td>
         <td>{{ student.username }}</td>
+        <!-- <td></td> -->
       </tr>
+    </tbody>
     </table>
   </center>
 </template>

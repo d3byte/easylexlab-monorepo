@@ -14,9 +14,9 @@
           <input v-model="password" required type="password" tabindex="2" placeholder="Пароль">
         </div>
         <router-link class="recover" to="/recover" tabindex="-1">Забыли пароль?</router-link>
-        <button @click="check" class="login-btn" tabindex="3">Войти</button>
+        <button @click="check" class="btn btn-default" tabindex="3">Войти</button>
       </form>
-    <button @click="hide" class="contact-btn" tabindex="3">Отмена</button>
+    <button @click="hide" class="btn btn-default dec" tabindex="3">Отмена</button>
   </div>
 </template>
 
@@ -91,6 +91,10 @@ export default {
   color: #DB5461;
 }
 
+.dec {
+  margin-left: 10px;
+}
+
 ::-webkit-input-placeholder { color: white; opacity: 0.8; }
 ::-moz-placeholder          { color: white; opacity: 0.8; }/* Firefox 19+ */
 :-moz-placeholder           { color: white; opacity: 0.8; }/* Firefox 18- */
@@ -105,7 +109,7 @@ export default {
 
 a.recover {
   color: white;
-  opacity: 0.5;
+  opacity: 0.8;
 } a.recover:hover {
   opacity: 1;
 }
