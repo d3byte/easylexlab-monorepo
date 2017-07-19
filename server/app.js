@@ -44,9 +44,6 @@ app.get('/profile/newgroup', (req, res) => {
 app.get('/logout', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
-app.get('/eula', (req, res) => {
-    res.sendFile(path.join(folder + "index.html"));
-});
 
 app.use('/', express.static(folder));
 app.use('/profile', express.static(folder));
