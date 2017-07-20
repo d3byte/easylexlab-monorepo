@@ -17,9 +17,10 @@ routes.get('/', basicConstroller.get);
 // User routes
 routes.post('/signup', userController.post);
 routes.post('/login', userController.login);
+routes.post('/groups', expressJWT({secret}), userController.getGroups);
 
 // Group routes
-routes.post('/reglink', expressJWT({secret}), groupController.regCode);
+routes.post('/regcode', expressJWT({secret}), groupController.regCode);
 routes.post('/addgroup', expressJWT({secret}), groupController.post);
 routes.delete('/deletegroup', expressJWT({secret}), groupController.delete);
 routes.patch('/addstudent', expressJWT({secret}), groupController.addStudent);
