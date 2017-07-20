@@ -23,7 +23,7 @@ routes.post('/groups', expressJWT({secret}), userController.getGroups);
 routes.post('/regcode', expressJWT({secret}), groupController.regCode);
 routes.post('/addgroup', expressJWT({secret}), groupController.post);
 routes.delete('/deletegroup', expressJWT({secret}), groupController.delete);
-routes.patch('/addstudent', expressJWT({secret}), groupController.addStudent);
+routes.patch('/addstudent', groupController.addStudent);
 routes.post('/getgroups', expressJWT({secret}), groupController.getGroups);
 routes.post('/getgroup', expressJWT({secret}), groupController.getGroup);
 routes.post('/addtest', expressJWT({secret}), groupController.addTest);

@@ -82,7 +82,7 @@ export default {
         this.$http.post('signup', body).then(res => {
           if(res.body.success) {
             if(!!this.groupCode) {
-              this.$http.post('addstudent', {
+              this.$http.patch('addstudent', {
                 groupCode: this.groupCode,
                 studentId: res.body.userId
               }).then( res => {

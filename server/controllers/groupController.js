@@ -104,8 +104,6 @@ groupController.addStudent = (req, res) => {
     studentId
   } = req.body;
 
-  const groupId = helper.crypt(groupCode, '123');
-
   db.Group.findOneAndUpdate(
     { code: groupCode },
     { $push: { '_students': studentId }},
