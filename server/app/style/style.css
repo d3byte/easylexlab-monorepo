@@ -115,16 +115,8 @@ input {
   align-items: center;
 }
 
-.list {
-  background: transparent !important;
-  border: none !important;
-  vertical-align: middle !important;
-  color: white !important;
-  text-shadow: 0 1px 1px black;
-  padding-top: 14px !important;
-  font-size: 12 !important;
-  width: 25px !important;
-} .default.text {
-  color: white !important;
-  text-shadow: 0 1px 1px black;
+.box {
+  background-color:#fff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
+  border-radius: 2px;
 }
