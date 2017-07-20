@@ -9,7 +9,7 @@
       <transition name="fade" mode="out-in">
         <div>
           <button v-if="!showLogin" @click="show" class="btn btn-default">Вход</button>
-          <button v-if="!showLogin" class="btn btn-default">Зарегистрироваться</button>
+          <router-link to="/signup"><button v-if="!showLogin" class="btn btn-default">Зарегистрироваться</button></router-link>
         </div>
       </transition>
     </div>

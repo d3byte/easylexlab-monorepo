@@ -15,6 +15,7 @@ import ProfileFooter from './components/ProfileFooter.vue';
 import Group from './components/Group.vue';
 import Students from './components/Students.vue';
 import Signup from './components/Signup.vue';
+import Eula from './components/Eula.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -22,6 +23,7 @@ Vue.use(VueResource);
 const routes = [
   { path: '/', component: Home },
   { path: '/signup', component: Signup },
+  { path: '/eula', component: Eula },
   {
     path: '/profile', component: Profile,
     children: [
