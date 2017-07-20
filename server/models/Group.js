@@ -9,6 +9,7 @@ const groupSchema = new Schema({
     type: String,
     required: true
   },
+  code: { type: String, required: true },
   grade: { type: Number, required: true },
   _teacher: { type: Schema.ObjectId, ref: 'User', required: true },
   _students: [{ type: Schema.ObjectId, ref: 'User'}],

@@ -18,11 +18,6 @@ userController.post = (req, res) => {
     school
   } = req.body;
 
-  const groupId =
-    groupCode ?
-    [helper.crypt(groupCode, '123')] :
-    [];
-
   db.User.findOne({ username }, (err, user) => {
     if(err)
       throw err;
@@ -35,27 +30,53 @@ userController.post = (req, res) => {
         else if(user)
           res.json({error: 'Данная электронная почта уже занята'});
         else {
-          const user = new db.User({
-            name,
-            username,
-            email,
-            password,
-            permissions,
-            _groups: groupId,
-            school
-          });
-          user.save().then(newUser => {
-            console.log('Success:\n', newUser);
-            res.status(200).json({
-              success: true,
-              userId: newUser._id
+          if(!!groupCode.length) {
+            db.Group.findOne({code: groupCode}).then(group => {
+              const user = new db.User({
+                name,
+                username,
+                email,
+                password,
+                permissions,
+                _groups: [group._id],
+                school
+              });
+              user.save().then(newUser => {
+                console.log('Success:\n', newUser);
+                res.status(200).json({
+                  success: true,
+                  userId: newUser._id
+                });
+              }).catch(err => {
+                console.log('Error:\n', err)
+                res.status(500).json({
+                  message: err
+                });
+              });
             });
-          }).catch(err => {
-            console.log('Error:\n', err)
-            res.status(500).json({
-              message: err
+          } else {
+            const user = new db.User({
+              name,
+              username,
+              email,
+              password,
+              permissions,
+              _groups: [],
+              school
             });
-          });
+            user.save().then(newUser => {
+              console.log('Success:\n', newUser);
+              res.status(200).json({
+                success: true,
+                userId: newUser._id
+              });
+            }).catch(err => {
+              console.log('Error:\n', err)
+              res.status(500).json({
+                message: err
+              });
+            });
+          }
         }
       });
     }
@@ -121,6 +142,18 @@ userController.login = (req, res) => {
       message: err
     });
   });
+};
+
+userController.getGroups = (req, res) => {
+  const user = req.user;
+  const groupId = req.body.groupId;
+  if(user.permissions == 'student' || user.permissions == 'teacher') {
+    db.Group.findById(groupId).then(group => {
+      res.json({
+        group
+      });
+    });
+  }
 };
 
 

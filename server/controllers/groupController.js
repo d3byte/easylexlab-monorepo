@@ -1,3 +1,5 @@
+import randomize from 'randomatic';
+
 import db from './../models';
 import secret from './../secret';
 import helper from './helperFunctions';
@@ -14,8 +16,13 @@ groupController.post = (req, res) => {
   const user = req.user;
 
   if(user.permissions == "admin" || user.permissions == "teacher") {
+    let code = randomize('A0', 5);
+
+    console.log(code);
+
     const group = new db.Group({
       name,
+      code,
       grade,
       _teacher: user.id
     });
@@ -70,8 +77,8 @@ groupController.addStudent = (req, res) => {
 
   const groupId = helper.crypt(groupCode, '123');
 
-  db.Group.findByIdAndUpdate(
-    groupId,
+  db.Group.findOneAndUpdate(
+    { code: groupCode },
     { $push: { '_students': studentId }},
   ).then((existingGroup) => {
     return res.status(200).json({
@@ -164,10 +171,11 @@ groupController.regCode = (req, res) => {
   const user = req.user;
 
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
-    let groupCode = helper.crypt(groupId, '123');
-    res.status(200).json({
-      success: true,
-      groupCode
+    db.Group.findById(groupId).then(group => {
+      return res.json({
+        success: true,
+        groupCode: group.code
+      });
     });
   }
 };
