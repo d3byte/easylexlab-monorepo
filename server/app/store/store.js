@@ -11,12 +11,13 @@ export const store = new Vuex.Store({
   state: {
     user: {
       logged: (localStorage.token ? true : false),
-      token: (localStorage.token ? localStorage.token : '')
+      token: (localStorage.token ? localStorage.token : ''),
+      groups: []
     },
     header: {
       showLogin: false
     },
-    currentGroup: ''
+    currentGroup: {}
   },
   getters,
   mutations,

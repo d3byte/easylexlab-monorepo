@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <h2>Настройки профиля</h2>
   </div>
 </template>

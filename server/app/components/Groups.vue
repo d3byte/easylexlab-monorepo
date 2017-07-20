@@ -55,11 +55,8 @@ export default {
         'Authorization': 'Bearer ' + this.token
       }
     }).then(res => {
-      // TODO: delete timeout
-      setTimeout(() => {
-        this.showPreloader = false;
-        this.groups = res.body.data;
-      }, 1000);
+      this.showPreloader = false;
+      this.groups = res.body.data;
     }).catch(err => {
       throw err;
     });

@@ -4,14 +4,11 @@
       <router-link to="/" tabindex="-1">EasyLexLab</router-link>
     </h3>
     <div v-if="!logged" class="login">
-
       <login v-if="showLogin"></login>
-      <transition name="fade" mode="out-in">
-        <div>
-          <button v-if="!showLogin" @click="show" class="btn btn-default">Вход</button>
-          <router-link to="/signup"><button v-if="!showLogin" class="btn btn-default">Зарегистрироваться</button></router-link>
-        </div>
-      </transition>
+      <div>
+        <button v-if="!showLogin" @click="show" class="btn btn-default">Вход</button>
+        <router-link to="/signup"><button v-if="!showLogin" class="btn btn-default">Зарегистрироваться</button></router-link>
+      </div>
     </div>
     <div v-if="logged" class="logged">
       <div class="nav-item">
@@ -19,12 +16,12 @@
       </div>
       <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
         <button v-if="user.permissions == 'teacher'" class="btn btn-default"><router-link to="/profile/newgroup">Новая группа</router-link></button>
-        <div v-if="user.permissions == 'student'" class="ui selection dropdown list">
-          <input type="hidden" name="group" v-model="this.$store.state.currentGroup">
+        <div v-if="user.permissions == 'student'" class="ui dropdown list">
+          <div v-if="isCurrentGr" class="text">{{ currentGroup.name }}</div>
+          <div v-else class="text">Выбор группы</div>
           <i class="dropdown icon"></i>
-          <div class="default text">Выбор группы</div>
           <div class="menu">
-            <div v-for="group in user.groups" :data-value="group.name">{{ group.name }}</div>
+            <div v-for="group in groups" @click="changeGroup(group)" class="item">{{ group.name }}</div>
           </div>
         </div>
       </div>
@@ -51,6 +48,13 @@ import jwtDecode from 'jwt-decode';
 import Login from './Login.vue';
 
 export default {
+  data() {
+    return {
+      requested: false,
+      isCurrentGr: false,
+      currentGroup: {}
+    }
+  },
   computed: {
     logged() {
       return this.$store.getters.loginState
@@ -60,6 +64,9 @@ export default {
     },
     user() {
       return jwtDecode(this.$store.getters.userToken)
+    },
+    groups() {
+      return this.$store.state.user.groups;
     }
   },
   methods: {
@@ -70,10 +77,36 @@ export default {
     },
     show() {
       this.$store.dispatch('hideOrShowLogin');
+    },
+    changeGroup(group) {
+      this.$store.dispatch('changeGroup', group);
+      this.currentGroup = group;
     }
+  },
+  http: {
+    root: '/api'
   },
   mounted() {
     $('.ui.dropdown').dropdown();
+    $('ui.selection.dropdown.list').dropdown();
+  },
+  created() {
+    for(let groupId of this.user.groups) {
+      this.$http.post('groups',
+      {
+        groupId
+      }, { headers: {
+            'Content-type' : 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }}).then(res => {
+          this.$store.state.user.groups.push(res.body.group);
+          if(this.$store.state.user.groups.length == 1) {
+            this.$store.dispatch('changeGroup', res.body.group);
+            this.isCurrentGr = true;
+            this.currentGroup = res.body.group;
+          }
+        });
+    }
   },
   components: {
     'login': Login
@@ -252,14 +285,17 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(-400px);
 }
 
-.select::before {
-  top: 10px !important;
-}
-
 .list {
   background: transparent;
 } .list > option:first-of-type {
   color: white !important
+}
+
+.nav-item.select::before {
+  top: 0;
+} .text {
+  color: white;
+  text-shadow: 0 1px 1px black;
 }
 
 

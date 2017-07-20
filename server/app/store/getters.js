@@ -7,5 +7,8 @@ export default {
    },
    showLogin(state) {
      return state.header.showLogin
+   },
+   currentGroup(state) {
+     return state.currentGroup
    }
 }

@@ -1,6 +1,6 @@
 <template lang="html">
   <center>
-    <table class="table table-striped table-hover" v-if="!showPreloader">
+    <table class="table table-striped table-hover">
       <thead>
       <tr>
         <th>Номер ученика</th>

@@ -16,26 +16,55 @@ groupController.post = (req, res) => {
   const user = req.user;
 
   if(user.permissions == "admin" || user.permissions == "teacher") {
-    let code = randomize('A0', 5);
+    const code = randomize('A0', 5);
+    db.Group.findOne({ code }, (err, group) => {
+      if(err)
+        throw err
+      if(group) {
+        let index = helper.randomInteger(1, 5);
+        var newCode = '';
+        for(let i = 0; i < code.length; i++) {
+          if(i != index) {
+            newCode += code[i];
+          } else {
+            newCode += randomize('A0', 1);
+          }
+        }
+        const group = new db.Group({
+          name,
+          code: newCode,
+          grade,
+          _teacher: user.id
+        });
+        group.save().then((newGroup) => {
+          return res.status(200).json({
+            success: true,
+            data: newGroup
+          });
+        }).catch((err) => {
+          return res.status(500).json({
+            message: err
+          });
+        });
+      } else {
+        const group = new db.Group({
+          name,
+          code,
+          grade,
+          _teacher: user.id
+        });
 
-    console.log(code);
-
-    const group = new db.Group({
-      name,
-      code,
-      grade,
-      _teacher: user.id
-    });
-
-    group.save().then((newGroup) => {
-      return res.status(200).json({
-        success: true,
-        data: newGroup
-      });
-    }).catch((err) => {
-      return res.status(500).json({
-        message: err
-      });
+        group.save().then((newGroup) => {
+          return res.status(200).json({
+            success: true,
+            data: newGroup
+          });
+        }).catch((err) => {
+          return res.status(500).json({
+            message: err
+          });
+        });
+      }
     });
   } else {
     return res.status(501).json({

@@ -7,5 +7,8 @@ export default {
   },
   hideOrShowLogin({ commit }) {
     commit('hideOrShowLogin');
+  },
+  changeGroup({ commit }, group) {
+    commit('changeGroup', group);
   }
 }

@@ -12,5 +12,8 @@ export default {
   },
   hideOrShowLogin(state) {
     state.header.showLogin = !state.header.showLogin;
+  },
+  changeGroup(state, group) {
+    state.currentGroup = group;
   }
 }

@@ -42,24 +42,16 @@ export default {
       };
       this.$http.post('login', body).then(res => {
         if(res.body.success) {
-          setTimeout(() => {
-            this.showPreloader = false;
-            this.$store.dispatch('login', res.body.token);
-            this.$router.push({ path: '/profile' });
-          }, 1000);
-
+          this.showPreloader = false;
+          this.$store.dispatch('login', res.body.token);
+          this.$router.push({ path: '/profile' });
         } else {
-          setTimeout(() => {
-            this.showPreloader = false;
-            this.error = 'Неверный пароль';
-          }, 1000);
+          this.showPreloader = false;
+          this.error = 'Неверный пароль';
         }
       }).catch(err => {
-        setTimeout(() => {
           this.showPreloader = false;
           this.error = 'Неверный логин';
-        }, 1000);
-
       });
     },
     check() {

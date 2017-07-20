@@ -54,7 +54,7 @@ export default {
       const body = {
         'groupId': id
       };
-      this.$http.post('reglink', body, {
+      this.$http.post('regcode', body, {
         headers: {
           'Content-type' : 'application/json',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
