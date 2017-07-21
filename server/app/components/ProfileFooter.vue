@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container-fluid box">
     <groups v-if="user.permissions == 'teacher'"/>
     <student v-else />
   </div>

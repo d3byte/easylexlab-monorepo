@@ -92,10 +92,7 @@ export default {
   },
   created() {
     for(let groupId of this.user.groups) {
-      this.$http.post('groups',
-      {
-        groupId
-      }, { headers: {
+      this.$http.post('groups',{ groupId } , { headers: {
             'Content-type' : 'application/json',
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }}).then(res => {
@@ -107,6 +104,16 @@ export default {
           }
         });
     }
+    setTimeout(() => {
+      this.$http.post('gettests', { groupId: this.$store.state.currentGroup._id }, {
+        headers: {
+          'Content-type' : 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.$store.dispatch('addTests', res.body.stacks);
+      });
+    }, 100);
   },
   components: {
     'login': Login

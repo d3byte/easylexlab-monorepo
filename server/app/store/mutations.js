@@ -15,5 +15,9 @@ export default {
   },
   changeGroup(state, group) {
     state.currentGroup = group;
+  },
+  addTests(state, stack) {
+    console.log('Adding tests: ', stack);
+    state.currentGroup._tests = stack;
   }
 }

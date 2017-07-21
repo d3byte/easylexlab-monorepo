@@ -64,8 +64,10 @@ stackController.post = (req, res) => {
 stackController.getTests = (req, res) => {
   const groupId = req.body.groupId;
   const user = req.user;
-  if(user.permissions == 'teacher' || user.permissions == 'admin') {
-    db.Stack.find({_group: groupId}).populate( {path: '_tests' }).then(stacks => {
+  console.log(groupId);
+  if(user.permissions == 'teacher' || user.permissions == 'admin' || user.permissions == 'student') {
+    db.Stack.find({_group: groupId}).populate( {path: '', select: 'name tasks test timeToDo'}).then(stacks => {
+      console.log('Stacks: ', stacks);
       res.status(200).json({stacks});
     }).catch(err => {
       res.status(500).json({err});

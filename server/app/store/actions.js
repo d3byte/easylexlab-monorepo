@@ -10,5 +10,8 @@ export default {
   },
   changeGroup({ commit }, group) {
     commit('changeGroup', group);
+  },
+  addTests({ commit }, stacks) {
+    commit('addTests', stacks);
   }
 }

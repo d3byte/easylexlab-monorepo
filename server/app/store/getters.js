@@ -10,5 +10,8 @@ export default {
    },
    currentGroup(state) {
      return state.currentGroup
+   },
+   user(state) {
+     return state.user
    }
 }

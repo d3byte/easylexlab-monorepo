@@ -5,7 +5,6 @@
       <tr>
         <th>Номер ученика</th>
         <th>Имя ученика</th>
-        <th>Название задания</th>
         <th v-for="test in tests">{{ test.name }}</th>
       </tr>
     </thead>
