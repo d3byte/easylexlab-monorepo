@@ -17,6 +17,7 @@
   },
   "permission": false,
   "autoInstall": false,
+  "silent": true,
   "rtl": false,
   "version": "2.2.11"
 }
