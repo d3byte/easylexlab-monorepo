@@ -1,9 +1,9 @@
 <template>
   <div>
     <app-header style="margin-bottom: 60px;"></app-header>
-    <flashcards v-if="games.flashcards" :task="task"></flashcards>
-    <matching v-if="games.matching" :task="task"></matching>
-    <div v-if="!games.matching && !games.flashcards">
+    <flashcards v-if="games.flashcards" :stack="task"></flashcards>
+    <matching v-if="games.matching" :stack="task"></matching>
+    <div v-show="!games.matching && !games.flashcards">
       <div class="container">
         <div class="row box">
           <center>
