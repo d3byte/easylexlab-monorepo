@@ -79,7 +79,7 @@ stackController.getTest = (req, res) => {
   const testId = req.body.testId;
   const user = req.user;
   if(user.permissions == 'teacher' || user.permissions == 'admin' || user.permissions == 'student') {
-    db.Stack.findById(testId).populate({ path: '', select: 'name tasks test timeToDo' }).then(stack => {
+    db.Stack.findById(testId).populate({ path: '', select: 'name tasks results test timeToDo' }).then(stack => {
       res.status(200).json({ stack });
     }).catch(err => {
       res.status(500).json({ err });

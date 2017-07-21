@@ -17,7 +17,6 @@ const userSchema = new Schema({
     bcrypt: true
   },
   school: { type: String, default: null },
-  // TODO: refactor _groups to Schema.Object
   _groups: [{ type: Schema.ObjectId, ref: 'Group', default: null }],
   notifications: [{ type: Object, default: null }],
   permissions: { type: String, required: true },
