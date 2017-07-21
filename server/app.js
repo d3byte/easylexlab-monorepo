@@ -47,11 +47,16 @@ app.get('/logout', (req, res) => {
 app.get('/eula', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/task/:id', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
 
 app.use('/', express.static(folder));
 app.use('/profile', express.static(folder));
 app.use('/group', express.static(folder));
 app.use('/group/:id', express.static(folder));
+app.use('/task', express.static(folder));
+app.use('/task/:id', express.static(folder));
 
 // Middleware
 app.use(bodyParser.json());

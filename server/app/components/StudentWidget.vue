@@ -6,7 +6,7 @@
       <h3>Невыполненные задания</h3>
       <div v-for="test in group._tests" class="box col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <h3>{{ test.name }}</h3>
-        <router-link to="#">Перейти</router-link>
+        <router-link :to="'/task/' + test._id">Перейти</router-link>
       </div>
     </div>
   </div>

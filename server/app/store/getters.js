@@ -13,5 +13,8 @@ export default {
    },
    user(state) {
      return state.user
+   },
+   games(state) {
+     return state.games
    }
 }

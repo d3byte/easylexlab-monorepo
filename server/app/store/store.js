@@ -17,7 +17,11 @@ export const store = new Vuex.Store({
     header: {
       showLogin: false
     },
-    currentGroup: {}
+    currentGroup: {},
+    games: {
+      matching: false,
+      flashcards: false
+    }
   },
   getters,
   mutations,

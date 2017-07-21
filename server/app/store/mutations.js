@@ -19,5 +19,17 @@ export default {
   addTests(state, stack) {
     console.log('Adding tests: ', stack);
     state.currentGroup._tests = stack;
+  },
+  showMatching(state) {
+    state.games.matching = true;
+    state.games.flashcards = false;
+  },
+  showFlashcards(state) {
+    state.games.flashcards = true;
+    state.games.matching = false;
+  },
+  hideGames(state) {
+    state.games.flashcards = false;
+    state.games.matching = false;
   }
 }

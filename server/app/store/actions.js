@@ -13,5 +13,14 @@ export default {
   },
   addTests({ commit }, stacks) {
     commit('addTests', stacks);
+  },
+  showMatching({ commit }) {
+    commit('showMatching');
+  },
+  showFlashcards({ commit }) {
+    commit('showFlashcards');
+  },
+  hideGames({ commit }) {
+    commit('hideGames');
   }
 }

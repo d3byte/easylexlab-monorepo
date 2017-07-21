@@ -31,5 +31,6 @@ routes.post('/addtest', expressJWT({secret}), groupController.addTest);
 // Stack routes
 routes.post('/newstack', expressJWT({secret}), stackController.post);
 routes.post('/gettests', expressJWT({secret}), stackController.getTests);
+routes.post('/gettest', expressJWT({secret}), stackController.getTest);
 
 export default routes;
