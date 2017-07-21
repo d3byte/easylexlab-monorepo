@@ -34,7 +34,7 @@
             <input type="text" v-model="groupCode" placeholder="Код группы (необязательно)">
           </div>
           <div class="agree">
-            <input required type="checkbox" tabindex="6" id="agree">
+            <input required v-model="agree" type="checkbox" tabindex="6" id="agree">
             <label for="agree">Разрешаю обработку своих персональных данных</label>
           </div>
           <button @click="check" class="btn btn-primary" tabindex="7">Зарегистрироваться</button>
@@ -57,6 +57,7 @@ export default {
       role: '',
       groupCode: '',
       school: '',
+      agree: false,
       success: false,
       error: false,
       errorMsg: '',
@@ -68,7 +69,7 @@ export default {
   },
   methods: {
     check() {
-      if(!!this.role.length && !!this.name.length && !!this.username.length && !!this.email.length && !!this.password.length && !!this.school.length) {
+      if(thi.agree && !!this.role.length && !!this.name.length && !!this.username.length && !!this.email.length && !!this.password.length && !!this.school.length) {
         this.showPreloader = true;
         const body = {
           name: this.name,

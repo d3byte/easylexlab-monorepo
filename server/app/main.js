@@ -16,7 +16,7 @@ import Group from './components/Group.vue';
 import Students from './components/Students.vue';
 import Signup from './components/Signup.vue';
 import Eula from './components/Eula.vue';
-import Test from './components/Test.vue';
+import Stack from './components/Stack.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -62,7 +62,7 @@ const routes = [
   },
   {
     path: '/task/:id',
-    component: Test
+    component: Stack
   },
   {
     path: '/task',

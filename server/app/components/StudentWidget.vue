@@ -25,5 +25,6 @@ export default {
 <style lang="css">
 .box {
   padding: 10px;
+  margin-bottom: 15px;
 }
 </style>

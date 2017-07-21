@@ -85,7 +85,8 @@ export default {
       content: [
         {
           key: '',
-          value: ''
+          value: '',
+          test: ''
         }
       ],
       repeat: 1,
@@ -102,7 +103,8 @@ export default {
         content: [
           {
             key: '',
-            value: ''
+            value: '',
+            test: ''
           }
         ],
         repeat: 1,
@@ -119,7 +121,8 @@ export default {
     newPair(task) {
       var newPair = {
         key: '',
-        value: ''
+        value: '',
+        test: ''
       };
       task.content.push(newPair);
     },

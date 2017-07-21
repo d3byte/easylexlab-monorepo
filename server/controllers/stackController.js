@@ -1,4 +1,3 @@
-import verifyPassword from 'mongoose-bcrypt';
 import jwt from 'jsonwebtoken';
 import secret from './../secret';
 
@@ -16,7 +15,9 @@ stackController.post = (req, res) => {
     timeToDo,
     groupId
   } = req.body;
-  console.log('Group id: ', groupId);
+
+  // TODO: use lodash to refactor the code
+
   const user = req.user;
 
   if(user.permissions == "teacher") {
@@ -73,6 +74,7 @@ stackController.getTests = (req, res) => {
   } else res.status(501).json({'error':'No permissions for this action'});
 };
 
+// Get one exact stack
 stackController.getTest = (req, res) => {
   const testId = req.body.testId;
   const user = req.user;
@@ -83,6 +85,36 @@ stackController.getTest = (req, res) => {
       res.status(500).json({ err });
     });
   } else res.status(501).json({'error':'No permissions for this action'});
+};
+
+// Add result to the stack
+stackController.addResult = (req, res) => {
+  const {
+    result,
+    stackId
+  } = req.body;
+
+  const user = req.user;
+
+  const results = {
+    'userId': user.id,
+    'username': user.username,
+    'result': result
+  };
+
+  console.log('Result:\n', results);
+  console.log('\n\nstackId: ', stackId);
+
+  db.Stack.findById(stackId).then(stack => {
+    stack.results.push(results);
+    stack.save();
+    res.json({
+      success: true
+    });
+  }).catch(err => {
+    throw err;
+  });
+
 };
 
 export default stackController;

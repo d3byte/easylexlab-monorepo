@@ -5,26 +5,19 @@ const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
 const userSchema = new Schema({
-  name : {
-    type: String,
-    required: true
-  },
+  name : { type: String, required: true },
   username: {
-    type: String,
-    required: true,
+    type: String, required: true,
     minlength: [5, 'Логин должен состоять хотя бы из 5 символов.']
   },
-  email: {
-    type: String,
-    required: true
-  },
+  email: { type: String, required: true },
   password: {
-    type: String,
-    required: true,
+    type: String, required: true,
     minlength: [6, 'Пароль должен состоять хотя бы из 6 символов.'],
     bcrypt: true
   },
   school: { type: String, default: null },
+  // TODO: refactor _groups to Schema.Object
   _groups: [{ type: Schema.ObjectId, ref: 'Group', default: null }],
   notifications: [{ type: Object, default: null }],
   permissions: { type: String, required: true },
