@@ -26,9 +26,9 @@
   </div>
   <br>
   <div class="row">
-    <div class="box">
+    <!-- <div class="box"> -->
       <router-view></router-view>
-    </div>
+    <!-- </div> -->
   </div>
 </div>
 </template>
