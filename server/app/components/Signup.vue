@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     check() {
-      if(thi.agree && !!this.role.length && !!this.name.length && !!this.username.length && !!this.email.length && !!this.password.length && !!this.school.length) {
+      if(this.agree && !!this.role.length && !!this.name.length && !!this.username.length && !!this.email.length && !!this.password.length && !!this.school.length) {
         this.showPreloader = true;
         const body = {
           name: this.name,

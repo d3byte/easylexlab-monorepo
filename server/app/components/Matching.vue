@@ -1,18 +1,57 @@
 <template>
-  <div>
+  <div class="col-lg-12">
+    <center>
     <h1>Matching</h1>
-    <div class="ui dropdown">
-      <div class="text game">Выбрать игру</div>
-      <div class="menu">
-        <div @click="showMatching" class="item">
-          Matching
+    <br>
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="box">
+          <h2> Cheese </h2>
         </div>
-        <div @click="showFlashcards" class="item">
-          Flashcards
+        <div class="box">
+          <h2> Textbook</h2>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="box">
+          <h2> Сэр </h2>
+        </div>
+        <div class="box">
+          <h2> Учебник </h2>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="box">
+          <h2> Нога </h2>
+        </div>
+        <div class="box">
+          <h2> Sir </h2>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="box">
+          <h2> Foot</h2>
+        </div>
+        <div class="box">
+          <h2> Сыр </h2>
         </div>
       </div>
     </div>
-    <button class="btn" @click="hideGames">Назад</button>
+    <div class="row">
+
+    </div>
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+    <button class="btn btn-primary" @click="hideGames">Закончить игру</button>
+  </div>
+  <br>
+  <div class="row">
+    <button class="btn btn-primary" @click="hideGames">Назад</button>
+  </div>
+    </center>
   </div>
 </template>
 
