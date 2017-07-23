@@ -83,24 +83,6 @@ userController.post = (req, res) => {
   });
 };
 
-userController.addGroup = (req, res) => {
-  const {
-    studentId,
-    groupId
-  } = req.body;
-
-  const teacher = req.user;
-
-  db.User.findByIdAndUpdate(
-    studentId,
-    { $push: { '_groups': groupId }},
-  ).then(user => {
-    res.json({ success: true });
-  }).catch(err => {
-    throw err;
-  });
-};
-
 userController.login = (req, res) => {
   const { username, password } = req.body;
 
@@ -154,6 +136,70 @@ userController.getGroups = (req, res) => {
       });
     });
   }
+};
+
+userController.updateInfo = (req, res) => {
+  const myUser = req.user;
+  const {
+    name,
+    username
+  } = req.body;
+
+  const query = {};
+
+  if(name)
+    query.name = name;
+  if(username)
+    query.username = username;
+  else if(!name && !username) {
+    return res.json({
+      changed: false
+    });
+  }
+
+  db.findByIdAndUpdate(myUser.id, {
+    $set: query
+  }).then(user => {
+    return res.json({
+      success: true,
+      user
+    });
+  });
+};
+
+userController.verifyPassword = (req, res) => {
+  const user = req.user;
+  const password = req.body.password;
+  db.findById(user.id).then(myUser => {
+    myUser.verifyPassword(password).then(valid => {
+      return res.json({ valid });
+    });
+  });
+};
+
+userController.changePassword = (req, res) => {
+  const user = req.user;
+  const newPassword = req.body.newPassword;
+
+  db.findByIdAndUpdate(user.id, {$set: { password: newPassword }})
+    .then(myUser => {
+      return res.json({ success: true });
+    });
+};
+
+userController.addGroup = (req, res) => {
+  const groupCode = req.body.groupCode;
+  const user = req.user;
+
+  db.Group.findOne({ code: groupCode }).then(group => {
+    group._students.push(user.id);
+    group.save();
+    db.User.findByIdAndUpdate(
+      user.id,
+      { $push: { '_groups': group._id }}).then(user => {
+      res.json({ success: true });
+    });
+  });
 };
 
 
