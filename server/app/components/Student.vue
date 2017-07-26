@@ -1,26 +1,27 @@
 <template>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 vertical-center ava">
-        <div class="avatar"></div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 userinfo">
-        <h2 class="name">{{ user.name }}</h2>
-        <h3 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h3>
-        <h3 class="school">{{ user.school }}</h3>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <div class="vertical-center">
-          <h3> Ближайший день сдачи </h3>
-          <br>
-          <h1 id="date"></h1>
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 vertical-center ava">
+          <div class="avatar"></div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 userinfo">
+          <h2 class="name">{{ user.name }}</h2>
+          <h3 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h3>
+          <h3 class="school">{{ user.school }}</h3>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <div class="vertical-center">
+            <h3> Ближайший день сдачи </h3>
+            <br>
+            <h1>{{ date }}</h1>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<router-view />
+  <router-view />
 </div>
 </template>
 
@@ -28,29 +29,26 @@
 import jwtDecode from 'jwt-decode';
 
 export default {
+  data() {
+    return {
+      date: null
+    }
+  },
   computed: {
     user() {
       return jwtDecode(this.$store.getters.userToken);
     }
+  },
+  created() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    dd < 10 ? dd = '0' + dd : dd = dd;
+    mm < 10 ? mm = '0' + mm : mm = mm;
+    today = dd + '/' + mm + '/' + yyyy;
+    this.date = today;
   }
-};
-
-// date(){
-//   var today = new Date();
-//   var dd = today.getDate();
-//   var mm = today.getMonth() + 1; //January is 0!
-//   var yyyy = today.getFullYear();
-//
-//   if (dd < 10) {
-//     dd = '0' + dd
-//   }
-//
-//   if (mm < 10) {
-//     mm = '0' + mm
-//   }
-//
-//   today = dd + '/' + mm + '/' + yyyy;
-//   document.getElementById(date).write(today);
 }
 </script>
 
