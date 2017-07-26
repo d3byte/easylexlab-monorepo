@@ -22,5 +22,20 @@ export default {
   },
   hideGames({ commit }) {
     commit('hideGames');
+  },
+  showTest({ commit }) {
+    commit('showOrHideTest');
+  },
+  incrementAttemps({ commit }) {
+    commit('incrementAttemps');
+  },
+  zeroAttempts({ commit }) {
+    commit('zeroAttempts');
+  },
+  testAvailable({ commit }) {
+    commit('testAvailable');
+  },
+  testNotAvailable({ commit }) {
+    commit('testNotAvailable');
   }
 }

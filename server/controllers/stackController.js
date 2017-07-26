@@ -13,38 +13,21 @@ stackController.post = (req, res) => {
     name,
     tasks,
     timeToDo,
-    groupId
+    groupId,
+    attempts
   } = req.body;
 
   // TODO: use lodash to refactor the code
 
   const user = req.user;
 
-  if(user.permissions == "teacher") {
-
-    var length = helper.count(tasks);
-    var indexes = helper.randomIndexes(length);
-    var checked = helper.checkContents(tasks);
-
-    if(checked) {
-      var test = [];
-      for(var task of tasks) {
-        for(var pair of task.content) {
-          for(let ind of indexes) {
-            if(task.content.indexOf(pair) == ind) {
-              test.push(pair);
-              break;
-            }
-          }
-        }
-      }
-
+  if(user.permissions == "teacher" || user.permissions == "admin") {
       const stack = new db.Stack({
         name,
         tasks,
-        test,
         timeToDo,
-        _group: groupId
+        _group: groupId,
+        attempts
       });
       console.log(stack);
       stack.save().then(stack => {
@@ -55,10 +38,7 @@ stackController.post = (req, res) => {
       }).catch(err => {
         res.status(500).json({err: 'lel'});
       });
-    } else res.status(502).json({'allFilled': false});
-
-  } else res.status(501).json({'error':'No permissions for this action'});
-
+    }
 };
 
 // Get stacks of one exact group

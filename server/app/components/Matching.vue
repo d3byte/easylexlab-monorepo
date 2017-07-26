@@ -1,35 +1,41 @@
 <template>
   <div class="col-lg-12">
     <center>
-    <h1>Matching</h1>
-    <br>
-    <div class="row">
-      <div v-for="(pair, index) in pairs" class="col-lg-3">
-        <div class="box"
-             :class="selected.first == pair.index ||
-                     selected.second == pair.index
-                     ? 'selected' : ''"
-             @click="select(pair.index)">
-          <h2 v-if="index % 2 == 0">{{ pair.key }}</h2>
-          <h2 v-else>{{ pair.value }}</h2>
+      <div>
+        <h1>Matching</h1>
+        <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+        <br>
+        <div class="row">
+          <div v-for="item in newPairs" class="col-lg-3">
+            <div class="box"
+                 :id="item.key"
+                 :class="selected.first == item.key ||
+                         selected.second == item.key
+                         ? item.index + ' selected' : item.index"
+                 @click="select(item.key)">
+              <h2>{{ item.word }}</h2>
+            </div>
+          </div>
         </div>
-        <div class="box"
-             :class="selected.first == pair.index + 1 ||
-                 selected.second == pair.index + 1
-                 ? 'selected' : ''"
-             @click="select(pair.index + 1)">
-          <h2 v-if="index % 2 == 0">{{ pair.value }}</h2>
-          <h2 v-else>{{ pair.key }}</h2>
-        </div>
+        <br>
       </div>
-    </div>
-    <div class="row">
-    <button class="btn btn-primary" @click="hideGames">Закончить игру</button>
-  </div>
-  <br>
-  <div class="row">
-    <button class="btn btn-primary" @click="hideGames">Назад</button>
-  </div>
+      <div v-if="showTest" class="row">
+        <button @click="tryTest" class="btn">Пройти тест</button>
+      </div>
+      <div class="last-menu">
+        <div class="ui dropdown btn">
+          <div class="text game">Выбрать игру</div>
+          <div class="menu">
+            <div @click="showMatching" class="item">
+              Matching
+            </div>
+            <div @click="showFlashcards" class="item">
+              Flashcards
+            </div>
+          </div>
+        </div>
+        <button class="btn back" @click="hideGames">Назад</button>
+      </div>
     </center>
   </div>
 </template>
@@ -42,12 +48,19 @@ export default {
   props: ['stack'],
   data() {
     return {
-      pairs: [],
+      oldPairs: [],
+      newPairs: [],
       correct: [],
       selected: {
         first: null,
         second: null
-      }
+      },
+      done: false
+    }
+  },
+  computed: {
+    showTest() {
+      return this.$store.getters.testAvailable
     }
   },
   methods: {
@@ -60,38 +73,95 @@ export default {
     showFlashcards() {
       this.$store.dispatch('showFlashcards');
     },
-    select(index) {
-      if(this.selected.first && this.selected.second &&
-         this.selected.first == this.selected.second.slice(0, -1)) {
-        this.correct.push(_.find(this.pairs, pair => {
-          return pair.index == this.selected.first
-        }));
+    restart() {
+      setTimeout(() => {
+        this.newPairs = _.shuffle(this.newPairs);
+        this.correct = [];
         this.selected.first = null;
         this.selected.second = null;
-        $('.selected').addClass('correct');
-        $('.correct').removeClass('selected');
-      } else if(this.selected.first && this.selected.second &&
-                this.selected.first != this.selected.second.slice(0, -1)) {
-        this.selected.first = null;
-        this.selected.second = null;
-        $('.selected').addClass('error');
-        $('.error.').removeClass('selected');
-      } else {
-        this.selected.first ?
-          this.selected.second = index :
-          this.selected.first = index;
+      }, 10);
+    },
+    allDone() {
+      this.done = true;
+    },
+    tryTest() {
+      this.$store.dispatch('hideGames');
+      this.$store.dispatch('showTest');
+    },
+    checkConditions() {
+      $('*').removeClass('correct');
+      if(this.correct.length == this.oldPairs.length &&
+         this.$store.getters.attempts + 1 < this.stack.attempts) {
+          this.$store.dispatch('incrementAttemps');
+          this.restart();
+      } else if(this.correct.length == this.oldPairs.length &&
+                this.$store.getters.attempts + 1 >= this.stack.attempts) {
+                  this.$store.dispatch('incrementAttemps');
+                  this.$store.dispatch('testAvailable');
+                  this.allDone();
+      }
+    },
+    select(key) {
+      this.checkConditions();
+      const check = _.find(this.newPairs, word => {
+        return word.key == key
+      });
+      $('.selected').off();
+      $('.error').removeClass('error');
+      if(this.selected.first && this.selected.first != key && !this.correct.includes(check.index)) {
+        this.selected.second = key;
+        const first = _.find(this.newPairs, word => {
+          return word.key == this.selected.first
+        });
+        const second = _.find(this.newPairs, word => {
+          return word.key == this.selected.second
+        });
+        if(first.index == second.index) {
+          this.correct.push(second.index);
+          setTimeout(() => {
+            $(`.${second.index}`).addClass('correct');
+          }, 10);
+          setTimeout(() => {
+            this.checkConditions();
+          }, 10);
+          this.selected.first = null;
+          this.selected.second = null;
+        } else if(first.index != second.index) {
+          setTimeout(() => {
+            $(`#${first.key}`).addClass('error');
+            $(`#${second.key}`).addClass('error');
+          }, 10);
+          this.selected.first = null;
+          this.selected.second = null;
+        }
+      } else if(!this.selected.first && !this.correct.includes(check.index)) {
+        this.selected.first = key;
       }
     }
   },
   created() {
     for(let task of this.stack.tasks) {
-      task.content = _.shuffle(task.content);
-      if(this.pairs.length == 8)
+      if(this.oldPairs.length == 8)
         break;
-      Array.prototype.push.apply(this.pairs, task.content);
+      Array.prototype.push.apply(this.oldPairs, task.content);
     }
-    for(let pair of this.pairs)
-      pair.index = randomize('0', 10);
+    for(let pair of this.oldPairs) {
+      let index = randomize('0', 10);
+      let key = {
+        word: pair.key,
+        key: randomize('0', 10),
+        index
+      };
+      let def = {
+        word: pair.value,
+        key: randomize('0', 10),
+        index
+      };
+      this.newPairs.push(key);
+      this.newPairs.push(def);
+    }
+
+    this.newPairs = _.shuffle(this.newPairs);
   },
   mounted() {
     $('.ui.dropdown').dropdown();
@@ -114,5 +184,24 @@ export default {
 
   .error {
     background: #DB5461;
+  }
+
+  .last-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .ui.dropdown {
+    background: #1DA1F2;
+  }
+
+  .text.game {
+    color: white;
+  }
+
+  .btn.back {
+    background: #1DA1F2;
   }
 </style>

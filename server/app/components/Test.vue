@@ -5,7 +5,7 @@
       <div v-if="success" class="signup">
         <h3 class="success">Вы прошли тест</h3>
         <h4>Ваш результат: {{ percentage }}/100%</h4>
-        <h5><router-link to="/profile">Вернуться</router-link></h5>
+        <h5 @click="toProfile">Вернуться</h5>
       </div>
     </center>
     <form v-if="!showPreloader && !success" onsubmit="return false">
@@ -83,6 +83,11 @@ export default {
         this.showPreloader = false;
         this.success = true;
       });
+    },
+    toProfile() {
+      this.$store.dispatch('zeroAttempts');
+      this.$store.dispatch('hideGames');
+      this.$router.replace('/profile');
     }
   },
   created() {
@@ -103,9 +108,17 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
   .preloader {
     color: black;
     font-size: 30px;
+  }
+
+  h5 {
+    transition: 0.2s;
+  } h5:hover {
+    cursor: pointer;
+    color: #5688C7;
+    text-decoration: none;
   }
 </style>

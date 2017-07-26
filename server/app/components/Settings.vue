@@ -75,6 +75,11 @@
 
 <script>
 export default {
+  created() {
+    this.$store.dispatch('hideGames');
+    this.$store.dispatch('zeroAttempts');
+    this.$store.dispatch('testNotAvailable');
+  }
 }
 </script>
 

@@ -20,7 +20,7 @@
                 </div>
               </div>
             </div>
-            <button @click="tryTest" class="btn">Пройти тест</button>
+            <button v-if="testAvailable" @click="tryTest" class="btn">Пройти тест</button>
           </center>
         </div>
       </div>
@@ -58,13 +58,18 @@ export default {
   data() {
     return {
       testId: this.$route.params.id,
-      task: {},
-      showTest: false
+      task: {}
     }
   },
   computed: {
     games() {
       return this.$store.getters.games
+    },
+    showTest() {
+      return this.$store.getters.showTest
+    },
+    testAvailable() {
+      return this.$store.getters.testAvailable
     }
   },
   http: {
@@ -89,8 +94,7 @@ export default {
       this.$store.dispatch('showFlashcards');
     },
     tryTest() {
-      this.$store.dispatch('hideGames');
-      this.showTest = true;
+      this.$store.dispatch('showTest');
     }
   },
   components: {

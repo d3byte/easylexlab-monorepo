@@ -30,5 +30,20 @@ export default {
   hideGames(state) {
     state.games.flashcards = false;
     state.games.matching = false;
+  },
+  showOrHideTest(state) {
+    state.games.showTest = !state.games.showTest;
+  },
+  incrementAttemps(state) {
+    state.games.attempts += 1;
+  },
+  zeroAttempts(state) {
+    state.games.attempts = 0;
+  },
+  testAvailable(state) {
+    state.games.testAvailable = true;
+  },
+  testNotAvailable(state) {
+    state.games.testAvailable = false;
   }
 }

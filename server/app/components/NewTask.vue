@@ -39,10 +39,6 @@
                       </td>
                     </tr>
                   </table>
-                  <label>
-                    Кол-во повторений <br>
-                    <input type="number" value="1" min="1" v-model="task.repeat" required>
-                  </label><br>
                   <button @click="confirm" class="btn"><i class="fa fa-check-square-o" aria-hidden="true"></i> Готово</button>
                 </form>
               </div>
@@ -56,6 +52,10 @@
               <label>
                 Кол-во дней на выполнение<br>
                 <input type="number" v-model="timeToDo" min="1">
+              </label><br>
+              <label>
+                Кол-во повторений перед тестом<br>
+                <input type="number" v-model="attempts" min="1">
               </label><br>
               <button @click="post" class="btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Создать</button>
             </div>
@@ -75,6 +75,7 @@ export default {
       showPost: false,
       errorMsg: '',
       timeToDo: 1,
+      attempts: 1,
       name: '',
       success: false,
       groupId: this.$route.params.id
@@ -149,10 +150,11 @@ export default {
     post() {
       console.log(this.$route.params.id);
       const body = {
-        'name': this.name,
-        'tasks': this.tasks,
-        'timeToDo': this.timeToDo,
-        'groupId': this.$route.params.id
+        name: this.name,
+        tasks: this.tasks,
+        timeToDo: this.timeToDo,
+        groupId: this.$route.params.id,
+        attempts: this.attempts
       };
 
       this.$http.post('newstack', body, {

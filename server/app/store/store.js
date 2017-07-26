@@ -20,7 +20,10 @@ export const store = new Vuex.Store({
     currentGroup: {},
     games: {
       matching: false,
-      flashcards: false
+      flashcards: false,
+      attempts: 0,
+      showTest: false,
+      testAvailable: false
     }
   },
   getters,

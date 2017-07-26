@@ -3,6 +3,7 @@
     <center>
       <div class="container flashcards">
         <h1>Flashcards</h1>
+        <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
         <div class="dashboard">
           <button @click="restart" class="flat-btn">Перезапуск</button>
           <button class="flat-btn">Помощь</button>
@@ -22,6 +23,9 @@
         <div v-if="done" @click="show()" class="vertical-center box">
           <h1 class="text-success">Готово!</h1>
           <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
+        </div>
+        <div v-if="done && showTest" class="row">
+          <button @click="tryTest" class="btn">Пройти тест</button>
         </div>
         <div class="last-menu">
           <div class="ui dropdown btn">
@@ -55,7 +59,12 @@ export default {
       know: [],
       dontKnow: [],
       showDef: false,
-      done: false,
+      done: false
+    }
+  },
+  computed: {
+    showTest() {
+      return this.$store.getters.testAvailable
     }
   },
   created() {
@@ -92,9 +101,16 @@ export default {
     toKnow() {
       this.know.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
-        if(this.index + 1 == this.pairs.length) {
-          this.done = true;
-          break;
+        if(this.index + 1 == this.pairs.length &&
+           this.$store.getters.attempts + 1 == this.stack.attempts) {
+             this.$store.dispatch('incrementAttemps');
+             this.$store.dispatch('testAvailable');
+             this.done = true;
+             break;
+        } else if(this.index + 1 == this.pairs.length) {
+            this.$store.dispatch('incrementAttemps');
+            this.done = true;
+            break;
         }
         if(this.index < i) {
           this.currentPair = this.pairs[i];
@@ -106,9 +122,16 @@ export default {
     toDontKnow() {
       this.dontKnow.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
-        if(this.index + 1 == this.pairs.length) {
-          this.done = true;
-          break;
+        if(this.index + 1 == this.pairs.length &&
+           this.$store.getters.attempts + 1 >= this.stack.attempts) {
+             this.$store.dispatch('incrementAttemps');
+             this.$store.dispatch('testAvailable');
+             this.done = true;
+             break;
+        } else if(this.index + 1 == this.pairs.length) {
+            this.$store.dispatch('incrementAttemps');
+            this.done = true;
+            break;
         }
         if(this.index < i) {
           this.currentPair = this.pairs[i];
@@ -116,7 +139,11 @@ export default {
           break;
         }
       }
-    }
+    },
+    tryTest() {
+      this.$store.dispatch('hideGames');
+      this.$store.dispatch('showTest');
+    },
   },
   mounted() {
     $('.ui.dropdown').dropdown();
