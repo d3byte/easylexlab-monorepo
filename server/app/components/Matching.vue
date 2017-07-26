@@ -14,10 +14,10 @@
           <h2 v-else>{{ pair.value }}</h2>
         </div>
         <div class="box"
-             :class="selected.first == ++pair.index ||
-                 selected.second == ++pair.index
+             :class="selected.first == pair.index + 1 ||
+                 selected.second == pair.index + 1
                  ? 'selected' : ''"
-             @click="select(++pair.index)">
+             @click="select(pair.index + 1)">
           <h2 v-if="index % 2 == 0">{{ pair.value }}</h2>
           <h2 v-else>{{ pair.key }}</h2>
         </div>
@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       pairs: [],
+      correct: [],
       selected: {
         first: null,
         second: null
@@ -60,26 +61,37 @@ export default {
       this.$store.dispatch('showFlashcards');
     },
     select(index) {
-      console.log(index);
-      this.selected.first ?
-        this.selected.second = index :
-        this.selected.first = index;
+      if(this.selected.first && this.selected.second &&
+         this.selected.first == this.selected.second.slice(0, -1)) {
+        this.correct.push(_.find(this.pairs, pair => {
+          return pair.index == this.selected.first
+        }));
+        this.selected.first = null;
+        this.selected.second = null;
+        $('.selected').addClass('correct');
+        $('.correct').removeClass('selected');
+      } else if(this.selected.first && this.selected.second &&
+                this.selected.first != this.selected.second.slice(0, -1)) {
+        this.selected.first = null;
+        this.selected.second = null;
+        $('.selected').addClass('error');
+        $('.error.').removeClass('selected');
+      } else {
+        this.selected.first ?
+          this.selected.second = index :
+          this.selected.first = index;
+      }
     }
   },
   created() {
-    while(this.pairs.length < 8) {
-      for(let task of this.stack.tasks) {
-        task.content = _.shuffle(task.content);
-        if(this.pairs.length == 8)
-          break;
-        Array.prototype.push.apply(this.pairs, task.content);
-      }
+    for(let task of this.stack.tasks) {
+      task.content = _.shuffle(task.content);
+      if(this.pairs.length == 8)
+        break;
+      Array.prototype.push.apply(this.pairs, task.content);
     }
-    if(this.pairs.length % 8 != 0)
-      this.pairs.splice(8, this.pairs.length - 8);
-    for(let pair of this.pairs) {
+    for(let pair of this.pairs)
       pair.index = randomize('0', 10);
-    }
   },
   mounted() {
     $('.ui.dropdown').dropdown();
@@ -94,5 +106,13 @@ export default {
 
   .selected {
     background: #1DA1F2;
+  }
+
+  .correct {
+    background: #307351;
+  }
+
+  .error {
+    background: #DB5461;
   }
 </style>
