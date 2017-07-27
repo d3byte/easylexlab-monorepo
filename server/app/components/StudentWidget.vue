@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <h2>{{ group.name }}</h2>
     <hr>
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
