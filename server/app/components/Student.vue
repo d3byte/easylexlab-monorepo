@@ -11,17 +11,18 @@
           <h3 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h3>
           <h3 class="school">{{ user.school }}</h3>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="vertical-center">
-            <h3> Ближайший день сдачи </h3>
-            <br>
-            <h1>{{ date }}</h1>
-          </div>
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 box blue marg">
+        <div class="vertical-center">
+          <h3> Ближайший день сдачи </h3>
+          <br>
+          <h1>{{ date }}</h1>
         </div>
       </div>
     </div>
+    <router-view />
   </div>
-  <router-view />
 </div>
 </template>
 
@@ -99,5 +100,20 @@ export default {
 .blue{ /* лабуди лабудай */
   background-color: rgb(29,157,244);
   color: white;
+}
+
+.row {
+  display: flex; /* equal height of the children */
+}
+
+.col {
+  flex: 1; /* additionally, equal width */
+
+  padding: 1em;
+  border: solid;
+}
+
+.container{
+  width:85%;
 }
 </style>
