@@ -20,11 +20,18 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   props: ['group'],
   data() {
     return {
-      tests: []
+      tests: [],
+      results: [{
+        test: {},
+        user: {},
+        result
+      }]
     }
   },
   http: {
@@ -41,10 +48,23 @@ export default {
       }
     }).then(res => {
       this.tests = res.body.stacks;
-      console.log(res);
-    }).catch(err => {
-      throw err;
     });
+
+    for(let test of this.tests) {
+      for(let result of test.results) {
+        this.results.push(
+          {
+            user: _.find(this.group._students, user => {
+              return user.username == result.username
+            }),
+            test: {
+              id: test._id
+            },
+            result: result.result
+          }
+        );
+      }
+    }
   }
 }
 </script>

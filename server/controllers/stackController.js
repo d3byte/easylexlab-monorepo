@@ -79,6 +79,7 @@ stackController.addResult = (req, res) => {
   const results = {
     'userId': user.id,
     'username': user.username,
+    'name': user.name,
     'result': result
   };
 
