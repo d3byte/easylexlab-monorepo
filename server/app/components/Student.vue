@@ -1,5 +1,4 @@
 <template>
-<div>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
@@ -21,9 +20,8 @@
         </div>
       </div>
     </div>
-    <router-view />
+    <router-view></router-view>
   </div>
-</div>
 </template>
 
 <script>
@@ -113,7 +111,7 @@ export default {
   border: solid;
 }
 
-.container{
-  width:85%;
+.container {
+  width: 85%;
 }
 </style>

@@ -1,7 +1,6 @@
 <template>
-  <div class="container">
+  <div>
     <h2>{{ group.name }}</h2>
-    <hr>
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
     <div v-if="!showPreloader" class="row">
       <h3>Невыполненные задания</h3>
@@ -55,7 +54,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .box {
   padding: 10px;
   margin-bottom: 15px;
