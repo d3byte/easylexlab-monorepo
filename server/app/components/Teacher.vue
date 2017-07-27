@@ -1,35 +1,26 @@
 <template>
 <div class="container">
   <div class="row">
-    <div class="box">
-      <div class="cntr ava col-lg-4 col-md-4 col-sm-4 col-xs-4">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 vertical-center ava">
         <div class="avatar"></div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 userinfo">
-        <h1 class="name">{{ user.name }}</h1>
-        <h2 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h2>
-        <h2 class="school">{{ user.school }}</h2>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <center>
-          <h1> Социальные сети </h1>
-          <br>
-          <div class="col-lg-6"><a href="https://vk.com/dierk" target="_blank" class="btn-social btn-vk"><i class="fa fa-vk"></i></a></div>
-          <div class="col-lg-6"><a href="http://facebook.com/" target="_blank" class="btn-social btn-facebook"><i class="fa fa-facebook"></i></a></div>
-          <br>
-          <div class="col-lg-6"><a href="https://twitter.com/russiankenny" target="_blank" class="btn-social btn-twitter"><i class="fa fa-twitter"></i></a></div>
-          <div class="col-lg-6"><a href="http://instagram.com/dierk.prod" target="_blank" class="btn-social btn-instagram"><i class="fa fa-instagram"></i></a></div>
-        </center>
+        <h2 class="name">{{ user.name }}</h2>
+        <h3 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h3>
+        <h3 class="school">{{ user.school }}</h3>
       </div>
     </div>
-    <hr>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 box blue marg">
+      <div class="vertical-center">
+        <h3> Ближайший день сдачи теста учениками </h3>
+        <br>
+        <h1>{{ date }}</h1>
+      </div>
+    </div>
   </div>
-  <br>
-  <div class="row">
-    <!-- <div class="box"> -->
-      <router-view></router-view>
-    <!-- </div> -->
-  </div>
+  <router-view />
 </div>
 </template>
 
@@ -41,6 +32,19 @@ export default {
     user() {
       return jwtDecode(this.$store.getters.userToken);
     }
+  },
+  created() {
+    this.$store.dispatch('hideGames');
+    this.$store.dispatch('zeroAttempts');
+    this.$store.dispatch('testNotAvailable');
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    dd < 10 ? dd = '0' + dd : dd = dd;
+    mm < 10 ? mm = '0' + mm : mm = mm;
+    today = dd + '/' + mm + '/' + yyyy;
+    this.date = today;
   }
 }
 </script>
@@ -81,5 +85,25 @@ export default {
   min-height:230px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
   border-radius: 2px;
+}
+
+.container{
+  width:85%;
+}
+
+.blue { /* лабуди лабудай */
+  background-color: rgb(29,157,244);
+  color: white;
+}
+
+.row {
+  display: flex; /* equal height of the children */
+}
+
+.col {
+  flex: 1; /* additionally, equal width */
+
+  padding: 1em;
+  border: solid;
 }
 </style>

@@ -97,7 +97,7 @@ export default {
   justify-content: space-between;
 }
 
-.blue{ /* лабуди лабудай */
+.blue { /* лабуди лабудай */
   background-color: rgb(29,157,244);
   color: white;
 }
