@@ -1,21 +1,21 @@
 <template>
   <div class="navigator">
-    <h3 class="naming">
+    <h3 class="navbar-brand">
       <router-link to="/" tabindex="-1">EasyLexLab</router-link>
     </h3>
     <div v-if="!logged" class="login">
       <login v-if="showLogin"></login>
       <div>
-        <button v-if="!showLogin" @click="show" class="btn btn-default">Вход</button>
-        <router-link to="/signup"><button v-if="!showLogin" class="btn btn-default">Зарегистрироваться</button></router-link>
+        <a v-if="!showLogin" @click="show">Вход</a>
+        <router-link to="/signup"><a v-if="!showLogin">Зарегистрироваться</a></router-link>
       </div>
     </div>
     <div v-if="logged" class="logged">
       <div class="nav-item">
-        <button class="btn btn-default"><router-link to="/profile/stats">Статистика</router-link></button>
+        <a><router-link to="/profile/stats">Статистика</router-link></a>
       </div>
       <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
-        <button v-if="user.permissions == 'teacher'" class="btn btn-default"><router-link to="/profile/newgroup">Новая группа</router-link></button>
+        <a v-if="user.permissions == 'teacher'"><router-link to="/profile/newgroup">Новая группа</router-link></a>
         <div v-if="user.permissions == 'student'" class="ui dropdown list">
           <div v-if="isCurrentGr" class="text">{{ currentGroup.name }}</div>
           <div v-else class="text">Выбор группы</div>
@@ -134,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background: #1DA1F2;
+  background: white;
   padding: 8px;
   padding-left: 36px;
   padding-right: 36;
@@ -184,13 +184,24 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   position: relative;
   padding-left: 32px;
+  /*color: rgb(0,162,238) !important;*/
 } .naming a {
-  color: white;
   font-family: 'Patrick Hand SC', cursive;
   font-size: 30px;
-} .naming:hover {
-  cursor: default;
+/*} .naming:hover {
+  cursor: default;*/
 } .naming::before {
+  content: ' ';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: 0;
+  top: 4px;
+  border-radius: 2px;
+  background: #D8D8D8;
+}
+
+.debug::before {
   content: ' ';
   position: absolute;
   width: 25px;
@@ -238,20 +249,20 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-} .nav-item:nth-child(2) {
-  padding: 1px 20px;
+/*} .nav-item:nth-child(2) {
+  padding: 1px 20px;*/
 } .nav-item {
   padding: 0 20px;
   position: relative;
 } .nav-item:last-child {
   padding: 0;
   margin: 0 20px;
-} .nav-item:last-child:hover {
-  cursor: pointer;
-} .nav-item:nth-child(3) {
+/*} .nav-item:last-child:hover {
+  cursor: pointer;*/
+/*} .nav-item:nth-child(3) {
   padding: 0 20px;
-  padding-top: 5px;
-} .nav-item:nth-child(2)::before,
+  padding-top: 5px;*/
+/*} .nav-item:nth-child(2)::before,
   .nav-item:nth-child(3)::before {
   content: " ";
   position: absolute;
@@ -261,8 +272,8 @@ h1, h2, h3, h4, h5, h6 {
   top: 8px;
   box-shadow: 0 1px 4px black;
   background: white;
-  border-radius: 2px;
-} .nav-item:nth-child(3)::after {
+  border-radius: 2px;*/
+/*} .nav-item:nth-child(3)::after {
   content: ' ';
   position: absolute;
   width: 2px;
@@ -270,14 +281,14 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   box-shadow: 0 1px 4px black;
   background: white;
-  border-radius: 2px;
+  border-radius: 2px;*/
 } .nav-item:nth-child(3)::before,
   .nav-item:nth-child(3)::after {
   bottom: 0;
   top: 7px;
 } .nav-item a {
   /*color: white;*/
-}
+}*/
 
 .item {
   color: black;
