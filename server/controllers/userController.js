@@ -202,5 +202,30 @@ userController.addGroup = (req, res) => {
   });
 };
 
+userController.addResult = (req, res) => {
+  const {
+    result,
+    stackName
+  } = req.body;
+
+  const user = req.user;
+
+  const results = {
+    stackName,
+    result
+  };
+
+  db.User.findById(user.id).then(user => {
+    user._results.push(results);
+    user.save();
+    res.json({
+      success: true
+    });
+  }).catch(err => {
+    throw err;
+  });
+
+};
+
 
 export default userController;

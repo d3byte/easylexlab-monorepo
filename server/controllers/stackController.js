@@ -46,7 +46,7 @@ stackController.getTests = (req, res) => {
   const groupId = req.body.groupId;
   const user = req.user;
   if(user.permissions == 'teacher' || user.permissions == 'admin' || user.permissions == 'student') {
-    db.Stack.find({_group: groupId}).populate({ path: '', select: 'name tasks test timeToDo' }).then(stacks => {
+    db.Stack.find({_group: groupId}).populate({ path: '', select: 'name _group tasks results timeToDo' }).then(stacks => {
       res.status(200).json({ stacks });
     }).catch(err => {
       res.status(500).json({ err });
@@ -83,9 +83,6 @@ stackController.addResult = (req, res) => {
     'result': result
   };
 
-  console.log('Result:\n', results);
-  console.log('\n\nstackId: ', stackId);
-
   db.Stack.findById(stackId).then(stack => {
     stack.results.push(results);
     stack.save();
@@ -95,7 +92,6 @@ stackController.addResult = (req, res) => {
   }).catch(err => {
     throw err;
   });
-
 };
 
 export default stackController;

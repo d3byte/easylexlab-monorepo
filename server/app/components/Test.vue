@@ -80,8 +80,18 @@ export default {
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }
       }).then(res => {
-        this.showPreloader = false;
-        this.success = true;
+        this.$http.patch('userresult', {
+          stackName: this.stack.name,
+          result: this.percentage
+        }, {
+          headers: {
+            'Content-type' : 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          this.showPreloader = false;
+          this.success = true;
+        });
       });
     },
     toProfile() {

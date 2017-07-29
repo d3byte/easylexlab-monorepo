@@ -18,10 +18,11 @@ routes.get('/', basicConstroller.get);
 routes.post('/signup', userController.post);
 routes.post('/login', userController.login);
 routes.post('/groups', expressJWT({secret}), userController.getGroups);
-routes.post('verifypassword', expressJWT({secret}), userController.verifyPassword);
+routes.post('/verifypassword', expressJWT({secret}), userController.verifyPassword);
 routes.patch('/newinfo', expressJWT({secret}), userController.updateInfo);
 routes.patch('/newpassword', expressJWT({secret}), userController.changePassword);
 routes.patch('/addgroup', expressJWT({secret}), userController.addGroup);
+routes.patch('/userresult', expressJWT({secret}), userController.addResult);
 
 // Group routes
 routes.post('/regcode', expressJWT({secret}), groupController.regCode);

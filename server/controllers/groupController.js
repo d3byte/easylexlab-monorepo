@@ -149,7 +149,6 @@ groupController.getGroup = (req, res) => {
   const groupId = req.body.groupId;
   db.Group.findById(groupId).populate({
     path: '_students',
-    select: 'username createdAt',
     match: {'isDeleted': false}
   }).then((group) => {
     return res.status(200).json({

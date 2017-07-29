@@ -11,8 +11,8 @@
     <tbody>
       <tr v-for="(student, index) in group._students">
         <td>{{ index + 1 }}</td>
-        <td>{{ student.username }}</td>
-        <!-- <td></td> -->
+        <td>{{ student.name }}</td>
+        <td v-for="result in student._results">{{ result.result }}%</td>
       </tr>
     </tbody>
     </table>
@@ -27,11 +27,7 @@ export default {
   data() {
     return {
       tests: [],
-      results: [{
-        test: {},
-        user: {},
-        result
-      }]
+      results: []
     }
   },
   http: {
@@ -49,22 +45,6 @@ export default {
     }).then(res => {
       this.tests = res.body.stacks;
     });
-
-    for(let test of this.tests) {
-      for(let result of test.results) {
-        this.results.push(
-          {
-            user: _.find(this.group._students, user => {
-              return user.username == result.username
-            }),
-            test: {
-              id: test._id
-            },
-            result: result.result
-          }
-        );
-      }
-    }
   }
 }
 </script>

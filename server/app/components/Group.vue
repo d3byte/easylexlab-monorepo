@@ -84,8 +84,6 @@ export default {
       }
     }).then(res => {
       this.group = res.body.group;
-    }).catch(err => {
-      throw err;
     });
   }
 }
