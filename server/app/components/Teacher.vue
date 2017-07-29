@@ -26,6 +26,7 @@
 
 <script>
 import jwtDecode from 'jwt-decode';
+import moment from 'moment';
 
 export default {
   computed: {
@@ -37,14 +38,10 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    dd < 10 ? dd = '0' + dd : dd = dd;
-    mm < 10 ? mm = '0' + mm : mm = mm;
-    today = dd + '/' + mm + '/' + yyyy;
-    this.date = today;
+    moment.locale('ru');
+    let date = moment().format('LL');
+    date = date.slice(0, date.length - 8);
+    this.date = date;
   }
 }
 </script>
