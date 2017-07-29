@@ -14,9 +14,9 @@
           <input v-model="password" required type="password" tabindex="2" placeholder="Пароль">
         </div>
         <router-link class="recover" to="/recover" tabindex="-1">Забыли пароль?</router-link>
-        <button @click="check" class="btn btn-default" tabindex="3">Войти</button>
+        <a class="login" @click="check">Войти</a>
       </form>
-    <button @click="hide" class="btn btn-default dec" tabindex="3">Отмена</button>
+    <a @click="hide" tabindex="3">Отмена</a>
   </div>
 </template>
 
@@ -66,6 +66,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+.login {
+  font-size: 16px;
+  margin-right: 20px;
+  /*color: white;*/
+}
+
 .login-form {
   display: inline-flex;
   flex-direction: row;

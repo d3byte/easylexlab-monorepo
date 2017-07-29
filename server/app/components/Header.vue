@@ -1,12 +1,12 @@
 <template>
   <div class="navigator">
-    <h3 class="navbar-brand">
+    <h3>
       <router-link to="/" tabindex="-1">EasyLexLab</router-link>
     </h3>
     <div v-if="!logged" class="login">
       <login v-if="showLogin"></login>
       <div>
-        <a v-if="!showLogin" @click="show">Вход</a>
+        <a class="login" v-if="!showLogin" @click="show">Вход</a>
         <router-link to="/signup"><a v-if="!showLogin">Зарегистрироваться</a></router-link>
       </div>
     </div>
@@ -128,6 +128,12 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+a {
+  color: black;
+}
+
+
+
 .navigator {
   box-shadow: 0 3px 8px black;
   display: flex;
@@ -145,7 +151,7 @@ h1, h2, h3, h4, h5, h6 {
 .login {
   font-size: 16px;
   margin-right: 20px;
-  color: white;
+  /*color: white;*/
 } .exit {
   color: black;
 }
@@ -184,10 +190,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   position: relative;
   padding-left: 32px;
-  /*color: rgb(0,162,238) !important;*/
 } .naming a {
   font-family: 'Patrick Hand SC', cursive;
   font-size: 30px;
+  color: rgb(0,162,238) !important;
 /*} .naming:hover {
   cursor: default;*/
 } .naming::before {
@@ -223,7 +229,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .profile {
   background: #D8D8D8;
-  box-shadow: 0 1px 4px black;
+  /*box-shadow: 0 1px 4px black;*/
   width: 30px;
   height: 30px;
   margin-bottom: 0;
@@ -237,7 +243,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .notifications {
-  text-shadow: 0 1px 8px black;
+  text-shadow: 0 1px 3px black;
   font-size: 26px;
 } .notifications:hover {
   cursor: pointer;
@@ -249,46 +255,19 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-/*} .nav-item:nth-child(2) {
-  padding: 1px 20px;*/
 } .nav-item {
   padding: 0 20px;
   position: relative;
 } .nav-item:last-child {
   padding: 0;
   margin: 0 20px;
-/*} .nav-item:last-child:hover {
-  cursor: pointer;*/
-/*} .nav-item:nth-child(3) {
-  padding: 0 20px;
-  padding-top: 5px;*/
-/*} .nav-item:nth-child(2)::before,
-  .nav-item:nth-child(3)::before {
-  content: " ";
-  position: absolute;
-  width: 2px;
-  height: 25px;
-  left: 0;
-  top: 8px;
-  box-shadow: 0 1px 4px black;
-  background: white;
-  border-radius: 2px;*/
-/*} .nav-item:nth-child(3)::after {
-  content: ' ';
-  position: absolute;
-  width: 2px;
-  height: 25px;
-  right: 0;
-  box-shadow: 0 1px 4px black;
-  background: white;
-  border-radius: 2px;*/
 } .nav-item:nth-child(3)::before,
   .nav-item:nth-child(3)::after {
   bottom: 0;
   top: 7px;
 } .nav-item a {
   /*color: white;*/
-}*/
+}
 
 .item {
   color: black;
