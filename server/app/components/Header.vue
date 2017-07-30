@@ -1,8 +1,13 @@
 <template>
   <div class="navigator">
-    <h3>
-      <router-link to="/" tabindex="-1">EasyLexLab</router-link>
-    </h3>
+    <div class="logo-container horizontal-vert-center">
+      <router-link to="/" tabindex="-1" class="ui small image logo">
+        <img src="pics/logo-small.png">
+      </router-link>
+      <router-link to="/" tabindex="-1" class="logo-link">
+        <h3>EasyLexLab</h3>
+      </router-link>
+    </div>
     <div v-if="!logged" class="login">
       <login v-if="showLogin"></login>
       <div>
@@ -29,8 +34,7 @@
         <i class="notifications material-icons">notifications</i>
       </div>
       <div class="ui right pointing dropdown nav-item profile">
-        <button class="avatar">
-        </button>
+        <img class="ui avatar image">
         <div class="menu">
           <div class="header">Меню</div>
           <router-link class="item" to="/profile">Профиль</router-link>
@@ -235,11 +239,6 @@ a {
   margin-bottom: 0;
   margin-top: 0;
   border-radius: 50%;
-} .avatar {
-  border: none;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
 }
 
 .notifications {
@@ -301,4 +300,13 @@ a {
   text-shadow: none !important;
 }
 
+.logo-container {
+  margin-left: 60px;
+}
+
+.logo {
+  width: 25px !important;
+  height: 25px !important;
+  margin-right: 10px;
+}
 </style>
