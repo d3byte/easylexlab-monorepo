@@ -16,9 +16,9 @@
       </div>
       <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
         <a v-if="user.permissions == 'teacher'"><router-link to="/profile/newgroup">Новая группа</router-link></a>
-        <div v-if="user.permissions == 'student'" class="ui dropdown list">
+        <div  v-if="user.permissions == 'student'" class="ui dropdown list">
           <div v-if="isCurrentGr" class="text">{{ currentGroup.name }}</div>
-          <div v-else class="text">Выбор группы</div>
+          <div id="test" v-else class="text">Выбор группы</div>
           <i class="dropdown icon"></i>
           <div class="menu">
             <div v-for="group in groups" @click="changeGroup(group)" class="item">{{ group.name }}</div>
@@ -296,5 +296,9 @@ a {
   text-shadow: 0 1px 1px black;
 }
 
+#test{
+  color:black;
+  box-shadow: 0 0 0;
+}
 
 </style>

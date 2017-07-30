@@ -69,8 +69,7 @@ export default {
 
 .login {
   font-size: 16px;
-  margin-right: 20px;
-  /*color: white;*/
+  /*margin-right: 20px;*/
 }
 
 .login-form {
@@ -78,6 +77,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  color: black;
 }
 
 .login-form input:first-of-type {

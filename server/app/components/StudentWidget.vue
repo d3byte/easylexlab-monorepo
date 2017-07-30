@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2>{{ group.name }}</h2>
+    <h2>Группа: {{ group.name }}</h2>
+    <h3>Невыполненные задания</h3>
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
     <div v-if="!showPreloader" class="row">
-      <h3>Невыполненные задания</h3>
-      <div v-for="test in tasks" class="box col-lg-3 col-md-3 col-sm-6 col-xs-12">
+      <div id="test_card" v-for="test in tasks" class="box col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <h3>{{ test.name }}</h3>
         <router-link :to="'/task/' + test._id">Перейти</router-link>
       </div>
@@ -63,5 +63,9 @@ export default {
 .preloader {
   color: black;
   font-size: 30px;
+}
+
+#test_card{
+  margin: 20px;
 }
 </style>
