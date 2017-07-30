@@ -9,7 +9,7 @@
       </div>
     </div>
     <div v-if="showTasks" class="row box">
-      <h3>Невыполненные задания</h3>
+      <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3>
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="!showPreloader" class="row">
         <div id="test_card" v-for="test in tasks" class="box col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -85,6 +85,12 @@ export default {
   justify-content: flex-start;
   align-items: center;
   padding: 0 20px;
+}
+
+.row.box:nth-of-type(2) {
+  padding: 10px 20px;
+} .row.box:nth-of-type(2) h3 {
+  font-weight: normal;
 }
 
 .navbar-item {
