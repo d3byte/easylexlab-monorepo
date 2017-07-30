@@ -2,7 +2,7 @@
   <div class="navigator">
     <div class="logo-container horizontal-vert-center">
       <router-link to="/" tabindex="-1" class="ui small image logo">
-        <img src="pics/logo-small.png">
+        <img src="pics/logo-small-2.png">
       </router-link>
       <router-link to="/" tabindex="-1" class="logo-link">
         <h3>EasyLexLab</h3>
