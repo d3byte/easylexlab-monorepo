@@ -136,8 +136,6 @@ a {
   color: black;
 }
 
-
-
 .navigator {
   box-shadow: 0 3px 6px #ccc;
   display: flex;
@@ -187,29 +185,6 @@ a {
 } .contact-btn:hover {
   /*background: #176087;*/
   /*border: 1px solid #ccc;*/
-
-
-.naming {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  padding-left: 32px;
-} .naming a {
-  font-family: 'Patrick Hand SC', cursive;
-  font-size: 30px;
-  color: rgb(0,162,238) !important;
-/*} .naming:hover {
-  cursor: default;*/
-} .naming::before {
-  content: ' ';
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  left: 0;
-  top: 4px;
-  border-radius: 2px;
-  background: #D8D8D8;
-}
 
 .debug::before {
   content: ' ';
@@ -301,7 +276,11 @@ a {
 }
 
 .logo-container {
-  margin-left: 60px;
+  margin-left: 80px;
+}
+
+.logo-link h3 {
+  font-family: 'Signika', sans-serif;
 }
 
 .logo {
