@@ -29,7 +29,7 @@
             <div v-for="group in groups" @click="changeGroup(group)" class="item">{{ group.name }}</div>
           </div>
         </div>
-      </div>      
+      </div>
       <div class="nav-item notif">
         <i v-if="notifications.length == 0" class="material-icons">notifications_off</i>
         <i @click="showNotifs" v-else class="material-icons">notifications_active</i>
@@ -265,7 +265,7 @@ a {
 }
 
 .preloader {
-  color: white;
+  color: darkgray;
 }
 
 [login] {
