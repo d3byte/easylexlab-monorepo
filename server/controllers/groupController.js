@@ -221,7 +221,7 @@ groupController.newMsg = (req, res) => {
   const notification = {
     type: 'newMsg',
     text: `Новое сообщение.`,
-    read: false
+    seen: false
   };
 
   if(user.permissions == 'teacher' || user.permissions == 'admin') {

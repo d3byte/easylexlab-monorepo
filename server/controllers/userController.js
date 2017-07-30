@@ -227,5 +227,29 @@ userController.addResult = (req, res) => {
 
 };
 
+userController.getNotifications = (req, res) => {
+  const user = req.user;
+
+  db.User.findById(user.id).then(user => {
+    var notifsToSend = [];
+    for(let notification of user.notifications) {
+      if(!!notification.seen)
+        notifsToSend.push(notification);
+    }
+    res.json({ notifications: notifsToSend });
+  });
+};
+
+userController.readNotifs = (req, res) => {
+  const user = req.user;
+
+  db.User.findById(user.id).then(user => {
+    for(let notification of user.notifications) {
+      notification.seen = true;
+    }
+    user.save();
+    res.json({ success: true });
+  });
+};
 
 export default userController;

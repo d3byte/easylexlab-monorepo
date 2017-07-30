@@ -29,11 +29,12 @@
             <div v-for="group in groups" @click="changeGroup(group)" class="item">{{ group.name }}</div>
           </div>
         </div>
-      </div>
+      </div>      
       <div class="nav-item notif">
-        <i class="fa fa-bell-o notifications" aria-hidden="true"></i>
+        <i v-if="notifications.length == 0" class="material-icons">notifications_off</i>
+        <i @click="showNotifs" v-else class="material-icons">notifications_active</i>
       </div>
-      <div class="ui right pointing dropdown nav-item profile">
+      <div class="ui pointing right dropdown nav-item profile">
         <img class="ui avatar image">
         <div class="menu">
           <div class="header">Меню</div>
@@ -56,6 +57,7 @@ export default {
     return {
       requested: false,
       isCurrentGr: false,
+      notifications: [],
       currentGroup: {}
     }
   },
@@ -86,6 +88,16 @@ export default {
     changeGroup(group) {
       this.$store.dispatch('changeGroup', group);
       this.currentGroup = group;
+    },
+    showNotifs() {
+      if(!!this.notifications) {
+        this.$http.post('readnotifs', {}, {
+          headers: {
+            'Content-type' : 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {});
+      }
     }
   },
   http: {
@@ -119,6 +131,14 @@ export default {
         this.$store.dispatch('addTests', res.body.stacks);
       });
     }, 100);
+    this.$http.post('getnotifs', {}, {
+      headers: {
+        'Content-type' : 'application/json',
+        'Authorization': 'Bearer ' + this.$store.getters.userToken
+      }
+    }).then(res => {
+      this.notifications = res.body.notifications;
+    });
   },
   components: {
     'login': Login
@@ -216,10 +236,10 @@ a {
   border-radius: 50%;
 }
 
-.notifications {
-  color: black;
-  font-size: 20px;
-} .notifications:hover {
+.notif i {
+  color: darkgray;
+  font-size: 24px;
+} .notif i:hover {
   cursor: pointer;
 }
 

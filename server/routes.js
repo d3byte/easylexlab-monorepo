@@ -41,5 +41,7 @@ routes.patch('/addresult', expressJWT({secret}), stackController.addResult);
 
 // Notification and message routes
 routes.post('/newmsg', expressJWT({secret}), groupController.newMsg);
+routes.post('/getnotifs', expressJWT({secret}), userController.getNotifications);
+routes.post('/readnotifs', expressJWT({secret}), userController.readNotifs);
 
 export default routes;
