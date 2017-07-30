@@ -243,7 +243,7 @@ a {
 }
 
 .notifications {
-  text-shadow: 0 1px 3px black;
+  text-shadow: 0 1px 2px black;
   font-size: 26px;
 } .notifications:hover {
   cursor: pointer;
