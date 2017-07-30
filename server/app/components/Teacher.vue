@@ -1,27 +1,24 @@
 <template>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 vertical-center ava">
-        <div class="avatar"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
+        <div class="col-lg-4 ava blue vertical-center">
+          <h2 class="white-text">Аватарка</h2>
+        </div>
+        <div class="col-lg-8 userinfo">
+          <h2 class="name"><b>{{ user.name }}</b><span class="permissions"> - {{ user.permissions == 'student' ? 'ученик' : 'учитель' }}</span></h2>
+          <h3><span  class="school">{{ user.school }}</span></h3>
+        </div>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 userinfo">
-        <h2 class="name">{{ user.name }}</h2>
-        <h3 class="permissions">{{ user.permissions == 'student' ? 'Ученик' : 'Учитель' }}</h3>
-        <h3 class="school">{{ user.school }}</h3>
-      </div>
-    </div>
-    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 box blue marg">
-      <div class="vertical-center">
-        <h3> Ближайший день сдачи теста учениками </h3>
-        <br>
-        <h1>{{ date }}</h1>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+      <div class="col-lg-3 box blue vertical-center">
+        <h5 class="white-text"> Ближайший день сдачи </h5><br>
+        <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
+        <h1 class="month white-text">{{ date.slice(2) }}</h1>
       </div>
     </div>
+    <router-view></router-view>
   </div>
-  <router-view />
-</div>
 </template>
 
 <script>
@@ -29,6 +26,11 @@ import jwtDecode from 'jwt-decode';
 import moment from 'moment';
 
 export default {
+  data() {
+    return {
+      date: null
+    }
+  },
   computed: {
     user() {
       return jwtDecode(this.$store.getters.userToken);
@@ -47,28 +49,41 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.ava {
-  justify-content: center;
-  min-height: 230px;
+.number {
+  margin-bottom: -15px;
+  font-size: 52px;
+} .month {
+  font-size: 20px;
 }
 
-.cntr {
+h5.white-text {
+  opacity: 0.75;
+}
+
+.deadline {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.avatar {
-  width: 170px;
-  height: 170px;
-  border: 7px solid #6D696A;
-  border-radius: 50%;
-  background: #ADA8A8;
-  float: right;
+.col-lg-8.box, .row {
+  padding: 0 !important;
+}
+
+.ava {
+  justify-content: center;
+  min-height: 220px;
+}
+
+.permissions {
+  font-size: 16px;
+  opacity: 0.75;
 }
 
 .userinfo {
-  padding-left: 40px;
+  padding: 20px;
+  padding-left: 30px;
 }
 
 .name, .school {
@@ -79,13 +94,18 @@ export default {
 
 .box {
   background-color:#fff;
-  min-height:230px;
+  min-height:220px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
   border-radius: 2px;
 }
 
-.container{
-  width:85%;
+.row:first-of-type {
+  margin-bottom: 25px;
+}
+
+.row:nth-of-type(2) {
+  display: flex;
+  justify-content: space-between;
 }
 
 .blue { /* лабуди лабудай */
@@ -93,14 +113,7 @@ export default {
   color: white;
 }
 
-.row {
-  display: flex; /* equal height of the children */
-}
-
-.col {
-  flex: 1; /* additionally, equal width */
-
-  padding: 1em;
-  border: solid;
+.container {
+  width: 75%;
 }
 </style>

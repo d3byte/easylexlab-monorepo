@@ -82,7 +82,8 @@ h5.white-text {
 }
 
 .userinfo {
-  padding-left: 40px;
+  padding: 20px;
+  padding-left: 30px;
 }
 
 .name, .school {
