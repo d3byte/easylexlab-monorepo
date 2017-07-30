@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-      <div class="col-lg-3 box blue vertical-center">
+      <div class="col-lg-3 box blue vertical-center date">
         <h5 class="white-text"> Ближайший день сдачи </h5><br>
         <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
         <h1 class="month white-text">{{ date.slice(2) }}</h1>
@@ -49,6 +49,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.date h1, .date h5 {
+  font-family: 'Roboto', sans-serif !important;
+}
+
 .number {
   margin-bottom: -15px;
   font-size: 52px;

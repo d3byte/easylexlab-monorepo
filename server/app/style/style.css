@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC');
 
 body {
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /*button {
@@ -117,7 +117,7 @@ input {
 
 .horizontal-vert-center {
   display: flex;
-  align-items: center;  
+  align-items: center;
 }
 
 .box {

@@ -30,8 +30,8 @@
           </div>
         </div>
       </div>
-      <div class="nav-item">
-        <i class="notifications material-icons">notifications</i>
+      <div class="nav-item notif">
+        <i class="fa fa-bell-o notifications" aria-hidden="true"></i>
       </div>
       <div class="ui right pointing dropdown nav-item profile">
         <img class="ui avatar image">
@@ -217,8 +217,8 @@ a {
 }
 
 .notifications {
-  text-shadow: 0 1px 2px black;
-  font-size: 26px;
+  color: black;
+  font-size: 20px;
 } .notifications:hover {
   cursor: pointer;
 }
@@ -231,16 +231,11 @@ a {
   align-items: center;
 } .nav-item {
   padding: 0 20px;
-  position: relative;
 } .nav-item:last-child {
   padding: 0;
   margin: 0 20px;
-} .nav-item:nth-child(3)::before,
-  .nav-item:nth-child(3)::after {
-  bottom: 0;
-  top: 7px;
-} .nav-item a {
-  /*color: white;*/
+} .notif {
+  padding-left: 0;
 }
 
 .item {
@@ -261,13 +256,6 @@ a {
   background: transparent;
 } .list > option:first-of-type {
   color: white !important
-}
-
-.nav-item.select::before {
-  top: 0;
-} .text {
-  color: white;
-  text-shadow: 0 1px 1px black;
 }
 
 .text {
