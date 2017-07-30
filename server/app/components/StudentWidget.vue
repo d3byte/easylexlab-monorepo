@@ -18,6 +18,16 @@
         </div>
       </div>
     </div>
+    <div v-if="!showTasks" class="row box">
+      <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
+      <i v-if="showPreloader" class="material-icons preloader">cached</i>
+      <div v-if="!showPreloader" class="row">
+        <div id="test_card" v-for="msg in messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <h3>{{ msg.author }}</h3>
+          <p>{{ msg.text }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +38,7 @@ export default {
   data() {
     return {
       tasks: [],
+      messages: [],
       showPreloader: true,
       showTasks: true
     }
