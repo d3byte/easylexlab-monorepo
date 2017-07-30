@@ -206,4 +206,33 @@ groupController.regCode = (req, res) => {
   }
 };
 
+groupController.newMsg = (req, res) => {
+  const user = req.user;
+  const {
+    groupId,
+    msgText
+  } = req.body.groupId;
+
+  const message = {
+    author: user.name,
+    text: msgText
+  };
+
+  const notification = {
+    type: 'newMsg',
+    text: `Новое сообщение.`
+  };
+
+  if(user.permissions == 'teacher' || user.permissions == 'admin') {
+    db.Group.findByIdAndUpdate(groupId, {
+      $push: { messages: message }
+    }).then(group => {
+      db.User.findAndUpdate({ $elemMatch: { _groups: groupId } },
+      { $push: { notifications: notification } }).then(success => {
+        res.json({ success: true });
+      });
+    });
+  }
+};
+
 export default groupController;

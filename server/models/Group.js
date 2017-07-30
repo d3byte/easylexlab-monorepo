@@ -14,6 +14,7 @@ const groupSchema = new Schema({
   _teacher: { type: Schema.ObjectId, ref: 'User', required: true },
   _students: [{ type: Schema.ObjectId, ref: 'User'}],
   _tests: [{ type: Schema.ObjectId, ref: 'Stack' }],
+  messages: { type: Array, default: null },
   createdAt: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false }
 });

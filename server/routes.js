@@ -39,4 +39,7 @@ routes.post('/gettests', expressJWT({secret}), stackController.getTests);
 routes.post('/gettest', expressJWT({secret}), stackController.getTest);
 routes.patch('/addresult', expressJWT({secret}), stackController.addResult);
 
+// Notification and message routes
+routes.post('/newmsg', expressJWT({secret}), groupController.newMsg);
+
 export default routes;
