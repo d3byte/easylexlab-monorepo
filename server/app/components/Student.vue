@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
-        <div class="col-lg-4 ava blue vertical-center">
+        <div class="col-lg-3 ava blue vertical-center">
           <h2 class="white-text">Аватарка</h2>
         </div>
-        <div class="col-lg-8 userinfo">
+        <div class="col-lg-9 userinfo">
           <h2 class="name"><b>{{ user.name }}</b><span class="permissions"> - {{ user.permissions == 'student' ? 'ученик' : 'учитель' }}</span></h2>
           <h3><span  class="school">{{ user.school }}</span></h3>
         </div>
@@ -73,7 +73,7 @@ h5.white-text {
 
 .ava {
   justify-content: center;
-  min-height: 220px;
+  min-height: 160px;
 }
 
 .permissions {
@@ -93,9 +93,8 @@ h5.white-text {
 }
 
 .box {
-  background-color:#fff;
-  min-height:220px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
+  background-color: #fff;
+  min-height: 160px;
   border-radius: 2px;
 }
 

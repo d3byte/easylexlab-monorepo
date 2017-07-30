@@ -135,12 +135,12 @@ a {
 
 
 .navigator {
-  box-shadow: 0 3px 8px black;
+  box-shadow: 0 3px 6px #ccc;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background: white;
+  background: #ffffff;
   padding: 8px;
   padding-left: 36px;
   padding-right: 36;
@@ -296,9 +296,9 @@ a {
   text-shadow: 0 1px 1px black;
 }
 
-#test{
-  color:black;
-  box-shadow: 0 0 0;
+.text {
+  color: black !important;
+  text-shadow: none !important;
 }
 
 </style>

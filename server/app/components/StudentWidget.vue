@@ -1,12 +1,21 @@
 <template>
   <div>
-    <h2>Группа: {{ group.name }}</h2>
-    <h3>Невыполненные задания</h3>
-    <i v-if="showPreloader" class="material-icons preloader">cached</i>
-    <div v-if="!showPreloader" class="row">
-      <div id="test_card" v-for="test in tasks" class="box col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <h3>{{ test.name }}</h3>
-        <router-link :to="'/task/' + test._id">Перейти</router-link>
+    <div class="row box">
+      <div @click="switchTasks" class="navbar-item" :class="showTasks ? 'active' : ''">
+        Задания
+      </div>
+      <div @click="switchTasks" class="navbar-item" :class="showTasks ? '' : 'active'">
+        Сообщения
+      </div>
+    </div>
+    <div v-if="showTasks" class="row box">
+      <h3>Невыполненные задания</h3>
+      <i v-if="showPreloader" class="material-icons preloader">cached</i>
+      <div v-if="!showPreloader" class="row">
+        <div id="test_card" v-for="test in tasks" class="box col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <h3>{{ test.name }}</h3>
+          <router-link :to="'/task/' + test._id">Перейти</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -19,7 +28,8 @@ export default {
   data() {
     return {
       tasks: [],
-      showPreloader: true
+      showPreloader: true,
+      showTasks: true
     }
   },
   computed: {
@@ -28,6 +38,11 @@ export default {
     },
     user() {
       return jwtDecode(this.$store.getters.userToken)
+    }
+  },
+  methods: {
+    switchTasks() {
+      this.showTasks = !this.showTasks;
     }
   },
   created() {
@@ -57,12 +72,38 @@ export default {
 <style lang="css" scoped>
 .box {
   padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .preloader {
   color: black;
   font-size: 30px;
+}
+
+.row.box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar-item {
+  padding: 7px 0;
+  transition: 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.active {
+  border-color: rgb(29,157,244);
+}
+
+.navbar-item:hover {
+  cursor: pointer;
+  border-color: rgb(29,157,244);
+}
+
+.navbar-item:first-of-type {
+  margin-right: 60px;
 }
 
 #test_card{
