@@ -7,7 +7,7 @@
           <br>
         </div>
       </div>
-      <div class="row">
+      <div class="row pad">
         <div class="col-lg-4">
           <h3>Изменение пароля</h3>
           <br>
@@ -86,5 +86,9 @@ export default {
 <style lang="css">
 .hideme{
   visibility: hidden;
+}
+
+.pad{
+  padding: 20px;
 }
 </style>
