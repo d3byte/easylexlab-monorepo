@@ -13,22 +13,21 @@
             <h3><b>Кем создана группа:</b></h3>
             <button @click="goto(group._id)" class="btn btn-primary" name="newtask"> Создать задание</button>
             <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn" name="reg">Код регистрации</button>
-            <div v-show="showCode" class="ui basic modal groupCode">
+            <div v-if="showCode" class="ui basic modal groupCode">
               <center>
-              <div class="header">Код регистрации</div>
-              <div class="content">
-                <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
-                <p><b>{{ groupCode }}</b></p>
-                <div class="actions">
-    <div class="ui red basic cancel inverted button">
-      <i class="remove icon"></i>
-      Закрыть
-    </div>
-  </div>
-              </div>
-            </center>
+                <div class="header">Код регистрации</div>
+                <div class="content">
+                  <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
+                  <p><b>{{ groupCode }}</b></p>
+                  <div class="actions">
+                    <div @click="close" class="ui red basic cancel inverted button">
+                      <i class="remove icon"></i>
+                      Закрыть
+                    </div>
+                  </div>
+                </div>
+              </center>
             </div>
-            <!-- Если сюда встроить basic modal, то будет топ! -->
           </div>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -56,21 +55,26 @@ export default {
     return {
       group: {},
       groupCode: '',
-      showCode: ''
+      showCode: false
     }
   },
   methods: {
     goto(id) {
       const path = '/group/' + id + '/newtask';
-      this.$router.push({
-        path
-      });
+      this.$router.push({ path });
+    },
+    close() {
+      setTimeout(() => {
+        $('.ui.dimmer.modals.page').remove();
+      }, 50);
     },
     generateLink(id) {
       const body = {
         'groupId': id
       };
-      $('.ui.basic.modal').modal('show');
+      setTimeout(() => {
+        $('.ui.basic.modal').modal('show');
+      }, 50);
       this.$http.post('regcode', body, {
         headers: {
           'Content-type': 'application/json',
@@ -104,9 +108,6 @@ export default {
     }).then(res => {
       this.group = res.body.group;
     });
-  },
-  mounted() {
-
   }
 }
 </script>
