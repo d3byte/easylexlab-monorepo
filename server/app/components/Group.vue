@@ -12,19 +12,16 @@
             <h2><b>Количество учеников в группе: </b></h2>
             <h3><b>Кем создана группа:</b></h3>
             <button @click="goto(group._id)" class="btn btn-primary" name="newtask"> Создать задание</button>
-            <button v-if="!showCode" @click="generateLink(group._id)" class="btn btn-primary" id="codebtn" name="reg">Код регистрации</button>
-            <p v-if="showCode" class="groupCode">{{ groupCode }}</p>
-            <!-- <div v-if="showCode" class="ui basic modal groupCode">
-  <div class="header">Header</div>
-  <div class="content">
-    <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
-    <p>{{ groupCode }}</p>
-    <p></p>
-  </div>
-</div> -->
-<!-- Если сюда встроить basic modal, то будет топ! -->
-
-
+            <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn" name="reg">Код регистрации</button>
+            <div v-show="showCode" class="ui basic modal groupCode">
+              <div class="header">Код регистрации</div>
+              <div class="content">
+                <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
+                <p>{{ groupCode }}</p>
+                <p></p>
+              </div>
+            </div>
+            <!-- Если сюда встроить basic modal, то будет топ! -->
           </div>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -64,6 +61,7 @@ export default {
       const body = {
         'groupId': id
       };
+      $('.ui.basic.modal').modal('show');
       this.$http.post('regcode', body, {
         headers: {
           'Content-type' : 'application/json',
@@ -72,7 +70,6 @@ export default {
       }).then(res => {
         this.groupCode = res.body.groupCode;
         this.showCode = true;
-        // this.getElementById("codebtn").style.display = "none";
       }).catch(err => {throw err});
     }
   },
@@ -98,7 +95,7 @@ export default {
     });
   },
   mounted(){
-    $('.ui.basic.modal').modal('show');
+
   }
 }
 </script>
