@@ -1,56 +1,67 @@
 <template>
-  <div class="navigator">
-    <div class="logo-container horizontal-vert-center">
-      <router-link to="/" tabindex="-1" class="ui small image logo">
-        <img src="pics/logo-small-2.png">
-      </router-link>
-      <router-link to="/" tabindex="-1" class="logo-link">
-        <h3>EasyLexLab</h3>
-      </router-link>
+<div class="navigator">
+  <div class="logo-container horizontal-vert-center">
+    <router-link to="/" tabindex="-1" class="ui small image logo">
+      <img src="pics/logo-small-2.png">
+    </router-link>
+    <router-link to="/" tabindex="-1" class="logo-link">
+      <h3>EasyLexLab</h3>
+    </router-link>
+  </div>
+  <div v-if="!logged" class="login">
+    <login v-if="showLogin"></login>
+    <div>
+      <a class="login" v-if="!showLogin" @click="show">Вход</a>
+      <router-link to="/signup"><a v-if="!showLogin">Зарегистрироваться</a></router-link>
     </div>
-    <div v-if="!logged" class="login">
-      <login v-if="showLogin"></login>
-      <div>
-        <a class="login" v-if="!showLogin" @click="show">Вход</a>
-        <router-link to="/signup"><a v-if="!showLogin">Зарегистрироваться</a></router-link>
-      </div>
+  </div>
+  <div v-if="logged" class="logged">
+    <div class="nav-item">
+      <a>
+        <router-link to="/profile/stats">Статистика</router-link>
+      </a>
     </div>
-    <div v-if="logged" class="logged">
-      <div class="nav-item">
-        <a><router-link to="/profile/stats">Статистика</router-link></a>
-      </div>
-      <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
-        <a v-if="user.permissions == 'teacher'"><router-link to="/profile/newgroup">Новая группа</router-link></a>
-        <div  v-if="user.permissions == 'student'" class="ui dropdown list">
-          <div v-if="isCurrentGr" class="text">{{ currentGroup.name }}</div>
-          <div id="test" v-else class="text">Выбор группы</div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div v-for="group in groups" @click="changeGroup(group)" class="item">{{ group.name }}</div>
-          </div>
+    <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
+      <a v-if="user.permissions == 'teacher'">
+        <a @click="$('.ui.basic.modal').modal('show');">Новая группа</a>
+      </a>
+      <div class="ui modal" id="groupmod">
+        <div class="header"><b>Создание новой группы</b></div>
+        <div class="content">
+          <newgroup></newgroup>
         </div>
       </div>
-      <div class="nav-item notif">
-        <i v-if="notifications.length == 0" class="material-icons">notifications_off</i>
-        <i @click="showNotifs" v-else class="material-icons">notifications_active</i>
-      </div>
-      <div class="ui pointing right dropdown nav-item profile">
-        <img class="ui avatar image">
+      <div v-if="user.permissions == 'student'" class="ui dropdown list">
+        <div v-if="isCurrentGr" class="text">{{ currentGroup.name }}</div>
+        <div id="test" v-else class="text">Выбор группы</div>
+        <i class="dropdown icon"></i>
         <div class="menu">
-          <div class="header">Меню</div>
-          <router-link class="item" to="/profile">Профиль</router-link>
-          <router-link class="item" to="/profile/settings">Настройки</router-link>
-          <div class="ui divider"></div>
-          <div class="item" @click="logout">Выход</div>
+          <div v-for="group in groups" @click="changeGroup(group)" class="item">{{ group.name }}</div>
         </div>
+      </div>
+    </div>
+    <div class="nav-item notif">
+      <i v-if="notifications.length == 0" class="material-icons">notifications_off</i>
+      <i @click="showNotifs" v-else class="material-icons">notifications_active</i>
+    </div>
+    <div class="ui pointing right dropdown nav-item profile">
+      <img class="ui avatar image">
+      <div class="menu">
+        <div class="header">Меню</div>
+        <router-link class="item" to="/profile">Профиль</router-link>
+        <router-link class="item" to="/profile/settings">Настройки</router-link>
+        <div class="ui divider"></div>
+        <div class="item" @click="logout">Выход</div>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import jwtDecode from 'jwt-decode';
 import Login from './Login.vue';
+import NewGroup from './NewGroup.vue';
 
 export default {
   data() {
@@ -79,7 +90,9 @@ export default {
     logout() {
       this.$store.dispatch('logout');
       this.$store.dispatch('hideGames');
-      this.$router.push({ path: '/' });
+      this.$router.push({
+        path: '/'
+      });
       localStorage.clear();
     },
     show() {
@@ -90,10 +103,10 @@ export default {
       this.currentGroup = group;
     },
     showNotifs() {
-      if(!!this.notifications) {
+      if (!!this.notifications) {
         this.$http.post('readnotifs', {}, {
           headers: {
-            'Content-type' : 'application/json',
+            'Content-type': 'application/json',
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(res => {});
@@ -106,25 +119,32 @@ export default {
   mounted() {
     $('.ui.dropdown').dropdown();
     $('ui.selection.dropdown.list').dropdown();
+    $('.ui.basic.modal').modal('show');
   },
   created() {
-    for(let groupId of this.user.groups) {
-      this.$http.post('groups',{ groupId } , { headers: {
-            'Content-type' : 'application/json',
-            'Authorization': 'Bearer ' + this.$store.getters.userToken
-          }}).then(res => {
-          this.$store.state.user.groups.push(res.body.group);
-          if(this.$store.state.user.groups.length == 1) {
-            this.$store.dispatch('changeGroup', res.body.group);
-            this.isCurrentGr = true;
-            this.currentGroup = res.body.group;
-          }
-        });
+    for (let groupId of this.user.groups) {
+      this.$http.post('groups', {
+        groupId
+      }, {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.$store.state.user.groups.push(res.body.group);
+        if (this.$store.state.user.groups.length == 1) {
+          this.$store.dispatch('changeGroup', res.body.group);
+          this.isCurrentGr = true;
+          this.currentGroup = res.body.group;
+        }
+      });
     }
     setTimeout(() => {
-      this.$http.post('gettests', { groupId: this.$store.state.currentGroup._id }, {
+      this.$http.post('gettests', {
+        groupId: this.$store.state.currentGroup._id
+      }, {
         headers: {
-          'Content-type' : 'application/json',
+          'Content-type': 'application/json',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }
       }).then(res => {
@@ -133,7 +153,7 @@ export default {
     }, 100);
     this.$http.post('getnotifs', {}, {
       headers: {
-        'Content-type' : 'application/json',
+        'Content-type': 'application/json',
         'Authorization': 'Bearer ' + this.$store.getters.userToken
       }
     }).then(res => {
@@ -141,10 +161,10 @@ export default {
     });
   },
   components: {
-    'login': Login
+    'login': Login,
+    'newgroup': NewGroup
   }
 }
-
 </script>
 
 <style lang="css">

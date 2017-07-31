@@ -14,12 +14,19 @@
             <button @click="goto(group._id)" class="btn btn-primary" name="newtask"> Создать задание</button>
             <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn" name="reg">Код регистрации</button>
             <div v-show="showCode" class="ui basic modal groupCode">
+              <center>
               <div class="header">Код регистрации</div>
               <div class="content">
                 <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
-                <p>{{ groupCode }}</p>
-                <p></p>
+                <p><b>{{ groupCode }}</b></p>
+                <div class="actions">
+    <div class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      Закрыть
+    </div>
+  </div>
               </div>
+            </center>
             </div>
             <!-- Если сюда встроить basic modal, то будет топ! -->
           </div>
@@ -55,7 +62,9 @@ export default {
   methods: {
     goto(id) {
       const path = '/group/' + id + '/newtask';
-      this.$router.push({ path });
+      this.$router.push({
+        path
+      });
     },
     generateLink(id) {
       const body = {
@@ -64,13 +73,15 @@ export default {
       $('.ui.basic.modal').modal('show');
       this.$http.post('regcode', body, {
         headers: {
-          'Content-type' : 'application/json',
+          'Content-type': 'application/json',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }
       }).then(res => {
         this.groupCode = res.body.groupCode;
         this.showCode = true;
-      }).catch(err => {throw err});
+      }).catch(err => {
+        throw err
+      });
     }
   },
   http: {
@@ -80,21 +91,21 @@ export default {
     'app-header': Header
   },
   created() {
-    if(!this.$store.getters.loginState)
+    if (!this.$store.getters.loginState)
       this.$router.push('/login');
     const body = {
       'groupId': this.$route.params.id
     };
     this.$http.post('getgroup', body, {
       headers: {
-        'Content-type' : 'application/json',
+        'Content-type': 'application/json',
         'Authorization': 'Bearer ' + this.$store.getters.userToken
       }
     }).then(res => {
       this.group = res.body.group;
     });
   },
-  mounted(){
+  mounted() {
 
   }
 }

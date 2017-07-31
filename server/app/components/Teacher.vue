@@ -24,7 +24,6 @@
 <script>
 import jwtDecode from 'jwt-decode';
 import moment from 'moment';
-
 export default {
   data() {
     return {
