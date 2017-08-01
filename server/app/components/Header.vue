@@ -22,10 +22,11 @@
       </a>
     </div>
     <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
-      <a v-if="user.permissions == 'teacher'">
-        <a @click="$('.ui.basic.modal').modal('show');">Новая группа</a>
-      </a>
-      <div class="ui modal" id="groupmod">
+      <span v-if="user.permissions == 'teacher'" class="black-text"
+            @click="showModal">
+        Новая группа
+      </span>
+      <div class="ui basic modal">
         <div class="header"><b>Создание новой группы</b></div>
         <div class="content">
           <newgroup></newgroup>
@@ -98,6 +99,9 @@ export default {
     show() {
       this.$store.dispatch('hideOrShowLogin');
     },
+    showModal() {
+      $('.ui.basic.modal').modal('show');
+    },
     changeGroup(group) {
       this.$store.dispatch('changeGroup', group);
       this.currentGroup = group;
@@ -119,7 +123,6 @@ export default {
   mounted() {
     $('.ui.dropdown').dropdown();
     $('ui.selection.dropdown.list').dropdown();
-    $('.ui.basic.modal').modal('show');
   },
   created() {
     for (let groupId of this.user.groups) {
@@ -315,7 +318,7 @@ a {
 .logo {
   width: 25px !important;
   height: 25px !important;
-  margin-top: -5px;
+  margin-bottom: 5px;
   margin-right: 10px;
 }
 </style>
