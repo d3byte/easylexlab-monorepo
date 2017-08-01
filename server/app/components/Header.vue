@@ -2,7 +2,7 @@
 <div class="navigator">
   <div class="logo-container horizontal-vert-center">
     <router-link to="/" tabindex="-1" class="ui small image logo">
-      <img src="pics/logo-small-2.png">
+      <img src="pics/logo-small.png">
     </router-link>
     <router-link to="/" tabindex="-1" class="logo-link">
       <h3>EasyLexLab</h3>
@@ -308,12 +308,14 @@ a {
 }
 
 .logo-link h3 {
+  font-size: 24px;
   font-family: 'Signika', sans-serif;
 }
 
 .logo {
   width: 25px !important;
   height: 25px !important;
+  margin-top: -5px;
   margin-right: 10px;
 }
 </style>
