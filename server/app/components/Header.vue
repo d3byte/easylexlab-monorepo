@@ -27,10 +27,13 @@
         Новая группа
       </span>
       <div class="ui basic modal">
+        <center>
         <div class="header"><b>Создание новой группы</b></div>
+        <br>
         <div class="content">
           <newgroup></newgroup>
         </div>
+      </center>
       </div>
       <div v-if="user.permissions == 'student'" class="ui dropdown list">
         <div v-if="isCurrentGr" class="text">{{ currentGroup.name }}</div>

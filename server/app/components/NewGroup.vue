@@ -1,26 +1,27 @@
 <template>
   <div class="">
     <center>
-      <h3>Создание группы</h3>
       <h5 class="success" v-if="success">
         Группа успешно создана!
-        <span class="link" @click="goto(newGroupId)"> Перейти</span>
-      </h5>
+        <br>
+        <button class="btn btn-primary goto" id="hide" @click="goto(newGroupId)"> Перейти</button>
+        <br>
+        </h5>
       <h5 class="errormsg" v-if="error">
         {{ this.errormsg }}
       </h5>
       <form class="login-form" onsubmit="return false">
-        <div class="name">
-          <label>Имя группы</label><br>
+        <div class="name white-text">
+          <label>Название группы</label><br>
           <input v-model="name" required type="text" tabindex="1">
         </div>
-        <div class="grade">
+        <div class="grade white-text">
           <label>Класс</label><br>
           <input v-model="grade" required type="number" tabindex="2" min="1" max="11">
         </div>
         <center>
-          <button @click="create" class="btn" tabindex="3">Создать</button>
-          <button class="btn"><router-link class="" to="/profile">Отменить</router-link></button>
+          <button @click="create" class="btn btn-success" tabindex="3">Создать</button>
+          <button @click="hideModal" class="btn btn-danger">Отменить</button>
         </center>
       </form>
     </center>
@@ -44,6 +45,9 @@ export default {
     root: '/api'
   },
   methods: {
+    hideModal() {
+      $('.ui.basic.modal').modal('hide');
+    },
     goto(id) {
       const path = '/group/' + id;
       this.$router.push({ path, alias: '/group' });
@@ -79,6 +83,10 @@ export default {
 <style lang="css">
 .success {
   color: #307351;
+}
+
+.goto{
+  margin:20px;
 }
 
 .name, .grade {
