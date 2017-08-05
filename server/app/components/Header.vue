@@ -16,7 +16,7 @@
     </div>
   </div>
   <div v-if="logged" class="logged">
-    <div class="nav-item">
+    <div v-if="user.permissions == 'student' ? true : false">
       <a>
         <router-link to="/profile/stats">Статистика</router-link>
       </a>
