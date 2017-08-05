@@ -86,8 +86,8 @@ userController.post = (req, res) => {
 userController.login = (req, res) => {
   const { username, password } = req.body;
 
-  db.User.findOne({username}).then((user) => {
-    user.verifyPassword(password).then((valid) => {
+  db.User.findOne({ username }).then(user => {
+    user.verifyPassword(password).then(valid => {
       if(valid) {
         console.log('Valid promise');
         const token = jwt.sign(
@@ -113,7 +113,7 @@ userController.login = (req, res) => {
           success: valid
         });
       }
-    }).catch((err) => {
+    }).catch(err => {
       console.log('Error');
       res.status(500).json({
         message: err

@@ -125,11 +125,14 @@ groupController.getGroups = (req, res) => {
 
   db.Group.find({_teacher: userId}).populate({
     path: '_teacher',
-    select: 'username createdAt -_id',
+    select: 'name username createdAt -_id',
     match: {'isDeleted': false}
   }).populate({
+    path: '_tests',
+    select: 'name tasks timeToDo _group attempts results'
+  }).populate({
     path: '_students',
-    select: 'username',
+    select: 'name username',
     match: {'isDeleted': false}
   }).then((groups) => {
     return res.status(200).json({
@@ -149,8 +152,12 @@ groupController.getGroup = (req, res) => {
   const groupId = req.body.groupId;
   db.Group.findById(groupId).populate({
     path: '_students',
-    match: {'isDeleted': false}
-  }).then((group) => {
+    select: '',
+    match: { 'isDeleted': false }
+  }).populate({
+    path: '_tests',
+    select: 'name tasks timeToDo _group attempts results'
+  }).then(group => {
     return res.status(200).json({
       success: true,
       group

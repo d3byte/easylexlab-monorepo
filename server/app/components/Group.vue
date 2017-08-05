@@ -6,13 +6,27 @@
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
           <div class="col-lg-3 ava blue vertical-center">
-            <h2 class="white-text">{{ this.group.name }}</h2>
+            <h2 class="white-text">{{ group.name }}</h2>
           </div>
           <div class="col-lg-9 userinfo">
-            <h2><b>Количество учеников в группе: </b></h2>
-            <h3><b>Кем создана группа:</b></h3>
-            <button @click="goto(group._id)" class="btn btn-primary" name="newtask"> Создать задание</button>
-            <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn" name="reg">Код регистрации</button>
+            <h2><b>Количество учеников в группе: {{ studentsLength }}</b></h2>
+            <button @click="goto(group._id)" class="btn btn-primary"> Создать задание</button>
+            <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn">Код регистрации</button>
+            <button @click="sendMsg" class="btn btn-primary">Написать сообщение группе</button>
+            <div v-if="writeMsg" class="ui basic modal sendMsg">
+              <center>
+                <div class="header">Сообщение группе</div>
+                <div class="content">
+                  <new-msg :props="group"></new-msg>
+                  <div class="actions">
+                    <div @click="close" class="ui red basic cancel inverted button">
+                      <i class="remove icon"></i>
+                      Закрыть
+                    </div>
+                  </div>
+                </div>
+              </center>
+            </div>
             <div v-if="showCode" class="ui basic modal groupCode">
               <center>
                 <div class="header">Код регистрации</div>
@@ -50,18 +64,29 @@
 
 <script>
 import Header from './Header.vue';
+import NewMsg from './NewMsg.vue';
+
 export default {
   data() {
     return {
       group: {},
       groupCode: '',
-      showCode: false
+      studentsLength: null,
+      showCode: false,
+      writeMsg: false
     }
   },
   methods: {
     goto(id) {
       const path = '/group/' + id + '/newtask';
       this.$router.push({ path });
+    },
+    sendMsg() {
+      this.writeMsg = true;
+      setTimeout(() => {
+        $('.ui.basic.modal.sendMsg').modal('show');
+      }, 30);
+      this.showCode = false;
     },
     close() {
       setTimeout(() => {
@@ -73,7 +98,7 @@ export default {
         'groupId': id
       };
       setTimeout(() => {
-        $('.ui.basic.modal').modal('show');
+        $('.ui.basic.modal.groupCode').modal('show');
       }, 50);
       this.$http.post('regcode', body, {
         headers: {
@@ -82,6 +107,7 @@ export default {
         }
       }).then(res => {
         this.groupCode = res.body.groupCode;
+        this.sendMsg = false;
         this.showCode = true;
       }).catch(err => {
         throw err
@@ -92,7 +118,8 @@ export default {
     root: '/api'
   },
   components: {
-    'app-header': Header
+    'app-header': Header,
+    'new-msg': NewMsg
   },
   created() {
     if (!this.$store.getters.loginState)
@@ -107,6 +134,7 @@ export default {
       }
     }).then(res => {
       this.group = res.body.group;
+      this.studentsLength = this.group._students.length;
     });
   }
 }
