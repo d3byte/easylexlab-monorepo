@@ -46,7 +46,7 @@
     </div>
     <div class="nav-item notif">
       <i v-if="notifications.length == 0" class="material-icons">notifications_off</i>
-      <i @click="showNotifs" v-else class="material-icons">notifications_active</i>
+      <i @click="showNotifs" v-else class="material-icons haveNotifs">notifications_active</i>
     </div>
     <div class="ui pointing right dropdown nav-item profile">
       <img class="ui avatar image">
@@ -181,6 +181,10 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   color: black;
+}
+
+.haveNotifs {
+  color: rgb(29,157,244) !important;
 }
 
 .navigator {

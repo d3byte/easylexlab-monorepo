@@ -233,7 +233,7 @@ userController.getNotifications = (req, res) => {
   db.User.findById(user.id).then(user => {
     var notifsToSend = [];
     for(let notification of user.notifications) {
-      if(!!notification.seen)
+      if(!notification.seen)
         notifsToSend.push(notification);
     }
     res.json({ notifications: notifsToSend });
