@@ -23,7 +23,8 @@
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="!showPreloader" class="row">
         <div id="test_card" v-for="msg in messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <h3>{{ msg.author }}</h3>
+          <h4>{{ msg.author }}</h4>
+          <hr>
           <p>{{ msg.text }}</p>
         </div>
       </div>
@@ -77,6 +78,14 @@ export default {
               this.tasks.push(test);
             }
           }
+        }
+      }
+      this.showPreloader = false;
+    }, 150);
+    setTimeout(() => {
+      if(this.group.messages) {
+        for(var msg of this.group.messages) {
+          this.messages.push(msg);
         }
       }
       this.showPreloader = false;
