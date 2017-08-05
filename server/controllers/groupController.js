@@ -218,7 +218,7 @@ groupController.newMsg = (req, res) => {
   const {
     groupId,
     msgText
-  } = req.body.groupId;
+  } = req.body;
 
   const message = {
     author: user.name,
