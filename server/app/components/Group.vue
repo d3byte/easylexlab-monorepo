@@ -13,11 +13,12 @@
             <button @click="goto(group._id)" class="btn btn-primary"> Создать задание</button>
             <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn">Код регистрации</button>
             <button @click="sendMsg" class="btn btn-primary">Написать сообщение группе</button>
-            <div v-if="writeMsg" class="ui basic modal sendMsg">
+            <div v-show="showModal" class="ui basic modal group">
               <center>
-                <div class="header">Сообщение группе</div>
-                <div class="content">
-                  <new-msg :props="group"></new-msg>
+                <div class="header" v-if="showCode">Код регистрации</div>
+                <div class="content" v-if="showCode">
+                  <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
+                  <p><b>{{ groupCode }}</b></p>
                   <div class="actions">
                     <div @click="close" class="ui red basic cancel inverted button">
                       <i class="remove icon"></i>
@@ -25,14 +26,9 @@
                     </div>
                   </div>
                 </div>
-              </center>
-            </div>
-            <div v-if="showCode" class="ui basic modal groupCode">
-              <center>
-                <div class="header">Код регистрации</div>
-                <div class="content">
-                  <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
-                  <p><b>{{ groupCode }}</b></p>
+                <div class="header" v-if="writeMsg">Сообщение группе</div>
+                <div class="content" v-if="writeMsg">
+                  <new-msg :group="group"></new-msg>
                   <div class="actions">
                     <div @click="close" class="ui red basic cancel inverted button">
                       <i class="remove icon"></i>
@@ -72,6 +68,7 @@ export default {
       group: {},
       groupCode: '',
       studentsLength: null,
+      showModal: false,
       showCode: false,
       writeMsg: false
     }
@@ -82,24 +79,28 @@ export default {
       this.$router.push({ path });
     },
     sendMsg() {
+      this.showModal = true;
+      $('.ui.dimmer.modals.page').addClass('active visible').show();
       this.writeMsg = true;
-      setTimeout(() => {
-        $('.ui.basic.modal.sendMsg').modal('show');
-      }, 30);
       this.showCode = false;
-    },
-    close() {
       setTimeout(() => {
-        $('.ui.dimmer.modals.page').remove();
+        $('.ui.basic.modal.group').modal('show');
       }, 50);
     },
+    close() {
+      this.showModal = false;
+      setTimeout(() => {
+        $('.ui.dimmer.modals.page').removeClass('active visible').hide();
+      }, 5);
+      this.writeMsg = false;
+      this.showCode = false;
+    },
     generateLink(id) {
+      $('.ui.dimmer.modals.page').addClass('active visible').show();
+      this.writeMsg = false;
       const body = {
         'groupId': id
       };
-      setTimeout(() => {
-        $('.ui.basic.modal.groupCode').modal('show');
-      }, 50);
       this.$http.post('regcode', body, {
         headers: {
           'Content-type': 'application/json',
@@ -107,8 +108,11 @@ export default {
         }
       }).then(res => {
         this.groupCode = res.body.groupCode;
-        this.sendMsg = false;
+        this.showModal = true;
         this.showCode = true;
+        setTimeout(() => {
+          $('.ui.basic.modal.group').modal('show');
+        }, 50);
       }).catch(err => {
         throw err
       });

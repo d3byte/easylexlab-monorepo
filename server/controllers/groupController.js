@@ -231,15 +231,19 @@ groupController.newMsg = (req, res) => {
     seen: false
   };
 
+  console.log(groupId);
+
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
     db.Group.findByIdAndUpdate(groupId, {
       $push: { messages: message }
     }).then(group => {
-      db.User.findAndUpdate({ $elemMatch: { _groups: groupId } },
+      console.log(group);
+      db.User.update({ _groups: { $in: [groupId] } },
       { $push: { notifications: notification } }).then(success => {
+        console.log(success);
         res.json({ success: true });
-      });
-    });
+      }).catch(error => { throw error });
+    }).catch(err => { throw err });
   }
 };
 

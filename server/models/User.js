@@ -19,7 +19,7 @@ const userSchema = new Schema({
   school: { type: String, default: null },
   _groups: [{ type: Schema.ObjectId, ref: 'Group', default: null }],
   _results: { type: Array, default: null },
-  notifications: [{ type: Object, default: null }],
+  notifications: { type: Array, default: null },
   permissions: { type: String, required: true },
   social: [{ type: Object, default: null }],
   createdAt: { type: Date, default: Date.now },

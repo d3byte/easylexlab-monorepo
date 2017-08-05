@@ -26,7 +26,7 @@
             @click="showModal">
         Новая группа
       </span>
-      <div class="ui basic modal">
+      <div class="ui basic modal newGroup">
         <center>
           <div class="header"><b>Создание новой группы</b></div>
           <br>
@@ -103,7 +103,8 @@ export default {
       this.$store.dispatch('hideOrShowLogin');
     },
     showModal() {
-      $('.ui.basic.modal').modal('show');
+      $('.ui.dimmer.modals.page').addClass('active visible').show();
+      $('.ui.basic.modal.newGroup').modal('show');
     },
     changeGroup(group) {
       this.$store.dispatch('changeGroup', group);

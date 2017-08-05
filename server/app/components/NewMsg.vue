@@ -4,7 +4,7 @@
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <form v-if="!success && !showPreloader" onsubmit="return false">
         <textarea v-model="text" rows="8" cols="80" placeholder="Сообщение" required></textarea>
-        <button @click="send">Отправить</button>
+        <button @click="send" class="ui red basic cancel inverted button">Отправить</button>
       </form>
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
         'Content-type' : 'application/json',
         'Authorization': 'Bearer ' + this.$store.getters.userToken
       };
-      this.$http.post('newmsg', body, headers).then(res => {
+      this.$http.post('newmsg', body, { headers }).then(res => {
         this.success = true;
         this.showPreloader = false;
       });
@@ -42,4 +42,9 @@ export default {
 </script>
 
 <style lang="css">
+textarea {
+  color: black;
+  padding: 10px;
+  border-radius: 2px;
+}
 </style>
