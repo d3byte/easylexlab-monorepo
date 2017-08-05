@@ -12,7 +12,7 @@
       <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3>
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="!showPreloader" class="row">
-        <div id="test_card" v-for="test in tasks" class="box col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
           <h3>{{ test.name }}</h3>
           <router-link :to="'/task/' + test._id">Перейти</router-link>
         </div>
@@ -95,7 +95,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.box {
+.task.box {
+  width: auto;
   padding: 10px;
   margin-bottom: 30px;
 }
@@ -135,9 +136,5 @@ export default {
 
 .navbar-item:first-of-type {
   margin-right: 60px;
-}
-
-#test_card{
-  margin: 20px;
 }
 </style>

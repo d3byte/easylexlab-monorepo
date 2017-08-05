@@ -1,7 +1,6 @@
 <template lang="html">
   <div>
     <app-header style="margin-bottom: 80px;" />
-  <template>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
@@ -42,19 +41,18 @@
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
         <div class="col-lg-3 box blue vertical-center">
-          <h5 class="white-text"> Ближайший день сдачи </h5><br>
+          <h5 class="white-text"> Полезная статистика </h5><br>
           <!-- <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
           <h1 class="month white-text">{{ date.slice(2) }}</h1> -->
         </div>
       </div>
       <!-- <router-view></router-view> -->
     </div>
-  </template>
-  <div class="container-fluid">
-    <div class="box">
-    <router-view :group="this.group" :groupid="this.$route.params.id"></router-view>
-  </div>
-  </div>
+    <div class="container-fluid">
+      <div class="box">
+        <router-view :group="this.group" :groupid="this.$route.params.id"></router-view>
+      </div>
+    </div>
 </div>
 </template>
 
@@ -168,13 +166,6 @@ export default {
 
   .groupCode{
     /*margin-right: 30px; */
-  }
-
-  .box {
-    background-color:#fff;
-    min-height:300px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23), 0 7px 6px rgba(0,0,0,0.23) ;
-    border-radius: 2px;
   }
 
   .number {

@@ -8,9 +8,6 @@ export default {
   hideOrShowLogin({ commit }) {
     commit('hideOrShowLogin');
   },
-  changeGroup({ commit }, group) {
-    commit('changeGroup', group);
-  },
   addTests({ commit }, stacks) {
     commit('addTests', stacks);
   },
@@ -37,5 +34,11 @@ export default {
   },
   testNotAvailable({ commit }) {
     commit('testNotAvailable');
+  },
+  requestedIsTrue({ commit }) {
+    commit('requestedIsTrue');
+  },
+  changeCurrentGroup({ commit }, newGroup) {
+    commit('changeCurrentGroup', newGroup);
   }
 }

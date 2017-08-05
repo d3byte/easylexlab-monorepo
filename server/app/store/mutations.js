@@ -13,9 +13,6 @@ export default {
   hideOrShowLogin(state) {
     state.header.showLogin = !state.header.showLogin;
   },
-  changeGroup(state, group) {
-    state.currentGroup = group;
-  },
   addTests(state, stack) {
     state.currentGroup._tests = stack;
   },
@@ -45,5 +42,11 @@ export default {
   },
   testNotAvailable(state) {
     state.games.testAvailable = false;
+  },
+  requestedIsTrue(state) {
+    state.user.requested = true;
+  },
+  changeCurrentGroup(state, newGroup) {
+    state.currentGroup = newGroup;
   }
 }

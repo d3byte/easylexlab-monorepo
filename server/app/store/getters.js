@@ -25,5 +25,8 @@ export default {
    },
    testAvailable(state) {
      return state.games.testAvailable
+   },
+   requested(state) {
+     return state.user.requested
    }
 }

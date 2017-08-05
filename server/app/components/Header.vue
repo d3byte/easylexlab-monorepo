@@ -72,8 +72,7 @@ export default {
     return {
       requested: false,
       isCurrentGr: false,
-      notifications: [],
-      currentGroup: {}
+      notifications: []
     }
   },
   computed: {
@@ -87,7 +86,10 @@ export default {
       return jwtDecode(this.$store.getters.userToken)
     },
     groups() {
-      return this.$store.state.user.groups;
+      return this.$store.state.user.groups
+    },
+    currentGroup() {
+      return this.$store.state.currentGroup
     }
   },
   methods: {
@@ -107,8 +109,7 @@ export default {
       $('.ui.basic.modal.newGroup').modal('show');
     },
     changeGroup(group) {
-      this.$store.dispatch('changeGroup', group);
-      this.currentGroup = group;
+      this.$store.dispatch('changeCurrentGroup', group);
     },
     showNotifs() {
       if (!!this.notifications) {
@@ -129,23 +130,26 @@ export default {
     $('ui.selection.dropdown.list').dropdown();
   },
   created() {
-    for (let groupId of this.user.groups) {
-      this.$http.post('groups', {
-        groupId
-      }, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }
-      }).then(res => {
-        this.$store.state.user.groups.push(res.body.group);
-        if (this.$store.state.user.groups.length == 1) {
-          this.$store.dispatch('changeGroup', res.body.group);
-          this.isCurrentGr = true;
-          this.currentGroup = res.body.group;
-        }
-      });
+    if(!this.$store.getters.requested) {
+      for (let groupId of this.user.groups) {
+        this.$http.post('groups', {
+          groupId
+        }, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          this.$store.state.user.groups.push(res.body.group);
+          if (this.$store.state.user.groups.length == 1) {
+            this.$store.dispatch('changeGroup', res.body.group);
+            this.$store.dispatch('changeCurrentGroup', res.body.group);
+            this.$store.dispatch('requestedIsTrue');
+          }
+        });
+      }
     }
+    this.isCurrentGr = true;
     setTimeout(() => {
       this.$http.post('gettests', {
         groupId: this.$store.state.currentGroup._id
@@ -299,10 +303,6 @@ a {
   color: darkgray;
 }
 
-[login] {
-  transform: translateX(-400px);
-}
-
 .list {
   background: transparent;
 } .list > option:first-of-type {
@@ -312,6 +312,7 @@ a {
 .text {
   color: black !important;
   text-shadow: none !important;
+  margin-bottom: 12px !important;
 }
 
 .logo-container {

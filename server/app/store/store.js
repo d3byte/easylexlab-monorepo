@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
     user: {
       logged: (localStorage.token ? true : false),
       token: (localStorage.token ? localStorage.token : ''),
-      groups: []
+      groups: [],
+      requested: false
     },
     header: {
       showLogin: false
