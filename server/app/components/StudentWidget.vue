@@ -4,7 +4,7 @@
       <div @click="switchTasks" class="navbar-item" :class="showTasks ? 'active' : ''">
         Задания
       </div>
-      <div @click="switchTasks" class="navbar-item" :class="showTasks ? '' : 'active'">
+      <div @click="switchMsgs" class="navbar-item" :class="showMsgs ? 'active' : ''">
         Сообщения
       </div>
     </div>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!showTasks" class="row box">
+    <div v-if="showMsgs" class="row box">
       <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="!showPreloader" class="row">
@@ -40,7 +40,8 @@ export default {
       tasks: [],
       messages: [],
       showPreloader: true,
-      showTasks: true
+      showTasks: true,
+      showMsgs: false
     }
   },
   computed: {
@@ -53,7 +54,12 @@ export default {
   },
   methods: {
     switchTasks() {
-      this.showTasks = !this.showTasks;
+      this.showTasks = true;
+      this.showMsgs = false;
+    },
+    switchMsgs() {
+      this.showTasks = false;
+      this.showMsgs = true;
     }
   },
   created() {
@@ -65,12 +71,11 @@ export default {
             for(let result of test.results) {
               if(result.username == this.user.username) {
                 done = true;
-                break;
               }
             }
-          }
-          if(!done) {
-            this.tasks.push(test);
+            if(!done) {
+              this.tasks.push(test);
+            }
           }
         }
       }
