@@ -157,7 +157,7 @@ userController.updateInfo = (req, res) => {
     });
   }
 
-  db.findByIdAndUpdate(myUser.id, {
+  db.User.findByIdAndUpdate(myUser.id, {
     $set: query
   }).then(user => {
     return res.json({
@@ -170,9 +170,9 @@ userController.updateInfo = (req, res) => {
 userController.verifyPassword = (req, res) => {
   const user = req.user;
   const password = req.body.password;
-  db.findById(user.id).then(myUser => {
+  db.User.findById(user.id).then(myUser => {
     myUser.verifyPassword(password).then(valid => {
-      return res.json({ valid });
+      return res.json({ success: valid });
     });
   });
 };
@@ -181,7 +181,7 @@ userController.changePassword = (req, res) => {
   const user = req.user;
   const newPassword = req.body.newPassword;
 
-  db.findByIdAndUpdate(user.id, {$set: { password: newPassword }})
+  db.User.findByIdAndUpdate(user.id, { $set: { password: newPassword }})
     .then(myUser => {
       return res.json({ success: true });
     });

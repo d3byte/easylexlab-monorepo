@@ -11,39 +11,40 @@
         <div class="col-lg-4">
           <h3>Изменение пароля</h3>
           <br>
-          <form>
+          <h5 class="errormsg" v-if="errOldPass && !errNewPass">Введен неправильный пароль. Попробуйте еще раз. </h5>
+          <h5 class="errormsg" v-if="!errOldPass && errNewPass">Введенные пароли не совпадают. Попробуйте еще раз. </h5>
+          <h5 class="success" v-if="passChanged">Пароль успешно изменен.</h5>
+          <form onsubmit="return false">
             <div class="old_pass">
-            <input type="text" placeholder="Старый пароль">
+            <input v-model="oldPass" type="text" placeholder="Старый пароль">
           </div>
             <br>
-            <div class="new_pass">
-            <input type="text" placeholder="Новый пароль">
+            <div class="new_pass" v-if="passwordIsCorrect">
+            <input v-model="newPass" type="text" placeholder="Новый пароль">
           </div>
             <br>
-            <div class="new_pass_conf">
-            <input type="text" placeholder="Подтвердите пароль">
+            <div class="new_pass_conf" v-if="passwordIsCorrect">
+            <input v-model="confPass" type="text" placeholder="Подтвердите пароль">
           </div>
           <br>
-          <button @click="check" class="btn btn-primary">Сменить пароль</button>
+          <button @click="checkPass" class="btn btn-primary" v-if="!passwordIsCorrect">Проверить пароль</button>
+          <button @click="changePass" class="btn btn-primary" v-if="passwordIsCorrect">Сменить пароль</button>
           </form>
         </div>
         <div class="col-lg-4">
           <h3>Изменение данных о пользователе</h3>
           <br>
-          <form>
-            <div class="change_mail">
-            <input type="text" placeholder="Ваша почта"> <!-- тут надо намутить тему шоб подставлялось мыло юзера на данный момент -->
-          </div>
-            <br>
+          <h5 class="success" v-if="changeInfo">Информация успешно обновлена. </h5>
+          <form onsubmit="return false">
             <div class="change_name">
-            <input type="text" placeholder="Ваше имя">
-          </div>
+              <input v-model="newName" type="text" placeholder="Ваше имя">
+            </div>
             <br>
-            <div class="change_school">
-            <input type="text" placeholder="Ваша школа"> <!-- тут тоже -->
-          </div>
-          <br>
-          <button @click="check" class="btn btn-primary">Применить изменения</button>
+            <div class="change_username">
+              <input v-model="newUsername" type="text" placeholder="Ваш логин"> <!-- тут тоже -->
+            </div>
+            <br>
+            <button @click="submitInfo" class="btn btn-primary">Применить изменения</button>
           </form>
         </div>
         <div class="col-lg-4">
@@ -65,7 +66,7 @@
         </div>
         <br>
         <!-- конец костыля -->
-          <button @click="check" class="btn btn-primary">Присоединиться к группе</button>
+          <!-- <button @click="check" class="btn btn-primary">Присоединиться к группе</button> -->
           </form>
         </div>
       </div>
@@ -75,6 +76,80 @@
 
 <script>
 export default {
+  data() {
+    return {
+      passwordIsCorrect: false,
+      oldPass: '',
+      newPass: '',
+      confPass: '',
+      passChanged: false,
+      errOldPass: false,
+      errNewPass: false,
+      successPass: false,
+      newName: '',
+      newUsername: '',
+      changeInfo: false
+    }
+  },
+  http: {
+    root: '/api'
+  },
+  methods: {
+    checkPass() {
+      const body = {
+        password: this.oldPass
+      };
+      this.$http.post('verifypassword', body, {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        // console.log(res);
+        if(res.body.success) {
+          this.passwordIsCorrect = true;
+          this.errOldPass = false;
+        } else {
+          this.errOldPass = true;
+        }
+      });
+    },
+    changePass() {
+      if(this.newPass == this.confPass) {
+        const body = {
+          newPassword: this.newPass
+        };
+        this.$http.patch('newpassword', body, {
+          headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          if(res.body.success) {
+              this.errNewPass = false;
+              this.errOldPass = false;
+              this.passChanged = true;
+          }
+        });
+      } else {
+        this.errNewPass = true;
+      }
+    },
+    submitInfo() {
+      const body = {
+        name: this.newName,
+        username: this.newUsername
+      };
+      this.$http.patch('newinfo', body, {
+        headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.changeInfo = true;
+      })
+    }
+  },
   created() {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
