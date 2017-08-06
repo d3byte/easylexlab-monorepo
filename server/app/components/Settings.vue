@@ -47,7 +47,7 @@
             <button @click="submitInfo" class="btn btn-primary">Применить изменения</button>
           </form>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" v-if="user.permissions == 'student'">
           <h3>Присоединение к группе</h3>
           <br>
           <form>
@@ -66,7 +66,7 @@
         </div>
         <br>
         <!-- конец костыля -->
-          <!-- <button @click="check" class="btn btn-primary">Присоединиться к группе</button> -->
+          <button @click="addGroup" class="btn btn-primary">Присоединиться к группе</button>
           </form>
         </div>
       </div>
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
+
 export default {
   data() {
     return {
@@ -89,6 +91,11 @@ export default {
       newName: '',
       newUsername: '',
       changeInfo: false
+    }
+  },
+  computed: {
+    user() {
+      return jwtDecode(this.$store.getters.userToken)
     }
   },
   http: {
