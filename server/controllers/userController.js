@@ -191,12 +191,14 @@ userController.addGroup = (req, res) => {
   const groupCode = req.body.groupCode;
   const user = req.user;
 
+  console.log(groupCode);
+
   db.Group.findOne({ code: groupCode }).then(group => {
     group._students.push(user.id);
     group.save();
     db.User.findByIdAndUpdate(
       user.id,
-      { $push: { '_groups': group._id }}).then(user => {
+      { $push: { '_groups': group._id }}).then(myUser => {
       res.json({ success: true });
     });
   });

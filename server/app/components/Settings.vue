@@ -50,7 +50,8 @@
         <div class="col-lg-4" v-if="user.permissions == 'student'">
           <h3>Присоединение к группе</h3>
           <br>
-          <form>
+          <h5 class="success" v-if="joinGroup">Вы успешно присоединились к группе. </h5>
+          <form onsubmit="return false">
 
           <!-- временный костыль -->
           <div class="hideme">
@@ -58,7 +59,7 @@
         </div>
         <br>
         <div class="join_group">
-        <input type="text" placeholder="Код группы">
+        <input type="text" v-model="groupCode" required placeholder="Код группы">
       </div>
           <br>
           <div class="hideme">
@@ -90,7 +91,9 @@ export default {
       successPass: false,
       newName: '',
       newUsername: '',
-      changeInfo: false
+      changeInfo: false,
+      groupCode: '',
+      joinGroup: false
     }
   },
   computed: {
@@ -154,6 +157,19 @@ export default {
         }
       }).then(res => {
         this.changeInfo = true;
+      })
+    },
+    addGroup() {
+      const body = {
+        groupCode: this.groupCode
+      };
+      this.$http.patch('addgroup', body, {
+        headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.joinGroup = true;
       })
     }
   },
