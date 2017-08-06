@@ -113,6 +113,10 @@ export default {
   padding: 0 20px;
 }
 
+.row.box:first-of-type {
+  margin-bottom: 40px;
+}
+
 .row.box:nth-of-type(2) {
   padding: 10px 20px;
 } .row.box:nth-of-type(2) h3 {
