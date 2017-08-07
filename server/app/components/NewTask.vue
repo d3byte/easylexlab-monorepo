@@ -6,15 +6,6 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 container">
         <center>
           <h4 v-if="!!this.errorMsg" class="errormsg">{{ this.errorMsg }}</h4>
-            <div v-if="this.showEditor" class="row nav">
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" v-for="(task, index) in tasks">
-                    <h3 class="nav-item active" v-if="task.active"><i class="fa fa-thumb-tack" aria-hidden="true"></i></h3>
-                    <h3 class="nav-item edittask" v-else @click="editTask(task)"><i class="fa fa-square-o" aria-hidden="true"></i></h3>
-                </div>
-              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                <h3 @click="add" class="add"><i class="fa fa-plus-square-o" aria-hidden="true"></i></h3>
-              </div>
-            </div>
             <div v-if="this.showEditor">
               <div  class="row task" v-for="(task, index) in tasks" v-show="task.active">
                 <form class="login-form" onsubmit="return false">
@@ -39,7 +30,7 @@
                       </td>
                     </tr>
                   </table>
-                  <button @click="confirm" class="btn"><i class="fa fa-check-square-o" aria-hidden="true"></i> Готово</button>
+                  <button @click="confirm" class="btn btn-primary"><i class="fa fa-check-square-o" aria-hidden="true"></i> Готово</button>
                 </form>
               </div>
             </div>

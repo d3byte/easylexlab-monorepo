@@ -1,22 +1,24 @@
 <template lang="html">
-  <center>
-    <table class="table table-striped table-hover">
-      <thead>
-      <tr>
-        <th>Номер ученика</th>
-        <th>Имя ученика</th>
-        <th v-for="test in tests">{{ test.name }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(student, index) in group._students">
-        <td>{{ index + 1 }}</td>
-        <td>{{ student.name }}</td>
-        <td v-for="result in student._results">{{ result.result }}%</td>
-      </tr>
-    </tbody>
-    </table>
-  </center>
+  <div class="test">
+    <center>
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Номер ученика</th>
+          <th>Имя ученика</th>
+          <th v-for="test in tests">{{ test.name }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(student, index) in group._students">
+          <td>{{ index + 1 }}</td>
+          <td>{{ student.name }}</td>
+          <td v-for="result in student._results">{{ result.result }}%</td>
+        </tr>
+      </tbody>
+      </table>
+    </center>
+  </div>
 </template>
 
 <script>
@@ -50,4 +52,5 @@ export default {
 </script>
 
 <style lang="css">
+  
 </style>

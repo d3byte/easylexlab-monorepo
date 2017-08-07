@@ -35,7 +35,7 @@
           </div>
           <div class="agree">
             <input required v-model="agree" type="checkbox" tabindex="6" id="agree">
-            <label for="agree">Разрешаю обработку своих персональных данных</label>
+            <label for="agree"><router-link to="/eula">Разрешаю обработку своих персональных данных</router-link></label>
           </div>
           <button @click="check" class="btn btn-primary" tabindex="7">Зарегистрироваться</button>
       </center>
