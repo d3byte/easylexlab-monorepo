@@ -12,7 +12,6 @@ import Header from './Header.vue';
 import Teacher from './Teacher.vue';
 import Student from './Student.vue';
 import Admin from './Admin.vue';
-import jwtDecode from 'jwt-decode';
 
 export default {
 
@@ -25,8 +24,8 @@ export default {
   },
   computed: {
     user() {
-      return jwtDecode(this.$store.getters.userToken);
-    }
+      return this.$store.getters.user
+    },
   },
   components: {
     'app-header': Header,

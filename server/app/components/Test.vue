@@ -36,7 +36,6 @@
 
 <script>
 import _ from 'lodash';
-import jwtDecode from 'jwt-decode';
 
 export default {
   props: ['stack'],
@@ -53,7 +52,7 @@ export default {
   },
   computed: {
     user() {
-      return jwtDecode(this.$store.getters.userToken);
+      return this.$store.getters.user
     }
   },
   methods: {

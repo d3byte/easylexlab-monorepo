@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import jwtDecode from 'jwt-decode';
-
 export default {
   data() {
     return {
@@ -50,8 +48,8 @@ export default {
       return this.$store.getters.currentGroup
     },
     user() {
-      return jwtDecode(this.$store.getters.userToken)
-    }
+      return this.$store.getters.user
+    },
   },
   methods: {
     switchTasks() {

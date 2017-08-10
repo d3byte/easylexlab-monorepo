@@ -27,12 +27,10 @@
 </template>
 
 <script>
-import jwtDecode from 'jwt-decode';
-
 export default {
   data() {
     return {
-      user: jwtDecode(this.$store.getters.userToken),
+      user: this.$store.getters.user,
       token: this.$store.getters.userToken,
       groups: [],
       showPreloader: true

@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import jwtDecode from 'jwt-decode';
 import moment from 'moment';
 export default {
   data() {
@@ -32,8 +31,8 @@ export default {
   },
   computed: {
     user() {
-      return jwtDecode(this.$store.getters.userToken);
-    }
+      return this.$store.getters.user
+    },
   },
   created() {
     this.$store.dispatch('hideGames');

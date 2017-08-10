@@ -154,29 +154,12 @@ export default {
         }}).then(res => {
           console.log(res);
           this.$store.dispatch('userInfo', res.body.user);
+          this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+          this.$store.dispatch('requestedIsTrue');
+          this.notifications = res.body.user.notifications;
         });
     }
     this.isCurrentGr = true;
-    setTimeout(() => {
-      this.$http.post('gettests', {
-        groupId: this.$store.state.currentGroup._id
-      }, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }
-      }).then(res => {
-        this.$store.dispatch('addTests', res.body.stacks);
-      });
-    }, 100);
-    this.$http.post('getnotifs', {}, {
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + this.$store.getters.userToken
-      }
-    }).then(res => {
-      this.notifications = res.body.notifications;
-    });
   },
   components: {
     'login': Login,
