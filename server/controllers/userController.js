@@ -92,13 +92,13 @@ userController.login = (req, res) => {
         console.log('Valid promise');
         const token = jwt.sign(
           {
-            username: user.username,
-            name: user.name,
-            notifications: user.notifications,
+            // username: user.username,
+            // name: user.name,
+            // notifications: user.notifications,
             id: user._id,
-            permissions: user.permissions,
-            groups: user._groups,
-            school: user.school
+            permissions: user.permissions
+            // groups: user._groups,
+            // school: user.school
           },
           secret,
           { expiresIn: '2 days' }
@@ -253,5 +253,18 @@ userController.readNotifs = (req, res) => {
     res.json({ success: true });
   });
 };
+
+userController.getUser = (req, res) => {
+  const userID = req.body.userId
+
+  db.User.findById(userID)
+         .populate({
+           path: '_groups',
+           select: 'name code grade _teacher _students _tests messages createdAt'
+         })
+         .then(user => {
+           res.json({ user })
+  })
+}
 
 export default userController;
