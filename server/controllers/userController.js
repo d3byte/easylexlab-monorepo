@@ -96,7 +96,7 @@ userController.login = (req, res) => {
             // name: user.name,
             // notifications: user.notifications,
             id: user._id,
-            permissions: user.permissions
+            permissions: user.permissions,
             // groups: user._groups,
             // school: user.school
           },
@@ -255,16 +255,22 @@ userController.readNotifs = (req, res) => {
 };
 
 userController.getUser = (req, res) => {
-  const userID = req.body.userId
+  const user = req.user;
 
-  db.User.findById(userID)
+  db.User.findById(user.id)
          .populate({
            path: '_groups',
-           select: 'name code grade _teacher _students _tests messages createdAt'
+           model: 'Group',
+           populate: {
+             path: '_tests',
+             model: 'Stack'
+           }
          })
          .then(user => {
-           res.json({ user })
-  })
+           console.log(user)
+           return res.json({ user })
+  });
+
 }
 
 export default userController;

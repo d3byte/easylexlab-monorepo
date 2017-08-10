@@ -23,6 +23,7 @@ routes.patch('/newinfo', expressJWT({ secret }), userController.updateInfo);
 routes.patch('/newpassword', expressJWT({ secret }), userController.changePassword);
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.patch('/userresult', expressJWT({ secret }), userController.addResult);
+routes.post('/user', expressJWT({ secret }), userController.getUser);
 
 // Group routes
 routes.post('/regcode', expressJWT({ secret }), groupController.regCode);

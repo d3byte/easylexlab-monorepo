@@ -131,23 +131,30 @@ export default {
   },
   created() {
     if(!this.$store.getters.requested) {
-      for (let groupId of this.user.groups) {
-        this.$http.post('groups', {
-          groupId
-        }, {
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.$store.getters.userToken
-          }
-        }).then(res => {
-          this.$store.state.user.groups.push(res.body.group);
-          if (this.$store.state.user.groups.length == 1) {
-            this.$store.dispatch('changeGroup', res.body.group);
-            this.$store.dispatch('changeCurrentGroup', res.body.group);
-            this.$store.dispatch('requestedIsTrue');
-          }
+      // for (let groupId of this.user.groups) {
+      //   this.$http.post('groups', {
+      //     groupId
+      //   }, {
+      //     headers: {
+      //       'Content-type': 'application/json',
+      //       'Authorization': 'Bearer ' + this.$store.getters.userToken
+      //     }
+      //   }).then(res => {
+      //     this.$store.state.user.groups.push(res.body.group);
+      //     if (this.$store.state.user.groups.length == 1) {
+      //       this.$store.dispatch('changeGroup', res.body.group);
+      //       this.$store.dispatch('changeCurrentGroup', res.body.group);
+      //       this.$store.dispatch('requestedIsTrue');
+      //     }
+      //   });
+      // }
+      this.$http.post('user', {}, { headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }}).then(res => {
+          console.log(res);
+          Object.assign(this.$store.state.user, ...res.body.user);
         });
-      }
     }
     this.isCurrentGr = true;
     setTimeout(() => {
