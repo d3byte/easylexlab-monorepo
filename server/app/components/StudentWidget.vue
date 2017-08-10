@@ -79,8 +79,6 @@ export default {
         }
       }
       this.showPreloader = false;
-    }, 150);
-    setTimeout(() => {
       if(this.group.messages) {
         for(var msg of this.group.messages) {
           this.messages.push(msg);

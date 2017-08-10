@@ -83,7 +83,7 @@ export default {
       return this.$store.getters.showLogin
     },
     user() {
-      return jwtDecode(this.$store.getters.userToken)
+      return this.$store.getters.user
     },
     groups() {
       return this.$store.state.user.groups
@@ -130,24 +130,7 @@ export default {
     $('ui.selection.dropdown.list').dropdown();
   },
   created() {
-    if(!this.$store.getters.requested) {
-      // for (let groupId of this.user.groups) {
-      //   this.$http.post('groups', {
-      //     groupId
-      //   }, {
-      //     headers: {
-      //       'Content-type': 'application/json',
-      //       'Authorization': 'Bearer ' + this.$store.getters.userToken
-      //     }
-      //   }).then(res => {
-      //     this.$store.state.user.groups.push(res.body.group);
-      //     if (this.$store.state.user.groups.length == 1) {
-      //       this.$store.dispatch('changeGroup', res.body.group);
-      //       this.$store.dispatch('changeCurrentGroup', res.body.group);
-      //       this.$store.dispatch('requestedIsTrue');
-      //     }
-      //   });
-      // }
+    setTimeout(() => {
       this.$http.post('user', {}, { headers: {
           'Content-type': 'application/json',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
@@ -158,8 +141,10 @@ export default {
           this.$store.dispatch('requestedIsTrue');
           this.notifications = res.body.user.notifications;
         });
-    }
-    this.isCurrentGr = true;
+      if(this.user.notifications)
+        this.notifications = this.user.notifications;
+      this.isCurrentGr = true;
+    }, 80);
   },
   components: {
     'login': Login,
