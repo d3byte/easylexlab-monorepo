@@ -1,0 +1,21 @@
+body {
+  background: #f1f1f1 !important;
+}
+
+.main > .row {
+  height: 50vh;
+}
+
+hr {
+  background: black !important;
+}
+
+.small {
+  font-size: 20px !important;
+}
+
+.img {
+  max-width: 120px;
+  max-height: 120px;
+  margin-right: 40px;
+}
