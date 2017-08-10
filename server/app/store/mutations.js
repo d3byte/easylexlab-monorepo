@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default {
   login(state, token) {
     state.user.logged = true;
@@ -48,5 +50,9 @@ export default {
   },
   changeCurrentGroup(state, newGroup) {
     state.currentGroup = newGroup;
+  },
+  userInfo(state, userInfo) {
+    _.assign(state.user, userInfo);
+    state.user.requested = true;
   }
 }

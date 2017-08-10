@@ -40,5 +40,8 @@ export default {
   },
   changeCurrentGroup({ commit }, newGroup) {
     commit('changeCurrentGroup', newGroup);
+  },
+  userInfo({ commit }, userInfo) {
+    commit('userInfo', userInfo);
   }
 }

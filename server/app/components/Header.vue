@@ -153,7 +153,7 @@ export default {
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }}).then(res => {
           console.log(res);
-          Object.assign(this.$store.state.user, ...res.body.user);
+          this.$store.dispatch('userInfo', res.body.user);
         });
     }
     this.isCurrentGr = true;
