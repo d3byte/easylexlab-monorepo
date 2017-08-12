@@ -71,7 +71,6 @@
         this.moveSnake();
         this.eatFood();
       },
-
       moveSnake() {
         let {x, y} = snakePos;
         let [xd, yd] = this.direction;
@@ -88,7 +87,6 @@
         snakePos.snake = length;
         snakeCells.push(snakePos);
       },
-
       eatFood() {
         if (snakePos && snakePos.food) {
           length++;
@@ -97,11 +95,9 @@
           this.setFood();
         }
       },
-
       setFood() {
         Grid.random(this.grid).food = true;
       },
-
       gameOver() {
         this.dead = true;
         clearInterval(ticking);
