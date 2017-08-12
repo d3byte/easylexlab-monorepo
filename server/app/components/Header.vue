@@ -138,7 +138,7 @@ export default {
             console.log(res);
             this.$store.dispatch('userInfo', res.body.user);
             this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
-            this.$store.dispatch('requestedIsTrue');
+            
             this.notifications = res.body.user.notifications;
           });
       }

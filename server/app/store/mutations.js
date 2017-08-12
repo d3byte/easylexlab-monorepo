@@ -22,20 +22,31 @@ export default {
     state.games.flashcards = false;
     state.games.snake = false;
     state.games.matching = true;
+    state.games.srcamble = false;
   },
   showFlashcards(state) {
     state.games.snake = false;
     state.games.matching = false;
     state.games.flashcards = true;
+    state.games.srcamble = false;
   },
   showSnake(state) {
     state.games.flashcards = false;
     state.games.matching = false
     state.games.snake = true;
+    state.games.srcamble = false;
+  },
+  showScramble(state) {
+    state.games.flashcards = false;
+    state.games.matching = false
+    state.games.snake = false;
+    state.games.scramble = true;
   },
   hideGames(state) {
     state.games.flashcards = false;
     state.games.matching = false;
+    state.games.scramble = false;
+    state.games.snake = false;
   },
   showOrHideTest(state) {
     state.games.showTest = !state.games.showTest;

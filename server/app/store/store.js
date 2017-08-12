@@ -22,6 +22,7 @@ export const store = new Vuex.Store({
       matching: false,
       flashcards: false,
       snake: false,
+      scramble: false,
       attempts: 0,
       showTest: false,
       testAvailable: false

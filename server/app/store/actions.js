@@ -20,6 +20,9 @@ export default {
   showSnake({ commit }) {
     commit('showSnake');
   },
+  showScramble({ commit }) {
+    commit('showScramble');
+  },
   hideGames({ commit }) {
     commit('hideGames');
   },

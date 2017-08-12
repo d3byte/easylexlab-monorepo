@@ -4,8 +4,9 @@
     <flashcards v-if="games.flashcards" :stack="task"></flashcards>
     <matching v-if="games.matching" :stack="task"></matching>
     <snake v-if="games.snake" :stack="task"></snake>
+    <scramble v-if="games.scramble" :stack="task"></scramble>
     <test v-if="showTest" :stack="task"></test>
-    <div v-show="!showTest && !games.matching && !games.flashcards">
+    <div v-show="!showTest && !games.matching && !games.flashcards && !games.snake && !games.scramble">
       <div class="container">
         <div class="row box">
           <center>
@@ -21,6 +22,9 @@
                 </div>
                 <div @click="showSnake" class="item">
                   Snake
+                </div>
+                <div @click="showScramble" class="item">
+                  Word Scramble
                 </div>
               </div>
             </div>
@@ -57,6 +61,7 @@ import Header from './Header.vue';
 import Flashcards from './Flashcards.vue';
 import Matching from './Matching.vue';
 import Snake from './Snake.vue';
+import Scramble from './Scramble.vue';
 import Test from './Test.vue';
 
 export default {
@@ -101,6 +106,9 @@ export default {
     showSnake() {
       this.$store.dispatch('showSnake');
     },
+    showScramble() {
+      this.$store.dispatch('showScramble');
+    },
     tryTest() {
       this.$store.dispatch('showTest');
     }
@@ -110,6 +118,7 @@ export default {
     'flashcards': Flashcards,
     'snake': Snake,
     'matching': Matching,
+    'scramble': Scramble,
     'test': Test
   }
 }
