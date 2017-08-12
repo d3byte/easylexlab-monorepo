@@ -3,7 +3,7 @@ import _ from 'lodash';
 export default {
   login(state, token) {
     state.user.logged = true;
-    state.user.token = token;
+    state.token = token;
     localStorage.token = token;
   },
   logout(state) {

@@ -1,6 +1,6 @@
 export default {
    userToken(state) {
-     return state.user.token
+     return state.token
    },
    loginState(state) {
      return state.user.logged

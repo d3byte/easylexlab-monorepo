@@ -89,14 +89,13 @@ userController.login = (req, res) => {
   db.User.findOne({ username }).then(user => {
     user.verifyPassword(password).then(valid => {
       if(valid) {
-        console.log('Valid promise');
         const token = jwt.sign(
           {
             // username: user.username,
             // name: user.name,
             // notifications: user.notifications,
             id: user._id,
-            permissions: user.permissions,
+            permissions: user.permissions
             // groups: user._groups,
             // school: user.school
           },
@@ -267,7 +266,6 @@ userController.getUser = (req, res) => {
            }
          })
          .then(user => {
-           console.log(user)
            return res.json({ user })
   });
 

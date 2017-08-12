@@ -130,21 +130,21 @@ export default {
     $('ui.selection.dropdown.list').dropdown();
   },
   created() {
-    setTimeout(() => {
-      this.$http.post('user', {}, { headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }}).then(res => {
-          console.log(res);
-          this.$store.dispatch('userInfo', res.body.user);
-          this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
-          this.$store.dispatch('requestedIsTrue');
-          this.notifications = res.body.user.notifications;
-        });
+      if(!this.$store.state.user.requested && this.$store.state.user.logged) {
+        this.$http.post('user', {}, { headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }}).then(res => {
+            console.log(res);
+            this.$store.dispatch('userInfo', res.body.user);
+            this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+            this.$store.dispatch('requestedIsTrue');
+            this.notifications = res.body.user.notifications;
+          });
+      }
       if(this.user.notifications)
         this.notifications = this.user.notifications;
       this.isCurrentGr = true;
-    }, 80);
   },
   components: {
     'login': Login,

@@ -1,9 +1,9 @@
 <template>
   <div>
     <app-header style="margin-bottom: 80px;"/>
-    <admin v-if="this.isAdmin" />
-    <teacher v-if="this.isTeacher" />
-    <student v-if="this.isStudent" />
+    <admin v-if="user.permissions == 'admin'" />
+    <teacher v-if="this.user.permissions == 'teacher'" />
+    <student v-if="user.permissions == 'student'" />
   </div>
 </template>
 

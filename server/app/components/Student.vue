@@ -36,7 +36,6 @@ export default {
     },
   },
   created() {
-    console.log(this.$store.getters.user);
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');

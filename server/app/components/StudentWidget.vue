@@ -19,10 +19,10 @@
       </div>
     </div>
     <div v-if="showMsgs" class="row box">
-      <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
+      <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="!showPreloader" class="row">
-        <div id="test_card" v-for="msg in messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div id="test_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <h4>{{ msg.author }}</h4>
           <hr>
           <p>{{ msg.text }}</p>
