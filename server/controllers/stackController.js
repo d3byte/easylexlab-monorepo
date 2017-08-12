@@ -71,16 +71,19 @@ stackController.getTest = (req, res) => {
 stackController.addResult = (req, res) => {
   const {
     result,
-    stackId
+    stackId,
+    name,
+    username,
+    userId
   } = req.body;
 
   const user = req.user;
 
   const results = {
-    'userId': user.id,
-    'username': user.username,
-    'name': user.name,
-    'result': result
+    userId: user.id,
+    username,
+    name,
+    result
   };
 
   db.Stack.findById(stackId).then(stack => {

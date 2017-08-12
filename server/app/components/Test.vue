@@ -71,7 +71,10 @@ export default {
       this.percentage = Math.round(this.correct / (this.typeKey.length + this.typeVal.length) * 100);
       const body = {
         result: this.percentage,
-        stackId: this.stack._id
+        stackId: this.stack._id,
+        name: this.user.name,
+        username: this.user.username,
+        userId: this.user._id
       };
       this.$http.patch('addresult', body, {
         headers: {
@@ -96,7 +99,7 @@ export default {
     toProfile() {
       this.$store.dispatch('zeroAttempts');
       this.$store.dispatch('hideGames');
-      this.$router.replace('/profile');
+      this.$router.push('/profile');
     }
   },
   created() {
