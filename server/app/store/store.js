@@ -21,6 +21,7 @@ export const store = new Vuex.Store({
     games: {
       matching: false,
       flashcards: false,
+      snake: false,
       attempts: 0,
       showTest: false,
       testAvailable: false

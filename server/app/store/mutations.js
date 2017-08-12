@@ -26,6 +26,11 @@ export default {
     state.games.flashcards = true;
     state.games.matching = false;
   },
+  showSnake(state) {
+    state.games.flashcards = false;
+    state.games.matching = false
+    state.games.snake = true;
+  },
   hideGames(state) {
     state.games.flashcards = false;
     state.games.matching = false;

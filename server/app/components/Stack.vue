@@ -3,6 +3,7 @@
     <app-header style="margin-bottom: 60px;"></app-header>
     <flashcards v-if="games.flashcards" :stack="task"></flashcards>
     <matching v-if="games.matching" :stack="task"></matching>
+    <snake v-if="games.snake" :stack="task"></snake>
     <test v-if="showTest" :stack="task"></test>
     <div v-show="!showTest && !games.matching && !games.flashcards">
       <div class="container">
@@ -17,6 +18,9 @@
                 </div>
                 <div @click="showFlashcards" class="item">
                   Flashcards
+                </div>
+                <div @click="showSnake" class="item">
+                  Snake
                 </div>
               </div>
             </div>
@@ -52,6 +56,7 @@
 import Header from './Header.vue';
 import Flashcards from './Flashcards.vue';
 import Matching from './Matching.vue';
+import Snake from './Snake.vue';
 import Test from './Test.vue';
 
 export default {
@@ -93,6 +98,9 @@ export default {
     showFlashcards() {
       this.$store.dispatch('showFlashcards');
     },
+    showSnake() {
+      this.$store.dispatch('showSnake');
+    },
     tryTest() {
       this.$store.dispatch('showTest');
     }
@@ -100,6 +108,7 @@ export default {
   components: {
     'app-header': Header,
     'flashcards': Flashcards,
+    'snake': Snake,
     'matching': Matching,
     'test': Test
   }

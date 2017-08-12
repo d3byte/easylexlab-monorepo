@@ -17,6 +17,9 @@ export default {
   showFlashcards({ commit }) {
     commit('showFlashcards');
   },
+  showSnake({ commit }) {
+    commit('showSnake');
+  },
   hideGames({ commit }) {
     commit('hideGames');
   },
