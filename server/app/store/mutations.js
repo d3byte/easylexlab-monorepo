@@ -19,12 +19,14 @@ export default {
     state.currentGroup._tests = stack;
   },
   showMatching(state) {
-    state.games.matching = true;
     state.games.flashcards = false;
+    state.games.snake = false;
+    state.games.matching = true;
   },
   showFlashcards(state) {
-    state.games.flashcards = true;
+    state.games.snake = false;
     state.games.matching = false;
+    state.games.flashcards = true;
   },
   showSnake(state) {
     state.games.flashcards = false;
