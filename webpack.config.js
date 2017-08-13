@@ -2,11 +2,11 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './server/app/main.js',
+  entry: './server/index.js',
   output: {
-    path: path.resolve(__dirname, 'server/app/dist'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist/',
-    filename: 'bundle.js'
+    filename: 'production.js'
   },
   module: {
     rules: [
@@ -16,8 +16,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        loader: 'babel-loader'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
