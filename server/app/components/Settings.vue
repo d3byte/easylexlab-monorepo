@@ -59,7 +59,7 @@
         </div>
         <br>
         <div class="join_group">
-        <input type="text" v-model="groupCode" required placeholder="Код группы">
+        <input type="text" minlength="5" v-model="groupCode" required placeholder="Код группы">
       </div>
           <br>
           <div class="hideme">
