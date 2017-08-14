@@ -28,6 +28,10 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
+var _cors = require('cors');
+
+var _cors2 = _interopRequireDefault(_cors);
+
 var _secret = require('./secret');
 
 var _secret2 = _interopRequireDefault(_secret);
@@ -52,6 +56,7 @@ var folder = __dirname + "/app/";
 // Middleware
 app.use(_bodyParser2.default.json());
 app.use('/api', _routes2.default);
+app.use((0, _cors2.default)());
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
 
 exports.default = app;
