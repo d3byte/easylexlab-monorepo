@@ -29,7 +29,7 @@ export default {
     }
   },
   components: {
-    draggable,
+    // draggable,
   }
 }
 </script>

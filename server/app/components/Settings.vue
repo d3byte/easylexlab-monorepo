@@ -16,15 +16,15 @@
           <h5 class="success" v-if="passChanged">Пароль успешно изменен.</h5>
           <form onsubmit="return false">
             <div class="old_pass">
-            <input v-model="oldPass" type="text" placeholder="Старый пароль">
+            <input type="password" v-model="oldPass" placeholder="Старый пароль">
           </div>
             <br>
             <div class="new_pass" v-if="passwordIsCorrect">
-            <input v-model="newPass" type="text" placeholder="Новый пароль">
+            <input type="password" minlength="6" v-model="newPass" placeholder="Новый пароль">
           </div>
             <br>
             <div class="new_pass_conf" v-if="passwordIsCorrect">
-            <input v-model="confPass" type="text" placeholder="Подтвердите пароль">
+            <input type="password" v-model="confPass" placeholder="Подтвердите пароль">
           </div>
           <br>
           <button @click="checkPass" class="btn btn-primary" v-if="!passwordIsCorrect">Проверить пароль</button>
@@ -41,7 +41,7 @@
             </div>
             <br>
             <div class="change_username">
-              <input v-model="newUsername" type="text" placeholder="Ваш логин"> <!-- тут тоже -->
+              <input v-model="newUsername" minlength="5" type="text" placeholder="Ваш логин"> <!-- тут тоже -->
             </div>
             <br>
             <button @click="submitInfo" class="btn btn-primary">Применить изменения</button>
@@ -91,7 +91,8 @@ export default {
       newUsername: '',
       changeInfo: false,
       groupCode: '',
-      joinGroup: false
+      joinGroup: false,
+      errShortPass: false
     }
   },
   computed: {
@@ -123,7 +124,7 @@ export default {
       });
     },
     changePass() {
-      if(this.newPass == this.confPass) {
+      if(this.newPass == this.confPass && !!this.password.length) {
         const body = {
           newPassword: this.newPass
         };
@@ -169,7 +170,7 @@ export default {
       }).then(res => {
         this.joinGroup = true;
       })
-    }
+    },
   },
   created() {
     this.$store.dispatch('hideGames');

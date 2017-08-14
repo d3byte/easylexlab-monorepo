@@ -3,7 +3,7 @@
     <app-header></app-header>
     <div class="signup-container">
       <div v-if="success" class="signup">
-        <h3 class="success">Вы успешно зарегистрировались!</h3>
+        <h3 class="success">Вы успешно зарегистрировались! <br> Для входа нажмите кнопку "Вход" в правом верхнем углу страницы.</h3>
       </div>
       <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
       <form v-if="!success && !showPreloader" class="signup" onsubmit="return false">
