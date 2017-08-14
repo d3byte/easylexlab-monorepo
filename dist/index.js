@@ -10,7 +10,7 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var port = process.env.PORT || 7998;
+var port = process.env.PORT || 80;
 
 _app2.default.listen(port, function () {
   console.log('Running on port ' + port);
