@@ -2,11 +2,11 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './server/index.js',
+  entry: './server/app/main.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'server/app/dist'),
     publicPath: '/dist/',
-    filename: 'production.js'
+    filename: 'bundle.js'
   },
   module: {
     rules: [
