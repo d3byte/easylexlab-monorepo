@@ -22,9 +22,9 @@ const app = express();
 const folder = __dirname + "/app/";
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use('/api', routes);
-app.use(cors());
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
 
 export default app;
