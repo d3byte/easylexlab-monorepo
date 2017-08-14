@@ -33,7 +33,7 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   created() {
     const body = {
@@ -52,5 +52,5 @@ export default {
 </script>
 
 <style lang="css">
-  
+
 </style>

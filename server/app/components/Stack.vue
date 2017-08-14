@@ -83,7 +83,7 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   created() {
     this.$http.post('gettest', { testId: this.testId }, {

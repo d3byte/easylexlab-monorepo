@@ -87,7 +87,7 @@ export default {
     this.tasks.push(task);
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   methods: {
     add() {

@@ -21,16 +21,13 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   methods: {
     hideGames() {
       this.$store.dispatch('hideGames');
     }
-  },
-  components: {
-    draggable,
-  }
+  }x
 }
 </script>
 
