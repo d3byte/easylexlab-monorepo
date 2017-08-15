@@ -55,6 +55,7 @@ export default {
     }).then(res => {
       this.showPreloader = false;
       this.groups = res.body.data;
+      Array.prototype.push.apply(this.$store.state.user._groups, this.groups);
     }).catch(err => {
       throw err;
     });

@@ -35,7 +35,7 @@ export default {
   },
   created() {
     if(!this.$store.getters.loginState)
-      this.$router.push('/login');
+      this.$router.push('/');
     this.isAdmin = (this.user.permissions == 'admin' ? true : false);
     this.isTeacher = (this.user.permissions == 'teacher' ? true : false);
     this.isStudent = (this.user.permissions == 'student' ? true : false);
