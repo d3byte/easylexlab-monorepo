@@ -2,7 +2,11 @@
   <div>
     <table v-if="!dead">
       <tr v-for="row in grid">
-        <td v-for="cell in row" class="grid-cell" :class="{ snake: cell.snake > 0, food: cell.food.exists }">
+        <td v-for="cell in row" class="grid-cell"
+            :class="{ snake: cell.snake > 0,
+              'food-1': cell.food.exists && cell.food.index == 1,
+              'food-2': cell.food.exists && cell.food.index == 2,
+              'food-3': cell.food.exists && cell.food.index == 3 }">
         </td>
       </tr>
     </table>
@@ -138,8 +142,16 @@
     border: 1px solid white;
   }
 
-  .food {
+  .food-1 {
     background-color: #56b0bb;
+  }
+
+  .food-2 {
+    background: #6E44FF;
+  }
+
+  .food-3 {
+    background: #F44444;
   }
 
   .snake {
