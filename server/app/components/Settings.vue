@@ -34,15 +34,15 @@
       <div class="col-lg-4 col">
         <h3>Изменение данных о пользователе</h3>
         <br>
-        <h5 class="success" v-if="changeInfo">Информация успешно обновлена. </h5>
+        <h5 class="success" v-if="changeInfo">Информация успешно обновлена.</h5>
+        <h5 class="errormsg" v-if="errShortUsername">Логин не должен быть короче 5 символов.</h5>
         <form onsubmit="return false">
           <div class="change_name">
             <input v-model="newName" type="text" placeholder="Ваше имя">
           </div>
           <br>
           <div class="change_username">
-            <input v-model="newUsername" minlength="5" type="text" placeholder="Ваш логин">
-            <!-- тут тоже -->
+            <input v-model="newUsername" type="text" placeholder="Ваш логин">
           </div>
           <br>
           <button @click="submitInfo" class="btn btn-primary">Применить изменения</button>
@@ -79,6 +79,7 @@ export default {
       successPass: false,
       newName: '',
       newUsername: '',
+      errShortUsername: false,
       changeInfo: false,
       groupCode: '',
       joinGroup: false,
@@ -135,18 +136,24 @@ export default {
       }
     },
     submitInfo() {
-      const body = {
-        name: this.newName,
-        username: this.newUsername
-      };
-      this.$http.patch('newinfo', body, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }
-      }).then(res => {
-        this.changeInfo = true;
-      })
+      console.log(this.newUsername.length);
+      if(this.newUsername.length < 5)
+        this.errShortUsername = true;
+      else {
+        const body = {
+          name: this.newName,
+          username: this.newUsername
+        };
+        this.$http.patch('newinfo', body, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          this.errShortUsername = false;
+          this.changeInfo = true;
+        })
+      }
     },
     addGroup() {
       const body = {
