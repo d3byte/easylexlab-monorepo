@@ -90,7 +90,7 @@ export default {
   },
   created() {
     if(!this.$store.getters.loginState || this.user.permissions != 'student') {
-      this.$router.push('/');
+      this.$router.push('/profile');
     }
     this.$http.post('gettest', { testId: this.testId }, {
       headers: {
@@ -110,7 +110,6 @@ export default {
           }
         }
       }
-      console.log(haveThisStack);
       if(!haveThisStack)
         this.$router.push('/profile');
     });

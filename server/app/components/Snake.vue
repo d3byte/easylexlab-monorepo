@@ -2,7 +2,7 @@
   <div>
     <table v-if="!dead">
       <tr v-for="row in grid">
-        <td v-for="cell in row" class="grid-cell" :class="{ snake: cell.snake > 0, food: cell.food }">
+        <td v-for="cell in row" class="grid-cell" :class="{ snake: cell.snake > 0, food: cell.food.exists }">
         </td>
       </tr>
     </table>
@@ -21,10 +21,10 @@
     RIGHT = [0, 1];
 
   let keyMap = {
-    "37": LEFT,
-    "38": UP,
-    "39": RIGHT,
-    "40": DOWN
+    "65": LEFT,
+    "87": UP,
+    "68": RIGHT,
+    "83": DOWN
   };
 
   let snakePos, snakeCells, length, ticking, userActions = [];
@@ -34,7 +34,8 @@
       return {
         direction: UP,
         dead: false,
-        grid: null
+        grid: null,
+        foodAmount: null
       };
     },
     methods: {
@@ -51,7 +52,7 @@
       },
       start() {
         let size = 50, ms = 65;
-        this.grid = new Grid(size, (x, y) => ({x, y, snake: 0, food: false}));
+        this.grid = new Grid(size, (x, y) => ({x, y, snake: 0, food: {exists: false, index: 0}}));
         this.dead = false;
         userActions = [];
         length = 5;
@@ -88,15 +89,23 @@
         snakeCells.push(snakePos);
       },
       eatFood() {
-        if (snakePos && snakePos.food) {
+        if (snakePos && snakePos.food.exists) {
           length++;
           snakeCells.forEach(cell => cell.snake++);
-          snakePos.food = false;
-          this.setFood();
+          snakePos.food.exists = false;
+          this.foodAmount--;
+          if(this.foodAmount == 0)
+            this.setFood();
         }
       },
       setFood() {
-        Grid.random(this.grid).food = true;
+        for(let i = 1; i <= 3; i++) {
+          Grid.random(this.grid).food = {
+            exists: true,
+            index: i
+          };
+        }
+        this.foodAmount = 3;
       },
       gameOver() {
         this.dead = true;
