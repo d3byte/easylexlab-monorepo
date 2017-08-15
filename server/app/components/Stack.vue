@@ -80,18 +80,40 @@ export default {
     },
     testAvailable() {
       return this.$store.getters.testAvailable
+    },
+    user() {
+      return this.$store.getters.user
     }
   },
   http: {
     root: '/api'
   },
   created() {
+    if(!this.$store.getters.loginState || this.user.permissions != 'student') {
+      this.$router.push('/');
+    }
     this.$http.post('gettest', { testId: this.testId }, {
       headers: {
         'Content-type' : 'application/json',
         'Authorization': 'Bearer ' + this.$store.getters.userToken
       }
-    }).then(res => this.task = res.body.stack);
+    }).then(res => {
+      this.task = res.body.stack;
+      var haveThisStack = false;
+      for(let group of this.user._groups) {
+        if(haveThisStack)
+          break;
+        for(let stack of group._tests) {
+          if(stack._id == this.task._id) {
+            haveThisStack = true;
+            break;
+          }
+        }
+      }
+      console.log(haveThisStack);
+      if(!haveThisStack)
+        this.$router.push('/profile');
+    });
   },
   mounted() {
     $('.ui.dropdown').dropdown();
