@@ -16,12 +16,6 @@ class Grid extends Array {
     var y = Math.floor(Math.random() * grid[x].length);
     return grid[x][y];
   }
-
-  static setFood(grid, word) {
-    var x = Math.floor(Math.random() * grid.length);
-    var y = Math.floor(Math.random() * grid[x].length);
-    return grid[x][y];
-  }
 }
 
 export default Grid;

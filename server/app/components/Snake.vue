@@ -1,17 +1,34 @@
 <template>
   <div>
-    <table v-if="!dead">
-      <tr v-for="row in grid">
-        <td v-for="cell in row" class="grid-cell"
-            :class="{ snake: cell.snake > 0,
-              'food-1': cell.food.exists && cell.food.index == 1,
-              'food-2': cell.food.exists && cell.food.index == 2,
-              'food-3': cell.food.exists && cell.food.index == 3 }">
-        </td>
-      </tr>
-    </table>
+    <h1>Snake</h1>
+    <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+    <div class="dashboard">
+      <button @click="start" class="flat-btn">Перезапуск</button>
+      <button class="flat-btn">Помощь</button>
+    </div>
+    <div v-if="!dead" class="container-fluid">
+      <div class="row">
+        <table class="col-lg-4">
+          <tr v-for="row in grid">
+            <td v-for="cell in row" class="grid-cell"
+                :class="{ snake: cell.snake > 0,
+                  'food-0': cell.food.exists && cell.food.index == 0,
+                  'food-1': cell.food.exists && cell.food.index == 1,
+                  'food-2': cell.food.exists && cell.food.index == 2 }">
+            </td>
+          </tr>
+        </table>
+        <div class="col-lg-3">
+          <h3>Слово: {{ currentWordGroup.key }}</h3>
+          <!-- Временная заглушка: -->
+          <h3 class="food-0">Вариант 1</h3>
+          <h3 class="food-1">Вариант 2</h3>
+          <h3 class="food-2">Вариант 3</h3>
+        </div>
+      </div>
+    </div>
     <div v-else>
-      You Died. <a @click="start">Play Again?</a>
+      Вы проиграли. <a @click="start">Сыграть снова?</a>
     </div>
   </div>
 </template>
@@ -34,12 +51,16 @@
   let snakePos, snakeCells, length, ticking, userActions = [];
 
   export default {
+    props: ['stack'],
     data() {
       return {
         direction: UP,
         dead: false,
         grid: null,
-        foodAmount: null
+        foodAmount: null,
+        words: [],
+        currentWordGroup: {},
+        wordGroups: []
       };
     },
     methods: {
@@ -55,8 +76,8 @@
         }
       },
       start() {
-        let size = 50, ms = 65;
-        this.grid = new Grid(size, (x, y) => ({x, y, snake: 0, food: {exists: false, index: 0}}));
+        let size = 25, ms = 95;
+        this.grid = new Grid(size, (x, y) => ({x, y, snake: 0, food: {exists: false, index: null}}));
         this.dead = false;
         userActions = [];
         length = 5;
@@ -67,7 +88,6 @@
         snakeCells = [snakePos];
         this.setFood();
       },
-
       tick() {
         let userAction;
         if (userAction = userActions.shift()) {
@@ -96,6 +116,7 @@
         if (snakePos && snakePos.food.exists) {
           length++;
           snakeCells.forEach(cell => cell.snake++);
+          console.log(snakePos.food);
           snakePos.food.exists = false;
           this.foodAmount--;
           if(this.foodAmount == 0)
@@ -103,9 +124,17 @@
         }
       },
       setFood() {
-        for(let i = 1; i <= 3; i++) {
+        for(let i = 0; i < 3; i++) {
+          var value;
+          if(i == 0)
+            value = this.currentWordGroup.trueValue;
+          if(i == 1)
+            value = this.currentWordGroup.value2;
+          if(i == 2)
+            value = this.currentWordGroup.value3;
           Grid.random(this.grid).food = {
             exists: true,
+            value,
             index: i
           };
         }
@@ -117,6 +146,43 @@
       }
     },
     created() {
+      let firstWordGroup = {};
+      for(let pair of _.shuffle(this.stack.tasks[0].content)) {
+        if(!firstWordGroup.key) {
+          firstWordGroup.key = pair.key;
+          firstWordGroup.trueValue = pair.value;
+          continue;
+        }
+        if(!firstWordGroup.value2) {
+          firstWordGroup.value2 = pair.value;
+          continue;
+        }
+        if(firstWordGroup.value3)
+          break;
+        firstWordGroup.value3 = pair.value;
+      }
+      this.currentWordGroup = firstWordGroup;
+      for(let task of this.stack.tasks) {
+        Array.prototype.push.apply(this.words, task.content);
+      }
+      for(let i = 0; i < this.words.length; i++) {
+        let wordGroup = {};
+        for(let pair of _.shuffle(this.words)) {
+          if(!wordGroup.key) {
+            wordGroup.key = pair.key;
+            wordGroup.trueValue = pair.value;
+            continue;
+          }
+          if(!wordGroup.value2) {
+            wordGroup.value2 = pair.value;
+            continue;
+          }
+          if(wordGroup.value3)
+            break;
+          wordGroup.value3 = pair.value;
+        }
+        this.wordGroups.push(wordGroup);
+      }
       this.start();
       window.addEventListener('keydown', event => this.handleUserAction(event.which));
     },
@@ -142,15 +208,15 @@
     border: 1px solid white;
   }
 
-  .food-1 {
+  .food-0 {
     background-color: #56b0bb;
   }
 
-  .food-2 {
+  .food-1 {
     background: #6E44FF;
   }
 
-  .food-3 {
+  .food-2 {
     background: #F44444;
   }
 
