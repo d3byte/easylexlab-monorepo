@@ -69,7 +69,15 @@ export default {
   },
   methods: {
     check() {
-      if(this.agree && !!this.role.length && !!this.name.length && !!this.username.length && !!this.email.length && !!this.password.length && !!this.school.length) {
+      if(this.username.length < 5) {
+        this.errorMsg = 'Длина логина должна быть не меньше 5 символов';
+        this.error = true;
+      }
+      if(this.password.length < 6) {
+        this.errorMsg = 'Длина пароля должна быть не меньше 6 символов';
+        this.error = true;
+      }
+      if(this.agree && !!this.role.length && !!this.name.length && !!this.username.length > 5 && !!this.email.length && !!this.password.length > 6 && !!this.school.length) {
         this.showPreloader = true;
         const body = {
           name: this.name,
@@ -110,6 +118,10 @@ export default {
         });
       }
     }
+  },
+  created() {
+    if(this.$store.getters.loginState)
+      this.$router.push('/profile');
   },
   mounted() {
     $('.ui.dropdown').dropdown();
