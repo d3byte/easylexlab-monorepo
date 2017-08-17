@@ -2,3 +2,4 @@
 /server/app/dist
 /npm-debug.log
 /.DS_STORE
+.idea
