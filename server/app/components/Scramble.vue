@@ -1,11 +1,20 @@
 <template>
   <div>
-    <h1>Snake</h1>
+    <h1>Word Scramble</h1>
     <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
     <div class="dashboard">
       <button @click="start" class="flat-btn">Перезапуск</button>
       <button class="flat-btn" @click="hideGames">Назад</button>
       <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
+    </div>
+    <div class="box">
+      <h3><b>{{ currentPair.key }}</b></h3>
+      <hr>
+      <draggable v-model="shuffledLetters">
+        <span v-for="letter in shuffledLetters">
+         {{ letter }}
+        </span>
+     </draggable>
     </div>
   </div>
 </template>
@@ -19,6 +28,7 @@ export default {
   data() {
     return {
       currentPair: {},
+      shuffledLetters: [],
       pairs: [],
       win: false
     }
@@ -45,6 +55,8 @@ export default {
   },
   created() {
     this.currentPair = this.stack.tasks[0].content[0];
+    this.shuffledLetters = this.currentPair.value.split('');
+    this.shuffledLetters = _.shuffle(this.shuffledLetters);
     for(let task of this.stack.tasks) {
       Array.prototype.push.apply(this.pairs, task.content);
     }

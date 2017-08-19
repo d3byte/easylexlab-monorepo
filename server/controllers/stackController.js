@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import lodash from 'lodash';
+import _ from 'lodash';
 import secret from './../secret';
 
 import db from './../models';
@@ -22,7 +22,7 @@ stackController.post = (req, res) => {
 
     const user = req.user;
 
-    if (user.permissions == "teacher" || user.permissions == "admin") {
+    if(user.permissions == "teacher" || user.permissions == "admin") {
         const stack = new db.Stack({
             name,
             tasks,
@@ -30,18 +30,14 @@ stackController.post = (req, res) => {
             _group: groupId,
             attempts
         });
-        if (check.isEmpty(stack)) {
-            stack.save().then(stack => {
-                res.status(200).json({
-                    success: true,
-                    stack
-                });
-            }).catch(err => {
-                res.status(500).json({err: 'lel'});
+        stack.save().then(stack => {
+            res.status(200).json({
+                success: true,
+                stack
             });
-        } else {
-            res.status(500).json({err: 'lel'});
-        }
+        }).catch(err => {
+            res.status(500).json({err: 'error'});
+        });
     }
 };
 

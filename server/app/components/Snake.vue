@@ -106,6 +106,8 @@
         }
       },
       start() {
+        if(ticking)
+          clearInterval(ticking);
         let size = 25, ms = 95;
         this.grid = new Grid(size, (x, y) => ({ x, y, snake: 0, food: { exists: false, index: null } }));
         this.dead = false;
@@ -235,7 +237,7 @@
         this.dead = true;
         clearInterval(ticking);
       },
-      setWordGroups(index) {
+      setWordGroups() {
         this.wordGroups = [];
         for(let i = 0; i < this.words.length; i++) {
           let wordGroup = {};
