@@ -8,7 +8,7 @@
         <button class="flat-btn" @click="hideGames">Назад</button>
         <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
       </div>
-      <div v-if="win && !dead" @click="show()" class="win box">
+      <div v-if="win && !dead" class="win box">
         <h1 class="text-success">Победа!</h1>
         <h2>Теперь вы можете пройти тест.</h2>
         <button v-if="win && showTest" @click="tryTest" class="btn">Пройти тест</button>
