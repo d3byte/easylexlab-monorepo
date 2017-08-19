@@ -7,10 +7,10 @@
       <button class="flat-btn" @click="hideGames">Назад</button>
       <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
     </div>
-    <div class="box">
+    <div class="box game">
       <h3><b>{{ currentPair.key }}</b></h3>
       <hr>
-      <draggable v-model="shuffledLetters">
+      <draggable v-model="shuffledLetters" @end="onEnd" element="h3" :class="correct ?'correct':''">
         <span v-for="letter in shuffledLetters">
          {{ letter }}
         </span>
@@ -30,6 +30,7 @@ export default {
       currentPair: {},
       shuffledLetters: [],
       pairs: [],
+      correct: false,
       win: false
     }
   },
@@ -48,6 +49,10 @@ export default {
     },
     hideGames() {
       this.$store.dispatch('hideGames');
+    },
+    onEnd() {
+      if(this.shuffledLetters.join('') == this.currentPair.value)
+        this.correct = true;
     },
     start() {
 
@@ -68,4 +73,12 @@ export default {
 </script>
 
 <style lang="css">
+  .game {
+    min-width: 80px;
+    max-width: 200px;
+  }
+
+  .correct {
+    background: #307351;
+  }
 </style>
