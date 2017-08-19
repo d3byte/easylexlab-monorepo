@@ -1,18 +1,26 @@
-<template lang="html">
+<template>
   <div>
-    <button class="btn back" @click="hideGames">Назад</button>
-</div>
+    <h1>Snake</h1>
+    <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+    <div class="dashboard">
+      <button @click="start" class="flat-btn">Перезапуск</button>
+      <button class="flat-btn" @click="hideGames">Назад</button>
+      <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
+    </div>
+  </div>
 </template>
 
 <script>
 import _ from 'lodash';
+import draggable from 'vuedraggable';
+
 export default {
   props: ['stack'],
   data() {
     return {
       currentPair: {},
-      pairs: []
-      // done: false
+      pairs: [],
+      win: false
     }
   },
   computed: {
@@ -24,12 +32,25 @@ export default {
     root: '/api'
   },
   methods: {
+    tryTest() {
+      this.$store.dispatch('hideGames');
+      this.$store.dispatch('showTest');
+    },
     hideGames() {
       this.$store.dispatch('hideGames');
+    },
+    start() {
+
+    },
+  },
+  created() {
+    this.currentPair = this.stack.tasks[0].content[0];
+    for(let task of this.stack.tasks) {
+      Array.prototype.push.apply(this.pairs, task.content);
     }
   },
   components: {
-    // draggable,
+    draggable,
   }
 }
 </script>
