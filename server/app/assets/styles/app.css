@@ -1,5 +1,6 @@
 /* 
-
+#1D9DF4
+#1D9DF4
 */
 html {
   background-color: #e0e0e0; }
@@ -153,7 +154,7 @@ sup {
 .btn.primary:hover,
 .btn.primary:focus {
   color: rgba(255, 255, 255, 0.87) !important;
-  background-color: #0cc2aa; }
+  background-color: #1D9DF4; }
 
 .btn.b-accent:hover,
 .btn.b-accent:focus,
@@ -1008,8 +1009,8 @@ a.list-group-item {
 .pager > .active > a,
 .pager > .active > span {
   color: white !important;
-  background-color: #0cc2aa !important;
-  border-color: #0cc2aa !important; }
+  background-color: #1D9DF4 !important;
+  border-color: #1D9DF4 !important; }
 
 .pagination > li {
   display: inline;
@@ -1576,7 +1577,7 @@ a.list-group-item {
       top: 5px;
       width: 6px;
       height: 6px;
-      background-color: #0cc2aa; }
+      background-color: #1D9DF4; }
     .ui-check input:checked + span .active {
       display: inherit; }
     .ui-check input[type="radio"] + i,
@@ -1909,7 +1910,7 @@ body {
   display: none; }
 
 .pace .pace-progress {
-  background: #0cc2aa;
+  background: #1D9DF4;
   position: fixed;
   z-index: 2000;
   top: 0;
@@ -1926,8 +1927,8 @@ body {
   width: 14px;
   height: 14px;
   border: solid 2px transparent;
-  border-top-color: #0cc2aa;
-  border-left-color: #0cc2aa;
+  border-top-color: #1D9DF4;
+  border-left-color: #1D9DF4;
   border-radius: 10px;
   -webkit-animation: loading-bar-spinner 400ms linear infinite;
   -moz-animation: loading-bar-spinner 400ms linear infinite;
@@ -2316,7 +2317,7 @@ body {
     padding-left: 5rem; }
   .nav-stacked .nav > li.active > a {
     color: rgba(255, 255, 255, 0.87);
-    background-color: #0cc2aa; }
+    background-color: #1D9DF4; }
   .nav-stacked .nav li a {
     border-radius: 3px; }
   .nav-stacked .nav .nav-header {
@@ -2362,7 +2363,7 @@ body {
 .nav-active-primary .nav-link.active,
 .nav-active-primary .nav > li.active > a {
   color: rgba(255, 255, 255, 0.87) !important;
-  background-color: #0cc2aa !important; }
+  background-color: #1D9DF4 !important; }
 
 .nav-active-accent .nav-link.active,
 .nav-active-accent .nav > li.active > a {
@@ -2529,7 +2530,7 @@ body {
     height: 1.7em;
     top: -1.35em; }
   .ui-icon.primary:after {
-    background-color: #0cc2aa; }
+    background-color: #1D9DF4; }
   .ui-icon.success:after {
     background-color: #6cc788; }
   .ui-icon.info:after {
@@ -3042,13 +3043,13 @@ body {
 
 .primary {
   color: rgba(255, 255, 255, 0.87);
-  background-color: #0cc2aa; }
+  background-color: #1D9DF4; }
   .primary .lt {
     background-color: #0dceb5; }
   .primary .dk {
     background-color: #0bb69f; }
   .primary .bg {
-    background-color: #0cc2aa; }
+    background-color: #1D9DF4; }
 
 .accent {
   color: rgba(255, 255, 255, 0.87);
@@ -3366,19 +3367,19 @@ body {
   border-color: #fff; }
 
 .b-primary {
-  border-color: #0cc2aa; }
+  border-color: #1D9DF4; }
 
 .b-t-primary {
-  border-top-color: #0cc2aa; }
+  border-top-color: #1D9DF4; }
 
 .b-r-#e7f9f7 {
-  border-right-color: #0cc2aa; }
+  border-right-color: #1D9DF4; }
 
 .b-b-primary {
-  border-bottom-color: #0cc2aa; }
+  border-bottom-color: #1D9DF4; }
 
 .b-l-primary {
-  border-left-color: #0cc2aa; }
+  border-left-color: #1D9DF4; }
 
 .b-accent {
   border-color: #a88add; }
@@ -3955,7 +3956,7 @@ a.text-primary:hover {
 
 .text-primary,
 .text-primary-hover a:hover {
-  color: #0cc2aa !important; }
+  color: #1D9DF4 !important; }
 
 a.warn:hover {
   background-color: #efb700; }
@@ -4669,7 +4670,7 @@ a.text-blue:hover {
   color: rgba(255, 255, 255, 0.87); }
 
 .indigo {
-  background-color: #3f51b5;
+  background-color: #1D9DF4;
   color: rgba(255, 255, 255, 0.87); }
 
 .indigo-50 {
@@ -5534,12 +5535,12 @@ a.text-blue:hover {
   color: inherit; }
   .md-input:focus,
   .md-input.focus {
-    border-color: #0cc2aa;
+    border-color: #1D9DF4;
     border-bottom-width: 2px;
     padding-bottom: 1px; }
     .md-input:focus ~ label,
     .md-input.focus ~ label {
-      color: #0cc2aa;
+      color: #1D9DF4;
       opacity: 1;
       top: 0 !important;
       font-size: 0.85em !important; }
