@@ -41,7 +41,10 @@ app.get('/profile/settings', (req, res) => {
 app.get('/profile/newgroup', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
-app.get('/logout', (req, res) => {
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+app.get('/forgotpassword', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 app.get('/eula', (req, res) => {
