@@ -35,7 +35,7 @@ app.get('/group/:id', (req, res) => {
 app.get('/group/:id/newtask', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
-app.get('/profile/settings', (req, res) => {
+app.get('/settings', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 app.get('/profile/newgroup', (req, res) => {

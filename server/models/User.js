@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
 const userSchema = new Schema({
-  name : { type: String, required: true },
+  firstName : { type: String, required: true },
+  lastName : { type: String, required: true },
   username: {
     type: String, required: true,
     minlength: [5, 'Логин должен состоять хотя бы из 5 символов.']

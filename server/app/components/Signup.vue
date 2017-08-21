@@ -19,8 +19,12 @@
       </div>
       <form v-if="!success && !showPreloader" onsubmit="return false">
         <div class="md-form-group float-label">
-          <input v-model="name" type="text" tabindex="1" class="md-input" required>
+          <input v-model="firstName" type="text" tabindex="1" class="md-input" required>
           <label>Имя</label>
+        </div>
+        <div class="md-form-group float-label">
+          <input v-model="lastName" type="text" tabindex="1" class="md-input" required>
+          <label>Фамилия</label>
         </div>
         <div class="md-form-group float-label">
           <input v-model="email" type="email" tabindex="2" class="md-input" required>
@@ -79,7 +83,8 @@
     export default {
         data() {
             return {
-                name: '',
+                firstName: '',
+                lastName: '',
                 username: '',
                 email: '',
                 password: '',
@@ -109,7 +114,8 @@
                 if (this.agree && !!this.role.length && !!this.name.length && this.username.length >= 5 && !!this.email.length && this.password.length >= 6 && !!this.school.length) {
                     this.showPreloader = true;
                     const body = {
-                        name: this.name,
+                        firstName: this.firstName,
+                        lastName: this.lastName,
                         username: this.username,
                         email: this.email,
                         password: this.password,

@@ -64,7 +64,7 @@
               <router-link class="dropdown-item" to="/profile">
                 Профиль
               </router-link>
-              <router-link class="dropdown-item" to="/profile/settings">
+              <router-link class="dropdown-item" to="/settings">
                 Настройки
               </router-link>
               <div class="dropdown-divider"></div>
@@ -91,7 +91,7 @@
           </li>
         </ul>
       </div>
-      
+
     </div>
 </template>
 

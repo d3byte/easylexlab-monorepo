@@ -28,17 +28,10 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/forgotpassword', component: ForgotPassword },
   { path: '/eula', component: Eula },
+  { path: '/settings', component: Settings },
   {
     path: '/profile', component: Profile,
     children: [
-      {
-        path: 'settings',
-        component: Settings
-      },
-      {
-        path: 'newgroup',
-        component: NewGroup
-      },
       {
         path: '',
         component: ProfileFooter
