@@ -1,4 +1,4 @@
-/* 
+/*
 #1D9DF4
 #1D9DF4
 */
@@ -1700,10 +1700,7 @@ body {
     clear: both; }
 
 .app-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   margin: inherit;
   z-index: 1020; }
   .app-header ~ .app-body {
