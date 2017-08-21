@@ -5,9 +5,6 @@ export default {
    loginState(state) {
      return state.user.logged
    },
-   showLogin(state) {
-     return state.header.showLogin
-   },
    currentGroup(state) {
      return state.currentGroup
    },

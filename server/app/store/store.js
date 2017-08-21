@@ -14,9 +14,6 @@ export const store = new Vuex.Store({
       requested: false
     },
     token: (localStorage.token ? localStorage.token : ''),
-    header: {
-      showLogin: false
-    },
     currentGroup: {},
     games: {
       matching: false,
