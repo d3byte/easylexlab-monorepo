@@ -77,6 +77,19 @@
             </a>
           </li>
         </ul>
+
+        <ul class="nav navbar-nav pull-right text-primary-hover" v-else>
+          <li class="nav-item">
+            <router-link to="/login" class="nav-link">
+              <span>Войти</span>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/signup" class="nav-link">
+              <span>Зарегистрироваться</span>
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
 </template>
