@@ -10,7 +10,7 @@
             <router-link to="/profile/stats" class="nav-link">Статистика</router-link>
           </li>
           <li class="nav-item" v-if="token.permissions === 'teacher'">
-            <span @click="showModal" class="nav-link">Новая группа</span>
+            <span class="nav-link" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
           </li>
           <li class="nav-item dropdown pos-stc-xs">
             <a class="nav-link" href data-toggle="dropdown">
@@ -51,7 +51,7 @@
                 </ul>
               </div>
             </div>
-              <!-- / dropdown -->
+            <!-- / dropdown -->
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link clear" href data-toggle="dropdown">
@@ -91,6 +91,7 @@
           </li>
         </ul>
       </div>
+      
     </div>
 </template>
 

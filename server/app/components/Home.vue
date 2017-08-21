@@ -1,10 +1,9 @@
 <template>
-    <div>
-        <app-header></app-header>
-        <h1>Landing page</h1>
-        <login></login>
-        <!-- <mail></mail> -->
-    </div>
+  <div>
+
+    <app-header></app-header>
+    <h1>Landing page</h1>
+  </div>
 </template>
 
 <script>
