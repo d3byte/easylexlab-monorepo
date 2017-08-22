@@ -23,6 +23,12 @@
         <div class="tab-content pos-rlt">
           <div class="tab-pane active" id="tab-1">
             <form role="form" class="p-a-md col-md-6" onsubmit="return false">
+              <div class="form-group" v-if="!!error">
+                <label class="text-danger">{{ error }}</label>
+              </div>
+              <div class="form-group" v-for="success in infoSuccess">
+                <label class="text-success">{{ success }}</label>
+              </div>
               <div class="form-group">
                 <label>Аватарка</label>
                 <div class="form-file">
@@ -38,11 +44,11 @@
                 <label>Фамилия</label>
                 <input v-model="lastName" type="text" class="form-control">
               </div>
-              <div class="form-group">
+              <div class="form-group" v-if="token.permissions === 'student'">
                 <label>Присоединиться к группе</label>
                 <input v-model="groupCode" type="text" class="form-control">
               </div>
-              <button type="submit" class="btn btn-info m-t" @click="">Обновить</button>
+              <button type="submit" class="btn btn-info m-t" @click="submitInfo">Обновить</button>
             </form>
           </div>
 
@@ -87,32 +93,29 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
 import Header from './Header.vue';
 
 export default {
   data() {
     return {
-      passwordIsCorrect: false,
+      error: '',
+      infoSuccess: [],
       oldPass: '',
       newPass: '',
       confPass: '',
-      passChanged: false,
-      errOldPass: false,
-      errNewPass: false,
-      successPass: false,
       firstName: '',
       lastName: '',
       newUsername: '',
-      errShortUsername: false,
-      changeInfo: false,
       groupCode: '',
-      joinGroup: false,
-      errShortPass: false
     }
   },
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
     }
   },
   http: {
@@ -160,22 +163,36 @@ export default {
       }
     },
     submitInfo() {
-      if(this.newUsername.length < 5)
-        this.errShortUsername = true;
-      else {
-        const body = {
-          name: this.newName,
-          username: this.newUsername
-        };
-        this.$http.patch('newinfo', body, {
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.$store.getters.userToken
-          }
-        }).then(res => {
-          this.errShortUsername = false;
-          this.changeInfo = true;
-        })
+      if(this.firstName || this.lastName || this.groupCode) {
+        if(!!this.groupCode) {
+          console.log('adding group...');
+          this.$http.patch('addgroup', { groupCode: this.groupCode }, {
+            headers: {
+              'Content-type': 'application/json',
+              'Authorization': 'Bearer ' + this.$store.getters.userToken
+            }
+          }).then(res => {
+            this.error = '';
+            this.infoSuccess.push('Вы успешно присоединились к группе!');
+          });
+        }
+        if(!!this.firstName || !!this.lastName) {
+          const body = {
+            firstName: this.firstName,
+            lastName: this.lastName
+          };
+          this.$http.patch('newinfo', body, {
+            headers: {
+              'Content-type': 'application/json',
+              'Authorization': 'Bearer ' + this.$store.getters.userToken
+            }
+          }).then(res => {
+            this.error = '';
+            this.infoSuccess.push('Информация успешно обновлена!');
+          });
+        }
+      } else {
+        this.error = 'Необходимо заполнить хотя бы одно из полей. Попробуйте еще раз.';
       }
     },
     addGroup() {
@@ -204,20 +221,5 @@ export default {
 </script>
 
 <style lang="css">
-.hideme{
-  visibility: hidden;
-}
 
-.pad{
-  padding: 20px;
-}
-
-.col-container {
-    display: table; /* Make the container element behave like a table */
-    width: 100%; /* Set full-width to expand the whole page */
-}
-
-.col {
-    display: table-cell; /* Make elements inside the container behave like table cells */
-}
 </style>
