@@ -74,6 +74,9 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    logged() {
+      return this.$store.getters.loginState
     }
   },
   methods: {
@@ -129,7 +132,7 @@ export default {
     'new-msg': NewMsg
   },
   created() {
-    if (!this.user.logged)
+    if (!this.logged)
       this.$router.push('/');
     if(this.user.permissions != 'teacher')
       this.$router.push('/profile');
@@ -143,11 +146,10 @@ export default {
       }
     }).then(res => {
       this.group = res.body.group;
-      this.studentsLength = this.group._students.length;
+      if(this.group._students)
+        this.studentsLength = this.group._students.length;
       var haveThisGroup = false;
       for(let group of this.user._groups) {
-        console.log(group);
-        console.log(this.group);
         if(group.code == this.group.code) {
           haveThisGroup = true;
           break;

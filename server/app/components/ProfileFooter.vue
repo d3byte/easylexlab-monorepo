@@ -1,6 +1,6 @@
 <template>
   <div>
-    <groups v-if="user.permissions == 'teacher'"/>
+    <groups v-if="token.permissions == 'teacher'"/>
     <student v-else />
   </div>
 </template>
@@ -12,12 +12,9 @@ import jwtDecode from 'jwt-decode'
 
 export default {
   computed: {
-    user() {
+    token() {
       return jwtDecode(this.$store.getters.userToken)
     }
-  },
-  created() {
-    console.log('Created');
   },
   components: {
     'groups': Groups,

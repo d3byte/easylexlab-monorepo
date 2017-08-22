@@ -125,7 +125,7 @@ groupController.getGroups = (req, res) => {
 
     db.Group.find({_teacher: userId}).populate({
         path: '_teacher',
-        select: 'name username createdAt -_id',
+        select: 'name username createdAt _id',
         match: {'isDeleted': false}
     }).populate({
         path: '_tests',

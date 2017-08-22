@@ -164,16 +164,26 @@ export default {
     submitInfo() {
       if(this.firstName || this.lastName || this.groupCode) {
         if(!!this.groupCode) {
-          console.log('adding group...');
-          this.$http.patch('addgroup', { groupCode: this.groupCode }, {
-            headers: {
-              'Content-type': 'application/json',
-              'Authorization': 'Bearer ' + this.$store.getters.userToken
+          let inGroup = false;
+          for(let group of this.user._groups) {
+            if(group.code == this.groupCode) {
+              inGroup = true;
+              break;
             }
-          }).then(res => {
-            this.error = '';
-            this.infoSuccess.push('Вы успешно присоединились к группе!');
-          });
+          }
+          if(!inGroup) {
+            this.$http.patch('addgroup', { groupCode: this.groupCode }, {
+              headers: {
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer ' + this.$store.getters.userToken
+              }
+            }).then(res => {
+              this.error = '';
+              this.infoSuccess.push('Вы успешно присоединились к группе!');
+            });
+          } else {
+            this.error = 'Вы уже состоите в этой группе!';
+          }
         }
         if(!!this.firstName || !!this.lastName) {
           const body = {

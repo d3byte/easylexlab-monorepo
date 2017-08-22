@@ -208,11 +208,12 @@ userController.addGroup = (req, res) => {
     const groupCode = req.body.groupCode;
     const user = req.user;
 
-    console.log(groupCode);
+    // db.Group.findOne({ code: groupCode }).then(group => {
+    //   console.log(group);
+    // })
 
     db.Group.findOneAndUpdate({ code: groupCode },
     { $push: {'_students': user.id} }).then(group => {
-        console.log(group);
         db.User.findByIdAndUpdate(
             user.id,
             { $push: {'_groups': group._id }}).then(myUser => {
@@ -300,7 +301,7 @@ userController.getUser = (req, res) => {
             }
         })
         .then(user => {
-            return res.json({user})
+          return res.json({ user })
         });
 };
 
