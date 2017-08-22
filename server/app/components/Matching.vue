@@ -100,8 +100,8 @@ export default {
     checkConditions() {
       $('*').removeClass('correct');
       if(this.correct.length == this.oldPairs.length &&
-         this.$store.getters.attempts + 1 < this.stack.attempts) {
-          this.$store.dispatch('incrementAttemps');
+         this.doneAttempts + 1 < this.totalAttempts) {
+          this.$store.dispatch('incrementAttemps', 'matching');
           this.restart();
       } else if(this.correct.length == this.oldPairs.length &&
                 this.doneAttempts + 1 >= this.totalAttempts) {

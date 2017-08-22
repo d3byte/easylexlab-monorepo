@@ -40,7 +40,6 @@ export const store = new Vuex.Store({
         attempts: 0,
         done: 0
       },
-      attempts: 0,
       showTest: false,
       testAvailable: false
     }

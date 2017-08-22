@@ -3,12 +3,12 @@
     <center>
       <div class="container flashcards">
         <h1>Flashcards</h1>
-        <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+        <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <div class="dashboard">
           <button @click="restart" class="flat-btn">Перезапуск</button>
           <button class="flat-btn">Помощь</button>
         </div>
-        <div v-show="!done" class="pair">
+        <div v-show="!done && !lose" class="pair">
           <div v-show="!showDef" @click="show()" class="vertical-center box">
             <h1>{{ currentPair.key }}</h1>
           </div>
@@ -20,9 +20,10 @@
             <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
           </div>
         </div>
-        <div v-if="done" @click="show()" class="vertical-center box">
-          <h1 class="text-success">Готово!</h1>
+        <div v-if="done || lose" @click="show()" class="vertical-center box">
+          <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
           <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
+          <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
         </div>
         <div v-if="done && showTest" class="row">
           <button @click="tryTest" class="btn">Пройти тест</button>
@@ -59,12 +60,22 @@ export default {
       know: [],
       dontKnow: [],
       showDef: false,
-      done: false
+      done: false,
+      lose: false
     }
   },
   computed: {
     showTest() {
       return this.$store.getters.testAvailable
+    },
+    doneAttempts() {
+      return this.$store.getters.games.flashcards.done
+    },
+    totalAttempts() {
+      return this.$store.getters.games.flashcards.attempts
+    },
+    gamesConditions() {
+      return this.$store.getters.finishedGames
     }
   },
   created() {
@@ -97,20 +108,33 @@ export default {
       this.know = [];
       this.dontKnow = [];
       this.done = false;
+      this.lose = false;
     },
     toKnow() {
       this.know.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
         if(this.index + 1 == this.pairs.length &&
-           this.$store.getters.attempts + 1 == this.stack.attempts) {
-             this.$store.dispatch('incrementAttemps');
-             this.$store.dispatch('testAvailable');
+           this.doneAttempts + 1 >= this.totalAttempts) {
+             if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+               this.$store.dispatch('incrementAttemps', 'flashcards');
+               this.$store.dispatch('gameFinished', 'flashcards');
+             } else {
+               this.lose = true;
+               return;
+             }
+             if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+               this.$store.dispatch('testAvailable');
              this.done = true;
              break;
         } else if(this.index + 1 == this.pairs.length) {
-            this.$store.dispatch('incrementAttemps');
-            this.done = true;
-            break;
+          if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+            this.$store.dispatch('incrementAttemps', 'flashcards');
+          } else {
+            this.lose = true;
+            return;
+          }
+          this.done = true;
+          break;
         }
         if(this.index < i) {
           this.currentPair = this.pairs[i];
@@ -123,15 +147,27 @@ export default {
       this.dontKnow.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
         if(this.index + 1 == this.pairs.length &&
-           this.$store.getters.attempts + 1 >= this.stack.attempts) {
-             this.$store.dispatch('incrementAttemps');
-             this.$store.dispatch('testAvailable');
+           this.doneAttempts + 1 >= this.totalAttempts) {
+             if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+               this.$store.dispatch('incrementAttemps', 'flashcards');
+               this.$store.dispatch('gameFinished', 'flashcards');
+             } else {
+               this.lose = true;
+               return;
+             }
+             if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+               this.$store.dispatch('testAvailable');
              this.done = true;
              break;
         } else if(this.index + 1 == this.pairs.length) {
-            this.$store.dispatch('incrementAttemps');
-            this.done = true;
-            break;
+          if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+            this.$store.dispatch('incrementAttemps', 'flashcards');
+          } else {
+            this.lose = true;
+            return;
+          }
+          this.done = true;
+          break;
         }
         if(this.index < i) {
           this.currentPair = this.pairs[i];

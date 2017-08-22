@@ -22,10 +22,10 @@ export default {
    },
    finishedGames(state) {
      var gamesConditions = [];
-      gamesConditions.push(games.matching.win);
-      gamesConditions.push(games.flashcards.win);
-      gamesConditions.push(games.snake.win);
-      gamesConditions.push(games.scramble.win);
+      gamesConditions.push(state.games.matching.win);
+      gamesConditions.push(state.games.flashcards.win);
+      gamesConditions.push(state.games.snake.win);
+      gamesConditions.push(state.games.scramble.win);
      return gamesConditions
    },
    testAvailable(state) {

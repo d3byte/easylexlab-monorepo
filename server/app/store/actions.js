@@ -23,8 +23,11 @@ export default {
   showScramble({ commit }) {
     commit('showScramble');
   },
+  setGames({ commit }, attempts) {
+    commit('setGames', attempts);
+  },
   gameFinished({ commit }, game) {
-    commit('gameFinished', game)
+    commit('gameFinished', game);
   },
   hideGames({ commit }) {
     commit('hideGames');

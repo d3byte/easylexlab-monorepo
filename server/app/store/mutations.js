@@ -21,50 +21,63 @@ export default {
     state.currentGroup._tests = stack;
   },
   showMatching(state) {
-    state.games.flashcards = false;
-    state.games.snake = false;
-    state.games.matching = true;
-    state.games.srcamble = false;
+    state.games.flashcards.show = false;
+    state.games.snake.show = false;
+    state.games.matching.show = true;
+    state.games.scramble.show = false;
   },
   showFlashcards(state) {
-    state.games.snake = false;
-    state.games.matching = false;
-    state.games.flashcards = true;
-    state.games.srcamble = false;
+    state.games.snake.show = false;
+    state.games.matching.show = false;
+    state.games.flashcards.show = true;
+    state.games.scramble.show = false;
   },
   showSnake(state) {
-    state.games.flashcards = false;
-    state.games.matching = false
-    state.games.snake = true;
-    state.games.srcamble = false;
+    state.games.flashcards.show = false;
+    state.games.matching.show = false
+    state.games.snake.show = true;
+    state.games.scramble.show = false;
   },
   showScramble(state) {
-    state.games.flashcards = false;
-    state.games.matching = false
-    state.games.snake = false;
-    state.games.scramble = true;
+    state.games.flashcards.show = false;
+    state.games.matching.show = false
+    state.games.snake.show = false;
+    state.games.scramble.show = true;
+  },
+  setGames(state, attempts) {
+    state.games.flashcards.attempts = attempts.flashcards;
+    state.games.matching.attempts = attempts.matching;
+    state.games.snake.attempts = attempts.snake;
+    state.games.scramble.attempts = attempts.scramble;
   },
   hideGames(state) {
-    state.games.flashcards = false;
-    state.games.matching = false;
-    state.games.scramble = false;
-    state.games.snake = false;
+    state.games.flashcards.show = false;
+    state.games.matching.show = false;
+    state.games.scramble.show = false;
+    state.games.snake.show = false;
   },
   showOrHideTest(state) {
     state.games.showTest = !state.games.showTest;
   },
   incrementAttemps(state, game) {
     if(game == 'matching')
-      state.games.matching.done += 1;
+      state.games.matching.done++;
     else if(game == 'snake')
-      state.games.snake.done += 1;
+      state.games.snake.done++;
     else if(game == 'flashcards')
-      state.games.flashcards.done += 1;
+      state.games.flashcards.done++;
     else if(game == 'scramble')
-      state.games.scramble.done += 1;
+      state.games.scramble.done++;
   },
   gameFinished(state, game) {
-    state.games[game].win = true;
+    if(game == 'matching')
+      state.games.matching.win = true
+    else if(game == 'snake')
+      state.games.snake.win = true;
+    else if(game == 'flashcards')
+      state.games.flashcards.win = true;
+    else if(game == 'scramble')
+      state.games.scramble.win = true;
   },
   zeroAttempts(state) {
     state.games.attempts = 0;
