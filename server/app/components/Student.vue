@@ -63,38 +63,38 @@
   </div>
   <div class="padding">
     <div class="row">
-      <div class="col-sm-8 col-lg-9">
+      <div class="col-sm-8 col-lg-8">
         <div class="tab-content">
-          <div class="tab-pane p-v-sm active" id="tab_1">
-            <div v-if="showTasks" class="row box">
+          <div v-if="showTasks">
+            <div class="tab-pane p-v-sm" id="tab_1">
               <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3>
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
               <div v-if="!showPreloader" class="row">
                 <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                  <div class="align-self-center">
                   <h3>{{ test.name }}</h3>
-                  <router-link :to="'/task/' + test._id">Перейти</router-link>
+                  <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                 </div>
+              </div>
               </div>
             </div>
           </div>
 
-          <div class="tab-content">
+          <div v-if="showMsgs">
             <div class="tab-pane p-v-sm" id="tab_2">
-              <div v-if="showMsgs" class="row box">
-                <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
-                <i v-if="showPreloader" class="material-icons preloader">cached</i>
-                <div v-if="!showPreloader" class="row">
-                  <div id="test_card" v-for="msg in group.messages" class="sl-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h4><b>{{ msg.author }}</b></h4>
-                    <p>{{ msg.text }}</p>
-                  </div>
+              <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
+              <i v-if="showPreloader" class="material-icons preloader">cached</i>
+              <div v-if="!showPreloader" class="row">
+                <div id="test_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <h4><b>{{ msg.author }}</b></h4>
+                  <p>{{ msg.text }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-4 col-lg-3">
+      <div class="col-sm-4 col-lg-4">
         <div>
           <div class="box">
             <div class="box-header">
@@ -105,6 +105,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </template>
 
@@ -192,6 +193,12 @@ export default {
 <style lang="css" scoped>
 .date h1, .date h5 {
   font-family: 'Roboto', sans-serif !important;
+}
+
+.task {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .number {
