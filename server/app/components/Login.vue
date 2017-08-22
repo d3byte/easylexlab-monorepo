@@ -33,8 +33,7 @@ export default {
     return {
       username: '',
       password: '',
-      error: '',
-      showPreloader: false
+      error: ''
     };
   },
   http: {
@@ -42,16 +41,14 @@ export default {
   },
   methods: {
     submitLogin(username, password) {
-      this.showPreloader = true;
       const body = {
         "username": username,
         "password": password
       };
       this.$http.post('login', body).then(res => {
         if(res.body.success) {
-          this.showPreloader = false;
           this.$store.dispatch('login', res.body.token);
-          this.$router.push({ path: '/profile' });
+          this.fetchUserInfo();
         } else {
           this.showPreloader = false;
           this.error = 'Неверный пароль';
@@ -65,9 +62,22 @@ export default {
       if(!!this.username.trim() && !!this.password.trim())
         this.submitLogin(this.username, this.password);
     },
-    hide() {
-      this.$store.dispatch('hideOrShowLogin');
-    }
+    fetchUserInfo() {
+      this.$http.post('user', {}, {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+          this.$store.dispatch('userInfo', res.body.user);
+          this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+          this.notifications = res.body.user.notifications;
+          localStorage.firstName = res.body.user.firstName;
+          localStorage.lastName = res.body.user.lastName;
+          localStorage.school = res.body.user.school;
+          this.$router.push({ path: '/profile' });
+        });
+    },
   }
 }
 </script>

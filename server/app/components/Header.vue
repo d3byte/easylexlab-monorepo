@@ -133,6 +133,18 @@
               });
               localStorage.clear();
             },
+            fetchUserInfo() {
+              this.$http.post('user', {}, {
+                headers: {
+                  'Content-type': 'application/json',
+                  'Authorization': 'Bearer ' + this.$store.getters.userToken
+                }
+              }).then(res => {
+                this.$store.dispatch('userInfo', res.body.user);
+                this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+                this.notifications = res.body.user.notifications;
+                });
+            },
             show() {
               this.$store.dispatch('hideOrShowLogin');
             },
@@ -157,18 +169,7 @@
 
         },
         created() {
-          if(!this.$store.state.user.requested && this.$store.state.user.logged) {
-            this.$http.post('user', {}, {
-              headers: {
-                'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + this.$store.getters.userToken
-              }
-            }).then(res => {
-              this.$store.dispatch('userInfo', res.body.user);
-              this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);this.notifications = res.body.user.notifications;
-            });
-          }
-          if(this.user.notifications)
+          if(this.logged && this.user.notifications)
             this.notifications = this.user.notifications;
           this.isCurrentGr = true;
         },

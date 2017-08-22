@@ -132,7 +132,6 @@ export default {
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }
       }).then(res => {
-        // console.log(res);
         if (res.body.success) {
           this.passwordIsCorrect = true;
           this.errOldPass = false;
@@ -189,6 +188,10 @@ export default {
           }).then(res => {
             this.error = '';
             this.infoSuccess.push('Информация успешно обновлена!');
+            if(this.firstName)
+              localStorage.firstName = this.firstName;
+            if(this.lastName)
+              localStorage.lastName = this.lastName;
           });
         }
       } else {
