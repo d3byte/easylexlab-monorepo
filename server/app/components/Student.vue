@@ -50,8 +50,8 @@
         <div class="col-sm-6 pull-sm-6">
           <div class="p-y-md clearfix nav-active-primary">
             <ul class="nav nav-pills nav-sm">
-              <li class="nav-item active">
-                <a class="nav-link" href data-toggle="tab" data-target="#tab_1">Задания</a>
+              <li class="nav-item">
+                <a class="nav-link" @click="switchTasks" :class="showTasks ? 'active' : ''" data-target="#tab_1">Задания</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href data-toggle="tab" data-target="#tab_2">Сообщения</a>
@@ -66,149 +66,21 @@
         <div class="col-sm-8 col-lg-9">
           <div class="tab-content">
             <div class="tab-pane p-v-sm active" id="tab_1">
-              <div class="streamline b-l m-b m-l">
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a0.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">2 minutes ago</div>
-                    <div class="sl-author">
-                      <a href>Peter Joo</a>
-                    </div>
-                    <div>
-                      <p>Check your Internet connection</p>
-                    </div>
-                    <div class="sl-footer">
-                      <a href ui-toggle-class class="btn white btn-xs">
-                        <i class="fa fa-fw fa-star-o text-muted inline"></i>
-                        <i class="fa fa-fw fa-star text-danger none"></i>
-                      </a>
-                      <a href class="btn white btn-xs" data-toggle="collapse" data-target="#reply-1">
-                        <i class="fa fa-fw fa-mail-reply text-muted"></i>
-                      </a>
-                    </div>
-                    <div class="box collapse m-a-0" id="reply-1">
-                      <form>
-                        <textarea class="form-control no-border" rows="3" placeholder="Type something..."></textarea>
-                      </form>
-                      <div class="box-footer clearfix">
-                        <button class="btn btn-info pull-right btn-sm">Post</button>
-                        <ul class="nav nav-pills nav-sm">
-                          <li class="nav-item"><a class="nav-link" href><i class="fa fa-camera text-muted"></i></a></li>
-                          <li class="nav-item"><a class="nav-link" href><i class="fa fa-video-camera text-muted"></i></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a1.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">9:30</div>
-                    <div class="sl-author">
-                      <a href>Mike</a>
-                    </div>
-                    <div>
-                      <p>Meeting with tech leader</p>
-                    </div>
-                    <div class="sl-footer">
-                      <a href ui-toggle-class class="btn white btn-xs">
-                        <i class="fa fa-fw fa-star-o text-muted inline"></i>
-                        <i class="fa fa-fw fa-star text-danger none"></i>
-                      </a>
-                      <a href class="btn white btn-xs" data-toggle="collapse" data-target="#reply-2">
-                        <i class="fa fa-fw fa-mail-reply text-muted"></i>
-                      </a>
-                    </div>
-                    <div class="box collapse in m-a-0" id="reply-2">
-                      <form>
-                        <textarea class="form-control no-border" rows="3" placeholder="Type something..."></textarea>
-                      </form>
-                      <div class="box-footer clearfix">
-                        <button class="btn btn-info pull-right btn-sm">Post</button>
-                        <ul class="nav nav-pills nav-sm">
-                          <li class="nav-item"><a class="nav-link" href><i class="fa fa-camera text-muted"></i></a></li>
-                          <li class="nav-item"><a class="nav-link" href><i class="fa fa-video-camera text-muted"></i></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a2.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">8:30</div>
-                    <div class="sl-author">
-                      <a href>Moke</a>
-                    </div>
-                    <div>
-                      <p>Call to customer <a href class="text-info">Jacob</a> and discuss the detail.</p>
-                      <p>
-                        <span class="inline w-lg w-auto-xs p-a-xs b dark-white">
-                          <img src="/flatkit/assets/images/c0.jpg" class="w-full">
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a3.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Wed, 25 Mar</div>
-                    <p>Finished task <a href class="text-info">Testing</a>.</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a4.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Thu, 10 Mar</div>
-                    <p>Trip to the moon</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a3.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Sat, 5 Mar</div>
-                    <p>Prepare for presentation</p>
-                    <blockquote>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante soe aiea ose dos soois.</p>
-                      <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-                    </blockquote>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a2.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Sun, 11 Feb</div>
-                    <p><a href class="text-info">Jessi</a> assign you a task <a href class="text-info">Mockup Design</a>.</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-left">
-                    <img src="/flatkit/assets/images/a5.jpg" class="img-circle">
-                  </div>
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Thu, 17 Jan</div>
-                    <p>Follow up to close deal</p>
+              <div v-if="showTasks" class="row box">
+                <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3>
+                <i v-if="showPreloader" class="material-icons preloader">cached</i>
+                <div v-if="!showPreloader" class="row">
+                  <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                    <h3>{{ test.name }}</h3>
+                    <router-link :to="'/task/' + test._id">Перейти</router-link>
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="tab-pane p-v-sm" id="tab_2">
               <div class="streamline b-l m-b m-l">
+
                 <div class="sl-item">
                   <div class="sl-content">
                     <div class="sl-date text-muted">2 minutes ago</div>
@@ -314,7 +186,12 @@ export default {
       date: null,
       firstName: '',
       lastName: '',
-      school: ''
+      school: '',
+      tasks: [],
+      messages: [],
+      showPreloader: true,
+      showTasks: true,
+      showMsgs: false
     }
   },
   computed: {
@@ -331,6 +208,14 @@ export default {
       let date = moment().format('LL');
       date = date.slice(0, date.length - 8);
       this.date = date;
+    },
+    switchTasks() {
+      this.showTasks = true;
+      this.showMsgs = false;
+    },
+    switchMsgs() {
+      this.showTasks = false;
+      this.showMsgs = true;
     }
   },
   created() {
@@ -341,6 +226,30 @@ export default {
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
     this.setDate();
+    setTimeout(() => {
+      if(this.group._tests) {
+        for(var test of this.group._tests) {
+          var done = false;
+          if(test.results) {
+            for(let result of test.results) {
+              if(result.username == this.user.username) {
+                done = true;
+              }
+            }
+            if(!done) {
+              this.tasks.push(test);
+            }
+          }
+        }
+      }
+      this.showPreloader = false;
+      if(this.group.messages) {
+        for(var msg of this.group.messages) {
+          this.messages.push(msg);
+        }
+      }
+      this.showPreloader = false;
+    }, 150);
   }
 }
 </script>
