@@ -71,10 +71,14 @@
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
               <div v-if="!showPreloader" class="row">
                 <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
-                  <div class="align-self-center">
+                  <div class="taskcontentouter">
+                  <div class="taskcontent">
+                    <center>
                   <h3>{{ test.name }}</h3>
                   <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                </center>
                 </div>
+              </div>
               </div>
               </div>
             </div>
@@ -199,6 +203,16 @@ export default {
   margin-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.taskcontentouter {
+  display: flex;
+  justify-content: center;
+  padding: 5% 0;
+}
+
+.taskcontent {
+  padding: 10% 0;
 }
 
 .number {
