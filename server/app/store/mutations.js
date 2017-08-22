@@ -2,13 +2,16 @@ import _ from 'lodash';
 
 export default {
   login(state, token) {
-    state.user.logged = true;
+    state.logged = true;
     state.token = token;
     localStorage.token = token;
   },
   logout(state) {
-    state.user.logged = false;
-    state.user.token = '';
+    state.user = {};
+    state.logged = false;
+    state.user.requested = false;
+    state.token = '';
+    state.currentGroup = {};
     localStorage.token = '';
   },
   hideOrShowLogin(state) {
@@ -70,6 +73,6 @@ export default {
   },
   userInfo(state, userInfo) {
     _.assign(state.user, userInfo);
-    state.user.requested = true;
+    state.requested = true;
   }
 }

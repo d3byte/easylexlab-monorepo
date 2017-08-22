@@ -143,17 +143,17 @@ userController.getGroups = (req, res) => {
 userController.updateInfo = (req, res) => {
     const myUser = req.user;
     const {
-        name,
-        username
+      firstName,
+      lastName
     } = req.body;
 
     const query = {};
 
-    if (name)
-        query.name = name;
-    if (username)
-        query.username = username;
-    else if (!name && !username) {
+    if(firstName)
+      query.firstName = firstName;
+    if(lastName)
+      query.lastName = lastName;
+    else if (!firstName && !lastName) {
         return res.json({
             changed: false
         });
@@ -163,8 +163,7 @@ userController.updateInfo = (req, res) => {
         $set: query
     }).then(user => {
         return res.json({
-            success: true,
-            user
+            success: true
         });
     }).catch(err => {
         res.status(500).json({
@@ -178,7 +177,7 @@ userController.verifyPassword = (req, res) => {
     const password = req.body.password;
     db.User.findById(user.id).then(myUser => {
         myUser.verifyPassword(password).then(valid => {
-            return res.json({success: valid});
+            return res.json({ success: valid });
         }).catch(err => {
             res.status(500).json({
                 message: err
@@ -209,18 +208,24 @@ userController.addGroup = (req, res) => {
     const groupCode = req.body.groupCode;
     const user = req.user;
 
-    db.Group.findOne({code: groupCode}).then(group => {
-        group._students.push(user.id);
-        group.save();
+    console.log(groupCode);
+
+    db.Group.findOneAndUpdate({ code: groupCode },
+    { $push: {'_students': user.id} }).then(group => {
+        console.log(group);
         db.User.findByIdAndUpdate(
             user.id,
-            {$push: {'_groups': group._id}}).then(myUser => {
-            res.json({success: true});
-        }).catch((err) => {
+            { $push: {'_groups': group._id }}).then(myUser => {
+            res.json({ success: true });
+        }).catch(err => {
             res.status(500).json({
-                message: err
+                body: err
             });
         });
+    }).catch(err => {
+      res.status(500).json({
+           body: err
+      });
     });
 };
 

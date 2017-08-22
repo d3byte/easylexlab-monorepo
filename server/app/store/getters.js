@@ -3,7 +3,7 @@ export default {
      return state.token
    },
    loginState(state) {
-     return state.user.logged
+     return state.logged
    },
    currentGroup(state) {
      return state.currentGroup
@@ -24,6 +24,6 @@ export default {
      return state.games.testAvailable
    },
    requested(state) {
-     return state.user.requested
+     return state.requested
    }
 }
