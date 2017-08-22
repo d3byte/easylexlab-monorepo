@@ -35,8 +35,8 @@ export default {
   showTest({ commit }) {
     commit('showOrHideTest');
   },
-  incrementAttemps({ commit }, game) {
-    commit('incrementAttemps', game);
+  incrementAttempts({ commit }, game) {
+    commit('incrementAttempts', game);
   },
   zeroAttempts({ commit }) {
     commit('zeroAttempts');

@@ -2,16 +2,15 @@
   <div>
     <center>
       <h1>Snake</h1>
-      <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+      <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <div class="dashboard">
         <button @click="start" class="flat-btn">Перезапуск</button>
         <button class="flat-btn" @click="hideGames">Назад</button>
         <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
       </div>
       <div v-if="win && !dead" class="win box">
-        <h1 class="text-success">Победа!</h1>
-        <h2>Теперь вы можете пройти тест.</h2>
-        <button v-if="win && showTest" @click="tryTest" class="btn">Пройти тест</button>
+        <h3 class="text-success">Победа!</h3>
+        <h5 @click="start" class="restart">Начать заново?</h5>
       </div>
     </center>
     <center>
@@ -36,14 +35,14 @@
             </table>
           </div>
           <div class="words box">
-            <h2>Слово: <i>{{ currentWordGroup.key }}</i></h2>
-            <h3 v-for="word in currentWordGroup.words"
+            <h5>Слово: <i>{{ currentWordGroup.key }}</i></h5>
+            <h6 v-for="word in currentWordGroup.words"
                 :class="'food food-' + word.index + ' '
                 + (word.eaten ? 'eaten ' : '')
                 + (word.correct ? 'correct' : '')">
 
               <b>{{ word.value }}</b>
-            </h3>
+            </h6>
           </div>
       </div>
     </center>
@@ -91,6 +90,15 @@
     computed: {
       showTest() {
         return this.$store.getters.testAvailable
+      },
+      doneAttempts() {
+        return this.$store.getters.games.snake.done
+      },
+      totalAttempts() {
+        return this.$store.getters.games.snake.attempts
+      },
+      gamesConditions() {
+        return this.$store.getters.finishedGames
       }
     },
     methods: {
@@ -195,10 +203,11 @@
             if(this.correct == this.wordGroups.length) {
               this.win = true;
               clearInterval(ticking);
-              this.$store.dispatch('incrementAttemps');
-              if(this.$store.getters.attempts == this.stack.attempts) {
+              this.$store.dispatch('incrementAttempts', 'snake');
+              if(this.doneAttempts== this.totalAttempts)
+                this.$store.dispatch('gameFinished', 'snake');
+              if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
                 this.$store.dispatch('testAvailable');
-              }
               return;
             }
             this.changeCurrentWordGroup();
@@ -375,10 +384,14 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 790px;
+    width: 480px;
   }
 
   .words {
     min-width: 150px;
+  }
+
+  .restart:hover {
+    cursor: pointer;
   }
 </style>

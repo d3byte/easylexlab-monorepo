@@ -116,7 +116,7 @@ export default {
         if(this.index + 1 == this.pairs.length &&
            this.doneAttempts + 1 >= this.totalAttempts) {
              if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-               this.$store.dispatch('incrementAttemps', 'flashcards');
+               this.$store.dispatch('incrementAttempts', 'flashcards');
                this.$store.dispatch('gameFinished', 'flashcards');
              } else {
                this.lose = true;
@@ -128,7 +128,7 @@ export default {
              break;
         } else if(this.index + 1 == this.pairs.length) {
           if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-            this.$store.dispatch('incrementAttemps', 'flashcards');
+            this.$store.dispatch('incrementAttempts', 'flashcards');
           } else {
             this.lose = true;
             return;

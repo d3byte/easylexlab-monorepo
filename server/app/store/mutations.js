@@ -59,7 +59,8 @@ export default {
   showOrHideTest(state) {
     state.games.showTest = !state.games.showTest;
   },
-  incrementAttemps(state, game) {
+  incrementAttempts(state, game) {
+    console.log(game);
     if(game == 'matching')
       state.games.matching.done++;
     else if(game == 'snake')
@@ -80,7 +81,10 @@ export default {
       state.games.scramble.win = true;
   },
   zeroAttempts(state) {
-    state.games.attempts = 0;
+    state.games.flashcards.done = 0;
+    state.games.snake.done = 0;
+    state.games.scramble.done = 0;
+    state.games.matching.done = 0;
   },
   testAvailable(state) {
     state.games.testAvailable = true;
