@@ -23,14 +23,17 @@ export default {
   showScramble({ commit }) {
     commit('showScramble');
   },
+  gameFinished({ commit }, game) {
+    commit('gameFinished', game)
+  },
   hideGames({ commit }) {
     commit('hideGames');
   },
   showTest({ commit }) {
     commit('showOrHideTest');
   },
-  incrementAttemps({ commit }) {
-    commit('incrementAttemps');
+  incrementAttemps({ commit }, game) {
+    commit('incrementAttemps', game);
   },
   zeroAttempts({ commit }) {
     commit('zeroAttempts');

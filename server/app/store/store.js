@@ -16,10 +16,30 @@ export const store = new Vuex.Store({
     logged: (localStorage.token ? true : false),
     currentGroup: {},
     games: {
-      matching: false,
-      flashcards: false,
-      snake: false,
-      scramble: false,
+      matching: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
+      flashcards: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
+      snake: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
+      scramble: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
       attempts: 0,
       showTest: false,
       testAvailable: false

@@ -53,8 +53,18 @@ export default {
   showOrHideTest(state) {
     state.games.showTest = !state.games.showTest;
   },
-  incrementAttemps(state) {
-    state.games.attempts += 1;
+  incrementAttemps(state, game) {
+    if(game == 'matching')
+      state.games.matching.done += 1;
+    else if(game == 'snake')
+      state.games.snake.done += 1;
+    else if(game == 'flashcards')
+      state.games.flashcards.done += 1;
+    else if(game == 'scramble')
+      state.games.scramble.done += 1;
+  },
+  gameFinished(state, game) {
+    state.games[game].win = true;
   },
   zeroAttempts(state) {
     state.games.attempts = 0;

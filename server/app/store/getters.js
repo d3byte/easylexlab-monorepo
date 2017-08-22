@@ -20,6 +20,14 @@ export default {
    attempts(state) {
      return state.games.attempts
    },
+   finishedGames(state) {
+     var gamesConditions = [];
+      gamesConditions.push(games.matching.win);
+      gamesConditions.push(games.flashcards.win);
+      gamesConditions.push(games.snake.win);
+      gamesConditions.push(games.scramble.win);
+     return gamesConditions
+   },
    testAvailable(state) {
      return state.games.testAvailable
    },
