@@ -103,7 +103,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
   .game, .win {
     min-width: 80px;
     max-width: 240px;
