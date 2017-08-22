@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="container">
+<!-- <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
         <div class="col-lg-3 ava blue vertical-center">
@@ -19,161 +19,93 @@
     </div>
     <router-view></router-view>
   </div> -->
-  <div>
-    <div class="item">
-      <div class="item-bg">
-        <img src="/flatkit/assets/images/a1.jpg" class="blur opacity-3">
-      </div>
-      <div class="p-a-md">
-        <div class="row m-t">
-          <div class="col-sm-7">
-            <a href class="pull-left m-r-md">
+<div>
+  <div class="item">
+    <div class="item-bg">
+      <img src="/flatkit/assets/images/a1.jpg" class="blur opacity-3">
+    </div>
+    <div class="p-a-md">
+      <div class="row m-t">
+        <div class="col-sm-7">
+          <a href class="pull-left m-r-md">
               <span class="avatar w-96">
                 <img src="/flatkit/assets/images/a1.jpg">
                 <i class="on b-white"></i>
               </span>
             </a>
-            <div class="clear m-b">
-              <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
-              <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}</small></p>
+          <div class="clear m-b">
+            <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
+            <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}</small></p>
+          </div>
+        </div>
+        <div class="col-sm-5">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dker p-x">
+    <div class="row">
+      <div class="col-sm-6 push-sm-6">
+      </div>
+      <div class="col-sm-6 pull-sm-6">
+        <div class="p-y-md clearfix nav-active-primary">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item">
+              <a class="nav-link" @click="switchTasks" :class="showTasks ? 'active' : ''" data-target="#tab_1">Задания</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="switchMsgs" :class="showMsgs ? 'active' : ''" data-target="#tab_2">Сообщения</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="padding">
+    <div class="row">
+      <div class="col-sm-8 col-lg-9">
+        <div class="tab-content">
+          <div class="tab-pane p-v-sm active" id="tab_1">
+            <div v-if="showTasks" class="row box">
+              <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3>
+              <i v-if="showPreloader" class="material-icons preloader">cached</i>
+              <div v-if="!showPreloader" class="row">
+                <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                  <h3>{{ test.name }}</h3>
+                  <router-link :to="'/task/' + test._id">Перейти</router-link>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-sm-5">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="dker p-x">
-      <div class="row">
-        <div class="col-sm-6 push-sm-6">
-        </div>
-        <div class="col-sm-6 pull-sm-6">
-          <div class="p-y-md clearfix nav-active-primary">
-            <ul class="nav nav-pills nav-sm">
-              <li class="nav-item">
-                <a class="nav-link" @click="switchTasks" :class="showTasks ? 'active' : ''" data-target="#tab_1">Задания</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href data-toggle="tab" data-target="#tab_2">Сообщения</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="padding">
-      <div class="row">
-        <div class="col-sm-8 col-lg-9">
+
           <div class="tab-content">
-            <div class="tab-pane p-v-sm active" id="tab_1">
-              <div v-if="showTasks" class="row box">
-                <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3>
+            <div class="tab-pane p-v-sm" id="tab_2">
+              <div v-if="showMsgs" class="row box">
+                <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
                 <i v-if="showPreloader" class="material-icons preloader">cached</i>
                 <div v-if="!showPreloader" class="row">
-                  <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
-                    <h3>{{ test.name }}</h3>
-                    <router-link :to="'/task/' + test._id">Перейти</router-link>
+                  <div id="test_card" v-for="msg in group.messages" class="sl-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h4><b>{{ msg.author }}</b></h4>
+                    <p>{{ msg.text }}</p>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div class="tab-pane p-v-sm" id="tab_2">
-              <div class="streamline b-l m-b m-l">
-
-                <div class="sl-item">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">2 minutes ago</div>
-                    <p>Check your Internet connection</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">9:30</div>
-                    <p>Meeting with tech leader</p>
-                  </div>
-                </div>
-                <div class="sl-item b-success">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">8:30</div>
-                    <p>Call to customer <a href class="text-info">Jacob</a> and discuss the detail.</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Wed, 25 Mar</div>
-                    <p>Finished task <a href class="text-info">Testing</a>.</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Thu, 10 Mar</div>
-                    <p>Trip to the moon</p>
-                  </div>
-                </div>
-                <div class="sl-item b-info">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Sat, 5 Mar</div>
-                    <p>Prepare for presentation</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Sun, 11 Feb</div>
-                    <p><a href class="text-info">Jessi</a> assign you a task <a href class="text-info">Mockup Design</a>.</p>
-                  </div>
-                </div>
-                <div class="sl-item">
-                  <div class="sl-content">
-                    <div class="sl-date text-muted">Thu, 17 Jan</div>
-                    <p>Follow up to close deal</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane p-v-sm" id="tab_3">
-                <div ui-include="'../views/blocks/widget.friends.html'"></div>
-            </div>
-            <div class="tab-pane p-v-sm" id="tab_4">
-              <div class="row m-b">
-                <div class="col-xs-6">
-                  <small class="text-muted">Cell Phone</small>
-                  <div class="_500">1243 0303 0333</div>
-                </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">Family Phone</small>
-                  <div class="_500">+32(0) 3003 234 543</div>
-                </div>
-              </div>
-              <div class="row m-b">
-                <div class="col-xs-6">
-                  <small class="text-muted">Reporter</small>
-                  <div class="_500">Coch Jose</div>
-                </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">Manager</small>
-                  <div class="_500">James Richo</div>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Bio</small>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-sm-4 col-lg-3">
-          <div>
-            <div class="box">
-                <div class="box-header">
-                  <h3>Ближайший день сдачи: <b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
-                </div>
+      </div>
+      <div class="col-sm-4 col-lg-3">
+        <div>
+          <div class="box">
+            <div class="box-header">
+              <h3>Ближайший день сдачи: <b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -200,6 +132,9 @@ export default {
     },
     token() {
       return jwtDecode(this.$store.getters.userToken)
+    },
+    group() {
+      return this.$store.getters.currentGroup
     }
   },
   methods: {
@@ -227,24 +162,24 @@ export default {
     this.$store.dispatch('testNotAvailable');
     this.setDate();
     setTimeout(() => {
-      if(this.group._tests) {
-        for(var test of this.group._tests) {
+      if (this.group._tests) {
+        for (var test of this.group._tests) {
           var done = false;
-          if(test.results) {
-            for(let result of test.results) {
-              if(result.username == this.user.username) {
+          if (test.results) {
+            for (let result of test.results) {
+              if (result.username == this.user.username) {
                 done = true;
               }
             }
-            if(!done) {
+            if (!done) {
               this.tasks.push(test);
             }
           }
         }
       }
       this.showPreloader = false;
-      if(this.group.messages) {
-        for(var msg of this.group.messages) {
+      if (this.group.messages) {
+        for (var msg of this.group.messages) {
           this.messages.push(msg);
         }
       }
