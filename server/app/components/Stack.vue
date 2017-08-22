@@ -81,6 +81,9 @@ export default {
     },
     user() {
       return this.$store.getters.user
+    },
+    gamesConditions() {
+      return this.$store.getters.finishedGames
     }
   },
   http: {

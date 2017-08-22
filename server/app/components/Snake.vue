@@ -203,9 +203,9 @@
             if(this.correct == this.wordGroups.length) {
               this.win = true;
               clearInterval(ticking);
-              this.$store.dispatch('incrementAttemps', 'snake');
-              if(this.snakets == this.totalAttempts)
-                this.$store.dispatch('gameFinished', snake);
+              this.$store.dispatch('incrementAttempts', 'snake');
+              if(this.doneAttempts== this.totalAttempts)
+                this.$store.dispatch('gameFinished', 'snake');
               if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
                 this.$store.dispatch('testAvailable');
               return;

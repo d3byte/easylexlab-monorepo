@@ -101,11 +101,11 @@ export default {
       $('*').removeClass('correct');
       if(this.correct.length == this.oldPairs.length &&
          this.doneAttempts + 1 < this.totalAttempts) {
-          this.$store.dispatch('incrementAttemps', 'matching');
+          this.$store.dispatch('incrementAttempts', 'matching');
           this.restart();
       } else if(this.correct.length == this.oldPairs.length &&
                 this.doneAttempts + 1 >= this.totalAttempts) {
-                  this.$store.dispatch('incrementAttemps', 'matching');
+                  this.$store.dispatch('incrementAttempts', 'matching');
                   this.$store.dispatch('gameFinished', 'matching');
                   if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
                     this.$store.dispatch('testAvailable');

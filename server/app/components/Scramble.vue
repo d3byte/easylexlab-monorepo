@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Word Scramble</h1>
-    <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+    <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
     <div class="dashboard">
       <button @click="start" class="flat-btn">Перезапуск</button>
       <button class="flat-btn" @click="hideGames">Назад</button>
@@ -9,8 +9,7 @@
     </div>
     <div v-if="win" class="win box">
       <h3 class="text-success">Победа!</h3>
-      <h4>Теперь вы можете пройти тест.</h4>
-      <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
+      <h5 @click="start" class="restart">Начать заново?</h5>
     </div>
     <div class="box game" v-if="!win">
       <h3 class="key"><b>{{ currentPair.key }}</b></h3>
@@ -43,6 +42,15 @@ export default {
   computed: {
     showTest() {
       return this.$store.getters.testAvailable
+    },
+    doneAttempts() {
+      return this.$store.getters.games.scramble.done
+    },
+    totalAttempts() {
+      return this.$store.getters.games.scramble.attempts
+    },
+    gamesConditions() {
+      return this.$store.getters.finishedGames
     }
   },
   http: {
@@ -61,13 +69,13 @@ export default {
         this.correct = true;
         this.totalCorrect++;
         if(this.totalCorrect == this.pairs.length) {
-          this.$store.dispatch('incrementAttemps');
-          if(this.$store.getters.attempts == this.stack.attempts) {
-            this.$store.dispatch('testAvailable');
-          }
+          this.$store.dispatch('incrementAttempts', 'scramble');
           this.win = true;
-          return;
         }
+        if(this.doneAttempts == this.totalAttempts)
+          this.$store.dispatch('gameFinished', 'scramble');
+        if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+          this.$store.dispatch('testAvailable');
       }
     },
     start() {
@@ -120,5 +128,9 @@ export default {
 
   .default {
     background: #ccc;
+  }
+
+  .restart:hover {
+    cursor: pointer;
   }
 </style>
