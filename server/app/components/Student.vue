@@ -66,12 +66,25 @@
         <div class="tab-content">
           <div v-if="showTasks">
             <div class="tab-pane p-v-sm" id="tab_1">
-              <h3 v-if="!!!uncompletedTasks.length && !showPreloader">Невыполненных заданий нет</h3>
-              <!-- <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3> -->
+              <input type="checkbox" id="checkbox" v-model="showAll">
+              <label for="checkbox">Показывать все задания</label>
+              <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
+              <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
               <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
-              <div v-if="!showPreloader" class="row">
+              <div v-if="!showPreloader && !showAll" class="row">
                 <div v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                  <div class="taskcontentouter">
+                    <div class="taskcontent">
+                      <center>
+                        <h3>{{ test.name }}</h3>
+                        <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+                <div v-if="!showPreloader && showAll">
+                <div v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
                   <div class="taskcontentouter">
                     <div class="taskcontent">
                       <center>
@@ -83,6 +96,7 @@
                 </div>
               </div>
             </div>
+            </div>
           </div>
 
           <div v-if="showMsgs">
@@ -90,7 +104,7 @@
               <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
               <div v-if="!showPreloader" class="row">
-                <div id="test_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div id="msg_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
                   <h5>От кого: <b>{{ msg.author }}</b></h5>
                   <p>Содержание: {{ msg.text }}</p>
                 </div>
@@ -106,6 +120,9 @@
               <h4>Ближайший день сдачи:</h4>
               <br>
               <h3><b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
+            </div>
+            <div v-if="showTasks">
+
             </div>
           </center>
         </div>
@@ -132,7 +149,8 @@ export default {
       messages: [],
       showPreloader: true,
       showTasks: true,
-      showMsgs: false
+      showMsgs: false,
+      showAll: false
     }
   },
   computed: {
@@ -208,6 +226,10 @@ export default {
   margin-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+#msg_card {
+  padding: 10px;
 }
 
 .taskcontentouter {
