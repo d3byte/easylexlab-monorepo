@@ -60,73 +60,71 @@
       </div>
     </div>
   </div>
-  <div class="padding">
-    <div class="row">
-      <div class="col-sm-8 col-lg-8">
-        <div class="tab-content">
-          <div v-if="showTasks">
-            <div class="tab-pane p-v-sm" id="tab_1">
-              <input type="checkbox" id="checkbox" v-model="showAll">
-              <label for="checkbox">Показывать все задания</label>
-              <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
-              <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
-              <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
-              <i v-if="showPreloader" class="material-icons preloader">cached</i>
-              <div v-if="!showPreloader" class="row">
-                <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
-                  <div class="taskcontentouter">
-                    <div class="taskcontent">
-                      <center>
-                        <h3>{{ test.name }}</h3>
-                        <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
-                      </center>
-                    </div>
+    <div class="row checkbox">
+      <input type="checkbox" id="padding" v-model="showAll">
+      <label for="padding" id="nope">Показывать все задания</label>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 col-lg-8">
+      <div class="tab-content">
+        <div v-if="showTasks">
+          <div class="tab-pane p-v-sm" id="tab_1">
+            <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
+            <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
+            <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
+            <i v-if="showPreloader" class="material-icons preloader">cached</i>
+            <div v-if="!showPreloader" class="row">
+              <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                <div class="taskcontentouter">
+                  <div class="taskcontent">
+                    <center>
+                      <h3>{{ test.name }}</h3>
+                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                    </center>
                   </div>
                 </div>
-                <div v-show="showAll" v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
-                  <div class="taskcontentouter">
-                    <div class="taskcontent">
-                      <center>
-                        <h3>{{ test.name }}</h3>
-                        <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
-                      </center>
-                    </div>
+              </div>
+              <div v-show="showAll" v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                <div class="taskcontentouter">
+                  <div class="taskcontent">
+                    <center>
+                      <h3>{{ test.name }}</h3>
+                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                    </center>
                   </div>
-                </div>
-            </div>
-            </div>
-          </div>
-
-          <div v-if="showMsgs">
-            <div class="tab-pane p-v-sm" id="tab_2">
-              <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
-              <i v-if="showPreloader" class="material-icons preloader">cached</i>
-              <div v-if="!showPreloader" class="row">
-                <div id="msg_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                  <h5>От кого: <b>{{ msg.author }}</b></h5>
-                  <p>Содержание: {{ msg.text }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4 col-lg-4">
-        <div>
-          <center>
-            <div class="box blue vertical-center date">
-              <h4>Ближайший день сдачи:</h4>
-              <br>
-              <h3><b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
-            </div>
-            <div v-if="showTasks">
 
+        <div v-if="showMsgs">
+          <div class="tab-pane p-v-sm" id="tab_2">
+            <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
+            <i v-if="showPreloader" class="material-icons preloader">cached</i>
+            <div v-if="!showPreloader" class="row">
+              <div id="msg_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h5>От кого: <b>{{ msg.author }}</b></h5>
+                <p>Содержание: {{ msg.text }}</p>
+              </div>
             </div>
-          </center>
+          </div>
         </div>
       </div>
     </div>
+    <div class="col-sm-4 col-lg-4">
+      <div>
+        <center>
+          <div class="box blue vertical-center date">
+            <h4>Ближайший день сдачи:</h4>
+            <br>
+            <h3><b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
+          </div>
+        </center>
+      </div>
+    </div>
   </div>
+  <!-- </div> -->
 </div>
 </div>
 </template>
@@ -226,8 +224,21 @@ export default {
   margin-right: 20px;
 }
 
+#padding {
+  margin-left: 20px;
+}
+
 #msg_card {
   padding: 10px;
+}
+
+#nope {
+  padding-left: 10px !important;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: start;
 }
 
 .taskcontentouter {
