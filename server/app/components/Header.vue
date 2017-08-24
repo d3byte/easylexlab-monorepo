@@ -16,39 +16,21 @@
             <span class="nav-link" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
           </li>
           <li class="nav-item dropdown pos-stc-xs">
-            <a class="nav-link" href data-toggle="dropdown">
-              <i class="material-icons" @click="showNotifs">&#xe7f5;</i>
-              <span class="label label-sm up warn">3</span>
+            <a class="nav-link" href data-toggle="dropdown" @click="showNotifs">
+              <i class="material-icons">&#xe7f5;</i>
+              <span class="label label-sm up warn">{{ newNotifsInt }}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
               <div class="scrollable" style="max-height: 220px">
                 <ul class="list-group list-group-gap m-a-0">
-                  <li class="list-group-item black lt box-shadow-z0 b">
+                  <li class="list-group-item dark-white text-color box-shadow-z0 b" v-for="notification in notifications">
                     <span class="pull-left m-r">
-                      <img src="../assets/images/a0.jpg" alt="..." class="w-40 img-circle">
+                      <img :src="notification.pic" class="w-40 img-circle">
                     </span>
                     <span class="clear block">
-                      Use awesome <a href class="text-primary">animate.css</a><br>
+                      {{ notification.text }}<br>
                       <small class="text-muted">10 minutes ago</small>
-                    </span>
-                  </li>
-                  <li class="list-group-item black lt box-shadow-z0 b">
-                    <span class="pull-left m-r">
-                      <img src="../assets/images/a1.jpg" alt="..." class="w-40 img-circle">
-                    </span>
-                    <span class="clear block">
-                      <a href class="text-primary">Joe</a> Added you as friend<br>
-                      <small class="text-muted">2 hours ago</small>
-                    </span>
-                  </li>
-                  <li class="list-group-item dark-white text-color box-shadow-z0 b">
-                    <span class="pull-left m-r">
-                      <img src="../assets/images/a2.jpg" alt="..." class="w-40 img-circle">
-                    </span>
-                    <span class="clear block">
-                      <a href class="text-primary">Danie</a> sent you a message<br>
-                      <small class="text-muted">1 day ago</small>
                     </span>
                   </li>
                 </ul>
@@ -107,7 +89,8 @@
             return {
                 requested: false,
                 isCurrentGr: false,
-                notifications: []
+                notifications: [],
+                newNotifsInt: 0
             }
         },
         computed: {
@@ -155,13 +138,16 @@
               this.$store.dispatch('changeCurrentGroup', group);
             },
             showNotifs() {
+              console.log(this.notifications)
               if(!!this.notifications) {
                 this.$http.post('readnotifs', {}, {
                   headers: {
                     'Content-type': 'application/json',
                     'Authorization': 'Bearer ' + this.$store.getters.userToken
                   }
-                }).then(res => { });
+                }).then(res => {
+                  this.newNotifsInt = 0;
+                });
                 }
               }
         },
@@ -172,8 +158,15 @@
 
         },
         created() {
-          if(this.logged && this.user.notifications)
+          setTimeout(() => {
             this.notifications = this.user.notifications;
+            for(let notification of this.notifications) {
+              console.log(notification)
+              if(!notification.seen)
+                this.newNotifsInt++;
+            }
+          }, 70);
+
           this.isCurrentGr = true;
         },
         components: {

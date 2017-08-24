@@ -22,7 +22,8 @@ const userSchema = new Schema({
   _results: { type: Array, default: null },
   notifications: { type: Array, default: null },
   permissions: { type: String, required: true },
-  social: [{ type: Object, default: null }],
+  picUrl: { type: String, default: null },
+  backgroundUrl: { type: String, default: null },
   createdAt: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false }
 });

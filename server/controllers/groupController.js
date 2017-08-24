@@ -217,21 +217,24 @@ groupController.newMsg = (req, res) => {
     const user = req.user;
     const {
         groupId,
-        msgText
+        msgText,
+        author
     } = req.body;
 
     const message = {
-        author: user.name,
+        author: author.name,
+        pic: author.avaUrl,
         text: msgText
     };
 
     const notification = {
         type: 'newMsg',
-        text: `Новое сообщение.`,
+        author: author.name,
+        pic: author.avaUrl,
+        text: `${fullName} прислал(а) вам сообщение.`,
         seen: false
     };
 
-    console.log(groupId);
 
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
         db.Group.findByIdAndUpdate(groupId, {

@@ -19,11 +19,20 @@ export default {
       success: false
     }
   },
+  computed: {
+    user() {
+        return this.$store.getters.user
+    }
+  },
   methods: {
     send() {
       const body = {
         groupId: this.group._id,
-        msgText: this.text
+        msgText: this.text,
+        author: {
+          name: this.user.firstName + this.user.firstName,
+          avaUrl: this.user.avaUrl
+        }
       };
       const headers = {
         'Content-type' : 'application/json',
