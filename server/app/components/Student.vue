@@ -22,15 +22,14 @@
 <div>
   <div class="item">
     <div class="item-bg">
-      <img src="/flatkit/assets/images/a1.jpg" class="blur opacity-3">
+      <img src="../assets/images/a6.jpg" class="blur opacity-3">
     </div>
     <div class="p-a-md">
       <div class="row m-t">
         <div class="col-sm-7">
           <a href class="pull-left m-r-md">
               <span class="avatar w-96">
-                <img src="/flatkit/assets/images/a1.jpg">
-                <i class="on b-white"></i>
+                <img src="../assets/images/a0.jpg">
               </span>
             </a>
           <div class="clear m-b">
