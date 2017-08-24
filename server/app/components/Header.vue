@@ -24,7 +24,7 @@
             <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
               <div class="scrollable" style="max-height: 220px">
                 <ul class="list-group list-group-gap m-a-0">
-                  <li class="list-group-item dark-white text-color box-shadow-z0 b" v-for="notification in notifications">
+                  <li class="list-group-item box-shadow-z0 b" :class="notification.type == 'newMsg' ? 'dark-white text-color' : 'black'" v-for="notification in notifications">
                     <span class="pull-left m-r">
                       <img :src="notification.pic" class="w-40 img-circle">
                     </span>
@@ -137,16 +137,18 @@
             changeGroup(group) {
               this.$store.dispatch('changeCurrentGroup', group);
             },
-            showNotifs() {
+            showNotifs(id) {
               console.log(this.notifications)
               if(!!this.notifications) {
-                this.$http.post('readnotifs', {}, {
+                const body = {
+                  id
+                }
+                this.$http.post('readnotifs', body, {
                   headers: {
                     'Content-type': 'application/json',
                     'Authorization': 'Bearer ' + this.$store.getters.userToken
                   }
                 }).then(res => {
-                  this.newNotifsInt = 0;
                 });
                 }
               }

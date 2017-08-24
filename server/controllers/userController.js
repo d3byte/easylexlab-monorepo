@@ -261,8 +261,8 @@ userController.addResult = (req, res) => {
 userController.getNotifications = (req, res) => {
     const user = req.user;
 
-    db.User.findById(user.id).then(user => {
-        res.json({ notifications: user.notifications });
+    db.User.findById(user.id).then(myUser => {
+        res.json({ notifications: myUser.notifications });
     }).catch((err) => {
         res.status(500).json({
             message: err
@@ -272,20 +272,21 @@ userController.getNotifications = (req, res) => {
 
 userController.readNotifs = (req, res) => {
     const user = req.user;
+    const id = req.body.id;
 
     db.User.findByIdAndUpdate(user.id,
     {
 
     })
 
-    db.User.findByIdAndUpdate(user.id).then(myUser => {
-        for (let notification of myUser.notifications) {
+    db.User.findById(user.id).then(myUser => {
+        for(let notification of myUser.notifications) {
             notification.seen = true;
             console.log(notification);
         }
         console.log(myUser.notifications);
         myUser.save();
-
+        res.json({ sucess: true });
     }).catch((err) => {
         res.status(500).json({
             message: err
