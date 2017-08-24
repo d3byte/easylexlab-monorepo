@@ -74,6 +74,12 @@
             <div class="p-a-md">
               <div class="clearfix m-b-lg">
                 <form role="form" class="col-md-6 p-a-0" onsubmit="return false">
+                  <div class="form-group" v-if="!!errorPassword">
+                    <label class="text-danger">{{ errorPassword }}</label>
+                  </div>
+                  <div class="form-group" v-if="!!passwordSuccess">
+                    <label class="text-success">{{ passwordSuccess }}</label>
+                  </div>
                   <div class="form-group">
                     <label>Старый пароль</label>
                     <input v-model="oldPass" type="password" class="form-control">
@@ -86,7 +92,7 @@
                     <label>Повторите новый пароль</label>
                     <input v-model="confPass" type="password" class="form-control">
                   </div>
-                  <button type="submit" class="btn btn-info m-t">Обновить</button>
+                  <button type="submit" class="btn btn-info m-t" @click="checkPass">Обновить</button>
                 </form>
               </div>
 
@@ -107,8 +113,10 @@ export default {
     return {
       errorInfo: '',
       errorLogin: '',
+      errorPassword: '',
       infoSuccess: [],
       loginSuccess: '',
+      passwordSuccess: '',
       oldPass: '',
       newPass: '',
       confPass: '',
@@ -141,10 +149,10 @@ export default {
         }
       }).then(res => {
         if (res.body.success) {
-          this.passwordIsCorrect = true;
-          this.errOldPass = false;
+          this.changePass();
         } else {
-          this.errOldPass = true;
+          this.errorPassword = 'Старый пароль не верный. Попробуйте еще раз';
+          this.passwordSuccess = '';
         }
       });
     },
@@ -167,24 +175,30 @@ export default {
       }
     },
     changePass() {
-      if (this.newPass == this.confPass && !!this.password.length) {
-        const body = {
-          newPassword: this.newPass
-        };
-        this.$http.patch('newpassword', body, {
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.$store.getters.userToken
-          }
-        }).then(res => {
-          if (res.body.success) {
-            this.errNewPass = false;
-            this.errOldPass = false;
-            this.passChanged = true;
-          }
-        });
+      if (this.newPass == this.confPass) {
+        if(this.newPass.length > 5 || this.confPass.length > 5) {
+          const body = {
+            newPassword: this.newPass
+          };
+          this.$http.patch('newpassword', body, {
+            headers: {
+              'Content-type': 'application/json',
+              'Authorization': 'Bearer ' + this.$store.getters.userToken
+            }
+          }).then(res => {
+            console.log(res);
+            if (res.body.success) {
+              this.errorPassword = '';
+              this.passwordSuccess = 'Пароль успешно изменен!';
+            }
+          });
+        } else {
+          this.errorPassword = 'Пароль не должен быть короче 6 символов. Попробуйте еще раз.';
+          this.passwordSuccess = '';
+        }
       } else {
-        this.errNewPass = true;
+        this.errorPassword = 'Введенные пароли не совпадают. Попробуйте еще раз.';
+        this.passwordSuccess = '';
       }
     },
     submitInfo() {
