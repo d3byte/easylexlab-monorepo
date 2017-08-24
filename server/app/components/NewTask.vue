@@ -7,7 +7,7 @@
         <center>
           <h4 v-if="!!this.errorMsg" class="errormsg">{{ this.errorMsg }}</h4>
             <div v-if="this.showEditor">
-              <div  class="row task" v-for="(task, index) in tasks" v-show="task.active">
+              <div class="row task" v-for="(task, index) in tasks" v-show="task.active">
                 <form class="login-form" onsubmit="return false">
                   <table>
                     <tr>
@@ -45,8 +45,20 @@
                 <input type="number" v-model="timeToDo" min="1">
               </label><br>
               <label>
-                Кол-во повторений перед тестом<br>
-                <input type="number" v-model="attempts" min="1">
+                Кол-во повторений змейки<br>
+                <input type="number" v-model="snakeAttempts" min="1">
+              </label><br>
+              <label>
+                Кол-во повторений перебора букв<br>
+                <input type="number" v-model="scrambleAttempts" min="1">
+              </label><br>
+              <label>
+                Кол-во повторений флеш карточек<br>
+                <input type="number" v-model="flashcardsAttempts" min="1">
+              </label><br>
+              <label>
+                Кол-во повторений соотношения(matching)<br>
+                <input type="number" v-model="matchingAttempts" min="1">
               </label><br>
               <button @click="post" class="btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Создать</button>
             </div>
@@ -66,7 +78,10 @@ export default {
       showPost: false,
       errorMsg: '',
       timeToDo: 1,
-      attempts: 1,
+      snakeAttempts: 1,
+      flashcardsAttempts: 1,
+      matchingAttempts: 1,
+      scrambleAttempts: 1,
       name: '',
       success: false,
       groupId: this.$route.params.id
@@ -74,69 +89,39 @@ export default {
   },
   created() {
     var task = {
-      content: [
-        {
-          key: '',
-          value: '',
-          test: ''
-        }
-      ],
+      content: [],
       repeat: 1,
       active: true
     }
     this.tasks.push(task);
+    for(let i = 0; i < 4; i++) {
+      this.tasks[0].content.push({
+        key: '',
+        value: '',
+        test: ''
+      });
+    }
+
   },
   http: {
     root: '//ealapi.tw1.ru/api'
   },
   methods: {
-    add() {
-      var newTask = {
-        content: [
-          {
-            key: '',
-            value: '',
-            test: ''
-          }
-        ],
-        repeat: 1,
-        active: false
-      }
-      this.tasks.push(newTask);
-    },
-    editTask(task) {
-      for(let item of this.tasks) {
-        item.active = false;
-      }
-      task.active = true;
-    },
     newPair(task) {
-      var newPair = {
-        key: '',
-        value: '',
-        test: ''
-      };
-      task.content.push(newPair);
+      for(let i = 0; i < 4; i++) {
+        this.tasks[0].content.push({
+          key: '',
+          value: '',
+          test: ''
+        });
+      }
     },
     confirm() {
-      var allGood = true;
-      for(var task of this.tasks) {
-        if(!allGood)
-          break;
-        for(var pair of task.content) {
-          if(!allGood)
-            break;
-          if(pair.key.length == 0 || pair.value.length == 0) {
-            allGood = false;
-            this.errorMsg = 'Заполните все слова.';
-          }
-        }
-      }
-      if(allGood) {
-        this.errorMsg = '';
-        this.showEditor = false;
-        this.showPost = true;
-      }
+      this.tasks[0].content = this.tasks[0].content.filter(pair => pair.key.length != 0 && pair.value.length != 0
+        || pair.key.length == 0 && pair.value.length != 0 || pair.key.length != 0 && pair.value.length == 0);
+      this.errorMsg = '';
+      this.showEditor = false;
+      this.showPost = true;
     },
     post() {
       console.log(this.$route.params.id);
@@ -145,7 +130,12 @@ export default {
         tasks: this.tasks,
         timeToDo: this.timeToDo,
         groupId: this.$route.params.id,
-        attempts: this.attempts
+        attempts: {
+          snake: this.snakeAttempts,
+          flashcards: this.flashcardsAttempts,
+          matching: this.matchingAttempts,
+          scramble: this.scrambleAttempts
+        }
       };
 
       this.$http.post('newstack', body, {

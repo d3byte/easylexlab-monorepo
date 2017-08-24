@@ -1,9 +1,9 @@
-  const basicConstroller = {};
+const basicConstroller = {};
 
-  basicConstroller.get = (req, res) => {
+basicConstroller.get = (req, res) => {
     res.json({
-      message: 'Welcome to our api!'
+        message: 'Welcome to our api!'
     });
-  };
+};
 
-  export default basicConstroller;
+export default basicConstroller;

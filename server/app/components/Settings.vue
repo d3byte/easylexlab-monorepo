@@ -1,102 +1,137 @@
 <template>
-  <div class="box">
-    <center>
-      <div class="row">
-        <div class="col-lg-12">
-          <h2>Пользовательские настройки</h2>
-          <br>
+  <div>
+    <app-header/>
+    <div class="row-col">
+      <div class="col-sm-3 col-lg-2">
+        <div class="p-y">
+          <div class="nav-active-border left b-primary">
+            <ul class="nav nav-sm">
+              <li class="nav-item">
+                <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Профиль</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Настройки аккаунта</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link block" href data-toggle="tab" data-target="#tab-5">Безопасность</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="row pad">
-        <div class="col-lg-4">
-          <h3>Изменение пароля</h3>
-          <br>
-          <h5 class="errormsg" v-if="errOldPass && !errNewPass">Введен неправильный пароль. Попробуйте еще раз. </h5>
-          <h5 class="errormsg" v-if="!errOldPass && errNewPass">Введенные пароли не совпадают. Попробуйте еще раз. </h5>
-          <h5 class="success" v-if="passChanged">Пароль успешно изменен.</h5>
-          <form onsubmit="return false">
-            <div class="old_pass">
-            <input v-model="oldPass" type="text" placeholder="Старый пароль">
+      <div class="col-sm-9 col-lg-10 light lt bg-auto">
+        <div class="tab-content pos-rlt">
+          <div class="tab-pane active" id="tab-1">
+            <form role="form" class="p-a-md col-md-6" onsubmit="return false">
+              <div class="form-group" v-if="!!errorInfo">
+                <label class="text-danger">{{ errorInfo }}</label>
+              </div>
+              <div class="form-group" v-for="success in infoSuccess">
+                <label class="text-success">{{ success }}</label>
+              </div>
+              <div class="form-group">
+                <label>Аватарка</label>
+                <div class="form-file">
+                  <input type="file">
+                  <button class="btn white">Загрузить новую фотографию</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Имя</label>
+                <input v-model="firstName" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Фамилия</label>
+                <input v-model="lastName" type="text" class="form-control">
+              </div>
+              <div class="form-group" v-if="token.permissions === 'student'">
+                <label>Присоединиться к группе</label>
+                <input v-model="groupCode" type="text" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-info m-t" @click="submitInfo">Обновить</button>
+            </form>
           </div>
-            <br>
-            <div class="new_pass" v-if="passwordIsCorrect">
-            <input v-model="newPass" type="text" placeholder="Новый пароль">
-          </div>
-            <br>
-            <div class="new_pass_conf" v-if="passwordIsCorrect">
-            <input v-model="confPass" type="text" placeholder="Подтвердите пароль">
-          </div>
-          <br>
-          <button @click="checkPass" class="btn btn-primary" v-if="!passwordIsCorrect">Проверить пароль</button>
-          <button @click="changePass" class="btn btn-primary" v-if="passwordIsCorrect">Сменить пароль</button>
-          </form>
-        </div>
-        <div class="col-lg-4">
-          <h3>Изменение данных о пользователе</h3>
-          <br>
-          <h5 class="success" v-if="changeInfo">Информация успешно обновлена. </h5>
-          <form onsubmit="return false">
-            <div class="change_name">
-              <input v-model="newName" type="text" placeholder="Ваше имя">
-            </div>
-            <br>
-            <div class="change_username">
-              <input v-model="newUsername" type="text" placeholder="Ваш логин"> <!-- тут тоже -->
-            </div>
-            <br>
-            <button @click="submitInfo" class="btn btn-primary">Применить изменения</button>
-          </form>
-        </div>
-        <div class="col-lg-4" v-if="user.permissions == 'student'">
-          <h3>Присоединение к группе</h3>
-          <br>
-          <h5 class="success" v-if="joinGroup">Вы успешно присоединились к группе. </h5>
-          <form onsubmit="return false">
 
-          <!-- временный костыль -->
-          <div class="hideme">
-          <input type="text">
+          <div class="tab-pane" id="tab-2">
+            <div class="p-a-md dker _600">Account settings</div>
+            <form role="form" class="p-a-md col-md-6" onsubmit="return false">
+              <div class="form-group" v-if="!!errorLogin">
+                <label class="text-danger">{{ errorLogin }}</label>
+              </div>
+              <div class="form-group" v-if="!!loginSuccess">
+                <label class="text-success">{{ loginSuccess }}</label>
+              </div>
+              <div class="form-group">
+                <label>Логин</label>
+                <input v-model="newUsername" type="text" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-info m-t" @click="changeUsername">Обновить</button>
+            </form>
+          </div>
+
+          <div class="tab-pane" id="tab-5">
+            <div class="p-a-md dker _600">Безопасность</div>
+            <div class="p-a-md">
+              <div class="clearfix m-b-lg">
+                <form role="form" class="col-md-6 p-a-0" onsubmit="return false">
+                  <div class="form-group" v-if="!!errorPassword">
+                    <label class="text-danger">{{ errorPassword }}</label>
+                  </div>
+                  <div class="form-group" v-if="!!passwordSuccess">
+                    <label class="text-success">{{ passwordSuccess }}</label>
+                  </div>
+                  <div class="form-group">
+                    <label>Старый пароль</label>
+                    <input v-model="oldPass" type="password" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Новый пароль</label>
+                    <input v-model="newPass" type="password" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Повторите новый пароль</label>
+                    <input v-model="confPass" type="password" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-info m-t" @click="checkPass">Обновить</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
         </div>
-        <br>
-        <div class="join_group">
-        <input type="text" v-model="groupCode" required placeholder="Код группы">
       </div>
-          <br>
-          <div class="hideme">
-          <input type="text">
-        </div>
-        <br>
-        <!-- конец костыля -->
-          <button @click="addGroup" class="btn btn-primary">Присоединиться к группе</button>
-          </form>
-        </div>
-      </div>
-    </center>
-</div>
+    </div>
+  </div>
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
+import Header from './Header.vue';
+
 export default {
   data() {
     return {
-      passwordIsCorrect: false,
+      errorInfo: '',
+      errorLogin: '',
+      errorPassword: '',
+      infoSuccess: [],
+      loginSuccess: '',
+      passwordSuccess: '',
       oldPass: '',
       newPass: '',
       confPass: '',
-      passChanged: false,
-      errOldPass: false,
-      errNewPass: false,
-      successPass: false,
-      newName: '',
+      firstName: '',
+      lastName: '',
       newUsername: '',
-      changeInfo: false,
       groupCode: '',
-      joinGroup: false
     }
   },
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
     }
   },
   http: {
@@ -113,78 +148,118 @@ export default {
           'Authorization': 'Bearer ' + this.$store.getters.userToken
         }
       }).then(res => {
-        // console.log(res);
-        if(res.body.success) {
-          this.passwordIsCorrect = true;
-          this.errOldPass = false;
+        if (res.body.success) {
+          this.changePass();
         } else {
-          this.errOldPass = true;
+          this.errorPassword = 'Старый пароль не верный. Попробуйте еще раз';
+          this.passwordSuccess = '';
         }
       });
     },
-    changePass() {
-      if(this.newPass == this.confPass) {
+    changeUsername() {
+      if(this.newUsername.length >= 5) {
         const body = {
-          newPassword: this.newPass
+          username: this.newUsername
         };
-        this.$http.patch('newpassword', body, {
+        this.$http.patch('newinfo', body, {
           headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(res => {
-          if(res.body.success) {
-              this.errNewPass = false;
-              this.errOldPass = false;
-              this.passChanged = true;
-          }
+          this.errorLogin = '';
+          this.loginSuccess = 'Логин успешно обновлен!';
         });
       } else {
-        this.errNewPass = true;
+        this.errorLogin = 'Логин должен быть не короче 5 символов. Попробуйте еще раз.';
+      }
+    },
+    changePass() {
+      if (this.newPass == this.confPass) {
+        if(this.newPass.length > 5 || this.confPass.length > 5) {
+          const body = {
+            newPassword: this.newPass
+          };
+          this.$http.patch('newpassword', body, {
+            headers: {
+              'Content-type': 'application/json',
+              'Authorization': 'Bearer ' + this.$store.getters.userToken
+            }
+          }).then(res => {
+            console.log(res);
+            if (res.body.success) {
+              this.errorPassword = '';
+              this.passwordSuccess = 'Пароль успешно изменен!';
+            }
+          });
+        } else {
+          this.errorPassword = 'Пароль не должен быть короче 6 символов. Попробуйте еще раз.';
+          this.passwordSuccess = '';
+        }
+      } else {
+        this.errorPassword = 'Введенные пароли не совпадают. Попробуйте еще раз.';
+        this.passwordSuccess = '';
       }
     },
     submitInfo() {
-      const body = {
-        name: this.newName,
-        username: this.newUsername
-      };
-      this.$http.patch('newinfo', body, {
-        headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + this.$store.getters.userToken
+      if(this.firstName || this.lastName || this.groupCode) {
+        if(!!this.groupCode) {
+          let inGroup = false;
+          for(let group of this.user._groups) {
+            if(group.code == this.groupCode) {
+              inGroup = true;
+              break;
+            }
+          }
+          if(!inGroup) {
+            this.$http.patch('addgroup', { groupCode: this.groupCode }, {
+              headers: {
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer ' + this.$store.getters.userToken
+              }
+            }).then(res => {
+              this.errorInfo = '';
+              this.infoSuccess.push('Вы успешно присоединились к группе!');
+            });
+          } else {
+            this.errorInfo = 'Вы уже состоите в этой группе!';
+          }
         }
-      }).then(res => {
-        this.changeInfo = true;
-      })
-    },
-    addGroup() {
-      const body = {
-        groupCode: this.groupCode
-      };
-      this.$http.patch('addgroup', body, {
-        headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + this.$store.getters.userToken
+        if(!!this.firstName || !!this.lastName) {
+          const body = {
+            firstName: this.firstName,
+            lastName: this.lastName
+          };
+          this.$http.patch('newinfo', body, {
+            headers: {
+              'Content-type': 'application/json',
+              'Authorization': 'Bearer ' + this.$store.getters.userToken
+            }
+          }).then(res => {
+            this.errorInfo = '';
+            this.infoSuccess.push('Информация успешно обновлена!');
+            if(this.firstName)
+              localStorage.firstName = this.firstName;
+            if(this.lastName)
+              localStorage.lastName = this.lastName;
+          });
         }
-      }).then(res => {
-        this.joinGroup = true;
-      })
+      } else {
+        this.errorInfo = 'Необходимо заполнить хотя бы одно из полей. Попробуйте еще раз.';
+      }
     }
   },
   created() {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
+  },
+  components: {
+    'app-header': Header
   }
 }
 </script>
 
 <style lang="css">
-.hideme{
-  visibility: hidden;
-}
 
-.pad{
-  padding: 20px;
-}
 </style>

@@ -71,6 +71,14 @@ export default {
       writeMsg: false
     }
   },
+  computed: {
+    user() {
+      return this.$store.getters.user
+    },
+    logged() {
+      return this.$store.getters.loginState
+    }
+  },
   methods: {
     goto(id) {
       const path = '/group/' + id + '/newtask';
@@ -124,8 +132,10 @@ export default {
     'new-msg': NewMsg
   },
   created() {
-    if (!this.$store.getters.loginState)
-      this.$router.push('/login');
+    if (!this.logged)
+      this.$router.push('/');
+    if(this.user.permissions != 'teacher')
+      this.$router.push('/profile');
     const body = {
       'groupId': this.$route.params.id
     };
@@ -136,7 +146,17 @@ export default {
       }
     }).then(res => {
       this.group = res.body.group;
-      this.studentsLength = this.group._students.length;
+      if(this.group._students)
+        this.studentsLength = this.group._students.length;
+      var haveThisGroup = false;
+      for(let group of this.user._groups) {
+        if(group.code == this.group.code) {
+          haveThisGroup = true;
+          break;
+        }
+      }
+      if(!haveThisGroup)
+        this.$router.push('/profile');
     });
   }
 }

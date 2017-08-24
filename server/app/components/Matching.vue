@@ -3,7 +3,7 @@
     <center>
       <div>
         <h1>Matching</h1>
-        <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+        <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <br>
         <div class="row">
           <div v-for="item in newPairs" class="col-lg-3">
@@ -61,6 +61,15 @@ export default {
   computed: {
     showTest() {
       return this.$store.getters.testAvailable
+    },
+    doneAttempts() {
+      return this.$store.getters.games.matching.done
+    },
+    totalAttempts() {
+      return this.$store.getters.games.matching.attempts
+    },
+    gamesConditions() {
+      return this.$store.getters.finishedGames
     }
   },
   methods: {
@@ -91,13 +100,15 @@ export default {
     checkConditions() {
       $('*').removeClass('correct');
       if(this.correct.length == this.oldPairs.length &&
-         this.$store.getters.attempts + 1 < this.stack.attempts) {
-          this.$store.dispatch('incrementAttemps');
+         this.doneAttempts + 1 < this.totalAttempts) {
+          this.$store.dispatch('incrementAttempts', 'matching');
           this.restart();
       } else if(this.correct.length == this.oldPairs.length &&
-                this.$store.getters.attempts + 1 >= this.stack.attempts) {
-                  this.$store.dispatch('incrementAttemps');
-                  this.$store.dispatch('testAvailable');
+                this.doneAttempts + 1 >= this.totalAttempts) {
+                  this.$store.dispatch('incrementAttempts', 'matching');
+                  this.$store.dispatch('gameFinished', 'matching');
+                  if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+                    this.$store.dispatch('testAvailable');
                   this.allDone();
       }
     },

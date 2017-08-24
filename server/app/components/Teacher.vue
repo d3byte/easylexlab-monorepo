@@ -6,12 +6,12 @@
           <h2 class="white-text">Аватарка</h2>
         </div>
         <div class="col-lg-9 userinfo">
-          <h2 class="name"><b>{{ user.name }}</b><span class="permissions"> - {{ user.permissions == 'student' ? 'ученик' : 'учитель' }}</span></h2>
-          <h3><span  class="school">{{ user.school }}</span></h3>
+          <h2 class="name"><b>{{ firstName + ' ' + lastName }}</b><span class="permissions"> - {{ token.permissions == 'student' ? 'ученик' : 'учитель' }}</span></h2>
+          <h3><span  class="school">{{ school }}</span></h3>
         </div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-      <div class="col-lg-3 box blue vertical-center">
+      <div class="col-lg-3 box blue vertical-center date">
         <h5 class="white-text"> Ближайший день сдачи </h5><br>
         <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
         <h1 class="month white-text">{{ date.slice(2) }}</h1>
@@ -23,30 +23,50 @@
 
 <script>
 import moment from 'moment';
+import jwtDecode from 'jwt-decode';
+
 export default {
   data() {
     return {
-      date: null
+      date: null,
+      firstName: '',
+      lastName: '',
+      school: ''
     }
   },
   computed: {
     user() {
       return this.$store.getters.user
     },
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
+    }
+  },
+  methods: {
+    setDate() {
+      moment.locale('ru');
+      let date = moment().format('LL');
+      date = date.slice(0, date.length - 8);
+      this.date = date;
+    }
   },
   created() {
+    this.firstName = localStorage.firstName;
+    this.lastName = localStorage.lastName;
+    this.school = localStorage.school;
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    moment.locale('ru');
-    let date = moment().format('LL');
-    date = date.slice(0, date.length - 8);
-    this.date = date;
+    this.setDate();
   }
 }
 </script>
 
 <style lang="css" scoped>
+.date h1, .date h5 {
+  font-family: 'Roboto', sans-serif !important;
+}
+
 .number {
   margin-bottom: -15px;
   font-size: 52px;

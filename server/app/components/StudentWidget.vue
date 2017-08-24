@@ -68,16 +68,11 @@ export default {
           var done = false;
           if(test.results) {
             for(let result of test.results) {
-              console.log('Task: ', test);
-              console.log('Username: ', this.user.username);
               if(result.username == this.user.username) {
                 done = true;
               }
             }
-            console.log('Done: ', done);
             if(!done) {
-              console.log('Checking done: ', done);
-              console.log('Pushed to tasks:', test);
               this.tasks.push(test);
             }
           }

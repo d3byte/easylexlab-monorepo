@@ -11,6 +11,7 @@ import Profile from './components/Profile.vue';
 import Settings from './components/Settings.vue';
 import NewGroup from './components/NewGroup.vue';
 import NewTask from './components/NewTask.vue';
+import ForgotPassword from './components/ForgotPassword.vue';
 import ProfileFooter from './components/ProfileFooter.vue';
 import Group from './components/Group.vue';
 import Students from './components/Students.vue';
@@ -24,18 +25,13 @@ Vue.use(VueResource);
 const routes = [
   { path: '/', component: Home },
   { path: '/signup', component: Signup },
+  { path: '/login', component: Login },
+  { path: '/forgotpassword', component: ForgotPassword },
   { path: '/eula', component: Eula },
+  { path: '/settings', component: Settings },
   {
     path: '/profile', component: Profile,
     children: [
-      {
-        path: 'settings',
-        component: Settings
-      },
-      {
-        path: 'newgroup',
-        component: NewGroup
-      },
       {
         path: '',
         component: ProfileFooter
@@ -70,7 +66,7 @@ const routes = [
   }
 ];
 
-const router = new VueRouter({ routes, mode: 'history' });
+const router = new VueRouter({routes, mode: 'history'});
 
 new Vue({
   el: "#app",

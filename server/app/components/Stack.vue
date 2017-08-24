@@ -1,17 +1,16 @@
 <template>
   <div>
     <app-header style="margin-bottom: 60px;"></app-header>
-    <flashcards v-if="games.flashcards" :stack="task"></flashcards>
-    <matching v-if="games.matching" :stack="task"></matching>
-    <snake v-if="games.snake" :stack="task"></snake>
-    <scramble v-if="games.scramble" :stack="task"></scramble>
+    <flashcards v-if="games.flashcards.show" :stack="task"></flashcards>
+    <matching v-if="games.matching.show" :stack="task"></matching>
+    <snake v-if="games.snake.show" :stack="task"></snake>
+    <scramble v-if="games.scramble.show" :stack="task"></scramble>
     <test v-if="showTest" :stack="task"></test>
-    <div v-show="!showTest && !games.matching && !games.flashcards && !games.snake && !games.scramble">
+    <div v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show">
       <div class="container">
         <div class="row box">
           <center>
             <h2>{{ task.name }}</h2>
-            <div class="ui dropdown">
               <div class="text game">Выбрать игру</div>
               <div class="menu">
                 <div @click="showMatching" class="item">
@@ -27,7 +26,6 @@
                   Word Scramble
                 </div>
               </div>
-            </div>
             <button v-if="testAvailable" @click="tryTest" class="btn">Пройти тест</button>
           </center>
         </div>
@@ -80,18 +78,43 @@ export default {
     },
     testAvailable() {
       return this.$store.getters.testAvailable
+    },
+    user() {
+      return this.$store.getters.user
+    },
+    gamesConditions() {
+      return this.$store.getters.finishedGames
     }
   },
   http: {
     root: '//ealapi.tw1.ru/api'
   },
   created() {
+    if(!this.$store.getters.loginState || this.user.permissions != 'student') {
+      this.$router.push('/profile');
+    }
     this.$http.post('gettest', { testId: this.testId }, {
       headers: {
         'Content-type' : 'application/json',
         'Authorization': 'Bearer ' + this.$store.getters.userToken
       }
-    }).then(res => this.task = res.body.stack);
+    }).then(res => {
+      this.task = res.body.stack;
+      var haveThisStack = false;
+      for(let group of this.user._groups) {
+        if(haveThisStack)
+          break;
+        for(let stack of group._tests) {
+          if(stack._id == this.task._id) {
+            haveThisStack = true;
+            break;
+          }
+        }
+      }
+      if(!haveThisStack)
+        this.$router.push('/profile');
+      this.$store.dispatch('setGames', this.task.attempts);
+    });
   },
   mounted() {
     $('.ui.dropdown').dropdown();
