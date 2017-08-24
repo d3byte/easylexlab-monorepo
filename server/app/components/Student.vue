@@ -72,8 +72,8 @@
               <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
               <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
-              <div v-if="!showPreloader && !showAll" class="row">
-                <div v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+              <div v-if="!showPreloader" class="row">
+                <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
                   <div class="taskcontentouter">
                     <div class="taskcontent">
                       <center>
@@ -83,8 +83,7 @@
                     </div>
                   </div>
                 </div>
-                <div v-if="!showPreloader && showAll">
-                <div v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                <div v-show="showAll" v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
                   <div class="taskcontentouter">
                     <div class="taskcontent">
                       <center>
@@ -94,7 +93,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
             </div>
           </div>
