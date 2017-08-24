@@ -83,7 +83,7 @@
                     </div>
                   </div>
                 </div>
-                <div v-show="showAll" v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                <div v-show="showAll" v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
                   <div class="taskcontentouter">
                     <div class="taskcontent">
                       <center>
