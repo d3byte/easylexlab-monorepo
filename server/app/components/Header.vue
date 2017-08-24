@@ -52,6 +52,9 @@
               <router-link class="dropdown-item" to="/settings">
                 Настройки
               </router-link>
+              <router-link class="dropdown-item" to="/settings">
+                Оставить отзыв
+              </router-link>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" @click="logout">Выход</a>
             </div>
