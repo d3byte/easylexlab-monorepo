@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-header style="margin-bottom: 80px;"/>
+    <app-header />
     <admin v-if="token.permissions == 'admin'" />
     <teacher v-if="token.permissions == 'teacher'" />
     <student v-if="token.permissions == 'student'" />
