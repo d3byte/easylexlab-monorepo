@@ -144,7 +144,8 @@ userController.updateInfo = (req, res) => {
     const myUser = req.user;
     const {
       firstName,
-      lastName
+      lastName,
+      username
     } = req.body;
 
     const query = {};
@@ -153,6 +154,8 @@ userController.updateInfo = (req, res) => {
       query.firstName = firstName;
     if(lastName)
       query.lastName = lastName;
+    if(username)
+      query.username = username;
     else if (!firstName && !lastName) {
         return res.json({
             changed: false

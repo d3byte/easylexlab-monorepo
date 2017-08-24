@@ -23,8 +23,8 @@
         <div class="tab-content pos-rlt">
           <div class="tab-pane active" id="tab-1">
             <form role="form" class="p-a-md col-md-6" onsubmit="return false">
-              <div class="form-group" v-if="!!error">
-                <label class="text-danger">{{ error }}</label>
+              <div class="form-group" v-if="!!errorInfo">
+                <label class="text-danger">{{ errorInfo }}</label>
               </div>
               <div class="form-group" v-for="success in infoSuccess">
                 <label class="text-success">{{ success }}</label>
@@ -55,11 +55,17 @@
           <div class="tab-pane" id="tab-2">
             <div class="p-a-md dker _600">Account settings</div>
             <form role="form" class="p-a-md col-md-6" onsubmit="return false">
+              <div class="form-group" v-if="!!errorLogin">
+                <label class="text-danger">{{ errorLogin }}</label>
+              </div>
+              <div class="form-group" v-if="!!loginSuccess">
+                <label class="text-success">{{ loginSuccess }}</label>
+              </div>
               <div class="form-group">
                 <label>Логин</label>
                 <input v-model="newUsername" type="text" class="form-control">
               </div>
-              <button type="submit" class="btn btn-info m-t">Обновить</button>
+              <button type="submit" class="btn btn-info m-t" @click="changeUsername">Обновить</button>
             </form>
           </div>
 
@@ -99,8 +105,10 @@ import Header from './Header.vue';
 export default {
   data() {
     return {
-      error: '',
+      errorInfo: '',
+      errorLogin: '',
       infoSuccess: [],
+      loginSuccess: '',
       oldPass: '',
       newPass: '',
       confPass: '',
@@ -140,6 +148,24 @@ export default {
         }
       });
     },
+    changeUsername() {
+      if(this.newUsername.length >= 5) {
+        const body = {
+          username: this.newUsername
+        };
+        this.$http.patch('newinfo', body, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          this.errorLogin = '';
+          this.loginSuccess = 'Логин успешно обновлен!';
+        });
+      } else {
+        this.errorLogin = 'Логин должен быть не короче 5 символов. Попробуйте еще раз.';
+      }
+    },
     changePass() {
       if (this.newPass == this.confPass && !!this.password.length) {
         const body = {
@@ -178,11 +204,11 @@ export default {
                 'Authorization': 'Bearer ' + this.$store.getters.userToken
               }
             }).then(res => {
-              this.error = '';
+              this.errorInfo = '';
               this.infoSuccess.push('Вы успешно присоединились к группе!');
             });
           } else {
-            this.error = 'Вы уже состоите в этой группе!';
+            this.errorInfo = 'Вы уже состоите в этой группе!';
           }
         }
         if(!!this.firstName || !!this.lastName) {
@@ -196,7 +222,7 @@ export default {
               'Authorization': 'Bearer ' + this.$store.getters.userToken
             }
           }).then(res => {
-            this.error = '';
+            this.errorInfo = '';
             this.infoSuccess.push('Информация успешно обновлена!');
             if(this.firstName)
               localStorage.firstName = this.firstName;
@@ -205,22 +231,9 @@ export default {
           });
         }
       } else {
-        this.error = 'Необходимо заполнить хотя бы одно из полей. Попробуйте еще раз.';
+        this.errorInfo = 'Необходимо заполнить хотя бы одно из полей. Попробуйте еще раз.';
       }
-    },
-    addGroup() {
-      const body = {
-        groupCode: this.groupCode
-      };
-      this.$http.patch('addgroup', body, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }
-      }).then(res => {
-        this.joinGroup = true;
-      })
-    },
+    }
   },
   created() {
     this.$store.dispatch('hideGames');
