@@ -71,14 +71,14 @@
               <div v-if="!showPreloader" class="row">
                 <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
                   <div class="taskcontentouter">
-                  <div class="taskcontent">
-                    <center>
-                  <h3>{{ test.name }}</h3>
-                  <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
-                </center>
+                    <div class="taskcontent">
+                      <center>
+                        <h3>{{ test.name }}</h3>
+                        <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                      </center>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              </div>
               </div>
             </div>
           </div>
@@ -99,11 +99,13 @@
       </div>
       <div class="col-sm-4 col-lg-4">
         <div>
-          <div class="box">
-            <div class="box-header">
-              <h3>Ближайший день сдачи: <b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
+          <center>
+            <div class="box blue vertical-center date">
+              <h4>Ближайший день сдачи:</h4>
+              <br>
+              <h3><b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
             </div>
-          </div>
+          </center>
         </div>
       </div>
     </div>
