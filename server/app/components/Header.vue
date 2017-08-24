@@ -2,7 +2,10 @@
     <div class="app-header white box-shadow">
       <div class="navbar">
         <!-- Page title - Bind to $state's title -->
-        <div class="navbar-item pull-left h5" id="pageTitle">Логотип</div>
+        <div class="navbar-item pull-left h5" id="pageTitle">
+          <img src="pics/logo.png" class="logo">
+          EasyLexLab
+        </div>
 
         <!-- navbar right -->
         <ul class="nav navbar-nav pull-right" v-if="logged">
@@ -195,5 +198,11 @@
 
   .nav > li > a:hover, .nav > li > a:focus {
     background: none;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    margin-right: -5px;
   }
 </style>
