@@ -60,7 +60,7 @@
       </div>
     </div>
   </div>
-    <div class="row checkbox">
+    <div v-show="showTasks" class="row checkbox">
       <input type="checkbox" id="padding" v-model="showAll">
       <label for="padding" id="nope">Показывать все задания</label>
   </div>
