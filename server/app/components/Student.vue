@@ -89,8 +89,8 @@
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
               <div v-if="!showPreloader" class="row">
                 <div id="test_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                  <h4><b>{{ msg.author }}</b></h4>
-                  <p>{{ msg.text }}</p>
+                  <h5>От кого: <b>{{ msg.author }}</b></h5>
+                  <p>Содержание: {{ msg.text }}</p>
                 </div>
               </div>
             </div>
