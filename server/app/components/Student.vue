@@ -66,10 +66,12 @@
         <div class="tab-content">
           <div v-if="showTasks">
             <div class="tab-pane p-v-sm" id="tab_1">
-              <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3>
+              <h3 v-if="!!!uncompletedTasks.length && !showPreloader">Невыполненных заданий нет</h3>
+              <!-- <h3 v-if="!!!tasks.length && !showPreloader">Заданий нет</h3> -->
+              <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
               <div v-if="!showPreloader" class="row">
-                <div v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                <div v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
                   <div class="taskcontentouter">
                     <div class="taskcontent">
                       <center>
@@ -126,6 +128,7 @@ export default {
       lastName: '',
       school: '',
       tasks: [],
+      uncompletedTasks: [],
       messages: [],
       showPreloader: true,
       showTasks: true,
@@ -178,9 +181,10 @@ export default {
               }
             }
             if (!done) {
-              this.tasks.push(test);
+              this.uncompletedTasks.push(test);
             }
           }
+          this.tasks.push(test);
         }
       }
       this.showPreloader = false;
