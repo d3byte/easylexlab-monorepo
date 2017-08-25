@@ -64,9 +64,9 @@
       </div>
     </div>
   </div>
-    <div v-show="showTasks" class="row checkbox">
-      <input type="checkbox" id="padding" v-model="showAll">
-      <label for="padding" id="nope">Показывать все задания</label>
+  <div v-show="showTasks" class="row checkbox">
+    <input type="checkbox" id="padding" v-model="showAll">
+    <label for="padding" id="nope">Показывать все задания</label>
   </div>
   <div class="row">
     <div class="col-sm-8 col-lg-8">
@@ -101,22 +101,11 @@
             </div>
           </div>
         </div>
-
-        <div v-if="showMsgs">
-          <div class="tab-pane p-v-sm" id="tab_2">
-            <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
-            <i v-if="showPreloader" class="material-icons preloader">cached</i>
-            <div v-if="!showPreloader" class="row">
-              <div id="msg_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <h5>От кого: <b>{{ msg.author }}</b></h5>
-                <p>Содержание: {{ msg.text }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-    <div class="col-sm-4 col-lg-4">
+
+
+    <div v-if="showTasks" class="col-sm-4 col-lg-4">
       <div>
         <center>
           <div class="box blue vertical-center date">
@@ -127,9 +116,63 @@
         </center>
       </div>
     </div>
+
+
+        <div v-if="showMsgs">
+          <div class="col-lg-12 col-sm-12">
+          <div class="padding">
+          <div class="tab-pane p-v-sm" id="tab_2">
+            <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
+            <i v-if="showPreloader" class="material-icons preloader">cached</i>
+            <div v-if="!showPreloader" class="row">
+              <!-- <div id="msg_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h5>От кого: <b>{{ msg.author }}</b></h5>
+                <p>Содержание: {{ msg.text }}</p>
+                <tr>
+                <td></td>
+              </tr>
+              </div> -->
+
+                <div class="box" v-for="(msg, index) in group.messages">
+                  <div class="box-header">
+                    <h2>Входящие сообщения</h2>
+                  </div>
+                  <div class="table-responsive">
+                    <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                      <thead>
+                        <tr>
+                          <th style="width:2%">#</th>
+                          <th style="width:10%">Дата</th>
+                          <th style="width:15%">От кого</th>
+                          <th style="width:15%">Сообщение</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <td>1</td>
+                        <td>25.07.2017</td>
+                        <td>Митя Никулин</td>
+                        <td>Ты хуй!</td> -->
+                        <td>{{ index + 1}}</td>
+                        <td></td>
+                        <td>{{ msg.author}}</td>
+                        <td>{{ msg.text}}</td>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <center>
+                  <button class="btn btn-primary">Показать еще</button>
+                </center>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
   </div>
-  <!-- </div> -->
-</div>
 </div>
 </template>
 
@@ -199,6 +242,12 @@ export default {
           }
         }
         this.tasks.push(test);
+      }
+    },
+    msgNum() {
+      var x = 0;
+      for (msg in group.messages) {
+        x++;
       }
     }
   },
