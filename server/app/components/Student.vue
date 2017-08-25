@@ -50,10 +50,14 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
-              <a class="nav-link" @click="switchTasks" :class="showTasks ? 'active' : ''" data-target="#tab_1">Задания</a>
+              <a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="switchMsgs" :class="showMsgs ? 'active' : ''" data-target="#tab_2">Сообщения</a>
+              <a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a>
+
+            </li>
+            <li class="nav-item" v-for="group in user._groups">
+              <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
             </li>
           </ul>
         </div>
@@ -174,6 +178,28 @@ export default {
     switchMsgs() {
       this.showTasks = false;
       this.showMsgs = true;
+    },
+    changeGroup(group) {
+      this.$store.dispatch('changeCurrentGroup', group);
+      this.sortTasks();
+    },
+    sortTasks() {
+      this.tasks = [];
+      this.uncompletedTasks = [];
+      for (var test of this.group._tests) {
+        var done = false;
+        if (test.results) {
+          for (let result of test.results) {
+            if (result.username == this.user.username) {
+              done = true;
+            }
+          }
+          if (!done) {
+            this.uncompletedTasks.push(test);
+          }
+        }
+        this.tasks.push(test);
+      }
     }
   },
   created() {
@@ -186,20 +212,7 @@ export default {
     this.setDate();
     setTimeout(() => {
       if (this.group._tests) {
-        for (var test of this.group._tests) {
-          var done = false;
-          if (test.results) {
-            for (let result of test.results) {
-              if (result.username == this.user.username) {
-                done = true;
-              }
-            }
-            if (!done) {
-              this.uncompletedTasks.push(test);
-            }
-          }
-          this.tasks.push(test);
-        }
+        this.sortTasks();
       }
       this.showPreloader = false;
       if (this.group.messages) {
@@ -207,7 +220,6 @@ export default {
           this.messages.push(msg);
         }
       }
-      this.showPreloader = false;
     }, 150);
   }
 }
