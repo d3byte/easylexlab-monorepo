@@ -1,24 +1,4 @@
 <template>
-<!-- <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
-        <div class="col-lg-3 ava blue vertical-center">
-          <h2 class="white-text">Аватарка</h2>
-        </div>
-        <div class="col-lg-9 userinfo">
-          <h2 class="name"><b>{{ firstName + ' ' + lastName }}</b><span class="permissions"> - {{ token.permissions == 'student' ? 'ученик' : 'учитель' }}</span></h2>
-          <h3><span  class="school">{{ school }}</span></h3>
-        </div>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-      <div class="col-lg-3 box blue vertical-center date">
-        <h5 class="white-text"> Ближайший день сдачи </h5><br>
-        <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
-        <h1 class="month white-text">{{ date.slice(2) }}</h1>
-      </div>
-    </div>
-    <router-view></router-view>
-  </div> -->
 <div>
   <div class="item">
     <div class="item-bg">
