@@ -220,12 +220,6 @@ export default {
         this.tasks.push(test);
       }
     },
-    msgNum() {
-      var x = 0;
-      for (msg in group.messages) {
-        x++;
-      }
-    }
   },
   created() {
     this.firstName = localStorage.firstName;
