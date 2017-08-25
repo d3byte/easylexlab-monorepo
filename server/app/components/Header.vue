@@ -152,6 +152,7 @@
                     'Authorization': 'Bearer ' + this.$store.getters.userToken
                   }
                 }).then(res => {
+                    console.log(res);
                 });
                 }
               }

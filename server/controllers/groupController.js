@@ -217,36 +217,37 @@ groupController.newMsg = (req, res) => {
     const user = req.user;
     const {
         groupId,
-        msgText,
-        author
+        msgText
     } = req.body;
-
-    const message = {
-        author: author.name,
-        pic: author.avaUrl,
-        text: msgText
-    };
-
-    const notification = {
-        type: 'newMsg',
-        author: author.name,
-        pic: author.avaUrl,
-        text: `${fullName} прислал(а) вам сообщение.`,
-        seen: false
-    };
 
 
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
-        db.Group.findByIdAndUpdate(groupId, {
-            $push: {messages: message}
-        }).then(group => {
-            console.log(group);
-            db.User.update({_groups: {$in: [groupId]}},
-                {$push: {notifications: notification}}).then(success => {
-                console.log(success);
-                res.json({success: true});
-            }).catch(error => {
-                throw error
+        db.User.findById(user.id).then(userAccount => {
+            const message = {
+                author: userAccount.firstName + " " + userAccount.lastName,
+                pic: userAccount.picUrl,
+                text: msgText
+            };
+
+            const notification = {
+                type: 'newMsg',
+                author: userAccount.firstName + " " + userAccount.lastName,
+                pic: userAccount.picUrl,
+                text: `${userAccount.firstName + " " + userAccount.lastName} прислал(а) вам сообщение.`,
+                seen: false
+            };
+
+            db.Group.findByIdAndUpdate(groupId, {
+                $push: {messages: message}
+            }).then(group => {
+                db.User.update({_groups: {$in: [groupId]}},
+                    {$push: {notifications: notification}}).then(success => {
+                    res.json({success: true});
+                }).catch(error => {
+                    throw error
+                });
+            }).catch(err => {
+                throw err
             });
         }).catch(err => {
             throw err

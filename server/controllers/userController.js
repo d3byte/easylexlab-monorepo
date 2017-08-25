@@ -9,7 +9,8 @@ const userController = {};
 
 userController.post = (req, res) => {
     const {
-        name,
+        firstName,
+        lastName,
         username,
         email,
         password,
@@ -33,7 +34,8 @@ userController.post = (req, res) => {
                     if (!!groupCode.length) {
                         db.Group.findOne({code: groupCode}).then(group => {
                             const user = new db.User({
-                                name,
+                                firstName,
+                                lastName,
                                 username,
                                 email,
                                 password,
@@ -56,7 +58,8 @@ userController.post = (req, res) => {
                         });
                     } else {
                         const user = new db.User({
-                            name,
+                            firstName,
+                            lastName,
                             username,
                             email,
                             password,
@@ -262,6 +265,7 @@ userController.getNotifications = (req, res) => {
     const user = req.user;
 
     db.User.findById(user.id).then(myUser => {
+        console.log(myUser.notifications);
         res.json({ notifications: myUser.notifications });
     }).catch((err) => {
         res.status(500).json({

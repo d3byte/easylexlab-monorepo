@@ -111,7 +111,7 @@
                     this.errorMsg = 'Длина пароля должна быть не меньше 6 символов';
                     this.error = true;
                 }
-                if (this.agree && !!this.role.length && !!this.name.length && this.username.length >= 5 && !!this.email.length && this.password.length >= 6 && !!this.school.length) {
+                if (this.agree && !!this.role.length && this.username.length >= 5 && !!this.email.length && this.password.length >= 6 && !!this.school.length) {
                     this.showPreloader = true;
                     const body = {
                         firstName: this.firstName,
