@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <app-header style="margin-bottom: 80px;" />
-    <div class="container">
+    <app-header/>
+    <!-- <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
           <div class="col-lg-3 ava blue vertical-center">
@@ -42,18 +42,126 @@
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
         <div class="col-lg-3 box blue vertical-center">
           <h5 class="white-text"> Полезная статистика </h5><br>
-          <!-- <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
-          <h1 class="month white-text">{{ date.slice(2) }}</h1> -->
         </div>
       </div>
-      <!-- <router-view></router-view> -->
-    </div>
-    <div class="container-fluid">
+    </div> -->
+    <!-- <div class="container-fluid">
       <div class="box">
         <router-view :group="this.group" :groupid="this.$route.params.id"></router-view>
       </div>
+    </div> -->
+    <div class="row-col b-b">
+    	<div class="row">
+    		<div class="padding">
+    			<div class="margin">
+    				<h5 class="m-b-0 _300">Название группы</h5>
+    			</div>
+    			<div class="row-col box">
+    				<div class="col-sm-12">
+    					<div class="box-header">
+    						<h3>Меню</h3>
+    					</div>
+    					<div class="box-body">
+    						<p class="text-muted m-b-md">Здесь вы можете создать новое задание или написать сообщение.</p>
+    						<a href class="btn btn-sm rounded success">Новое задание</a>
+                <a href class="btn btn-sm rounded primary">Новое сообщение</a>
+                <a href class="btn btn-sm rounded info">Код регистрации</a>
+    					</div>
+            </div>
+    	    </div>
+    			<div class="row">
+    				<div class="col-sm-6">
+    					<div class="box">
+    						<div class="box-header">
+    							<h3>Последние отправленные сообщения</h3>
+    						</div>
+    						<div class="box-body">
+                  <ul class="list-group no-border m-b">
+    				        <li class="list-group-item">
+    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
+    				          <div class="clear">
+    				            <a href="" class="_500 block">Автор</a>
+    				            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+    				          </div>
+    				        </li>
+    				        <li class="list-group-item">
+    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
+    				          <div class="clear">
+    				            <a href="" class="_500 block">Автор</a>
+    				            <span class="text-muted">Sectetur adipiscing elit</span>
+    				          </div>
+    				        </li>
+    				        <li class="list-group-item">
+    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
+    				          <div class="clear">
+    				            <a href="" class="_500 block">Автор</a>
+    				            <span class="text-muted">Sectetur adipiscing elit</span>
+    				          </div>
+    				        </li>
+    				        <li class="list-group-item">
+    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
+    				          <div class="clear">
+    				            <a href="" class="_500 block">Автор</a>
+    				            <span class="text-muted">Vestibulum ullamcorper sodales nisi nec condimentum</span>
+    				          </div>
+    				        </li>
+    					    </ul>
+                  <a href class="btn btn-sm rounded info">Посмотреть все</a>
+    						</div>
+    			    </div>
+    				</div>
+    				<div class="col-sm-6">
+    	        <div class="grey lt">
+            		<div class="box-header">
+      	          <h3>Статистика</h3>
+      	          <small>Результаты за последний модуль</small>
+      	        </div>
+      	        <div class="box-body">
+      	            Гистограмма
+      	        </div>
+    	        </div>
+    				</div>
+    			</div>
+          <div class="row-col">
+            <table class="table table-striped b-t b-b box">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Ученик</th>
+                  <th>Результат 1</th>
+                  <th>Результат 2</th>
+                  <th>Результат 3</th>
+                  <th>Результат 4</th>
+                  <th>Результат 5</th>
+                  <th><a class="btn-sm rounded primary text-white">-></a></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <th>Савтыра Сергей</th>
+                  <th>99%</th>
+                  <th>99%</th>
+                  <th>99%</th>
+                  <th>99%</th>
+                  <th>100%</th>
+                </tr>
+                <tr>
+                  <th>1</th>
+                  <th>Дмитрий Никулин</th>
+                  <th>99%</th>
+                  <th>99%</th>
+                  <th>99%</th>
+                  <th>99%</th>
+                  <th>100%</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    		</div>
+    	</div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -164,94 +272,5 @@ export default {
 
 
 <style lang="css" scoped>
-  .row {
-    vertical-align: middle;
-  }
 
-  .fl{
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .col-lg-8 {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .btn-first {
-    margin-right: 50px;
-  }
-
-  .groupCode{
-    /*margin-right: 30px; */
-  }
-
-  .number {
-    margin-bottom: -15px;
-    font-size: 52px;
-  } .month {
-    font-size: 20px;
-  }
-
-  h5.white-text {
-    opacity: 0.75;
-  }
-
-  .deadline {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .col-lg-8.box, .row {
-    padding: 0 !important;
-  }
-
-  .ava {
-    justify-content: center;
-    min-height: 160px;
-  }
-
-  .permissions {
-    font-size: 16px;
-    opacity: 0.75;
-  }
-
-  .userinfo {
-    padding: 20px;
-    padding-left: 30px;
-  }
-
-  .name, .school {
-    font-weight: bold;
-  } .school {
-    opacity: 0.75;
-  }
-
-  .box {
-    background-color: #fff;
-    min-height: 160px;
-    border-radius: 2px;
-  }
-
-  .row:first-of-type {
-    margin-bottom: 25px;
-  }
-
-  .row:nth-of-type(2) {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .blue { /* лабуди лабудай */
-    background-color: rgb(29,157,244);
-    color: white;
-  }
-
-  .container {
-    width: 75%;
-  }
 </style>
