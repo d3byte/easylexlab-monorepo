@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <newgroup v-if="logged" />
+    <newmsg v-if="logged" />
+    <regcode v-if="logged" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import NewGroup from './components/NewGroup.vue';
+import NewMsg from './components/NewMsg.vue';
+import RegCode from './components/RegCode.vue';
+
 export default {
   computed: {
     logged() {
@@ -14,7 +19,9 @@ export default {
     }
   },
   components: {
-    'newgroup': NewGroup
+    'newgroup': NewGroup,
+    'newmsg': NewMsg,
+    'regcode': RegCode
   }
 }
 </script>

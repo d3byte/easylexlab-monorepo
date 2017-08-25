@@ -4,7 +4,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal</h5>
+          <h5 class="modal-title">Новая группа</h5>
         </div>
         <div class="modal-body text-center p-lg">
           <h5 class="success" v-if="success">

@@ -232,7 +232,7 @@ groupController.newMsg = (req, res) => {
 
             const notification = new db.Notification({
                 type: 'newMsg',
-                _author: userAccount.firstName + " " + userAccount.lastName,
+                _author: userAccount._id,
                 pic: userAccount.picUrl,
                 text: `${userAccount.firstName + " " + userAccount.lastName} прислал(а) вам сообщение.`,
                 seen: false
