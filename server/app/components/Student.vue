@@ -148,10 +148,6 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- <td>1</td>
-                        <td>25.07.2017</td>
-                        <td>Митя Никулин</td>
-                        <td>Ты хуй!</td> -->
                         <td>{{ index + 1}}</td>
                         <td></td>
                         <td>{{ msg.author}}</td>
