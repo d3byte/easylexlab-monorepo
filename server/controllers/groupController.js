@@ -226,29 +226,32 @@ groupController.newMsg = (req, res) => {
             const message = {
                 author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
+                date: Date.now,
                 text: msgText
             };
 
-            const notification = {
+            const notification = new db.Notification({
                 type: 'newMsg',
-                author: userAccount.firstName + " " + userAccount.lastName,
+                _author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
                 text: `${userAccount.firstName + " " + userAccount.lastName} прислал(а) вам сообщение.`,
                 seen: false
-            };
-
-            db.Group.findByIdAndUpdate(groupId, {
-                $push: {messages: message}
-            }).then(group => {
-                db.User.update({_groups: {$in: [groupId]}},
-                    {$push: {notifications: notification}}).then(success => {
-                    res.json({success: true});
-                }).catch(error => {
-                    throw error
-                });
-            }).catch(err => {
-                throw err
             });
+
+            notification.save().then(notif => {
+              db.Group.findByIdAndUpdate(groupId, {
+                  $push: { messages: message }
+              }).then(group => {
+                  db.User.update({ _groups: { $in: [groupId] }},
+                      { $push: { notifications: notif } }).then(success => {
+                      res.json({ success: true });
+                  }).catch(error => {
+                      throw error
+                  });
+              }).catch(err => {
+                  throw err
+              });
+            })
         }).catch(err => {
             throw err
         });

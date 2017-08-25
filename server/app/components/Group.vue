@@ -54,7 +54,7 @@
     	<div class="row">
     		<div class="padding">
     			<div class="margin">
-    				<h5 class="m-b-0 _300">Название группы</h5>
+    				<h5 class="m-b-0 _300">{{ group.name }}</h5>
     			</div>
     			<div class="row-col box">
     				<div class="col-sm-12">
@@ -77,36 +77,25 @@
     						</div>
     						<div class="box-body">
                   <ul class="list-group no-border m-b">
-    				        <li class="list-group-item">
-    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
+                    <li class="list-group-item checkbox">
+                      <input type="checkbox" id="padding" v-model="showAll">
+                      <label for="padding" id="nope">Посмотреть все</label>
+                    </li>
+    				        <li v-show="showAll" class="list-group-item" v-for="msg in group.messages">
+    				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
     				          <div class="clear">
-    				            <a href="" class="_500 block">Автор</a>
-    				            <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+    				            <a href="" class="_500 block">{{ msg.author }}</a>
+    				            <span class="text-muted">{{ msg.text }}</span>
     				          </div>
     				        </li>
-    				        <li class="list-group-item">
-    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
+                    <li v-show="!showAll" class="list-group-item" v-for="msg in splicedMessages">
+    				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
     				          <div class="clear">
-    				            <a href="" class="_500 block">Автор</a>
-    				            <span class="text-muted">Sectetur adipiscing elit</span>
-    				          </div>
-    				        </li>
-    				        <li class="list-group-item">
-    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
-    				          <div class="clear">
-    				            <a href="" class="_500 block">Автор</a>
-    				            <span class="text-muted">Sectetur adipiscing elit</span>
-    				          </div>
-    				        </li>
-    				        <li class="list-group-item">
-    				          <a href="" class="pull-left w-40 m-r"><img src="../assets/images/a4.jpg" class="img-responsive img-circle"></a>
-    				          <div class="clear">
-    				            <a href="" class="_500 block">Автор</a>
-    				            <span class="text-muted">Vestibulum ullamcorper sodales nisi nec condimentum</span>
+    				            <a href="" class="_500 block">{{ msg.author }}</a>
+    				            <span class="text-muted">{{ msg.text }}</span>
     				          </div>
     				        </li>
     					    </ul>
-                  <a href class="btn btn-sm rounded info">Посмотреть все</a>
     						</div>
     			    </div>
     				</div>
@@ -173,7 +162,9 @@ export default {
     return {
       group: {},
       groupCode: '',
+      splicedMessages: [],
       studentsLength: null,
+      showAll: false,
       showModal: false,
       showCode: false,
       writeMsg: false
@@ -265,6 +256,8 @@ export default {
       }
       if(!haveThisGroup)
         this.$router.push('/profile');
+
+      this.splicedMessages = this.group.messages.slice(0, 4);
     });
   }
 }
@@ -272,5 +265,7 @@ export default {
 
 
 <style lang="css" scoped>
-
+#nope {
+  padding-left: 0;
+}
 </style>
