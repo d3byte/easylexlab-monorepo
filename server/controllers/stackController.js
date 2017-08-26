@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import moment from 'moment';
 import secret from './../secret';
 
 import db from './../models';
@@ -17,8 +18,6 @@ stackController.post = (req, res) => {
         groupId,
         attempts
     } = req.body;
-
-    // TODO: use lodash to refactor the code
 
     const user = req.user;
 
@@ -42,18 +41,16 @@ stackController.post = (req, res) => {
                   date: moment().format('LL')
               };
               db.User.update({ _groups: { $in: [groupId] }},
-                  { $push: { notifications: notification } }).then(success => {
-                  res.json({ success: true });
+                  { $push: { notifications: notification }}, {
+                    multi: true
+                  }).then(success => {
+                  return res.json({ success: true, stack });
               }).catch(error => {
                   throw error
               });
             })
-            res.status(200).json({
-                success: true,
-                stack
-            });
         }).catch(err => {
-            res.status(500).json({err: 'error'});
+            return res.status(500).json({err: 'error'});
         });
     }
 };

@@ -165,7 +165,7 @@
         },
         created() {
           setTimeout(() => {
-            this.notifications = this.user.notifications;
+            this.notifications = this.user.notifications.reverse();
             for(let notification of this.notifications) {
               console.log(notification)
               if(!notification.seen)

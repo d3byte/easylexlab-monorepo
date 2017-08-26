@@ -38,11 +38,11 @@
               </div>
               <div class="form-group">
                 <label>Имя</label>
-                <input v-model="firstName" type="text" class="form-control">
+                <input v-model="firstName" type="text" class="form-control" :placeholder="firstNamePlaceholder">
               </div>
               <div class="form-group">
                 <label>Фамилия</label>
-                <input v-model="lastName" type="text" class="form-control">
+                <input v-model="lastName" type="text" class="form-control" :placeholder="lastNamePlaceholder">
               </div>
               <div class="form-group" v-if="token.permissions === 'student'">
                 <label>Присоединиться к группе</label>
@@ -121,6 +121,8 @@ export default {
       newPass: '',
       confPass: '',
       firstName: '',
+      firstNamePlaceholder: '',
+      lastNamePlaceholder: '',
       lastName: '',
       newUsername: '',
       groupCode: '',
@@ -253,8 +255,8 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    this.firstName = localStorage.firstName;
-    this.lastName = localStorage.lastName;
+    this.firstNamePlaceholder = localStorage.firstName;
+    this.lastNamePlaceholder = localStorage.lastName;
   },
   components: {
     'app-header': Header

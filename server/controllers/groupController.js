@@ -243,11 +243,17 @@ groupController.newMsg = (req, res) => {
                 date: moment().format('LL')
             };
 
+            console.log(notification);
+
             db.Group.findByIdAndUpdate(groupId, {
                 $push: { messages: message }
             }).then(group => {
+                console.log('kek');
+                console.log(groupId);
                 db.User.update({ _groups: { $in: [groupId] }},
-                    { $push: { notifications: notification } }).then(success => {
+                    { $push: { notifications: notification }}, {
+                      multi: true
+                    }).then(success => {
                     res.json({ success: true });
                 }).catch(error => {
                     throw error
