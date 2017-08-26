@@ -253,6 +253,8 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
+    this.firstName = localStorage.firstName;
+    this.lastName = localStorage.lastName;
   },
   components: {
     'app-header': Header
