@@ -15,7 +15,7 @@
   <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" sizes="196x196" href="../assets/images/logo.png">
-
+  
   <!-- style -->
   <link rel="stylesheet" href="../assets/animate.css/animate.min.css" type="text/css" />
   <link rel="stylesheet" href="../assets/glyphicons/glyphicons.css" type="text/css" />
@@ -48,12 +48,12 @@
       </div>
       <div flex class="hide-scroll">
           <nav class="scroll nav-light">
-
+            
               <ul class="nav" ui-nav>
                 <li class="nav-header hidden-folded">
                   <small class="text-muted">Main</small>
                 </li>
-
+                
                 <li>
                   <a href="dashboard.html" >
                     <span class="nav-icon">
@@ -64,7 +64,7 @@
                     <span class="nav-text">Dashboard</span>
                   </a>
                 </li>
-
+            
                 <li>
                   <a>
                     <span class="nav-caret">
@@ -98,7 +98,7 @@
                     </li>
                   </ul>
                 </li>
-
+            
                 <li>
                   <a>
                     <span class="nav-caret">
@@ -129,7 +129,7 @@
                     </li>
                   </ul>
                 </li>
-
+            
                 <li>
                   <a href="widget.html" >
                     <span class="nav-icon">
@@ -140,11 +140,11 @@
                     <span class="nav-text">Widgets</span>
                   </a>
                 </li>
-
+            
                 <li class="nav-header hidden-folded">
                   <small class="text-muted">Components</small>
                 </li>
-
+            
                 <li>
                   <a>
                     <span class="nav-caret">
@@ -248,7 +248,7 @@
                     </li>
                   </ul>
                 </li>
-
+            
                 <li>
                   <a>
                     <span class="nav-caret">
@@ -335,7 +335,7 @@
                     </li>
                   </ul>
                 </li>
-
+            
                 <li>
                   <a>
                     <span class="nav-caret">
@@ -391,7 +391,7 @@
                     </li>
                   </ul>
                 </li>
-
+            
                 <li>
                   <a>
                     <span class="nav-caret">
@@ -490,17 +490,17 @@
                     </li>
                   </ul>
                 </li>
-
+            
                 <li class="nav-header hidden-folded">
                   <small class="text-muted">Help</small>
                 </li>
-
+                
                 <li class="hidden-folded" >
                   <a href="docs.html" >
                     <span class="nav-text">Documents</span>
                   </a>
                 </li>
-
+            
               </ul>
           </nav>
       </div>
@@ -520,7 +520,7 @@
     </div>
   </div>
   <!-- / -->
-
+  
   <!-- content -->
   <div id="content" class="app-content box-shadow-z0" role="main">
     <div class="app-header white box-shadow">
@@ -530,10 +530,10 @@
               <i class="material-icons">&#xe5d2;</i>
             </a>
             <!-- / -->
-
+        
             <!-- Page title - Bind to $state's title -->
             <div class="navbar-item pull-left h5" ng-bind="$state.current.data.title" id="pageTitle"></div>
-
+        
             <!-- navbar right -->
             <ul class="nav navbar-nav pull-right">
               <li class="nav-item dropdown pos-stc-xs">
@@ -559,7 +559,7 @@
               </li>
             </ul>
             <!-- / navbar right -->
-
+        
             <!-- navbar collapse -->
             <div class="collapse navbar-toggleable-sm" id="collapse">
               <div ui-include="'../views/blocks/navbar.form.right.html'"></div>
@@ -600,10 +600,19 @@
       <div class="nav-active-border left b-primary">
         <ul class="nav nav-sm">
           <li class="nav-item">
-            <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Профиль</a>
+            <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link block" href data-toggle="tab" data-target="#tab-5">Безопасность</a>
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Account Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Emails</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-4">Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-5">Security</a>
           </li>
         </ul>
       </div>
@@ -612,45 +621,142 @@
   <div class="col-sm-9 col-lg-10 light lt bg-auto">
     <div class="tab-content pos-rlt">
       <div class="tab-pane active" id="tab-1">
+        <div class="p-a-md dker _600">Public profile</div>
         <form role="form" class="p-a-md col-md-6">
           <div class="form-group">
-            <label>Аватарка</label>
+            <label>Profile picture</label>
             <div class="form-file">
               <input type="file">
-              <button class="btn white">Загрузить новую фотографию</button>
+              <button class="btn white">Upload new picture</button>
             </div>
           </div>
           <div class="form-group">
-            <label>Имя</label>
+            <label>First Name</label>
             <input type="text" class="form-control">
           </div>
           <div class="form-group">
-            <label>Фамилия</label>
+            <label>Last Name</label>
             <input type="text" class="form-control">
           </div>
-          <button type="submit" class="btn btn-info m-t">Обновить</button>
+          <div class="form-group">
+            <label>URL</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Available for hire
+            </label>
+          </div>
+          <button type="submit" class="btn btn-info m-t">Update</button>
+        </form>
+      </div>
+      <div class="tab-pane" id="tab-2">
+        <div class="p-a-md dker _600">Account settings</div>
+        <form role="form" class="p-a-md col-md-6">
+          <div class="form-group">
+            <label>Client ID</label>
+            <input type="text" disabled class="form-control" value="d6386c0651d6380745846efe300b9869">
+          </div>
+          <div class="form-group">
+            <label>Secret Key</label>
+            <input type="text" disabled class="form-control" value="3f9573e88f65787d86d8a685aeb4bd13">
+          </div>
+          <div class="form-group">
+            <label>App Name</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>App URL</label>
+            <input type="text" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-info m-t">Update</button>
+        </form>
+      </div>
+      <div class="tab-pane" id="tab-3">
+        <div class="p-a-md dker _600">Emails</div>
+        <form role="form" class="p-a-md col-md-6">
+          <p>E-mail me whenever</p>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone posts a comment
+            </label>
+          </div>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone follow me
+            </label>
+          </div>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
+            </label>
+          </div>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
+            </label>
+          </div>
+          <button type="submit" class="btn btn-info m-t">Update</button>
+        </form>
+      </div>
+      <div class="tab-pane" id="tab-4">
+        <div class="p-a-md dker _600">Notifications</div>
+        <form role="form" class="p-a-md col-md-6">
+          <p>Notice me whenever</p>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone seeing my profile page
+            </label>
+          </div>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone follow me
+            </label>
+          </div>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
+            </label>
+          </div>
+          <div class="checkbox">
+            <label class="ui-check">
+              <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
+            </label>
+          </div>
+          <button type="submit" class="btn btn-info m-t">Update</button>
         </form>
       </div>
       <div class="tab-pane" id="tab-5">
-        <div class="p-a-md dker _600">Безопасность</div>
+        <div class="p-a-md dker _600">Security</div>
         <div class="p-a-md">
           <div class="clearfix m-b-lg">
             <form role="form" class="col-md-6 p-a-0">
               <div class="form-group">
-                <label>Старый пароль</label>
+                <label>Old Password</label>
                 <input type="password" class="form-control">
               </div>
               <div class="form-group">
-                <label>Новый пароль</label>
+                <label>New Password</label>
                 <input type="password" class="form-control">
               </div>
               <div class="form-group">
-                <label>Повторите новый пароль</label>
+                <label>New Password Again</label>
                 <input type="password" class="form-control">
               </div>
-              <button type="submit" class="btn btn-info m-t">Обновить</button>
+              <button type="submit" class="btn btn-info m-t">Update</button>
             </form>
           </div>
+
+          <p><strong>Delete account?</strong></p>
+          <button type="submit" class="btn btn-danger m-t" data-toggle="modal" data-target="#modal">Delete Account</button>
 
         </div>
       </div>
@@ -665,7 +771,7 @@
     <div class="row-cell v-m">
       <div class="modal-dialog modal-sm">
         <div class="modal-content flip-y">
-          <div class="modal-body text-center">
+          <div class="modal-body text-center">          
             <p class="p-y m-t"><i class="fa fa-remove text-warning fa-3x"></i></p>
             <p>Are you sure to delete your account?</p>
           </div>
@@ -770,7 +876,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="switcher box-color black lt" id="sw-demo">
       <a href ui-toggle-class="active" target="#sw-demo" class="box-color black lt text-color sw-btn">
         <i class="fa fa-list text-white"></i>
@@ -809,7 +915,7 @@
             class="p-a col-xs-6 info">
             <span class="text-white">Five</span>
           </a>
-          <div
+          <div 
             class="p-a col-xs-6 lter">
             <span class="text">...</span>
           </div>

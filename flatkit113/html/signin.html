@@ -15,7 +15,7 @@
   <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" sizes="196x196" href="../assets/images/logo.png">
-
+  
   <!-- style -->
   <link rel="stylesheet" href="../assets/animate.css/animate.min.css" type="text/css" />
   <link rel="stylesheet" href="../assets/glyphicons/glyphicons.css" type="text/css" />
@@ -40,24 +40,29 @@
     </div>
     <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
       <div class="m-b text-sm">
-        Вход в EasyLexLab
+        Sign in with your Flatkit Account
       </div>
       <form name="form">
         <div class="md-form-group float-label">
           <input type="email" class="md-input" ng-model="user.email" required>
-          <label>Логин</label>
+          <label>Email</label>
         </div>
         <div class="md-form-group float-label">
           <input type="password" class="md-input" ng-model="user.password" required>
-          <label>Пароль</label>
+          <label>Password</label>
+        </div>      
+        <div class="m-b-md">        
+          <label class="md-check">
+            <input type="checkbox"><i class="primary"></i> Keep me signed in
+          </label>
         </div>
-        <button type="submit" class="btn primary btn-block p-x-md">Войти</button>
+        <button type="submit" class="btn primary btn-block p-x-md">Sign in</button>
       </form>
     </div>
 
     <div class="p-v-lg text-center">
-      <div class="m-b"><a ui-sref="access.forgot-password" href="forgot-password.html" class="text-primary _600">Забыли пароль?</a></div>
-      <div>Нет аккаунта? <a ui-sref="access.signup" href="signup.html" class="text-primary _600">Зарегистрируйтесь</a></div>
+      <div class="m-b"><a ui-sref="access.forgot-password" href="forgot-password.html" class="text-primary _600">Forgot password?</a></div>
+      <div>Do not have an account? <a ui-sref="access.signup" href="signup.html" class="text-primary _600">Sign up</a></div>
     </div>
   </div>
 
