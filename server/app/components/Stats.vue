@@ -110,7 +110,7 @@
             <pie-chart
               v-if="!noneResults"
               :data="chartData"
-              />
+              :library="{legend: { alignment: 'center', position: 'top', textStyle: { bold: true } }}"/>
               <h5 v-else><small>Результатов пока нет.</small></h5>
           </div>
         </div>
