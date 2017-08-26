@@ -120,7 +120,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(msg, index) in messages">
+                        <tr v-for="(msg, index) in messages.reverse()">
                         <td>{{ index + 1}}</td>
                         <td></td>
                         <td>{{ msg.author}}</td>
