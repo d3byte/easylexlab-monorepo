@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
+import Chartkick from 'chartkick';
+import VueChartkick from 'vue-chartkick';
 
 import { store } from './store/store';
 
@@ -21,6 +23,7 @@ import Stack from './components/Stack.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(VueChartkick, { Chartkick });
 
 const routes = [
   { path: '/', component: Home },

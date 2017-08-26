@@ -14,7 +14,7 @@
     					</div>
     					<div class="box-body">
     						<p class="text-muted m-b-md">Здесь вы можете создать новое задание или написать сообщение.</p>
-    						<a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новое задание</a>
+    						<a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новый модуль</a>
                 <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
                 <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
     					</div>
@@ -59,7 +59,10 @@
       	          <small>Результаты за последний модуль</small>
       	        </div>
       	        <div class="box-body">
-      	            Гистограмма
+                  <pie-chart
+                    :data="chartData"
+                    :library="{backgroundColor: '#424242', legend: { textStyle: { color: 'white' } }}"
+                    :legend="{}"/>
       	        </div>
     	        </div>
     				</div>
@@ -113,7 +116,8 @@ export default {
       showAll: false,
       showModal: false,
       showCode: false,
-      writeMsg: false
+      writeMsg: false,
+      chartData: {}
     }
   },
   computed: {
@@ -138,6 +142,9 @@ export default {
       this.sliceTestIndex -= 5;
       this.slicedTests = this.group._tests.reverse().slice(this.sliceTestIndex, 5);
       this.prepareRender();
+    },
+    setCharData() {
+      this.chartData = [["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]];
     },
     prepareRender() {
       if(!!this.slicedTests.length) {
@@ -210,6 +217,7 @@ export default {
       this.slicedTests = this.group._tests.reverse().slice(0, 5);
       this.students = this.group._students;
       this.prepareRender();
+      this.setCharData();
     });
   }
 }
