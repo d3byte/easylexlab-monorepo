@@ -173,6 +173,7 @@ export default {
     prepareRender() {
       if(!!this.slicedTests.length) {
         this.render = this.students.map((student, index) => {
+          console.log(student);
           let newStudent = {
             name: student.firstName + ' ' + student.lastName,
             results: []
@@ -182,17 +183,19 @@ export default {
               if(result.userId == student._id) {
                 result.index = this.slicedTests.indexOf(test);
                 for(let i = 0; i < this.slicedTests.length; i++) {
-                  if(i != result.index) {
-                    newStudent.results.push({});
-                    continue;
+                  if(i == result.index) {
+                    newStudent.results.push(result);
+                    break;
                   }
-                  newStudent.results.push(result);
                 }
-
-                return newStudent;
               }
             }
           }
+          for(let i = 0; i < newStudent.results.length; i++) {
+            if(newStudent.results[i + 1] && newStudent.results[i + 1].index != i + 1)
+              newStudent.results.splice(i + 1, 0, {});
+          }
+          return newStudent;
         });
       } else {
         this.render = this.students.map((student, index) => {
