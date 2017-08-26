@@ -40,7 +40,7 @@
                         <span class="text-muted"><small>{{ msg.date }}</small></span>
     				          </div>
     				        </li>
-                    <li v-show="!showAll" class="list-group-item" v-for="msg in splicedMessages">
+                    <li v-show="!showAll" class="list-group-item" v-for="msg in slicedMessages">
     				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
     				          <div class="clear">
     				            <a href="" class="_500 block">{{ msg.author }}</a>
@@ -70,8 +70,11 @@
                 <tr>
                   <th>№</th>
                   <th>Ученик</th>
-                  <th v-for="test in splicedTests">{{ test.name }}</th>
-                  <th><a class="btn-sm rounded primary text-white">-></a></th>
+                  <th v-for="test in slicedTests">{{ test.name }}</th>
+                  <th>
+                    <a @click="previousFiveTests" v-show="sliceTestIndex >= 5" class="btn-sm rounded primary text-white"><-</a>
+                    <a @click="nextFiveTests" class="btn-sm rounded primary text-white">-></a>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -101,8 +104,9 @@ export default {
     return {
       group: {},
       groupCode: '',
-      splicedMessages: [],
-      splicedTests: [],
+      slicedMessages: [],
+      slicedTests: [],
+      sliceTestIndex: 0,
       render: [],
       students: [],
       studentsLength: null,
@@ -124,6 +128,49 @@ export default {
     goto(id) {
       const path = '/group/' + id + '/newtask';
       this.$router.push({ path });
+    },
+    nextFiveTests() {
+      this.sliceTestIndex += 5;
+      this.slicedTests = this.group._tests.reverse().slice(this.sliceTestIndex, 5);
+      this.prepareRender();
+    },
+    previousFiveTests() {
+      this.sliceTestIndex -= 5;
+      this.slicedTests = this.group._tests.reverse().slice(this.sliceTestIndex, 5);
+      this.prepareRender();
+    },
+    prepareRender() {
+      if(!!this.slicedTests.length) {
+        this.render = this.students.map((student, index) => {
+          let newStudent = {
+            name: student.firstName + ' ' + student.lastName,
+            results: []
+          };
+          for(let test of this.slicedTests) {
+            for(let result of test.results) {
+              if(result.userId == student._id) {
+                result.index = this.slicedTests.indexOf(test);
+                for(let i = 0; i < this.slicedTests.length; i++) {
+                  if(i != result.index) {
+                    newStudent.results.push({});
+                    continue;
+                  }
+                  newStudent.results.push(result);
+                }
+
+                return newStudent;
+              }
+            }
+          }
+        });
+      } else {
+        this.render = this.students.map((student, index) => {
+          return {
+            name: student.firstName + ' ' + student.lastName,
+            results: []
+          }
+        });
+      }
     }
   },
   http: {
@@ -159,33 +206,10 @@ export default {
       }
       if(!haveThisGroup)
         this.$router.push('/profile');
-      this.splicedMessages = this.group.messages.reverse().slice(0, 3);
-      this.splicedTests = this.group._tests.reverse().slice(0, 5);
+      this.slicedMessages = this.group.messages.reverse().slice(0, 3);
+      this.slicedTests = this.group._tests.reverse().slice(0, 5);
       this.students = this.group._students;
-      let render = [];
-      render = this.students.map((student, index) => {
-        let newStudent = {
-          name: student.firstName + ' ' + student.lastName,
-          results: []
-        };
-        for(let test of this.splicedTests) {
-          for(let result of test.results) {
-            if(result.userId == student._id) {
-              result.index = this.splicedTests.indexOf(test);
-              for(let i = 0; i < this.splicedTests.length; i++) {
-                if(i != result.index) {
-                  newStudent.results.push({});
-                  continue;
-                }
-                newStudent.results.push(result);
-              }
-
-              return newStudent;
-            }
-          }
-        }
-      });
-      this.render = render;
+      this.prepareRender();
     });
   }
 }
