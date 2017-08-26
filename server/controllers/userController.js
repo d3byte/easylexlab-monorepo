@@ -42,7 +42,8 @@ userController.post = (req, res) => {
                                 password,
                                 permissions,
                                 _groups: [group._id],
-                                school
+                                school,
+                                city
                             });
                             user.save().then(newUser => {
                                 // console.log('Success:\n', newUser);
