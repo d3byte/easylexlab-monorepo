@@ -98,19 +98,22 @@ stackController.addResult = (req, res) => {
 
     const user = req.user;
 
-    const results = {
-        userId: user.id,
-        username,
-        name,
-        result
-    };
-
     db.Stack.findById(stackId).then(stack => {
-        stack.results.push(results);
-        stack.save();
-        res.json({
-            success: true
-        });
+      const results = {
+          userId: user.id,
+          username,
+          name,
+          stack: {
+            name: stack.name,
+            id: stack._id
+          },
+          result
+      };
+      stack.results.push(results);
+      stack.save();
+      res.json({
+          success: true
+      });
     }).catch(err => {
         throw err;
     });

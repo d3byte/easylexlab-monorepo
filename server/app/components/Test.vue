@@ -72,7 +72,7 @@ export default {
       const body = {
         result: this.percentage,
         stackId: this.stack._id,
-        name: this.user.name,
+        name: this.user.firstName + ' ' + this.user.lastName,
         username: this.user.username,
         userId: this.user._id
       };

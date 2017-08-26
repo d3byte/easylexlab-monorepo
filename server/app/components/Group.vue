@@ -70,32 +70,18 @@
                 <tr>
                   <th>№</th>
                   <th>Ученик</th>
-                  <th>Результат 1</th>
-                  <th>Результат 2</th>
-                  <th>Результат 3</th>
-                  <th>Результат 4</th>
-                  <th>Результат 5</th>
+                  <th v-for="test in splicedTests">{{ test.name }}</th>
                   <th><a class="btn-sm rounded primary text-white">-></a></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>1</th>
-                  <th>Савтыра Сергей</th>
-                  <th>99%</th>
-                  <th>99%</th>
-                  <th>99%</th>
-                  <th>99%</th>
-                  <th>100%</th>
-                </tr>
-                <tr>
-                  <th>1</th>
-                  <th>Дмитрий Никулин</th>
-                  <th>99%</th>
-                  <th>99%</th>
-                  <th>99%</th>
-                  <th>99%</th>
-                  <th>100%</th>
+                <tr v-for="(student, index) in render">
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ student.name }}</td>
+                  <td v-for="(result, i) in student.results">
+                    <span v-if="i == result.index">{{ result.result }}%</span>
+                    <span v-else> — </span>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -116,6 +102,9 @@ export default {
       group: {},
       groupCode: '',
       splicedMessages: [],
+      splicedTests: [],
+      render: [],
+      students: [],
       studentsLength: null,
       showAll: false,
       showModal: false,
@@ -170,7 +159,33 @@ export default {
       }
       if(!haveThisGroup)
         this.$router.push('/profile');
-      this.splicedMessages = this.group.messages.reverse().slice(0, 4);
+      this.splicedMessages = this.group.messages.reverse().slice(0, 3);
+      this.splicedTests = this.group._tests.reverse().slice(0, 5);
+      this.students = this.group._students;
+      let render = [];
+      render = this.students.map((student, index) => {
+        let newStudent = {
+          name: student.firstName + ' ' + student.lastName,
+          results: []
+        };
+        for(let test of this.splicedTests) {
+          for(let result of test.results) {
+            if(result.userId == student._id) {
+              result.index = this.splicedTests.indexOf(test);
+              for(let i = 0; i < this.splicedTests.length; i++) {
+                if(i != result.index) {
+                  newStudent.results.push({});
+                  continue;
+                }
+                newStudent.results.push(result);
+              }
+
+              return newStudent;
+            }
+          }
+        }
+      });
+      this.render = render;
     });
   }
 }
