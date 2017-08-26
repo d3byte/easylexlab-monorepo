@@ -238,7 +238,7 @@ groupController.newMsg = (req, res) => {
                 authorId: userAccount._id,
                 author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
-                text: `${userAccount.firstName + " " + userAccount.lastName} прислал(а) вам сообщение.`,
+                text: `${userAccount.firstName + " " + userAccount.lastName} отправил сообщение.`,
                 seen: false,
                 date: moment().format('LL')
             };

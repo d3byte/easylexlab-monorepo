@@ -78,6 +78,10 @@ export default {
           this.$router.push({ path: '/profile' });
         });
     },
+  },
+  created() {
+    if (this.$store.getters.loginState)
+        this.$router.push('/profile');
   }
 }
 </script>
