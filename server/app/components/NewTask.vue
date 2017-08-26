@@ -1,72 +1,102 @@
 <template>
-  <div class="container-fluid">
-    <h3>Создать задание</h3>
-    <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 container">
-        <center>
-          <h4 v-if="!!this.errorMsg" class="errormsg">{{ this.errorMsg }}</h4>
-            <div v-if="this.showEditor">
-              <div class="row task" v-for="(task, index) in tasks" v-show="task.active">
-                <form class="login-form" onsubmit="return false">
-                  <table>
-                    <tr>
-                      <th>Слово</th>
-                      <th>Перевод</th>
-                    </tr>
-                    <tr v-for="pair in task.content">
-                      <td>
-                        <input type="text" v-model="pair.key" required placeholder="Слово">
-                      </td>
-                      <td>
-                        <input type="text" v-model="pair.value" required placeholder="Перевод">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="new" colspan="2">
-                        <center>
-                          <i @focus="newPair(task)" @click="newPair(task)" class="fa fa-plus newpair" aria-hidden="true"></i>
-                        </center>
-                      </td>
-                    </tr>
-                  </table>
-                  <button @click="confirm" class="btn btn-primary"><i class="fa fa-check-square-o" aria-hidden="true"></i> Готово</button>
-                </form>
+  <div id="newtask" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Новое задание</h5>
+        </div>
+        <div class="modal-body text-center p-lg">
+          <h5 v-if="success" class="success">Задание успешно создано.</h5>
+          <form class="login-form" onsubmit="return false" v-if="this.showEditor">
+            <table class="table table-striped b-t b-b">
+              <tr>
+                <th>Слово</th>
+                <th>Перевод</th>
+              </tr>
+              <tr v-for="pair in tasks[0].content">
+                <td>
+                  <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Слово</label>
+                    <div class="col-sm-10">
+                      <input type="text" v-model="pair.key" required>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Перевод</label>
+                    <div class="col-sm-10">
+                      <input type="text" v-model="pair.value" required>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="new" colspan="2">
+                  <center>
+                    <i @focus="newPair(tasks[0])" @click="newPair(tasks[0])" class="fa fa-plus newpair" aria-hidden="true"></i>
+                  </center>
+                </td>
+              </tr>
+            </table>
+            <center>
+              <button @click="confirm" class="btn btn-primary">Готово</button>
+            </center>
+          </form>
+          <div v-if="this.showPost">
+            <form onsubmit="return false">
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Название задания</label>
+                <div class="col-sm-6">
+                  <input type="text" v-model="name" required>
+                </div>
               </div>
-            </div>
-            <h4 v-if="this.success" class="success">Задание успешно создано! <span class="link" @click="goto(groupId)">Вернуться</span></h4>
-            <div class="login-form" v-if="this.showPost">
-              <label>
-                Имя теста<br>
-              <input type="text" v-model="name">
-              </label><br>
-              <label>
-                Кол-во дней на выполнение<br>
-                <input type="number" v-model="timeToDo" min="1">
-              </label><br>
-              <label>
-                Кол-во повторений змейки<br>
-                <input type="number" v-model="snakeAttempts" min="1">
-              </label><br>
-              <label>
-                Кол-во повторений перебора букв<br>
-                <input type="number" v-model="scrambleAttempts" min="1">
-              </label><br>
-              <label>
-                Кол-во повторений флеш карточек<br>
-                <input type="number" v-model="flashcardsAttempts" min="1">
-              </label><br>
-              <label>
-                Кол-во повторений соотношения(matching)<br>
-                <input type="number" v-model="matchingAttempts" min="1">
-              </label><br>
-              <button @click="post" class="btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Создать</button>
-            </div>
-          </center>
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Кол-во дней на выполнение</label>
+                <div class="col-sm-6">
+                  <input type="number" v-model="timeToDo" min="1">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Кол-во дней на выполнение</label>
+                <div class="col-sm-6">
+                  <input type="number" v-model="timeToDo" min="1">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Кол-во повторений змейки</label>
+                <div class="col-sm-6">
+                  <input type="number" v-model="snakeAttempts" min="1">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Кол-во повторений перебора букв</label>
+                <div class="col-sm-6">
+                  <input type="number" v-model="scrambleAttempts" min="1">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Кол-во повторений флеш карточек</label>
+                <div class="col-sm-6">
+                  <input type="number" v-model="flashcardsAttempts" min="1">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Кол-во повторений соотношения(matching)</label>
+                <div class="col-sm-6">
+                  <input type="number" v-model="matchingAttempts" min="1">
+                </div>
+              </div>
+              <hr>
+              <button @click="post" class="btn dark-white p-x-md" v-if="!success">Создать</button>
+              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
+              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-else>Закрыть</button>
+            </form>
+          </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -87,26 +117,37 @@ export default {
       groupId: this.$route.params.id
     }
   },
-  created() {
-    var task = {
-      content: [],
-      repeat: 1,
-      active: true
-    }
-    this.tasks.push(task);
-    for(let i = 0; i < 4; i++) {
-      this.tasks[0].content.push({
-        key: '',
-        value: '',
-        test: ''
-      });
-    }
-
-  },
   http: {
     root: '/api'
   },
   methods: {
+    refresh() {
+      this.showEditor = true;
+      this.errorMsg = '';
+      this.timeToDo = 1;
+      this.snakeAttempts = 1;
+      this.flashcardsAttempts = 1;
+      this.matchingAttempts = 1;
+      this.scrambleAttempts = 1;
+      this.name = '';
+      this.success = false;
+      this.showPost = false;
+      this.tasks = [];
+      var task = {
+        content: [],
+        repeat: 1,
+        active: true
+      }
+      this.tasks.push(task);
+      this.tasks[0].content = [];
+      for(let i = 0; i < 4; i++) {
+        this.tasks[0].content.push({
+          key: '',
+          value: '',
+          test: ''
+        });
+      }
+    },
     newPair(task) {
       for(let i = 0; i < 4; i++) {
         this.tasks[0].content.push({
@@ -168,54 +209,16 @@ export default {
       const path = '/group/' + id;
       this.$router.push({ path, alias: '/group' });
     }
+  },
+  created() {
+    this.refresh();
   }
 }
 </script>
 
 <style lang="css" scoped>
-.nav {
-  border-bottom: 1px solid black;
-} .nav-item {
-  transition: 0.3s;
-  color: #808080;
-} .active {
-  color: #293132;
-} .nav-item:hover {
-  color: #293132;
-}
 
-.add:hover, .active:hover, .edittask:hover {
-  cursor: pointer;
-}
-
-.new {
-  cell-spacing: 2;
-}
-
-table {
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-} table tr td:last-of-type {
-  border-left: 1px solid black;
-} table tr:last-of-type td {
-  border: none;
-}
-
-.newpair:hover {
-  cursor: pointer;
-}
-
-.login-form input {
-  background: transparent;
-  border: none;
-  color: #293132;
-  font-size: 16px;
-  transition: 0.4s;
-  border-bottom: 1px solid black;
-  margin-right: 10px;
-} .login-form input:active,
-  .login-form input:focus {
-    outline: none;
-    border-color: #5688C7;
+input {
+  color: black;
 }
 </style>

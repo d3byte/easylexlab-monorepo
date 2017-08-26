@@ -19,7 +19,7 @@
               </div> -->
               <center>
                 <button @click="send" class="btn dark-white p-x-md" v-if="!success">Создать</button>
-                <button type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
+                <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
                 <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-else>Закрыть</button>
               </center>
             </form>

@@ -26,7 +26,7 @@ const userSchema = new Schema({
   permissions: { type: String, required: true },
   picUrl: { type: String, default: null },
   backgroundUrl: { type: String, default: null },
-  createdAt: { type: Date, default: moment().format('LL') },
+  createdAt: { type: String, default: moment().format('LL') },
   isDeleted: { type: Boolean, default: false }
 });
 
