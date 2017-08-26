@@ -13,31 +13,31 @@
       <div v-if="error" class="alert ng-scope ng-isolate-scope alert-danger alert-dismissible">{{ errorMsg }}
       </div>
       <form v-if="!success" onsubmit="return false">
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input v-model="firstName" type="text" tabindex="1" class="md-input" required>
           <label>Имя</label>
         </div>
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input v-model="lastName" type="text" tabindex="1" class="md-input" required>
           <label>Фамилия</label>
         </div>
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input v-model="email" type="email" tabindex="2" class="md-input" required>
           <label>Email</label>
         </div>
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input v-model="username" type="text" tabindex="3" class="md-input" required>
           <label>Логин</label>
         </div>
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input v-model="password" type="password" tabindex="4" class="md-input" required>
           <label>Пароль</label>
         </div>
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input v-model="school" type="text" tabindex="5" class="md-input" required>
           <label>Название учебного заведения</label>
         </div>
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input v-model="city" type="text" tabindex="6" class="md-input" required>
           <label>Город</label>
         </div>
@@ -53,7 +53,7 @@
             Ученик
           </label>
         </div>
-        <div class="md-form-group float-label" v-if="role == 'student'">
+        <div class="md-form-group" v-if="role == 'student'">
           <input type="text" v-model="groupCode" class="md-input">
           <label>Код группы (необязательно)</label>
         </div>

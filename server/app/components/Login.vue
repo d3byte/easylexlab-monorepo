@@ -8,11 +8,11 @@
         {{ this.error }}
       </div>
       <form name="form" onsubmit="return false">
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input type="text" class="md-input" v-model="username" required>
           <label>Логин</label>
         </div>
-        <div class="md-form-group float-label">
+        <div class="md-form-group">
           <input type="password" class="md-input" v-model="password" required>
           <label>Пароль</label>
         </div>
