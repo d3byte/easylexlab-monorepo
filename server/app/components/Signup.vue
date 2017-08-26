@@ -1,22 +1,14 @@
 <template>
   <div class="center-block w-xxl w-auto-xs p-y-md">
-    <div class="navbar">
-      <div class="pull-center">
-        <router-link to="/" tabindex="-1" class="ui small image logo">
-          <img src="pics/logo-small.png">
-        </router-link>
-        <router-link to="/" tabindex="-1" class="logo-link">
-          <h3>EasyLexLab</h3>
-        </router-link>
-      </div>
-    </div>
-
     <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
       <div v-if="!success" class="m-b text-sm">
         Регистрация
       </div>
       <div v-if="success" class="m-b text-sm">
-        <span class="text-success">Вы успешно зарегистрировались.</span>
+        <span class="text-success">
+          Вы успешно зарегистрировались. 
+          <router-link to="/login" class="text-primary _600">Войти</router-link>
+        </span>
       </div>
       <div v-if="error" class="alert ng-scope ng-isolate-scope alert-danger alert-dismissible">{{ errorMsg }}
       </div>
