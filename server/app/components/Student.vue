@@ -55,7 +55,7 @@
     <div class="col-sm-8 col-lg-8 padding">
       <div class="tab-content">
         <div v-if="showTasks">
-          <div class="tab-pane p-v-sm" id="tab_1">
+          <div class="tab-pane p-v-sm padding" id="tab_1">
             <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
             <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
             <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->

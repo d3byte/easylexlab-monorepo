@@ -22,7 +22,6 @@ routes.post('/verifypassword', expressJWT({ secret }), userController.verifyPass
 routes.patch('/newinfo', expressJWT({ secret }), userController.updateInfo);
 routes.patch('/newpassword', expressJWT({ secret }), userController.changePassword);
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
-routes.patch('/userresult', expressJWT({ secret }), userController.addResult);
 routes.post('/user', expressJWT({ secret }), userController.getUser);
 routes.patch('/words', expressJWT({ secret }), userController.learnWords);
 
@@ -40,6 +39,7 @@ routes.post('/newstack', expressJWT({ secret }), stackController.post);
 routes.post('/gettests', expressJWT({ secret }), stackController.getTests);
 routes.post('/gettest', expressJWT({ secret }), stackController.getTest);
 routes.patch('/addresult', expressJWT({ secret }), stackController.addResult);
+routes.patch('/updateresult', expressJWT({ secret }), stackController.updateResult);
 
 // Notification and message routes
 routes.post('/newmsg', expressJWT({ secret }), groupController.newMsg);

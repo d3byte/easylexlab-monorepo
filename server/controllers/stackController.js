@@ -126,4 +126,39 @@ stackController.addResult = (req, res) => {
     });
 };
 
+stackController.updateResult = (req, res) => {
+    const {
+        result,
+        stackId,
+    } = req.body;
+
+    const user = req.user;
+
+    $set: { userId: user.id }
+
+    db.Stack.update({
+      _id: stackId,
+      results: { $elemMatch: { userId: user.id } }
+    }, {
+      $set: {
+        'results.$.result': result
+      }
+    }).then(success => res.json({ success: true }));
+
+    // db.Stack.findById(stackId).then(stack => {
+    //   console.log(stack);
+    //   stack.results = stack.results.map(result => {
+    //     if(result.userId == user.id)
+    //       results.result = result;
+    //     return result
+    //   });
+    //   stack.save();
+    //   res.json({
+    //       success: true
+    //   });
+    // }).catch(err => {
+    //     throw err;
+    // });
+};
+
 export default stackController;

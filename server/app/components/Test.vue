@@ -1,15 +1,16 @@
 <template>
-  <div class="container-fluid box">
+  <div class="container-fluid box padding">
     <center>
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="success" class="signup">
         <h3 class="success">Вы прошли тест</h3>
         <h4>Ваш результат: {{ percentage }}/100%</h4>
+        <h4>Вы выучили {{ wordsLearnt }} слов</h4>
         <h5 @click="toProfile">Вернуться</h5>
       </div>
     </center>
-    <form v-if="!showPreloader && !success" onsubmit="return false">
-      <div class="row">
+    <form v-if="!showPreloader && !success" class="padding" onsubmit="return false">
+      <div class="row padding">
         <h1>Тест</h1>
         <hr>
         <div class="ui divided selection list typeVal">
@@ -47,7 +48,8 @@ export default {
       correct: 0,
       percentage: 0,
       showPreloader: false,
-      success: false
+      success: false,
+      wordsLearnt: 0
     }
   },
   computed: {
@@ -69,39 +71,52 @@ export default {
         }
       }
       this.percentage = Math.round(this.correct / (this.typeKey.length + this.typeVal.length) * 100);
-      const body = {
-        result: this.percentage,
-        stackId: this.stack._id,
-        name: this.user.firstName + ' ' + this.user.lastName,
-        username: this.user.username,
-        userId: this.user._id
-      };
-      this.$http.patch('addresult', body, {
-        headers: {
-          'Content-type' : 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }
-      }).then(res => {
-        this.$http.patch('userresult', {
-          stackName: this.stack.name,
-          result: this.percentage
-        }, {
+      let done = false;
+      this.stack.results.map(result => {
+        if(result.userId == this.user._id)
+          done = true;
+      })
+      if(!done) {
+        console.log('Not done');
+        const body = {
+          result: this.percentage,
+          stackId: this.stack._id,
+          name: this.user.firstName + ' ' + this.user.lastName,
+          username: this.user.username,
+          userId: this.user._id
+        };
+        this.$http.patch('addresult', body, {
           headers: {
             'Content-type' : 'application/json',
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(res => {
-          this.showPreloader = false;
           this.success = true;
+          this.showPreloader = false;
         });
-        let wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
-        this.$http.patch('words', { amount: wordsLearnt }, {
+      } else {
+        console.log('Done');
+        const body = {
+          result: this.percentage,
+          stackId: this.stack._id
+        };
+        this.$http.patch('updateresult', body, {
           headers: {
             'Content-type' : 'application/json',
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
-        }).then(res => { });
-      });
+        }).then(res => {
+          this.success = true;
+          this.showPreloader = false;
+        });
+      }
+      this.wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
+      this.$http.patch('words', { amount: this.wordsLearnt }, {
+        headers: {
+          'Content-type' : 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => { });
     },
     toProfile() {
       this.$store.dispatch('zeroAttempts');
