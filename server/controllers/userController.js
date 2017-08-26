@@ -9,13 +9,15 @@ const userController = {};
 
 userController.post = (req, res) => {
     const {
-        name,
+        firstName,
+        lastName,
         username,
         email,
         password,
         permissions,
         groupCode,
-        school
+        school,
+        city
     } = req.body;
 
     db.User.findOne({username}, (err, user) => {
@@ -33,13 +35,15 @@ userController.post = (req, res) => {
                     if (!!groupCode.length) {
                         db.Group.findOne({code: groupCode}).then(group => {
                             const user = new db.User({
-                                name,
+                                firstName,
+                                lastName,
                                 username,
                                 email,
                                 password,
                                 permissions,
                                 _groups: [group._id],
-                                school
+                                school,
+                                city
                             });
                             user.save().then(newUser => {
                                 // console.log('Success:\n', newUser);
@@ -56,13 +60,15 @@ userController.post = (req, res) => {
                         });
                     } else {
                         const user = new db.User({
-                            name,
+                            firstName,
+                            lastName,
                             username,
                             email,
                             password,
                             permissions,
                             _groups: [],
-                            school
+                            school,
+                            city
                         });
                         user.save().then(newUser => {
                             // console.log('Success:\n', newUser);
@@ -233,30 +239,6 @@ userController.addGroup = (req, res) => {
     });
 };
 
-userController.addResult = (req, res) => {
-    const {
-        result,
-        stackName
-    } = req.body;
-
-    const user = req.user;
-
-    const results = {
-        stackName,
-        result
-    };
-
-    db.User.findById(user.id).then(user => {
-        user._results.push(results);
-        user.save();
-        res.json({
-            success: true
-        });
-    }).catch(err => {
-        throw err;
-    });
-
-};
 
 userController.getNotifications = (req, res) => {
     const user = req.user;
@@ -270,23 +252,15 @@ userController.getNotifications = (req, res) => {
     });
 };
 
-userController.readNotifs = (req, res) => {
+userController.removeNotification = (req, res) => {
     const user = req.user;
     const id = req.body.id;
 
-    db.User.findByIdAndUpdate(user.id,
-    {
-
-    })
-
     db.User.findById(user.id).then(myUser => {
-        for(let notification of myUser.notifications) {
-            notification.seen = true;
-            console.log(notification);
-        }
-        console.log(myUser.notifications);
+        myUser.notifications = myUser.notifications.filter(notif => notif.id != id);
+        let notificationsCopy = myUser.notifications;
         myUser.save();
-        res.json({ sucess: true });
+        res.json({ sucсess: true, notifications: notificationsCopy });
     }).catch((err) => {
         res.status(500).json({
             message: err
@@ -309,6 +283,15 @@ userController.getUser = (req, res) => {
         .then(user => {
           return res.json({ user })
         });
+};
+
+userController.learnWords = (req, res) => {
+  const user = req.user;
+  const amount = req.body.amount;
+
+  db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(success => {
+    return res.json({ success: true });
+  })
 };
 
 export default userController;

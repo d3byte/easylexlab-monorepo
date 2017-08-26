@@ -30,13 +30,15 @@ var userController = {};
 
 userController.post = function (req, res) {
     var _req$body = req.body,
-        name = _req$body.name,
+        firstName = _req$body.firstName,
+        lastName = _req$body.lastName,
         username = _req$body.username,
         email = _req$body.email,
         password = _req$body.password,
         permissions = _req$body.permissions,
         groupCode = _req$body.groupCode,
-        school = _req$body.school;
+        school = _req$body.school,
+        city = _req$body.city;
 
 
     _models2.default.User.findOne({ username: username }, function (err, user) {
@@ -46,13 +48,15 @@ userController.post = function (req, res) {
                     if (!!groupCode.length) {
                         _models2.default.Group.findOne({ code: groupCode }).then(function (group) {
                             var user = new _models2.default.User({
-                                name: name,
+                                firstName: firstName,
+                                lastName: lastName,
                                 username: username,
                                 email: email,
                                 password: password,
                                 permissions: permissions,
                                 _groups: [group._id],
-                                school: school
+                                school: school,
+                                city: city
                             });
                             user.save().then(function (newUser) {
                                 // console.log('Success:\n', newUser);
@@ -69,13 +73,15 @@ userController.post = function (req, res) {
                         });
                     } else {
                         var _user = new _models2.default.User({
-                            name: name,
+                            firstName: firstName,
+                            lastName: lastName,
                             username: username,
                             email: email,
                             password: password,
                             permissions: permissions,
                             _groups: [],
-                            school: school
+                            school: school,
+                            city: city
                         });
                         _user.save().then(function (newUser) {
                             // console.log('Success:\n', newUser);
@@ -237,30 +243,6 @@ userController.addGroup = function (req, res) {
     });
 };
 
-userController.addResult = function (req, res) {
-    var _req$body4 = req.body,
-        result = _req$body4.result,
-        stackName = _req$body4.stackName;
-
-
-    var user = req.user;
-
-    var results = {
-        stackName: stackName,
-        result: result
-    };
-
-    _models2.default.User.findById(user.id).then(function (user) {
-        user._results.push(results);
-        user.save();
-        res.json({
-            success: true
-        });
-    }).catch(function (err) {
-        throw err;
-    });
-};
-
 userController.getNotifications = function (req, res) {
     var user = req.user;
 
@@ -273,42 +255,17 @@ userController.getNotifications = function (req, res) {
     });
 };
 
-userController.readNotifs = function (req, res) {
+userController.removeNotification = function (req, res) {
     var user = req.user;
     var id = req.body.id;
 
-    _models2.default.User.findByIdAndUpdate(user.id, {});
-
     _models2.default.User.findById(user.id).then(function (myUser) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = myUser.notifications[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var notification = _step.value;
-
-                notification.seen = true;
-                console.log(notification);
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-
-        console.log(myUser.notifications);
+        myUser.notifications = myUser.notifications.filter(function (notif) {
+            return notif.id != id;
+        });
+        var notificationsCopy = myUser.notifications;
         myUser.save();
-        res.json({ sucess: true });
+        res.json({ sucсess: true, notifications: notificationsCopy });
     }).catch(function (err) {
         res.status(500).json({
             message: err
@@ -328,6 +285,15 @@ userController.getUser = function (req, res) {
         }
     }).then(function (user) {
         return res.json({ user: user });
+    });
+};
+
+userController.learnWords = function (req, res) {
+    var user = req.user;
+    var amount = req.body.amount;
+
+    _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(function (success) {
+        return res.json({ success: true });
     });
 };
 

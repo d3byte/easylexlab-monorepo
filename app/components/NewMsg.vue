@@ -1,11 +1,31 @@
 <template>
-    <div>
-      <h3 v-if="success && !showPreloader" class="success">Сообщение отправлено.</h3>
-      <i v-if="showPreloader" class="material-icons preloader">cached</i>
-      <form v-if="!success && !showPreloader" onsubmit="return false">
-        <textarea v-model="text" rows="8" cols="80" placeholder="Сообщение" required></textarea>
-        <button @click="send" class="ui red basic cancel inverted button">Отправить</button>
-      </form>
+    <div id="newmsg" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Новое сообщение</h5>
+          </div>
+          <div class="modal-body text-center p-lg">
+            <h5 v-if="success && !showPreloader" class="success">Сообщение успешно отправлено.</h5>
+            <form class="login-form" onsubmit="return false">
+              <div class="form-group row">
+                <label class="col-sm-2 form-control-label">Текст сообщения</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="5" v-model="text" required></textarea>
+                </div>
+              </div>
+              <!-- <div class="white-text">
+                <textarea v-model="text" placeholder="Сообщение" required></textarea>
+              </div> -->
+              <center>
+                <button @click="send" class="btn dark-white p-x-md" v-if="!success">Создать</button>
+                <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
+                <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-else>Закрыть</button>
+              </center>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -16,13 +36,19 @@ export default {
     return {
       text: '',
       showPreloader: false,
-      success: false
+      success: false,
+      groupId: this.$route.params.id
+    }
+  },
+  computed: {
+    user() {
+        return this.$store.getters.user
     }
   },
   methods: {
     send() {
       const body = {
-        groupId: this.group._id,
+        groupId: this.groupId,
         msgText: this.text
       };
       const headers = {
@@ -33,6 +59,11 @@ export default {
         this.success = true;
         this.showPreloader = false;
       });
+    },
+    refresh() {
+      this.success = false;
+      this.text = '';
+      this.showPreloader = false;
     }
   },
   http: {

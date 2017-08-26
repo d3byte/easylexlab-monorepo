@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
+moment.locale('ru');
 
 const { Schema } = mongoose;
 
@@ -17,14 +19,16 @@ const userSchema = new Schema({
     minlength: [6, 'Пароль должен состоять хотя бы из 6 символов.'],
     bcrypt: true
   },
+  wordsLearnt: { type: Number, default: 0 },
   school: { type: String, default: null },
   _groups: [{ type: Schema.ObjectId, ref: 'Group', default: null }],
   _results: { type: Array, default: null },
-  notifications: [{ type: Schema.ObjectId, ref: 'Notification', default: null }],
+  notifications: { type: Array, default: null },
   permissions: { type: String, required: true },
   picUrl: { type: String, default: null },
+  city: { type: String, required: true },
   backgroundUrl: { type: String, default: null },
-  createdAt: { type: Date, default: Date.now },
+  createdAt: { type: String, default: moment().format('LL') },
   isDeleted: { type: Boolean, default: false }
 });
 

@@ -41,6 +41,9 @@ app.get('/settings', (req, res) => {
 app.get('/profile/newgroup', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/stats', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
 app.get('/login', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });

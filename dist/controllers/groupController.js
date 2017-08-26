@@ -8,6 +8,10 @@ var _randomatic = require('randomatic');
 
 var _randomatic2 = _interopRequireDefault(_randomatic);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _models = require('./../models');
 
 var _models2 = _interopRequireDefault(_models);
@@ -21,6 +25,8 @@ var _helperFunctions = require('./helperFunctions');
 var _helperFunctions2 = _interopRequireDefault(_helperFunctions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_moment2.default.locale('ru');
 
 var groupController = {};
 
@@ -225,34 +231,42 @@ groupController.newMsg = function (req, res) {
     var user = req.user;
     var _req$body4 = req.body,
         groupId = _req$body4.groupId,
-        msgText = _req$body4.msgText,
-        author = _req$body4.author;
+        msgText = _req$body4.msgText;
 
-
-    var message = {
-        author: author.name,
-        pic: author.avaUrl,
-        text: msgText
-    };
-
-    var notification = {
-        type: 'newMsg',
-        author: author.name,
-        pic: author.avaUrl,
-        text: fullName + ' \u043F\u0440\u0438\u0441\u043B\u0430\u043B(\u0430) \u0432\u0430\u043C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435.',
-        seen: false
-    };
 
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
-        _models2.default.Group.findByIdAndUpdate(groupId, {
-            $push: { messages: message }
-        }).then(function (group) {
-            console.log(group);
-            _models2.default.User.update({ _groups: { $in: [groupId] } }, { $push: { notifications: notification } }).then(function (success) {
-                console.log(success);
-                res.json({ success: true });
-            }).catch(function (error) {
-                throw error;
+        _models2.default.User.findById(user.id).then(function (userAccount) {
+            var message = {
+                authorId: userAccount._id,
+                author: userAccount.firstName + " " + userAccount.lastName,
+                pic: userAccount.picUrl,
+                text: msgText,
+                date: (0, _moment2.default)().format('LL')
+            };
+
+            var notification = {
+                type: 'newMsg',
+                authorId: userAccount._id,
+                author: userAccount.firstName + " " + userAccount.lastName,
+                pic: userAccount.picUrl,
+                text: userAccount.firstName + " " + userAccount.lastName + ' \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043B \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435.',
+                seen: false,
+                date: (0, _moment2.default)().format('LL'),
+                id: (0, _randomatic2.default)('0A', 10)
+            };
+
+            _models2.default.Group.findByIdAndUpdate(groupId, {
+                $push: { messages: message }
+            }).then(function (group) {
+                _models2.default.User.update({ _groups: { $in: [groupId] } }, { $push: { notifications: notification } }, {
+                    multi: true
+                }).then(function (success) {
+                    res.json({ success: true, message: message });
+                }).catch(function (error) {
+                    throw error;
+                });
+            }).catch(function (err) {
+                throw err;
             });
         }).catch(function (err) {
             throw err;

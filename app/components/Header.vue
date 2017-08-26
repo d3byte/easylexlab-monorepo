@@ -1,308 +1,205 @@
 <template>
-<div class="navigator">
-  <div class="logo-container horizontal-vert-center">
-    <router-link to="/" tabindex="-1" class="ui small image logo">
-      <img src="pics/logo-small.png">
-    </router-link>
-    <router-link to="/" tabindex="-1" class="logo-link">
-      <h3>EasyLexLab</h3>
-    </router-link>
-  </div>
-  <div v-if="!logged" class="login">
-    <login v-if="showLogin"></login>
-    <div>
-      <a class="login" v-if="!showLogin" @click="show">Вход</a>
-      <router-link to="/signup"><a v-if="!showLogin">Зарегистрироваться</a></router-link>
-    </div>
-  </div>
-  <div v-if="logged" class="logged">
-    <div v-if="user.permissions == 'student' ? true : false">
-      <a>
-        <router-link to="/profile/stats">Статистика</router-link>
-      </a>
-    </div>
-    <div :class="user.permissions == 'student' ? 'nav-item select' : 'nav-item'">
-      <span v-if="user.permissions == 'teacher'" class="black-text"
-            @click="showModal">
-        Новая группа
-      </span>
-      <div class="ui basic modal newGroup">
-        <center>
-          <div class="header"><b>Создание новой группы</b></div>
-          <br>
-          <div class="content">
-            <newgroup></newgroup>
-          </div>
-        </center>
-      </div>
-      <div v-if="user.permissions == 'student'" class="ui dropdown list">
-        <div v-if="isCurrentGr" class="text">{{ currentGroup.name }}</div>
-        <div id="test" v-else class="text">Выбор группы</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <div v-for="group in groups" @click="changeGroup(group)" class="item">{{ group.name }}</div>
+    <div class="app-header white box-shadow">
+      <div class="navbar">
+        <!-- Page title - Bind to $state's title -->
+        <div class="navbar-item pull-left h5" id="pageTitle">
+          <img src="pics/logo.png" class="logo">
+          EasyLexLab
         </div>
+
+        <!-- navbar right -->
+        <ul class="nav navbar-nav pull-right" v-if="logged">
+          <li class="nav-item" v-if="token.permissions === 'student'">
+            <router-link to="/stats" class="nav-link">Мои результаты</router-link>
+          </li>
+          <li class="nav-item" v-if="token.permissions === 'teacher'">
+            <span class="nav-link" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
+          </li>
+          <li class="nav-item dropdown pos-stc-xs">
+            <a class="nav-link" href data-toggle="dropdown">
+              <i class="material-icons">&#xe7f5;</i>
+              <span class="label label-sm up warn">{{ notifications.length }}</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
+              <div class="scrollable" style="max-height: 220px">
+                <ul class="list-group list-group-gap m-a-0">
+                  <li class="list-group-item box-shadow-z0 b" :class="notification.type == 'newMsg' ? 'dark-white text-color' : 'black'" v-for="notification in notifications">
+                    <span class="pull-right m-r hover" @click="removeNotif(notification.id)"><i class="material-icons">delete</i></span>
+                    <span class="pull-left m-r">
+                      <img :src="notification.pic" class="w-40 img-circle">
+                    </span>
+                    <span class="clear block">
+                      {{ notification.text }}<br>
+                      <small class="text-muted">{{ notification.date }}</small>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- / dropdown -->
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link clear" href data-toggle="dropdown">
+              <span class="avatar w-32">
+                <img src="../assets/images/a0.jpg" alt="...">
+                <i class="on b-white bottom"></i>
+              </span>
+            </a>
+            <div class="dropdown-menu pull-right dropdown-menu-scale">
+              <router-link class="dropdown-item" to="/profile">
+                Профиль
+              </router-link>
+              <router-link class="dropdown-item" to="/settings">
+                Настройки
+              </router-link>
+              <router-link class="dropdown-item" to="/settings">
+                Оставить отзыв
+              </router-link>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" @click="logout">Выход</a>
+            </div>
+          </li>
+          <li class="nav-item hidden-md-up">
+            <a class="nav-link" data-toggle="collapse" data-target="#collapse">
+              <i class="material-icons">&#xe5d4;</i>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav pull-right text-primary-hover" v-else>
+          <li class="nav-item">
+            <router-link to="/login" class="nav-link">
+              <span>Войти</span>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/signup" class="nav-link">
+              <span>Зарегистрироваться</span>
+            </router-link>
+          </li>
+        </ul>
       </div>
+
     </div>
-    <div class="nav-item notif">
-      <i v-if="notifications.length == 0" class="material-icons">notifications_off</i>
-      <i @click="showNotifs" v-else class="material-icons haveNotifs">notifications_active</i>
-    </div>
-    <div class="ui pointing right dropdown nav-item profile">
-      <img class="ui avatar image">
-      <div class="menu">
-        <div class="header">Меню</div>
-        <router-link class="item" to="/profile">Профиль</router-link>
-        <router-link class="item" to="/profile/settings">Настройки</router-link>
-        <div class="ui divider"></div>
-        <div class="item" @click="logout">Выход</div>
-      </div>
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
-import jwtDecode from 'jwt-decode';
-import Login from './Login.vue';
-import NewGroup from './NewGroup.vue';
+    import jwtDecode from 'jwt-decode';
+    import NewGroup from './NewGroup.vue';
 
-export default {
-  data() {
-    return {
-      requested: false,
-      isCurrentGr: false,
-      notifications: []
+    export default {
+        data() {
+            return {
+                requested: false,
+                isCurrentGr: false,
+                notifications: [],
+                newNotifsInt: 0
+            }
+        },
+        computed: {
+            logged() {
+                return this.$store.getters.loginState
+            },
+            token() {
+              return jwtDecode(this.$store.getters.userToken)
+            },
+            user() {
+                return this.$store.getters.user
+            },
+            groups() {
+                return this.$store.state.user.groups
+            },
+            currentGroup() {
+                return this.$store.state.currentGroup
+            }
+        },
+        methods: {
+            logout() {
+              this.$store.dispatch('logout');
+              this.$store.dispatch('hideGames');
+              this.$router.push({
+                  path: '/'
+              });
+              localStorage.clear();
+            },
+            fetchUserInfo() {
+              this.$http.post('user', {}, {
+                headers: {
+                  'Content-type': 'application/json',
+                  'Authorization': 'Bearer ' + this.$store.getters.userToken
+                }
+              }).then(res => {
+                this.$store.dispatch('userInfo', res.body.user);
+                this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+                this.notifications = res.body.user.notifications;
+                });
+            },
+            show() {
+              this.$store.dispatch('hideOrShowLogin');
+            },
+            changeGroup(group) {
+              this.$store.dispatch('changeCurrentGroup', group);
+            },
+            removeNotif(id) {
+              const body = {
+                id
+              };
+              this.$http.post('removenotif', body, {
+                headers: {
+                  'Content-type': 'application/json',
+                  'Authorization': 'Bearer ' + this.$store.getters.userToken
+                }
+              }).then(res => {
+                  this.notifications = res.body.notifications;
+              });
+            }
+        },
+        http: {
+            root: '//ealapi.tw1.ru/api'
+        },
+        mounted() {
+
+        },
+        created() {
+          setTimeout(() => {
+            if(this.user.notifications)
+              this.notifications = this.user.notifications.reverse();
+          }, 70);
+
+          this.isCurrentGr = true;
+        },
+        components: {
+            'newgroup': NewGroup
+        }
     }
-  },
-  computed: {
-    logged() {
-      return this.$store.getters.loginState
-    },
-    showLogin() {
-      return this.$store.getters.showLogin
-    },
-    user() {
-      return this.$store.getters.user
-    },
-    groups() {
-      return this.$store.state.user.groups
-    },
-    currentGroup() {
-      return this.$store.state.currentGroup
-    }
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout');
-      this.$store.dispatch('hideGames');
-      this.$router.push({
-        path: '/'
-      });
-      localStorage.clear();
-    },
-    show() {
-      this.$store.dispatch('hideOrShowLogin');
-    },
-    showModal() {
-      $('.ui.dimmer.modals.page').addClass('active visible').show();
-      $('.ui.basic.modal.newGroup').modal('show');
-    },
-    changeGroup(group) {
-      this.$store.dispatch('changeCurrentGroup', group);
-    },
-    showNotifs() {
-      if (!!this.notifications) {
-        this.$http.post('readnotifs', {}, {
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.$store.getters.userToken
-          }
-        }).then(res => {});
-      }
-    }
-  },
-  http: {
-    root: '/api'
-  },
-  mounted() {
-    $('.ui.dropdown').dropdown();
-    $('ui.selection.dropdown.list').dropdown();
-  },
-  created() {
-      if(!this.$store.state.user.requested && this.$store.state.user.logged) {
-        this.$http.post('user', {}, { headers: {
-            'Content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.$store.getters.userToken
-          }}).then(res => {
-            console.log(res);
-            this.$store.dispatch('userInfo', res.body.user);
-            this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
-            
-            this.notifications = res.body.user.notifications;
-          });
-      }
-      if(this.user.notifications)
-        this.notifications = this.user.notifications;
-      this.isCurrentGr = true;
-  },
-  components: {
-    'login': Login,
-    'newgroup': NewGroup
-  }
-}
 </script>
 
-<style lang="css">
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
+<style lang="css" scoped>
+  .h5 {
+    margin-top: 0;
+  }
 
-a {
-  color: black;
-}
+  .navbar {
+    border-radius: 0;
+    box-shadow: none;
+  }
 
-.haveNotifs {
-  color: rgb(29,157,244) !important;
-}
+  .navbar-nav {
+    margin: 0;
+  }
 
-.navigator {
-  box-shadow: 0 3px 6px #ccc;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  padding: 8px;
-  padding-left: 36px;
-  padding-right: 36;
-  color: white;
-  z-index: 5;
-}
+  .nav > li > a:hover, .nav > li > a:focus {
+    background: none;
+  }
 
-.login {
-  font-size: 16px;
-  margin-right: 20px;
-  /*color: white;*/
-} .exit {
-  color: black;
-}
+  .logo {
+    width: 50px;
+    height: 50px;
+    margin-right: -5px;
+  }
 
-/*.login-btn {
-  text-align: center;
-  border-radius: 2px;
-  background: transparent;
-  border: 1px solid white;
-  font-size: 16px;
-  transition: 0.4s;
-  padding-left: 25px;
-  padding-right: 25px;
-  margin-right: 15px;
-} .login-btn:hover {
-  /*background: white;*/
-  /*color: black;*/
-
-
-/*.contact-btn {
-  text-align: center;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  background: #5688C7;
-  font-size: 16px;
-  transition: 0.4s;
-  padding-left: 10px;
-  padding-right: 10px;
-} .contact-btn:hover {
-  /*background: #176087;*/
-  /*border: 1px solid #ccc;*/
-
-.debug::before {
-  content: ' ';
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  left: 0;
-  top: 4px;
-  border-radius: 2px;
-  background: #D8D8D8;
-}
-
-.recover {
-  transition: 0.2s;
-  color: darkgray;
-  margin-left: 15px;
-  margin-right: 15px;
-  font-size: 12px;
-}
-
-
-.profile {
-  background: #D8D8D8;
-  /*box-shadow: 0 1px 4px black;*/
-  width: 30px;
-  height: 30px;
-  margin-bottom: 0;
-  margin-top: 0;
-  border-radius: 50%;
-}
-
-.notif i {
-  color: darkgray;
-  font-size: 24px;
-} .notif i:hover {
-  cursor: pointer;
-}
-
-.logged {
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-} .nav-item {
-  padding: 0 20px;
-} .nav-item:last-child {
-  padding: 0;
-  margin: 0 20px;
-} .notif {
-  padding-left: 0;
-}
-
-.item {
-  color: black;
-} .item:hover {
-  color: black;
-}
-
-.preloader {
-  color: darkgray;
-}
-
-.list {
-  background: transparent;
-} .list > option:first-of-type {
-  color: white !important
-}
-
-.text {
-  color: black !important;
-  text-shadow: none !important;
-  margin-bottom: 12px !important;
-}
-
-.logo-container {
-  margin-left: 80px;
-}
-
-.logo-link h3 {
-  font-size: 24px;
-  font-family: 'Signika', sans-serif;
-}
-
-.logo {
-  width: 25px !important;
-  height: 25px !important;
-  margin-bottom: 5px;
-  margin-right: 10px;
-}
+  .hover:hover {
+    cursor: pointer;
+  }
 </style>

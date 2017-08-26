@@ -1,59 +1,103 @@
 <template lang="html">
   <div>
-    <app-header style="margin-bottom: 80px;" />
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
-          <div class="col-lg-3 ava blue vertical-center">
-            <h2 class="white-text">{{ group.name }}</h2>
-          </div>
-          <div class="col-lg-9 userinfo">
-            <h2><b>Количество учеников в группе: {{ studentsLength }}</b></h2>
-            <button @click="goto(group._id)" class="btn btn-primary"> Создать задание</button>
-            <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn">Код регистрации</button>
-            <button @click="sendMsg" class="btn btn-primary">Написать сообщение группе</button>
-            <div v-show="showModal" class="ui basic modal group">
-              <center>
-                <div class="header" v-if="showCode">Код регистрации</div>
-                <div class="content" v-if="showCode">
-                  <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
-                  <p><b>{{ groupCode }}</b></p>
-                  <div class="actions">
-                    <div @click="close" class="ui red basic cancel inverted button">
-                      <i class="remove icon"></i>
-                      Закрыть
-                    </div>
-                  </div>
-                </div>
-                <div class="header" v-if="writeMsg">Сообщение группе</div>
-                <div class="content" v-if="writeMsg">
-                  <new-msg :group="group"></new-msg>
-                  <div class="actions">
-                    <div @click="close" class="ui red basic cancel inverted button">
-                      <i class="remove icon"></i>
-                      Закрыть
-                    </div>
-                  </div>
-                </div>
-              </center>
+    <app-header/>
+    <div class="row-col b-b">
+    	<div class="row">
+    		<div class="padding">
+    			<div class="margin">
+    				<h5 class="m-b-0 _300">{{ group.name }}</h5>
+    			</div>
+    			<div class="row-col box">
+    				<div class="col-sm-12">
+    					<div class="box-header">
+    						<h3>Меню</h3>
+    					</div>
+    					<div class="box-body">
+    						<p class="text-muted m-b-md">Здесь вы можете создать новое задание или написать сообщение.</p>
+    						<a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новый модуль</a>
+                <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
+                <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
+    					</div>
             </div>
+    	    </div>
+    			<div class="row">
+    				<div class="col-sm-6">
+    					<div class="box">
+    						<div class="box-header">
+    							<h3>Последние отправленные сообщения</h3>
+    						</div>
+    						<div class="box-body">
+                  <ul class="list-group no-border m-b">
+                    <li class="list-group-item checkbox">
+                      <input type="checkbox" id="padding" v-model="showAll">
+                      <label for="padding" id="nope">Посмотреть все</label>
+                    </li>
+    				        <li v-show="showAll" class="list-group-item" v-for="msg in group.messages">
+    				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
+    				          <div class="clear">
+    				            <a href="" class="_500 block">{{ msg.author }}</a>
+    				            <span class="text-muted">{{ msg.text }}</span><br>
+                        <span class="text-muted"><small>{{ msg.date }}</small></span>
+    				          </div>
+    				        </li>
+                    <li v-show="!showAll" class="list-group-item" v-for="msg in slicedMessages">
+    				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
+    				          <div class="clear">
+    				            <a href="" class="_500 block">{{ msg.author }}</a>
+    				            <span class="text-muted">{{ msg.text }}</span><br>
+                        <span class="text-muted"><small>{{ msg.date }}</small></span>
+    				          </div>
+    				        </li>
+    					    </ul>
+    						</div>
+    			    </div>
+    				</div>
+    				<div class="col-sm-6">
+    	        <div class="grey lt">
+            		<div class="box-header">
+      	          <h3>Статистика</h3>
+      	          <small>Результаты за последний модуль</small>
+      	        </div>
+      	        <div class="box-body">
+                  <pie-chart
+                    v-if="!noneResults"
+                    :data="chartData"
+                    :library="{backgroundColor: '#424242', legend: { textStyle: { color: 'white' } }}"
+                    />
+                    <h5 v-else><small>Результатов пока нет.</small></h5>
+      	        </div>
+    	        </div>
+    				</div>
+    			</div>
+          <div class="row-col">
+            <table class="table table-striped b-t b-b box">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Ученик</th>
+                  <th v-for="test in slicedTests">{{ test.name }}</th>
+                  <th>
+                    <a @click="previousFiveTests" v-show="sliceTestIndex >= 5" class="btn-sm rounded primary text-white"><-</a>
+                    <a @click="nextFiveTests" class="btn-sm rounded primary text-white">-></a>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(student, index) in render">
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ student.name }}</td>
+                  <td v-for="(result, i) in student.results">
+                    <span v-if="i == result.index">{{ result.result }}%</span>
+                    <span v-else> — </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-        <div class="col-lg-3 box blue vertical-center">
-          <h5 class="white-text"> Полезная статистика </h5><br>
-          <!-- <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
-          <h1 class="month white-text">{{ date.slice(2) }}</h1> -->
-        </div>
-      </div>
-      <!-- <router-view></router-view> -->
+    		</div>
+    	</div>
     </div>
-    <div class="container-fluid">
-      <div class="box">
-        <router-view :group="this.group" :groupid="this.$route.params.id"></router-view>
-      </div>
-    </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -65,10 +109,26 @@ export default {
     return {
       group: {},
       groupCode: '',
+      slicedMessages: [],
+      slicedTests: [],
+      sliceTestIndex: 0,
+      render: [],
+      students: [],
       studentsLength: null,
+      showAll: false,
       showModal: false,
       showCode: false,
-      writeMsg: false
+      writeMsg: false,
+      chartData: {},
+      noneResults: false
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.getters.user
+    },
+    logged() {
+      return this.$store.getters.loginState
     }
   },
   methods: {
@@ -76,56 +136,88 @@ export default {
       const path = '/group/' + id + '/newtask';
       this.$router.push({ path });
     },
-    sendMsg() {
-      this.showModal = true;
-      $('.ui.dimmer.modals.page').addClass('active visible').show();
-      this.writeMsg = true;
-      this.showCode = false;
-      setTimeout(() => {
-        $('.ui.basic.modal.group').modal('show');
-      }, 50);
+    nextFiveTests() {
+      this.sliceTestIndex += 5;
+      this.slicedTests = this.group._tests.slice(this.sliceTestIndex, this.sliceTestIndex + 5);
+      this.prepareRender();
     },
-    close() {
-      this.showModal = false;
-      setTimeout(() => {
-        $('.ui.dimmer.modals.page').removeClass('active visible').hide();
-      }, 5);
-      this.writeMsg = false;
-      this.showCode = false;
+    previousFiveTests() {
+      this.sliceTestIndex -= 5;
+      this.slicedTests = this.group._tests.slice(this.sliceTestIndex, this.sliceTestIndex + 5);
+      this.prepareRender();
     },
-    generateLink(id) {
-      $('.ui.dimmer.modals.page').addClass('active visible').show();
-      this.writeMsg = false;
-      const body = {
-        'groupId': id
+    setCharData(test) {
+      this.noneResults = false;
+      let results = test.results.map(result => result.result);
+      let newResults = {
+        excellent: [],
+        normal: [],
+        bad: [],
+        veryBad: []
       };
-      this.$http.post('regcode', body, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
+      for(let result of results) {
+        if(result >= 90) {
+          newResults.excellent.push(result)
+        } else if(result >= 75 && result < 90) {
+          newResults.normal.push(result)
+        } else if(result >= 50 && result < 75) {
+          newResults.bad.push(result)
+        } else if(result < 50 && result != undefined){
+          newResults.veryBad.push(result)
         }
-      }).then(res => {
-        this.groupCode = res.body.groupCode;
-        this.showModal = true;
-        this.showCode = true;
-        setTimeout(() => {
-          $('.ui.basic.modal.group').modal('show');
-        }, 50);
-      }).catch(err => {
-        throw err
-      });
+      }
+      if(!!!newResults.excellent.length && !!!newResults.normal.length && !!!newResults.bad.length && !!!newResults.veryBad.length)
+        this.noneResults = true;
+      this.chartData = [['От 90% и выше', newResults.excellent.length], ['От 75% до 90%', newResults.normal.length], ["От 50% до 75%", newResults.bad.length], ["Меньше 50%", newResults.veryBad.length]];
+    },
+    prepareRender() {
+      if(!!this.slicedTests.length) {
+        this.render = this.students.map((student, index) => {
+          let newStudent = {
+            name: student.firstName + ' ' + student.lastName,
+            results: []
+          };
+          for(let i = 0; i < this.slicedTests.length; i++) {
+            newStudent.results.push(i);
+          }
+          for(let test of this.slicedTests) {
+            for(let result of test.results) {
+              if(result.userId == student._id) {
+                result.index = this.slicedTests.indexOf(test);
+                for(let i = 0; i < this.slicedTests.length; i++) {
+                  if(newStudent.results[i] == result.index) {
+                    newStudent.results[i] = result;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+
+          return newStudent;
+        });
+      } else {
+        this.render = this.students.map((student, index) => {
+          return {
+            name: student.firstName + ' ' + student.lastName,
+            results: []
+          }
+        });
+      }
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   components: {
     'app-header': Header,
     'new-msg': NewMsg
   },
   created() {
-    if (!this.$store.getters.loginState)
-      this.$router.push('/login');
+    if (!this.logged)
+      this.$router.push('/');
+    if(this.user.permissions != 'teacher')
+      this.$router.push('/profile');
     const body = {
       'groupId': this.$route.params.id
     };
@@ -136,7 +228,23 @@ export default {
       }
     }).then(res => {
       this.group = res.body.group;
-      this.studentsLength = this.group._students.length;
+      if(this.group._students)
+        this.studentsLength = this.group._students.length;
+      var haveThisGroup = false;
+      for(let group of this.user._groups) {
+        if(group.code == this.group.code) {
+          haveThisGroup = true;
+          break;
+        }
+      }
+      if(!haveThisGroup)
+        this.$router.push('/profile');
+      this.slicedMessages = this.group.messages.reverse().slice(0, 3);
+      this.group._tests = this.group._tests.reverse();
+      this.slicedTests = this.group._tests.slice(0, 5);
+      this.students = this.group._students;
+      this.prepareRender();
+      this.setCharData(this.slicedTests[0]);
     });
   }
 }
@@ -144,94 +252,7 @@ export default {
 
 
 <style lang="css" scoped>
-  .row {
-    vertical-align: middle;
-  }
-
-  .fl{
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .col-lg-8 {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .btn-first {
-    margin-right: 50px;
-  }
-
-  .groupCode{
-    /*margin-right: 30px; */
-  }
-
-  .number {
-    margin-bottom: -15px;
-    font-size: 52px;
-  } .month {
-    font-size: 20px;
-  }
-
-  h5.white-text {
-    opacity: 0.75;
-  }
-
-  .deadline {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .col-lg-8.box, .row {
-    padding: 0 !important;
-  }
-
-  .ava {
-    justify-content: center;
-    min-height: 160px;
-  }
-
-  .permissions {
-    font-size: 16px;
-    opacity: 0.75;
-  }
-
-  .userinfo {
-    padding: 20px;
-    padding-left: 30px;
-  }
-
-  .name, .school {
-    font-weight: bold;
-  } .school {
-    opacity: 0.75;
-  }
-
-  .box {
-    background-color: #fff;
-    min-height: 160px;
-    border-radius: 2px;
-  }
-
-  .row:first-of-type {
-    margin-bottom: 25px;
-  }
-
-  .row:nth-of-type(2) {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .blue { /* лабуди лабудай */
-    background-color: rgb(29,157,244);
-    color: white;
-  }
-
-  .container {
-    width: 75%;
-  }
+#nope {
+  padding-left: 0;
+}
 </style>

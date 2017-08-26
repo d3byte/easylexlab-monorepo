@@ -1,48 +1,264 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
-        <div class="col-lg-3 ava blue vertical-center">
-          <h2 class="white-text">Аватарка</h2>
+<div>
+  <div class="item">
+    <div class="item-bg">
+      <img src="../assets/images/a6.jpg" class="blur opacity-3">
+    </div>
+    <div class="p-a-md">
+      <div class="row m-t">
+        <div class="col-sm-7">
+          <a href class="pull-left m-r-md">
+              <span class="avatar w-96">
+                <img src="../assets/images/a0.jpg">
+              </span>
+            </a>
+          <div class="clear m-b">
+            <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
+            <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
+            <h5 class="m-a-0 text-md text-muted">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+          </div>
         </div>
-        <div class="col-lg-9 userinfo">
-          <h2 class="name"><b>{{ user.name }}</b><span class="permissions"> - {{ user.permissions == 'student' ? 'ученик' : 'учитель' }}</span></h2>
-          <h3><span  class="school">{{ user.school }}</span></h3>
+        <div class="col-sm-5">
         </div>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-      <div class="col-lg-3 box blue vertical-center date">
-        <h5 class="white-text"> Ближайший день сдачи </h5><br>
-        <h1 class="number white-text">{{ date.slice(0, 2) }}</h1>
-        <h1 class="month white-text">{{ date.slice(2) }}</h1>
       </div>
     </div>
-    <router-view></router-view>
   </div>
+  <div class="dker p-x">
+    <div class="row">
+      <div class="col-sm-6 push-sm-6">
+      </div>
+      <div class="col-sm-6 pull-sm-6">
+        <div class="p-y-md clearfix nav-active-primary">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item">
+              <a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a>
+
+            </li>
+            <li class="nav-item" v-for="group in user._groups">
+              <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-show="showTasks" class="row checkbox">
+    <div class="padding">
+      <input type="checkbox" id="padding" v-model="showAll">
+      <label for="padding" id="nope">Показывать все задания</label>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-sm-8 col-lg-8 padding">
+      <div class="tab-content">
+        <div v-if="showTasks">
+          <div class="tab-pane p-v-sm padding" id="tab_1">
+            <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
+            <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
+            <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
+            <i v-if="showPreloader" class="material-icons preloader">cached</i>
+            <div v-if="!showPreloader" class="row">
+              <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                <div class="taskcontentouter">
+                  <div class="taskcontent">
+                    <center>
+                      <h3>{{ test.name }}</h3>
+                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                    </center>
+                  </div>
+                </div>
+              </div>
+              <div v-show="showAll" v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+                <div class="taskcontentouter">
+                  <div class="taskcontent">
+                    <center>
+                      <h3>{{ test.name }}</h3>
+                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div v-if="showTasks" class="col-sm-4 col-lg-4 padding">
+      <div>
+        <center>
+          <div class="box blue vertical-center date">
+            <h6 class="text-muted">Ближайший день сдачи:</h6>
+            <br>
+            <h4 class="text-lg"><b>{{ date }}</b> </h4>
+          </div>
+        </center>
+      </div>
+    </div>
+
+
+        <div v-if="showMsgs">
+          <div class="col-lg-12 col-sm-12">
+          <div class="padding">
+          <div class="tab-pane p-v-sm" id="tab_2">
+            <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
+            <i v-if="showPreloader" class="material-icons preloader">cached</i>
+            <div v-if="!!messages.length && !showPreloader" class="row">
+                <div class="box">
+                  <div class="box-header">
+                    <h2>Входящие сообщения</h2>
+                  </div>
+                  <div class="table-responsive">
+                    <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                      <thead>
+                        <tr>
+                          <th style="width:2%">#</th>
+                          <th style="width:10%">Дата</th>
+                          <th style="width:15%">От кого</th>
+                          <th style="width:15%">Сообщение</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(msg, index) in slicedMessages">
+                        <td>{{ index + 1}}</td>
+                        <td></td>
+                        <td>{{ msg.author}}</td>
+                        <td>{{ msg.text}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <center>
+                  <button @click="nextFive" class="btn btn-primary">Показать еще</button>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>
 </template>
 
 <script>
 import moment from 'moment';
+import jwtDecode from 'jwt-decode';
 
 export default {
   data() {
     return {
-      date: null
+      date: null,
+      firstName: '',
+      lastName: '',
+      school: '',
+      city: '',
+      tasks: [],
+      uncompletedTasks: [],
+      messages: [],
+      slicedMessages: [],
+      showPreloader: true,
+      showTasks: true,
+      showMsgs: false,
+      showAll: false,
+      wordsLearnt: 0,
+      sliceIndex: 0
     }
   },
   computed: {
     user() {
       return this.$store.getters.user
     },
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
+    },
+    group() {
+      return this.$store.getters.currentGroup
+    }
+  },
+  methods: {
+    setDate() {
+      moment.locale('ru');
+      let dates = this.uncompletedTasks.map(task => {
+        return {
+          timeToDo: task.timeToDo,
+          deadline: task.deadline
+        }
+      });
+      let closestDay = 0;
+      let closest = '';
+      for(let date of dates) {
+        if(+date.deadline.slice(0, 2).trim() > closestDay) {
+          closestDay = +date.deadline.slice(0, 2);
+          closest = date.deadline;
+        }
+      }
+      this.date = closest;
+    },
+    switchTasks() {
+      this.showTasks = true;
+      this.showMsgs = false;
+    },
+    switchMsgs() {
+      this.showTasks = false;
+      this.showMsgs = true;
+    },
+    changeGroup(group) {
+      this.$store.dispatch('changeCurrentGroup', group);
+      this.sortTasks();
+    },
+    sortTasks() {
+      this.tasks = [];
+      this.uncompletedTasks = [];
+      for (var test of this.group._tests) {
+        var done = false;
+        if (test.results) {
+          for (let result of test.results) {
+            if (result.username == this.user.username) {
+              done = true;
+            }
+          }
+          if (!done) {
+            this.uncompletedTasks.push(test);
+          }
+        }
+        this.tasks.push(test);
+      }
+    },
+    nextFive() {
+      this.sliceIndex += 5;
+      this.slicedMessages = this.slicedMessages.concat(this.messages.slice(this.sliceIndex, this.sliceIndex + 5));
+    }
   },
   created() {
+    this.firstName = localStorage.firstName;
+    this.lastName = localStorage.lastName;
+    this.school = localStorage.school;
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    moment.locale('ru');
-    let date = moment().format('LL');
-    date = date.slice(0, date.length - 8);
-    this.date = date;
+    setTimeout(() => {
+      if (this.group) {
+        this.wordsLearnt = this.user.wordsLearnt;
+        this.sortTasks();
+        this.setDate();
+      }
+      this.showPreloader = false;
+      if(this.group) {
+        for (var msg of this.group.messages) {
+          this.messages.push(msg);
+        }
+      }
+      this.messages = this.messages.reverse();
+      this.slicedMessages = this.messages.slice(0, 5);
+    }, 150);
   }
 }
 </script>
@@ -50,6 +266,39 @@ export default {
 <style lang="css" scoped>
 .date h1, .date h5 {
   font-family: 'Roboto', sans-serif !important;
+}
+
+.task {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#padding {
+  margin-left: 20px;
+}
+
+#msg_card {
+  padding: 10px;
+}
+
+#nope {
+  padding-left: 10px !important;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: start;
+}
+
+.taskcontentouter {
+  display: flex;
+  justify-content: center;
+  padding: 5% 0;
+}
+
+.taskcontent {
+  padding: 10% 0;
 }
 
 .number {

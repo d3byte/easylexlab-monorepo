@@ -1,31 +1,30 @@
 <template>
   <div>
-    <app-header style="margin-bottom: 80px;"/>
-    <admin v-if="user.permissions == 'admin'" />
-    <teacher v-if="this.user.permissions == 'teacher'" />
-    <student v-if="user.permissions == 'student'" />
+    <app-header />
+    <admin v-if="token.permissions == 'admin'" />
+    <teacher v-if="token.permissions == 'teacher'" />
+    <student v-if="token.permissions == 'student'" />
   </div>
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
 import Header from './Header.vue';
 import Teacher from './Teacher.vue';
 import Student from './Student.vue';
 import Admin from './Admin.vue';
 
 export default {
-
-  data() {
-    return {
-      isAdmin: '',
-      isTeacher: '',
-      isStudent: ''
+  computed: {
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
+    },
+    requested() {
+      return this.$store.getters.requested
     }
   },
-  computed: {
-    user() {
-      return this.$store.getters.user
-    },
+  http: {
+    root: '//ealapi.tw1.ru/api'
   },
   components: {
     'app-header': Header,
@@ -35,10 +34,17 @@ export default {
   },
   created() {
     if(!this.$store.getters.loginState)
-      this.$router.push('/login');
-    this.isAdmin = (this.user.permissions == 'admin' ? true : false);
-    this.isTeacher = (this.user.permissions == 'teacher' ? true : false);
-    this.isStudent = (this.user.permissions == 'student' ? true : false);
+      this.$router.push('/');
+    this.$http.post('user', {}, {
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + this.$store.getters.userToken
+      }
+    }).then(res => {
+      this.$store.dispatch('userInfo', res.body.user);
+      this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+      this.notifications = res.body.user.notifications;
+    });
   }
 }
 </script>

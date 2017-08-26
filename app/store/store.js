@@ -10,20 +10,36 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     user: {
-      logged: (localStorage.token ? true : false),
-      requested: false
     },
+    requested: false,
     token: (localStorage.token ? localStorage.token : ''),
-    header: {
-      showLogin: false
-    },
+    logged: (localStorage.token ? true : false),
     currentGroup: {},
     games: {
-      matching: false,
-      flashcards: false,
-      snake: false,
-      scramble: false,
-      attempts: 0,
+      matching: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
+      flashcards: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
+      snake: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
+      scramble: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
       showTest: false,
       testAvailable: false
     }

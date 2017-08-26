@@ -1,11 +1,22 @@
 <template>
   <div class="col-lg-12">
+    <div class="container">
     <center>
       <div>
         <h1>Matching</h1>
-        <h3>Пройдено раз: {{ $store.getters.attempts }}/{{ this.stack.attempts }}</h3>
+        <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <br>
-        <div class="row">
+        <div class="dashboard">
+          <button @click="restart" class="flat-btn">Перезапуск</button>
+          <button class="flat-btn" @click="hideGames">Назад</button>
+          <button v-if="showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
+        </div><br>
+        <div v-if="done || lose" @click="show()" class="vertical-center box">
+          <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
+          <h2>{{ Math.round(100 - incorrect * 100 / correct.length) }}/100%</h2>
+          <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
+        </div>
+        <div class="row" v-if="!done && !lose">
           <div v-for="item in newPairs" class="col-lg-3">
             <div class="box"
                  :id="item.key"
@@ -18,9 +29,6 @@
           </div>
         </div>
         <br>
-      </div>
-      <div v-if="showTest" class="row">
-        <button @click="tryTest" class="btn">Пройти тест</button>
       </div>
       <div class="last-menu">
         <div class="ui dropdown btn">
@@ -38,6 +46,7 @@
       </div>
     </center>
   </div>
+</div>
 </template>
 
 <script>
@@ -51,16 +60,27 @@ export default {
       oldPairs: [],
       newPairs: [],
       correct: [],
+      incorrect: 0,
       selected: {
         first: null,
         second: null
       },
-      done: false
+      done: false,
+      lose: false
     }
   },
   computed: {
     showTest() {
       return this.$store.getters.testAvailable
+    },
+    doneAttempts() {
+      return this.$store.getters.games.matching.done
+    },
+    totalAttempts() {
+      return this.$store.getters.games.matching.attempts
+    },
+    gamesConditions() {
+      return this.$store.getters.finishedGames
     }
   },
   methods: {
@@ -74,31 +94,39 @@ export default {
       this.$store.dispatch('showFlashcards');
     },
     restart() {
+      $('*').removeClass('correct');
       setTimeout(() => {
         this.newPairs = _.shuffle(this.newPairs);
         this.correct = [];
+        this.incorrect = 0;
+        this.done = false;
+        this.lose = false;
         this.selected.first = null;
         this.selected.second = null;
       }, 10);
     },
     allDone() {
-      this.done = true;
+      if(Math.round(this.incorrect * 100 / this.correct.length) <= 10) {
+        this.$store.dispatch('incrementAttempts', 'matching');
+        this.$store.dispatch('gameFinished', 'matching');
+        this.done = true;
+        return;
+      }
+      this.lose = true;
     },
     tryTest() {
       this.$store.dispatch('hideGames');
       this.$store.dispatch('showTest');
     },
     checkConditions() {
-      $('*').removeClass('correct');
       if(this.correct.length == this.oldPairs.length &&
-         this.$store.getters.attempts + 1 < this.stack.attempts) {
-          this.$store.dispatch('incrementAttemps');
-          this.restart();
+         this.doneAttempts + 1 < this.totalAttempts) {
+          this.allDone();
       } else if(this.correct.length == this.oldPairs.length &&
-                this.$store.getters.attempts + 1 >= this.stack.attempts) {
-                  this.$store.dispatch('incrementAttemps');
-                  this.$store.dispatch('testAvailable');
+                this.doneAttempts + 1 >= this.totalAttempts) {
                   this.allDone();
+                  if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+                    this.$store.dispatch('testAvailable');
       }
     },
     select(key) {
@@ -131,6 +159,7 @@ export default {
             $(`#${first.key}`).addClass('error');
             $(`#${second.key}`).addClass('error');
           }, 10);
+          this.incorrect++;
           this.selected.first = null;
           this.selected.second = null;
         }
@@ -162,16 +191,17 @@ export default {
     }
 
     this.newPairs = _.shuffle(this.newPairs);
-  },
-  mounted() {
-    $('.ui.dropdown').dropdown();
   }
 }
 </script>
 
 <style lang="css" scoped>
-  .box {
+  .col-lg-3 .box {
     height: 50px;
+  }
+
+  .box {
+    padding: 10px;
   }
 
   .selected {

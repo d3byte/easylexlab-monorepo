@@ -70,6 +70,9 @@ app.get('/settings', function (req, res) {
 app.get('/profile/newgroup', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
+app.get('/stats', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
 app.get('/login', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });

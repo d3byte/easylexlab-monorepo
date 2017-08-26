@@ -48,8 +48,8 @@ routes.post('/verifypassword', (0, _expressJwt2.default)({ secret: _secret2.defa
 routes.patch('/newinfo', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.updateInfo);
 routes.patch('/newpassword', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.changePassword);
 routes.patch('/addgroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.addGroup);
-routes.patch('/userresult', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.addResult);
 routes.post('/user', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getUser);
+routes.patch('/words', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.learnWords);
 
 // Group routes
 routes.post('/regcode', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.regCode);
@@ -65,11 +65,12 @@ routes.post('/newstack', (0, _expressJwt2.default)({ secret: _secret2.default })
 routes.post('/gettests', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.getTests);
 routes.post('/gettest', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.getTest);
 routes.patch('/addresult', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.addResult);
+routes.patch('/updateresult', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.updateResult);
 
 // Notification and message routes
 routes.post('/newmsg', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.newMsg);
 routes.post('/getnotifs', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getNotifications);
-routes.post('/readnotifs', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.readNotifs);
+routes.post('/removenotif', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.removeNotification);
 
 exports.default = routes;
 //# sourceMappingURL=routes.js.map

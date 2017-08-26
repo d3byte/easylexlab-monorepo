@@ -3,10 +3,7 @@ export default {
      return state.token
    },
    loginState(state) {
-     return state.user.logged
-   },
-   showLogin(state) {
-     return state.header.showLogin
+     return state.logged
    },
    currentGroup(state) {
      return state.currentGroup
@@ -23,10 +20,18 @@ export default {
    attempts(state) {
      return state.games.attempts
    },
+   finishedGames(state) {
+     var gamesConditions = [];
+      gamesConditions.push(state.games.matching.win);
+      gamesConditions.push(state.games.flashcards.win);
+      gamesConditions.push(state.games.snake.win);
+      gamesConditions.push(state.games.scramble.win);
+     return gamesConditions
+   },
    testAvailable(state) {
      return state.games.testAvailable
    },
    requested(state) {
-     return state.user.requested
+     return state.requested
    }
 }
