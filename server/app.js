@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import expressJWT from 'express-jwt';
 import jwt from 'jsonwebtoken';
 import path from 'path';
+import cors from 'cors';
 
 import secret from './secret';
 
@@ -65,6 +66,7 @@ app.use('/task', express.static(folder));
 app.use('/task/:id', express.static(folder));
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use('/api', routes);
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
