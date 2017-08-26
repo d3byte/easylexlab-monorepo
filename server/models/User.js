@@ -19,6 +19,7 @@ const userSchema = new Schema({
     minlength: [6, 'Пароль должен состоять хотя бы из 6 символов.'],
     bcrypt: true
   },
+  wordsLearnt: { type: Number, default: 0 },
   school: { type: String, default: null },
   _groups: [{ type: Schema.ObjectId, ref: 'Group', default: null }],
   _results: { type: Array, default: null },

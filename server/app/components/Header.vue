@@ -163,7 +163,8 @@
         },
         created() {
           setTimeout(() => {
-            this.notifications = this.user.notifications.reverse();
+            if(this.user.notifications)
+              this.notifications = this.user.notifications.reverse();
           }, 70);
 
           this.isCurrentGr = true;

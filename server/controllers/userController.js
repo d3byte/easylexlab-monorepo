@@ -306,4 +306,13 @@ userController.getUser = (req, res) => {
         });
 };
 
+userController.learnWords = (req, res) => {
+  const user = req.user;
+  const amount = req.body.amount;
+
+  db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(success => {
+    return res.json({ success: true });
+  })
+};
+
 export default userController;

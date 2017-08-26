@@ -15,7 +15,7 @@
                 </span>
               </div>
               <div class="clear">
-                <h4 class="m-a-0 text-md"><a href>26 <span class="text-sm">Августа</span></a></h4>
+                <h4 class="m-a-0 text-md"><a>{{ date.num }}<span class="text-sm">{{ date.rest }}</span></a></h4>
                 <small class="text-muted">Вы зарегистрировались</small>
               </div>
             </div>
@@ -28,7 +28,7 @@
                 </span>
               </div>
               <div class="clear">
-                <h4 class="m-a-0 text-md"><a>1086 <span class="text-sm">Слов</span></a></h4>
+                <h4 class="m-a-0 text-md"><a>{{ wordsLearnt }} <span class="text-sm">Слов</span></a></h4>
                 <small class="text-muted">Выучено за все время</small>
               </div>
             </div>
@@ -41,7 +41,7 @@
                 </span>
               </div>
               <div class="clear">
-                <h4 class="m-a-0 text-md"><span class="text-sm">К</span> <a href>3 <span class="text-sm">группам</span></a></h4>
+                <h4 class="m-a-0 text-md"><span class="text-sm">К</span> <a href>{{ groupsAmount }} <span class="text-sm">группам</span></a></h4>
                 <small class="text-muted">Вы присоединились</small>
               </div>
             </div>
@@ -54,7 +54,7 @@
                 </span>
               </div>
               <div class="clear">
-                <h4 class="m-a-0 text-md"><a href>64 <span class="text-sm">Сообщения</span></a></h4>
+                <h4 class="m-a-0 text-md"><a href>{{ messsagesAmount }} <span class="text-sm">Сообщений</span></a></h4>
                 <small class="text-muted">Было получено</small>
               </div>
             </div>
@@ -71,11 +71,6 @@
               <table class="table table-striped b-t">
                 <thead>
                   <tr>
-                    <th style="width:20px;">
-                      <label class="ui-check m-a-0">
-                        <input type="checkbox"><i></i>
-                      </label>
-                    </th>
                     <th>Группа</th>
                     <th>Задание</th>
                     <th>Результат</th>
@@ -83,25 +78,21 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><label class="ui-check m-a-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
                     <td>Джуба</td>
                     <td>State test</td>
                     <td>90%</td>
                   </tr>
                   <tr>
-                    <td><label class="ui-check m-a-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
                     <td>Джуба</td>
                     <td>Сложный тест</td>
                     <td>90%</td>
                   </tr>
                   <tr>
-                    <td><label class="ui-check m-a-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
                     <td>Джуба</td>
                     <td>Unit test 4</td>
                     <td>90%</td>
                   </tr>
                   <tr>
-                    <td><label class="ui-check m-a-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
                     <td>Джуба</td>
                     <td>По_ржатб</td>
                     <td>90%</td>
@@ -185,11 +176,59 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
 import Header from './Header.vue';
 
 export default {
+  data() {
+    return {
+      date: {
+        num: '',
+        rest: ''
+      },
+      groupsAmount: 0,
+      messsagesAmount: 0,
+      wordsLearnt: 0
+    }
+  },
+  computed: {
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
+    },
+    user() {
+        return this.$store.getters.user
+    },
+    groups() {
+        return this.$store.state.user.groups
+    }
+  },
   components: {
     'app-header': Header
+  },
+  http: {
+    root: '/api'
+  },
+  created() {
+    if(!this.$store.getters.loginState)
+      this.$router.push('/');
+    else if(this.token.permissions != 'student')
+      this.$router.push('/profile');
+      this.$http.post('user', {}, {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.$store.dispatch('userInfo', res.body.user);
+        this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+        this.date.num = this.user.createdAt[1] == ' ' ? this.user.createdAt.slice(0, 2) : this.user.createdAt.slice(0, 2);
+        this.date.rest = this.user.createdAt[1] == ' ' ? this.user.createdAt.slice(3) : this.user.createdAt.slice(2);
+        this.groupsAmount = this.user._groups.length;
+        this.wordsLearnt = this.user.wordsLearnt;
+        let messsagesAmount = 0;
+        this.user._groups.map(group => messsagesAmount += group.messages.length);
+        this.messsagesAmount = messsagesAmount;
+      });
   }
 }
 </script>
