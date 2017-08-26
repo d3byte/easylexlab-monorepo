@@ -11,6 +11,7 @@ import Home from './components/Home.vue';
 import Login from './components/Login.vue';
 import Profile from './components/Profile.vue';
 import Settings from './components/Settings.vue';
+import Stats from './components/Stats.vue';
 import NewGroup from './components/NewGroup.vue';
 import NewTask from './components/NewTask.vue';
 import ForgotPassword from './components/ForgotPassword.vue';
@@ -32,6 +33,7 @@ const routes = [
   { path: '/forgotpassword', component: ForgotPassword },
   { path: '/eula', component: Eula },
   { path: '/settings', component: Settings },
+  { path: '/stats', component: Stats },
   {
     path: '/profile', component: Profile,
     children: [
@@ -41,32 +43,10 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/group/:id',
-    component: Group,
-    children: [
-      {
-        path: '',
-        component: Students
-      },
-      {
-        path: 'newtask',
-        component: NewTask
-      }
-    ]
-  },
-  {
-    path: '/group',
-    redirect: '/profile'
-  },
-  {
-    path: '/task/:id',
-    component: Stack
-  },
-  {
-    path: '/task',
-    redirect: '/profile'
-  }
+  { path: '/group/:id', component: Group },
+  { path: '/group', redirect: '/profile' },
+  { path: '/task/:id', component: Stack },
+  { path: '/task', redirect: '/profile' }
 ];
 
 const router = new VueRouter({routes, mode: 'history'});
