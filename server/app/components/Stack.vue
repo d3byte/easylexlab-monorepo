@@ -27,7 +27,7 @@
     <div class="col-sm-4">
       <div class="col box">
         <div class="row-col success white-text">
-          <h1>Учить</h1></div>
+          <h3>Учить</h3></div>
         <div class="p-a text-center">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
@@ -44,7 +44,7 @@
     <div class="col-sm-4">
       <div class="col box">
         <div class="row-col info white-text">
-          <h1>Играть</h1></div>
+          <h3>Играть</h3></div>
         <div class="p-a text-center">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
@@ -60,7 +60,7 @@
     <div class="col-sm-4" v-if="testAvailable">
       <div class="col box">
         <div class="row-col danger white-text">
-          <h1>Тест</h1></div>
+          <h3>Тест</h3></div>
         <div class="p-a text-center">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
@@ -74,7 +74,7 @@
   <div class="row col-lg-12" id="translate">
     <div class="box">
       <div class="row-col grey white-text">
-        <h1>Повторить</h1>
+        <h3>Повторить</h3>
       </div>
       <div class="p-a">
         <table class="table table-striped table-hover">
