@@ -105,7 +105,7 @@
             <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
             <i v-if="showPreloader" class="material-icons preloader">cached</i>
             <div v-if="!!messages.length && !showPreloader" class="row">
-                <div v-if="" class="box" v-for="(msg, index) in messages">
+                <div class="box">
                   <div class="box-header">
                     <h2>Входящие сообщения</h2>
                   </div>
@@ -120,10 +120,12 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <tr v-for="(msg, index) in messages">
                         <td>{{ index + 1}}</td>
                         <td></td>
                         <td>{{ msg.author}}</td>
                         <td>{{ msg.text}}</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -131,7 +133,6 @@
                 <center>
                   <button class="btn btn-primary">Показать еще</button>
                 </center>
-
               </div>
             </div>
           </div>
