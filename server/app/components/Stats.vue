@@ -65,7 +65,7 @@
     		<div class="col-lg-8">
     			<div class="box">
     				<div class="box-header">
-    					<h3>Все результаты <span class="label success">5</span></h3>
+    					<h3>Все результаты <span class="label success">{{ results.length }}</span></h3>
     				</div>
     				<div class="box-body">
               <table class="table table-striped b-t">
@@ -91,8 +91,8 @@
     		<div class="col-lg-4 col-md-12 col-xl-4">
           <div class="box">
             <div class="box-header">
-              <h3>Administrative test</h3>
-              <small>Результаты по группе</small>
+              <h3>Невыполненные задания</h3>
+              <small>Результаты группы по заданию {{ currentTask }}</small>
             </div>
             <div class="box-tool">
             <ul class="nav">
@@ -101,31 +101,17 @@
                   <i class="material-icons md-18">&#xe5d4;</i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-scale pull-right">
-                  <a class="dropdown-item" href>Administrative test</a>
-                  <a class="dropdown-item" href>Unit 4 test</a>
-                  <a class="dropdown-item" href>Джуба</a>
+                  <a v-for="task in uncompletedTasks" class="dropdown-item" @click="setCharData(task)">{{ task.name }}</a>
                 </div>
               </li>
             </ul>
           </div>
           <div class="box-body">
-            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="
-              [
-                { data: [[1, 2], [2, 4], [3, 5], [4, 7], [5, 6], [6, 4], [7, 5], [8, 4]] },
-                { data: [[1, 2], [2, 3], [3, 2], [4, 5], [5, 4], [6, 3], [7, 4], [8, 2]] }
-              ],
-              {
-                bars: { show: true, fill: true,  barWidth: 0.3, lineWidth: 2, order: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 0.2}] }, align: 'center'},
-                colors: ['#0cc2aa','#fcc100'],
-                series: { shadowSize: 3 },
-                xaxis: { show: true, font: { color: '#ccc' }, position: 'bottom' },
-                yaxis:{ show: true, font: { color: '#ccc' }},
-                grid: { hoverable: true, clickable: true, borderWidth: 0, color: 'rgba(120,120,120,0.5)' },
-                tooltip: true,
-                tooltipOpts: { content: '%x.0 is %y.4',  defaultTheme: false, shifts: { x: 0, y: -40 } }
-              }
-            " style="height:200px" >
-            </div>
+            <pie-chart
+              v-if="!noneResults"
+              :data="chartData"
+              />
+              <h5 v-else><small>Результатов пока нет.</small></h5>
           </div>
         </div>
         <div class="box">
@@ -174,7 +160,11 @@ export default {
       groupsAmount: 0,
       messsagesAmount: 0,
       wordsLearnt: 0,
-      results: []
+      results: [],
+      noneResults: true,
+      chartData: {},
+      uncompletedTasks: [],
+      currentTask: ''
     }
   },
   computed: {
@@ -182,7 +172,10 @@ export default {
       return jwtDecode(this.$store.getters.userToken)
     },
     user() {
-        return this.$store.getters.user
+      return this.$store.getters.user
+    },
+    currentGroup() {
+      return this.$store.getters.currentGroup
     }
   },
   methods: {
@@ -194,6 +187,49 @@ export default {
           results = results.concat(newResults);
         }
         this.results = this.results.concat(results);
+      }
+    },
+    setCharData(test) {
+      this.noneResults = false;
+      this.currentTask = test.name;
+      let results = test.results.map(result => result.result);
+      let newResults = {
+        excellent: [],
+        normal: [],
+        bad: [],
+        veryBad: []
+      };
+      for(let result of results) {
+        if(result >= 90) {
+          newResults.excellent.push(result)
+        } else if(result >= 75 && result < 90) {
+          newResults.normal.push(result)
+        } else if(result >= 50 && result < 75) {
+          newResults.bad.push(result)
+        } else if(result < 50 && result != undefined){
+          newResults.veryBad.push(result)
+        }
+      }
+      if(!!!newResults.excellent.length && !!!newResults.normal.length && !!!newResults.bad.length && !!!newResults.veryBad.length)
+        this.noneResults = true;
+      this.chartData = [['От 90% и выше', newResults.excellent.length], ['От 75% до 90%', newResults.normal.length], ["От 50% до 75%", newResults.bad.length], ["Меньше 50%", newResults.veryBad.length]];
+    },
+    sortTasks() {
+      this.uncompletedTasks = [];
+      for(let group of this.user._groups) {
+        for (var test of group._tests) {
+          var done = false;
+          if (test.results) {
+            for (let result of test.results) {
+              if (result.username == this.user.username) {
+                done = true;
+              }
+            }
+            if (!done) {
+              this.uncompletedTasks.push(test);
+            }
+          }
+        }
       }
     }
   },
@@ -224,6 +260,8 @@ export default {
         this.user._groups.map(group => messsagesAmount += group.messages.length);
         this.messsagesAmount = messsagesAmount;
         this.formResults();
+        this.setCharData(this.currentGroup._tests[0]);
+        this.sortTasks();
       });
   }
 }
