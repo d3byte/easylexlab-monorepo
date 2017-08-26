@@ -241,7 +241,7 @@ export default {
     'app-header': Header
   },
   http: {
-    root: '//ealapi.tw1.ru'
+    root: '//ealapi.tw1.ru/api'
   },
   created() {
     if(!this.$store.getters.loginState)
