@@ -121,7 +121,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(msg, index) in messages.reverse()">
+                        <tr v-for="(msg, index) in slicedMessages">
                         <td>{{ index + 1}}</td>
                         <td></td>
                         <td>{{ msg.author}}</td>
@@ -132,7 +132,7 @@
                   </div>
                 </div>
                 <center>
-                  <button class="btn btn-primary">Показать еще</button>
+                  <button @click="nextFive" class="btn btn-primary">Показать еще</button>
                 </center>
               </div>
             </div>
@@ -160,11 +160,13 @@ export default {
       tasks: [],
       uncompletedTasks: [],
       messages: [],
+      slicedMessages: [],
       showPreloader: true,
       showTasks: true,
       showMsgs: false,
       showAll: false,
-      wordsLearnt: 0
+      wordsLearnt: 0,
+      sliceIndex: 0
     }
   },
   computed: {
@@ -215,6 +217,10 @@ export default {
         this.tasks.push(test);
       }
     },
+    nextFive() {
+      this.sliceIndex += 5;
+      this.slicedMessages = this.slicedMessages.concat(this.messages.slice(this.sliceIndex, this.sliceIndex + 5));
+    }
   },
   created() {
     this.firstName = localStorage.firstName;
@@ -235,6 +241,8 @@ export default {
           this.messages.push(msg);
         }
       }
+      this.messages = this.messages.reverse();
+      this.slicedMessages = this.messages.slice(0, 5);
     }, 150);
   }
 }
