@@ -15,6 +15,7 @@
           <div class="clear m-b">
             <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
             <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}</small></p>
+            <h5 class="m-a-0 text-md text-muted">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
           </div>
         </div>
         <div class="col-sm-5">
@@ -162,7 +163,8 @@ export default {
       showPreloader: true,
       showTasks: true,
       showMsgs: false,
-      showAll: false
+      showAll: false,
+      wordsLearnt: 0
     }
   },
   computed: {
@@ -224,6 +226,7 @@ export default {
     this.setDate();
     setTimeout(() => {
       if (this.group) {
+        this.wordsLearnt = this.user.wordsLearnt;
         this.sortTasks();
       }
       this.showPreloader = false;
