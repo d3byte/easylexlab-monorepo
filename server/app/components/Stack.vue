@@ -24,32 +24,79 @@
 
   <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show">
     <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="col box">
-        <div class="row-col success white-text text-center">
+        <div class="row-col success white-text">
           <h1>Учить</h1></div>
         <div class="p-a text-center">
-          <h4 @click="showMatching">Matching</h4>
-          <h4 @click="showFlashcards">Flashcards</h4>
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item">
+              <a class="nav-link" @click="showMatching">Matching</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="showFlashcards">Flashcards</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="col box">
-        <div class="row-col warn white-text text-center">
+        <div class="row-col warn white-text">
           <h1>Играть</h1></div>
         <div class="p-a text-center">
-          <h4 @click="showSnake">Змейка</h4>
-          <h4 @click="showScramble">Word Scramble</h4>
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item">
+              <a class="nav-link" @click="showSnake">Змейка</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="showScramble">Word Scramble</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" v-if="testAvailable">
+      <div class="col box">
+        <div class="row-col danger white-text">
+          <h1>Тест</h1></div>
+        <div class="p-a text-center">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item">
+              <a class="nav-link" @click="tryTest">Пройти тест</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
+  <div class="row" id="translate">
+  <div class="col-sm-6">
+    <div class="box">
+        <table class="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th>Слово</th>
+            <th>Перевод</th>
+          </tr>
+        </thead>
+        <tbody v-for="task in task.tasks">
+          <tr v-for="pair in task.content">
+            <td>{{ pair.key }}</td>
+            <td>{{ pair.value }}</td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+  </div>
+</div>
 </div>
 
+
+
             <!-- <button v-if="testAvailable" @click="tryTest" class="btn">Пройти тест</button> -->
-      <div class="container">
+      <!-- <div class="container">
         <div class="row box">
             <table class="table table-striped table-hover">
               <thead>
@@ -66,25 +113,16 @@
             </tbody>
             </table>
         </div>
-      </div>
+      </div> -->
 
-      <div class="col-sm-3"></div>
-      <div class="col-sm-3" v-if="testAvailable">
-        <div class="col box">
-          <div class="row-col danger white-text text-center">
-            <h1>Тест</h1></div>
-          <div class="p-a text-center">
-            <h4 @click="tryTest">Пройти тест</h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-3"></div>
 
+      <div class="row">
       <flashcards v-if="games.flashcards.show" :stack="task"></flashcards>
       <matching v-if="games.matching.show" :stack="task"></matching>
       <snake v-if="games.snake.show" :stack="task"></snake>
       <scramble v-if="games.scramble.show" :stack="task"></scramble>
       <test v-if="showTest" :stack="task"></test>
+    </div>
 
     </div>
 
@@ -205,6 +243,10 @@ export default {
   }
 
   #gameblock {
+    margin-top: 20px;
+  }
+
+  #translate {
     margin-top: 20px;
   }
 
