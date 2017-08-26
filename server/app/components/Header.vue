@@ -16,15 +16,16 @@
             <span class="nav-link" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
           </li>
           <li class="nav-item dropdown pos-stc-xs">
-            <a class="nav-link" href data-toggle="dropdown" @click="showNotifs">
+            <a class="nav-link" href data-toggle="dropdown">
               <i class="material-icons">&#xe7f5;</i>
-              <span class="label label-sm up warn">{{ newNotifsInt }}</span>
+              <span class="label label-sm up warn">{{ notifications.length }}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
               <div class="scrollable" style="max-height: 220px">
                 <ul class="list-group list-group-gap m-a-0">
                   <li class="list-group-item box-shadow-z0 b" :class="notification.type == 'newMsg' ? 'dark-white text-color' : 'black'" v-for="notification in notifications">
+                    <span class="pull-right m-r hover" @click="removeNotif(notification.id)"><i class="material-icons">delete</i></span>
                     <span class="pull-left m-r">
                       <img :src="notification.pic" class="w-40 img-circle">
                     </span>
@@ -140,22 +141,19 @@
             changeGroup(group) {
               this.$store.dispatch('changeCurrentGroup', group);
             },
-            showNotifs(id) {
-              console.log(this.notifications)
-              if(!!this.notifications) {
-                const body = {
-                  id
+            removeNotif(id) {
+              const body = {
+                id
+              };
+              this.$http.post('removenotif', body, {
+                headers: {
+                  'Content-type': 'application/json',
+                  'Authorization': 'Bearer ' + this.$store.getters.userToken
                 }
-                this.$http.post('readnotifs', body, {
-                  headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': 'Bearer ' + this.$store.getters.userToken
-                  }
-                }).then(res => {
-                    console.log(res);
-                });
-                }
-              }
+              }).then(res => {
+                  this.notifications = res.body.notifications;
+              });
+            }
         },
         http: {
             root: '/api'
@@ -166,11 +164,6 @@
         created() {
           setTimeout(() => {
             this.notifications = this.user.notifications.reverse();
-            for(let notification of this.notifications) {
-              console.log(notification)
-              if(!notification.seen)
-                this.newNotifsInt++;
-            }
           }, 70);
 
           this.isCurrentGr = true;
@@ -203,5 +196,9 @@
     width: 50px;
     height: 50px;
     margin-right: -5px;
+  }
+
+  .hover:hover {
+    cursor: pointer;
   }
 </style>

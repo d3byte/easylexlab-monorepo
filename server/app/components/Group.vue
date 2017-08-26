@@ -1,55 +1,6 @@
 <template lang="html">
   <div>
     <app-header/>
-    <!-- <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 box">
-          <div class="col-lg-3 ava blue vertical-center">
-            <h2 class="white-text">{{ group.name }}</h2>
-          </div>
-          <div class="col-lg-9 userinfo">
-            <h2><b>Количество учеников в группе: {{ studentsLength }}</b></h2>
-            <button @click="goto(group._id)" class="btn btn-primary"> Создать задание</button>
-            <button @click="generateLink(group._id)" class="btn btn-primary" id="codebtn">Код регистрации</button>
-            <button @click="sendMsg" class="btn btn-primary">Написать сообщение группе</button>
-            <div v-show="showModal" class="ui basic modal group">
-              <center>
-                <div class="header" v-if="showCode">Код регистрации</div>
-                <div class="content" v-if="showCode">
-                  <p>Дайте этот код ученикам и они смогут присоединиться к группе!</p>
-                  <p><b>{{ groupCode }}</b></p>
-                  <div class="actions">
-                    <div @click="close" class="ui red basic cancel inverted button">
-                      <i class="remove icon"></i>
-                      Закрыть
-                    </div>
-                  </div>
-                </div>
-                <div class="header" v-if="writeMsg">Сообщение группе</div>
-                <div class="content" v-if="writeMsg">
-                  <new-msg :group="group"></new-msg>
-                  <div class="actions">
-                    <div @click="close" class="ui red basic cancel inverted button">
-                      <i class="remove icon"></i>
-                      Закрыть
-                    </div>
-                  </div>
-                </div>
-              </center>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-        <div class="col-lg-3 box blue vertical-center">
-          <h5 class="white-text"> Полезная статистика </h5><br>
-        </div>
-      </div>
-    </div> -->
-    <!-- <div class="container-fluid">
-      <div class="box">
-        <router-view :group="this.group" :groupid="this.$route.params.id"></router-view>
-      </div>
-    </div> -->
     <div class="row-col b-b">
     	<div class="row">
     		<div class="padding">
@@ -184,45 +135,6 @@ export default {
     goto(id) {
       const path = '/group/' + id + '/newtask';
       this.$router.push({ path });
-    },
-    sendMsg() {
-      this.showModal = true;
-      $('.ui.dimmer.modals.page').addClass('active visible').show();
-      this.writeMsg = true;
-      this.showCode = false;
-      setTimeout(() => {
-        $('.ui.basic.modal.group').modal('show');
-      }, 50);
-    },
-    close() {
-      this.showModal = false;
-      setTimeout(() => {
-        $('.ui.dimmer.modals.page').removeClass('active visible').hide();
-      }, 5);
-      this.writeMsg = false;
-      this.showCode = false;
-    },
-    generateLink(id) {
-      $('.ui.dimmer.modals.page').addClass('active visible').show();
-      this.writeMsg = false;
-      const body = {
-        'groupId': id
-      };
-      this.$http.post('regcode', body, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }
-      }).then(res => {
-        this.groupCode = res.body.groupCode;
-        this.showModal = true;
-        this.showCode = true;
-        setTimeout(() => {
-          $('.ui.basic.modal.group').modal('show');
-        }, 50);
-      }).catch(err => {
-        throw err
-      });
     }
   },
   http: {

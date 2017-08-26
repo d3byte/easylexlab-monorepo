@@ -233,6 +233,9 @@ groupController.newMsg = (req, res) => {
                 date: moment().format('LL')
             };
 
+            console.log(message);
+            console.log(groupId);
+
             const notification = {
                 type: 'newMsg',
                 authorId: userAccount._id,
@@ -240,21 +243,19 @@ groupController.newMsg = (req, res) => {
                 pic: userAccount.picUrl,
                 text: `${userAccount.firstName + " " + userAccount.lastName} отправил сообщение.`,
                 seen: false,
-                date: moment().format('LL')
+                date: moment().format('LL'),
+                id: randomize('0A', 10)
             };
 
-            console.log(notification);
 
             db.Group.findByIdAndUpdate(groupId, {
                 $push: { messages: message }
             }).then(group => {
-                console.log('kek');
-                console.log(groupId);
                 db.User.update({ _groups: { $in: [groupId] }},
                     { $push: { notifications: notification }}, {
                       multi: true
                     }).then(success => {
-                    res.json({ success: true });
+                    res.json({ success: true, message });
                 }).catch(error => {
                     throw error
                 });

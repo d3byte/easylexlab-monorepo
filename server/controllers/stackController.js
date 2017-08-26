@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import randomize from 'randomatic';
 import _ from 'lodash';
 import moment from 'moment';
 import secret from './../secret';
@@ -38,7 +39,8 @@ stackController.post = (req, res) => {
                   pic: userAccount.picUrl,
                   text: `${userAccount.firstName + " " + userAccount.lastName} создал новое задание.`,
                   seen: false,
-                  date: moment().format('LL')
+                  date: moment().format('LL'),
+                  id: randomize('0A', 10)
               };
               db.User.update({ _groups: { $in: [groupId] }},
                   { $push: { notifications: notification }}, {

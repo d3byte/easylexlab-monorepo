@@ -30,10 +30,14 @@
                 <label class="text-success">{{ success }}</label>
               </div>
               <div class="form-group">
-                <label>Аватарка</label>
+                <label>Фотографии</label>
                 <div class="form-file">
-                  <input type="file">
-                  <button class="btn white">Загрузить новую фотографию</button>
+                  <input type="file" id="ava">
+                  <button class="btn white">Фотография профиля</button>
+                </div><br>
+                <div class="form-file">
+                  <input type="file" id="background">
+                  <button class="btn white">Фон профиля</button>
                 </div>
               </div>
               <div class="form-group">

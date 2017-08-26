@@ -273,16 +273,15 @@ userController.getNotifications = (req, res) => {
     });
 };
 
-userController.readNotifs = (req, res) => {
+userController.removeNotification = (req, res) => {
     const user = req.user;
     const id = req.body.id;
 
     db.User.findById(user.id).then(myUser => {
-        for(let notification of myUser.notifications) {
-            notification.seen = true;
-        }
+        myUser.notifications = myUser.notifications.filter(notif => notif.id != id);
+        let notificationsCopy = myUser.notifications;
         myUser.save();
-        res.json({ sucess: true });
+        res.json({ sucсess: true, notifications: notificationsCopy });
     }).catch((err) => {
         res.status(500).json({
             message: err
