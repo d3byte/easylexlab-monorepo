@@ -77,6 +77,7 @@ export default {
           done = true;
       })
       if(!done) {
+        console.log('Not done');
         const body = {
           result: this.percentage,
           stackId: this.stack._id,
@@ -94,6 +95,7 @@ export default {
           this.showPreloader = false;
         });
       } else {
+        console.log('Done');
         const body = {
           result: this.percentage,
           stackId: this.stack._id
@@ -135,7 +137,7 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    root: '//ealapi.tw1.ru'
   }
 }
 </script>

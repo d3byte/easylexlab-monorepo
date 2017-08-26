@@ -81,6 +81,7 @@ export default {
     this.firstName = localStorage.firstName;
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
+    this.city = localStorage.city;
     this.setDate();
   }
 }

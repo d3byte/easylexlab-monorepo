@@ -143,7 +143,7 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    root: '//ealapi.tw1.ru'
   },
   created() {
     if (!this.$store.getters.loginState || this.user.permissions != 'student') {

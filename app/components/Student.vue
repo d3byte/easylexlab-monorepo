@@ -58,6 +58,7 @@
           <div class="tab-pane p-v-sm padding" id="tab_1">
             <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
             <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
+            <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
             <i v-if="showPreloader" class="material-icons preloader">cached</i>
             <div v-if="!showPreloader" class="row">
               <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
@@ -245,6 +246,8 @@ export default {
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
     setTimeout(() => {
+      localStorage.city = this.user.city;
+      this.city = this.user.city;
       if (this.group) {
         this.wordsLearnt = this.user.wordsLearnt;
         this.sortTasks();

@@ -13,6 +13,9 @@ export default {
     state.token = '';
     state.currentGroup = {};
     localStorage.token = '';
+    localStorage.city = '';
+    localStorage.firstName = '';
+    localStorage.lastName = '';
   },
   hideOrShowLogin(state) {
     state.header.showLogin = !state.header.showLogin;

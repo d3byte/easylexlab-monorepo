@@ -15,7 +15,9 @@ import Stats from './components/Stats.vue';
 import NewGroup from './components/NewGroup.vue';
 import NewTask from './components/NewTask.vue';
 import ForgotPassword from './components/ForgotPassword.vue';
+import ProfileFooter from './components/ProfileFooter.vue';
 import Group from './components/Group.vue';
+import Students from './components/Students.vue';
 import Signup from './components/Signup.vue';
 import Eula from './components/Eula.vue';
 import Stack from './components/Stack.vue';
@@ -32,7 +34,15 @@ const routes = [
   { path: '/eula', component: Eula },
   { path: '/settings', component: Settings },
   { path: '/stats', component: Stats },
-  { path: '/profile', component: Profile },
+  {
+    path: '/profile', component: Profile,
+    children: [
+      {
+        path: '',
+        component: ProfileFooter
+      }
+    ]
+  },
   { path: '/group/:id', component: Group },
   { path: '/group', redirect: '/profile' },
   { path: '/task/:id', component: Stack },
