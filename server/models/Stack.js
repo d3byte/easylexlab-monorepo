@@ -13,7 +13,8 @@ const stackSchema = new Schema({
   _group: { type: Schema.ObjectId, ref:'Group', required: true },
   attempts: { type: Object, required: true },
   results: { type: Array, default: null },
-  createdAt: { type: String, default: moment().format('LL') }
+  createdAt: { type: String, default: moment().format('LL') },
+  deadline: { type: String, required: true }
 });
 
 const Stack = mongoose.model('Stack', stackSchema);

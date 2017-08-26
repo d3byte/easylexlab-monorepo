@@ -58,12 +58,6 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-6 form-control-label">Кол-во дней на выполнение</label>
-                <div class="col-sm-6">
-                  <input type="number" v-model="timeToDo" min="1">
-                </div>
-              </div>
-              <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во повторений змейки</label>
                 <div class="col-sm-6">
                   <input type="number" v-model="snakeAttempts" min="1">

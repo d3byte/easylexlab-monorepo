@@ -90,9 +90,9 @@
       <div>
         <center>
           <div class="box blue vertical-center date">
-            <h4>Ближайший день сдачи:</h4>
+            <h6 class="text-muted">Ближайший день сдачи:</h6>
             <br>
-            <h3><b>{{ date.slice(0, 2) + " " + date.slice(2) }}</b> </h3>
+            <h4 class="text-lg"><b>{{ date }}</b> </h4>
           </div>
         </center>
       </div>
@@ -183,9 +183,21 @@ export default {
   methods: {
     setDate() {
       moment.locale('ru');
-      let date = moment().format('LL');
-      date = date.slice(0, date.length - 8);
-      this.date = date;
+      let dates = this.uncompletedTasks.map(task => {
+        return {
+          timeToDo: task.timeToDo,
+          deadline: task.deadline
+        }
+      });
+      let closestDay = 0;
+      let closest = '';
+      for(let date of dates) {
+        if(+date.deadline.slice(0, 2).trim() > closestDay) {
+          closestDay = +date.deadline.slice(0, 2);
+          closest = date.deadline;
+        }
+      }
+      this.date = closest;
     },
     switchTasks() {
       this.showTasks = true;
@@ -229,11 +241,11 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    this.setDate();
     setTimeout(() => {
       if (this.group) {
         this.wordsLearnt = this.user.wordsLearnt;
         this.sortTasks();
+        this.setDate();
       }
       this.showPreloader = false;
       if(this.group) {

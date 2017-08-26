@@ -10,6 +10,8 @@ import helper from './helperFunctions';
 
 const stackController = {};
 
+moment.locale('ru');
+
 // New stack
 stackController.post = (req, res) => {
     const {
@@ -28,7 +30,8 @@ stackController.post = (req, res) => {
             tasks,
             timeToDo,
             _group: groupId,
-            attempts
+            attempts,
+            deadline: moment().add(timeToDo, 'days').format('LL')
         });
         stack.save().then(stack => {
             db.User.findById(user.id).then(userAccount => {
@@ -39,7 +42,7 @@ stackController.post = (req, res) => {
                   pic: userAccount.picUrl,
                   text: `${userAccount.firstName + " " + userAccount.lastName} создал новое задание.`,
                   seen: false,
-                  date: moment().format('LL'),
+                  date: moment().subtract(timeToDo, 'days').format('LL'),
                   id: randomize('0A', 10)
               };
               db.User.update({ _groups: { $in: [groupId] }},
