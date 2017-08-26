@@ -10,7 +10,7 @@
         <!-- navbar right -->
         <ul class="nav navbar-nav pull-right" v-if="logged">
           <li class="nav-item" v-if="token.permissions === 'student'">
-            <router-link to="/stats" class="nav-link">Статистика</router-link>
+            <router-link to="/stats" class="nav-link">Мои результаты</router-link>
           </li>
           <li class="nav-item" v-if="token.permissions === 'teacher'">
             <span class="nav-link" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
