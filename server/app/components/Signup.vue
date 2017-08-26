@@ -12,12 +12,15 @@
     </div>
 
     <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
-      <div class="m-b text-sm">
+      <div v-if="!success" class="m-b text-sm">
         Регистрация
+      </div>
+      <div v-if="success" class="m-b text-sm">
+        <span class="text-success">Вы успешно зарегистрировались.</span>
       </div>
       <div v-if="error" class="alert ng-scope ng-isolate-scope alert-danger alert-dismissible">{{ errorMsg }}
       </div>
-      <form v-if="!success && !showPreloader" onsubmit="return false">
+      <form v-if="!success" onsubmit="return false">
         <div class="md-form-group float-label">
           <input v-model="firstName" type="text" tabindex="1" class="md-input" required>
           <label>Имя</label>
@@ -61,7 +64,7 @@
         <div class="m-b-md">
           <label class="md-check">
             <input type="checkbox" v-model="agree" required><i class="primary"></i>
-            <router-link to="/eula">Разрешаю обработку своих персональных данных</router-link>
+            <router-link to="/eula" target="_blank">Разрешаю обработку своих персональных данных</router-link>
           </label>
         </div>
         <button type="submit" @click="check" class="btn primary btn-block p-x-md">Зарегистрироваться

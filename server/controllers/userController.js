@@ -265,7 +265,6 @@ userController.getNotifications = (req, res) => {
     const user = req.user;
 
     db.User.findById(user.id).then(myUser => {
-        console.log(myUser.notifications);
         res.json({ notifications: myUser.notifications });
     }).catch((err) => {
         res.status(500).json({
@@ -278,17 +277,10 @@ userController.readNotifs = (req, res) => {
     const user = req.user;
     const id = req.body.id;
 
-    db.User.findByIdAndUpdate(user.id,
-    {
-
-    })
-
     db.User.findById(user.id).then(myUser => {
         for(let notification of myUser.notifications) {
             notification.seen = true;
-            console.log(notification);
         }
-        console.log(myUser.notifications);
         myUser.save();
         res.json({ sucess: true });
     }).catch((err) => {

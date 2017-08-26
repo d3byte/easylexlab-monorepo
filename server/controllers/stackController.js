@@ -31,6 +31,23 @@ stackController.post = (req, res) => {
             attempts
         });
         stack.save().then(stack => {
+            db.User.findById(user.id).then(userAccount => {
+              const notification = {
+                  type: 'newTask',
+                  authorId: userAccount._id,
+                  author: userAccount.firstName + " " + userAccount.lastName,
+                  pic: userAccount.picUrl,
+                  text: `${userAccount.firstName + " " + userAccount.lastName} создал новое задание.`,
+                  seen: false,
+                  date: moment().format('LL')
+              };
+              db.User.update({ _groups: { $in: [groupId] }},
+                  { $push: { notifications: notification } }).then(success => {
+                  res.json({ success: true });
+              }).catch(error => {
+                  throw error
+              });
+            })
             res.status(200).json({
                 success: true,
                 stack

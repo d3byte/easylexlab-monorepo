@@ -102,18 +102,10 @@
           <div class="col-lg-12 col-sm-12">
           <div class="padding">
           <div class="tab-pane p-v-sm" id="tab_2">
-            <h3 v-if="!!!group.messages.length && !showPreloader">Сообщений нет</h3>
+            <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
             <i v-if="showPreloader" class="material-icons preloader">cached</i>
-            <div v-if="!showPreloader" class="row">
-              <!-- <div id="msg_card" v-for="msg in group.messages" class="box col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <h5>От кого: <b>{{ msg.author }}</b></h5>
-                <p>Содержание: {{ msg.text }}</p>
-                <tr>
-                <td></td>
-              </tr>
-              </div> -->
-
-                <div class="box" v-for="(msg, index) in group.messages">
+            <div v-if="!!messages.length && !showPreloader" class="row">
+                <div v-if="" class="box" v-for="(msg, index) in messages">
                   <div class="box-header">
                     <h2>Входящие сообщения</h2>
                   </div>
@@ -230,11 +222,11 @@ export default {
     this.$store.dispatch('testNotAvailable');
     this.setDate();
     setTimeout(() => {
-      if (this.group._tests) {
+      if (this.group) {
         this.sortTasks();
       }
       this.showPreloader = false;
-      if (this.group.messages) {
+      if(this.group) {
         for (var msg of this.group.messages) {
           this.messages.push(msg);
         }

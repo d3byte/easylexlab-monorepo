@@ -30,7 +30,7 @@
                     </span>
                     <span class="clear block">
                       {{ notification.text }}<br>
-                      <small class="text-muted">10 minutes ago</small>
+                      <small class="text-muted">{{ notification.date }}</small>
                     </span>
                   </li>
                 </ul>

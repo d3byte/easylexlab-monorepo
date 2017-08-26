@@ -89,8 +89,8 @@
               </div>
               <hr>
               <button @click="post" class="btn dark-white p-x-md" v-if="!success">Создать</button>
-              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
-              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-else>Закрыть</button>
+              <button type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
+              <button type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-else>Закрыть</button>
             </form>
           </div>
         </div>
@@ -122,7 +122,6 @@ export default {
   },
   methods: {
     refresh() {
-      this.showEditor = true;
       this.errorMsg = '';
       this.timeToDo = 1;
       this.snakeAttempts = 1;
@@ -132,6 +131,7 @@ export default {
       this.name = '';
       this.success = false;
       this.showPost = false;
+      this.showEditor = true;
       this.tasks = [];
       var task = {
         content: [],
@@ -165,7 +165,6 @@ export default {
       this.showPost = true;
     },
     post() {
-      console.log(this.$route.params.id);
       const body = {
         name: this.name,
         tasks: this.tasks,

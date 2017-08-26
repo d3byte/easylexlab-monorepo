@@ -226,35 +226,35 @@ groupController.newMsg = (req, res) => {
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
         db.User.findById(user.id).then(userAccount => {
             const message = {
+                authorId: userAccount._id,
                 author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
                 text: msgText,
                 date: moment().format('LL')
             };
 
-            const notification = new db.Notification({
+            const notification = {
                 type: 'newMsg',
-                _author: userAccount._id,
+                authorId: userAccount._id,
+                author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
                 text: `${userAccount.firstName + " " + userAccount.lastName} прислал(а) вам сообщение.`,
                 seen: false,
                 date: moment().format('LL')
-            });
+            };
 
-            notification.save().then(notif => {
-              db.Group.findByIdAndUpdate(groupId, {
-                  $push: { messages: message }
-              }).then(group => {
-                  db.User.update({ _groups: { $in: [groupId] }},
-                      { $push: { notifications: notif } }).then(success => {
-                      res.json({ success: true });
-                  }).catch(error => {
-                      throw error
-                  });
-              }).catch(err => {
-                  throw err
-              });
-            })
+            db.Group.findByIdAndUpdate(groupId, {
+                $push: { messages: message }
+            }).then(group => {
+                db.User.update({ _groups: { $in: [groupId] }},
+                    { $push: { notifications: notification } }).then(success => {
+                    res.json({ success: true });
+                }).catch(error => {
+                    throw error
+                });
+            }).catch(err => {
+                throw err
+            });
         }).catch(err => {
             throw err
         });
