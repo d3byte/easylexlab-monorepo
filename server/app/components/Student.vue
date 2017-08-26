@@ -46,11 +46,13 @@
     </div>
   </div>
   <div v-show="showTasks" class="row checkbox">
-    <input type="checkbox" id="padding" v-model="showAll">
-    <label for="padding" id="nope">Показывать все задания</label>
+    <div class="padding">
+      <input type="checkbox" id="padding" v-model="showAll">
+      <label for="padding" id="nope">Показывать все задания</label>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-sm-8 col-lg-8">
+  <div class="row ">
+    <div class="col-sm-8 col-lg-8 padding">
       <div class="tab-content">
         <div v-if="showTasks">
           <div class="tab-pane p-v-sm" id="tab_1">
@@ -86,7 +88,7 @@
     </div>
 
 
-    <div v-if="showTasks" class="col-sm-4 col-lg-4">
+    <div v-if="showTasks" class="col-sm-4 col-lg-4 padding">
       <div>
         <center>
           <div class="box blue vertical-center date">
