@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
+moment.locale('ru');
 
 const { Schema } = mongoose;
 
@@ -24,7 +26,7 @@ const userSchema = new Schema({
   permissions: { type: String, required: true },
   picUrl: { type: String, default: null },
   backgroundUrl: { type: String, default: null },
-  createdAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: moment().format('LL') },
   isDeleted: { type: Boolean, default: false }
 });
 

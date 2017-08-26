@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
+moment.locale('ru');
 
 const { Schema } = mongoose;
 
@@ -10,7 +12,7 @@ const notificationSchema = new Schema({
   pic: { type: String, default: null },
   text: { type: String, default: null },
   seen: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: moment().format('LL') }
 });
 
 const Notification = mongoose.model('Notification', notificationSchema);

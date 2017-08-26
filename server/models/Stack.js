@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
+moment.locale('ru');
 
 const { Schema } = mongoose;
 
@@ -11,7 +13,7 @@ const stackSchema = new Schema({
   _group: { type: Schema.ObjectId, ref:'Group', required: true },
   attempts: { type: Object, required: true },
   results: { type: Array, default: null },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: moment().format('LL') }
 });
 
 const Stack = mongoose.model('Stack', stackSchema);

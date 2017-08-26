@@ -85,14 +85,16 @@
     				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
     				          <div class="clear">
     				            <a href="" class="_500 block">{{ msg.author }}</a>
-    				            <span class="text-muted">{{ msg.text }}</span>
+    				            <span class="text-muted">{{ msg.text }}</span><br>
+                        <span class="text-muted"><small>{{ msg.date }}</small></span>
     				          </div>
     				        </li>
                     <li v-show="!showAll" class="list-group-item" v-for="msg in splicedMessages">
     				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
     				          <div class="clear">
     				            <a href="" class="_500 block">{{ msg.author }}</a>
-    				            <span class="text-muted">{{ msg.text }}</span>
+    				            <span class="text-muted">{{ msg.text }}</span><br>
+                        <span class="text-muted"><small>{{ msg.date }}</small></span>
     				          </div>
     				        </li>
     					    </ul>
@@ -256,8 +258,7 @@ export default {
       }
       if(!haveThisGroup)
         this.$router.push('/profile');
-
-      this.splicedMessages = this.group.messages.slice(0, 4);
+      this.splicedMessages = this.group.messages.reverse().slice(0, 4);
     });
   }
 }

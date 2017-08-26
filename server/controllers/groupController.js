@@ -1,8 +1,10 @@
 import randomize from 'randomatic';
+import moment from 'moment';
 
 import db from './../models';
 import secret from './../secret';
 import helper from './helperFunctions';
+moment.locale('ru');
 
 const groupController = {};
 
@@ -226,8 +228,8 @@ groupController.newMsg = (req, res) => {
             const message = {
                 author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
-                date: Date.now,
-                text: msgText
+                text: msgText,
+                date: moment().format('LL')
             };
 
             const notification = new db.Notification({
@@ -235,7 +237,8 @@ groupController.newMsg = (req, res) => {
                 _author: userAccount._id,
                 pic: userAccount.picUrl,
                 text: `${userAccount.firstName + " " + userAccount.lastName} прислал(а) вам сообщение.`,
-                seen: false
+                seen: false,
+                date: moment().format('LL')
             });
 
             notification.save().then(notif => {
