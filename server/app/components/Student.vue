@@ -241,10 +241,13 @@ export default {
     this.firstName = localStorage.firstName;
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
+    this.city = localStorage.city;
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
     setTimeout(() => {
+      localStorage.city = this.user.city;
+      this.city = this.user.city;
       if (this.group) {
         this.wordsLearnt = this.user.wordsLearnt;
         this.sortTasks();

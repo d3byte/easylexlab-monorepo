@@ -13,7 +13,7 @@
             <router-link to="/stats" class="nav-link">Мои результаты</router-link>
           </li>
           <li class="nav-item" v-if="token.permissions === 'teacher'">
-            <span class="nav-link" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
+            <span class="nav-link hover" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
           </li>
           <li class="nav-item dropdown pos-stc-xs">
             <a class="nav-link" href data-toggle="dropdown">

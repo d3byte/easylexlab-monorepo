@@ -121,7 +121,8 @@
                         password: this.password,
                         permissions: this.role,
                         groupCode: this.groupCode,
-                        school: this.school
+                        school: this.school,
+                        city: this.city
                     };
                     this.$http.post('signup', body).then(res => {
                         if (res.body.success) {
