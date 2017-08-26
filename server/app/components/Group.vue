@@ -138,12 +138,12 @@ export default {
     },
     nextFiveTests() {
       this.sliceTestIndex += 5;
-      this.slicedTests = this.group._tests.reverse().slice(this.sliceTestIndex, 5);
+      this.slicedTests = this.group._tests.slice(this.sliceTestIndex, this.sliceTestIndex + 5);
       this.prepareRender();
     },
     previousFiveTests() {
       this.sliceTestIndex -= 5;
-      this.slicedTests = this.group._tests.reverse().slice(this.sliceTestIndex, 5);
+      this.slicedTests = this.group._tests.slice(this.sliceTestIndex, this.sliceTestIndex + 5);
       this.prepareRender();
     },
     setCharData(test) {
@@ -173,28 +173,27 @@ export default {
     prepareRender() {
       if(!!this.slicedTests.length) {
         this.render = this.students.map((student, index) => {
-          console.log(student);
           let newStudent = {
             name: student.firstName + ' ' + student.lastName,
             results: []
           };
+          for(let i = 0; i < this.slicedTests.length; i++) {
+            newStudent.results.push(i);
+          }
           for(let test of this.slicedTests) {
             for(let result of test.results) {
               if(result.userId == student._id) {
                 result.index = this.slicedTests.indexOf(test);
                 for(let i = 0; i < this.slicedTests.length; i++) {
-                  if(i == result.index) {
-                    newStudent.results.push(result);
+                  if(newStudent.results[i] == result.index) {
+                    newStudent.results[i] = result;
                     break;
                   }
                 }
               }
             }
           }
-          for(let i = 0; i < newStudent.results.length; i++) {
-            if(newStudent.results[i + 1] && newStudent.results[i + 1].index != i + 1)
-              newStudent.results.splice(i + 1, 0, {});
-          }
+
           return newStudent;
         });
       } else {
@@ -241,7 +240,8 @@ export default {
       if(!haveThisGroup)
         this.$router.push('/profile');
       this.slicedMessages = this.group.messages.reverse().slice(0, 3);
-      this.slicedTests = this.group._tests.reverse().slice(0, 5);
+      this.group._tests = this.group._tests.reverse();
+      this.slicedTests = this.group._tests.slice(0, 5);
       this.students = this.group._students;
       this.prepareRender();
       this.setCharData(this.slicedTests[0]);
