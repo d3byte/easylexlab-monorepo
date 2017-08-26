@@ -16,7 +16,8 @@ userController.post = (req, res) => {
         password,
         permissions,
         groupCode,
-        school
+        school,
+        city
     } = req.body;
 
     db.User.findOne({username}, (err, user) => {
@@ -65,7 +66,8 @@ userController.post = (req, res) => {
                             password,
                             permissions,
                             _groups: [],
-                            school
+                            school,
+                            city
                         });
                         user.save().then(newUser => {
                             // console.log('Success:\n', newUser);

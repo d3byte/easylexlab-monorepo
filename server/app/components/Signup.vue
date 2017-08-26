@@ -6,7 +6,7 @@
       </div>
       <div v-if="success" class="m-b text-sm">
         <span class="text-success">
-          Вы успешно зарегистрировались. 
+          Вы успешно зарегистрировались.
           <router-link to="/login" class="text-primary _600">Войти</router-link>
         </span>
       </div>
@@ -36,6 +36,10 @@
         <div class="md-form-group float-label">
           <input v-model="school" type="text" tabindex="5" class="md-input" required>
           <label>Название учебного заведения</label>
+        </div>
+        <div class="md-form-group float-label">
+          <input v-model="city" type="text" tabindex="6" class="md-input" required>
+          <label>Город</label>
         </div>
         <div class="md-form-group">
           <label class="md-check">
@@ -86,6 +90,7 @@
                 role: '',
                 groupCode: '',
                 school: '',
+                city: '',
                 agree: false,
                 success: false,
                 error: false,
