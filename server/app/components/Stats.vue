@@ -92,7 +92,7 @@
           <div class="box">
             <div class="box-header">
               <h3>Невыполненные задания</h3>
-              <small>Результаты группы по заданию {{ currentTask }}</small>
+              <small>Результаты группы по заданию <b>{{ currentTask }}</b></small>
             </div>
             <div class="box-tool">
             <ul class="nav">
@@ -126,7 +126,7 @@
                 </div>
                 <div>
                   Выполнено
-                  <small class="block m-b">15</small>
+                  <small class="block m-b">{{ completedTasks.length }}</small>
                 </div>
               </div>
               <div class="row-cell p-a dker">
@@ -134,7 +134,7 @@
                 </div>
                 <div>
                   Ожидают выполнения
-                  <small class="block m-b">7</small>
+                  <small class="block m-b">{{ uncompletedTasks.length }}</small>
                 </div>
               </div>
             </div>
@@ -163,6 +163,7 @@ export default {
       results: [],
       noneResults: true,
       chartData: {},
+      completedTasks: [],
       uncompletedTasks: [],
       currentTask: ''
     }
@@ -215,6 +216,7 @@ export default {
       this.chartData = [['От 90% и выше', newResults.excellent.length], ['От 75% до 90%', newResults.normal.length], ["От 50% до 75%", newResults.bad.length], ["Меньше 50%", newResults.veryBad.length]];
     },
     sortTasks() {
+      this.completedTasks = [];
       this.uncompletedTasks = [];
       for(let group of this.user._groups) {
         for (var test of group._tests) {
@@ -227,6 +229,8 @@ export default {
             }
             if (!done) {
               this.uncompletedTasks.push(test);
+            } else {
+              this.completedTasks.push(test);
             }
           }
         }
