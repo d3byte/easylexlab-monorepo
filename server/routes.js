@@ -24,6 +24,7 @@ routes.patch('/newpassword', expressJWT({ secret }), userController.changePasswo
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.patch('/userresult', expressJWT({ secret }), userController.addResult);
 routes.post('/user', expressJWT({ secret }), userController.getUser);
+routes.patch('/words', expressJWT({ secret }), userController.learnWords);
 
 // Group routes
 routes.post('/regcode', expressJWT({ secret }), groupController.regCode);

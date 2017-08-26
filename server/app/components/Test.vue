@@ -94,6 +94,13 @@ export default {
           this.showPreloader = false;
           this.success = true;
         });
+        let wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
+        this.$http.patch('words', { amount: wordsLearnt }, {
+          headers: {
+            'Content-type' : 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => { });
       });
     },
     toProfile() {
