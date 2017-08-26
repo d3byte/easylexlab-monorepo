@@ -11,8 +11,8 @@
       <div class="row m-t">
         <div class="col-sm-7">
           <div class="clear m-b">
-            <h3 class="m-a-0 m-b-xs">{{ task.name }}</h3>
-            <h4> Выберите игру: </h4>
+            <h3 class="m-a-0 m-b-xs">Название модуля: {{ task.name }}</h3>
+            <h4 v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show"> Выберите игру: </h4>
           </div>
         </div>
         <div class="col-sm-5">
@@ -43,7 +43,7 @@
 
     <div class="col-sm-4">
       <div class="col box">
-        <div class="row-col warn white-text">
+        <div class="row-col info white-text">
           <h1>Играть</h1></div>
         <div class="p-a text-center">
           <ul class="nav nav-pills nav-sm">
@@ -71,9 +71,12 @@
       </div>
     </div>
   </div>
-  <div class="row" id="translate">
-  <div class="col-sm-6">
+  <div class="row col-lg-12" id="translate">
     <div class="box">
+      <div class="row-col grey white-text">
+        <h1>Повторить</h1>
+      </div>
+      <div class="p-a">
         <table class="table table-striped table-hover">
           <thead>
           <tr>
@@ -93,27 +96,6 @@
 </div>
 </div>
 
-
-
-            <!-- <button v-if="testAvailable" @click="tryTest" class="btn">Пройти тест</button> -->
-      <!-- <div class="container">
-        <div class="row box">
-            <table class="table table-striped table-hover">
-              <thead>
-              <tr>
-                <th>Слово</th>
-                <th>Перевод</th>
-              </tr>
-            </thead>
-            <tbody v-for="task in task.tasks">
-              <tr v-for="pair in task.content">
-                <td>{{ pair.key }}</td>
-                <td>{{ pair.value }}</td>
-              </tr>
-            </tbody>
-            </table>
-        </div>
-      </div> -->
 
 
       <div class="row">
@@ -255,7 +237,16 @@ export default {
     width: 100%;
 }
 
+  .padding {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
   .col {
     display: table-cell;
 }
+
+  .grey {
+    background-color: rgb(117, 117, 117)
+  }
 </style>

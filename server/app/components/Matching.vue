@@ -1,5 +1,6 @@
 <template>
   <div class="col-lg-12">
+    <div class="container">
     <center>
       <div>
         <h1>Matching</h1>
@@ -38,6 +39,7 @@
       </div>
     </center>
   </div>
+</div>
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="container">
+    <center>
     <h1>Word Scramble</h1>
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
     <div class="dashboard">
@@ -20,6 +21,7 @@
         </span>
      </draggable>
     </div>
+  </center>
   </div>
 </template>
 
