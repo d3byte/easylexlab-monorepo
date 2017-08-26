@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <newgroup v-if="logged" />
-    <newmsg v-if="logged" />
+    <newmsg v-if="logged && $route.params.id" />
     <regcode v-if="logged && $route.params.id" />
     <newtask v-if="logged" />
     <router-view></router-view>

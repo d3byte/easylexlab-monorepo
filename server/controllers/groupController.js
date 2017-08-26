@@ -233,9 +233,6 @@ groupController.newMsg = (req, res) => {
                 date: moment().format('LL')
             };
 
-            console.log(message);
-            console.log(groupId);
-
             const notification = {
                 type: 'newMsg',
                 authorId: userAccount._id,
