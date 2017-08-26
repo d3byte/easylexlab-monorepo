@@ -7,6 +7,7 @@
         <div class="dashboard">
           <button @click="restart" class="flat-btn">Перезапуск</button>
           <button class="flat-btn">Помощь</button>
+          <button v-if="showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
         </div>
         <div v-show="!done && !lose" class="pair">
           <div v-show="!showDef" @click="show()" class="vertical-center box">
