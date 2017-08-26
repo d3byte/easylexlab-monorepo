@@ -60,9 +60,11 @@
       	        </div>
       	        <div class="box-body">
                   <pie-chart
+                    v-if="!noneResults"
                     :data="chartData"
                     :library="{backgroundColor: '#424242', legend: { textStyle: { color: 'white' } }}"
-                    :legend="{}"/>
+                    />
+                    <h5 v-else><small>Результатов пока нет.</small></h5>
       	        </div>
     	        </div>
     				</div>
@@ -117,7 +119,8 @@ export default {
       showModal: false,
       showCode: false,
       writeMsg: false,
-      chartData: {}
+      chartData: {},
+      noneResults: false
     }
   },
   computed: {
@@ -143,8 +146,29 @@ export default {
       this.slicedTests = this.group._tests.reverse().slice(this.sliceTestIndex, 5);
       this.prepareRender();
     },
-    setCharData() {
-      this.chartData = [["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]];
+    setCharData(test) {
+      this.noneResults = false;
+      let results = test.results.map(result => result.result);
+      let newResults = {
+        excellent: [],
+        normal: [],
+        bad: [],
+        veryBad: []
+      };
+      for(let result of results) {
+        if(result >= 90) {
+          newResults.excellent.push(result)
+        } else if(result >= 75 && result < 90) {
+          newResults.normal.push(result)
+        } else if(result >= 50 && result < 75) {
+          newResults.bad.push(result)
+        } else if(result < 50 && result != undefined){
+          newResults.veryBad.push(result)
+        }
+      }
+      if(!!!newResults.excellent.length && !!!newResults.normal.length && !!!newResults.bad.length && !!!newResults.veryBad.length)
+        this.noneResults = true;
+      this.chartData = [['От 90% и выше', newResults.excellent.length], ['От 75% до 90%', newResults.normal.length], ["От 50% до 75%", newResults.bad.length], ["Меньше 50%", newResults.veryBad.length]];
     },
     prepareRender() {
       if(!!this.slicedTests.length) {
@@ -217,7 +241,7 @@ export default {
       this.slicedTests = this.group._tests.reverse().slice(0, 5);
       this.students = this.group._students;
       this.prepareRender();
-      this.setCharData();
+      this.setCharData(this.slicedTests[0]);
     });
   }
 }
