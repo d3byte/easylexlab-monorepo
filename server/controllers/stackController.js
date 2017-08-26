@@ -98,7 +98,10 @@ stackController.addResult = (req, res) => {
 
     const user = req.user;
 
-    db.Stack.findById(stackId).then(stack => {
+    db.Stack.findById(stackId).populate({
+      path: '_group',
+      model: 'Group'
+    }).then(stack => {
       const results = {
           userId: user.id,
           username,
@@ -107,6 +110,7 @@ stackController.addResult = (req, res) => {
             name: stack.name,
             id: stack._id
           },
+          groupName: stack._group.name,
           result
       };
       stack.results.push(results);

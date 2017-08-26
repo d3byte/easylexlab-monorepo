@@ -77,25 +77,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Джуба</td>
-                    <td>State test</td>
-                    <td>90%</td>
-                  </tr>
-                  <tr>
-                    <td>Джуба</td>
-                    <td>Сложный тест</td>
-                    <td>90%</td>
-                  </tr>
-                  <tr>
-                    <td>Джуба</td>
-                    <td>Unit test 4</td>
-                    <td>90%</td>
-                  </tr>
-                  <tr>
-                    <td>Джуба</td>
-                    <td>По_ржатб</td>
-                    <td>90%</td>
+                  <tr v-for="result in results">
+                    <td>{{ result.groupName }}</td>
+                    <td>{{ result.stack.name }}</td>
+                    <td>{{ result.result }}%</td>
                   </tr>
                 </tbody>
               </table>
@@ -188,7 +173,8 @@ export default {
       },
       groupsAmount: 0,
       messsagesAmount: 0,
-      wordsLearnt: 0
+      wordsLearnt: 0,
+      results: []
     }
   },
   computed: {
@@ -197,9 +183,18 @@ export default {
     },
     user() {
         return this.$store.getters.user
-    },
-    groups() {
-        return this.$store.state.user.groups
+    }
+  },
+  methods: {
+    formResults() {
+      for(let group of this.user._groups) {
+        let results = [];
+        for(let test of group._tests) {
+          let newResults = test.results.filter(res => res.userId == this.user._id);
+          results = results.concat(newResults);
+        }
+        this.results = this.results.concat(results);
+      }
     }
   },
   components: {
@@ -228,6 +223,7 @@ export default {
         let messsagesAmount = 0;
         this.user._groups.map(group => messsagesAmount += group.messages.length);
         this.messsagesAmount = messsagesAmount;
+        this.formResults();
       });
   }
 }
