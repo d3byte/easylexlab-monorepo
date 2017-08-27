@@ -33,7 +33,10 @@ export default {
     commit('hideGames');
   },
   showTest({ commit }) {
-    commit('showOrHideTest');
+    commit('showTest');
+  },
+  hideTest({ commit }) {
+    commit('hideTest');
   },
   incrementAttempts({ commit }, game) {
     commit('incrementAttempts', game);

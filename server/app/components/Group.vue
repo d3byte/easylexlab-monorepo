@@ -20,7 +20,7 @@
     					</div>
             </div>
     	    </div>
-    			<div class="row">
+    			<div class="row" style="margin-bottom: 20px;">
     				<div class="col-sm-6">
     					<div class="box">
     						<div class="box-header">
@@ -56,8 +56,20 @@
     	        <div class="grey lt">
             		<div class="box-header">
       	          <h3>Статистика</h3>
-      	          <small>Результаты за последний модуль</small>
+      	          <small>Результаты за {{ currentTask }}</small>
       	        </div>
+                <div class="box-tool">
+                <ul class="nav">
+                  <li class="nav-item inline dropdown">
+                    <a class="nav-link" data-toggle="dropdown">
+                      <i class="material-icons md-18">&#xe5d4;</i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-scale pull-right">
+                      <a v-for="task in group._tests" class="dropdown-item" @click="setCharData(task)">{{ task.name }}</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
       	        <div class="box-body">
                   <pie-chart
                     v-if="!noneResults"
@@ -120,7 +132,8 @@ export default {
       showCode: false,
       writeMsg: false,
       chartData: {},
-      noneResults: false
+      noneResults: false,
+      currentTask: ''
     }
   },
   computed: {
@@ -148,6 +161,7 @@ export default {
     },
     setCharData(test) {
       this.noneResults = false;
+      this.currentTask = test.name;
       let results = test.results.map(result => result.result);
       let newResults = {
         excellent: [],
@@ -207,7 +221,7 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   components: {
     'app-header': Header,

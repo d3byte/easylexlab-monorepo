@@ -172,12 +172,16 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   created() {
     if (!this.$store.getters.loginState || this.user.permissions != 'student') {
       this.$router.push('/profile');
     }
+    this.$store.dispatch('hideTest');
+    this.$store.dispatch('testNotAvailable');
+    this.$store.dispatch('hideGames');
+    this.$store.dispatch('zeroAttempts');
     this.$http.post('gettest', {
       testId: this.testId
     }, {
@@ -202,9 +206,6 @@ export default {
         this.$router.push('/profile');
       this.$store.dispatch('setGames', this.task.attempts);
     });
-  },
-  mounted() {
-    $('.ui.dropdown').dropdown();
   },
   methods: {
     showMatching() {

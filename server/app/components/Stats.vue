@@ -241,7 +241,7 @@ export default {
     'app-header': Header
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   created() {
     if(!this.$store.getters.loginState)
@@ -267,6 +267,10 @@ export default {
         this.sortTasks();
         this.setCharData(this.completedTasks[0]);
       });
+      this.$store.dispatch('hideGames');
+      this.$store.dispatch('zeroAttempts');
+      this.$store.dispatch('testNotAvailable');
+      this.$store.dispatch('hideTest');
   }
 }
 </script>

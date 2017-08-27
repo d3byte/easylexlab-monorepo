@@ -3,7 +3,7 @@
       <div class="navbar">
         <!-- Page title - Bind to $state's title -->
         <div class="navbar-item pull-left h5" id="pageTitle">
-          <img src="pics/logo.png" class="logo">
+          <img src="../pics/logo.png" class="logo">
           EasyLexLab
         </div>
 
@@ -118,6 +118,7 @@
             logout() {
               this.$store.dispatch('logout');
               this.$store.dispatch('hideGames');
+              this.$store.dispatch('testNotAvailable');
               this.$router.push({
                   path: '/'
               });
@@ -156,10 +157,7 @@
             }
         },
         http: {
-            root: '/api'
-        },
-        mounted() {
-
+            root: '//ealapi.tw1.ru/api'
         },
         created() {
           setTimeout(() => {

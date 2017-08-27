@@ -24,7 +24,7 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   components: {
     'app-header': Header,
@@ -43,7 +43,10 @@ export default {
     }).then(res => {
       this.$store.dispatch('userInfo', res.body.user);
       this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
-      this.notifications = res.body.user.notifications;
+      this.$store.dispatch('hideGames');
+      this.$store.dispatch('zeroAttempts');
+      this.$store.dispatch('testNotAvailable');
+      this.$store.dispatch('hideTest');
     });
   }
 }
