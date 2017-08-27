@@ -4,6 +4,7 @@
     <newmsg v-if="logged && $route.params.id" />
     <regcode v-if="logged && $route.params.id" />
     <newtask v-if="logged" />
+    <feedback v-if="logged" />
     <router-view></router-view>
   </div>
 </template>
@@ -13,6 +14,7 @@ import NewGroup from './components/NewGroup.vue';
 import NewMsg from './components/NewMsg.vue';
 import RegCode from './components/RegCode.vue';
 import NewTask from './components/NewTask.vue';
+import Feedback from './components/Feedback.vue';
 
 export default {
   computed: {
@@ -24,7 +26,8 @@ export default {
     'newgroup': NewGroup,
     'newmsg': NewMsg,
     'regcode': RegCode,
-    'newtask': NewTask
+    'newtask': NewTask,
+    'feedback': Feedback
   }
 }
 </script>
