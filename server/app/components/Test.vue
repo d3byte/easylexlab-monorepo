@@ -13,21 +13,13 @@
       <div class="row padding">
         <h1>Тест</h1>
         <hr>
-        <div class="ui divided selection list typeVal">
-          <a v-for="pair in typeVal" class="item">
-            <div class="ui blue horizontal label">{{ pair.key }}</div>
-            <div class="ui input">
-              <input type="text" v-model="pair.test" placeholder="Перевод" required>
-            </div>
-          </a>
+        <div class="md-form-group" v-for="pair in typeVal">
+          <input type="text" v-model="pair.test" class="md-input" placeholder="Перевод" required>
+          <label>{{ pair.key }}</label>
         </div>
-        <div class="ui divided selection list typeKey">
-          <a v-for="pair in typeKey" class="item">
-            <div class="ui blue horizontal label">{{ pair.value }}</div>
-            <div class="ui input">
-              <input type="text" v-model="pair.test" placeholder="Слово" required>
-            </div>
-          </a>
+        <div class="md-form-group" v-for="pair in typeKey">
+          <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
+          <label>{{ pair.value }}</label>
         </div>
         <button @click="submit" class="btn btn-primary">Готово</button>
       </div>
