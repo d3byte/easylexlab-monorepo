@@ -13,7 +13,7 @@
       <h5 @click="start" class="restart">Начать заново?</h5>
     </div>
     <div class="box game" v-if="!win">
-      <h3 class="key"><b>{{ currentPair.key }}</b></h3>
+      <h3 class="key"><b>{{ currentPair.value }}</b></h3>
       <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
       <draggable v-model="shuffledLetters" @end="onEnd" element="h3" class="value" :class="correct ?'correct':'default'">
         <span v-for="letter in shuffledLetters">
@@ -67,7 +67,7 @@ export default {
       this.$store.dispatch('hideGames');
     },
     onEnd() {
-      if(this.shuffledLetters.join('') == this.currentPair.value) {
+      if(this.shuffledLetters.join('') == this.currentPair.key) {
         this.correct = true;
         this.totalCorrect++;
         if(this.totalCorrect == this.pairs.length) {
@@ -97,8 +97,11 @@ export default {
       this.shuffleLetters();
     },
     shuffleLetters() {
-      this.shuffledLetters = this.currentPair.value.split('');
-      this.shuffledLetters = _.shuffle(this.shuffledLetters);
+      this.shuffledLetters = this.currentPair.key.split('');
+      let copyShuffledLetters = this.shuffledLetters;
+      while(this.shuffledLetters == copyShuffledLetters) {
+        this.shuffledLetters = _.shuffle(this.shuffledLetters);
+      }
     }
   },
   created() {
