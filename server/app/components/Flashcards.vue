@@ -4,9 +4,10 @@
       <div class="container flashcards">
         <h1>Flashcards</h1>
         <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-        <div class="dashboard">
+        <div class=" box">
           <button @click="restart" class="flat-btn">Перезапуск</button>
           <button class="flat-btn">Помощь</button>
+          <button class="flat-btn" @click="hideGames">Назад</button>
           <button v-if="showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
         </div>
         <div v-show="!done && !lose" class="pair">
@@ -29,7 +30,7 @@
         <div v-if="done && showTest" class="row">
           <button @click="tryTest" class="btn">Пройти тест</button>
         </div>
-        <div class="last-menu">
+        <!-- <div class="last-menu">
           <div class="ui dropdown btn">
             <div class="text game">Выбрать игру</div>
             <div class="menu">
@@ -41,8 +42,7 @@
               </div>
             </div>
           </div>
-          <button class="btn back" @click="hideGames">Назад</button>
-        </div>
+        </div> -->
       </div>
     </center>
   </div>
