@@ -69,7 +69,6 @@ export default {
           done = true;
       })
       if(!done) {
-        console.log('Not done');
         const body = {
           result: this.percentage,
           stackId: this.stack._id,
@@ -87,7 +86,6 @@ export default {
           this.showPreloader = false;
         });
       } else {
-        console.log('Done');
         const body = {
           result: this.percentage,
           stackId: this.stack._id
@@ -100,6 +98,9 @@ export default {
         }).then(res => {
           this.success = true;
           this.showPreloader = false;
+          this.$store.dispatch('zeroAttempts');
+          this.$store.dispatch('showTest');
+          this.$store.dispatch('testNotAvailable');
         });
       }
       this.wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
@@ -111,8 +112,6 @@ export default {
       }).then(res => { });
     },
     toProfile() {
-      this.$store.dispatch('zeroAttempts');
-      this.$store.dispatch('hideGames');
       this.$router.push('/profile');
     }
   },

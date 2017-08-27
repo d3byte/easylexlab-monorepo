@@ -66,7 +66,6 @@
                     <center>
                       <h3>{{ test.name }}</h3>
                       <p>Крайний срок сдачи: {{ test.deadline }}</p>
-                      <p>Пар слов: {{ test.content.length }}</p>
                       <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                     </center>
                   </div>
@@ -236,9 +235,9 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
+    this.$store.dispatch('hideTest');
+    this.$store.state.games.showTest = false;
     setTimeout(() => {
-      localStorage.city = this.user.city;
-      this.city = this.user.city;
       if (this.group) {
         this.wordsLearnt = this.user.wordsLearnt;
         this.sortTasks();

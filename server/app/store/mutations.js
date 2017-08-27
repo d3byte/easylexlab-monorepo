@@ -59,11 +59,13 @@ export default {
     state.games.scramble.show = false;
     state.games.snake.show = false;
   },
-  showOrHideTest(state) {
-    state.games.showTest = !state.games.showTest;
+  showTest(state) {
+    state.games.showTest = true;
+  },
+  hideTest(state) {
+    state.games.showTest = false;
   },
   incrementAttempts(state, game) {
-    console.log(game);
     if(game == 'matching')
       state.games.matching.done++;
     else if(game == 'snake')
@@ -94,6 +96,11 @@ export default {
   },
   testNotAvailable(state) {
     state.games.testAvailable = false;
+    state.finishedGames = state.finishedGames.map(game => false);
+    state.games.matching.win = false;
+    state.games.snake.win = false;
+    state.games.flashcards.win = false;
+    state.games.scramble.win = false;
   },
   requestedIsTrue(state) {
     state.user.requested = true;
