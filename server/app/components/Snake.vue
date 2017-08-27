@@ -116,7 +116,7 @@
       start() {
         if(ticking)
           clearInterval(ticking);
-        let size = 25, ms = 95;
+        let size = 25, ms = 140;
         this.grid = new Grid(size, (x, y) => ({ x, y, snake: 0, food: { exists: false, index: null } }));
         this.dead = false;
         this.correct = 0;
@@ -308,8 +308,8 @@
   .grid-cell {
     margin: 0;
     padding: 0;
-    height: 10px;
-    width: 10px;
+    height: 12px;
+    width: 12px;
     background-color: #f4f4f4;
     border: 1px solid white;
   }
@@ -384,7 +384,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 480px;
+    width: 560px;
   }
 
   .words {
