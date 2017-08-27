@@ -66,7 +66,6 @@
                     <center>
                       <h3>{{ test.name }}</h3>
                       <p>Крайний срок сдачи: {{ test.deadline }}</p>
-                      <p>Пар слов: {{ test.content.length }}</p>
                       <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                     </center>
                   </div>
