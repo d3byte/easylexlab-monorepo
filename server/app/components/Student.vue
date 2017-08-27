@@ -16,6 +16,7 @@
             <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
             <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
             <h5 class="m-a-0 text-md text-muted">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+            <h5 class="m-a-0 text-md text-muted">Ближайший день сдачи: <b> {{ date }}</b></h5>
           </div>
         </div>
         <div class="col-sm-5">
@@ -46,19 +47,16 @@
     </div>
   </div>
   <div v-show="showTasks" class="row checkbox">
-    <div class="padding">
-      <input type="checkbox" id="padding" v-model="showAll">
-      <label for="padding" id="nope">Показывать все задания</label>
-    </div>
+    <input type="checkbox" id="padding" v-model="showAll">
+    <label for="padding">Показывать все задания</label>
   </div>
-  <div class="row ">
-    <div class="col-sm-8 col-lg-8 padding">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12 padding">
       <div class="tab-content">
         <div v-if="showTasks">
           <div class="tab-pane p-v-sm padding" id="tab_1">
             <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
             <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
-            <!-- Нужно, чтобы этот h3 показывался при условии, как и все задания, даже выполненные -->
             <i v-if="showPreloader" class="material-icons preloader">cached</i>
             <div v-if="!showPreloader" class="row">
               <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
@@ -88,7 +86,7 @@
     </div>
 
 
-    <div v-if="showTasks" class="col-sm-4 col-lg-4 padding">
+    <!-- <div v-if="showTasks" class="col-sm-4 col-lg-4 padding">
       <div>
         <center>
           <div class="box blue vertical-center date">
@@ -98,53 +96,53 @@
           </div>
         </center>
       </div>
-    </div>
+    </div> -->
 
 
-        <div v-if="showMsgs">
-          <div class="col-lg-12 col-sm-12">
-          <div class="padding">
+    <div v-if="showMsgs">
+      <div class="col-lg-12 col-sm-12">
+        <div class="padding">
           <div class="tab-pane p-v-sm" id="tab_2">
             <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
             <i v-if="showPreloader" class="material-icons preloader">cached</i>
             <div v-if="!!messages.length && !showPreloader" class="row">
-                <div class="box">
-                  <div class="box-header">
-                    <h2>Входящие сообщения</h2>
-                  </div>
-                  <div class="table-responsive">
-                    <table ui-jp="dataTable" class="table table-striped b-t b-b">
-                      <thead>
-                        <tr>
-                          <th style="width:2%">#</th>
-                          <th style="width:10%">Дата</th>
-                          <th style="width:15%">От кого</th>
-                          <th style="width:15%">Сообщение</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(msg, index) in slicedMessages">
+              <div class="box">
+                <div class="box-header">
+                  <h2>Входящие сообщения</h2>
+                </div>
+                <div class="table-responsive">
+                  <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                    <thead>
+                      <tr>
+                        <th style="width:2%">#</th>
+                        <th style="width:10%">Дата</th>
+                        <th style="width:15%">От кого</th>
+                        <th style="width:15%">Сообщение</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(msg, index) in slicedMessages">
                         <td>{{ index + 1}}</td>
                         <td></td>
                         <td>{{ msg.author}}</td>
                         <td>{{ msg.text}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <center>
-                  <button @click="nextFive" class="btn btn-primary">Показать еще</button>
-                </center>
               </div>
+              <center>
+                <button @click="nextFive" class="btn btn-primary">Показать еще</button>
+              </center>
             </div>
           </div>
         </div>
-        </div>
       </div>
     </div>
-    <!-- </div> -->
   </div>
+</div>
+<!-- </div> -->
+</div>
 </div>
 </template>
 
@@ -194,8 +192,8 @@ export default {
       });
       let closestDay = 0;
       let closest = '';
-      for(let date of dates) {
-        if(+date.deadline.slice(0, 2).trim() > closestDay) {
+      for (let date of dates) {
+        if (+date.deadline.slice(0, 2).trim() > closestDay) {
           closestDay = +date.deadline.slice(0, 2);
           closest = date.deadline;
         }
@@ -255,7 +253,7 @@ export default {
         this.setDate();
       }
       this.showPreloader = false;
-      if(this.group) {
+      if (this.group) {
         for (var msg of this.group.messages) {
           this.messages.push(msg);
         }
@@ -287,9 +285,6 @@ export default {
   padding: 10px;
 }
 
-#nope {
-  /*padding-left: 10px !important;*/
-}
 
 .checkbox {
   display: flex;

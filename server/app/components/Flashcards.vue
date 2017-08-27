@@ -21,6 +21,13 @@
             <button @click="toKnow()" class="btn btn-success">Знаю</button>
             <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
           </div>
+          <div class="col box">
+            <div class="row-col primary white-text">
+              <h3>Осталось карточек: {{ }}</h3></div>
+            <div class="p-a text-center">
+              <!-- здесь должно быть содержание карточки -->
+            </div>
+          </div>
         </div>
         <div v-if="done || lose" @click="show()" class="vertical-center box">
           <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
@@ -30,7 +37,7 @@
         <div v-if="done && showTest" class="row">
           <button @click="tryTest" class="btn">Пройти тест</button>
         </div>
-        
+
       </div>
     </center>
   </div>
