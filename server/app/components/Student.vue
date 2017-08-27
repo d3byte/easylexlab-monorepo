@@ -213,6 +213,7 @@ export default {
     changeGroup(group) {
       this.$store.dispatch('changeCurrentGroup', group);
       this.sortTasks();
+      this.setDate();
     },
     sortTasks() {
       this.tasks = [];
@@ -278,7 +279,8 @@ export default {
 }
 
 #padding {
-  margin-left: 20px;
+  margin-left: 30px;
+  width: 10px;
 }
 
 #msg_card {
@@ -286,7 +288,7 @@ export default {
 }
 
 #nope {
-  padding-left: 10px !important;
+  /*padding-left: 10px !important;*/
 }
 
 .checkbox {
