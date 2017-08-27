@@ -141,6 +141,7 @@
                             } else {
                                 !!res.body.error ? this.errorMsg = res.body.error : this.errorMsg = '';
                                 this.success = res.body.success;
+                                this.error = false;
                                 this.showPreloader = false;
                             }
                         } else {
