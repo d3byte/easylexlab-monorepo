@@ -91,7 +91,7 @@
     		<div class="col-lg-4 col-md-12 col-xl-4">
           <div class="box">
             <div class="box-header">
-              <h3>Невыполненные задания</h3>
+              <h3>Выполненные задания</h3>
               <small>Результаты группы по заданию <b>{{ currentTask }}</b></small>
             </div>
             <div class="box-tool">
@@ -101,7 +101,7 @@
                   <i class="material-icons md-18">&#xe5d4;</i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-scale pull-right">
-                  <a v-for="task in uncompletedTasks" class="dropdown-item" @click="setCharData(task)">{{ task.name }}</a>
+                  <a v-for="task in completedTasks" class="dropdown-item" @click="setCharData(task)">{{ task.name }}</a>
                 </div>
               </li>
             </ul>
@@ -265,7 +265,7 @@ export default {
         this.messsagesAmount = messsagesAmount;
         this.formResults();
         this.sortTasks();
-        this.setCharData(this.uncompletedTasks[0]);
+        this.setCharData(this.completedTasks[0]);
       });
   }
 }
