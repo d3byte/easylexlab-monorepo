@@ -21,6 +21,35 @@
     </div>
   </div>
 
+  <div class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show">
+    <div class="row">
+      <div class="col-sm-6 push-sm-6">
+      </div>
+      <div class="col-sm-6 pull-sm-6">
+        <div class="p-y-md clearfix nav-active-primary">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item">
+              <a class="nav-link" @click="showMatching">Matching</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="showFlashcards">Flashcards</a>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="showSnake">Змейка</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="showScramble">Word Scramble</a>
+            </li>
+            <li class="nav-item" v-if="testAvailable">
+              <a class="nav-link" @click="tryTest">Пройти тест</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show">
     <div class="row">

@@ -76,7 +76,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 textarea {
   color: black;
   padding: 10px;
