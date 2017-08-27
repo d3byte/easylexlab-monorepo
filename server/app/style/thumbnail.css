@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Bad+Script');
+
+body {
+  background: #f1f1f1 !important;
+}
+
+.main > .row {
+  height: 50vh;
+}
+
+hr {
+  background: black !important;
+}
+
+.small {
+  font-size: 20px !important;
+}
+
+.img {
+  max-width: 140px;
+  max-height: 140px;
+  margin-right: 40px;
+}
+
+.blue {
+  color: rgb(4, 87, 167);
+}
+
+.font {
+  font-family: 'Bad Script', cursive;
+}
+
+.gray {
+  color: #5C5B57;
+}
+
+#motto {
+  text-align: center;
+}
