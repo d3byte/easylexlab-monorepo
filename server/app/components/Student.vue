@@ -65,6 +65,8 @@
                   <div class="taskcontent">
                     <center>
                       <h3>{{ test.name }}</h3>
+                      <p>Крайний срок сдачи: {{ test.deadline }}</p>
+                      <p>Пар слов: {{ test.content.length }}</p>
                       <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                     </center>
                   </div>
@@ -75,6 +77,7 @@
                   <div class="taskcontent">
                     <center>
                       <h3>{{ test.name }}</h3>
+                      <p>Крайний срок сдачи: {{ test.deadline }}</p>
                       <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                     </center>
                   </div>
@@ -86,18 +89,6 @@
       </div>
     </div>
 
-
-    <!-- <div v-if="showTasks" class="col-sm-4 col-lg-4 padding">
-      <div>
-        <center>
-          <div class="box blue vertical-center date">
-            <h6 class="text-muted">Ближайший день сдачи:</h6>
-            <br>
-            <h4 class="text-lg"><b>{{ date }}</b> </h4>
-          </div>
-        </center>
-      </div>
-    </div> -->
 
 
     <div v-if="showMsgs">
