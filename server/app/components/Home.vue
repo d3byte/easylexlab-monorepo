@@ -1,24 +1,19 @@
 <template>
   <div>
-
     <app-header></app-header>
     <h1>Landing page</h1>
   </div>
 </template>
 
 <script>
+  import Header from './Header.vue';
+  import Login from './Login.vue';
 
-    import Header from './Header.vue';
-    import SendMail from './SendMail.vue';
-    import Login from './Login.vue';
-
-    export default {
-        components: {
-            'app-header': Header,
-            'mail': SendMail,
-            'login': Login
-        }
-    }
+  export default {
+      components: {
+          'app-header': Header
+      }
+  }
 </script>
 
 <style lang="css">

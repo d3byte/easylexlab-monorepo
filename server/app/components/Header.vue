@@ -53,9 +53,9 @@
               <router-link class="dropdown-item" to="/settings">
                 Настройки
               </router-link>
-              <router-link class="dropdown-item" to="/settings">
+              <span class="dropdown-item hover" data-toggle="modal" data-target="#feedback">
                 Оставить отзыв
-              </router-link>
+              </span>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" @click="logout">Выход</a>
             </div>
