@@ -30,20 +30,6 @@
         </div>
         <br>
       </div>
-      <div class="last-menu">
-        <div class="ui dropdown btn">
-          <div class="text game">Выбрать игру</div>
-          <div class="menu">
-            <div @click="showMatching" class="item">
-              Matching
-            </div>
-            <div @click="showFlashcards" class="item">
-              Flashcards
-            </div>
-          </div>
-        </div>
-        <button class="btn back" @click="hideGames">Назад</button>
-      </div>
     </center>
   </div>
 </div>

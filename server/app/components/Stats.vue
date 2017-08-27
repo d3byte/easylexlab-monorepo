@@ -264,8 +264,8 @@ export default {
         this.user._groups.map(group => messsagesAmount += group.messages.length);
         this.messsagesAmount = messsagesAmount;
         this.formResults();
-        this.setCharData(this.currentGroup._tests[0]);
         this.sortTasks();
+        this.setCharData(this.uncompletedTasks[0]);
       });
   }
 }
