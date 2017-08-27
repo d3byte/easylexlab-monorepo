@@ -14,11 +14,11 @@
             <br>
           </h5>
           <form class="login-form" onsubmit="return false">
-            <div class="name white-text">
+            <div class="name">
               <label>Название группы</label><br>
               <input v-model="name" required type="text" tabindex="1">
             </div>
-            <div class="grade white-text">
+            <div class="grade">
               <label>Класс</label><br>
               <input v-model="grade" required type="number" tabindex="2" min="1" max="11">
             </div>
