@@ -1,7 +1,8 @@
-import verifyPassword from 'mongoose-bcrypt';
+import { verifyPassword, encryptPassword } from 'mongoose-bcrypt';
 import jwt from 'jsonwebtoken';
 import secret from './../secret';
 import helper from './helperFunctions';
+import nodemailer from 'nodemailer';
 
 import db from './../models';
 
@@ -291,6 +292,49 @@ userController.learnWords = (req, res) => {
 
   db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(success => {
     return res.json({ success: true });
+  })
+};
+
+userController.recoverPassword = (req, res) => {
+  const email = req.body.email;
+
+  db.User.findOne({ email }).then(user => {
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email
+      },
+      secret
+    );
+    user.recoverToken = token;
+    user.save().then(res => {
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        secure: false,
+        port: 25,
+        auth: {
+          user: 'easylexlab@gmail.com',
+          pass: '45aCRawa@hut'
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+      let HelperOptions = {
+        from: '"EasyLexLab" <easylexlab@gmail.com>',
+        to: 'easylexlab@gmail.com',
+        subject: 'Восстановление пароля',
+        text: `Чтобы восстановить пароль, перейдите по этой ссылке: easylexlab.ru/recover/${token}`
+      };
+      transporter.sendMail(HelperOptions, (error, info) => {
+        if(error) {
+          console.log(error);
+        } else {
+          console.log('Сообщение отправлено!');
+          console.log(info);
+        }
+      });
+    });
   })
 };
 
