@@ -47,13 +47,11 @@ userController.post = (req, res) => {
                                 city
                             });
                             user.save().then(newUser => {
-                                // console.log('Success:\n', newUser);
                                 res.status(200).json({
                                     success: true,
                                     userId: newUser._id
                                 });
                             }).catch(err => {
-                                console.log('Error:\n', err);
                                 res.status(500).json({
                                     message: err
                                 });
@@ -78,7 +76,6 @@ userController.post = (req, res) => {
                                 userId: newUser._id
                             });
                         }).catch(err => {
-                            console.log('Error:\n', err)
                             res.status(500).json({
                                 message: err
                             });
@@ -114,7 +111,6 @@ userController.login = (req, res) => {
                     token
                 });
             } else {
-                console.log('Invalid promise');
                 res.status(200).json({
                     success: valid
                 });
@@ -342,8 +338,8 @@ userController.recoverPassword = (req, res) => {
       });
       let HelperOptions = {
         from: '"EasyLexLab" <easylexlab@gmail.com>',
-        // to: user.email,
-        to: 'easylexlab@gmail.com',
+        to: user.email,
+        // to: 'easylexlab@gmail.com',
         subject: 'Восстановление пароля',
         text: `Чтобы восстановить пароль, перейдите по этой ссылке: easylexlab.ru/recover/${token}`
       };
