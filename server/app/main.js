@@ -21,6 +21,7 @@ import Students from './components/Students.vue';
 import Signup from './components/Signup.vue';
 import Eula from './components/Eula.vue';
 import Stack from './components/Stack.vue';
+import RecoverPass from './components/RecoverPass.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -31,6 +32,7 @@ const routes = [
   { path: '/signup', component: Signup },
   { path: '/login', component: Login },
   { path: '/forgotpassword', component: ForgotPassword },
+  { path: '/recover/:token', component: RecoverPass },
   { path: '/eula', component: Eula },
   { path: '/settings', component: Settings },
   { path: '/stats', component: Stats },

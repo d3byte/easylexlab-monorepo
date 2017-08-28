@@ -173,8 +173,13 @@ export default {
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(res => {
-          this.errorLogin = '';
-          this.loginSuccess = 'Логин успешно обновлен!';
+          if(res.body.error) {
+            this.errorLogin = res.body.error;
+            this.loginSuccess = '';
+          } else {
+            this.errorLogin = '';
+            this.loginSuccess = 'Логин успешно обновлен!';
+          }
         });
       } else {
         this.errorLogin = 'Логин должен быть не короче 5 символов. Попробуйте еще раз.';
@@ -192,7 +197,6 @@ export default {
               'Authorization': 'Bearer ' + this.$store.getters.userToken
             }
           }).then(res => {
-            console.log(res);
             if (res.body.success) {
               this.errorPassword = '';
               this.passwordSuccess = 'Пароль успешно изменен!';

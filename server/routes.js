@@ -20,6 +20,7 @@ routes.post('/login', userController.login);
 routes.post('/groups', expressJWT({ secret }), userController.getGroups);
 routes.post('/verifypassword', expressJWT({ secret }), userController.verifyPassword);
 routes.post('/recover', userController.recoverPassword);
+routes.post('/checktoken', userController.checkToken);
 routes.patch('/newinfo', expressJWT({ secret }), userController.updateInfo);
 routes.patch('/newpassword', expressJWT({ secret }), userController.changePassword);
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);

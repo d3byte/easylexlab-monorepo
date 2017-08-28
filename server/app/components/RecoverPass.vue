@@ -1,23 +1,23 @@
 <template lang="html">
   <div class="center-block w-xxl w-auto-xs p-y-md">
-    <div class="p-a-md box-color r box-shadow-z1 text-color m-a" v-if="!done">
+    <div class="p-a-md box-color r box-shadow-z1 text-color m-a" v-if="trueRoute">
       <div class="m-b">
-        Забыли пароль?
-        <p class="text-xs m-t">Введите ваш email адрес, и мы отправим вам инструкции, как поменять пароль.</p>
+        Восстановление пароля
+        <p class="text-xs m-t">Введите новый пароль</p>
       </div>
       <form name="reset" onsubmit="return false">
-        <div class="md-form-group">
-          <input type="email" class="md-input" required v-model="email">
-          <label>Email</label>
+        <div class="form-group" v-if="!!errorPassword.length">
+          <label class="text-danger">{{ errorPassword }}</label>
         </div>
-        <button type="submit" @click="sendMail"class="btn primary btn-block p-x-md">Отправить</button>
+        <div class="form-group" v-if="!!successMsg.length">
+          <label class="text-success">{{ successMsg }}</label>
+        </div>
+        <div class="md-form-group">
+          <input type="password" class="md-input" required v-model="password">
+          <label>Пароль</label>
+        </div>
+        <button type="submit" @click="changePassword" class="btn primary btn-block p-x-md">Изменить</button>
       </form>
-    </div>
-    <div class="p-a-md box-color r box-shadow-z1 text-color m-a" v-else>
-      <div class="m-b">
-        <span class="text-success">Письмо успешно отправлено!</span>
-        <p class="text-xs m-t">Следуйте инструкциям из письма, чтобы восстановить пароль.</p>
-      </div>
     </div>
     <p id="alerts-container"></p>
     <div class="p-v-lg text-center"><router-link to="/login"class="text-primary _600">Войти</router-link></div>
@@ -28,19 +28,13 @@
 export default {
   data() {
     return {
-      email: '',
-      done: false
+      password: '',
+      successMsg: '',
+      errorPassword: '',
+      trueRoute: false
     }
   },
   methods: {
-    sendMail() {
-      const body = {
-        email: this.email
-      };
-      this.$http.post('recover', body).then(res => {
-          this.done = true;
-      });
-    },
     changePassword() {
       if(this.password.length > 5) {
         const body = {
@@ -49,7 +43,7 @@ export default {
         this.$http.patch('newpassword', body, {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.$store.getters.userToken
+            'Authorization': 'Bearer ' + this.$route.params.token
           }
         }).then(res => {
           if (res.body.success) {
@@ -65,6 +59,19 @@ export default {
   },
   http: {
     root: '//ealapi.tw1.ru/api'
+  },
+  created() {
+    const token = this.$route.params.token;
+    const body = {
+      token
+    };
+    this.$http.post('checktoken', body).then(res => {
+      if(res.body.success) {
+        this.trueRoute = true;
+      } else {
+        this.$router.push('/forgotpassword');
+      }
+    });
   }
 }
 </script>

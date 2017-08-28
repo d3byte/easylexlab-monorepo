@@ -29,6 +29,14 @@ export default {
     return {
       email: ''
     }
+  },
+  methods: {
+    sendMail() {
+
+    }
+  },
+  http: {
+    root: '/api'
   }
 }
 </script>

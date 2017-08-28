@@ -25,7 +25,7 @@ userController.post = (req, res) => {
         if (err)
             throw err;
         else if (user)
-            res.json({error: 'Данный логин уже занят'});
+            return res.json({error: 'Данный логин уже занят'});
         else {
             db.User.findOne({email}, (err, user) => {
                 if (err)
@@ -169,17 +169,37 @@ userController.updateInfo = (req, res) => {
         });
     }
 
-    db.User.findByIdAndUpdate(myUser.id, {
-        $set: query
-    }).then(user => {
-        return res.json({
-            success: true
-        });
-    }).catch(err => {
-        res.status(500).json({
-            message: err
-        });
-    });
+    if(query.username) {
+        db.User.findOne({ username: query.username }).then(user => {
+          if(user)
+            return res.json({error: 'Данный логин уже занят'});
+          else {
+            db.User.findByIdAndUpdate(myUser.id, {
+                $set: query
+            }).then(user => {
+                return res.json({
+                    success: true
+                });
+            }).catch(err => {
+                return res.status(500).json({
+                    message: err
+                });
+            });
+          }
+        })
+    } else {
+      db.User.findByIdAndUpdate(myUser.id, {
+          $set: query
+      }).then(user => {
+          return res.json({
+              success: true
+          });
+      }).catch(err => {
+          return res.status(500).json({
+              message: err
+          });
+      });
+    }
 };
 
 userController.verifyPassword = (req, res) => {
@@ -208,7 +228,7 @@ userController.changePassword = (req, res) => {
         .then(myUser => {
             return res.json({success: true});
         }).catch((err) => {
-        res.status(500).json({
+          return res.status(500).json({
             message: err
         });
     });
@@ -217,10 +237,6 @@ userController.changePassword = (req, res) => {
 userController.addGroup = (req, res) => {
     const groupCode = req.body.groupCode;
     const user = req.user;
-
-    // db.Group.findOne({ code: groupCode }).then(group => {
-    //   console.log(group);
-    // })
 
     db.Group.findOneAndUpdate({ code: groupCode },
     { $push: {'_students': user.id} }).then(group => {
@@ -299,6 +315,9 @@ userController.recoverPassword = (req, res) => {
   const email = req.body.email;
 
   db.User.findOne({ email }).then(user => {
+    if(!user) {
+      return res.json({ success: false })
+    }
     const token = jwt.sign(
       {
         id: user._id,
@@ -306,6 +325,7 @@ userController.recoverPassword = (req, res) => {
       },
       secret
     );
+    let uri = encodeURI(token);
     user.recoverToken = token;
     user.save().then(res => {
       let transporter = nodemailer.createTransport({
@@ -322,6 +342,7 @@ userController.recoverPassword = (req, res) => {
       });
       let HelperOptions = {
         from: '"EasyLexLab" <easylexlab@gmail.com>',
+        // to: user.email,
         to: 'easylexlab@gmail.com',
         subject: 'Восстановление пароля',
         text: `Чтобы восстановить пароль, перейдите по этой ссылке: easylexlab.ru/recover/${token}`
@@ -330,12 +351,25 @@ userController.recoverPassword = (req, res) => {
         if(error) {
           console.log(error);
         } else {
-          console.log('Сообщение отправлено!');
           console.log(info);
+          return res.json({ success: true })
         }
       });
     });
   })
+};
+
+userController.checkToken = (req, res) => {
+  const token = req.body.token;
+  db.User.findOne({ recoverToken: token }).then(user => {
+    if(user) {
+      user.recoverToken = '';
+      user.save().then(rr => {
+        return res.json({ success: true });
+      });
+    }
+    return res.json({ success: false });
+  });
 };
 
 export default userController;

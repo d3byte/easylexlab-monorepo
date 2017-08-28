@@ -51,6 +51,9 @@ app.get('/login', (req, res) => {
 app.get('/forgotpassword', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/recover/:token', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
 app.get('/eula', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
@@ -64,6 +67,8 @@ app.use('/group', express.static(folder));
 app.use('/group/:id', express.static(folder));
 app.use('/task', express.static(folder));
 app.use('/task/:id', express.static(folder));
+app.use('/recover', express.static(folder));
+app.use('/recover/:token', express.static(folder));
 
 // Middleware
 app.use(cors());
