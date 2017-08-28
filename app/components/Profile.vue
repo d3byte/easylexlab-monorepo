@@ -9,18 +9,17 @@
 
 <script>
 import jwtDecode from 'jwt-decode';
+
 import Header from './Header.vue';
 import Teacher from './Teacher.vue';
 import Student from './Student.vue';
 import Admin from './Admin.vue';
+import { EventBus } from './event';
 
 export default {
   computed: {
     token() {
       return jwtDecode(this.$store.getters.userToken)
-    },
-    requested() {
-      return this.$store.getters.requested
     }
   },
   http: {
@@ -43,7 +42,8 @@ export default {
     }).then(res => {
       this.$store.dispatch('userInfo', res.body.user);
       this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
-      this.notifications = res.body.user.notifications;
+      this.$store.dispatch('requestedIsTrue');
+      this.$emit('requested');
     });
   }
 }

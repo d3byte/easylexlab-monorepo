@@ -74,6 +74,7 @@
     "nodemailer": "^4.0.1",
     "nodemon": "^1.11.0",
     "randomatic": "^1.1.7",
+    "rxjs-es": "^5.0.0-beta.12",
     "semantic-ui": "^2.2.10",
     "semantic-ui-vue2": "^2.4.2",
     "uuid": "^3.1.0",

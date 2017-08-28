@@ -13,6 +13,7 @@
               </span>
             </a>
           <div class="clear m-b">
+            <h3 v-if="listened">Ура</h3>
             <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
             <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
             <h5 class="m-a-0 text-md text-muted">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
@@ -151,6 +152,7 @@
 <script>
 import moment from 'moment';
 import jwtDecode from 'jwt-decode';
+import { EventBus } from './event';
 
 export default {
   data() {
@@ -169,7 +171,15 @@ export default {
       showMsgs: false,
       showAll: false,
       wordsLearnt: 0,
-      sliceIndex: 0
+      sliceIndex: 0,
+      observer: {
+        next(value) {},
+        error(error) {
+          throw error
+        },
+        completed() {}
+      },
+      listened: false
     }
   },
   computed: {
@@ -181,6 +191,9 @@ export default {
     },
     group() {
       return this.$store.getters.currentGroup
+    },
+    requested() {
+      return this.$store.getters.requested
     }
   },
   methods: {
@@ -245,23 +258,20 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    setTimeout(() => {
-      localStorage.city = this.user.city;
-      this.city = this.user.city;
-      if (this.group) {
-        this.wordsLearnt = this.user.wordsLearnt;
-        this.sortTasks();
-        this.setDate();
-      }
+    this.$once('requested', event => {
+      this.listened = true;
+      console.log('Event!');
+      this.city = localStorage.city;
+      this.wordsLearnt = this.user.wordsLearnt;
+      this.sortTasks();
+      this.setDate();
       this.showPreloader = false;
-      if(this.group) {
-        for (var msg of this.group.messages) {
-          this.messages.push(msg);
-        }
+      for (var msg of this.group.messages) {
+        this.messages.push(msg);
       }
       this.messages = this.messages.reverse();
       this.slicedMessages = this.messages.slice(0, 5);
-    }, 150);
+    });
   }
 }
 </script>

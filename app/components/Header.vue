@@ -158,9 +158,6 @@
         http: {
             root: '//ealapi.tw1.ru/api'
         },
-        mounted() {
-
-        },
         created() {
           setTimeout(() => {
             if(this.user.notifications)
