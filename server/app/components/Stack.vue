@@ -146,6 +146,7 @@ import Matching from './Matching.vue';
 import Snake from './Snake.vue';
 import Scramble from './Scramble.vue';
 import Test from './Test.vue';
+import { EventBus } from './event';
 
 export default {
   data() {
@@ -175,36 +176,38 @@ export default {
     root: '//ealapi.tw1.ru/api'
   },
   created() {
-    if (!this.$store.getters.loginState || this.user.permissions != 'student') {
-      this.$router.push('/profile');
-    }
-    this.$store.dispatch('hideTest');
-    this.$store.dispatch('testNotAvailable');
-    this.$store.dispatch('hideGames');
-    this.$store.dispatch('zeroAttempts');
-    this.$http.post('gettest', {
-      testId: this.testId
-    }, {
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + this.$store.getters.userToken
+    EventBus.$once('requested', () => {
+      if(!this.$store.getters.loginState || this.user.permissions != 'student') {
+        this.$router.push('/profile');
       }
-    }).then(res => {
-      this.task = res.body.stack;
-      var haveThisStack = false;
-      for (let group of this.user._groups) {
-        if (haveThisStack)
-          break;
-        for (let stack of group._tests) {
-          if (stack._id == this.task._id) {
-            haveThisStack = true;
+      this.$store.dispatch('hideTest');
+      this.$store.dispatch('testNotAvailable');
+      this.$store.dispatch('hideGames');
+      this.$store.dispatch('zeroAttempts');
+      this.$http.post('gettest', {
+        testId: this.testId
+      }, {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.task = res.body.stack;
+        var haveThisStack = false;
+        for (let group of this.user._groups) {
+          if (haveThisStack)
             break;
+          for (let stack of group._tests) {
+            if (stack._id == this.task._id) {
+              haveThisStack = true;
+              break;
+            }
           }
         }
-      }
-      if (!haveThisStack)
-        this.$router.push('/profile');
-      this.$store.dispatch('setGames', this.task.attempts);
+        if(!haveThisStack)
+          this.$router.push('/profile');
+        this.$store.dispatch('setGames', this.task.attempts);
+      });
     });
   },
   methods: {

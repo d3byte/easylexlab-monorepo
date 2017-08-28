@@ -88,7 +88,7 @@
     import jwtDecode from 'jwt-decode';
     import NewGroup from './NewGroup.vue';
     import { EventBus } from './event';
-    
+
     export default {
         data() {
             return {
@@ -135,6 +135,7 @@
                 this.$store.dispatch('userInfo', res.body.user);
                 this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
                 this.notifications = res.body.user.notifications;
+                EventBus.$emit('requested');
                 });
             },
             show() {
@@ -164,7 +165,9 @@
           EventBus.$once('requested', event => {
             this.notifications = this.user.notifications.reverse();
           });
-
+          if(this.$route.path.slice(0, 5) == '/task') {
+            this.fetchUserInfo();
+          }
         },
         components: {
             'newgroup': NewGroup

@@ -237,8 +237,6 @@ export default {
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
     EventBus.$once('requested', event => {
-      console.log('Event!');
-      this.city = localStorage.city;
       this.wordsLearnt = this.user.wordsLearnt;
       this.sortTasks();
       this.setDate();
