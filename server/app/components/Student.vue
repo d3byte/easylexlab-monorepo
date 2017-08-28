@@ -140,6 +140,7 @@
 <script>
 import moment from 'moment';
 import jwtDecode from 'jwt-decode';
+import { EventBus } from './event';
 
 export default {
   data() {
@@ -235,23 +236,19 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    setTimeout(() => {
-      localStorage.city = this.user.city;
-      this.city = this.user.city;
-      if (this.group) {
-        this.wordsLearnt = this.user.wordsLearnt;
-        this.sortTasks();
-        this.setDate();
-      }
+    EventBus.$once('requested', event => {
+      console.log('Event!');
+      this.city = localStorage.city;
+      this.wordsLearnt = this.user.wordsLearnt;
+      this.sortTasks();
+      this.setDate();
       this.showPreloader = false;
-      if (this.group) {
-        for (var msg of this.group.messages) {
-          this.messages.push(msg);
-        }
+      for (var msg of this.group.messages) {
+        this.messages.push(msg);
       }
       this.messages = this.messages.reverse();
       this.slicedMessages = this.messages.slice(0, 5);
-    }, 150);
+    });
   }
 }
 </script>

@@ -87,7 +87,8 @@
 <script>
     import jwtDecode from 'jwt-decode';
     import NewGroup from './NewGroup.vue';
-
+    import { EventBus } from './event';
+    
     export default {
         data() {
             return {
@@ -160,12 +161,10 @@
             root: '//ealapi.tw1.ru/api'
         },
         created() {
-          setTimeout(() => {
-            if(this.user.notifications)
-              this.notifications = this.user.notifications.reverse();
-          }, 70);
+          EventBus.$once('requested', event => {
+            this.notifications = this.user.notifications.reverse();
+          });
 
-          this.isCurrentGr = true;
         },
         components: {
             'newgroup': NewGroup

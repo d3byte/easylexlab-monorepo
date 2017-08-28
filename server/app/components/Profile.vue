@@ -13,6 +13,7 @@ import Header from './Header.vue';
 import Teacher from './Teacher.vue';
 import Student from './Student.vue';
 import Admin from './Admin.vue';
+import { EventBus } from './event';
 
 export default {
   computed: {
@@ -43,6 +44,7 @@ export default {
     }).then(res => {
       this.$store.dispatch('userInfo', res.body.user);
       this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
+      EventBus.$emit('requested');
       this.$store.dispatch('hideGames');
       this.$store.dispatch('zeroAttempts');
       this.$store.dispatch('testNotAvailable');
