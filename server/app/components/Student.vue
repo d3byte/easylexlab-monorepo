@@ -107,16 +107,16 @@
                       <tr>
                         <th style="width:2%">#</th>
                         <th style="width:10%">Дата</th>
-                        <th style="width:15%">От кого</th>
                         <th style="width:15%">Сообщение</th>
+                        <th style="width:15%">От кого</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="(msg, index) in slicedMessages">
                         <td>{{ index + 1}}</td>
                         <td></td>
-                        <td>{{ msg.author}}</td>
                         <td>{{ msg.text}}</td>
+                        <td>{{ msg.author}}</td>
                       </tr>
                     </tbody>
                   </table>
