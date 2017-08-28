@@ -167,6 +167,8 @@
           });
           if(this.$route.path.slice(0, 5) == '/task') {
             this.fetchUserInfo();
+          } else if(this.$route.path.slice(0, 6) == '/group') {
+            this.fetchUserInfo();
           }
         },
         components: {
