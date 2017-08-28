@@ -220,7 +220,7 @@
         let oldRandomIndexes = [];
         for(let i = 0; i < 3; i++) {
           let randomIndex = randomize('0', 1);
-          while(randomIndex in oldRandomIndexes) {
+          while(oldRandomIndexes.includes(randomIndex)) {
             randomIndex = randomize('0', 1);
           }
           oldRandomIndexes.push(randomIndex);
