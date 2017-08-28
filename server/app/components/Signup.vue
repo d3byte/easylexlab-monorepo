@@ -60,7 +60,7 @@
         <div class="m-b-md">
           <label class="md-check">
             <input type="checkbox" v-model="agree" required><i class="primary"></i>
-            <router-link to="/eula" target="_blank">Разрешаю обработку своих персональных данных</router-link>
+            Я ознакомлен с <router-link to="/eula" target="_blank">пользовательским соглашением</router-link> и разрешаю обработку персональных данных
           </label>
         </div>
         <button type="submit" @click="check" class="btn primary btn-block p-x-md">Зарегистрироваться
