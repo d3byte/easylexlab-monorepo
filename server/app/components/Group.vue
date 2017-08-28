@@ -221,7 +221,7 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    root: '/api'
   },
   components: {
     'app-header': Header,

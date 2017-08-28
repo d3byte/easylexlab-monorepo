@@ -235,9 +235,9 @@ export default {
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
-    this.$store.dispatch('hideTest');
-    this.$store.state.games.showTest = false;
     setTimeout(() => {
+      localStorage.city = this.user.city;
+      this.city = this.user.city;
       if (this.group) {
         this.wordsLearnt = this.user.wordsLearnt;
         this.sortTasks();

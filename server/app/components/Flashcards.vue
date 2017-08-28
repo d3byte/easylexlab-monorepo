@@ -23,7 +23,7 @@
           </div>
           <div class="col box">
             <div class="row-col primary white-text">
-              <h3>Осталось карточек: {{ }}</h3></div>
+              <h3>Осталось карточек: {{ pairsLeft }}</h3></div>
             <div class="p-a text-center">
               <!-- здесь должно быть содержание карточки -->
             </div>
@@ -51,6 +51,8 @@ export default {
   data() {
     return {
       currentPair: {},
+      pairsSeen: 0,
+      pairsLeft: 0,
       index: 0,
       pairs: [],
       know: [],
@@ -72,6 +74,12 @@ export default {
     },
     gamesConditions() {
       return this.$store.getters.finishedGames
+    },
+    howManyPairsSeen() {
+      return this.pairsSeen = this.know.length + this.dontKnow.length + 1
+    },
+    howManyPairsLeft() {
+      return this.pairsLeft = this.pairs.length - this.pairsSeen
     }
   },
   created() {
@@ -175,7 +183,7 @@ export default {
     tryTest() {
       this.$store.dispatch('hideGames');
       this.$store.dispatch('showTest');
-    },
+    }
   },
   mounted() {
     $('.ui.dropdown').dropdown();
