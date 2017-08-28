@@ -135,7 +135,7 @@
                 this.$store.dispatch('userInfo', res.body.user);
                 this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
                 this.notifications = res.body.user.notifications;
-                EventBus.$emit('requested');
+                EventBus.$emit('requested-header');
                 });
             },
             show() {

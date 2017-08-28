@@ -170,16 +170,20 @@ export default {
     },
     gamesConditions() {
       return this.$store.getters.finishedGames
-    }
+    },
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
+    },
   },
   http: {
     root: '//ealapi.tw1.ru/api'
   },
   created() {
-    EventBus.$once('requested', () => {
-      if(!this.$store.getters.loginState || this.user.permissions != 'student') {
+    EventBus.$once('requested-header', () => {
+      if(!this.$store.getters.loginState)
+        this.$router.push('/login');
+      if(this.token.permissions != 'student')
         this.$router.push('/profile');
-      }
       this.$store.dispatch('hideTest');
       this.$store.dispatch('testNotAvailable');
       this.$store.dispatch('hideGames');

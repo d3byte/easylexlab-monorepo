@@ -53,7 +53,7 @@
     			    </div>
     				</div>
     				<div class="col-sm-6">
-    	        <div class="grey lt">
+    	        <div class="grey lt" id="color">
             		<div class="box-header">
       	          <h3>Статистика</h3>
       	          <small>Результаты за {{ currentTask }}</small>
@@ -74,7 +74,7 @@
                   <pie-chart
                     v-if="!noneResults"
                     :data="chartData"
-                    :library="{backgroundColor: '#424242', legend: { textStyle: { color: 'white' } }}"
+                    :library="{backgroundColor: '#484848', legend: { textStyle: { color: 'white' } }}"
                     />
                     <h5 v-else><small>Результатов пока нет.</small></h5>
       	        </div>
@@ -115,6 +115,7 @@
 <script>
 import Header from './Header.vue';
 import NewMsg from './NewMsg.vue';
+import jwtDecode from 'jwt-decode';
 import { EventBus } from './event';
 
 export default {
@@ -143,7 +144,10 @@ export default {
     },
     logged() {
       return this.$store.getters.loginState
-    }
+    },
+    token() {
+      return jwtDecode(this.$store.getters.userToken)
+    },
   },
   methods: {
     goto(id) {
@@ -160,7 +164,11 @@ export default {
       this.slicedTests = this.group._tests.slice(this.sliceTestIndex, this.sliceTestIndex + 5);
       this.prepareRender();
     },
-    setCharData(test) {
+    setCharData(test, justLoaded = false) {
+      if(justLoaded) {
+        this.noneResults = true;
+        return;
+      }
       this.noneResults = false;
       this.currentTask = test.name;
       let results = test.results.map(result => result.result);
@@ -229,10 +237,11 @@ export default {
     'new-msg': NewMsg
   },
   created() {
-    EventBus.$once('requested', () => {
+    this.setCharData(null, true);
+    EventBus.$once('requested-header', () => {
       if(!this.logged)
-        this.$router.push('/');
-      if(this.user.permissions != 'teacher')
+        this.$router.push('/login');
+      if(this.token.permissions != 'teacher')
         this.$router.push('/profile');
       const body = {
         'groupId': this.$route.params.id
@@ -244,15 +253,10 @@ export default {
         }
       }).then(res => {
         this.group = res.body.group;
-        if(this.group._students)
-          this.studentsLength = this.group._students.length;
+        this.studentsLength = this.group._students.length;
         var haveThisGroup = false;
-        for(let group of this.user._groups) {
-          if(group.code == this.group.code) {
-            haveThisGroup = true;
-            break;
-          }
-        }
+        if(this.group._teacher == this.user._id)
+          haveThisGroup = true;
         if(!haveThisGroup)
           this.$router.push('/profile');
         this.slicedMessages = this.group.messages.reverse().slice(0, 3);
@@ -271,5 +275,9 @@ export default {
 <style lang="css" scoped>
 #nope {
   padding-left: 0;
+}
+
+#color {
+  background: #484848;
 }
 </style>
