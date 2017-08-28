@@ -61,13 +61,11 @@ userController.post = function (req, res) {
                                 city: city
                             });
                             user.save().then(function (newUser) {
-                                // console.log('Success:\n', newUser);
                                 res.status(200).json({
                                     success: true,
                                     userId: newUser._id
                                 });
                             }).catch(function (err) {
-                                console.log('Error:\n', err);
                                 res.status(500).json({
                                     message: err
                                 });
@@ -92,7 +90,6 @@ userController.post = function (req, res) {
                                 userId: newUser._id
                             });
                         }).catch(function (err) {
-                            console.log('Error:\n', err);
                             res.status(500).json({
                                 message: err
                             });
@@ -127,7 +124,6 @@ userController.login = function (req, res) {
                     token: token
                 });
             } else {
-                console.log('Invalid promise');
                 res.status(200).json({
                     success: valid
                 });
@@ -341,8 +337,8 @@ userController.recoverPassword = function (req, res) {
             });
             var HelperOptions = {
                 from: '"EasyLexLab" <easylexlab@gmail.com>',
-                // to: user.email,
-                to: 'easylexlab@gmail.com',
+                to: user.email,
+                // to: 'easylexlab@gmail.com',
                 subject: 'Восстановление пароля',
                 text: '\u0427\u0442\u043E\u0431\u044B \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043F\u0430\u0440\u043E\u043B\u044C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u043F\u043E \u044D\u0442\u043E\u0439 \u0441\u0441\u044B\u043B\u043A\u0435: easylexlab.ru/recover/' + token
             };
@@ -350,7 +346,6 @@ userController.recoverPassword = function (req, res) {
                 if (error) {
                     console.log(error);
                 } else {
-                    console.log(info);
                     return res.json({ success: true });
                 }
             });

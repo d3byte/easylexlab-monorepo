@@ -347,7 +347,6 @@ userController.recoverPassword = (req, res) => {
         if(error) {
           console.log(error);
         } else {
-          console.log(info);
           return res.json({ success: true })
         }
       });
