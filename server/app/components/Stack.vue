@@ -140,6 +140,7 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
 import Header from './Header.vue';
 import Flashcards from './Flashcards.vue';
 import Matching from './Matching.vue';
