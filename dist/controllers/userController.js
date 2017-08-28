@@ -6,8 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _mongooseBcrypt = require('mongoose-bcrypt');
 
-var _mongooseBcrypt2 = _interopRequireDefault(_mongooseBcrypt);
-
 var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
@@ -19,6 +17,10 @@ var _secret2 = _interopRequireDefault(_secret);
 var _helperFunctions = require('./helperFunctions');
 
 var _helperFunctions2 = _interopRequireDefault(_helperFunctions);
+
+var _nodemailer = require('nodemailer');
+
+var _nodemailer2 = _interopRequireDefault(_nodemailer);
 
 var _models = require('./../models');
 
@@ -42,7 +44,7 @@ userController.post = function (req, res) {
 
 
     _models2.default.User.findOne({ username: username }, function (err, user) {
-        if (err) throw err;else if (user) res.json({ error: 'Данный логин уже занят' });else {
+        if (err) throw err;else if (user) return res.json({ error: 'Данный логин уже занят' });else {
             _models2.default.User.findOne({ email: email }, function (err, user) {
                 if (err) throw err;else if (user) res.json({ error: 'Данная электронная почта уже занята' });else {
                     if (!!groupCode.length) {
@@ -176,17 +178,35 @@ userController.updateInfo = function (req, res) {
         });
     }
 
-    _models2.default.User.findByIdAndUpdate(myUser.id, {
-        $set: query
-    }).then(function (user) {
-        return res.json({
-            success: true
+    if (query.username) {
+        _models2.default.User.findOne({ username: query.username }).then(function (user) {
+            if (user) return res.json({ error: 'Данный логин уже занят' });else {
+                _models2.default.User.findByIdAndUpdate(myUser.id, {
+                    $set: query
+                }).then(function (user) {
+                    return res.json({
+                        success: true
+                    });
+                }).catch(function (err) {
+                    return res.status(500).json({
+                        message: err
+                    });
+                });
+            }
         });
-    }).catch(function (err) {
-        res.status(500).json({
-            message: err
+    } else {
+        _models2.default.User.findByIdAndUpdate(myUser.id, {
+            $set: query
+        }).then(function (user) {
+            return res.json({
+                success: true
+            });
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: err
+            });
         });
-    });
+    }
 };
 
 userController.verifyPassword = function (req, res) {
@@ -214,7 +234,7 @@ userController.changePassword = function (req, res) {
     _models2.default.User.findByIdAndUpdate(user.id, { $set: { password: newPassword } }).then(function (myUser) {
         return res.json({ success: true });
     }).catch(function (err) {
-        res.status(500).json({
+        return res.status(500).json({
             message: err
         });
     });
@@ -223,10 +243,6 @@ userController.changePassword = function (req, res) {
 userController.addGroup = function (req, res) {
     var groupCode = req.body.groupCode;
     var user = req.user;
-
-    // db.Group.findOne({ code: groupCode }).then(group => {
-    //   console.log(group);
-    // })
 
     _models2.default.Group.findOneAndUpdate({ code: groupCode }, { $push: { '_students': user.id } }).then(function (group) {
         _models2.default.User.findByIdAndUpdate(user.id, { $push: { '_groups': group._id } }).then(function (myUser) {
@@ -294,6 +310,64 @@ userController.learnWords = function (req, res) {
 
     _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(function (success) {
         return res.json({ success: true });
+    });
+};
+
+userController.recoverPassword = function (req, res) {
+    var email = req.body.email;
+
+    _models2.default.User.findOne({ email: email }).then(function (user) {
+        if (!user) {
+            return res.json({ success: false });
+        }
+        var token = _jsonwebtoken2.default.sign({
+            id: user._id,
+            email: email
+        }, _secret2.default);
+        var uri = encodeURI(token);
+        user.recoverToken = token;
+        user.save().then(function (res) {
+            var transporter = _nodemailer2.default.createTransport({
+                service: 'gmail',
+                secure: false,
+                port: 25,
+                auth: {
+                    user: 'easylexlab@gmail.com',
+                    pass: '45aCRawa@hut'
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
+            var HelperOptions = {
+                from: '"EasyLexLab" <easylexlab@gmail.com>',
+                // to: user.email,
+                to: 'easylexlab@gmail.com',
+                subject: 'Восстановление пароля',
+                text: '\u0427\u0442\u043E\u0431\u044B \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043F\u0430\u0440\u043E\u043B\u044C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u043F\u043E \u044D\u0442\u043E\u0439 \u0441\u0441\u044B\u043B\u043A\u0435: easylexlab.ru/recover/' + token
+            };
+            transporter.sendMail(HelperOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(info);
+                    return res.json({ success: true });
+                }
+            });
+        });
+    });
+};
+
+userController.checkToken = function (req, res) {
+    var token = req.body.token;
+    _models2.default.User.findOne({ recoverToken: token }).then(function (user) {
+        if (user) {
+            user.recoverToken = '';
+            user.save().then(function (rr) {
+                return res.json({ success: true });
+            });
+        }
+        return res.json({ success: false });
     });
 };
 

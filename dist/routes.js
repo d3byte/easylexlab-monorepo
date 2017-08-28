@@ -45,6 +45,8 @@ routes.post('/signup', _userController2.default.post);
 routes.post('/login', _userController2.default.login);
 routes.post('/groups', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getGroups);
 routes.post('/verifypassword', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.verifyPassword);
+routes.post('/recover', _userController2.default.recoverPassword);
+routes.post('/checktoken', _userController2.default.checkToken);
 routes.patch('/newinfo', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.updateInfo);
 routes.patch('/newpassword', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.changePassword);
 routes.patch('/addgroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.addGroup);
