@@ -115,6 +115,7 @@
 <script>
 import Header from './Header.vue';
 import NewMsg from './NewMsg.vue';
+import { EventBus } from './event';
 
 export default {
   data() {
@@ -228,37 +229,39 @@ export default {
     'new-msg': NewMsg
   },
   created() {
-    if (!this.logged)
-      this.$router.push('/');
-    if(this.user.permissions != 'teacher')
-      this.$router.push('/profile');
-    const body = {
-      'groupId': this.$route.params.id
-    };
-    this.$http.post('getgroup', body, {
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + this.$store.getters.userToken
-      }
-    }).then(res => {
-      this.group = res.body.group;
-      if(this.group._students)
-        this.studentsLength = this.group._students.length;
-      var haveThisGroup = false;
-      for(let group of this.user._groups) {
-        if(group.code == this.group.code) {
-          haveThisGroup = true;
-          break;
-        }
-      }
-      if(!haveThisGroup)
+    EventBus.$once('requested', () => {
+      if(!this.logged)
+        this.$router.push('/');
+      if(this.user.permissions != 'teacher')
         this.$router.push('/profile');
-      this.slicedMessages = this.group.messages.reverse().slice(0, 3);
-      this.group._tests = this.group._tests.reverse();
-      this.slicedTests = this.group._tests.slice(0, 5);
-      this.students = this.group._students;
-      this.prepareRender();
-      this.setCharData(this.slicedTests[0]);
+      const body = {
+        'groupId': this.$route.params.id
+      };
+      this.$http.post('getgroup', body, {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.group = res.body.group;
+        if(this.group._students)
+          this.studentsLength = this.group._students.length;
+        var haveThisGroup = false;
+        for(let group of this.user._groups) {
+          if(group.code == this.group.code) {
+            haveThisGroup = true;
+            break;
+          }
+        }
+        if(!haveThisGroup)
+          this.$router.push('/profile');
+        this.slicedMessages = this.group.messages.reverse().slice(0, 3);
+        this.group._tests = this.group._tests.reverse();
+        this.slicedTests = this.group._tests.slice(0, 5);
+        this.students = this.group._students;
+        this.prepareRender();
+        this.setCharData(this.slicedTests[0]);
+      });
     });
   }
 }
