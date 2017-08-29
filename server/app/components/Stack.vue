@@ -211,6 +211,14 @@ export default {
         }
         if(!haveThisStack)
           this.$router.push('/profile');
+        let done = false;
+        this.task.results.map(result => {
+          if(result.userId == this.user._id) {
+            done = true;
+          }
+        });
+        if(done)
+          this.$store.dispatch('testAvailable');
         this.$store.dispatch('setGames', this.task.attempts);
       });
     });
