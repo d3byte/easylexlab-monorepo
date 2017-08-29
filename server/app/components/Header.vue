@@ -41,9 +41,9 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link clear" href data-toggle="dropdown">
-              <span class="avatar w-32">
-                <img src="../assets/images/a0.jpg" alt="...">
-                <i class="on b-white bottom"></i>
+              <span class="avatar w-32" :style="{ backgroundColor: color }">
+                <img src="">
+                <span style="margin-right: 4px;">{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
               </span>
             </a>
             <div class="dropdown-menu pull-right dropdown-menu-scale">
@@ -95,7 +95,8 @@
                 requested: false,
                 isCurrentGr: false,
                 notifications: [],
-                newNotifsInt: 0
+                newNotifsInt: 0,
+                color: ''
             }
         },
         computed: {
@@ -162,6 +163,7 @@
             root: '//ealapi.tw1.ru/api'
         },
         created() {
+          this.color = localStorage.color  ? localStorage.color : '#ccc';
           EventBus.$once('requested', event => {
             this.notifications = this.user.notifications.reverse();
           });

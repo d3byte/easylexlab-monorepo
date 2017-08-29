@@ -1,8 +1,8 @@
 <template>
 <div>
   <div class="item">
-    <div class="item-bg">
-      <img src="../assets/images/a6.jpg" class="blur opacity-3">
+    <div class="item-bg" :style="{ background: background }">
+
     </div>
     <div class="p-a-md">
       <div class="row m-t">
@@ -159,7 +159,8 @@ export default {
       showMsgs: false,
       showAll: false,
       wordsLearnt: 0,
-      sliceIndex: 0
+      sliceIndex: 0,
+      background: ''
     }
   },
   computed: {
@@ -233,6 +234,7 @@ export default {
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
     this.city = localStorage.city;
+    this.background = localStorage.background ? localStorage.background : '#ccc';
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');

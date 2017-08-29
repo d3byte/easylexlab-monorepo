@@ -10,7 +10,7 @@
                 <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Профиль</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Фотографии</a>
+                <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Цвета</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Настройки аккаунта</a>
@@ -49,27 +49,26 @@
           </div>
 
           <div class="tab-pane" id="tab-3">
-            <div class="p-a-md dker _600">Загрузить фото</div>
-            <form action="/api/upload" onsubmit="return false" class="p-a-md col-md-6" enctype="multipart/form-data" method="post">
-              <div class="form-group" v-if="!!errorPhoto">
-                <label class="text-danger">{{ erroPhoto }}</label>
+            <div class="p-a-md dker _600">Настройки цветовой гаммы</div>
+            <form onsubmit="return false" class="p-a-md col-md-6">
+              <div class="form-group" v-if="colorSuccess">
+                <label class="text-success">Новая цветовая гамма сохранена.</label>
               </div>
-              <div class="form-group" v-if="loginSuccess">
-                <label class="text-success">Фотография(и) успешно загружены</label>
-              </div>
-              <input type="hidden" name="id" v-model="user.id">
               <div class="form-group">
-                <label>Фотографии</label>
+                <label>Цвета</label>
                 <div class="form-file">
-                  <input type="file" id="ava" name="ava">
-                  <button class="btn white">Фотография профиля</button>
+                  <input type="color" v-model="color">
+                  <button class="btn white">Цвет пользователя</button>
+                  <label class="color" :style="{ backgroundColor: color }"></label>
                 </div><br>
                 <div class="form-file">
-                  <input type="file" id="background" name="background">
-                  <button class="btn white">Фон профиля</button>
+                  <input type="color" v-model="background">
+                  <button class="btn white">Цвет фона профиля</button>
+                  <label class="color" :style="{ backgroundColor: background }"></label>
                 </div>
               </div>
-              <button @click="upload" class="btn btn-info m-t">Загрузить</button>
+              <button @click="changeColor" class="btn btn-info m-t">Сменить</button>
+              <button @click="defaultColors" class="btn btn-primary m-t">Стандартные цвета</button>
             </form>
           </div>
 
@@ -138,6 +137,7 @@ export default {
       infoSuccess: [],
       loginSuccess: '',
       passwordSuccess: '',
+      colorSuccess: false,
       oldPass: '',
       newPass: '',
       confPass: '',
@@ -148,8 +148,8 @@ export default {
       newUsername: '',
       groupCode: '',
       userId: '',
-      successPhoto: false,
-      errorPhoto: ''
+      color: localStorage.color,
+      background: localStorage.background
     }
   },
   computed: {
@@ -277,35 +277,17 @@ export default {
         }
       }
     },
-    upload() {
-      var ava = document.querySelector('#ava').files[0];
-      var background = document.querySelector('#background').files[0];
-      var formData = new FormData();
-      if(ava || background) {
-        if(ava)
-          formData.append('ava', ava);
-        if(background)
-          formData.append('background', background);
-        formData.append('id', this.userId);
-
-        $.ajax({
-           url: "/api/upload",
-           type: "POST",
-           data: formData,
-           processData: false,
-           contentType: false,
-           success() {
-               this.successPhoto = true;
-               this.errorPhoto = '';
-           },
-           error(jqXHR, textStatus, errorMessage) {
-               return
-           }
-        });
-      } else {
-        this.successPhoto = false;
-        this.errorPhoto = 'Нужно загрузить хотя бы одну картинку.';
-      }
+    changeColor() {
+      if(this.color)
+        localStorage.color = this.color;
+      if(this.background)
+        localStorage.background = this.background
+      this.colorSuccess = true;
+    },
+    defaultColors() {
+      localStorage.color = '';
+      localStorage.background = '';
+      this.colorSuccess = true;
     }
   },
   created() {
@@ -322,6 +304,18 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+.color {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  margin-left: 25px;
+  margin-top: 6px;
+  vertical-align: middle;
+}
 
+.form-file {
+  display: flex;
+  align-items: center;
+}
 </style>
