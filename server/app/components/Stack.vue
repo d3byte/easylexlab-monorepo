@@ -59,10 +59,10 @@
         <div class="p-a text-center">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
-              <a class="nav-link" @click="showMatching">Matching</a>
+              <a class="nav-link" @click="showFlashcards">Flashcards</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showFlashcards">Flashcards</a>
+              <a class="nav-link" @click="showMatching">Matching</a>
             </li>
           </ul>
         </div>
@@ -85,14 +85,15 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4" v-if="testAvailable">
+    <div class="col-sm-4">
       <div class="col box">
         <div class="row-col danger white-text">
           <h3>Тест</h3></div>
         <div class="p-a text-center">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
-              <a class="nav-link" @click="tryTest">Пройти тест</a>
+              <a class="nav-link" v-if="testAvailable" @click="tryTest">Пройти тест</a>
+              <a class="nav-link" v-else>Тест будет доступен после прохождения всех игр</a>
             </li>
           </ul>
         </div>
