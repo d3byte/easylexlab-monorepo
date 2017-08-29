@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <center>
-                        <h3>{{ test.name }}</h3>
+                        <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
                         <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
                       </center>
                     </div>
