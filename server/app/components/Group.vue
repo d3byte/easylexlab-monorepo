@@ -87,6 +87,7 @@
                 <tr>
                   <th>№</th>
                   <th>Ученик</th>
+                  <th>Средний результат</th>
                   <th v-for="test in slicedTests">{{ test.name }}</th>
                   <th>
                     <a @click="previousFiveTests" v-show="sliceTestIndex >= 5"><i class="fa fa-angle-left btn-sm primary"></i></a>
@@ -98,6 +99,8 @@
                 <tr v-for="(student, index) in render">
                   <td>{{ index + 1 }}</td>
                   <td>{{ student.name }}</td>
+                  <td v-if="student.averageRes != '—'">{{ student.averageRes }}%</td>
+                  <td v-else>{{ student.averageRes }}</td>
                   <td v-for="(result, i) in student.results">
                     <span v-if="i == result.index">{{ result.result }}%</span>
                     <span v-else> — </span>
@@ -198,7 +201,9 @@ export default {
         this.render = this.students.map((student, index) => {
           let newStudent = {
             name: student.firstName + ' ' + student.lastName,
-            results: []
+            results: [],
+            averageRes: 0,
+            allTests: 0
           };
           for(let i = 0; i < this.slicedTests.length; i++) {
             newStudent.results.push(i);
@@ -216,7 +221,18 @@ export default {
               }
             }
           }
-
+          for(let test of this.group._tests) {
+            for(let result of test.results) {
+              if(result.userId == student._id) {
+                newStudent.averageRes += result.result;
+                newStudent.allTests++;
+              }
+            }
+          }
+          newStudent.averageRes = parseInt(newStudent.averageRes / newStudent.allTests);
+          if(isNaN(newStudent.averageRes)) {
+            newStudent.averageRes = '—';
+          }
           return newStudent;
         });
       } else {
