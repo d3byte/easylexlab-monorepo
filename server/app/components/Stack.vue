@@ -29,11 +29,10 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
-              <a class="nav-link" @click="showMatching">Matching</a>
+              <a class="nav-link" @click="showFlashcards">Flashcards</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showFlashcards">Flashcards</a>
-
+              <a class="nav-link" @click="showMatching">Matching</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="showSnake">Змейка</a>
