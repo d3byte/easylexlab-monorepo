@@ -89,8 +89,8 @@
                   <th>Ученик</th>
                   <th v-for="test in slicedTests">{{ test.name }}</th>
                   <th>
-                    <a @click="previousFiveTests" v-show="sliceTestIndex >= 5" class="btn-sm rounded primary text-white"><-</a>
-                    <a @click="nextFiveTests" class="btn-sm rounded primary text-white">-></a>
+                    <a @click="previousFiveTests" v-show="sliceTestIndex >= 5"><i class="fa fa-angle-left btn-sm primary"></i></a>
+                    <a @click="nextFiveTests"><i class="fa fa-angle-right btn-sm primary"></i></a>
                   </th>
                 </tr>
               </thead>
@@ -275,6 +275,10 @@ export default {
 <style lang="css" scoped>
 #nope {
   padding-left: 0;
+}
+
+.icono-caretLeft {
+  color: black !important;
 }
 
 #color {
