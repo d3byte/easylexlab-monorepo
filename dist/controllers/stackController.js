@@ -61,6 +61,8 @@ stackController.post = function (req, res) {
         });
         stack.save().then(function (stack) {
             _models2.default.User.findById(user.id).then(function (userAccount) {
+                console.log(userAccount);
+                console.log(user.id);
                 var notification = {
                     type: 'newTask',
                     authorId: userAccount._id,
@@ -74,13 +76,47 @@ stackController.post = function (req, res) {
                 _models2.default.User.update({ _groups: { $in: [groupId] } }, { $push: { notifications: notification } }, {
                     multi: true
                 }).then(function (success) {
+                    _models2.default.Group.findById(stack._group).populate({
+                        path: '_students',
+                        model: 'User',
+                        select: 'email'
+                    }).then(function (group) {
+                        var transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            secure: false,
+                            port: 25,
+                            auth: {
+                                user: 'easylexlab@gmail.com',
+                                pass: '45aCRawa@hut'
+                            },
+                            tls: {
+                                rejectUnauthorized: false
+                            }
+                        });
+                        var maillist = group._students.map(function (student) {
+                            return student.email;
+                        });
+                        maillist = maillist.join(', ');
+                        console.log(maillist);
+                        var HelperOptions = {
+                            from: userAccount.firstName + userAccount.lastName + ' <' + userAccount.email + '>',
+                            to: maillist,
+                            subject: 'Новое задание',
+                            text: userAccount.firstName + userAccount.lastName + ' \u0441\u043E\u0437\u0434\u0430\u043B(\u0430) \u043D\u043E\u0432\u043E\u0435 \u0437\u0430\u0434\u0430\u043D\u0438\u0435. \u0421\u0440\u043E\u043A \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F: ' + stack.timeToDo + ' \u0434\u043D\u0435\u0439.'
+                        };
+                        transporter.sendMail(HelperOptions, function (error, info) {
+                            if (error) {
+                                console.log(error);
+                            }
+                        });
+                    });
                     return res.json({ success: true, stack: stack });
                 }).catch(function (error) {
                     throw error;
                 });
             });
         }).catch(function (err) {
-            return res.status(500).json({ err: 'error' });
+            throw err;
         });
     }
 };

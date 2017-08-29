@@ -35,6 +35,8 @@ stackController.post = (req, res) => {
         });
         stack.save().then(stack => {
             db.User.findById(user.id).then(userAccount => {
+              console.log(userAccount);
+              console.log(user.id);
               const notification = {
                   type: 'newTask',
                   authorId: userAccount._id,
@@ -49,13 +51,45 @@ stackController.post = (req, res) => {
                   { $push: { notifications: notification }}, {
                     multi: true
                   }).then(success => {
+                  db.Group.findById(stack._group).populate({
+                    path: '_students',
+                    model: 'User',
+                    select: 'email'
+                  }).then(group => {
+                    let transporter = nodemailer.createTransport({
+                      service: 'gmail',
+                      secure: false,
+                      port: 25,
+                      auth: {
+                        user: 'easylexlab@gmail.com',
+                        pass: '45aCRawa@hut'
+                      },
+                      tls: {
+                        rejectUnauthorized: false
+                      }
+                    });
+                    var maillist = group._students.map(student => student.email);
+                    maillist = maillist.join(', ');
+                    console.log(maillist);
+                    let HelperOptions = {
+                      from: `${userAccount.firstName + userAccount.lastName} <${userAccount.email}>`,
+                      to: maillist,
+                      subject: 'Новое задание',
+                      text: `${userAccount.firstName + userAccount.lastName} создал(а) новое задание. Срок выполнения: ${stack.timeToDo} дней.`
+                    };
+                    transporter.sendMail(HelperOptions, (error, info) => {
+                      if(error) {
+                        console.log(error);
+                      }
+                    });
+                  });
                   return res.json({ success: true, stack });
               }).catch(error => {
                   throw error
               });
             })
         }).catch(err => {
-            return res.status(500).json({err: 'error'});
+            throw err
         });
     }
 };

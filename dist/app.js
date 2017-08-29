@@ -32,6 +32,10 @@ var _cors = require('cors');
 
 var _cors2 = _interopRequireDefault(_cors);
 
+var _quickthumb = require('quickthumb');
+
+var _quickthumb2 = _interopRequireDefault(_quickthumb);
+
 var _secret = require('./secret');
 
 var _secret2 = _interopRequireDefault(_secret);
@@ -93,6 +97,7 @@ app.get('/task/:id', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
 
+app.use(_quickthumb2.default.static(__dirname + '/'));
 app.use('/', _express2.default.static(folder));
 app.use('/profile', _express2.default.static(folder));
 app.use('/group', _express2.default.static(folder));

@@ -112,7 +112,8 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    // root: '//ealapi.tw1.ru/api'
+    root: '/api'
   },
   methods: {
     refresh() {
