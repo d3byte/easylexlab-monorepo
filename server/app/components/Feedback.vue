@@ -17,7 +17,7 @@
               <div class="form-group row">
                 <label class="col-sm-4 form-control-label">Электронная почта</label>
                 <div class="col-sm-8">
-                  <input type="text" v-model="email" required>
+                  <input type="email" v-model="email" required>
                 </div>
               </div>
               <div class="form-group row">

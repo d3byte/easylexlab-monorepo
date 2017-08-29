@@ -119,12 +119,7 @@ userController.post = (req, res) => {
                             to: email,
                             // to: 'easylexlab@gmail.com',
                             subject: 'Регистрация на EasyLexLab',
-                            text: `
-                            Вы успешно зарегистрировались на EasyLexLab, ${firstName} ${lastName}.
-
-                            Логин: ${username}
-                            Пароль: ${password}
-                            `
+                            text: `Вы успешно зарегистрировались на EasyLexLab, ${firstName} ${lastName}.\n\nЛогин: ${username}\nПароль: ${password}`
                           };
                           transporter.sendMail(HelperOptions, (error, info) => {
                             if(error) {
@@ -277,7 +272,7 @@ userController.changePassword = (req, res) => {
     const user = req.user;
     const newPassword = req.body.newPassword;
 
-    db.User.findByIdAndUpdate(user.id, {$set: {password: newPassword}})
+    db.User.findByIdAndUpdate(user.id, {$set: {password: newPassword, recoverToken: ''}})
         .then(myUser => {
             return res.json({success: true});
         }).catch((err) => {
@@ -415,10 +410,7 @@ userController.checkToken = (req, res) => {
   const token = req.body.token;
   db.User.findOne({ recoverToken: token }).then(user => {
     if(user) {
-      user.recoverToken = '';
-      user.save().then(rr => {
-        return res.json({ success: true });
-      });
+      return res.json({ success: true });
     }
     return res.json({ success: false });
   });
@@ -448,10 +440,7 @@ userController.sendFeedback = (req, res) => {
     from: `${name} <${email}>`,
     to: 'easylexlab@gmail.com',
     subject: 'Отзыв',
-    text: `
-    ${name}: ${text}
-    ${email}
-    `
+    text: `${name}: ${text}\n${email}`
   };
   transporter.sendMail(HelperOptions, (error, info) => {
     if(error) {

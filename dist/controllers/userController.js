@@ -128,7 +128,7 @@ userController.post = function (req, res) {
                                 to: email,
                                 // to: 'easylexlab@gmail.com',
                                 subject: 'Регистрация на EasyLexLab',
-                                text: '\n                            \u0412\u044B \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043B\u0438\u0441\u044C \u043D\u0430 EasyLexLab, ' + firstName + ' ' + lastName + '.\n\n                            \u041B\u043E\u0433\u0438\u043D: ' + username + '\n                            \u041F\u0430\u0440\u043E\u043B\u044C: ' + password + '\n                            '
+                                text: '\u0412\u044B \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043B\u0438\u0441\u044C \u043D\u0430 EasyLexLab, ' + firstName + ' ' + lastName + '.\n\n\u041B\u043E\u0433\u0438\u043D: ' + username + '\n\u041F\u0430\u0440\u043E\u043B\u044C: ' + password
                             };
                             transporter.sendMail(HelperOptions, function (error, info) {
                                 if (error) {
@@ -274,7 +274,7 @@ userController.changePassword = function (req, res) {
     var user = req.user;
     var newPassword = req.body.newPassword;
 
-    _models2.default.User.findByIdAndUpdate(user.id, { $set: { password: newPassword } }).then(function (myUser) {
+    _models2.default.User.findByIdAndUpdate(user.id, { $set: { password: newPassword, recoverToken: '' } }).then(function (myUser) {
         return res.json({ success: true });
     }).catch(function (err) {
         return res.status(500).json({
@@ -404,10 +404,7 @@ userController.checkToken = function (req, res) {
     var token = req.body.token;
     _models2.default.User.findOne({ recoverToken: token }).then(function (user) {
         if (user) {
-            user.recoverToken = '';
-            user.save().then(function (rr) {
-                return res.json({ success: true });
-            });
+            return res.json({ success: true });
         }
         return res.json({ success: false });
     });
@@ -437,7 +434,7 @@ userController.sendFeedback = function (req, res) {
         from: name + ' <' + email + '>',
         to: 'easylexlab@gmail.com',
         subject: 'Отзыв',
-        text: '\n    ' + name + ': ' + text + '\n    ' + email + '\n    '
+        text: name + ': ' + text + '\n' + email
     };
     transporter.sendMail(HelperOptions, function (error, info) {
         if (error) {
