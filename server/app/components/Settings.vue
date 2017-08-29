@@ -10,6 +10,9 @@
                 <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Профиль</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Фотографии</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Настройки аккаунта</a>
               </li>
               <li class="nav-item">
@@ -22,23 +25,12 @@
       <div class="col-sm-9 col-lg-10 light lt bg-auto">
         <div class="tab-content pos-rlt">
           <div class="tab-pane active" id="tab-1">
-            <form role="form" class="p-a-md col-md-6" onsubmit="return false">
+            <form role="form" class="p-a-md col-md-6" enctype="multipart/form-data" onsubmit="return false">
               <div class="form-group" v-if="!!errorInfo">
                 <label class="text-danger">{{ errorInfo }}</label>
               </div>
               <div class="form-group" v-for="success in infoSuccess">
                 <label class="text-success">{{ success }}</label>
-              </div>
-              <div class="form-group">
-                <label>Фотографии</label>
-                <div class="form-file">
-                  <input type="file" id="ava">
-                  <button class="btn white">Фотография профиля</button>
-                </div><br>
-                <div class="form-file">
-                  <input type="file" id="background">
-                  <button class="btn white">Фон профиля</button>
-                </div>
               </div>
               <div class="form-group">
                 <label>Имя</label>
@@ -53,6 +45,31 @@
                 <input v-model="groupCode" type="text" class="form-control">
               </div>
               <button type="submit" class="btn btn-info m-t" @click="submitInfo">Обновить</button>
+            </form>
+          </div>
+
+          <div class="tab-pane" id="tab-3">
+            <div class="p-a-md dker _600">Загрузить фото</div>
+            <form action="/api/upload" onsubmit="return false" class="p-a-md col-md-6" enctype="multipart/form-data" method="post">
+              <div class="form-group" v-if="!!errorPhoto">
+                <label class="text-danger">{{ erroPhoto }}</label>
+              </div>
+              <div class="form-group" v-if="loginSuccess">
+                <label class="text-success">Фотография(и) успешно загружены</label>
+              </div>
+              <input type="hidden" name="id" v-model="user.id">
+              <div class="form-group">
+                <label>Фотографии</label>
+                <div class="form-file">
+                  <input type="file" id="ava" name="ava">
+                  <button class="btn white">Фотография профиля</button>
+                </div><br>
+                <div class="form-file">
+                  <input type="file" id="background" name="background">
+                  <button class="btn white">Фон профиля</button>
+                </div>
+              </div>
+              <button @click="upload" class="btn btn-info m-t">Загрузить</button>
             </form>
           </div>
 
@@ -130,6 +147,9 @@ export default {
       lastName: '',
       newUsername: '',
       groupCode: '',
+      userId: '',
+      successPhoto: false,
+      errorPhoto: ''
     }
   },
   computed: {
@@ -141,7 +161,8 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    // root: '//ealapi.tw1.ru/api'
+    root: '/api'
   },
   methods: {
     checkPass() {
@@ -254,8 +275,36 @@ export default {
               localStorage.lastName = this.lastName;
           });
         }
+      }
+    },
+    upload() {
+      var ava = document.querySelector('#ava').files[0];
+      var background = document.querySelector('#background').files[0];
+      var formData = new FormData();
+      if(ava || background) {
+        if(ava)
+          formData.append('ava', ava);
+        if(background)
+          formData.append('background', background);
+        formData.append('id', this.userId);
+
+        $.ajax({
+           url: "/api/upload",
+           type: "POST",
+           data: formData,
+           processData: false,
+           contentType: false,
+           success() {
+               this.successPhoto = true;
+               this.errorPhoto = '';
+           },
+           error(jqXHR, textStatus, errorMessage) {
+               return
+           }
+        });
       } else {
-        this.errorInfo = 'Необходимо заполнить хотя бы одно из полей. Попробуйте еще раз.';
+        this.successPhoto = false;
+        this.errorPhoto = 'Нужно загрузить хотя бы одну картинку.';
       }
     }
   },
@@ -265,6 +314,7 @@ export default {
     this.$store.dispatch('testNotAvailable');
     this.firstNamePlaceholder = localStorage.firstName;
     this.lastNamePlaceholder = localStorage.lastName;
+    this.userId = localStorage.id;
   },
   components: {
     'app-header': Header

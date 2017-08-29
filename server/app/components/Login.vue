@@ -76,6 +76,7 @@ export default {
           localStorage.lastName = res.body.user.lastName;
           localStorage.school = res.body.user.school;
           localStorage.city = res.body.user.city;
+          localStorage.id = res.body.user._id;
           this.$router.push({ path: '/profile' });
         });
     },

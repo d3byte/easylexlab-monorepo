@@ -32,6 +32,7 @@ const routes = [
   { path: '/signup', component: Signup },
   { path: '/login', component: Login },
   { path: '/forgotpassword', component: ForgotPassword },
+  { path: '/recover', redirect: '/forgotpassword' },
   { path: '/recover/:token', component: RecoverPass },
   { path: '/eula', component: Eula },
   { path: '/settings', component: Settings },

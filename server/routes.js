@@ -8,6 +8,7 @@ import basicConstroller from './controllers/basicController';
 import userController from './controllers/userController';
 import groupController from './controllers/groupController';
 import stackController from './controllers/stackController';
+import fileController from './controllers/fileController';
 
 const routes = express();
 
@@ -27,6 +28,7 @@ routes.patch('/newpassword', expressJWT({ secret }), userController.changePasswo
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.post('/user', expressJWT({ secret }), userController.getUser);
 routes.patch('/words', expressJWT({ secret }), userController.learnWords);
+routes.post('/upload', fileController.uploadFiles);
 
 // Group routes
 routes.post('/regcode', expressJWT({ secret }), groupController.regCode);

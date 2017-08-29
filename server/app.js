@@ -5,6 +5,7 @@ import expressJWT from 'express-jwt';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 import cors from 'cors';
+import qt from 'quickthumb';
 
 import secret from './secret';
 
@@ -61,6 +62,7 @@ app.get('/task/:id', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 
+app.use(qt.static(__dirname + '/'));
 app.use('/', express.static(folder));
 app.use('/profile', express.static(folder));
 app.use('/group', express.static(folder));
