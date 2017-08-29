@@ -24,6 +24,10 @@ var _secret = require('./../secret');
 
 var _secret2 = _interopRequireDefault(_secret);
 
+var _nodemailer = require('nodemailer');
+
+var _nodemailer2 = _interopRequireDefault(_nodemailer);
+
 var _models = require('./../models');
 
 var _models2 = _interopRequireDefault(_models);
@@ -81,7 +85,7 @@ stackController.post = function (req, res) {
                         model: 'User',
                         select: 'email'
                     }).then(function (group) {
-                        var transporter = nodemailer.createTransport({
+                        var transporter = _nodemailer2.default.createTransport({
                             service: 'gmail',
                             secure: false,
                             port: 25,

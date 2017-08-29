@@ -3,6 +3,7 @@ import randomize from 'randomatic';
 import _ from 'lodash';
 import moment from 'moment';
 import secret from './../secret';
+import nodemailer from 'nodemailer';
 
 import db from './../models';
 
