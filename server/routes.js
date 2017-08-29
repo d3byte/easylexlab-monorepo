@@ -8,7 +8,6 @@ import basicConstroller from './controllers/basicController';
 import userController from './controllers/userController';
 import groupController from './controllers/groupController';
 import stackController from './controllers/stackController';
-import fileController from './controllers/fileController';
 
 const routes = express();
 
