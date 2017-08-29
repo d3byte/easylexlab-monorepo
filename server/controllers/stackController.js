@@ -73,10 +73,10 @@ stackController.post = (req, res) => {
                     maillist = maillist.join(', ');
                     console.log(maillist);
                     let HelperOptions = {
-                      from: `${userAccount.firstName + userAccount.lastName} <${userAccount.email}>`,
+                      from: `${userAccount.firstName + ' ' + userAccount.lastName} <${userAccount.email}>`,
                       to: maillist,
                       subject: 'Новое задание',
-                      text: `${userAccount.firstName + userAccount.lastName} создал(а) новое задание. Срок выполнения: ${stack.timeToDo} дней.`
+                      text: `${userAccount.firstName + ' ' + userAccount.lastName} создал(а) новое задание. Срок выполнения: ${stack.timeToDo} дней.`
                     };
                     transporter.sendMail(HelperOptions, (error, info) => {
                       if(error) {

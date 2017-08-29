@@ -103,10 +103,10 @@ stackController.post = function (req, res) {
                         maillist = maillist.join(', ');
                         console.log(maillist);
                         var HelperOptions = {
-                            from: userAccount.firstName + userAccount.lastName + ' <' + userAccount.email + '>',
+                            from: userAccount.firstName + ' ' + userAccount.lastName + ' <' + userAccount.email + '>',
                             to: maillist,
                             subject: 'Новое задание',
-                            text: userAccount.firstName + userAccount.lastName + ' \u0441\u043E\u0437\u0434\u0430\u043B(\u0430) \u043D\u043E\u0432\u043E\u0435 \u0437\u0430\u0434\u0430\u043D\u0438\u0435. \u0421\u0440\u043E\u043A \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F: ' + stack.timeToDo + ' \u0434\u043D\u0435\u0439.'
+                            text: userAccount.firstName + ' ' + userAccount.lastName + ' \u0441\u043E\u0437\u0434\u0430\u043B(\u0430) \u043D\u043E\u0432\u043E\u0435 \u0437\u0430\u0434\u0430\u043D\u0438\u0435. \u0421\u0440\u043E\u043A \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F: ' + stack.timeToDo + ' \u0434\u043D\u0435\u0439.'
                         };
                         transporter.sendMail(HelperOptions, function (error, info) {
                             if (error) {
