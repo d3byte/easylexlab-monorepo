@@ -121,9 +121,9 @@ export default {
     }
     this.pairs = _.shuffle(this.pairs);
     for(let i = 0; i < this.pairs.length; i++) {
-      if(i <= this.pairs.length * 0.3)
+      if(i <= this.pairs.length * 0.5)
         this.typeKey.push(this.pairs[i]);
-      else if(i > this.pairs.length * 0.3 && i <= this.pairs.length * 0.6)
+      else if(i > this.pairs.length * 0.5 && i <= this.pairs.length)
         this.typeVal.push(this.pairs[i]);
     }
   },
