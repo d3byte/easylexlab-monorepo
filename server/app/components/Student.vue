@@ -49,7 +49,7 @@
   </div>
   <div v-show="showTasks" class="row checkbox">
     <input type="checkbox" id="padding" v-model="showAll">
-    <label for="padding">Показывать все задания</label>
+    <label for="padding">Показать выполненные</label>
   </div>
   <div class="row">
     <div class="col-sm-12 col-lg-12 padding">
@@ -71,14 +71,18 @@
                   </div>
                 </div>
               </div>
-              <div v-show="showAll" v-for="test in tasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
+              <div v-show="showAll" v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task done">
                 <div class="taskcontentouter">
                   <div class="taskcontent">
-                    <center>
-                      <h3>{{ test.name }}</h3>
-                      <p>Крайний срок сдачи: {{ test.deadline }}</p>
-                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
-                    </center>
+                    <div class="pull-right success">
+                      <i class="material-icons">done</i>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <center>
+                        <h3>{{ test.name }}</h3>
+                        <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
+                      </center>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -151,6 +155,7 @@ export default {
       school: '',
       city: '',
       tasks: [],
+      completedTasks: [],
       uncompletedTasks: [],
       messages: [],
       slicedMessages: [],
@@ -207,10 +212,10 @@ export default {
       this.setDate();
     },
     sortTasks() {
-      this.tasks = [];
+      this.completedTasks = [];
       this.uncompletedTasks = [];
-      if(this.group && this.group._tests) {
-        for (var test of this.group._tests) {
+      for(let group of this.user._groups) {
+        for (var test of group._tests) {
           var done = false;
           if (test.results) {
             for (let result of test.results) {
@@ -220,9 +225,11 @@ export default {
             }
             if (!done) {
               this.uncompletedTasks.push(test);
+            } else {
+              this.completedTasks.push(test);
             }
+            this.tasks.push(test);
           }
-          this.tasks.push(test);
         }
       }
     },
@@ -359,4 +366,15 @@ h5.white-text {
 .container {
   width: 75%;
 }
+
+.success {
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-top: -25px;
+} .success > i {
+  color: white;
+  font-size: 30px;
+}
+
+
 </style>
