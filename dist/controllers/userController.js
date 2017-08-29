@@ -61,7 +61,33 @@ userController.post = function (req, res) {
                                 city: city
                             });
                             user.save().then(function (newUser) {
-                                res.status(200).json({
+                                var transporter = _nodemailer2.default.createTransport({
+                                    service: 'gmail',
+                                    secure: false,
+                                    port: 25,
+                                    auth: {
+                                        user: 'easylexlab@gmail.com',
+                                        pass: '45aCRawa@hut'
+                                    },
+                                    tls: {
+                                        rejectUnauthorized: false
+                                    }
+                                });
+                                var HelperOptions = {
+                                    from: '"EasyLexLab" <easylexlab@gmail.com>',
+                                    to: newUser.email,
+                                    // to: 'easylexlab@gmail.com',
+                                    subject: 'Регистрация на EasyLexLab',
+                                    text: '\n                                  \u0412\u044B \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043B\u0438\u0441\u044C \u043D\u0430 EasyLexLab, ' + newUser.firstName + ' ' + newUser.lastName + '.\n\n                                  \u041B\u043E\u0433\u0438\u043D: ' + newUser.username + '\n                                  \u041F\u0430\u0440\u043E\u043B\u044C: ' + password + '\n                                  '
+                                };
+                                transporter.sendMail(HelperOptions, function (error, info) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        return res.json({ success: true });
+                                    }
+                                });
+                                return res.status(200).json({
                                     success: true,
                                     userId: newUser._id
                                 });
@@ -84,8 +110,34 @@ userController.post = function (req, res) {
                             city: city
                         });
                         _user.save().then(function (newUser) {
-                            // console.log('Success:\n', newUser);
-                            res.status(200).json({
+                            console.log(newUser);
+                            var transporter = _nodemailer2.default.createTransport({
+                                service: 'gmail',
+                                secure: false,
+                                port: 25,
+                                auth: {
+                                    user: 'easylexlab@gmail.com',
+                                    pass: '45aCRawa@hut'
+                                },
+                                tls: {
+                                    rejectUnauthorized: false
+                                }
+                            });
+                            var HelperOptions = {
+                                from: '"EasyLexLab" <easylexlab@gmail.com>',
+                                to: email,
+                                // to: 'easylexlab@gmail.com',
+                                subject: 'Регистрация на EasyLexLab',
+                                text: '\n                            \u0412\u044B \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043B\u0438\u0441\u044C \u043D\u0430 EasyLexLab, ' + firstName + ' ' + lastName + '.\n\n                            \u041B\u043E\u0433\u0438\u043D: ' + username + '\n                            \u041F\u0430\u0440\u043E\u043B\u044C: ' + password + '\n                            '
+                            };
+                            transporter.sendMail(HelperOptions, function (error, info) {
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    return res.json({ success: true });
+                                }
+                            });
+                            return res.status(200).json({
                                 success: true,
                                 userId: newUser._id
                             });
@@ -111,13 +163,8 @@ userController.login = function (req, res) {
         user.verifyPassword(password).then(function (valid) {
             if (valid) {
                 var token = _jsonwebtoken2.default.sign({
-                    // username: user.username,
-                    // name: user.name,
-                    // notifications: user.notifications,
                     id: user._id,
                     permissions: user.permissions
-                    // groups: user._groups,
-                    // school: user.school
                 }, _secret2.default, { expiresIn: '2 days' });
                 res.status(200).json({
                     success: valid,
@@ -363,6 +410,41 @@ userController.checkToken = function (req, res) {
             });
         }
         return res.json({ success: false });
+    });
+};
+
+userController.sendFeedback = function (req, res) {
+    var user = req.user;
+    var _req$body4 = req.body,
+        name = _req$body4.name,
+        text = _req$body4.text,
+        email = _req$body4.email;
+
+
+    var transporter = _nodemailer2.default.createTransport({
+        service: 'gmail',
+        secure: false,
+        port: 25,
+        auth: {
+            user: 'easylexlab@gmail.com',
+            pass: '45aCRawa@hut'
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    });
+    var HelperOptions = {
+        from: name + ' <' + email + '>',
+        to: 'easylexlab@gmail.com',
+        subject: 'Отзыв',
+        text: '\n    ' + name + ': ' + text + '\n    ' + email + '\n    '
+    };
+    transporter.sendMail(HelperOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            return res.json({ success: true });
+        }
     });
 };
 

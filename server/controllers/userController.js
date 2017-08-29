@@ -47,7 +47,38 @@ userController.post = (req, res) => {
                                 city
                             });
                             user.save().then(newUser => {
-                                res.status(200).json({
+                                let transporter = nodemailer.createTransport({
+                                  service: 'gmail',
+                                  secure: false,
+                                  port: 25,
+                                  auth: {
+                                    user: 'easylexlab@gmail.com',
+                                    pass: '45aCRawa@hut'
+                                  },
+                                  tls: {
+                                    rejectUnauthorized: false
+                                  }
+                                });
+                                let HelperOptions = {
+                                  from: '"EasyLexLab" <easylexlab@gmail.com>',
+                                  to: newUser.email,
+                                  // to: 'easylexlab@gmail.com',
+                                  subject: 'Регистрация на EasyLexLab',
+                                  text: `
+                                  Вы успешно зарегистрировались на EasyLexLab, ${newUser.firstName} ${newUser.lastName}.
+
+                                  Логин: ${newUser.username}
+                                  Пароль: ${password}
+                                  `
+                                };
+                                transporter.sendMail(HelperOptions, (error, info) => {
+                                  if(error) {
+                                    console.log(error);
+                                  } else {
+                                    return res.json({ success: true })
+                                  }
+                                });
+                                return res.status(200).json({
                                     success: true,
                                     userId: newUser._id
                                 });
@@ -70,8 +101,39 @@ userController.post = (req, res) => {
                             city
                         });
                         user.save().then(newUser => {
-                            // console.log('Success:\n', newUser);
-                            res.status(200).json({
+                          console.log(newUser);
+                          let transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            secure: false,
+                            port: 25,
+                            auth: {
+                              user: 'easylexlab@gmail.com',
+                              pass: '45aCRawa@hut'
+                            },
+                            tls: {
+                              rejectUnauthorized: false
+                            }
+                          });
+                          let HelperOptions = {
+                            from: '"EasyLexLab" <easylexlab@gmail.com>',
+                            to: email,
+                            // to: 'easylexlab@gmail.com',
+                            subject: 'Регистрация на EasyLexLab',
+                            text: `
+                            Вы успешно зарегистрировались на EasyLexLab, ${firstName} ${lastName}.
+
+                            Логин: ${username}
+                            Пароль: ${password}
+                            `
+                          };
+                          transporter.sendMail(HelperOptions, (error, info) => {
+                            if(error) {
+                              console.log(error);
+                            } else {
+                              return res.json({ success: true })
+                            }
+                          });
+                          return res.status(200).json({
                                 success: true,
                                 userId: newUser._id
                             });
@@ -95,13 +157,8 @@ userController.login = (req, res) => {
             if (valid) {
                 const token = jwt.sign(
                     {
-                        // username: user.username,
-                        // name: user.name,
-                        // notifications: user.notifications,
                         id: user._id,
                         permissions: user.permissions
-                        // groups: user._groups,
-                        // school: user.school
                     },
                     secret,
                     {expiresIn: '2 days'}
@@ -364,6 +421,44 @@ userController.checkToken = (req, res) => {
       });
     }
     return res.json({ success: false });
+  });
+};
+
+userController.sendFeedback = (req, res) => {
+  const user = req.user;
+  const {
+    name,
+    text,
+    email
+  } = req.body;
+
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    port: 25,
+    auth: {
+      user: 'easylexlab@gmail.com',
+      pass: '45aCRawa@hut'
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+  let HelperOptions = {
+    from: `${name} <${email}>`,
+    to: 'easylexlab@gmail.com',
+    subject: 'Отзыв',
+    text: `
+    ${name}: ${text}
+    ${email}
+    `
+  };
+  transporter.sendMail(HelperOptions, (error, info) => {
+    if(error) {
+      console.log(error);
+    } else {
+      return res.json({ success: true })
+    }
   });
 };
 

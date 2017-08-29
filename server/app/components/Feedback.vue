@@ -6,7 +6,7 @@
             <h5 class="modal-title">Новое сообщение</h5>
           </div>
           <div class="modal-body text-center p-lg">
-            <h5 v-if="success && !showPreloader" class="success">Сообщение успешно отправлено.</h5>
+            <h5 v-if="success" class="success">Сообщение успешно отправлено.</h5>
             <form class="login-form" onsubmit="return false">
               <div class="form-group row">
                 <label class="col-sm-4 form-control-label">ФИО</label>
@@ -26,9 +26,6 @@
                   <textarea class="form-control" v-model="text" required></textarea>
                 </div>
               </div>
-              <!-- <div class="white-text">
-                <textarea v-model="text" placeholder="Сообщение" required></textarea>
-              </div> -->
               <center>
                 <button @click="send" class="btn dark-white p-x-md" v-if="!success">Создать</button>
                 <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
@@ -43,7 +40,6 @@
 
 <script>
 export default {
-  props: ['group'],
   data() {
     return {
       text: '',
@@ -60,13 +56,24 @@ export default {
   methods: {
     send() {
       const body = {
-        groupId: this.groupId,
-        msgText: this.text
+        name: this.name,
+        text: this.text,
+        email: this.email
       };
-      this.success = true;
+      this.$http.post('feedback', body, {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        if(res.body.success)
+          this.success = true;
+      });
     },
     refresh() {
       this.success = false;
+      this.name = '';
+      this.email = '';
       this.text = '';
     }
   },
