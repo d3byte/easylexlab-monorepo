@@ -209,19 +209,21 @@ export default {
     sortTasks() {
       this.tasks = [];
       this.uncompletedTasks = [];
-      for (var test of this.group._tests) {
-        var done = false;
-        if (test.results) {
-          for (let result of test.results) {
-            if (result.username == this.user.username) {
-              done = true;
+      if(this.group && this.group._tests) {
+        for (var test of this.group._tests) {
+          var done = false;
+          if (test.results) {
+            for (let result of test.results) {
+              if (result.username == this.user.username) {
+                done = true;
+              }
+            }
+            if (!done) {
+              this.uncompletedTasks.push(test);
             }
           }
-          if (!done) {
-            this.uncompletedTasks.push(test);
-          }
+          this.tasks.push(test);
         }
-        this.tasks.push(test);
       }
     },
     nextFive() {
@@ -243,11 +245,13 @@ export default {
       this.sortTasks();
       this.setDate();
       this.showPreloader = false;
-      for (var msg of this.group.messages) {
-        this.messages.push(msg);
+      if(this.group && this.group.messages) {
+        for (var msg of this.group.messages) {
+          this.messages.push(msg);
+        }
+        this.messages = this.messages.reverse();
+        this.slicedMessages = this.messages.slice(0, 5);
       }
-      this.messages = this.messages.reverse();
-      this.slicedMessages = this.messages.slice(0, 5);
     });
   }
 }
