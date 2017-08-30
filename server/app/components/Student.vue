@@ -215,22 +215,20 @@ export default {
     sortTasks() {
       this.completedTasks = [];
       this.uncompletedTasks = [];
-      for(let group of this.user._groups) {
-        for (var test of group._tests) {
-          var done = false;
-          if (test.results) {
-            for (let result of test.results) {
-              if (result.username == this.user.username) {
-                done = true;
-              }
+      for (var test of this.group._tests) {
+        var done = false;
+        if (test.results) {
+          for (let result of test.results) {
+            if (result.username == this.user.username) {
+              done = true;
             }
-            if (!done) {
-              this.uncompletedTasks.push(test);
-            } else {
-              this.completedTasks.push(test);
-            }
-            this.tasks.push(test);
           }
+          if (!done) {
+            this.uncompletedTasks.push(test);
+          } else {
+            this.completedTasks.push(test);
+          }
+          this.tasks.push(test);
         }
       }
     },
