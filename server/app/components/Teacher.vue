@@ -18,8 +18,12 @@
           </div>
         </div>
         <div class="col-sm-5">
-          <div class="box ad" v-if="showAd">
-            <h2>Текст)</h2>
+          <div class="ad padding" v-if="showAd">
+            <center>
+            <h4>А еще мы сделали приложение</h4>
+            <img src="../pics/googleplay.png" width="135px" height="40px"></img>
+            <img src="../pics/appstore.svg"></img>
+          </center>
           </div>
         </div>
       </div>
@@ -110,7 +114,12 @@ export default {
   justify-content: center;
 }
 
-.box.ad {
-  width: 300px;
+.google {
+  padding: 0px;
+  margin: 0px;
+}
+
+.ad {
+  /*width: 300px;*/
 }
 </style>
