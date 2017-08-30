@@ -43,6 +43,7 @@ routes.post('/gettests', expressJWT({ secret }), stackController.getTests);
 routes.post('/gettest', expressJWT({ secret }), stackController.getTest);
 routes.patch('/addresult', expressJWT({ secret }), stackController.addResult);
 routes.patch('/updateresult', expressJWT({ secret }), stackController.updateResult);
+routes.post('/removetask', expressJWT({ secret }), stackController.removeStack);
 
 // Notification and message routes
 routes.post('/newmsg', expressJWT({ secret }), groupController.newMsg);

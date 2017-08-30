@@ -22,6 +22,7 @@
                   <i class="fa fa-bandcamp" aria-hidden="true" v-else></i>
                   Показать слова
                 </td>
+                <td @click="removeTask(task._id)" class="hover"><i class="material-icons">remove_circle</i> Удалить</td>
               </tr>
               <tr v-show="show == task._id">
                 <td><b>Слово</b></dh>
@@ -60,6 +61,23 @@ export default {
         return;
       }
       this.show = id;
+    },
+    removeTask(id) {
+      if(confirm('Вы действительно хотите удалить задание?')) {
+        const body = {
+          stackId: id
+        }
+        this.$http.post('removetask', body, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          if(res.body.success) {
+            this.group._tests = this.group._tests.filter(test => test._id != id);
+          }
+        });
+      }
     },
     fetchData() {
       const body = {

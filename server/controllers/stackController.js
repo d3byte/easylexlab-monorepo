@@ -179,4 +179,15 @@ stackController.updateResult = (req, res) => {
     }).then(success => res.json({ success: true }));
 };
 
+stackController.removeStack = (req, res) => {
+  const user = req.user;
+  const stackId = req.body.stackId;
+
+  if (user.permissions == 'teacher' || user.permissions == 'admin') {
+    db.Stack.findByIdAndRemove(stackId).then(success => {
+      return res.json({ success: true });
+    });
+  }
+};
+
 export default stackController;
