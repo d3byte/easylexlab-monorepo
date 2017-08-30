@@ -211,5 +211,16 @@ stackController.updateResult = function (req, res) {
     });
 };
 
+stackController.removeStack = function (req, res) {
+    var user = req.user;
+    var stackId = req.body.stackId;
+
+    if (user.permissions == 'teacher' || user.permissions == 'admin') {
+        _models2.default.Stack.findByIdAndRemove(stackId).then(function (success) {
+            return res.json({ success: true });
+        });
+    }
+};
+
 exports.default = stackController;
 //# sourceMappingURL=stackController.js.map

@@ -69,6 +69,7 @@ routes.post('/gettests', (0, _expressJwt2.default)({ secret: _secret2.default })
 routes.post('/gettest', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.getTest);
 routes.patch('/addresult', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.addResult);
 routes.patch('/updateresult', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.updateResult);
+routes.post('/removetask', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.removeStack);
 
 // Notification and message routes
 routes.post('/newmsg', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.newMsg);
