@@ -246,22 +246,8 @@ export default {
           }
         });
       }
-    }
-  },
-  http: {
-    root: '//ealapi.tw1.ru/api'
-  },
-  components: {
-    'app-header': Header,
-    'new-msg': NewMsg
-  },
-  created() {
-    this.setCharData(null, true);
-    EventBus.$once('requested-header', () => {
-      if(!this.logged)
-        this.$router.push('/login');
-      if(this.token.permissions != 'teacher')
-        this.$router.push('/profile');
+    },
+    fetchData() {
       const body = {
         'groupId': this.$route.params.id
       };
@@ -285,6 +271,23 @@ export default {
         this.prepareRender();
         this.setCharData(this.slicedTests[0]);
       });
+    }
+  },
+  http: {
+    root: '//ealapi.tw1.ru/api'
+  },
+  components: {
+    'app-header': Header,
+    'new-msg': NewMsg
+  },
+  created() {
+    this.setCharData(null, true);
+    EventBus.$once('requested-header', () => {
+      if(!this.logged)
+        this.$router.push('/login');
+      if(this.token.permissions != 'teacher')
+        this.$router.push('/profile');
+      this.fetchData();
     });
   }
 }
