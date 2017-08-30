@@ -49,7 +49,7 @@ export const store = new Vuex.Store({
       showTest: false,
       testAvailable: false
     },
-    finishedGames: [false, false, false, false]
+    finishedGames: [false, false, false, false, false]
   },
   getters,
   mutations,
