@@ -40,56 +40,27 @@ export default {
       correct: 0,
       percentage: 0,
       showPreloader: false,
-      success: false,
+      done: false,
+      lose: false
     }
   },
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    gamesConditions() {
+      return this.$store.getters.finishedGames
     }
   },
   methods: {
-    submit() {
-      this.showPreloader = true;
-      for(let pair of this.typeKey) {
-        if(pair.test.toLowerCase() == pair.key.toLowerCase()) {
-          this.correct += 1;
-        }
+    allDone() {
+      if(Math.round(this.incorrect * 100 / this.correct.length) <= 10) {
+        this.$store.dispatch('incrementAttempts', 'matching');
+        this.$store.dispatch('gameFinished', 'matching');
+        this.done = true;
+        return;
       }
-      for(let pair of this.typeVal) {
-        if(pair.test.toLowerCase() == pair.value.toLowerCase()) {
-          this.correct += 1;
-        }
-      }
-      this.percentage = Math.round(this.correct / (this.typeKey.length + this.typeVal.length) * 100);
-      let done = false;
-      })
-      // if(!done) {
-      //   const body = {
-      //     result: this.percentage,
-      //     stackId: this.stack._id,
-      //     name: this.user.firstName + ' ' + this.user.lastName,
-      //     username: this.user.username,
-      //     userId: this.user._id
-      //   };
-      // } else {
-      //   const body = {
-      //     result: this.percentage,
-      //     stackId: this.stack._id
-      //   };
-      //   this.$http.patch('updateresult', body, {
-      //     headers: {
-      //       'Content-type' : 'application/json',
-      //       'Authorization': 'Bearer ' + this.$store.getters.userToken
-      //     }
-      //   }).then(res => {
-      //     this.success = true;
-      //     this.showPreloader = false;
-      //     this.$store.dispatch('zeroAttempts');
-      //     this.$store.dispatch('showTest');
-      //     this.$store.dispatch('testNotAvailable');
-      //   });
-      // }
+      this.lose = true;
     }
   },
   created() {
