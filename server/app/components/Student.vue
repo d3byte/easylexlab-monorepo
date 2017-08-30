@@ -21,6 +21,13 @@
           </div>
         </div>
         <div class="col-sm-5">
+          <div class="ad padding" v-if="showAd">
+            <center>
+            <h4>А еще мы сделали приложение</h4>
+            <img src="../pics/googleplay.png" width="135px" height="40px"></img>
+            <img src="../pics/appstore.svg"></img>
+          </center>
+          </div>
         </div>
       </div>
     </div>
@@ -166,7 +173,9 @@ export default {
       wordsLearnt: 0,
       sliceIndex: 0,
       color: '',
-      background: ''
+      background: '',
+      showAd: false,
+      showAdContainer: false
     }
   },
   computed: {
@@ -238,6 +247,10 @@ export default {
     }
   },
   created() {
+    if(localStorage.ad == 'true') {
+      this.showAd = true;
+      localStorage.ad = 'false';
+    };
     this.firstName = localStorage.firstName;
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;

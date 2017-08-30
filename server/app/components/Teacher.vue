@@ -98,7 +98,7 @@ export default {
     this.setDate();
     if(localStorage.ad == 'true') {
       this.showAd = true;
-      // localStorage.ad = 'false';
+      localStorage.ad = 'false';
     }
   }
 }
