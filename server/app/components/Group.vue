@@ -17,6 +17,7 @@
     						<a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новый модуль</a>
                 <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
                 <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
+                <a href class="btn btn-sm rounded accent" data-toggle="modal" data-target="#history">История заданий</a>
     					</div>
             </div>
     	    </div>
@@ -194,7 +195,9 @@ export default {
       }
       if(!!!newResults.excellent.length && !!!newResults.normal.length && !!!newResults.bad.length && !!!newResults.veryBad.length)
         this.noneResults = true;
-      this.chartData = [['От 90% и выше', newResults.excellent.length], ['От 75% до 90%', newResults.normal.length], ["От 50% до 75%", newResults.bad.length], ["Меньше 50%", newResults.veryBad.length]];
+      else
+        newResults.didNotComplete = this.group._students.length - (newResults.excellent.length + newResults.normal.length + newResults.bad.length + newResults.veryBad.length);
+      this.chartData = [['От 90% и выше', newResults.excellent.length], ['От 75% до 90%', newResults.normal.length], ["От 50% до 75%", newResults.bad.length], ["Меньше 50%", newResults.veryBad.length], ["Не выполнили", newResults.didNotComplete]];
     },
     prepareRender() {
       if(!!this.slicedTests.length) {
