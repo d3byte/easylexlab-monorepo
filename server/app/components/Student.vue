@@ -8,10 +8,10 @@
       <div class="row m-t">
         <div class="col-sm-7">
           <a href class="pull-left m-r-md">
-              <span class="avatar w-96">
-                <img src="../assets/images/a0.jpg">
-              </span>
-            </a>
+            <span class="avatar w-96" :style="{ backgroundColor: color }">
+              <h1>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</h1>
+            </span>
+          </a>
           <div class="clear m-b">
             <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
             <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
@@ -165,6 +165,7 @@ export default {
       showAll: false,
       wordsLearnt: 0,
       sliceIndex: 0,
+      color: '',
       background: ''
     }
   },
@@ -244,6 +245,7 @@ export default {
     this.school = localStorage.school;
     this.city = localStorage.city;
     this.background = localStorage.background ? localStorage.background : '#ccc';
+    this.color = localStorage.color ? localStorage.color : 'white';
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
@@ -376,5 +378,12 @@ h5.white-text {
   font-size: 30px;
 }
 
-
+.avatar {
+  width: 130px;
+  height: 130px;
+  border: 2px solid #343A3F;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

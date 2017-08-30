@@ -42,8 +42,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link clear" href data-toggle="dropdown">
               <span class="avatar w-32" :style="{ backgroundColor: color }">
-                <img src="">
-                <span style="margin-right: 4px;">{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
+                  <span>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
               </span>
             </a>
             <div class="dropdown-menu pull-right dropdown-menu-scale">
@@ -205,5 +204,11 @@
 
   .hover:hover {
     cursor: pointer;
+  }
+
+  .avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
