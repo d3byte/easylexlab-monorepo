@@ -18,6 +18,9 @@
           </div>
         </div>
         <div class="col-sm-5">
+          <div class="box ad" v-if="showAd">
+            <h2>Текст)</h2>
+          </div>
         </div>
       </div>
     </div>
@@ -54,7 +57,9 @@ export default {
       school: '',
       city: '',
       color: '',
-      background: ''
+      background: '',
+      showAd: false,
+      showAdContainer: false
     }
   },
   computed: {
@@ -87,6 +92,10 @@ export default {
     this.background = localStorage.background ? localStorage.background : '#ccc';
     this.color = localStorage.color ? localStorage.color : 'white';
     this.setDate();
+    if(localStorage.ad == 'true') {
+      this.showAd = true;
+      // localStorage.ad = 'false';
+    }
   }
 }
 </script>
@@ -99,5 +108,9 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.box.ad {
+  width: 300px;
 }
 </style>
