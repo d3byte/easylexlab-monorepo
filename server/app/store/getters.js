@@ -26,6 +26,7 @@ export default {
       gamesConditions.push(state.games.flashcards.win);
       gamesConditions.push(state.games.snake.win);
       gamesConditions.push(state.games.scramble.win);
+      gamesConditions.push(state.games.typein.win);
      return gamesConditions
    },
    testAvailable(state) {

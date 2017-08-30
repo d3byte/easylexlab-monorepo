@@ -23,6 +23,9 @@ export default {
   showScramble({ commit }) {
     commit('showScramble');
   },
+  showTypein({ commit }) {
+    commit('showTypein');
+  }
   setGames({ commit }, attempts) {
     commit('setGames', attempts);
   },
