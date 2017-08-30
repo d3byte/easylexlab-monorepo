@@ -40,6 +40,12 @@ export const store = new Vuex.Store({
         attempts: 0,
         done: 0
       },
+      typein: {
+        show: false,
+        win: false,
+        attempts: 0,
+        done: 0
+      },
       showTest: false,
       testAvailable: false
     },
