@@ -25,7 +25,7 @@ export default {
   },
   showTypein({ commit }) {
     commit('showTypein');
-  }
+  },
   setGames({ commit }, attempts) {
     commit('setGames', attempts);
   },
