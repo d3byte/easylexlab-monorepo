@@ -126,7 +126,7 @@ export default {
                this.lose = true;
                return;
              }
-             if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+             if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
                this.$store.dispatch('testAvailable');
              this.done = true;
              break;

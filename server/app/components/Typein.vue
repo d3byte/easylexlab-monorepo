@@ -1,30 +1,34 @@
 <template>
-  <div class="container-fluid box padding">
-    <center>
-      <i v-if="showPreloader" class="material-icons preloader">cached</i>
-      <div v-if="success" class="signup">
-        <h3 class="success">Вы прошли тест</h3>
-        <h4>Ваш результат: {{ percentage }}/100%</h4>
-        <h4>Вы выучили {{ wordsLearnt }} слов</h4>
-        <h5 @click="toProfile">Вернуться</h5>
+<div class="container box padding">
+  <center>
+    <i v-if="showPreloader" class="material-icons preloader">cached</i>
+    <div v-if="done" class="signup">
+      <h3 class="success">Победа!</h3>
+      <h4>Ваш результат: {{ percentage }}/100%</h4>
+      <h5 @click="hideGames">Вернуться</h5>
+    </div>
+    <div v-if="lose" class="signup">
+      <h3 class="text-danger"> Неудача ;c </h3>
+      <button @click="restart" class="btn btn-primary"> Попробовать еще раз </button>
+    </div>
+  </center>
+  <form v-if="!showPreloader && !done" class="padding" onsubmit="return false">
+    <div class="row padding">
+      <h1>Type In</h1>
+      <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
+      <hr>
+      <div class="md-form-group" v-for="pair in typeVal">
+        <input type="text" v-model="pair.test" class="md-input" placeholder="Перевод" required>
+        <label>{{ pair.key }}</label>
       </div>
-    </center>
-    <form v-if="!showPreloader && !success" class="padding" onsubmit="return false">
-      <div class="row padding">
-        <h1>Тест</h1>
-        <hr>
-        <div class="md-form-group" v-for="pair in typeVal">
-          <input type="text" v-model="pair.test" class="md-input" placeholder="Перевод" required>
-          <label>{{ pair.key }}</label>
-        </div>
-        <div class="md-form-group" v-for="pair in typeKey">
-          <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
-          <label>{{ pair.value }}</label>
-        </div>
-        <button @click="submit" class="btn btn-primary">Готово</button>
+      <div class="md-form-group" v-for="pair in typeKey">
+        <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
+        <label>{{ pair.value }}</label>
       </div>
-    </form>
-  </div>
+      <button @click="allDone" class="btn btn-primary">Готово</button>
+    </div>
+  </form>
+</div>
 </template>
 
 <script>
@@ -50,30 +54,73 @@ export default {
     },
     gamesConditions() {
       return this.$store.getters.finishedGames
-    }
+    },
+    doneAttempts() {
+      return this.$store.getters.games.typein.done
+    },
+    totalAttempts() {
+      return this.$store.getters.games.typein.attempts
+    },
   },
   methods: {
     allDone() {
-      if(Math.round(this.incorrect * 100 / this.correct.length) <= 10) {
-        this.$store.dispatch('incrementAttempts', 'matching');
-        this.$store.dispatch('gameFinished', 'matching');
+      this.check();
+      if (this.percentage >= 90) {
+        this.$store.dispatch('incrementAttempts', 'typein');
+        if (this.doneAttempts == this.totalAttempts)
+          this.$store.dispatch('gameFinished', 'typein');
+        if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
+          this.$store.dispatch('testAvailable');
         this.done = true;
-        return;
+      } else {
+        this.lose = true;
       }
-      this.lose = true;
+      this.stack.tasks[0].content.map(pair => pair.test = '')
+    },
+    restart() {
+      this.newPairs = _.shuffle(this.newPairs);
+      this.correct = 0;
+      this.incorrect = 0;
+      this.done = false;
+      this.lose = false;
+    },
+    check() {
+      this.typeVal.map(pair => {
+        if (pair.test == pair.value) {
+          this.correct++;
+        } else {
+          this.incorrect++;
+        }
+      });
+      this.typeKey.map(pair => {
+        if (pair.test == pair.key) {
+          this.correct++;
+        } else {
+          this.incorrect++;
+        }
+      });
+      this.percentage = Math.round(this.correct * 100 / (this.typeVal.length + this.typeKey.length));
+    },
+    hideGames() {
+      this.$store.dispatch('hideGames');
+    },
+    start() {
+      this.typeKey = [];
+      this.typeVal = [];
+      this.pairs = _.shuffle(this.pairs);
+      for (let i = 0; i < this.pairs.length; i++) {
+        if (i <= this.pairs.length * 0.5)
+          this.typeKey.push(this.pairs[i]);
+        else if (i > this.pairs.length * 0.5 && i <= this.pairs.length)
+          this.typeVal.push(this.pairs[i]);
+      }
     }
   },
   created() {
-    for(let task of this.stack.tasks) {
+    for (let task of this.stack.tasks) {
       Array.prototype.push.apply(this.pairs, task.content);
     }
-    this.pairs = _.shuffle(this.pairs);
-    for(let i = 0; i < this.pairs.length; i++) {
-      if(i <= this.pairs.length * 0.3)
-        this.typeKey.push(this.pairs[i]);
-      else if(i > this.pairs.length * 0.3 && i <= this.pairs.length * 0.6)
-        this.typeVal.push(this.pairs[i]);
-    }
+    this.start();
   },
   http: {
     root: '//ealapi.tw1.ru/api'

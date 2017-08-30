@@ -206,7 +206,7 @@
               this.$store.dispatch('incrementAttempts', 'snake');
               if(this.doneAttempts== this.totalAttempts)
                 this.$store.dispatch('gameFinished', 'snake');
-              if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+              if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
                 this.$store.dispatch('testAvailable');
               return;
             }

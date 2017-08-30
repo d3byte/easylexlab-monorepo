@@ -76,6 +76,12 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label class="col-sm-6 form-control-label">Кол-во повторений Type In</label>
+                <div class="col-sm-6">
+                  <input type="number" v-model="typeinAttempts" min="1">
+                </div>
+              </div>
+              <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во повторений соотношения(matching)</label>
                 <div class="col-sm-6">
                   <input type="number" v-model="matchingAttempts" min="1">
@@ -106,6 +112,7 @@ export default {
       flashcardsAttempts: 1,
       matchingAttempts: 1,
       scrambleAttempts: 1,
+      typeinAttempts: 1,
       name: '',
       success: false,
       groupId: this.$route.params.id
@@ -169,7 +176,8 @@ export default {
           snake: this.snakeAttempts,
           flashcards: this.flashcardsAttempts,
           matching: this.matchingAttempts,
-          scramble: this.scrambleAttempts
+          scramble: this.scrambleAttempts,
+          typein: this.typeinAttempts
         }
       };
 

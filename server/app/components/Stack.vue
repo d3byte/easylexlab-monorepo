@@ -12,7 +12,7 @@
         <div class="col-sm-7">
           <div class="clear m-b">
             <h3 class="m-a-0 m-b-xs">Название модуля: {{ task.name }}</h3>
-            <h4 v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show"> Выберите игру: </h4>
+            <h4 v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"> Выберите игру: </h4>
           </div>
         </div>
         <div class="col-sm-5">
@@ -35,6 +35,9 @@
               <a class="nav-link" @click="showMatching">Matching</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" @click="showTypein">Type In</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" @click="showSnake">Змейка</a>
             </li>
             <li class="nav-item">
@@ -50,7 +53,7 @@
   </div>
 
 
-  <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show">
+  <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">
     <div class="row">
     <div class="col-sm-4">
       <div class="col box">
@@ -63,6 +66,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="showMatching">Matching</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="showTypein">Type In</a>
             </li>
           </ul>
         </div>
@@ -132,6 +138,7 @@
       <matching v-if="games.matching.show" :stack="task"></matching>
       <snake v-if="games.snake.show" :stack="task"></snake>
       <scramble v-if="games.scramble.show" :stack="task"></scramble>
+      <typein v-if="games.typein.show" :stack="task"></typein>
       <test v-if="showTest" :stack="task"></test>
     </div>
 
@@ -237,6 +244,9 @@ export default {
     showScramble() {
       this.$store.dispatch('showScramble');
     },
+    showTypein() {
+      this.$store.dispatch('showTypein');
+    },
     tryTest() {
       this.$store.dispatch('showTest');
     }
@@ -247,7 +257,8 @@ export default {
     'snake': Snake,
     'matching': Matching,
     'scramble': Scramble,
-    'test': Test
+    'test': Test,
+    'typein': Typein
   }
 }
 </script>
