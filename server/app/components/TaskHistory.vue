@@ -24,8 +24,8 @@
                 </td>
               </tr>
               <tr v-show="show == task._id">
-                <td>Слово</dh>
-                <td>Перевод</td>
+                <td><b>Слово</b></dh>
+                <td><b>Перевод</b></td>
               </tr>
               <tr v-show="show == task._id" v-for="pair in task.tasks[0].content">
                 <td>{{ pair.key }}</td>
