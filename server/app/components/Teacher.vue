@@ -1,9 +1,7 @@
 <template>
 <div>
   <div class="item">
-    <div class="item-bg" :style="{ background: background }">
-
-    </div>
+    <div class="item-bg" :style="{ background: background }"></div>
     <div class="p-a-md">
       <div class="row m-t">
         <div class="col-sm-12 hidden-md-up ad" style="margin-bottom: 10px;">
@@ -40,22 +38,22 @@
       </div>
     </div>
   </div>
-<div class="dker p-x">
-  <div class="row">
-    <div class="col-sm-6 push-sm-6">
-    </div>
-    <div class="col-sm-6 pull-sm-6">
-      <div class="p-y-md clearfix nav-active-primary">
-        <ul class="nav nav-pills nav-sm">
-          <li class="nav-item" v-for="group in user._groups">
-            <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
-          </li>
-        </ul>
+  <div class="dker p-x">
+    <div class="row">
+      <div class="col-sm-6 push-sm-6">
+      </div>
+      <div class="col-sm-6 pull-sm-6">
+        <div class="p-y-md clearfix nav-active-primary">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item" v-for="group in user._groups">
+              <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<router-view></router-view>
+  <router-view></router-view>
 </div>
 </template>
 
