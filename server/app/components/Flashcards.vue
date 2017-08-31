@@ -23,7 +23,7 @@
           </div>
           <div class="col box">
             <div class="row-col primary white-text">
-              <h3>Осталось карточек: {{ pairsLeft }}</h3></div>
+              <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3></div>
             <div class="p-a text-center">
               <h3>{{ nextKey }}</h3>
             </div>
@@ -120,7 +120,6 @@ export default {
         if(this.pairsLeft > 1){
           this.nextKey = this.pairs[i+1].key;
         } else if (this.pairsLeft == 1) {
-          this.pairsLeft--;
           this.nextKey = 'Это последняя карточка.';
         }
         if(this.index + 1 == this.pairs.length &&
@@ -157,7 +156,11 @@ export default {
       this.pairsLeft--;
       this.dontKnow.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
-        this.nextKey = this.pairs[i+1].key;
+        if(this.pairsLeft > 1){
+          this.nextKey = this.pairs[i+1].key;
+        } else if (this.pairsLeft == 1) {
+          this.nextKey = 'Это последняя карточка.';
+        }
         if(this.index + 1 == this.pairs.length &&
            this.doneAttempts + 1 >= this.totalAttempts) {
              if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
