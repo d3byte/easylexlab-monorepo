@@ -3,17 +3,23 @@
       <div class="navbar">
         <!-- Page title - Bind to $state's title -->
         <div class="navbar-item pull-left h5" id="pageTitle">
-          <img src="../pics/logo.png" class="logo">
-          EasyLexLab
+          <router-link to="/">
+            <img src="../pics/logo.png" class="logo">
+            EasyLexLab
+          </router-link>
         </div>
 
         <!-- navbar right -->
-        <ul class="nav navbar-nav pull-right" v-if="logged">
-          <li class="nav-item" v-if="token.permissions === 'student'">
-            <router-link to="/stats" class="nav-link">Мои результаты</router-link>
+        <ul class="nav navbar-nav pull-right text-primary-hover" v-if="logged">
+          <li class="nav-item text-primary-hover" v-if="token.permissions === 'student'">
+            <router-link class="nav-link" to="/stats">
+              <span>Мои результаты</span>
+            </router-link>
           </li>
-          <li class="nav-item" v-if="token.permissions === 'teacher'">
-            <span class="nav-link hover" data-toggle="modal" data-target="#m-a-f">Создать группу</span>
+          <li class="nav-item text-primary-hover" v-if="token.permissions === 'teacher'">
+            <a class="nav-link" href data-toggle="modal" data-target="#m-a-f">
+              <span>Создать группу</span>
+            </a>
           </li>
           <li class="nav-item dropdown pos-stc-xs">
             <a class="nav-link" href data-toggle="dropdown">
