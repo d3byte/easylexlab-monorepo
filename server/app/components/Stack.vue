@@ -54,7 +54,7 @@
 
   <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">
     <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-4 hidden-sm-down">
       <div class="col box">
         <div class="row-col success white-text">
           <h3>Учить</h3></div>
@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-4 hidden-sm-down">
       <div class="col box">
         <div class="row-col info white-text">
           <h3>Играть</h3></div>
@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4 hidden-sm-down">
       <div class="col box">
         <div class="row-col danger white-text">
           <h3>Тест</h3></div>
