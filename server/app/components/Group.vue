@@ -14,10 +14,32 @@
     					</div>
     					<div class="box-body">
     						<p class="text-muted m-b-md">Здесь вы можете создать новое задание, написать сообщение, получить код для регистрации учеников и управлять ранее созданными заданиями.</p>
-    						<a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новое задание</a>
-                <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
-                <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
-                <a href class="btn btn-sm rounded accent" data-toggle="modal" data-target="#history">История заданий</a>
+    						<div class="row hidden-sm-down">
+                  <a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новое задание</a>
+                  <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
+                  <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
+                  <a href class="btn btn-sm rounded accent" data-toggle="modal" data-target="#history">История заданий</a>
+    						</div>
+                <div class="row hidden-sm-up">
+                  <a href style="margin-bottom: 10px;" class="btn btn-sm rounded success text-white col-xs-12" data-toggle="modal" data-target="#newtask">Новое задание</a>
+                  <a href style="margin-bottom: 10px;" class="btn btn-sm rounded primary col-xs-12" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
+                  <a href style="margin-bottom: 10px;" class="btn btn-sm rounded info col-xs-12" data-toggle="modal" data-target="#regcode">Код регистрации</a>
+                  <a href style="margin-bottom: 10px;" class="btn btn-sm rounded accent col-xs-12" data-toggle="modal" data-target="#history">История заданий</a>
+    						</div>
+                <div class="row hidden-md-up hidden-xs-down">
+                  <div class="col-sm-6" style="margin-bottom: 10px;">
+                    <a href class="btn btn-sm rounded success text-white col-sm-12" data-toggle="modal" data-target="#newtask">Новое задание</a>
+                  </div>
+                  <div class="col-sm-6" style="margin-bottom: 10px;">
+                    <a href class="btn btn-sm rounded primary col-sm-12" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
+                  </div>
+                  <div class="col-sm-6" style="margin-bottom: 10px;">
+                    <a href class="btn btn-sm rounded info col-sm-12" data-toggle="modal" data-target="#regcode">Код регистрации</a>
+                  </div>
+                  <div class="col-sm-6" style="margin-bottom: 10px;">
+                    <a href class="btn btn-sm rounded accent col-sm-12" data-toggle="modal" data-target="#history">История заданий</a>
+                  </div>
+    						</div>
     					</div>
             </div>
     	    </div>
@@ -83,32 +105,34 @@
     				</div>
     			</div>
           <div class="row-col">
-            <table class="table table-striped b-t b-b box">
-              <thead>
-                <tr>
-                  <th>№</th>
-                  <th>Ученик</th>
-                  <th>Средний результат</th>
-                  <th v-for="test in slicedTests">{{ test.name }}</th>
-                  <th>
-                    <a @click="previousFiveTests" v-show="sliceTestIndex >= 5"><i class="fa fa-angle-left btn-sm primary"></i></a>
-                    <a @click="nextFiveTests"><i class="fa fa-angle-right btn-sm primary"></i></a>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(student, index) in render">
-                  <td>{{ index + 1 }}</td>
-                  <td>{{ student.name }}</td>
-                  <td v-if="student.averageRes != '—'">{{ student.averageRes }}%</td>
-                  <td v-else>{{ student.averageRes }}</td>
-                  <td v-for="(result, i) in student.results">
-                    <span v-if="i == result.index">{{ result.result }}%</span>
-                    <span v-else> — </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="p-a table-responsive box">
+              <table class="table table-striped b-t b-b">
+                <thead>
+                  <tr>
+                    <th>№</th>
+                    <th>Ученик</th>
+                    <th>Средний результат</th>
+                    <th v-for="test in slicedTests">{{ test.name }}</th>
+                    <th>
+                      <a @click="previousFiveTests" v-show="sliceTestIndex >= 5"><i class="fa fa-angle-left btn-sm primary"></i></a>
+                      <a @click="nextFiveTests"><i class="fa fa-angle-right btn-sm primary"></i></a>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(student, index) in render">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ student.name }}</td>
+                    <td v-if="student.averageRes != '—'">{{ student.averageRes }}%</td>
+                    <td v-else>{{ student.averageRes }}</td>
+                    <td v-for="(result, i) in student.results">
+                      <span v-if="i == result.index">{{ result.result }}%</span>
+                      <span v-else> — </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
     		</div>
     	</div>

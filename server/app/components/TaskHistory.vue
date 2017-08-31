@@ -5,7 +5,7 @@
         <div class="modal-header">
           <h5 class="modal-title">История заданий</h5>
         </div>
-        <div class="modal-body text-center p-lg">
+        <div class="modal-body text-center p-lg table-responsive">
           <table class="table table-striped b-t b-b box">
             <thead>
               <tr>

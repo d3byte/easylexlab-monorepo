@@ -8,37 +8,39 @@
         <div class="modal-body text-center p-lg">
           <h5 v-if="success" class="success">Задание успешно создано.</h5>
           <form class="login-form" onsubmit="return false" v-if="this.showEditor">
-            <table class="table table-striped b-t b-b">
-              <tr>
-                <th>Слово</th>
-                <th>Перевод</th>
-              </tr>
-              <tr v-for="pair in tasks[0].content">
-                <td>
-                  <div class="form-group row">
-                    <label class="col-sm-2 form-control-label">Слово</label>
-                    <div class="col-sm-10">
-                      <input type="text" v-model="pair.key" required>
+            <div class="table-responsive">
+              <table class="table table-striped b-t b-b">
+                <tr>
+                  <th>Слово</th>
+                  <th>Перевод</th>
+                </tr>
+                <tr v-for="pair in tasks[0].content">
+                  <td>
+                    <div class="form-group row">
+                      <label class="col-sm-2 form-control-label">Слово</label>
+                      <div class="col-sm-10">
+                        <input type="text" v-model="pair.key" required>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group row">
-                    <label class="col-sm-2 form-control-label">Перевод</label>
-                    <div class="col-sm-10">
-                      <input type="text" v-model="pair.value" required>
+                  </td>
+                  <td>
+                    <div class="form-group row">
+                      <label class="col-sm-2 form-control-label">Перевод</label>
+                      <div class="col-sm-10">
+                        <input type="text" v-model="pair.value" required>
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="new" colspan="2">
-                  <center>
-                    <i @focus="newPair(tasks[0])" @click="newPair(tasks[0])" class="fa fa-plus newpair" aria-hidden="true"></i>
-                  </center>
-                </td>
-              </tr>
-            </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="new" colspan="2">
+                    <center>
+                      <i @focus="newPair(tasks[0])" @click="newPair(tasks[0])" class="fa fa-plus newpair" aria-hidden="true"></i>
+                    </center>
+                  </td>
+                </tr>
+              </table>
+            </div>
             <center>
               <button @click="confirm" class="btn btn-primary">Готово</button>
             </center>
