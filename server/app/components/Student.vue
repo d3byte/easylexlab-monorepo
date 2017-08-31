@@ -5,8 +5,8 @@
     </div>
     <div class="p-a-md">
       <div class="row m-t">
-        <div class="col-sm-12 hidden-md-up" style="margin-bottom: 10px;">
-          <div class="ad padding box" v-if="showAd">
+        <div class="col-sm-12 hidden-md-up ad" style="margin-bottom: 10px;">
+          <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
               <h4>А еще мы сделали приложение</h4>
@@ -29,8 +29,8 @@
             <h5 class="m-a-0 text-md text-muted">Ближайший день сдачи: <b> {{ date }}</b></h5>
           </div>
         </div>
-        <div class="col-md-4 hidden-sm-down">
-          <div class="ad padding box" v-if="showAd">
+        <div class="col-md-4 ad hidden-sm-down">
+          <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
               <h4>А еще мы сделали приложение</h4>
@@ -110,17 +110,19 @@
             </div>
           </div>
         </div>
-        <div v-show="showAll" v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-10 box task done">
-          <div class="taskcontentouter">
-            <div class="taskcontent">
-              <div class="pull-right success">
-                <i class="material-icons">done</i>
-              </div>
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <center>
-                  <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
-                  <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
-                </center>
+        <div v-show="showAll" v-for="test in completedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+          <div class="col-lg col-md col-sm col-xs box task">
+            <div class="taskcontentouter">
+              <div class="taskcontent">
+                <div class="pull-right success">
+                  <i class="material-icons">done</i>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <center>
+                    <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
+                    <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
+                  </center>
+                </div>
               </div>
             </div>
           </div>
@@ -414,6 +416,12 @@ h5.white-text {
   border: 2px solid #343A3F;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+}
+
+.ad {
+  display: flex;
+  vertical-align: center;
   justify-content: center;
 }
 </style>

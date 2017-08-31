@@ -6,8 +6,8 @@
     </div>
     <div class="p-a-md">
       <div class="row m-t">
-        <div class="col-sm-12 hidden-md-up" style="margin-bottom: 10px;">
-          <div class="ad padding box" v-if="showAd">
+        <div class="col-sm-12 hidden-md-up ad" style="margin-bottom: 10px;">
+          <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
               <h4>А еще мы сделали приложение</h4>
@@ -27,8 +27,8 @@
             <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
           </div>
         </div>
-        <div class="col-md-4 hidden-sm-down">
-          <div class="ad padding box" v-if="showAd">
+        <div class="col-md-4 ad hidden-sm-down">
+          <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
               <h4>А еще мы сделали приложение</h4>
@@ -83,20 +83,11 @@ export default {
     },
     token() {
       return jwtDecode(this.$store.getters.userToken)
-    },
-    group() {
-      return this.$store.getters.currentGroup
     }
   },
   methods: {
-    setDate() {
-      moment.locale('ru');
-      let date = moment().format('LL');
-      date = date.slice(0, date.length - 8);
-      this.date = date;
-    },
-    changeGroup(group) {
-      this.$store.dispatch('changeCurrentGroup', group);
+    hideAd() {
+      this.showAd = false;
     }
   },
   created() {
@@ -131,6 +122,8 @@ export default {
 }
 
 .ad {
-  /*width: 300px;*/
+  display: flex;
+  vertical-align: center;
+  justify-content: center;
 }
 </style>
