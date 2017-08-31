@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container box">
     <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
     <center>
       <table class="table table-striped table-hover" v-if="!showPreloader">
