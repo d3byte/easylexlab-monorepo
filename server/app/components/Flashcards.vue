@@ -66,9 +66,6 @@ export default {
     showTest() {
       return this.$store.getters.testAvailable
     },
-    pairsLeftSetter() {
-      return this.pairsLeft = this.pairs.length - this.pairsSeen;
-    },
     doneAttempts() {
       return this.$store.getters.games.flashcards.done
     },
@@ -90,6 +87,7 @@ export default {
     for(let task of this.stack.tasks) {
       Array.prototype.push.apply(this.pairs, task.content);
     }
+    this.pairsLeft = this.pairs.length;
   },
   methods: {
     hideGames() {
@@ -118,7 +116,7 @@ export default {
       this.lose = false;
     },
     toKnow() {
-      this.pairsSeen = this.know.length + this.dontKnow.length + 1;
+      this.pairsLeft--;
       this.know.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
         if(this.index + 1 == this.pairs.length &&
@@ -152,8 +150,7 @@ export default {
       }
     },
     toDontKnow() {
-      this.pairsSeen = this.know.length + this.dontKnow.length + 1;
-      this.pairsLeft = this.pairs.length - this.pairsSeen;
+      this.pairsLeft--;
       this.dontKnow.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
         if(this.index + 1 == this.pairs.length &&
@@ -189,9 +186,6 @@ export default {
     tryTest() {
       this.$store.dispatch('hideGames');
       this.$store.dispatch('showTest');
-    },
-    incrementPairsSeen() {
-
     }
   },
   mounted() {
