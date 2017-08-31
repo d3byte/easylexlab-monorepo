@@ -86,8 +86,7 @@ export default {
     }
     this.pairsLeft = this.pairs.length;
     this.nextKey = this.pairs[1].key;
-    this.pairsLength = this.pairs.length - 1;
-  },
+    },
   methods: {
     hideGames() {
       this.$store.dispatch('hideGames');
@@ -118,7 +117,12 @@ export default {
       this.pairsLeft--;
       this.know.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
-        this.nextKey = this.pairs[i].key;
+        if(this.pairsLeft > 1){
+          this.nextKey = this.pairs[i+1].key;
+        } else if (this.pairsLeft == 1) {
+          this.pairsLeft--;
+          this.nextKey = 'Это последняя карточка.';
+        }
         if(this.index + 1 == this.pairs.length &&
            this.doneAttempts + 1 >= this.totalAttempts) {
              if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
@@ -153,7 +157,7 @@ export default {
       this.pairsLeft--;
       this.dontKnow.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
-        this.nextKey = this.pairs[i].key;
+        this.nextKey = this.pairs[i+1].key;
         if(this.index + 1 == this.pairs.length &&
            this.doneAttempts + 1 >= this.totalAttempts) {
              if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
