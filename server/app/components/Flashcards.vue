@@ -66,6 +66,9 @@ export default {
     showTest() {
       return this.$store.getters.testAvailable
     },
+    pairsLeftSetter() {
+      return this.pairsLeft = this.pairs.length - this.pairsSeen;
+    },
     doneAttempts() {
       return this.$store.getters.games.flashcards.done
     },
@@ -75,12 +78,12 @@ export default {
     gamesConditions() {
       return this.$store.getters.finishedGames
     },
-    howManyPairsSeen() {
-      return this.pairsSeen = this.know.length + this.dontKnow.length + 1
-    },
-    howManyPairsLeft() {
-      return this.pairsLeft = this.pairs.length - this.pairsSeen
-    }
+    // howManyPairsSeen() {
+    //   return this.pairsSeen = this.know.length + this.dontKnow.length + 1
+    // },
+    // howManyPairsLeft() {
+    //   return this.pairsLeft = this.pairs.length - this.pairsSeen
+    // }
   },
   created() {
     this.currentPair = this.stack.tasks[0].content[0];
@@ -115,6 +118,7 @@ export default {
       this.lose = false;
     },
     toKnow() {
+      this.pairsSeen = this.know.length + this.dontKnow.length + 1;
       this.know.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
         if(this.index + 1 == this.pairs.length &&
@@ -148,6 +152,8 @@ export default {
       }
     },
     toDontKnow() {
+      this.pairsSeen = this.know.length + this.dontKnow.length + 1;
+      this.pairsLeft = this.pairs.length - this.pairsSeen;
       this.dontKnow.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
         if(this.index + 1 == this.pairs.length &&
@@ -183,6 +189,9 @@ export default {
     tryTest() {
       this.$store.dispatch('hideGames');
       this.$store.dispatch('showTest');
+    },
+    incrementPairsSeen() {
+
     }
   },
   mounted() {
