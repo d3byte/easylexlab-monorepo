@@ -25,7 +25,7 @@
             <div class="row-col primary white-text">
               <h3>Осталось карточек: {{ pairsLeft }}</h3></div>
             <div class="p-a text-center">
-              <!-- здесь должно быть содержание карточки -->
+              <h3>{{ nextKey }}</h3>
             </div>
           </div>
         </div>
@@ -55,6 +55,9 @@ export default {
       pairsLeft: 0,
       index: 0,
       pairs: [],
+      nextPairs: [],
+      nextKey: '',
+      pairsLength: 0,
       know: [],
       dontKnow: [],
       showDef: false,
@@ -75,12 +78,6 @@ export default {
     gamesConditions() {
       return this.$store.getters.finishedGames
     },
-    // howManyPairsSeen() {
-    //   return this.pairsSeen = this.know.length + this.dontKnow.length + 1
-    // },
-    // howManyPairsLeft() {
-    //   return this.pairsLeft = this.pairs.length - this.pairsSeen
-    // }
   },
   created() {
     this.currentPair = this.stack.tasks[0].content[0];
@@ -88,6 +85,8 @@ export default {
       Array.prototype.push.apply(this.pairs, task.content);
     }
     this.pairsLeft = this.pairs.length;
+    this.nextKey = this.pairs[1].key;
+    this.pairsLength = this.pairs.length - 1;
   },
   methods: {
     hideGames() {
@@ -119,6 +118,7 @@ export default {
       this.pairsLeft--;
       this.know.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
+        this.nextKey = this.pairs[i].key;
         if(this.index + 1 == this.pairs.length &&
            this.doneAttempts + 1 >= this.totalAttempts) {
              if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
@@ -153,6 +153,7 @@ export default {
       this.pairsLeft--;
       this.dontKnow.push(this.currentPair);
       for(let i = 0; i < this.pairs.length; i++) {
+        this.nextKey = this.pairs[i].key;
         if(this.index + 1 == this.pairs.length &&
            this.doneAttempts + 1 >= this.totalAttempts) {
              if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
