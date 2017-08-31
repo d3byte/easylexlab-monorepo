@@ -5,7 +5,8 @@
     <div class="h-v white row-col">
       <div class="row-cell v-b">
         <div class="container p-y-lg pos-rlt">
-          <h2 class="display-2 _700 l-s-n-3x m-t-lg m-b-md"><span class="text-primary">EasyLexLab</span></h2>
+          <h2 class="display-2 _700 l-s-n-3x m-t-lg m-b-md text-primary hidden-xs-down">EasyLexLab</h2>
+          <h2 class="display-3 _700 l-s-n-3x m-t-lg m-b-md text-primary hidden-sm-up">EasyLexLab</h2>
           <h5 class="text-muted m-b-lg">С нами эффективно учиться и легко учить</h5>
           <h5 class="text-muted text-center m-b-lg">
             Наши особенности<br>
