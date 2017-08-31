@@ -45,7 +45,7 @@
       </div>
     </div>
   </div>
-  <div class="p-y-lg" id="aboutus">
+  <div class="p-y-lg" id="roles">
     <div class="container p-y-lg text-primary-hover">
       <h2 class=" _700 l-s-n-1x m-b-md">Разделение на <span class="text-primary">роли</span></h2>
       <h5 class="text-muted m-b-lg">Вы можете создать аккаунт учителя или ученика.</h5>
@@ -94,7 +94,9 @@
           </div>
         </div>
       </div>
-      <h5 class="m-y-lg text-muted text-center">Создано школьниками для школьников</h5>
+      <h5 class="text-muted text-center m-b-lg">
+        Заведите аккаунт уже сейчас – <router-link to="/signup">зарегистрироваться</router-link>
+      </h5>
     </div>
   </div>
   <footer class="pos-rlt" style="background: #4D5E7C; color: white">
@@ -107,11 +109,14 @@
           <a class="nav-link m-x" href="#" ui-scroll-to="" >
             <span class="nav-text">Наверх</span>
           </a>
-          <a class="nav-link m-x" href="#aboutus" ui-scroll-to="#aboutus">
-            <span class="nav-text">О нас</span>
-          </a>
           <a class="nav-link m-x" href="#features" ui-scroll-to="features" >
             <span class="nav-text">Особенности</span>
+          </a>
+          <a class="nav-link m-x" href="#roles" ui-scroll-to="#roles">
+            <span class="nav-text">Роли</span>
+          </a>
+          <a class="nav-link m-x" href="#feedback" ui-scroll-to="#feedback">
+            <span class="nav-text">Отзывы</span>
           </a>
         </div>
         <div class="block clearfix">
