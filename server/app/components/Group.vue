@@ -13,7 +13,7 @@
     						<h3>Меню</h3>
     					</div>
     					<div class="box-body">
-    						<p class="text-muted m-b-md">Здесь вы можете создать новое задание или написать сообщение.</p>
+    						<p class="text-muted m-b-md">Здесь вы можете создать новое задание, написать сообщение, получить код для регистрации учеников и управлять ранее созданными заданиями.</p>
     						<a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новое задание</a>
                 <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
                 <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
