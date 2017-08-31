@@ -1,7 +1,8 @@
 <template>
-  <div class="container box">
+  <div class="container box margin">
     <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
     <center>
+      <div class="table-responsive">
       <table class="table table-striped table-hover" v-if="!showPreloader">
         <thead>
           <tr>
@@ -22,6 +23,7 @@
         </tr>
       </tbody>
       </table>
+    </div>
     </center>
   </div>
 </template>
@@ -81,6 +83,10 @@ table {
 } .link:hover {
   cursor: pointer;
   color: #5688C7;
+}
+
+.margin {
+  margin-top: 20px;
 }
 
 .preloader {

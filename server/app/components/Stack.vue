@@ -110,8 +110,8 @@
       <div class="row-col grey white-text">
         <h3>Повторить</h3>
       </div>
-      <div class="p-a">
-        <table class="table table-striped table-responsive table-hover">
+      <div class="p-a table-responsive">
+        <table class="table table-striped table-hover">
           <thead>
           <tr>
             <th>Слово</th>
