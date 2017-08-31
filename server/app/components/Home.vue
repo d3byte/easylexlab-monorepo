@@ -156,4 +156,9 @@ export default {
 .icon {
   font-size: 36px;
 }
+
+.col-md-6.col-lg-4 img,
+.col-md-12.col-lg-6 img {
+  border-bottom: 1px solid black;
+}
 </style>
