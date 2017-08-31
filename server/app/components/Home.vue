@@ -115,9 +115,9 @@
           <a class="nav-link m-x" href="#roles" ui-scroll-to="#roles">
             <span class="nav-text">Роли</span>
           </a>
-          <a class="nav-link m-x" href="#feedback" ui-scroll-to="#feedback">
+          <!-- <a class="nav-link m-x" href="#feedback" ui-scroll-to="#feedback">
             <span class="nav-text">Отзывы</span>
-          </a>
+          </a> -->
         </div>
         <div class="block clearfix">
           <a href="https://twitter.com" target="_blank" class="btn btn-icon btn-social rounded btn-sm m-r">
