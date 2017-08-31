@@ -3,8 +3,7 @@
   <app-header></app-header>
 
   <div class="item">
-    <div class="item-bg">
-      <img src="../assets/images/a6.jpg" class="blur opacity-3">
+    <div class="item-bg" style="background: lightgray;">
     </div>
 
     <div class="p-a-md">
