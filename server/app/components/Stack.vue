@@ -111,7 +111,7 @@
         <h3>Повторить</h3>
       </div>
       <div class="p-a">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-responsive table-hover">
           <thead>
           <tr>
             <th>Слово</th>
