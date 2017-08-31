@@ -2,12 +2,21 @@
 <div>
   <div class="item">
     <div class="item-bg" :style="{ background: background }">
-
     </div>
     <div class="p-a-md">
       <div class="row m-t">
-        <div class="col-sm-7">
-          <a href class="pull-left m-r-md">
+        <div class="col-sm-12 hidden-md-up" style="margin-bottom: 10px;">
+          <div class="ad padding box" v-if="showAd">
+            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
+            <center>
+              <h4>А еще мы сделали приложение</h4>
+              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
+              <img src="../pics/appstore.svg"></img>
+            </center>
+          </div>
+        </div>
+        <div class="col-md-8 col-sm-12">
+          <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
               <h1>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</h1>
             </span>
@@ -20,23 +29,22 @@
             <h5 class="m-a-0 text-md text-muted">Ближайший день сдачи: <b> {{ date }}</b></h5>
           </div>
         </div>
-        <div class="col-sm-5">
-          <div class="ad padding" v-if="showAd">
+        <div class="col-md-4 hidden-sm-down">
+          <div class="ad padding box" v-if="showAd">
+            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
-            <h4>А еще мы сделали приложение</h4>
-            <img src="../pics/googleplay.png" width="135px" height="40px"></img>
-            <img src="../pics/appstore.svg"></img>
-          </center>
+              <h4>А еще мы сделали приложение</h4>
+              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
+              <img src="../pics/appstore.svg"></img>
+            </center>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="dker p-x">
-    <div class="row">
-      <div class="col-sm-6 push-sm-6">
-      </div>
-      <div class="col-sm-6 pull-sm-6">
+    <div class="row hidden-xs-down">
+      <div class="col-sm-12">
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
@@ -53,89 +61,107 @@
         </div>
       </div>
     </div>
+    <div class="row hidden-sm-up">
+      <div class="col-sm-12 col-xs-12">
+        <div class="p-y-md clearfix nav-active-primary">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item">
+              <a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row hidden-sm-up">
+      <div class="col-sm-12 col-xs-12">
+        <div class="p-y-md">
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item" v-for="group in user._groups">
+              <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
   <div v-show="showTasks" class="row checkbox">
     <input type="checkbox" id="padding" v-model="showAll">
     <label for="padding">Показать выполненные</label>
   </div>
-  <div class="row">
-    <div class="col-sm-12 col-lg-12 padding">
-      <div class="tab-content">
-        <div v-if="showTasks">
-          <div class="tab-pane p-v-sm padding" id="tab_1">
-            <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
-            <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
-            <i v-if="showPreloader" class="material-icons preloader">cached</i>
-            <div v-if="!showPreloader" class="row">
-              <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task">
-                <div class="taskcontentouter">
-                  <div class="taskcontent">
-                    <center>
-                      <h3>{{ test.name }}</h3>
-                      <p>Крайний срок сдачи: {{ test.deadline }}</p>
-                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
-                    </center>
-                  </div>
-                </div>
+  <div class="container-fluid">
+    <div class="row padding">
+      <div v-if="showTasks" class="p-v-sm padding">
+        <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
+        <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
+        <i v-if="showPreloader" class="material-icons preloader">cached</i>
+        <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+          <div class="col-lg col-md col-sm col-xs box task">
+            <div class="taskcontentouter">
+              <div class="taskcontent">
+                <center>
+                  <h3>{{ test.name }}</h3>
+                  <p>Крайний срок сдачи: {{ test.deadline }}</p>
+                  <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
+                </center>
               </div>
-              <div v-show="showAll" v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 box task done">
-                <div class="taskcontentouter">
-                  <div class="taskcontent">
-                    <div class="pull-right success">
-                      <i class="material-icons">done</i>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <center>
-                        <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
-                        <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
-                      </center>
-                    </div>
-                  </div>
-                </div>
+            </div>
+          </div>
+        </div>
+        <div v-show="showAll" v-for="test in completedTasks" class="col-lg-3 col-md-3 col-sm-6 col-xs-10 box task done">
+          <div class="taskcontentouter">
+            <div class="taskcontent">
+              <div class="pull-right success">
+                <i class="material-icons">done</i>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <center>
+                  <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
+                  <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
+                </center>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-
-
-    <div v-if="showMsgs">
-      <div class="col-lg-12 col-sm-12">
-        <div class="padding">
-          <div class="tab-pane p-v-sm" id="tab_2">
-            <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
-            <i v-if="showPreloader" class="material-icons preloader">cached</i>
-            <div v-if="!!messages.length && !showPreloader" class="row">
-              <div class="box">
-                <div class="box-header">
-                  <h2>Входящие сообщения</h2>
+      <div v-if="showMsgs">
+        <div class="col-lg-12 col-sm-12">
+          <div class="padding">
+            <div class="tab-pane p-v-sm" id="tab_2">
+              <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
+              <i v-if="showPreloader" class="material-icons preloader">cached</i>
+              <div v-if="!!messages.length && !showPreloader" class="row">
+                <div class="box">
+                  <div class="box-header">
+                    <h2>Входящие сообщения</h2>
+                  </div>
+                  <div class="table-responsive">
+                    <table ui-jp="dataTable" class="table table-striped b-t b-b">
+                      <thead>
+                        <tr>
+                          <th style="width:2%">#</th>
+                          <th style="width:10%">Дата</th>
+                          <th style="width:15%">Сообщение</th>
+                          <th style="width:15%">От кого</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(msg, index) in slicedMessages">
+                          <td>{{ index + 1}}</td>
+                          <td></td>
+                          <td>{{ msg.text}}</td>
+                          <td>{{ msg.author}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="table-responsive">
-                  <table ui-jp="dataTable" class="table table-striped b-t b-b">
-                    <thead>
-                      <tr>
-                        <th style="width:2%">#</th>
-                        <th style="width:10%">Дата</th>
-                        <th style="width:15%">Сообщение</th>
-                        <th style="width:15%">От кого</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(msg, index) in slicedMessages">
-                        <td>{{ index + 1}}</td>
-                        <td></td>
-                        <td>{{ msg.text}}</td>
-                        <td>{{ msg.author}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <center>
+                  <button @click="nextFive" class="btn btn-primary">Показать еще</button>
+                </center>
               </div>
-              <center>
-                <button @click="nextFive" class="btn btn-primary">Показать еще</button>
-              </center>
             </div>
           </div>
         </div>
@@ -244,6 +270,9 @@ export default {
     nextFive() {
       this.sliceIndex += 5;
       this.slicedMessages = this.slicedMessages.concat(this.messages.slice(this.sliceIndex, this.sliceIndex + 5));
+    },
+    hideAd() {
+      this.showAd = false;
     }
   },
   created() {
@@ -278,16 +307,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.date h1, .date h5 {
-  font-family: 'Roboto', sans-serif !important;
-}
-
-.task {
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
 #padding {
   margin-left: 30px;
   width: 10px;

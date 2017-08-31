@@ -6,8 +6,18 @@
     </div>
     <div class="p-a-md">
       <div class="row m-t">
-        <div class="col-sm-7">
-          <a href class="pull-left m-r-md">
+        <div class="col-sm-12 hidden-md-up" style="margin-bottom: 10px;">
+          <div class="ad padding box" v-if="showAd">
+            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
+            <center>
+              <h4>А еще мы сделали приложение</h4>
+              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
+              <img src="../pics/appstore.svg"></img>
+            </center>
+          </div>
+        </div>
+        <div class="col-md-8 col-sm-12">
+          <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
               <h1>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</h1>
             </span>
@@ -17,13 +27,14 @@
             <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
           </div>
         </div>
-        <div class="col-sm-5">
-          <div class="ad padding" v-if="showAd">
+        <div class="col-md-4 hidden-sm-down">
+          <div class="ad padding box" v-if="showAd">
+            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
-            <h4>А еще мы сделали приложение</h4>
-            <img src="../pics/googleplay.png" width="135px" height="40px"></img>
-            <img src="../pics/appstore.svg"></img>
-          </center>
+              <h4>А еще мы сделали приложение</h4>
+              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
+              <img src="../pics/appstore.svg"></img>
+            </center>
           </div>
         </div>
       </div>
