@@ -11,17 +11,17 @@
 
         <!-- navbar right -->
         <ul class="nav navbar-nav pull-right text-primary-hover" v-if="logged">
-          <li class="nav-item text-primary-hover" v-if="token.permissions === 'student'">
+          <li class="nav-item text-primary-hover hidden-sm-down" v-if="token.permissions === 'student'">
             <router-link class="nav-link" to="/stats">
               <span>Мои результаты</span>
             </router-link>
           </li>
-          <li class="nav-item text-primary-hover" v-if="token.permissions === 'teacher'">
+          <li class="nav-item text-primary-hover hidden-sm-down" v-if="token.permissions === 'teacher'">
             <a class="nav-link" href data-toggle="modal" data-target="#m-a-f">
               <span>Создать группу</span>
             </a>
           </li>
-          <li class="nav-item dropdown pos-stc-xs">
+          <li class="nav-item dropdown pos-stc-xs hidden-sm-down">
             <a class="nav-link" href data-toggle="dropdown">
               <i class="material-icons">&#xe7f5;</i>
               <span class="label label-sm up warn">{{ notifications.length }}</span>
@@ -45,7 +45,7 @@
             </div>
             <!-- / dropdown -->
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
               <span class="avatar w-32" :style="{ backgroundColor: color }">
                   <span>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
@@ -71,8 +71,7 @@
             </a>
           </li>
         </ul>
-
-        <ul class="nav navbar-nav pull-right text-primary-hover" v-else>
+        <ul class="nav navbar-nav pull-right text-primary-hover hidden-sm-down" v-else>
           <li class="nav-item">
             <router-link to="/login" class="nav-link">
               <span>Войти</span>
@@ -84,6 +83,73 @@
             </router-link>
           </li>
         </ul>
+        <ul class="nav navbar-nav pull-right hidden-md-up" v-if="!logged">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" data-target="#collapse">
+              <i class="material-icons">&#xe5d4;</i>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="hidden-md-up collapse navbar-toggleable-sm" id="collapse">
+        <div ui-include="'../views/blocks/navbar.form.right.html'"></div>
+        <!-- link and dropdown -->
+        <ul class="nav navbar-nav text-primary-hover" v-if="logged">
+          <li class="nav-item">
+            <router-link class="dropdown-item" to="/profile">
+              Профиль
+            </router-link>
+            <a class="dropdown-item" href data-toggle="dropdown">
+              Оповещения
+              <span class="label label-sm up warn">{{ notifications.length }}</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
+              <div class="scrollable" style="max-height: 220px">
+                <ul class="list-group list-group-gap m-a-0">
+                  <li class="list-group-item box-shadow-z0 b" :class="notification.type == 'newMsg' ? 'dark-white text-color' : 'black'" v-for="notification in notifications">
+                    <span class="pull-right m-r hover" @click="removeNotif(notification.id)"><i class="material-icons">delete</i></span>
+                    <span class="pull-left m-r">
+                      <img :src="notification.pic" class="w-40 img-circle">
+                    </span>
+                    <span class="clear block">
+                      {{ notification.text }}<br>
+                      <small class="text-muted">{{ notification.date }}</small>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <router-link class="dropdown-item" to="/settings">
+              Настройки
+            </router-link>
+            <router-link class="dropdown-item" to="/stats" v-if="token.permissions === 'student'">
+              <span>Мои результаты</span>
+            </router-link>
+            <a class="dropdown-item" href data-toggle="modal" data-target="#m-a-f" v-if="token.permissions === 'teacher'">
+              <span>Создать группу</span>
+            </a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#feedback">
+              Оставить отзыв
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" @click="logout">Выход</a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav" v-else>
+          <li class="nav-item">
+            <router-link to="/login" class="dropdown-item">
+              <span>Войти</span>
+            </router-link>
+            <router-link to="/signup" class="dropdown-item">
+              <span>Зарегистрироваться</span>
+            </router-link>
+          </li>
+        </ul>
+        <!-- / -->
       </div>
 
     </div>
