@@ -67,7 +67,7 @@
           </li>
           <li class="nav-item hidden-md-up">
             <a class="nav-link" data-toggle="collapse" data-target="#collapse">
-              <i class="material-icons">&#xe5d4;</i>
+              <i class="material-icons">&#xE5D2;</i>
             </a>
           </li>
         </ul>
@@ -86,7 +86,7 @@
         <ul class="nav navbar-nav pull-right hidden-md-up" v-if="!logged">
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" data-target="#collapse">
-              <i class="material-icons">&#xe5d4;</i>
+              <i class="material-icons">&#xE5D2;</i>
             </a>
           </li>
         </ul>
