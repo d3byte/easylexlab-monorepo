@@ -25,7 +25,8 @@
         </div>
         <div class="col-sm-6 primary v-m">
           <div class="p-a-lg">
-            <h2 class=" _700 l-s-n-1x m-y m-b-md">Кроссплатформенность</h2>
+            <h2 class=" _700 l-s-n-1x m-y m-b-md hidden-xs-down">Кроссплатформенность</h2>
+            <h3 class=" _700 l-s-n-1x m-y m-b-md hidden-sm-up">Кроссплатформенность</h3>
             <p class="h5 text-muted l-h">Работайте с планшета, телефона или компьютера.</p>
           </div>
         </div>
