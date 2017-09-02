@@ -9,21 +9,18 @@
     </div>
     <div v-if="lose" class="signup">
       <h3 class="text-danger"> Неудача ;c </h3>
+      <h4>Ваш результат: {{ percentage }}/100%</h4>
       <button @click="restart" class="btn btn-primary"> Попробовать еще раз </button>
     </div>
   </center>
-  <form v-if="!showPreloader && !done" class="padding" onsubmit="return false">
+  <form v-if="!showPreloader && !done && !lose" class="padding" onsubmit="return false">
     <div class="row padding">
       <h1>Type In</h1>
       <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
       <hr>
-      <div class="md-form-group" v-for="pair in typeVal">
+      <div class="md-form-group" v-for="pair in pairs">
         <input type="text" v-model="pair.test" class="md-input" placeholder="Перевод" required>
         <label>{{ pair.key }}</label>
-      </div>
-      <div class="md-form-group" v-for="pair in typeKey">
-        <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
-        <label>{{ pair.value }}</label>
       </div>
       <button @click="allDone" class="btn btn-primary">Готово</button>
     </div>
@@ -39,7 +36,6 @@ export default {
   data() {
     return {
       pairs: [],
-      typeKey: [],
       typeVal: [],
       correct: 0,
       percentage: 0,
@@ -85,21 +81,12 @@ export default {
       this.lose = false;
     },
     check() {
-      this.typeVal.map(pair => {
+      this.pairs.map(pair => {
         if (pair.test == pair.value) {
           this.correct++;
-        } else {
-          this.incorrect++;
         }
       });
-      this.typeKey.map(pair => {
-        if (pair.test == pair.key) {
-          this.correct++;
-        } else {
-          this.incorrect++;
-        }
-      });
-      this.percentage = Math.round(this.correct * 100 / (this.typeVal.length + this.typeKey.length));
+      this.percentage = Math.round(this.correct * 100 / this.pairs.length);
     },
     hideGames() {
       this.$store.dispatch('hideGames');
@@ -108,12 +95,6 @@ export default {
       this.typeKey = [];
       this.typeVal = [];
       this.pairs = _.shuffle(this.pairs);
-      for (let i = 0; i < this.pairs.length; i++) {
-        if (i <= this.pairs.length * 0.5)
-          this.typeKey.push(this.pairs[i]);
-        else if (i > this.pairs.length * 0.5 && i <= this.pairs.length)
-          this.typeVal.push(this.pairs[i]);
-      }
     }
   },
   created() {
