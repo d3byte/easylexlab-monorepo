@@ -258,6 +258,7 @@ export default {
     'matching': Matching,
     'scramble': Scramble,
     'test': Test,
+    'typein' : Typein
   }
 }
 </script>
