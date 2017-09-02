@@ -220,7 +220,7 @@ export default {
           this.$router.push('/profile');
         let done = false;
         this.task.results.map(result => {
-          if(result.userId == this.user._id) {
+          if(result.userId == this.user._id && result.result >= 75) {
             done = true;
           }
         });
