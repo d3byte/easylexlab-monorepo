@@ -21,6 +21,7 @@
   </div>
 
   <div class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
+
     <div class="row">
       <div class="col-sm-6 push-sm-6">
       </div>
@@ -154,7 +155,7 @@ import Snake from './Snake.vue';
 import Scramble from './Scramble.vue';
 import Test from './Test.vue';
 import { EventBus } from './event';
-import Typein from './Typein.vue';
+// import Typein from './Typein.vue';
 
 export default {
   data() {
@@ -257,7 +258,6 @@ export default {
     'matching': Matching,
     'scramble': Scramble,
     'test': Test,
-    'typein': Typein
   }
 }
 </script>

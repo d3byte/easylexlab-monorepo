@@ -30,7 +30,7 @@ export default {
     'regcode': RegCode,
     'newtask': NewTask,
     'feedback': Feedback,
-    'history': TaskHistory
+    'history': TaskHistory,
   }
 }
 </script>
