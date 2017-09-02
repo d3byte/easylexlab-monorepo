@@ -155,7 +155,7 @@ import Snake from './Snake.vue';
 import Scramble from './Scramble.vue';
 import Test from './Test.vue';
 import { EventBus } from './event';
-// import Typein from './Typein.vue';
+import Typein from './Typein.vue';
 
 export default {
   data() {
