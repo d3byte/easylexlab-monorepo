@@ -1,46 +1,47 @@
 <template>
-  <div class="vertical-center">
-    <center>
-      <div class="container flashcards">
-        <h1>Flashcards</h1>
-        <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-        <div class=" box">
-          <button @click="restart" class="flat-btn">Перезапуск</button>
-          <button class="flat-btn">Помощь</button>
-          <button class="flat-btn" @click="hideGames">Назад</button>
-          <button v-if="showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
+<div class="vertical-center">
+  <center>
+    <div class="container-fluid flashcards">
+      <h1>Flashcards</h1>
+      <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
+      <div class="row box">
+        <button @click="restart" class="flat-btn">Перезапуск</button>
+        <button class="flat-btn" @click="hideGames">Назад</button>
+      </div>
+        <div class="main-menu">
+          <button @click="toKnow()" class="btn btn-success">Знаю</button>
+          <br>
+          <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
         </div>
-        <div v-show="!done && !lose" class="pair">
-          <div v-show="!showDef" @click="show()" class="vertical-center box">
-            <h1>{{ currentPair.key }}</h1>
+          <div class="col-lg-6">
+            <div v-show="!done && !lose" class="pair">
+              <div v-show="!showDef" @click="show()" class="vertical-center box task-card">
+                <h1>{{ currentPair.key }}</h1>
+              </div>
+              <div v-show="showDef" @click="show()" class="vertical-center box task-card">
+                <h1>{{ currentPair.value }}</h1>
+              </div>
+            </div>
           </div>
-          <div v-show="showDef" @click="show()" class="vertical-center box">
-            <h1>{{ currentPair.value }}</h1>
-          </div>
-          <div class="main-menu">
-            <button @click="toKnow()" class="btn btn-success">Знаю</button>
-            <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
-          </div>
-          <div class="col box">
-            <div class="row-col primary white-text">
-              <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3></div>
-            <div class="p-a text-center">
+          <div class="col-lg-6 cards-left" v-show="!done && !lose">
+            <div class="row-col primary white-text vertical-center">
+              <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3>
+            </div>
+            <div class="p-a text-center box">
               <h3>{{ nextKey }}</h3>
             </div>
           </div>
-        </div>
-        <div v-if="done || lose" @click="show()" class="vertical-center box">
-          <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
-          <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
-          <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
-        </div>
-        <div v-if="done && showTest" class="row">
-          <button @click="tryTest" class="btn">Пройти тест</button>
-        </div>
-
-      </div>
-    </center>
-  </div>
+    </div>
+    <div v-if="done || lose" @click="show()" class="vertical-center box">
+      <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
+      <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
+      <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
+    </div>
+    <div v-if="done && showTest" class="row">
+      <button @click="tryTest" class="btn">Пройти тест</button>
+    </div>
+</center>
+</div>
 </template>
 
 <script>
@@ -81,12 +82,12 @@ export default {
   },
   created() {
     this.currentPair = this.stack.tasks[0].content[0];
-    for(let task of this.stack.tasks) {
+    for (let task of this.stack.tasks) {
       Array.prototype.push.apply(this.pairs, task.content);
     }
     this.pairsLeft = this.pairs.length;
     this.nextKey = this.pairs[1].key;
-    },
+  },
   methods: {
     hideGames() {
       this.$store.dispatch('hideGames');
@@ -112,31 +113,33 @@ export default {
       this.dontKnow = [];
       this.done = false;
       this.lose = false;
+      this.nextKey = '';
+      this.pairsLeft = 0;
     },
     toKnow() {
       this.pairsLeft--;
       this.know.push(this.currentPair);
-      for(let i = 0; i < this.pairs.length; i++) {
-        if(this.pairsLeft > 1){
-          this.nextKey = this.pairs[i+1].key;
+      for (let i = 0; i < this.pairs.length; i++) {
+        if (this.pairsLeft > 1) {
+          this.nextKey = this.pairs[i + 1].key;
         } else if (this.pairsLeft == 1) {
           this.nextKey = 'Это последняя карточка.';
         }
-        if(this.index + 1 == this.pairs.length &&
-           this.doneAttempts + 1 >= this.totalAttempts) {
-             if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-               this.$store.dispatch('incrementAttempts', 'flashcards');
-               this.$store.dispatch('gameFinished', 'flashcards');
-             } else {
-               this.lose = true;
-               return;
-             }
-             if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
-               this.$store.dispatch('testAvailable');
-             this.done = true;
-             break;
-        } else if(this.index + 1 == this.pairs.length) {
-          if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+        if (this.index + 1 == this.pairs.length &&
+          this.doneAttempts + 1 >= this.totalAttempts) {
+          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+            this.$store.dispatch('incrementAttempts', 'flashcards');
+            this.$store.dispatch('gameFinished', 'flashcards');
+          } else {
+            this.lose = true;
+            return;
+          }
+          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
+            this.$store.dispatch('testAvailable');
+          this.done = true;
+          break;
+        } else if (this.index + 1 == this.pairs.length) {
+          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
             this.$store.dispatch('incrementAttempts', 'flashcards');
           } else {
             this.lose = true;
@@ -145,7 +148,7 @@ export default {
           this.done = true;
           break;
         }
-        if(this.index < i) {
+        if (this.index < i) {
           this.currentPair = this.pairs[i];
           this.index += 1;
           break;
@@ -155,27 +158,27 @@ export default {
     toDontKnow() {
       this.pairsLeft--;
       this.dontKnow.push(this.currentPair);
-      for(let i = 0; i < this.pairs.length; i++) {
-        if(this.pairsLeft > 1){
-          this.nextKey = this.pairs[i+1].key;
+      for (let i = 0; i < this.pairs.length; i++) {
+        if (this.pairsLeft > 1) {
+          this.nextKey = this.pairs[i + 1].key;
         } else if (this.pairsLeft == 1) {
           this.nextKey = 'Это последняя карточка.';
         }
-        if(this.index + 1 == this.pairs.length &&
-           this.doneAttempts + 1 >= this.totalAttempts) {
-             if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-               this.$store.dispatch('incrementAttemps', 'flashcards');
-               this.$store.dispatch('gameFinished', 'flashcards');
-             } else {
-               this.lose = true;
-               return;
-             }
-             if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
-               this.$store.dispatch('testAvailable');
-             this.done = true;
-             break;
-        } else if(this.index + 1 == this.pairs.length) {
-          if(Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+        if (this.index + 1 == this.pairs.length &&
+          this.doneAttempts + 1 >= this.totalAttempts) {
+          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+            this.$store.dispatch('incrementAttemps', 'flashcards');
+            this.$store.dispatch('gameFinished', 'flashcards');
+          } else {
+            this.lose = true;
+            return;
+          }
+          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
+            this.$store.dispatch('testAvailable');
+          this.done = true;
+          break;
+        } else if (this.index + 1 == this.pairs.length) {
+          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
             this.$store.dispatch('incrementAttemps', 'flashcards');
           } else {
             this.lose = true;
@@ -184,7 +187,7 @@ export default {
           this.done = true;
           break;
         }
-        if(this.index < i) {
+        if (this.index < i) {
           this.currentPair = this.pairs[i];
           this.index += 1;
           break;
@@ -214,7 +217,7 @@ export default {
   }
 
   .flashcards {
-    width: 300px;
+    width: 500px;
   }
 
   .box.vertical-center {
@@ -246,6 +249,14 @@ export default {
 
   .text.game {
     color: white;
+  }
+
+  .task-card {
+    height: 220px !important;
+  }
+
+  .cards-left {
+    height: 150px !important;
   }
 
   .btn.back {
