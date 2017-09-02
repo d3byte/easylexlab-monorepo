@@ -113,8 +113,8 @@ export default {
       this.dontKnow = [];
       this.done = false;
       this.lose = false;
-      this.nextKey = '';
-      this.pairsLeft = 0;
+      this.pairsLeft = this.pairs.length;
+      this.nextKey = this.pairs[1].key;
     },
     toKnow() {
       this.pairsLeft--;
