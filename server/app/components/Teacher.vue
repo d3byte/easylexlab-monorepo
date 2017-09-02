@@ -95,7 +95,6 @@ export default {
     this.city = localStorage.city;
     this.background = localStorage.background ? localStorage.background : '#ccc';
     this.color = localStorage.color ? localStorage.color : 'white';
-    this.setDate();
     if(localStorage.ad == 'true') {
       this.showAd = true;
       localStorage.ad = 'false';
