@@ -22,7 +22,6 @@
   </div>
 
   <div class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
-
     <div class="row">
       <div class="col-sm-6 push-sm-6">
       </div>
@@ -259,7 +258,7 @@ export default {
     'matching': Matching,
     'scramble': Scramble,
     'test': Test,
-    'typein' : Typein
+    'typein': Typein
   }
 }
 </script>

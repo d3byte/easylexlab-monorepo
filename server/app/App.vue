@@ -6,6 +6,7 @@
     <history v-if="logged && $route.params.id && $route.path.slice(0, 6) == '/group'" />
     <newtask v-if="logged" />
     <feedback v-if="logged" />
+    <test-aval v-if="logged && testAvailable" />
     <router-view></router-view>
   </div>
 </template>
@@ -17,11 +18,15 @@ import RegCode from './components/RegCode.vue';
 import NewTask from './components/NewTask.vue';
 import Feedback from './components/Feedback.vue';
 import TaskHistory from './components/TaskHistory.vue';
+import TestAval from './components/TestAval.vue';
 
 export default {
   computed: {
     logged() {
         return this.$store.getters.loginState
+    },
+    testAvailable() {
+      return this.$store.getters.testAvailable
     }
   },
   components: {
@@ -31,6 +36,7 @@ export default {
     'newtask': NewTask,
     'feedback': Feedback,
     'history': TaskHistory,
+    'test-aval': TestAval
   }
 }
 </script>
