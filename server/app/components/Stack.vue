@@ -10,8 +10,9 @@
       <div class="row m-t">
         <div class="col-sm-7">
           <div class="clear m-b">
-            <h3 class="m-a-0 m-b-xs">Название модуля: {{ task.name }}</h3>
-            <h4 v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"> Выберите игру: </h4>
+            <h3 class="m-a-0 m-b-xs">Название задания: {{ task.name }}</h3>
+            <h4 class="hidden-sm-down" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"> Выберите игру: </h4>
+            <h6 class="hidden-md-up text-muted">Игры недоступны в мобильной версии. Чтобы пройти игры с мобильного устройства, воспользуетесь мобильным приложением.</h6>
           </div>
         </div>
         <div class="col-sm-5">
