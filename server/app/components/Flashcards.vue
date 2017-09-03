@@ -42,6 +42,7 @@
     </div>
 </center>
 </div>
+</div>
 </template>
 
 <script>
