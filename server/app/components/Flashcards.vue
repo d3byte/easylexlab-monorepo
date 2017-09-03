@@ -135,8 +135,12 @@ export default {
             this.lose = true;
             return;
           }
-          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
+          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
             this.$store.dispatch('testAvailable');
+            setTimeout(() => {
+              $('#testavailable').modal('show');
+            }, 50)
+          }
           this.done = true;
           break;
         } else if (this.index + 1 == this.pairs.length) {
@@ -174,8 +178,11 @@ export default {
             this.lose = true;
             return;
           }
-          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3])
-            this.$store.dispatch('testAvailable');
+          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
+            setTimeout(() => {
+              $('#testavailable').modal('show');
+            }, 50)
+          }
           this.done = true;
           break;
         } else if (this.index + 1 == this.pairs.length) {

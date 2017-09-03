@@ -65,8 +65,12 @@ export default {
         this.$store.dispatch('incrementAttempts', 'typein');
         if (this.doneAttempts == this.totalAttempts)
           this.$store.dispatch('gameFinished', 'typein');
-        if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
+        if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
           this.$store.dispatch('testAvailable');
+          setTimeout(() => {
+            $('#testavailable').modal('show');
+          }, 50)
+        }
         this.done = true;
       } else {
         this.lose = true;

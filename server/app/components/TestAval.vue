@@ -1,6 +1,6 @@
 <template>
 <!-- Modal -->
-<div id="testpopup" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
+<div id="testavailable" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     hideModal() {
-      $('.ui.basic.modal').modal('hide');
+      // $('.ui.basic.modal').modal('hide');
       this.$store.dispatch('hideGames');
       this.$store.dispatch('showTest');
     },

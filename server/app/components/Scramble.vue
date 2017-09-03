@@ -76,8 +76,12 @@ export default {
         }
         if(this.doneAttempts == this.totalAttempts)
           this.$store.dispatch('gameFinished', 'scramble');
-        if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4])
-          this.$store.dispatch('testAvailable');
+          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
+            this.$store.dispatch('testAvailable');
+            setTimeout(() => {
+              $('#testavailable').modal('show');
+            }, 50)
+          }
       }
     },
     start() {
