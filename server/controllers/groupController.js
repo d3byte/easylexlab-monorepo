@@ -227,6 +227,7 @@ groupController.newMsg = (req, res) => {
         db.User.findById(user.id).then(userAccount => {
             const message = {
                 authorId: userAccount._id,
+                id: randomize('*', 15),
                 author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
                 text: msgText,
@@ -275,6 +276,21 @@ groupController.changeName = (req, res) => {
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
     db.Group.findByIdAndUpdate(groupId, { $set: { name } }).then(success => {
       return res.json({ success: true });
+    });
+  }
+};
+
+groupController.deleteMsg = (req, res) => {
+  const {
+    groupId,
+    msgId
+  } = req.body;
+  const user = req.user;
+
+  if(user.permissions == 'teacher' || user.permissions == 'admin') {
+    db.Group.findById(groupId).then(group => {
+      group.messages = group.messages.filter(item => item.id != msgId);
+      group.save().then(s => res.json({ success: true }));
     });
   }
 };

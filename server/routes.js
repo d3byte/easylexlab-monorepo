@@ -37,6 +37,7 @@ routes.post('/getgroups', expressJWT({ secret }), groupController.getGroups);
 routes.post('/getgroup', expressJWT({ secret }), groupController.getGroup);
 routes.post('/addtest', expressJWT({ secret }), groupController.addTest);
 routes.patch('/changename', expressJWT({ secret }), groupController.changeName);
+routes.post('/deletemsg', expressJWT({ secret }), groupController.deleteMsg);
 
 
 // Stack routes
@@ -46,6 +47,7 @@ routes.post('/gettest', expressJWT({ secret }), stackController.getTest);
 routes.patch('/addresult', expressJWT({ secret }), stackController.addResult);
 routes.patch('/updateresult', expressJWT({ secret }), stackController.updateResult);
 routes.post('/removetask', expressJWT({ secret }), stackController.removeStack);
+
 
 // Notification and message routes
 routes.post('/newmsg', expressJWT({ secret }), groupController.newMsg);
