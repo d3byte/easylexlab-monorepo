@@ -63,6 +63,7 @@
                       <label for="padding" id="nope">Посмотреть все</label>
                     </li>
     				        <li v-show="showAll" class="list-group-item" v-for="msg in group.messages">
+                      <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
     				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
     				          <div class="clear">
     				            <a href="" class="_500 block">{{ msg.author }}</a>
@@ -71,6 +72,7 @@
     				          </div>
     				        </li>
                     <li v-show="!showAll" class="list-group-item" v-for="msg in slicedMessages">
+                      <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
     				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
     				          <div class="clear">
     				            <a href="" class="_500 block">{{ msg.author }}</a>
@@ -326,6 +328,23 @@ export default {
         });
       } else {
         this.newName = false;
+      }
+    },
+    removeMsg(id) {
+      if(confirm('Вы действительно хотите удалить сообщение?')) {
+        const body = {
+          groupId: this.group._id,
+          msgId: id
+        };
+        this.$http.post('deletemsg', body, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(s => {
+          this.slicedMessages = this.slicedMessages.filter(item => item.id != id);
+          this.group.messages = this.group.messages.filter(item => item.id != id);
+        })
       }
     }
   },
