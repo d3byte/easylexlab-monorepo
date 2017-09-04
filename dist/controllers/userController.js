@@ -165,7 +165,7 @@ userController.login = function (req, res) {
                 var token = _jsonwebtoken2.default.sign({
                     id: user._id,
                     permissions: user.permissions
-                }, _secret2.default, { expiresIn: '2 days' });
+                }, _secret2.default);
                 res.status(200).json({
                     success: valid,
                     token: token

@@ -274,5 +274,19 @@ groupController.newMsg = function (req, res) {
     }
 };
 
+groupController.changeName = function (req, res) {
+    var _req$body5 = req.body,
+        groupId = _req$body5.groupId,
+        name = _req$body5.name;
+
+    var user = req.user;
+
+    if (user.permissions == 'teacher' || user.permissions == 'admin') {
+        _models2.default.Group.findByIdAndUpdate(groupId, { $set: { name: name } }).then(function (success) {
+            return res.json({ success: true });
+        });
+    }
+};
+
 exports.default = groupController;
 //# sourceMappingURL=groupController.js.map
