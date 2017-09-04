@@ -19,8 +19,8 @@
       <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
       <hr>
       <div class="md-form-group" v-for="pair in pairs">
-        <input type="text" v-model="pair.test" class="md-input" placeholder="Перевод" required>
-        <label>{{ pair.key }}</label>
+        <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
+        <label>{{ pair.value }}</label>
       </div>
       <button @click="allDone" class="btn btn-primary">Готово</button>
     </div>
@@ -75,7 +75,7 @@ export default {
       } else {
         this.lose = true;
       }
-      this.stack.tasks[0].content.map(pair => pair.test = '')
+      this.stack.tasks[0].content.map(pair => pair.test = '');
     },
     restart() {
       this.newPairs = _.shuffle(this.newPairs);
@@ -86,7 +86,7 @@ export default {
     },
     check() {
       this.pairs.map(pair => {
-        if (pair.test == pair.value) {
+        if (pair.test == pair.key) {
           this.correct++;
         }
       });
