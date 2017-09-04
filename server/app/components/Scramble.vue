@@ -16,7 +16,7 @@
       <h3 class="key"><b>{{ currentPair.value }}</b></h3>
       <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
       <draggable v-model="shuffledLetters" @end="onEnd" element="h3" class="value" :class="correct ?'correct':'default'">
-        <span v-for="letter in shuffledLetters">
+        <span class="letter" v-for="letter in shuffledLetters">
          {{ letter }}
         </span>
      </draggable>
@@ -123,7 +123,8 @@ export default {
 <style lang="css" scoped>
   .game, .win {
     min-width: 80px;
-    max-width: 240px;
+    width: auto;
+    max-width: 360px;
   }
 
   .correct {
@@ -141,5 +142,27 @@ export default {
 
   .restart:hover {
     cursor: pointer;
+  }
+
+  .letter {
+    background: lightgray;
+    font-size: 24px;
+    border: 1px solid darkgray;
+    margin-right: 2px;
+  }
+
+  .letter:last-child {
+    margin-right: 0;
+  }
+
+  .value {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .value > span {
+    text-align: center !important;
   }
 </style>
