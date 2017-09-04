@@ -54,7 +54,7 @@
                 </span>
               </div>
               <div class="clear">
-                <h4 class="m-a-0 text-md"><a href>{{ messsagesAmount }} <span class="text-sm">Сообщений</span></a></h4>
+                <h4 class="m-a-0 text-md"><router-link to="/profile/msg">{{ messsagesAmount }} <span class="text-sm">Сообщений</span></router-link></h4>
                 <small class="text-muted">Было получено</small>
               </div>
             </div>

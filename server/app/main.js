@@ -46,6 +46,15 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/profile/msg', component: Profile,
+    children: [
+      {
+        path: '',
+        component: ProfileFooter
+      }
+    ]
+  },
   { path: '/group/:id', component: Group },
   { path: '/group', redirect: '/profile' },
   { path: '/task/:id', component: Stack },

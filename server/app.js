@@ -31,6 +31,9 @@ app.get('/signup', (req, res) => {
 app.get('/profile', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/profile/msg', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
 app.get('/group/:id', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });

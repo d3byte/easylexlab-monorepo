@@ -282,6 +282,10 @@ export default {
       this.showAd = true;
       localStorage.ad = 'false';
     };
+    if(this.$route.path.slice(9) == 'msg') {
+      this.showTasks = false;
+      this.showMsgs = true;
+    }
     this.firstName = localStorage.firstName;
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
