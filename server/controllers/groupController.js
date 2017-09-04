@@ -265,4 +265,18 @@ groupController.newMsg = (req, res) => {
     }
 };
 
+groupController.changeName = (req, res) => {
+  const {
+    groupId,
+    name
+  } = req.body;
+  const user = req.user;
+
+  if(user.permissions == 'teacher' || user.permissions == 'admin') {
+    db.Group.findByIdAndUpdate(groupId, { $set: { name } }).then(success => {
+      return res.json({ success: true });
+    });
+  }
+};
+
 export default groupController;

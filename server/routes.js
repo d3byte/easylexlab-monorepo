@@ -36,6 +36,8 @@ routes.patch('/addstudent', groupController.addStudent);
 routes.post('/getgroups', expressJWT({ secret }), groupController.getGroups);
 routes.post('/getgroup', expressJWT({ secret }), groupController.getGroup);
 routes.post('/addtest', expressJWT({ secret }), groupController.addTest);
+routes.patch('/changename', expressJWT({ secret }), groupController.changeName);
+
 
 // Stack routes
 routes.post('/newstack', expressJWT({ secret }), stackController.post);
