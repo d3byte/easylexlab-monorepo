@@ -63,6 +63,7 @@ routes.post('/getgroups', (0, _expressJwt2.default)({ secret: _secret2.default }
 routes.post('/getgroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.getGroup);
 routes.post('/addtest', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.addTest);
 routes.patch('/changename', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.changeName);
+routes.post('/deletemsg', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.deleteMsg);
 
 // Stack routes
 routes.post('/newstack', (0, _expressJwt2.default)({ secret: _secret2.default }), _stackController2.default.post);

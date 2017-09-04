@@ -238,6 +238,7 @@ groupController.newMsg = function (req, res) {
         _models2.default.User.findById(user.id).then(function (userAccount) {
             var message = {
                 authorId: userAccount._id,
+                id: (0, _randomatic2.default)('*', 15),
                 author: userAccount.firstName + " " + userAccount.lastName,
                 pic: userAccount.picUrl,
                 text: msgText,
@@ -284,6 +285,25 @@ groupController.changeName = function (req, res) {
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
         _models2.default.Group.findByIdAndUpdate(groupId, { $set: { name: name } }).then(function (success) {
             return res.json({ success: true });
+        });
+    }
+};
+
+groupController.deleteMsg = function (req, res) {
+    var _req$body6 = req.body,
+        groupId = _req$body6.groupId,
+        msgId = _req$body6.msgId;
+
+    var user = req.user;
+
+    if (user.permissions == 'teacher' || user.permissions == 'admin') {
+        _models2.default.Group.findById(groupId).then(function (group) {
+            group.messages = group.messages.filter(function (item) {
+                return item.id != msgId;
+            });
+            group.save().then(function (s) {
+                return res.json({ success: true });
+            });
         });
     }
 };
