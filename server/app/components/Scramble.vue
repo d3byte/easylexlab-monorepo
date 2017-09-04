@@ -165,4 +165,10 @@ export default {
   .value > span {
     text-align: center !important;
   }
+
+  .correct > .letter {
+    background: transparent;
+    border: none;
+    margin-right: 0;
+  }
 </style>
