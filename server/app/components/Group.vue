@@ -7,12 +7,12 @@
     			<div class="margin">
             <h3 @click="changeName" v-if="!newName" class="hover">
               {{ group.name }}
-              <i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;"></i>
+              <i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;vertical-align: top"></i>
             </h3>
     			</div>
           <div class="margin input-group" v-if="newName" style="width: 150px;">
             <input type="text" class="form-control" placeholder="Новое имя" v-model="name" aria-describedby="basic-addon2">
-            <span @click="submitNewName" class="input-group-addon hover" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></span>
+            <span @click="submitNewName" class="input-group-addon hover success" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
     			<div class="row-col box">
     				<div class="col-sm-12">
@@ -324,6 +324,8 @@ export default {
           this.group.name = this.name;
           this.newName = false;
         });
+      } else {
+        this.newName = false;
       }
     }
   },
