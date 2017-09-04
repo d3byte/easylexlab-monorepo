@@ -155,8 +155,7 @@ userController.login = (req, res) => {
                         id: user._id,
                         permissions: user.permissions
                     },
-                    secret,
-                    {expiresIn: '2 days'}
+                    secret
                 );
                 res.status(200).json({
                     success: valid,
