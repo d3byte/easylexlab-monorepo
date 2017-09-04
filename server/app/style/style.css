@@ -5,11 +5,6 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-/*button {
-  padding: 0;
-  text-align: center;
-}*/
-
 body {
   padding: 0;
   margin: 0;
@@ -35,13 +30,6 @@ a {
   margin-top: 250px;
 }
 
-/*.btn {
-  transition: 0.3s;
-  color: black;
-} .btn:hover {
-  background: #5688C7;
-}*/
-
 .name {
   color: #293132;
 }
@@ -52,7 +40,6 @@ input {
   color: white;
   font-size: 16px;
   transition: 0.3s;
-  border-bottom: 1px solid black;
 } input:active,
   input:focus {
     outline: none;

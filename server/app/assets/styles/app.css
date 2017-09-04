@@ -5799,3 +5799,9 @@ textarea.md-input {
 .fade-in-down.ng-leave {
   -webkit-animation: fadeOutDown 0.5s;
   animation: fadeOutDown 0.5s; }
+
+#groupname {
+  -webkit-appearance: none;
+  border-width: 0px;
+  border: none;
+}

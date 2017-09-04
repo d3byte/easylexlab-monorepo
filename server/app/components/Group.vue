@@ -5,8 +5,15 @@
     	<div class="row">
     		<div class="padding">
     			<div class="margin">
-    				<h5 class="m-b-0 _300">{{ group.name }}</h5>
+            <h3 @click="changeName" v-if="!newName" class="hover">
+              {{ group.name }}
+              <i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;"></i>
+            </h3>
     			</div>
+          <div class="margin input-group" v-if="newName" style="width: 150px;">
+            <input type="text" class="form-control" placeholder="Новое имя" v-model="name" aria-describedby="basic-addon2">
+            <span @click="submitNewName" class="input-group-addon hover" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></span>
+          </div>
     			<div class="row-col box">
     				<div class="col-sm-12">
     					<div class="box-header">
@@ -163,7 +170,9 @@ export default {
       writeMsg: false,
       chartData: {},
       noneResults: false,
-      currentTask: ''
+      currentTask: '',
+      newName: false,
+      name: ''
     }
   },
   computed: {
@@ -283,6 +292,7 @@ export default {
       }).then(res => {
         this.group = res.body.group;
         this.studentsLength = this.group._students.length;
+        this.name = this.group.name;
         var haveThisGroup = false;
         if(this.group._teacher == this.user._id)
           haveThisGroup = true;
@@ -295,6 +305,26 @@ export default {
         this.prepareRender();
         this.setCharData(this.slicedTests[0]);
       });
+    },
+    changeName() {
+      this.newName = true;
+    },
+    submitNewName() {
+      if(this.name != this.group.name) {
+        const body = {
+          groupId: this.group._id,
+          name: this.name
+        };
+        this.$http.patch('changename', body, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          this.group.name = this.name;
+          this.newName = false;
+        });
+      }
     }
   },
   http: {
@@ -319,6 +349,12 @@ export default {
 
 
 <style lang="css" scoped>
+#groupname {
+  border-width: 0 !important;
+  border: none !important;
+  border-bottom: none !important;
+}
+
 #nope {
   padding-left: 0;
 }
