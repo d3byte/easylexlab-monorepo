@@ -146,4 +146,8 @@ export default {
     color: #5688C7;
     text-decoration: none;
   }
+
+  label {
+    font-size: 14px;
+  }
 </style>

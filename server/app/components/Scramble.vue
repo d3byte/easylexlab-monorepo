@@ -6,7 +6,6 @@
     <div class="dashboard">
       <button @click="start" class="flat-btn">Перезапуск</button>
       <button class="flat-btn" @click="hideGames">Назад</button>
-      <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
     </div>
     <div v-if="win" class="win box">
       <h3 class="text-success">Победа!</h3>
