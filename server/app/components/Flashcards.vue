@@ -7,12 +7,20 @@
       <div class="row">
         <button @click="restart" class="flat-btn">Перезапуск</button>
       </div>
-        <div class="main-menu" v-show="!done && !lose">
-          <button @click="toKnow()" class="btn btn-success">Знаю</button>
-          <br>
-          <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
+      <div v-if="done || lose" @click="show()" class="vertical-center box">
+        <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
+        <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
+        <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
+      </div>
+        <div class="col-lg-4 cards-left" v-show="!done && !lose">
+          <div class="row-col accent white-text vertical-center cards-left">
+            <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3>
+          </div>
+          <div class="p-a text-center box">
+            <h4>{{ nextKey }}</h4>
+          </div>
         </div>
-          <div class="col-lg-6">
+          <div class="col-lg-4 task-card">
             <div v-show="!done && !lose" class="pair">
               <div v-show="!showDef" @click="show()" class="vertical-center box task-card">
                 <h1>{{ currentPair.key }}</h1>
@@ -22,19 +30,13 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6 cards-left" v-show="!done && !lose">
-            <div class="row-col primary white-text vertical-center">
-              <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3>
-            </div>
-            <div class="p-a text-center box">
-              <h3>{{ nextKey }}</h3>
-            </div>
+          <div class="col-lg-4 game-btns" v-show="!done && !lose">
+            <div class="vertical-center" id="test">
+            <button @click="toKnow()" class="btn btn-success">Знаю</button>
+            <br>
+            <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
           </div>
-    </div>
-    <div v-if="done || lose" @click="show()" class="vertical-center box">
-      <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
-      <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
-      <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
+          </div>
     </div>
     <div v-if="done && showTest" class="row">
       <button @click="tryTest" class="btn">Пройти тест</button>
@@ -223,8 +225,13 @@ export default {
     margin-bottom: 10px;
   }
 
+  #test {
+    margin-top: 70px;
+    margin-bottom: 100px;
+  }
+
   .flashcards {
-    width: 500px;
+    width: 700px;
   }
 
   .box.vertical-center {
@@ -237,10 +244,14 @@ export default {
     cursor: pointer;
   }
 
-  .main-menu {
+  /*.main-menu {
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
+  }*/
+
+  .game-btns {
+    height: 238px;
   }
 
   .last-menu {
@@ -259,7 +270,7 @@ export default {
   }
 
   .task-card {
-    height: 220px !important;
+    height: 238px !important;
   }
 
   .cards-left {
