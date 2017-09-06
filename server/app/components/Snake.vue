@@ -3,14 +3,9 @@
     <center>
       <h1>Snake</h1>
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-      <div class="dashboard">
-        <button @click="start" class="flat-btn">Перезапуск</button>
-        <button class="flat-btn" @click="hideGames">Назад</button>
-        <button v-if="win && showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
-      </div>
       <div v-if="win && !dead" class="win box">
         <h3 class="text-success">Победа!</h3>
-        <h5 @click="start" class="restart">Начать заново?</h5>
+        <h5 @click="start" class="restart">Начать заново.</h5>
       </div>
     </center>
     <center>
@@ -47,9 +42,9 @@
       </div>
     </center>
     <center>
-      <div v-if="dead && !win">
-        Вы проиграли. <a @click="start">Сыграть снова?</a>
-        <button class="flat-btn" @click="hideGames">Назад</button>
+      <div v-if="dead && !win"><br>
+        Вы проиграли.<br>
+        <a @click="start"><b>Попробуйте еще раз</b></a>.
       </div>
     </center>
   </div>

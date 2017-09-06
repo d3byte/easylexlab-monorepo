@@ -4,9 +4,8 @@
     <div class="container-fluid flashcards">
       <h1>Flashcards</h1>
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-      <div class="row box">
+      <div class="row">
         <button @click="restart" class="flat-btn">Перезапуск</button>
-        <button class="flat-btn" @click="hideGames">Назад</button>
       </div>
         <div class="main-menu">
           <button @click="toKnow()" class="btn btn-success">Знаю</button>

@@ -29,6 +29,9 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
+              <a class="nav-link" @click="hideGames">Назад</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" @click="showFlashcards">Flashcards</a>
             </li>
             <li class="nav-item">
@@ -249,6 +252,9 @@ export default {
     },
     tryTest() {
       this.$store.dispatch('showTest');
+    },
+    hideGames() {
+      this.$store.dispatch('hideGames');
     }
   },
   components: {

@@ -5,7 +5,6 @@
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
     <div class="dashboard">
       <button @click="start" class="flat-btn">Перезапуск</button>
-      <button class="flat-btn" @click="hideGames">Назад</button>
     </div>
     <div v-if="win" class="win box">
       <h3 class="text-success">Победа!</h3>

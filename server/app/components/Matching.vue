@@ -8,8 +8,6 @@
         <br>
         <div class="dashboard">
           <button @click="restart" class="flat-btn">Перезапуск</button>
-          <button class="flat-btn" @click="hideGames">Назад</button>
-          <button v-if="showTest" @click="tryTest" class="flat-btn">Пройти тест</button>
         </div><br>
         <div v-if="done || lose" @click="show()" class="vertical-center box">
           <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
