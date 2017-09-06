@@ -5,13 +5,18 @@
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <div class="box help" v-if="help">
         <p>
-          В этой игре вам нужно смотреть на то, какое слово вам показано и варианты перевода и отыскать по цвету нужную клетку.
+          <!-- В этой игре вам нужно смотреть на то, какое слово показано и варианты перевода и отыскать по цвету нужную клетку. -->
+          В этой игре Вы должны выбрать подходящий вариант перевода для слова, показанного в меню слева. Каждый вариант перевода - отдельная клетка, выделенная своим цветом.
         </p>
         <p>
           Управление змейкой производится нажатием на кнопки:
+          <br>
           W - вверх
+          <br>
           A - влево
+          <br>
           S - вниз
+          <br>
           D - вправо
         </p>
         <div class="form-group row">
@@ -27,14 +32,15 @@
         <button class="btn btn-info" @click="start">Начать</button>
       </div>
       <div v-if="win && !dead && !help" class="win box">
-        Победа!.<br>
+        <h1 class="text-success">Победа!</h1>
+        <br>
         <a @click="start"><b>Сыграйте еще раз</b></a>.<br>
-        Или попробуйте <a @click="help = true"><b>настроить игру</b></a>.
+        Или смените <a @click="help = true"><b>уровень сложности</b></a>.
       </div>
     </center>
     <center>
       <div v-if="!dead && !win && !help" class="box game">
-          <div class="table">
+          <div class="table box">
             <table>
               <tr v-for="row in grid">
                 <td v-for="cell in row" class="grid-cell"
@@ -66,10 +72,12 @@
       </div>
     </center>
     <center>
-      <div v-if="dead && !win && !help"><br>
-        Вы проиграли.<br>
+      <div v-if="dead && !win && !help">
+        <br>
+        <h1 class="text-danger">Вы проиграли.</h1>
+        <br>
         <a @click="start"><b>Попробуйте еще раз</b></a>.<br>
-        Или попробуйте <a @click="help = true"><b>настроить игру</b></a>.
+        Или смените <a @click="help = true"><b>уровень сложности</b></a>.
       </div>
     </center>
   </div>
