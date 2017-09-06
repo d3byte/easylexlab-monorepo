@@ -16,8 +16,8 @@
           <div class="row-col accent white-text vertical-center cards-left">
             <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3>
           </div>
-          <div class="p-a text-center box">
-            <h4>{{ nextKey }}</h4>
+          <div class="p-a vertical-center box" id="nextkey">
+            <h3>{{ nextKey }}</h3>
           </div>
         </div>
           <div class="col-lg-4 task-card">
@@ -30,8 +30,8 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 game-btns" v-show="!done && !lose">
-            <div class="vertical-center" id="test">
+          <div class="col-lg-4 game-btns box" v-show="!done && !lose">
+            <div class="vertical-center" id="game-btns-center">
             <button @click="toKnow()" class="btn btn-success">Знаю</button>
             <br>
             <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
@@ -125,7 +125,7 @@ export default {
         if (this.pairsLeft > 1) {
           this.nextKey = this.pairs[i + 1].key;
         } else if (this.pairsLeft == 1) {
-          this.nextKey = 'Это последняя карточка.';
+          this.nextKey = 'Последняя карточка';
         }
         if (this.index + 1 == this.pairs.length &&
           this.doneAttempts + 1 >= this.totalAttempts) {
@@ -168,7 +168,7 @@ export default {
         if (this.pairsLeft > 1) {
           this.nextKey = this.pairs[i + 1].key;
         } else if (this.pairsLeft == 1) {
-          this.nextKey = 'Это последняя карточка.';
+          this.nextKey = 'Последняя карточка.';
         }
         if (this.index + 1 == this.pairs.length &&
           this.doneAttempts + 1 >= this.totalAttempts) {
@@ -225,8 +225,8 @@ export default {
     margin-bottom: 10px;
   }
 
-  #test {
-    margin-top: 70px;
+  #game-btns-center {
+    margin-top: 80px;
     margin-bottom: 100px;
   }
 
@@ -251,7 +251,7 @@ export default {
   }*/
 
   .game-btns {
-    height: 238px;
+    height: 268px;
   }
 
   .last-menu {
@@ -269,8 +269,12 @@ export default {
     color: white;
   }
 
+  #nextkey {
+    height: 100px !important;
+  }
+
   .task-card {
-    height: 238px !important;
+    height: 268px !important;
   }
 
   .cards-left {
