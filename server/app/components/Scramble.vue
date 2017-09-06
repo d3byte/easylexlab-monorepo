@@ -13,10 +13,10 @@
     <div class="box game" v-if="!win">
       <h3 class="key"><b>{{ currentPair.value }}</b></h3>
       <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
-      <draggable v-model="shuffledLetters" @end="onEnd" element="h3" class="value" :class="correct ?'correct':'default'">
-        <span class="letter" v-for="letter in shuffledLetters">
+      <draggable v-model="shuffledLetters" @end="onEnd" element="div" class="value" :class="correct ?'correct':'default'">
+        <div class="letter" v-for="letter in shuffledLetters">
          {{ letter }}
-        </span>
+       </div>
      </draggable>
     </div>
   </center>
@@ -120,9 +120,7 @@ export default {
 
 <style lang="css" scoped>
   .game, .win {
-    min-width: 80px;
-    width: auto;
-    max-width: 360px;
+    width: 360px;
   }
 
   .correct {
@@ -147,6 +145,7 @@ export default {
     font-size: 24px;
     border: 1px solid darkgray;
     margin-right: 2px;
+    width: 34px;
   }
 
   .letter:last-child {
@@ -154,19 +153,17 @@ export default {
   }
 
   .value {
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding-top: 10px;
     padding-bottom: 10px;
-  }
-
-  .value > span {
-    text-align: center !important;
   }
 
   .correct > .letter {
     background: transparent;
     border: none;
     margin-right: 0;
+    width: 24px;
   }
 </style>
