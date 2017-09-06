@@ -13,7 +13,7 @@
         <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
       </div>
         <div class="col-lg-4 cards-left" v-show="!done && !lose">
-          <div class="row-col accent white-text vertical-center cards-left">
+          <div class="row-col dark white-text vertical-center cards-left">
             <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3>
           </div>
           <div class="p-a vertical-center box" id="nextkey">
