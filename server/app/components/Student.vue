@@ -226,12 +226,13 @@ export default {
           deadline: task.deadline
         }
       });
-      let closestDay = 0;
+      dates = dates.sort((a, b) => a.timeToDo > b.timeToDo);
+      let today = +moment().format('LL').slice(0, 2);
       let closest = '';
       for (let date of dates) {
-        if (+date.deadline.slice(0, 2).trim() > closestDay) {
-          closestDay = +date.deadline.slice(0, 2);
+        if (+date.deadline.slice(0, 2) > today) {
           closest = date.deadline;
+          break;
         }
       }
       this.date = closest;
