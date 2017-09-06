@@ -120,7 +120,8 @@ export default {
 
 <style lang="css" scoped>
   .game, .win {
-    width: 360px;
+    display: inline-block;
+    min-width: 360px;
   }
 
   .correct {
@@ -156,8 +157,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
   }
 
   .correct > .letter {
