@@ -55,7 +55,7 @@
 
             </li>
             <li class="nav-item" v-for="group in user._groups">
-              <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
+              <a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a>
             </li>
           </ul>
         </div>
