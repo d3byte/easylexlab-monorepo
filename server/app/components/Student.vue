@@ -80,7 +80,7 @@
         <div class="p-y-md">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item" v-for="group in user._groups">
-              <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
+              <a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a>
             </li>
           </ul>
         </div>
@@ -153,15 +153,15 @@
                         <tr v-for="(msg, index) in slicedMessages">
                           <td>{{ index + 1}}</td>
                           <td></td>
-                          <td>{{ msg.text}}</td>
-                          <td>{{ msg.author}}</td>
+                          <td>{{ msg.text }}</td>
+                          <td>{{ msg.author }}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
                 <center>
-                  <button @click="nextFive" class="btn btn-primary">Показать еще</button>
+                  <button v-show="slicedMessages.length != messages.length" @click="nextFive" class="btn btn-primary">Показать еще</button>
                 </center>
               </div>
             </div>
