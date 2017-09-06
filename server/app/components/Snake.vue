@@ -3,13 +3,30 @@
     <center>
       <h1>Snake</h1>
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-      <div v-if="win && !dead" class="win box">
-        <h3 class="text-success">Победа!</h3>
-        <h5 @click="start" class="restart">Начать заново.</h5>
+      <div class="box help" v-if="help">
+        <p>
+          В этой игре вам нужно смотреть на то, какое слово вам показано и варианты перевода и отыскать по цвету нужную клетку.
+        </p>
+        <div class="form-group row">
+          <label class="col-sm-2 form-control-label">Уровень сложности</label>
+          <div class="col-sm-10">
+            <select class="form-control input-c" v-model="ms">
+              <option value="200">Легкий</option>
+              <option value="150">Средний</option>
+              <option value="100">Тяжелый</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-info" @click="start">Начать</button>
+      </div>
+      <div v-if="win && !dead && !help" class="win box">
+        Победа!.<br>
+        <a @click="start"><b>Сыграйте еще раз</b></a>.<br>
+        Или попробуйте <a @click="help = true"><b>настроить игру</b></a>.
       </div>
     </center>
     <center>
-      <div v-if="!dead && !win" class="box game">
+      <div v-if="!dead && !win && !help" class="box game">
           <div class="table">
             <table>
               <tr v-for="row in grid">
@@ -42,9 +59,10 @@
       </div>
     </center>
     <center>
-      <div v-if="dead && !win"><br>
+      <div v-if="dead && !win && !help"><br>
         Вы проиграли.<br>
-        <a @click="start"><b>Попробуйте еще раз</b></a>.
+        <a @click="start"><b>Попробуйте еще раз</b></a>.<br>
+        Или попробуйте <a @click="help = true"><b>настроить игру</b></a>.
       </div>
     </center>
   </div>
@@ -72,6 +90,8 @@
     props: ['stack'],
     data() {
       return {
+        help: true,
+        ms: 200,
         direction: UP,
         dead: false,
         win: false,
@@ -111,6 +131,7 @@
       start() {
         if(ticking)
           clearInterval(ticking);
+        this.help = false;
         let size = 25, ms = 140;
         this.grid = new Grid(size, (x, y) => ({ x, y, snake: 0, food: { exists: false, index: null } }));
         this.dead = false;
@@ -118,7 +139,7 @@
         this.win = false;
         userActions = [];
         length = 5;
-        ticking = setInterval(this.tick, ms);
+        ticking = setInterval(this.tick, parseInt(this.ms));
 
         snakePos = Grid.random(this.grid);
         snakePos.snake = length;
@@ -287,7 +308,6 @@
       for(let task of this.stack.tasks) {
         Array.prototype.push.apply(this.words, task.content);
       }
-      this.start();
       window.addEventListener('keydown', event => this.handleUserAction(event.which));
     }
   }
@@ -384,6 +404,11 @@
     flex-direction: row;
     justify-content: center;
     width: 560px;
+  }
+
+  .help {
+    width: 560px;
+    padding: 10px;
   }
 
   .words {
