@@ -96,7 +96,7 @@
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
         <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
-        <h3 v-if="!!!tasks.length && !showPreloader && showAll">Заданий нет</h3>
+        <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
         <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
           <div class="col-lg col-md col-sm col-xs box task">
@@ -299,8 +299,10 @@ export default {
     this.$store.dispatch('testNotAvailable');
     EventBus.$once('requested', event => {
       this.wordsLearnt = this.user.wordsLearnt;
-      this.sortTasks();
-      this.setDate();
+      if(this._group) {
+        this.sortTasks();
+        this.setDate();
+      }
       this.showPreloader = false;
       if(this.group && this.group.messages) {
         for (var msg of this.group.messages) {
