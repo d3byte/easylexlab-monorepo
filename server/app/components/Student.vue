@@ -26,7 +26,8 @@
             <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
             <h5 class="m-a-0 text-md text-muted">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
             <br>
-            <h5 class="m-a-0 text-md text-muted">Ближайший день сдачи: <b> {{ date }}</b></h5>
+            <h5 class="m-a-0 text-md text-muted" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
+            <h5 class="m-a-0 text-md text-muted" v-else>Ближайшего дня сдачи нет</h5>
           </div>
         </div>
         <div class="col-md-4 ad hidden-sm-down">
