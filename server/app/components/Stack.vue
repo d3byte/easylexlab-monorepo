@@ -117,7 +117,7 @@
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
               <a class="nav-link" v-if="testAvailable" @click="tryTest">Пройти тест</a>
-              <a class="nav-link" v-else>Тест будет доступен после прохождения всех игр</a>
+              <a class="nav-link" v-else>Тест будет доступен после завершения всех видов деятельности</a>
             </li>
           </ul>
         </div>
