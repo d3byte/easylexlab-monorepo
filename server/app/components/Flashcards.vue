@@ -7,7 +7,7 @@
       <div class="row">
         <button @click="restart" class="flat-btn">Перезапуск</button>
       </div>
-        <div class="main-menu">
+        <div class="main-menu" v-show="!done && !lose">
           <button @click="toKnow()" class="btn btn-success">Знаю</button>
           <br>
           <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>

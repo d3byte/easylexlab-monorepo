@@ -32,19 +32,34 @@
               <a class="nav-link" @click="hideGames">Назад</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showFlashcards">Flashcards</a>
+              <a class="nav-link" @click="showFlashcards">
+                Flashcards <i v-if="games.flashcards.win" class="material-icons">done</i><br>
+                {{ games.flashcards.done + '/' + games.flashcards.attempts }}
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showMatching">Matching</a>
+              <a class="nav-link" @click="showMatching">
+                Matching <i v-if="games.matching.win" class="material-icons">done</i><br>
+                {{ games.matching.done + '/' + games.matching.attempts }}
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showTypein">Type In</a>
+              <a class="nav-link" @click="showTypein">
+                Type In <i v-if="games.typein.win" class="material-icons">done</i><br>
+                {{ games.typein.done + '/' + games.typein.attempts }}
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showSnake">Змейка</a>
+              <a class="nav-link" @click="showSnake">
+                Змейка <i v-if="games.snake.win" class="material-icons">done</i><br>
+                {{ games.snake.done + '/' + games.snake.attempts }}
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showScramble">Word Scramble</a>
+              <a class="nav-link" @click="showScramble">
+                Word Scramble <i v-if="games.scramble.win" class="material-icons">done</i><br>
+                {{ games.scramble.done + '/' + games.scramble.attempts }}
+              </a>
             </li>
             <li class="nav-item" v-if="testAvailable">
               <a class="nav-link" @click="tryTest">Пройти тест</a>
