@@ -97,7 +97,7 @@
         </div>
       </div>
       <h5 class="text-muted text-center m-b-lg">
-        Заведите аккаунт уже сейчас – <router-link to="/signup">зарегистрироваться</router-link>
+        Заведите аккаунт уже сейчас – <router-link to="/signup"><b>зарегистрироваться</b></router-link>
       </h5>
     </div>
   </div>
