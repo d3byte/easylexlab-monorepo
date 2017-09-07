@@ -305,8 +305,8 @@ export default {
       }
       this.showPreloader = false;
       if(this.group && this.group.messages) {
-        for (var msg of this.group.messages) {
-          this.messages.push(msg);
+        for (var group of this.user._groups) {
+          group.messages.map(msg => this.messages.push(msg));
         }
         this.messages = this.messages.reverse();
         this.slicedMessages = this.messages.slice(0, 5);
