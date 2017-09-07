@@ -23,9 +23,7 @@
 
   <div class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
     <div class="row">
-      <div class="col-sm-6 push-sm-6">
-      </div>
-      <div class="col-sm-6 pull-sm-6">
+      <div class="col-sm-12">
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
