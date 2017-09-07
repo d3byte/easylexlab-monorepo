@@ -4,7 +4,7 @@
     <div class="container-fluid flashcards">
       <h1>Flashcards</h1>
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-      <div class="row">
+      <div class="row" style="margin-bottom:20px;">
         <button @click="restart" class="flat-btn">Перезапуск</button>
       </div>
       <div v-if="done || lose" @click="show()" class="vertical-center box">
@@ -12,35 +12,36 @@
         <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
         <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
       </div>
-        <div class="col-lg-4 cards-left" v-show="!done && !lose">
-          <div class="row-col dark white-text vertical-center cards-left">
-            <h3>Осталось карточек: {{ pairsLeft - 1 }}</h3>
+      <div class="col-md-4" v-show="!done && !lose">
+        <div class="row-col dark white-text vertical-center cards-left">
+          <h5>Осталось карточек: {{ pairsLeft - 1 }}</h5>
+        </div>
+        <div class="p-a vertical-center box" id="nextkey">
+          <h3>{{ nextKey }}</h3>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div v-show="!done && !lose" class="pair">
+          <div v-show="!showDef" @click="show()" class="vertical-center box task-card game-item">
+            <h1>{{ currentPair.key }}</h1>
           </div>
-          <div class="p-a vertical-center box" id="nextkey">
-            <h3>{{ nextKey }}</h3>
+          <div v-show="showDef" @click="show()" class="vertical-center box task-card game-item">
+            <h1>{{ currentPair.value }}</h1>
           </div>
         </div>
-          <div class="col-lg-4 task-card">
-            <div v-show="!done && !lose" class="pair">
-              <div v-show="!showDef" @click="show()" class="vertical-center box task-card">
-                <h1>{{ currentPair.key }}</h1>
-              </div>
-              <div v-show="showDef" @click="show()" class="vertical-center box task-card">
-                <h1>{{ currentPair.value }}</h1>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 game-btns box" v-show="!done && !lose">
-            <button @click="toKnow()" class="btn btn-success">Знаю</button>
-            <br>
-            <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
+      </div>
+      <div class="col-md-4" v-show="!done && !lose">
+        <div class="game-btns game-item box">
+          <button @click="toKnow()" class="btn btn-success">Знаю</button>
+          <br>
+          <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
         </div>
+      </div>
     </div>
     <div v-if="done && showTest" class="row">
       <button @click="tryTest" class="btn">Пройти тест</button>
     </div>
-</center>
-</div>
+  </center>
 </div>
 </template>
 
@@ -229,11 +230,10 @@ export default {
   }
 
   .flashcards {
-    width: 700px;
+    width: 800px;
   }
 
   .box.vertical-center {
-    height: 150px;;
     justify-content: center;
     margin-bottom: 20px;
     -webkit-user-select: none;
@@ -243,10 +243,9 @@ export default {
   }
 
   .game-btns {
-    height: 268px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
   }
 
@@ -265,22 +264,15 @@ export default {
     color: white;
   }
 
-  #nextkey {
-    height: 100px !important;
-  }
-
-  .task-card {
-    height: 268px !important;
-  }
-
-  .cards-left {
-    height: 150px !important;
-  }
-
   .btn.back {
     background: #1DA1F2;
   }
 
+  .cards-left {
+    height: 130px;
+  }
 
-
+  .game-item {
+    height: 200px;
+  }
 </style>
