@@ -11,7 +11,7 @@
         <div class="col-sm-7">
           <div class="clear m-b">
             <h3 class="m-a-0 m-b-xs">Название урока: {{ task.name }}</h3><br>
-            <h4 class="hidden-sm-down text-muted" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">Выберите вид деятельности</h4>
+            <h5 class="hidden-sm-down text-muted" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">Выберите вид деятельности</h5>
             <h6 class="hidden-md-up text-muted">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
           </div>
         </div>
@@ -117,34 +117,36 @@
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
               <a class="nav-link" v-if="testAvailable" @click="tryTest">Пройти тест</a>
-              <a class="nav-link" v-else>Тест будет доступен после завершения всех видов деятельности</a>
+              <a class="nav-link" v-else>Выполните все виды деятельности</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="row col-lg-12" id="translate">
-    <div class="box">
-      <div class="row-col grey white-text">
-        <h3>Повторить</h3>
+  <div class="row" id="translate">
+    <div class="col-sm-12 ">
+      <div class="box">
+        <div class="row-col grey white-text">
+          <h3>Повторить</h3>
+        </div>
+        <div class="p-a table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>Слово</th>
+              <th>Перевод</th>
+            </tr>
+          </thead>
+          <tbody v-for="task in task.tasks">
+            <tr v-for="pair in task.content">
+              <td>{{ pair.key }}</td>
+              <td>{{ pair.value }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="p-a table-responsive">
-        <table class="table table-striped table-hover">
-          <thead>
-          <tr>
-            <th>Слово</th>
-            <th>Перевод</th>
-          </tr>
-        </thead>
-        <tbody v-for="task in task.tasks">
-          <tr v-for="pair in task.content">
-            <td>{{ pair.key }}</td>
-            <td>{{ pair.value }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      </div>
   </div>
 </div>
 </div>
@@ -309,6 +311,7 @@ export default {
 
   #translate {
     margin-top: 20px;
+    background: transparent;
   }
 
   .col-container {
