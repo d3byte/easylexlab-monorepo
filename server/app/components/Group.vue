@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <app-header/>
-    <div class="row-col b-b">
+    <div class="row-col b-b padding">
     	<div class="row">
     		<div class="padding">
     			<div class="margin">
