@@ -31,12 +31,10 @@
             </div>
           </div>
           <div class="col-lg-4 game-btns box" v-show="!done && !lose">
-            <div class="vertical-center" id="game-btns-center">
             <button @click="toKnow()" class="btn btn-success">Знаю</button>
             <br>
             <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
-          </div>
-          </div>
+        </div>
     </div>
     <div v-if="done && showTest" class="row">
       <button @click="tryTest" class="btn">Пройти тест</button>
@@ -244,14 +242,12 @@ export default {
     cursor: pointer;
   }
 
-  /*.main-menu {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }*/
-
   .game-btns {
     height: 268px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .last-menu {
@@ -284,4 +280,7 @@ export default {
   .btn.back {
     background: #1DA1F2;
   }
+
+
+
 </style>
