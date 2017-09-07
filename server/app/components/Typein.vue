@@ -1,5 +1,5 @@
 <template>
-<div class="container box padding">
+<div class="container padding">
   <center>
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
     <div v-if="done" class="signup">
@@ -15,9 +15,12 @@
   </center>
   <form v-if="!showPreloader && !done && !lose" class="padding" onsubmit="return false">
     <div class="row padding">
-      <h1>Type In</h1>
-      <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
-      <hr>
+      <center>
+        <h1>Type In</h1>
+        <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
+      </center>
+    </div>
+    <div class="row padding box">
       <div class="md-form-group" v-for="pair in pairs">
         <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
         <label>{{ pair.value }}</label>
