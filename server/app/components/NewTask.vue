@@ -7,6 +7,9 @@
         </div>
         <div class="modal-body text-center p-lg">
           <h5 v-if="success" class="success">Задание успешно создано.</h5>
+          <center>
+            <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="success">Назад</button>
+          </center>
           <form class="login-form" onsubmit="return false" v-if="this.showEditor">
             <div class="table-responsive">
               <table class="table table-striped b-t b-b">
@@ -43,9 +46,10 @@
             </div>
             <center>
               <button @click="confirm" class="btn btn-primary">Готово</button>
+              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Отмена</button>
             </center>
           </form>
-          <div v-if="this.showPost">
+          <div v-if="this.showPost && !success">
             <form onsubmit="return false">
               <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Название задания</label>
@@ -91,8 +95,7 @@
               </div>
               <hr>
               <button @click="post" class="btn dark-white p-x-md" v-if="!success">Создать</button>
-              <button type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
-              <button type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-else>Закрыть</button>
+              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
             </form>
           </div>
         </div>

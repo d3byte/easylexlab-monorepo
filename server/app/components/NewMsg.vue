@@ -7,7 +7,10 @@
           </div>
           <div class="modal-body text-center p-lg">
             <h5 v-if="success && !showPreloader" class="success">Сообщение успешно отправлено.</h5>
-            <form class="login-form" onsubmit="return false">
+            <center>
+              <button v-if="success && !showPreloader" @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
+            </center>
+            <form v-if="!success" class="login-form" onsubmit="return false">
               <div class="form-group row">
                 <label class="col-sm-2 form-control-label">Текст сообщения</label>
                 <div class="col-sm-10">
@@ -18,9 +21,8 @@
                 <textarea v-model="text" placeholder="Сообщение" required></textarea>
               </div> -->
               <center>
-                <button @click="send" class="btn dark-white p-x-md" v-if="!success">Отправить</button>
-                <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
-                <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-else>Закрыть</button>
+                <button @click="send" class="btn btn-primary p-x-md" v-if="!success">Отправить</button>
+                <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Отмена</button>
               </center>
             </form>
           </div>

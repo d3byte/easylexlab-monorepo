@@ -12,8 +12,9 @@
             <br>
             <button class="btn btn-primary goto" id="hide" data-dismiss="modal" @click="goto(newGroupId)"> Перейти</button>
             <br>
+            <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Назад</button>
           </h5>
-          <form class="login-form" onsubmit="return false">
+          <form class="login-form" onsubmit="return false" v-if="!success">
             <div class="name">
               <label>Название группы</label><br>
               <input v-model="name" required type="text" tabindex="1">
@@ -24,7 +25,7 @@
             </div>
             <center>
               <button @click="create" class="btn dark-white p-x-md" tabindex="3">Создать</button>
-              <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Отмена</button>
+              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Отмена</button>
             </center>
           </form>
         </div>
@@ -51,6 +52,14 @@ export default {
     root: '//ealapi.tw1.ru/api'
   },
   methods: {
+    refresh() {
+      this.name = '';
+      this.grade = null;
+      this.success = false;
+      this.error = false;
+      this.errormsg = '';
+      this.newGroupId = '';
+    },
     hideModal() {
       $('.ui.basic.modal').modal('hide');
     },
