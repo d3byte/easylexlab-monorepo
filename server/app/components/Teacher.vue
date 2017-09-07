@@ -38,21 +38,6 @@
       </div>
     </div>
   </div>
-  <div class="dker p-x">
-    <div class="row">
-      <div class="col-sm-6 push-sm-6">
-      </div>
-      <div class="col-sm-6 pull-sm-6">
-        <div class="p-y-md clearfix nav-active-primary">
-          <ul class="nav nav-pills nav-sm">
-            <li class="nav-item" v-for="group in user._groups">
-              <a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
   <router-view></router-view>
 </div>
 </template>
