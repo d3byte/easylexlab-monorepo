@@ -4,7 +4,7 @@
     <newmsg v-if="logged && $route.params.id" />
     <regcode v-if="logged && $route.params.id" />
     <history v-if="logged && $route.params.id && $route.path.slice(0, 6) == '/group'" />
-    <delete v-if="logged"/>
+    <delete v-if="logged && $route.params.id && $route.path.slice(0, 6) == '/group'" />
     <newtask v-if="logged" />
     <feedback v-if="logged" />
     <test-aval v-if="logged && testAvailable" />
