@@ -15,7 +15,8 @@
           <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
         </div>
         <div class="row" v-if="!done && !lose">
-          <div v-for="item in newPairs" class="col-lg-3">
+          <center>
+          <div v-for="item in newPairs" class="col-lg-4" id="dju">
             <div class="box"
                  :id="item.key"
                  :class="selected.first == item.key ||
@@ -25,6 +26,7 @@
               <h2>{{ item.word }}</h2>
             </div>
           </div>
+        </center>
         </div>
         <br>
       </div>
@@ -190,6 +192,10 @@ export default {
 
   .box {
     padding: 10px;
+  }
+
+  #dju {
+    word-break: break-all;
   }
 
   .selected {

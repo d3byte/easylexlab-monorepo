@@ -226,6 +226,7 @@ export default {
 
   .task-card {
     height: 238px !important;
+    word-break: break-all;
   }
 
   .cards-left {
@@ -234,6 +235,7 @@ export default {
 
   #nextkey {
     height: 119px !important;
+    word-break: break-all;
   }
 
   #game-btns-center {
