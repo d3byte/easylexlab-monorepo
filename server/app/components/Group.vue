@@ -49,7 +49,7 @@
                     <a href class="btn btn-sm rounded accent col-sm-12" data-toggle="modal" data-target="#history">История заданий</a>
                   </div>
                   <div class="col-sm-6" style="margin-bottom: 10px;">
-                    <a href class="btn btn-sm rounded danger" data-toggle="modal" data-target="#delete">Удалить группу</a>
+                    <a href class="btn btn-sm rounded danger col-sm-12" data-toggle="modal" data-target="#delete">Удалить группу</a>
                   </div>
     						</div>
     					</div>

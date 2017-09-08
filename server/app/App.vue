@@ -4,6 +4,7 @@
     <newmsg v-if="logged && $route.params.id" />
     <regcode v-if="logged && $route.params.id" />
     <history v-if="logged && $route.params.id && $route.path.slice(0, 6) == '/group'" />
+    <delete v-if="logged"/>
     <newtask v-if="logged" />
     <feedback v-if="logged" />
     <test-aval v-if="logged && testAvailable" />
@@ -18,6 +19,7 @@ import RegCode from './components/RegCode.vue';
 import NewTask from './components/NewTask.vue';
 import Feedback from './components/Feedback.vue';
 import TaskHistory from './components/TaskHistory.vue';
+import TaskDelete from './components/TaskDelete.vue';
 import TestAval from './components/TestAval.vue';
 
 export default {
@@ -36,6 +38,7 @@ export default {
     'newtask': NewTask,
     'feedback': Feedback,
     'history': TaskHistory,
+    'delete': TaskDelete,
     'test-aval': TestAval
   }
 }
