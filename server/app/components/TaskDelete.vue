@@ -4,37 +4,38 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Удаление группы</h5>
+          <h5 class="errormsg" v-if="!!error.length">{{ error }}</h5>
         </div>
         <div class="modal-body text-center p-lg">
           <h3>
-            Подтвердите удаление группы вводом своего пароля.
+            Подтвердите удаление группы, введя название группы.
            </h3>
-             <p>
-               При удалении группы удалятся все задания,<br>
-               созданные для этой группы.
-             </p>
-             <form role="form" class="" onsubmit="return false">
+           <p>
+             При удалении группы удалятся все задания,<br>
+             созданные для этой группы.
+           </p>
+           <form role="form" class="" onsubmit="return false">
              <div class="form-group">
                <center>
                <div class="row flexme">
                  <div class="col-sm-12">
-               <label>Введите пароль:</label>
+               <label>Введите название группы:</label>
              </div>
              <div class="col-sm-4"></div>
              <div class="col-sm-4">
-               <input type="password" class="form-control">
+               <input type="name" class="form-control">
              </div>
              <div class="col-sm-4"></div>
            </div>
            <br>
              <button type="submit" class="btn btn-success m-t" @click="">Удалить группу</button>
            </center>
-         </div>
-         </form>
-        </div>
-        <div class="modal-footer text-center">
-          <button type="button" class="btn danger p-x-md" data-dismiss="modal">Отмена</button>
-        </div>
+          </div>
+       </form>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn danger p-x-md" data-dismiss="modal">Отмена</button>
+      </div>
     </div>
   </div>
 </div>
@@ -44,16 +45,46 @@
 export default {
   data() {
     return {
-      group: {},
+      name: '',
+      error: '',
+      group: {}
     }
   },
   http: {
     root: '//ealapi.tw1.ru/api'
   },
   methods: {
-
+    submit() {
+      if(this.name == this.group.name) {
+        this.$http.post('deletegroup', { groupId: this.group._id }, {
+          headers: {
+            'Content-type' : 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          if(res.body.success) {
+            this.$router.push('/profile');
+          } else {
+            this.error = 'Произошла ошибка во время удаления. Попробуйте позже.'
+          }
+        });
+      } else {
+        this.error = 'Введённое имя не совпадает с именем группы.';
+      }
+    }
   },
-  created() {}
+  created() {
+    this.$http.post('getgroup', {
+      groupId: this.$route.params.id
+    }, {
+      headers: {
+        'Content-type' : 'application/json',
+        'Authorization': 'Bearer ' + this.$store.getters.userToken
+      }
+    }).then(res => {
+      this.group = res.body.group;
+    });
+  }
 }
 </script>
 
