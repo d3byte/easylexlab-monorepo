@@ -308,5 +308,16 @@ groupController.deleteMsg = function (req, res) {
     }
 };
 
+groupController.deleteGroup = function (req, res) {
+    var groupId = req.body.groupId;
+    var user = req.user;
+
+    if (user.permissions == 'teacher' || user.permissions == 'admin') {
+        _models2.default.Group.findByIdAndRemove(groupId).then(function (success) {
+            return res.json({ success: success });
+        });
+    }
+};
+
 exports.default = groupController;
 //# sourceMappingURL=groupController.js.map

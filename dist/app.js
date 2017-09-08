@@ -66,6 +66,9 @@ app.get('/signup', function (req, res) {
 app.get('/profile', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
+app.get('/profile/msg', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
 app.get('/group/:id', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
