@@ -26,12 +26,14 @@
                   <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
                   <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
                   <a href class="btn btn-sm rounded accent" data-toggle="modal" data-target="#history">История заданий</a>
+                  <a href class="btn btn-sm rounded danger" data-toggle="modal" data-target="#delete">Удалить группу</a>
     						</div>
                 <div class="row hidden-sm-up">
                   <a href style="margin-bottom: 10px;" class="btn btn-sm rounded success text-white col-xs-12" data-toggle="modal" data-target="#newtask">Новое задание</a>
                   <a href style="margin-bottom: 10px;" class="btn btn-sm rounded primary col-xs-12" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
                   <a href style="margin-bottom: 10px;" class="btn btn-sm rounded info col-xs-12" data-toggle="modal" data-target="#regcode">Код регистрации</a>
                   <a href style="margin-bottom: 10px;" class="btn btn-sm rounded accent col-xs-12" data-toggle="modal" data-target="#history">История заданий</a>
+                  <a href style="margin-bottom: 10px;" class="btn btn-sm rounded danger col-xs-12" data-toggle="modal" data-target="#delete">Удалить группу</a>
     						</div>
                 <div class="row hidden-md-up hidden-xs-down">
                   <div class="col-sm-6" style="margin-bottom: 10px;">
@@ -45,6 +47,9 @@
                   </div>
                   <div class="col-sm-6" style="margin-bottom: 10px;">
                     <a href class="btn btn-sm rounded accent col-sm-12" data-toggle="modal" data-target="#history">История заданий</a>
+                  </div>
+                  <div class="col-sm-6" style="margin-bottom: 10px;">
+                    <a href class="btn btn-sm rounded danger" data-toggle="modal" data-target="#delete">Удалить группу</a>
                   </div>
     						</div>
     					</div>
