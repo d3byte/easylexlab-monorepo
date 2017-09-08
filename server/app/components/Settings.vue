@@ -177,7 +177,7 @@ export default {
         if (res.body.success) {
           this.changePass();
         } else {
-          this.errorPassword = 'Старый пароль не верный. Попробуйте еще раз';
+          this.errorPassword = 'Старый пароль неверен. Попробуйте еще раз.';
           this.passwordSuccess = '';
         }
       });

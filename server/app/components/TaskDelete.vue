@@ -6,14 +6,38 @@
           <h5 class="modal-title">Удаление группы</h5>
         </div>
         <div class="modal-body text-center p-lg">
-          <h1> Да ты просто лох! </h1>
+          <h3>
+            Подтвердите удаление группы вводом своего пароля.
+           </h3>
+             <p>
+               При удалении группы удалятся все задания,<br>
+               созданные для этой группы.
+             </p>
+             <form role="form" class="" onsubmit="return false">
+             <div class="form-group">
+               <center>
+               <div class="row flexme">
+                 <div class="col-sm-12">
+               <label>Введите пароль:</label>
+             </div>
+             <div class="col-sm-4"></div>
+             <div class="col-sm-4">
+               <input type="password" class="form-control">
+             </div>
+             <div class="col-sm-4"></div>
+           </div>
+           <br>
+             <button type="submit" class="btn btn-success m-t" @click="">Удалить группу</button>
+           </center>
+         </div>
+         </form>
         </div>
         <div class="modal-footer text-center">
-          <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn danger p-x-md" data-dismiss="modal">Отмена</button>
         </div>
-      </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -29,8 +53,7 @@ export default {
   methods: {
 
   },
-  created() {
-  }
+  created() {}
 }
 </script>
 
