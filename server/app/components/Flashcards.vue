@@ -16,7 +16,7 @@
         <div class="row-col dark white-text vertical-center cards-left">
           <h5>Осталось карточек: {{ pairsLeft - 1 }}</h5>
         </div>
-        <div class="p-a vertical-center box" id="nextkey">
+        <div class="p-a vertical-center box cards-left" id="nextkey">
           <h3>{{ nextKey }}</h3>
         </div>
       </div>
@@ -224,13 +224,25 @@ export default {
     margin-bottom: 10px;
   }
 
+  .task-card {
+    height: 238px !important;
+  }
+
+  .cards-left {
+    height: 119px !important;
+  }
+
+  #nextkey {
+    height: 119px !important;
+  }
+
   #game-btns-center {
     margin-top: 80px;
     margin-bottom: 100px;
   }
 
   .flashcards {
-    width: 800px;
+    width: 950px;
   }
 
   .box.vertical-center {
@@ -247,6 +259,7 @@ export default {
     flex-direction: column;
     align-items: baseline;
     justify-content: center;
+    height: 238px !important;
   }
 
   .last-menu {
@@ -269,7 +282,7 @@ export default {
   }
 
   .cards-left {
-    height: 130px;
+    height: 119px !important;
   }
 
   .game-item {
