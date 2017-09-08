@@ -295,4 +295,13 @@ groupController.deleteMsg = (req, res) => {
   }
 };
 
+groupController.deleteGroup = (req, res) => {
+  const groupId = req.body.groupId;
+  const user = req.user;
+
+  if(user.permissions == 'teacher' || user.permissions == 'admin') {
+    db.Group.findByIdAndRemove(groupId).then(success => res.json({ success }));
+  }
+};
+
 export default groupController;

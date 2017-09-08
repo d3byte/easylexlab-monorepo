@@ -38,6 +38,7 @@ routes.post('/getgroup', expressJWT({ secret }), groupController.getGroup);
 routes.post('/addtest', expressJWT({ secret }), groupController.addTest);
 routes.patch('/changename', expressJWT({ secret }), groupController.changeName);
 routes.post('/deletemsg', expressJWT({ secret }), groupController.deleteMsg);
+routes.post('/deletegroup', expressJWT({ secret }), groupController.deleteGroup);
 
 
 // Stack routes
