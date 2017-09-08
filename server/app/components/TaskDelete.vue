@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Удаление группы</h5>
-          <h5 class="errormsg" v-if="!!error.length">{{ error }}</h5>
+          <h6 class="errormsg" v-if="!!error.length">{{ error }}</h6>
         </div>
         <div class="modal-body text-center p-lg">
           <h3>
@@ -23,18 +23,18 @@
              </div>
              <div class="col-sm-4"></div>
              <div class="col-sm-4">
-               <input type="name" class="form-control">
+               <input type="name" class="form-control" v-model="name">
              </div>
              <div class="col-sm-4"></div>
            </div>
            <br>
-             <button type="submit" class="btn btn-success m-t" @click="">Удалить группу</button>
+             <button @click="submit" type="submit" class="btn btn-danger m-t">Удалить группу</button>
            </center>
           </div>
        </form>
       </div>
       <div class="modal-footer text-center">
-        <button type="button" class="btn danger p-x-md" data-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-success p-x-md" data-dismiss="modal">Отмена</button>
       </div>
     </div>
   </div>
@@ -63,6 +63,7 @@ export default {
           }
         }).then(res => {
           if(res.body.success) {
+            $('#delete').modal('hide');
             this.$router.push('/profile');
           } else {
             this.error = 'Произошла ошибка во время удаления. Попробуйте позже.'
