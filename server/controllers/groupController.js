@@ -313,7 +313,7 @@ groupController.removeStudent = (req, res) => {
 
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
     db.Group.findById(groupId).then(group => {
-      group = group._students.filter(student => student._id != userId);
+      group._students = group._students.filter(student => student._id != userId);
       group.save().then(success => res.json({ success: true }));
     });
   }

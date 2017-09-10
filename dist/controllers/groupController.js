@@ -328,7 +328,7 @@ groupController.removeStudent = function (req, res) {
 
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
         _models2.default.Group.findById(groupId).then(function (group) {
-            group = group._students.filter(function (student) {
+            group._students = group._students.filter(function (student) {
                 return student._id != userId;
             });
             group.save().then(function (success) {
