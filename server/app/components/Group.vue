@@ -142,7 +142,7 @@
                   <tr v-for="(student, index) in render">
                     <td>{{ index + 1 }}</td>
                     <td>{{ student.name }}</td>
-                    <td v-show="deleteStudent"><button class="btn btn-xs rounded danger" @click="deleteStud">Удалить</button></td>
+                    <td v-show="deleteStudent"><button class="btn btn-xs rounded danger" @click="deleteStud(student.id)">Удалить</button></td>
                     <td v-if="student.averageRes != '—'">{{ student.averageRes }}%</td>
                     <td v-else>{{ student.averageRes }}</td>
                     <td v-for="(result, i) in student.results">
@@ -261,6 +261,7 @@ export default {
         this.render = this.students.map((student, index) => {
           let newStudent = {
             name: student.firstName + ' ' + student.lastName,
+            id: student._id,
             results: [],
             averageRes: 0,
             allTests: 0
@@ -369,9 +370,20 @@ export default {
         })
       }
     },
-    deleteStud() {
+    deleteStud(id) {
       if (confirm('Вы действительно хотите удалить кек?')) {
-        alert('апи нема еще, сорян')
+        const body = {
+          userId: id,
+          groupId: this.$route.params.id
+        };
+        this.post('removestudent', body, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(s => {
+          this.render = this.render.filter(student => student.id != id);
+        })
       }
     }
   },
