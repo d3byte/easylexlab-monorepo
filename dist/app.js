@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _express = require('express');
@@ -47,9 +47,9 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _mongoose2.default.connect('mongodb://localhost:27017/eng_proj', {
-  useMongoClient: true
+    useMongoClient: true
 }, function () {
-  console.log('Connected to mongodb');
+    console.log('Connected to mongodb');
 });
 
 var app = (0, _express2.default)();
@@ -57,58 +57,58 @@ var app = (0, _express2.default)();
 // Public folder
 var folder = __dirname + "/app/";
 
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/signup', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/profile', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/profile/msg', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/group/:id', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/group/:id/newtask', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/settings', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/profile/newgroup', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/stats', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/login', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/forgotpassword', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/recover/:token', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/eula', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-// app.get('/task/:id', (req, res) => {
-//     res.sendFile(path.join(folder + "index.html"));
-// });
-//
-// app.use(qt.static(__dirname + '/'));
-// app.use('/', express.static(folder));
-// app.use('/profile', express.static(folder));
-// app.use('/group', express.static(folder));
-// app.use('/group/:id', express.static(folder));
-// app.use('/task', express.static(folder));
-// app.use('/task/:id', express.static(folder));
-// app.use('/recover', express.static(folder));
-// app.use('/recover/:token', express.static(folder));
+app.get('/', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/signup', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/profile', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/profile/msg', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/group/:id', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/group/:id/newtask', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/settings', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/profile/newgroup', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/stats', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/login', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/forgotpassword', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/recover/:token', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/eula', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/task/:id', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+
+app.use(_quickthumb2.default.static(__dirname + '/'));
+app.use('/', _express2.default.static(folder));
+app.use('/profile', _express2.default.static(folder));
+app.use('/group', _express2.default.static(folder));
+app.use('/group/:id', _express2.default.static(folder));
+app.use('/task', _express2.default.static(folder));
+app.use('/task/:id', _express2.default.static(folder));
+app.use('/recover', _express2.default.static(folder));
+app.use('/recover/:token', _express2.default.static(folder));
 
 // Middleware
 app.use((0, _cors2.default)());
