@@ -316,6 +316,6 @@ groupController.removeStudent = (req, res) => {
       $pull: { '_students': userId }
     }).then(success => { res.json({ success: true }) });
   }
-}
+};
 
 export default groupController;
