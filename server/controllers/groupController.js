@@ -304,4 +304,19 @@ groupController.deleteGroup = (req, res) => {
   }
 };
 
+groupController.removeStudent = (req, res) => {
+  const {
+    groupId,
+    userId
+  } = req.body;
+  const user = req.user;
+
+  if(user.permissions == 'teacher' || user.permissions == 'admin') {
+    db.Group.findById(groupId).then(group => {
+      group = group._students.filter(student => student._id != userId);
+      group.save().then(success => res.json({ success: true }));
+    });
+  }
+}
+
 export default groupController;
