@@ -371,17 +371,19 @@ export default {
       }
     },
     deleteStud(id) {
-      if (confirm('Вы действительно хотите удалить ученика из группы?')) {
+      if(confirm('Вы действительно хотите удалить ученика из группы?')) {
         const body = {
           userId: id,
           groupId: this.$route.params.id
         };
+        console.log(body);
         this.$http.post('removestudent', body, {
           headers: {
             'Content-type': 'application/json',
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(s => {
+          console.log(s);
           this.render = this.render.filter(student => student.id != id);
         })
       }

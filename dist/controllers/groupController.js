@@ -328,7 +328,7 @@ groupController.removeStudent = function (req, res) {
 
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
         _models2.default.Group.findByIdAndUpdate(groupId, {
-            $pull: { '_students': { $elemMatch: { '_id': userId } } }
+            $pull: { '_students': { '_id': userId } }
         }).then(function (success) {
             res.json({ success: true });
         });
