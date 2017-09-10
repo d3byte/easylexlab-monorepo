@@ -312,10 +312,9 @@ groupController.removeStudent = (req, res) => {
   const user = req.user;
 
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
-    db.Group.findById(groupId).then(group => {
-      group._students = group._students.filter(student => student._id != userId);
-      group.save().then(success => res.json({ success: true }));
-    });
+    db.Group.findByIdAndUpdate(groupId, {
+      $pull: { '_students': { $elemMatch: { '_id': userId } } }
+    }).then(success => {res.json({ success: true }) });
   }
 }
 
