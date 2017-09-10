@@ -65,7 +65,7 @@
                   <ul class="list-group no-border m-b">
                     <li class="list-group-item checkbox">
                       <input type="checkbox" id="padding" v-model="showAll">
-                      <label for="padding" id="nope">Посмотреть все</label>
+                      <label for="padding">Посмотреть все</label>
                     </li>
     				        <li v-show="showAll" class="list-group-item" v-for="msg in group.messages">
                       <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
@@ -120,11 +120,16 @@
     			</div>
           <div class="row-col">
             <div class="p-a table-responsive box">
+              <div class="row checkbox">
+                <input type="checkbox" class="deleteCheckbox" id="padding_delete" v-model="deleteStudent">
+                <label for="padding_delete">Редактировать группу</label>
+              </div>
               <table class="table table-striped b-t b-b">
                 <thead>
                   <tr>
                     <th>№</th>
                     <th>Ученик</th>
+                    <th v-show="deleteStudent">Удалить ученика</th>
                     <th>Средний результат</th>
                     <th v-for="test in slicedTests">{{ test.name }}</th>
                     <th>
@@ -137,6 +142,7 @@
                   <tr v-for="(student, index) in render">
                     <td>{{ index + 1 }}</td>
                     <td>{{ student.name }}</td>
+                    <td v-show="deleteStudent"><button class="btn btn-xs rounded danger" @click="deleteStud">Удалить</button></td>
                     <td v-if="student.averageRes != '—'">{{ student.averageRes }}%</td>
                     <td v-else>{{ student.averageRes }}</td>
                     <td v-for="(result, i) in student.results">
@@ -158,7 +164,9 @@
 import Header from './Header.vue';
 import NewMsg from './NewMsg.vue';
 import jwtDecode from 'jwt-decode';
-import { EventBus } from './event';
+import {
+  EventBus
+} from './event';
 
 export default {
   data() {
@@ -179,7 +187,8 @@ export default {
       noneResults: false,
       currentTask: '',
       newName: false,
-      name: ''
+      name: '',
+      deleteStudent: false
     }
   },
   computed: {
@@ -196,7 +205,9 @@ export default {
   methods: {
     goto(id) {
       const path = '/group/' + id + '/newtask';
-      this.$router.push({ path });
+      this.$router.push({
+        path
+      });
     },
     nextFiveTests() {
       this.sliceTestIndex += 5;
@@ -209,7 +220,7 @@ export default {
       this.prepareRender();
     },
     setCharData(test, justLoaded = false) {
-      if(justLoaded) {
+      if (justLoaded) {
         this.noneResults = true;
         return;
       }
@@ -222,25 +233,31 @@ export default {
         bad: [],
         veryBad: []
       };
-      for(let result of results) {
-        if(result >= 90) {
+      for (let result of results) {
+        if (result >= 90) {
           newResults.excellent.push(result)
-        } else if(result >= 75 && result < 90) {
+        } else if (result >= 75 && result < 90) {
           newResults.normal.push(result)
-        } else if(result >= 50 && result < 75) {
+        } else if (result >= 50 && result < 75) {
           newResults.bad.push(result)
-        } else if(result < 50 && result != undefined){
+        } else if (result < 50 && result != undefined) {
           newResults.veryBad.push(result)
         }
       }
-      if(!!!newResults.excellent.length && !!!newResults.normal.length && !!!newResults.bad.length && !!!newResults.veryBad.length)
+      if (!!!newResults.excellent.length && !!!newResults.normal.length && !!!newResults.bad.length && !!!newResults.veryBad.length)
         this.noneResults = true;
       else
         newResults.didNotComplete = this.group._students.length - (newResults.excellent.length + newResults.normal.length + newResults.bad.length + newResults.veryBad.length);
-      this.chartData = [['От 90% и выше', newResults.excellent.length], ['От 75% до 90%', newResults.normal.length], ["От 50% до 75%", newResults.bad.length], ["Меньше 50%", newResults.veryBad.length], ["Не выполнили", newResults.didNotComplete]];
+      this.chartData = [
+        ['От 90% и выше', newResults.excellent.length],
+        ['От 75% до 90%', newResults.normal.length],
+        ["От 50% до 75%", newResults.bad.length],
+        ["Меньше 50%", newResults.veryBad.length],
+        ["Не выполнили", newResults.didNotComplete]
+      ];
     },
     prepareRender() {
-      if(!!this.slicedTests.length) {
+      if (!!this.slicedTests.length) {
         this.render = this.students.map((student, index) => {
           let newStudent = {
             name: student.firstName + ' ' + student.lastName,
@@ -248,15 +265,15 @@ export default {
             averageRes: 0,
             allTests: 0
           };
-          for(let i = 0; i < this.slicedTests.length; i++) {
+          for (let i = 0; i < this.slicedTests.length; i++) {
             newStudent.results.push(i);
           }
-          for(let test of this.slicedTests) {
-            for(let result of test.results) {
-              if(result.userId == student._id) {
+          for (let test of this.slicedTests) {
+            for (let result of test.results) {
+              if (result.userId == student._id) {
                 result.index = this.slicedTests.indexOf(test);
-                for(let i = 0; i < this.slicedTests.length; i++) {
-                  if(newStudent.results[i] == result.index) {
+                for (let i = 0; i < this.slicedTests.length; i++) {
+                  if (newStudent.results[i] == result.index) {
                     newStudent.results[i] = result;
                     break;
                   }
@@ -264,16 +281,16 @@ export default {
               }
             }
           }
-          for(let test of this.group._tests) {
-            for(let result of test.results) {
-              if(result.userId == student._id) {
+          for (let test of this.group._tests) {
+            for (let result of test.results) {
+              if (result.userId == student._id) {
                 newStudent.averageRes += result.result;
                 newStudent.allTests++;
               }
             }
           }
           newStudent.averageRes = parseInt(newStudent.averageRes / newStudent.allTests);
-          if(isNaN(newStudent.averageRes)) {
+          if (isNaN(newStudent.averageRes)) {
             newStudent.averageRes = '—';
           }
           return newStudent;
@@ -301,9 +318,9 @@ export default {
         this.studentsLength = this.group._students.length;
         this.name = this.group.name;
         var haveThisGroup = false;
-        if(this.group._teacher == this.user._id)
+        if (this.group._teacher == this.user._id)
           haveThisGroup = true;
-        if(!haveThisGroup)
+        if (!haveThisGroup)
           this.$router.push('/profile');
         this.slicedMessages = this.group.messages.reverse().slice(0, 3);
         this.group._tests = this.group._tests.reverse();
@@ -317,7 +334,7 @@ export default {
       this.newName = true;
     },
     submitNewName() {
-      if(this.name != this.group.name) {
+      if (this.name != this.group.name) {
         const body = {
           groupId: this.group._id,
           name: this.name
@@ -336,7 +353,7 @@ export default {
       }
     },
     removeMsg(id) {
-      if(confirm('Вы действительно хотите удалить сообщение?')) {
+      if (confirm('Вы действительно хотите удалить сообщение?')) {
         const body = {
           groupId: this.group._id,
           msgId: id
@@ -351,6 +368,11 @@ export default {
           this.group.messages = this.group.messages.filter(item => item.id != id);
         })
       }
+    },
+    deleteStud() {
+      if (confirm('Вы действительно хотите удалить кек?')) {
+        alert('апи нема еще, сорян')
+      }
     }
   },
   http: {
@@ -363,9 +385,9 @@ export default {
   created() {
     this.setCharData(null, true);
     EventBus.$once('requested-header', () => {
-      if(!this.logged)
+      if (!this.logged)
         this.$router.push('/login');
-      if(this.token.permissions != 'teacher')
+      if (this.token.permissions != 'teacher')
         this.$router.push('/profile');
       this.fetchData();
     });
@@ -385,8 +407,31 @@ export default {
   padding-left: 0;
 }
 
+#padding {
+  margin-left: 0px;
+  width: 10px;
+}
+
+#padding_delete {
+  margin-left: 0px;
+  width: 10px;
+}
+
+.deleteCheckbox {
+  padding-left: 28px;
+}
+
 .icono-caretLeft {
   color: black !important;
+}
+
+.icono-cross {
+  color: black !important;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: start;
 }
 
 #color {
