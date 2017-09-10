@@ -319,5 +319,24 @@ groupController.deleteGroup = function (req, res) {
     }
 };
 
+groupController.removeStudent = function (req, res) {
+    var _req$body7 = req.body,
+        groupId = _req$body7.groupId,
+        userId = _req$body7.userId;
+
+    var user = req.user;
+
+    if (user.permissions == 'teacher' || user.permissions == 'admin') {
+        _models2.default.Group.findById(groupId).then(function (group) {
+            group = group._students.filter(function (student) {
+                return student._id != userId;
+            });
+            group.save().then(function (success) {
+                return res.json({ success: true });
+            });
+        });
+    }
+};
+
 exports.default = groupController;
 //# sourceMappingURL=groupController.js.map
