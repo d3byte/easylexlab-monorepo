@@ -23,9 +23,9 @@
           <label class="col-sm-2 form-control-label">Уровень сложности</label>
           <div class="col-sm-10">
             <select class="form-control input-c" v-model="ms">
-              <option value="200">Легкий</option>
-              <option value="150">Средний</option>
-              <option value="100">Тяжелый</option>
+              <option value="400">Легкий</option>
+              <option value="300">Средний</option>
+              <option value="200">Тяжелый</option>
             </select>
           </div>
         </div>
@@ -40,35 +40,36 @@
     </center>
     <center>
       <div v-if="!dead && !win && !help" class="box game">
-          <div class="table box">
-            <table>
-              <tr v-for="row in grid">
-                <td v-for="cell in row" class="grid-cell"
-                    :class="{ snake: cell.snake > 0,
-                      'food-0': cell.food.exists && cell.food.index == 0,
-                      'food-1': cell.food.exists && cell.food.index == 1,
-                      'food-2': cell.food.exists && cell.food.index == 2,
-                      'food-3': cell.food.exists && cell.food.index == 3,
-                      'food-4': cell.food.exists && cell.food.index == 4,
-                      'food-5': cell.food.exists && cell.food.index == 5,
-                      'food-6': cell.food.exists && cell.food.index == 6,
-                      'food-7': cell.food.exists && cell.food.index == 7,
-                      'food-8': cell.food.exists && cell.food.index == 8,
-                      'food-9': cell.food.exists && cell.food.index == 9 }">
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="words box">
-            <h5>Слово: <i>{{ currentWordGroup.key }}</i></h5>
-            <h6 v-for="word in currentWordGroup.words"
-                :class="'food food-' + word.index + ' '
-                + (word.eaten ? 'eaten ' : '')
-                + (word.correct ? 'correct' : '')">
+        <div class="table box">
+          <h4 v-if="waitForKey" class="text-muted">Нажмите любую клавишу, чтобы начать</h4>
+          <table>
+            <tr v-for="row in grid">
+              <td v-for="cell in row" class="grid-cell"
+                  :class="{ snake: cell.snake > 0,
+                    'food-0': cell.food.exists && cell.food.index == 0,
+                    'food-1': cell.food.exists && cell.food.index == 1,
+                    'food-2': cell.food.exists && cell.food.index == 2,
+                    'food-3': cell.food.exists && cell.food.index == 3,
+                    'food-4': cell.food.exists && cell.food.index == 4,
+                    'food-5': cell.food.exists && cell.food.index == 5,
+                    'food-6': cell.food.exists && cell.food.index == 6,
+                    'food-7': cell.food.exists && cell.food.index == 7,
+                    'food-8': cell.food.exists && cell.food.index == 8,
+                    'food-9': cell.food.exists && cell.food.index == 9 }">
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="words box">
+          <h5>Слово: <i>{{ currentWordGroup.key }}</i></h5>
+          <h6 v-for="word in currentWordGroup.words"
+              :class="'food food-' + word.index + ' '
+              + (word.eaten ? 'eaten ' : '')
+              + (word.correct ? 'correct' : '')">
 
-              <b>{{ word.value }}</b>
-            </h6>
-          </div>
+            <b>{{ word.value }}</b>
+          </h6>
+        </div>
       </div>
     </center>
     <center>
@@ -106,6 +107,7 @@
     data() {
       return {
         help: true,
+        waitForKey: true,
         ms: 200,
         direction: UP,
         dead: false,
@@ -133,8 +135,12 @@
     },
     methods: {
       handleUserAction(key) {
+        if(this.waitForKey) {
+          this.waitForKey = false;
+          ticking = setInterval(this.tick, parseInt(this.ms));
+        }
         let direction = keyMap[key];
-        if (direction) {
+        if(direction) {
           userActions.push(() => {
             if (direction[0] + this.direction[0] === 0 && direction[1] + this.direction[1] === 0) {
               return; // ignore opposite direction presses
@@ -146,16 +152,15 @@
       start() {
         if(ticking)
           clearInterval(ticking);
+        this.waitForKey = true;
         this.help = false;
-        let size = 25, ms = 140;
+        let size = 25;
         this.grid = new Grid(size, (x, y) => ({ x, y, snake: 0, food: { exists: false, index: null } }));
         this.dead = false;
         this.correct = 0;
         this.win = false;
         userActions = [];
         length = 5;
-        ticking = setInterval(this.tick, parseInt(this.ms));
-
         snakePos = Grid.random(this.grid);
         snakePos.snake = length;
         snakeCells = [snakePos];
