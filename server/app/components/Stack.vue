@@ -31,19 +31,19 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="showFlashcards">
-                Flashcards <i v-if="games.flashcards.win" class="material-icons">done</i><br>
+                Выучи слова <i v-if="games.flashcards.win" class="material-icons">done</i><br>
                 {{ games.flashcards.done + '/' + games.flashcards.attempts }}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="showMatching">
-                Matching <i v-if="games.matching.win" class="material-icons">done</i><br>
+                Найди пару <i v-if="games.matching.win" class="material-icons">done</i><br>
                 {{ games.matching.done + '/' + games.matching.attempts }}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="showTypein">
-                Type In <i v-if="games.typein.win" class="material-icons">done</i><br>
+                Введи слово <i v-if="games.typein.win" class="material-icons">done</i><br>
                 {{ games.typein.done + '/' + games.typein.attempts }}
               </a>
             </li>
@@ -55,7 +55,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="showScramble">
-                Word Scramble <i v-if="games.scramble.win" class="material-icons">done</i><br>
+                Скрэмбл <i v-if="games.scramble.win" class="material-icons">done</i><br>
                 {{ games.scramble.done + '/' + games.scramble.attempts }}
               </a>
             </li>
