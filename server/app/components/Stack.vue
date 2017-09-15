@@ -78,13 +78,13 @@
         <div class="p-a text-center">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
-              <a class="nav-link" @click="showFlashcards">Flashcards</a>
+              <a class="nav-link" @click="showFlashcards">Выучи слова</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showMatching">Matching</a>
+              <a class="nav-link" @click="showMatching">Найди пару</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showTypein">Type In</a>
+              <a class="nav-link" @click="showTypein">Введи слово</a>
             </li>
           </ul>
         </div>
@@ -101,7 +101,7 @@
               <a class="nav-link" @click="showSnake">Змейка</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="showScramble">Word Scramble</a>
+              <a class="nav-link" @click="showScramble">Скрэмбл</a>
             </li>
           </ul>
         </div>
