@@ -90,31 +90,32 @@ export default {
           result: this.percentage,
           stackId: this.stack._id
         };
-        this.$http.patch('updateresult', body, {
+        this.wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
+        this.$http.patch('words', {
+          amount: this.wordsLearnt,
+          stackId: this.stack._id,
+          userResult: this.percentage,
+          pairsLength: this.pairs.length
+        }, {
           headers: {
             'Content-type' : 'application/json',
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(res => {
-          this.success = true;
-          this.showPreloader = false;
-          this.$store.dispatch('zeroAttempts');
-          this.$store.dispatch('showTest');
-          this.$store.dispatch('testNotAvailable');
+          this.$http.patch('updateresult', body, {
+            headers: {
+              'Content-type' : 'application/json',
+              'Authorization': 'Bearer ' + this.$store.getters.userToken
+            }
+          }).then(res => {
+            this.success = true;
+            this.showPreloader = false;
+            this.$store.dispatch('zeroAttempts');
+            this.$store.dispatch('showTest');
+            this.$store.dispatch('testNotAvailable');
+          });
         });
       }
-      this.wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
-      this.$http.patch('words', {
-        amount: this.wordsLearnt,
-        stackId: this.stack._id,
-        userResult: this.percentage,
-        pairsLength: this.pairs.length
-      }, {
-        headers: {
-          'Content-type' : 'application/json',
-          'Authorization': 'Bearer ' + this.$store.getters.userToken
-        }
-      }).then(res => { });
     },
     toProfile() {
       this.$router.push('/profile');

@@ -360,7 +360,6 @@ userController.learnWords = (req, res) => {
 
   db.Stack.findById(stackId).then(stack => {
     let result = stack.results.filter(result => result.userId == user.id);
-    console.log(result)
     if(result[0]) {
       let difference = Math.abs(result[0].result - userResult);
       let newAmount = Math.round(pairsLength * (difference / 100));
