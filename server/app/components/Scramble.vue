@@ -14,7 +14,7 @@
       <h3 class="key"><b>{{ currentPair.value }}</b></h3>
       <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
       <draggable v-model="shuffledLetters" @end="onEnd" element="div" class="value" :class="correct ?'correct':'default'">
-        <div class="letter" v-for="letter in shuffledLetters">
+        <div class="letter" v-for="letter in shuffledLetters" :class="letter == ' ' ? 'empty' : ''">
          {{ letter }}
        </div>
      </draggable>
@@ -147,6 +147,10 @@ export default {
     border: 1px solid darkgray;
     margin-right: 2px;
     width: 34px;
+  }
+
+  .empty {
+    height: 38px;
   }
 
   .letter:last-child {
