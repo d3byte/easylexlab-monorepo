@@ -58,7 +58,7 @@ app.get('/forgotpassword', (req, res) => {
 app.get('/recover/:token', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
-app.get('/eula', (req, res) => {
+app.get('/info/rules', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
 app.get('/task/:id', (req, res) => {
@@ -74,6 +74,8 @@ app.use('/task', express.static(folder));
 app.use('/task/:id', express.static(folder));
 app.use('/recover', express.static(folder));
 app.use('/recover/:token', express.static(folder));
+app.use('/info', express.static(folder));
+app.use('/info/rules', express.static(folder));
 
 // Middleware
 app.use(cors());
