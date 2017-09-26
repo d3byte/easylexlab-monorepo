@@ -349,10 +349,23 @@ userController.getUser = function (req, res) {
 
 userController.learnWords = function (req, res) {
     var user = req.user;
-    var amount = req.body.amount;
+    var _req$body4 = req.body,
+        amount = _req$body4.amount,
+        stackId = _req$body4.stackId,
+        userResult = _req$body4.userResult,
+        pairsLength = _req$body4.pairsLength;
 
-    _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(function (success) {
-        return res.json({ success: true });
+
+    _models2.default.Stack.findById(stackId).then(function (stack) {
+        var result = stack.results.filter(function (result) {
+            return result.userId == user.id;
+        });
+        console.log(result);
+        var difference = Math.abs(result.join('') - userResult);
+        newAmount = Math.round(pairsLength * (difference / 100));
+        _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(function (success) {
+            return res.json({ success: true });
+        });
     });
 };
 
@@ -412,10 +425,10 @@ userController.checkToken = function (req, res) {
 
 userController.sendFeedback = function (req, res) {
     var user = req.user;
-    var _req$body4 = req.body,
-        name = _req$body4.name,
-        text = _req$body4.text,
-        email = _req$body4.email;
+    var _req$body5 = req.body,
+        name = _req$body5.name,
+        text = _req$body5.text,
+        email = _req$body5.email;
 
 
     var transporter = _nodemailer2.default.createTransport({

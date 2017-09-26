@@ -93,7 +93,7 @@ app.get('/forgotpassword', function (req, res) {
 app.get('/recover/:token', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
-app.get('/eula', function (req, res) {
+app.get('/info/rules', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
 app.get('/task/:id', function (req, res) {
@@ -109,6 +109,8 @@ app.use('/task', _express2.default.static(folder));
 app.use('/task/:id', _express2.default.static(folder));
 app.use('/recover', _express2.default.static(folder));
 app.use('/recover/:token', _express2.default.static(folder));
+app.use('/info', _express2.default.static(folder));
+app.use('/info/rules', _express2.default.static(folder));
 
 // Middleware
 app.use((0, _cors2.default)());
