@@ -104,7 +104,12 @@ export default {
         });
       }
       this.wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
-      this.$http.patch('words', { amount: this.wordsLearnt }, {
+      this.$http.patch('words', {
+        amount: this.wordsLearnt,
+        stackId: this.stack._id,
+        userResult: this.percentage,
+        pairsLength: this.pairs.length
+      }, {
         headers: {
           'Content-type' : 'application/json',
           'Authorization': 'Bearer ' + this.$store.getters.userToken

@@ -145,7 +145,7 @@ userController.post = (req, res) => {
 };
 
 userController.login = (req, res) => {
-    const {username, password} = req.body;
+    const { username, password } = req.body;
 
     db.User.findOne({username}).then(user => {
         user.verifyPassword(password).then(valid => {
@@ -351,10 +351,21 @@ userController.getUser = (req, res) => {
 
 userController.learnWords = (req, res) => {
   const user = req.user;
-  const amount = req.body.amount;
+  const {
+    amount,
+    stackId,
+    userResult,
+    pairsLength
+  } = req.body;
 
-  db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(success => {
-    return res.json({ success: true });
+  db.Stack.findById(stackId).then(stack => {
+    let result = stack.results.filter(result => result.userId == user.id);
+    console.log(result);
+    let difference = Math.abs(result.join('') - userResult);
+    newAmount = Math.round(pairsLength * (difference / 100));
+    db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(success => {
+      return res.json({ success: true });
+    })
   })
 };
 
