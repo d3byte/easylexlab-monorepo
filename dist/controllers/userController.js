@@ -360,11 +360,17 @@ userController.learnWords = function (req, res) {
         var result = stack.results.filter(function (result) {
             return result.userId == user.id;
         });
-        var difference = Math.abs(result[0].result - userResult);
-        var newAmount = Math.round(pairsLength * (difference / 100));
-        _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(function (success) {
-            return res.json({ success: true });
-        });
+        if (result) {
+            var difference = Math.abs(result[0].result - userResult);
+            var newAmount = Math.round(pairsLength * (difference / 100));
+            _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(function (success) {
+                return res.json({ success: true });
+            });
+        } else {
+            _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(function (success) {
+                return res.json({ success: true });
+            });
+        }
     });
 };
 

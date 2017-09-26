@@ -360,11 +360,17 @@ userController.learnWords = (req, res) => {
 
   db.Stack.findById(stackId).then(stack => {
     let result = stack.results.filter(result => result.userId == user.id);
-    let difference = Math.abs(result[0].result - userResult);
-    let newAmount = Math.round(pairsLength * (difference / 100));
-    db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(success => {
-      return res.json({ success: true });
-    })
+    if(result) {
+      let difference = Math.abs(result[0].result - userResult);
+      let newAmount = Math.round(pairsLength * (difference / 100));
+      db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(success => {
+        return res.json({ success: true });
+      })
+    } else {
+      db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(success => {
+        return res.json({ success: true });
+      })
+    }
   })
 };
 
