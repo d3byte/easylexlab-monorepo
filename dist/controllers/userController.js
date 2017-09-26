@@ -360,9 +360,9 @@ userController.learnWords = function (req, res) {
         var result = stack.results.filter(function (result) {
             return result.userId == user.id;
         });
-        console.log(result);
-        var difference = Math.abs(result.join('') - userResult);
-        newAmount = Math.round(pairsLength * (difference / 100));
+        result = result.result;
+        var difference = Math.abs(result - userResult);
+        var newAmount = Math.round(pairsLength * (difference / 100));
         _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(function (success) {
             return res.json({ success: true });
         });
