@@ -9,7 +9,7 @@
       </div>
       <div v-if="done || lose" @click="show()" class="vertical-center box">
         <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
-        <h2>{{ Math.round(know.length * 100 / pairs.length) }}/100%</h2>
+        <h2>{{ Math.round(know.length * 100 / pairs.length) }}%</h2>
         <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
       </div>
       <div class="col-md-4" v-show="!done && !lose">

@@ -4,7 +4,7 @@
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="success" class="signup">
         <h3 class="success">Вы прошли тест</h3>
-        <h4>Ваш результат: {{ percentage }}/100%</h4>
+        <h4>Ваш результат: {{ percentage }}%</h4>
         <h4>Вы выучили {{ wordsLearnt }} слов</h4>
         <h5 @click="toProfile">Вернуться</h5>
       </div>

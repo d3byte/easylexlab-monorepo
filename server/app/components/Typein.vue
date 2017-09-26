@@ -4,12 +4,12 @@
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
     <div v-if="done" class="signup">
       <h3 class="success">Победа!</h3>
-      <h4>Ваш результат: {{ percentage }}/100%</h4>
+      <h4>Ваш результат: {{ percentage }}%</h4>
       <h5 @click="hideGames">Вернуться</h5>
     </div>
     <div v-if="lose" class="signup">
       <h3 class="text-danger"> Неудача ;c </h3>
-      <h4>Ваш результат: {{ percentage }}/100%</h4>
+      <h4>Ваш результат: {{ percentage }}%</h4>
       <button @click="restart" class="btn btn-primary"> Попробовать еще раз </button>
     </div>
   </center>
