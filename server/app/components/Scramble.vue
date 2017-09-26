@@ -122,6 +122,7 @@ export default {
   .game, .win {
     display: inline-block;
     min-width: 360px;
+    max-width: 95%;
   }
 
   .correct {
