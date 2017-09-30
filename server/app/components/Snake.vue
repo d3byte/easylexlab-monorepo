@@ -1,7 +1,7 @@
 <template>
   <div>
     <center>
-      <h1>Snake</h1>
+      <h1>Змейка</h1>
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <div class="box help" v-if="help">
         <p>

@@ -3,7 +3,7 @@
     <div class="container">
     <center>
       <div>
-        <h1>Matching</h1>
+        <h1>Найди пару</h1>
         <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <br>
         <div class="dashboard">

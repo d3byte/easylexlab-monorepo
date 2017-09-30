@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <center>
-    <h1>Word Scramble</h1>
+    <h1>Скрэмбл</h1>
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
     <div class="dashboard">
       <button @click="start" class="flat-btn">Перезапуск</button>

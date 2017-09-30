@@ -2,7 +2,7 @@
 <div class="vertical-center">
   <center>
     <div class="container-fluid flashcards">
-      <h1>Flashcards</h1>
+      <h1>Выучи слова</h1>
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <div class="row" style="margin-bottom:20px;">
         <button @click="restart" class="flat-btn">Перезапуск</button>

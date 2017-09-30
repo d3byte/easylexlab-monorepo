@@ -16,7 +16,7 @@
   <form v-if="!showPreloader && !done && !lose" class="padding" onsubmit="return false">
     <div class="row padding">
       <center>
-        <h1>Type In</h1>
+        <h1>Введи слово</h1>
         <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
       </center>
     </div>
