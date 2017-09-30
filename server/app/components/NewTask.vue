@@ -8,7 +8,7 @@
         <div class="modal-body text-center p-lg">
           <h5 v-if="success" class="success">Задание успешно создано.</h5>
           <center>
-            <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="success">Назад</button>
+            <button @click="pageUpdate" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="success">Ок</button>
           </center>
           <form class="login-form" onsubmit="return false" v-if="this.showEditor">
             <div class="table-responsive">
@@ -45,8 +45,8 @@
               </table>
             </div>
             <center>
-              <button @click="confirm" class="btn btn-primary">Готово</button>
-              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Отмена</button>
+              <button @click="confirm" class="btn btn-success">Готово</button>
+              <button @click="refresh" type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
             </center>
           </form>
           <div v-if="this.showPost && !success">
@@ -94,8 +94,8 @@
                 </div>
               </div>
               <hr>
-              <button @click="post" class="btn dark-white p-x-md" v-if="!success">Создать</button>
-              <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="!success">Отмена</button>
+              <button @click="post" class="btn btn-success" v-if="!success">Создать</button>
+              <button @click="refresh" type="button" class="btn btn-danger" data-dismiss="modal" v-if="!success">Отмена</button>
             </form>
           </div>
         </div>
@@ -128,6 +128,9 @@ export default {
     // root: '/api'
   },
   methods: {
+    pageUpdate() {
+      window.location.reload();
+    },
     refresh() {
       this.errorMsg = '';
       this.timeToDo = 1;
