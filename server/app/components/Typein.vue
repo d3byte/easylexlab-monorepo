@@ -65,7 +65,6 @@ export default {
   },
   methods: {
     allDone() {
-      this.check();
       if (this.percentage >= 90) {
         this.$store.dispatch('incrementAttempts', 'typein');
         if (this.doneAttempts == this.totalAttempts)
@@ -91,35 +90,39 @@ export default {
     },
     check() {
       var i = 0;
-      for (this.pair in this.pairs) {
-        if (this.currentPair.test == this.currentPair.key) {
-          this.correct = i + 1;
-          i++;
-          this.currentPair = this.pairs[i];
-        }
+      for (this.pair in this.pairs){
+        if (i <= this.pairs.length){
+      if (this.currentPair.test == this.currentPair.key) {
+        this.correct = i + 1;
+        i++;
+        this.currentPair = this.pairs[i];
       }
-        this.percentage = Math.round(this.correct * 100 / this.pairs.length);
-      },
-      hideGames() {
-          this.$store.dispatch('hideGames');
-        },
-        start() {
-          this.typeKey = [];
-          this.typeVal = [];
-          this.pairs = _.shuffle(this.pairs);
-          this.currentPair = this.pairs[0];
-        }
-    },
-    created() {
-      for (let task of this.stack.tasks) {
-        Array.prototype.push.apply(this.pairs, task.content);
-      }
-      this.start();
-    },
-    http: {
-      root: '//ealapi.tw1.ru/api'
+    } else {
+      break;
     }
+    }
+      this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+    },
+    hideGames() {
+      this.$store.dispatch('hideGames');
+    },
+    start() {
+      this.typeKey = [];
+      this.typeVal = [];
+      this.pairs = _.shuffle(this.pairs);
+      this.currentPair = this.pairs[0];
+    }
+  },
+  created() {
+    for (let task of this.stack.tasks) {
+      Array.prototype.push.apply(this.pairs, task.content);
+    }
+    this.start();
+  },
+  http: {
+    root: '//ealapi.tw1.ru/api'
   }
+}
 </script>
 
 <style lang="css" scoped>
