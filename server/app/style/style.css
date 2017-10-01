@@ -142,7 +142,7 @@ table {
 } .body-row:nth-child(odd) {
   background: white;
 } .body-row:hover {
-  border: 1px solid rgb(233, 103, 44) !important;
+  border-left: 1px solid rgb(233, 103, 44) !important;
 } .body-row:hover td {
   color: rgb(233, 103, 44);
 }
@@ -151,6 +151,14 @@ table {
   border-top: 5px solid rgb(144, 197, 246);
   border-bottom: 5px solid rgb(211, 215, 217);
   border-radius: 5px;
+  padding-bottom: 0 !important;
+} .table-responsive table {
+  margin-bottom: 0 !important;
+}
+
+.table-responsive table th,
+.table-responsive table td {
+  border: 1px solid rgba(207, 206, 216, 0.4) !important;
 }
 
 .headers {

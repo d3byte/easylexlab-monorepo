@@ -107,7 +107,7 @@ export default {
 }
 
 .container {
-  width: 60%;
+  width: 75%;
 }
 
 .container-sm-xs {
