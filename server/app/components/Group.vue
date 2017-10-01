@@ -527,7 +527,7 @@ export default {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 10px 40px;
+  padding: 10px 0px;
   padding-bottom: 0;
   margin: 0;
 }
