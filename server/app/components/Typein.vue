@@ -90,10 +90,10 @@ export default {
       this.lose = false;
     },
     check() {
-      var i = 1;
+      var i = 0;
       for (this.pair in this.pairs) {
         if (this.currentPair.test == this.currentPair.key) {
-          this.correct = i;
+          this.correct = i + 1;
           i++;
           this.currentPair = this.pairs[i];
         }
