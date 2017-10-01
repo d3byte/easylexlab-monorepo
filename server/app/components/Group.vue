@@ -1,30 +1,47 @@
 <template lang="html">
   <div>
     <app-header/>
-    <div class="row-col b-b padding">
-      <div class="container">
-        <div>
-          <h3 @click="changeName" v-if="!newName" class="hover">
-            {{ group.name }}
-            <i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;vertical-align: top"></i>
-          </h3>
+    <div class="gradient">
+      <div class="container custom-padding hidden-sm-down">
+        <div class="parent">
+          <div class="description">
+            <span @click="changeName" v-if="!newName" class="hover group-name-span">
+              <small class="text-muted">Название группы:</small> {{ group.name }}
+            </span>
+            <span class="label label-sm up transparent" v-if="!newName">
+              <i class="material-icons" style="font-size:12px;">&#xE254;</i>
+            </span>
+            <div class="margin input-group" v-if="newName" style="width: 140px;">
+              <input type="text" class="form-control" placeholder="Новое имя" id="basic-addon2-input" v-model="name" aria-describedby="basic-addon2">
+              <div @click="submitNewName" class="input-group-addon hover primary" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></div>
+            </div>
+            <h6>Меню</h6>
+            <p class="text-muted m-b-sm">Здесь вы можете создать новое задание, написать сообщение, получить код для регистрации учеников и управлять ранее созданными заданиями.</p>
+          </div>
         </div>
       </div>
+      <div class="hidden-md-up">
+        <div class="parent">
+          <span @click="changeName" v-if="!newName" class="hover group-name-span">
+            <small class="text-muted">Название группы:</small> {{ group.name }}
+          </span>
+          <span class="label label-sm up transparent" v-if="!newName">
+            <i class="material-icons" style="font-size:12px;">&#xE254;</i>
+          </span>
+          <div class="adaptive-change-name input-group" v-if="newName">
+            <input type="text" class="form-control" placeholder="Новое имя" id="basic-addon2-input" v-model="name" aria-describedby="basic-addon2">
+            <div @click="submitNewName" class="input-group-addon hover primary" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-col b-b padding">
     	<div class="container">
         <div class="row">
       		<div class="padding">
-
-            <div class="margin input-group" v-if="newName" style="width: 150px;">
-              <input type="text" class="form-control" placeholder="Новое имя" v-model="name" aria-describedby="basic-addon2">
-              <span @click="submitNewName" class="input-group-addon hover success" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></span>
-            </div>
       			<div class="row-col box">
       				<div class="col-sm-12">
-      					<div class="box-header">
-      						<h3>Меню</h3>
-      					</div>
       					<div class="box-body">
-      						<p class="text-muted m-b-md">Здесь вы можете создать новое задание, написать сообщение, получить код для регистрации учеников и управлять ранее созданными заданиями.</p>
       						<div class="row hidden-sm-down">
                     <a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новое задание</a>
                     <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
@@ -500,4 +517,47 @@ export default {
   margin-top: 5px;
 }
 
+.gradient {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to right, rgb(108, 88, 146), rgb(167, 133, 157));
+  color: white;
+  min-height: 50px;
+} .gradient > .container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px 40px;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+#basic-addon2-input {
+  height: 38px;
+  border-left-radius: 2px;
+}
+
+.group-name, .description {
+  display: inline-block;
+  max-width: 90%;
+}
+
+.parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+.transparent {
+  background: transparent;
+}
+
+.group-name-span {
+  font-size: 20px;
+}
+
+.adaptive-change-name {
+  padding: 0 10px;
+}
 </style>
