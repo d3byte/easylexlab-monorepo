@@ -2,7 +2,7 @@
 <div>
   <div class="item">
     <div class="item-bg" :style="{ background: background }"></div>
-    <div class="p-a-md">
+    <div class="container">
       <div class="row m-t">
         <div class="col-sm-12 hidden-md-up ad" style="margin-bottom: 10px;">
           <div class="padding box" v-if="showAd">
@@ -14,18 +14,18 @@
             </center>
           </div>
         </div>
-        <div class="col-md-8 col-sm-12">
+        <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
-              <h1>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</h1>
+              <h1 class="text-white"><b>{{ firstName.slice(0, 1) }}</b></h1>
             </span>
           </a>
           <div class="clear m-b">
-            <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
-            <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
+            <h5 class="m-a-0 m-b-xs calc text-white"><b>{{ firstName + ' ' + lastName }}</b></h5>
+            <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span><small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
           </div>
         </div>
-        <div class="col-md-4 ad hidden-sm-down">
+        <div class="col-md-4 ad hidden-sm-down" v-if="showAd">
           <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
@@ -78,8 +78,8 @@ export default {
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
     this.city = localStorage.city;
-    this.background = localStorage.background ? localStorage.background : '#ccc';
-    this.color = localStorage.color ? localStorage.color : 'white';
+    this.background = localStorage.background ? localStorage.background : 'linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190)';
+    this.color = localStorage.color ? localStorage.color : 'rgb(98, 171, 242)';
     if(localStorage.ad == 'true') {
       this.showAd = true;
       localStorage.ad = 'false';
@@ -92,7 +92,7 @@ export default {
 .avatar {
   width: 130px;
   height: 130px;
-  border: 2px solid #343A3F;
+  border: 2px solid rgb(144, 197, 246);;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -107,5 +107,11 @@ export default {
   display: flex;
   vertical-align: center;
   justify-content: center;
+}
+
+.container {
+  width: 60%;
+  padding: 5px;
+  padding-bottom: 10px;
 }
 </style>

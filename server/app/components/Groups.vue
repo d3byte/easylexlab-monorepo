@@ -1,30 +1,59 @@
 <template>
-  <div class="container box margin">
-    <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
-    <center>
-      <div class="table-responsive">
-      <table class="table table-striped table-hover" v-if="!showPreloader">
-        <thead>
-          <tr>
-          <th>Название</th>
-          <th>Класс</th>
-          <th>Ученики</th>
-          <th>Подробнее</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="group in groups">
-          <td>{{ group.name }}</td>
-          <td>{{ group.grade }}</td>
-          <td>{{ group._students.length }}</td>
-          <td>
-            <span class="link" @click="goto(group._id)">Посмотреть</span>
-          </td>
-        </tr>
-      </tbody>
-      </table>
+  <div>
+    <div class="container margin hidden-sm-down">
+      <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
+      <center>
+        <div class="table-responsive box">
+          <table class="table table-striped table-hover" v-if="!showPreloader">
+            <thead>
+              <tr class="headers">
+                <th>Название</th>
+                <th>Класс</th>
+                <th>Ученики</th>
+                <th>Подробнее</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="body-row" v-for="group in groups">
+                <td>{{ group.name }}</td>
+                <td>{{ group.grade }}</td>
+                <td>{{ group._students.length }}</td>
+                <td>
+                  <span class="link" @click="goto(group._id)">Посмотреть</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </center>
     </div>
-    </center>
+    <div class="container-sm-xs margin hidden-md-up">
+      <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
+      <center>
+        <div class="table-responsive box">
+        <table class="table table-striped table-hover" v-if="!showPreloader">
+          <thead>
+            <tr class="headers">
+              <th>Название</th>
+              <th>Класс</th>
+              <th>Ученики</th>
+              <th>Подробнее</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="body-row" v-for="group in groups">
+              <td>{{ group.name }}</td>
+              <td>{{ group.grade }}</td>
+              <td>{{ group._students.length }}</td>
+              <td>
+                <span class="link" @click="goto(group._id)">Посмотреть</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </center>
+    </div>
   </div>
 </template>
 
@@ -73,9 +102,19 @@ table {
   padding: 10px;
   text-align: center;
   border-bottom: 1px solid black;
+  color: white;
 } td {
   padding: 10px;
   text-align: center;
+  color: rgb(70, 107, 121);
+} .body-row:nth-child(even) {
+  background: rgb(234, 244, 245);
+} .body-row:nth-child(odd) {
+  background: white;
+} .body-row:hover {
+  border: 1px solid rgb(233, 103, 44) !important;
+} .body-row:hover td {
+  color: rgb(233, 103, 44);
 }
 
 .link {
@@ -91,5 +130,27 @@ table {
 
 .preloader {
   color: black;
+}
+
+.container {
+  width: 60%;
+}
+
+.container-sm-xs {
+  display: flex;
+  justify-content: center;
+}
+
+.table-responsive.box {
+  border-top: 5px solid rgb(144, 197, 246);
+  border-bottom: 5px solid rgb(211, 215, 217);
+  border-radius: 5px;
+}
+
+.headers {
+  background: rgb(98, 171, 242);
+} .headers:hover {
+  background: rgb(98, 171, 242) !important;
+  color: white !important;
 }
 </style>
