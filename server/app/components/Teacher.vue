@@ -110,7 +110,7 @@ export default {
 }
 
 .container {
-  width: 60%;
+  width: 75%;
   padding: 5px;
   padding-bottom: 15px;
 }
