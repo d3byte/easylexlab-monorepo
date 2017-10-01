@@ -43,7 +43,7 @@
       </div>
     </div>
   </div>
-  <div class="dker p-x">
+  <div style="background: rgb(99, 170, 242)">
     <div class="row hidden-xs-down">
       <div class="col-sm-12">
         <div class="p-y-md clearfix nav-active-primary">
@@ -292,7 +292,7 @@ export default {
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
     this.city = localStorage.city;
-    this.background = localStorage.background ? localStorage.background : '#ccc';
+    this.background = localStorage.background ? localStorage.background : 'linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190)';
     this.color = localStorage.color ? localStorage.color : 'white';
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
@@ -432,4 +432,5 @@ h5.white-text {
   vertical-align: center;
   justify-content: center;
 }
+
 </style>
