@@ -4,7 +4,7 @@
     <div class="item-bg" :style="{ background: background }"></div>
     <div class="container">
       <div class="row m-t">
-        <div class="col-sm-12 hidden-md-up ad" style="margin-bottom: 10px;">
+        <div class="col-sm-12 hidden-md-up ad">
           <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
@@ -92,7 +92,7 @@ export default {
 .avatar {
   width: 130px;
   height: 130px;
-  border: 2px solid rgb(144, 197, 246);;
+  border: 2px solid rgb(144, 197, 246);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -112,6 +112,6 @@ export default {
 .container {
   width: 60%;
   padding: 5px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 </style>

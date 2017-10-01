@@ -124,3 +124,38 @@ input {
 input {
   color: black;
 }
+
+table {
+  color: #293132;
+} th {
+  margin-bottom: 5px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid black;
+  color: white;
+} td {
+  padding: 10px;
+  text-align: center;
+  color: rgb(70, 107, 121);
+} .body-row:nth-child(even) {
+  background: rgb(234, 244, 245);
+} .body-row:nth-child(odd) {
+  background: white;
+} .body-row:hover {
+  border: 1px solid rgb(233, 103, 44) !important;
+} .body-row:hover td {
+  color: rgb(233, 103, 44);
+}
+
+.table-responsive.box {
+  border-top: 5px solid rgb(144, 197, 246);
+  border-bottom: 5px solid rgb(211, 215, 217);
+  border-radius: 5px;
+}
+
+.headers {
+  background: rgb(98, 171, 242);
+} .headers:hover {
+  background: rgb(98, 171, 242) !important;
+  color: white !important;
+}

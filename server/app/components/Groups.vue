@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container margin hidden-sm-down">
+    <div class="container hidden-sm-down">
       <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
       <center>
         <div class="table-responsive box">
@@ -27,7 +27,7 @@
         </div>
       </center>
     </div>
-    <div class="container-sm-xs margin hidden-md-up">
+    <div class="container-sm-xs hidden-md-up">
       <center><i v-if="showPreloader" class="material-icons preloader">cached</i></center>
       <center>
         <div class="table-responsive box">
@@ -95,37 +95,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
-table {
-  color: #293132;
-} th {
-  margin-bottom: 5px;
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid black;
-  color: white;
-} td {
-  padding: 10px;
-  text-align: center;
-  color: rgb(70, 107, 121);
-} .body-row:nth-child(even) {
-  background: rgb(234, 244, 245);
-} .body-row:nth-child(odd) {
-  background: white;
-} .body-row:hover {
-  border: 1px solid rgb(233, 103, 44) !important;
-} .body-row:hover td {
-  color: rgb(233, 103, 44);
-}
-
 .link {
   transition: 0.3s;
 } .link:hover {
   cursor: pointer;
   color: #5688C7;
-}
-
-.margin {
-  margin-top: 20px;
 }
 
 .preloader {
