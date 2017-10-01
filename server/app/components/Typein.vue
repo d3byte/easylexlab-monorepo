@@ -21,9 +21,10 @@
       </center>
     </div>
     <div class="row padding box">
-      <div class="md-form-group" v-for="pair in pairs">
-        <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
-        <label>{{ pair.value }}</label>
+      <div class="md-form-group">
+        <input type="text" v-model="currentPair.test" class="md-input" placeholder="Слово" required>
+        <label>{{ currentPair.value }}</label>
+        <button @click="check">проверь ёба</button>
       </div>
       <button @click="allDone" class="btn btn-primary">Готово</button>
     </div>
@@ -38,6 +39,7 @@ export default {
   props: ['stack'],
   data() {
     return {
+      currentPair: {},
       pairs: [],
       typeVal: [],
       correct: 0,
@@ -88,32 +90,36 @@ export default {
       this.lose = false;
     },
     check() {
-      this.pairs.map(pair => {
-        if (pair.test == pair.key) {
-          this.correct++;
+      var i = 1;
+      for (this.pair in this.pairs) {
+        if (this.currentPair.test == this.currentPair.key) {
+          this.correct = i;
+          i++;
+          this.currentPair = this.pairs[i];
         }
-      });
-      this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+      }
+        this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+      },
+      hideGames() {
+          this.$store.dispatch('hideGames');
+        },
+        start() {
+          this.typeKey = [];
+          this.typeVal = [];
+          this.pairs = _.shuffle(this.pairs);
+          this.currentPair = this.pairs[0];
+        }
     },
-    hideGames() {
-      this.$store.dispatch('hideGames');
+    created() {
+      for (let task of this.stack.tasks) {
+        Array.prototype.push.apply(this.pairs, task.content);
+      }
+      this.start();
     },
-    start() {
-      this.typeKey = [];
-      this.typeVal = [];
-      this.pairs = _.shuffle(this.pairs);
+    http: {
+      root: '//ealapi.tw1.ru/api'
     }
-  },
-  created() {
-    for (let task of this.stack.tasks) {
-      Array.prototype.push.apply(this.pairs, task.content);
-    }
-    this.start();
-  },
-  http: {
-    root: '//ealapi.tw1.ru/api'
   }
-}
 </script>
 
 <style lang="css" scoped>
