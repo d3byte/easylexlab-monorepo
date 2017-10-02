@@ -2,21 +2,26 @@
   <div id="newtask" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Новое задание</h5>
+        <div class="modal-header" style="background:rgb(161, 196, 226);">
+          <h5 class="modal-title text-center text-white">
+            <b>
+              <i class="material-icons">&#xE150;</i>
+              НОВОЕ ЗАДАНИЕ
+            </b>
+          </h5>
         </div>
-        <div class="modal-body text-center p-lg">
+        <div class="modal-header" style="background:rgb(227, 243, 254);padding:5px">
+          <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:7px"><b>СЛОВО</b></h5>
+          <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:7px"><b>ПЕРЕВОД</b></h5>
+        </div>
+        <div class="modal-body text-center p-lg" style="margin-top:0;">
           <h5 v-if="success" class="success">Задание успешно создано.</h5>
           <center>
             <button @click="pageUpdate" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="success">Ок</button>
           </center>
-          <form class="login-form" onsubmit="return false" v-if="this.showEditor">
+          <form class="login-form" onsubmit="return false" v-if="this.showEditor" style="margin-top:0">
             <div class="table-responsive">
-              <table class="table table-striped b-t b-b">
-                <tr>
-                  <th>Слово</th>
-                  <th>Перевод</th>
-                </tr>
+              <table class="table table-striped b-t b-b no-border">
                 <tr v-for="pair in tasks[0].content">
                   <td>
                     <div class="form-group row">
@@ -38,7 +43,7 @@
                 <tr>
                   <td class="new" colspan="2">
                     <center>
-                      <i @focus="newPair(tasks[0])" @click="newPair(tasks[0])" class="fa fa-plus newpair" aria-hidden="true"></i>
+                      <i @click="newPair(tasks[0])" class="material-icons newpair">&#xE148;</i>
                     </center>
                   </td>
                 </tr>
@@ -227,8 +232,21 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.modal-content {
+  border-radius: 5px;
+}
+
+.newpair:hover{
+  cursor: pointer;
+}
 
 input {
   color: black;
+}
+
+table td {
+  border: none !important;
+} table tr:nth-child(even) {
+  background: rgb(246, 247, 248);
 }
 </style>
