@@ -123,7 +123,7 @@
                     <pie-chart
                       v-if="!noneResults"
                       :data="chartData"
-                      :options="chartOptions"
+                      :colors="chartOptions.colors"
                       :library="{backgroundColor: '#fff', legend: { textStyle: { color: 'black' } }}"
                       />
                       <h5 v-else><small>Результатов пока нет.</small></h5>
@@ -210,7 +210,7 @@ export default {
       deleteStudent: false,
       chartOptions: {
         height: 250,
-        colors: ['#526A77', '#477C9B', '#fff', '#6BBFEF', '#074060']
+        colors: ['#526A77', '#477C9B', '#6BBFEF', '#074060', '#16A6F9']
       }
     }
   },
