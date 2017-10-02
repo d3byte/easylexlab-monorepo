@@ -1,4 +1,4 @@
-<template lang="html">
+ <template lang="html">
   <div>
     <app-header/>
     <div class="gradient">
@@ -35,47 +35,33 @@
         </div>
       </div>
     </div>
+    <div class="blue">
+      <div class="container custom-padding" style="padding-bottom: 0;margin-bottom: 0;">
+        <div class="menu">
+          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#newtask">
+            <i class="material-icons menu-icon">&#xE148;</i>
+            <span>Новое задание</span>
+          </div>
+          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#newmsg">
+            <i class="material-icons menu-icon">&#xE150;</i>
+            <span>Новое сообщение</span>
+          </div>
+          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#regcode">
+            <i class="material-icons menu-icon">&#xE8D3;</i>
+            <span>Код регистрации</span>
+          </div>
+          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#history">
+            <i class="material-icons menu-icon">&#xE8DE;</i>
+            <span>История заданий</span>
+          </div>
+          <!-- <a href class="btn btn-sm rounded danger" data-toggle="modal" data-target="#delete">Удалить группу</a> -->
+        </div>
+      </div>
+    </div>
     <div class="row-col b-b padding">
     	<div class="container">
         <div class="row">
       		<div class="padding">
-      			<div class="row-col box">
-      				<div class="col-sm-12">
-      					<div class="box-body">
-      						<div class="row hidden-sm-down">
-                    <a href class="btn btn-sm rounded success text-white" data-toggle="modal" data-target="#newtask">Новое задание</a>
-                    <a href class="btn btn-sm rounded primary" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
-                    <a href class="btn btn-sm rounded info" data-toggle="modal" data-target="#regcode">Код регистрации</a>
-                    <a href class="btn btn-sm rounded accent" data-toggle="modal" data-target="#history">История заданий</a>
-                    <a href class="btn btn-sm rounded danger" data-toggle="modal" data-target="#delete">Удалить группу</a>
-      						</div>
-                  <div class="row hidden-sm-up">
-                    <a href style="margin-bottom: 10px;" class="btn btn-sm rounded success text-white col-xs-12" data-toggle="modal" data-target="#newtask">Новое задание</a>
-                    <a href style="margin-bottom: 10px;" class="btn btn-sm rounded primary col-xs-12" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
-                    <a href style="margin-bottom: 10px;" class="btn btn-sm rounded info col-xs-12" data-toggle="modal" data-target="#regcode">Код регистрации</a>
-                    <a href style="margin-bottom: 10px;" class="btn btn-sm rounded accent col-xs-12" data-toggle="modal" data-target="#history">История заданий</a>
-                    <a href style="margin-bottom: 10px;" class="btn btn-sm rounded danger col-xs-12" data-toggle="modal" data-target="#delete">Удалить группу</a>
-      						</div>
-                  <div class="row hidden-md-up hidden-xs-down">
-                    <div class="col-sm-6" style="margin-bottom: 10px;">
-                      <a href class="btn btn-sm rounded success text-white col-sm-12" data-toggle="modal" data-target="#newtask">Новое задание</a>
-                    </div>
-                    <div class="col-sm-6" style="margin-bottom: 10px;">
-                      <a href class="btn btn-sm rounded primary col-sm-12" data-toggle="modal" data-target="#newmsg">Новое сообщение</a>
-                    </div>
-                    <div class="col-sm-6" style="margin-bottom: 10px;">
-                      <a href class="btn btn-sm rounded info col-sm-12" data-toggle="modal" data-target="#regcode">Код регистрации</a>
-                    </div>
-                    <div class="col-sm-6" style="margin-bottom: 10px;">
-                      <a href class="btn btn-sm rounded accent col-sm-12" data-toggle="modal" data-target="#history">История заданий</a>
-                    </div>
-                    <div class="col-sm-6" style="margin-bottom: 10px;">
-                      <a href class="btn btn-sm rounded danger col-sm-12" data-toggle="modal" data-target="#delete">Удалить группу</a>
-                    </div>
-      						</div>
-      					</div>
-              </div>
-      	    </div>
       			<div class="row" style="margin-bottom: 20px;">
       				<div class="col-sm-6">
       					<div class="box">
@@ -559,5 +545,48 @@ export default {
 
 .adaptive-change-name {
   padding: 0 10px;
+}
+
+.menu {
+  padding: 0 25px;
+  height: 50px;
+  padding-bottom: 0 !important;
+}
+
+.blue {
+  background: linear-gradient(to right, rgb(79, 101, 180), rgb(49, 137, 225));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  height: 50px;
+  transition: 0.3s;
+} .menu-item:first-child {
+  border-top: 3px solid rgb(228, 78, 60);
+  border-right: 3px solid rgb(72, 112, 189);
+  border-left: 3px solid rgb(80, 112, 189);
+} .menu-item:nth-child(2) {
+  border-top: 3px solid rgb(234, 168, 59);
+  border-right: 3px solid rgb(63, 113, 191);
+} .menu-item:nth-child(3) {
+  border-top: 3px solid rgb(41, 205, 107);
+  border-right: 3px solid rgb(72, 132, 208);
+} .menu-item:last-child {
+  border-top: 3px solid rgb(37, 198, 218);
+  border-right: 3px solid rgb(54, 124, 202);
+} .menu-item:hover {
+  cursor: pointer;
+  background: rgb(48, 84, 157);
+}
+
+.menu-icon {
+  font-size: 22px;
+  margin-right: 5px;
 }
 </style>
