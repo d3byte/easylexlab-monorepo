@@ -6,7 +6,7 @@
         <div class="parent">
           <div class="description">
             <span @click="changeName" v-if="!newName" class="hover group-name-span">
-              <small class="text-muted">Название группы:</small> {{ group.name }}
+              <small class="text-muted">Название группы:</small> <b>{{ group.name }}</b>
             </span>
             <span class="label label-sm up transparent" v-if="!newName">
               <i class="material-icons" style="font-size:12px;">&#xE254;</i>
@@ -38,23 +38,25 @@
     <div class="blue">
       <div class="container custom-padding" style="padding-bottom: 0;margin-bottom: 0;">
         <div class="menu">
-          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#newtask">
+          <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#newtask">
             <i class="material-icons menu-icon">&#xE148;</i>
             <span>Новое задание</span>
           </div>
-          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#newmsg">
+          <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#newmsg">
             <i class="material-icons menu-icon">&#xE150;</i>
             <span>Новое сообщение</span>
           </div>
-          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#regcode">
+          <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#regcode">
             <i class="material-icons menu-icon">&#xE8D3;</i>
             <span>Код регистрации</span>
           </div>
-          <div class="menu-item col-md-3 col-sm-6" data-toggle="modal" data-target="#history">
+          <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#history">
             <i class="material-icons menu-icon">&#xE8DE;</i>
             <span>История заданий</span>
           </div>
+          <!-- Удаление группы -->
           <!-- <a href class="btn btn-sm rounded danger" data-toggle="modal" data-target="#delete">Удалить группу</a> -->
+          <!--  -->
         </div>
       </div>
     </div>
@@ -62,43 +64,46 @@
     	<div class="container">
         <div class="row">
       		<div class="padding">
-      			<div class="row" style="margin-bottom: 20px;">
+      			<div class="row">
       				<div class="col-sm-6">
       					<div class="box">
-      						<div class="box-header">
-      							<h3>Последние отправленные сообщения</h3>
+      						<div class="box-header msg-header">
+      							<small class="text-muted"><b>{{ !!group.messages ? group.messages.length : 0 }}</b> Cообщений</small>
+                    <div class="pull-right">
+
+                    </div>
       						</div>
-      						<div class="box-body">
-                    <ul class="list-group no-border m-b">
+      						<div class="box-body msgs-body" style="background: rgb(200, 237, 246);padding-bottom:0;">
+                    <ul class="list-group m-b">
+      				        <li v-if="showAll" class="list-group-item msg" v-for="msg in group.messages">
+                        <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
+      				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
+      				          <div class="clear">
+      				            <a href="" class="_500 block">{{ msg.author }}</a>
+      				            <span class="text-muted">{{ msg.text }}</span><br>
+                          <span class="text-muted"><small>{{ msg.date }}</small></span>
+      				          </div>
+      				        </li>
+                      <li v-if="!showAll" class="list-group-item msg" v-for="msg in slicedMessages">
+                        <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
+      				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
+      				          <div class="clear">
+      				            <a href="" class="_500 block">{{ msg.author }}</a>
+      				            <span class="text-muted">{{ msg.text }}</span><br>
+                          <span class="text-muted"><small>{{ msg.date }}</small></span>
+      				          </div>
+      				        </li>
                       <li class="list-group-item checkbox">
                         <input type="checkbox" id="padding" v-model="showAll">
                         <label for="padding">Посмотреть все</label>
                       </li>
-      				        <li v-show="showAll" class="list-group-item" v-for="msg in group.messages">
-                        <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
-      				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
-      				          <div class="clear">
-      				            <a href="" class="_500 block">{{ msg.author }}</a>
-      				            <span class="text-muted">{{ msg.text }}</span><br>
-                          <span class="text-muted"><small>{{ msg.date }}</small></span>
-      				          </div>
-      				        </li>
-                      <li v-show="!showAll" class="list-group-item" v-for="msg in slicedMessages">
-                        <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
-      				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
-      				          <div class="clear">
-      				            <a href="" class="_500 block">{{ msg.author }}</a>
-      				            <span class="text-muted">{{ msg.text }}</span><br>
-                          <span class="text-muted"><small>{{ msg.date }}</small></span>
-      				          </div>
-      				        </li>
       					    </ul>
       						</div>
       			    </div>
       				</div>
       				<div class="col-sm-6">
-      	        <div class="grey lt" id="color">
-              		<div class="box-header">
+      	        <div class="lt" id="color">
+              		<div class="box-header" style="background:white">
         	          <h3>Статистика</h3>
         	          <small>Результаты за {{ currentTask }}</small>
         	        </div>
@@ -114,11 +119,12 @@
                     </li>
                   </ul>
                 </div>
-        	        <div class="box-body">
+        	        <div class="box-body" style="background:white;min-height:270px;padding-bottom:0;padding-top:13px;">
                     <pie-chart
                       v-if="!noneResults"
                       :data="chartData"
-                      :library="{backgroundColor: '#484848', legend: { textStyle: { color: 'white' } }}"
+                      :options="chartOptions"
+                      :library="{backgroundColor: '#fff', legend: { textStyle: { color: 'black' } }}"
                       />
                       <h5 v-else><small>Результатов пока нет.</small></h5>
         	        </div>
@@ -201,7 +207,11 @@ export default {
       currentTask: '',
       newName: false,
       name: '',
-      deleteStudent: false
+      deleteStudent: false,
+      chartOptions: {
+        height: 250,
+        colors: ['#526A77', '#477C9B', '#fff', '#6BBFEF', '#074060']
+      }
     }
   },
   computed: {
@@ -457,6 +467,7 @@ export default {
 }
 
 .checkbox {
+  margin-top: 0;
   display: flex;
   justify-content: start;
 }
@@ -569,7 +580,7 @@ export default {
   transition: 0.3s;
 } .menu-item:first-child {
   border-top: 3px solid rgb(228, 78, 60);
-  border-right: 3px solid rgb(72, 112, 189);
+  border-right: 3px solid rgb(72, 120, 189);
   border-left: 3px solid rgb(80, 112, 189);
 } .menu-item:nth-child(2) {
   border-top: 3px solid rgb(234, 168, 59);
@@ -588,5 +599,25 @@ export default {
 .menu-icon {
   font-size: 22px;
   margin-right: 5px;
+}
+
+.msg-header {
+  border-bottom: 3px solid rgb(180, 213, 219);
+  background: white;
+}
+
+.box-body.msgs-body {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.list-group-item {
+  background: rgb(200, 237, 246);
+  border-color: rgb(116, 151, 162) !important;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
+} .list-group-item:first-of-type {
+  border-top: none !important;
 }
 </style>
