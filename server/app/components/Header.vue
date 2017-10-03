@@ -443,7 +443,7 @@
    box-sizing: border-box;
    width: 75%;
    margin-bottom: 0;
-   padding:5px 30px;
+   padding:0 30px;
    padding-right: 40px;
  }
 </style>
