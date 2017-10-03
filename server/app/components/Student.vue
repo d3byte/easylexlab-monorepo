@@ -5,7 +5,7 @@
     </div>
     <div class="p-a-md">
       <div class="row m-t">
-        <div class="col-sm-12 hidden-md-up ad" style="margin-bottom: 10px;">
+        <div class="col-sm-12 hidden-md-up ad">
           <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
@@ -15,22 +15,22 @@
             </center>
           </div>
         </div>
-        <div class="col-md-8 col-sm-12">
+        <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
-              <h1>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</h1>
+              <h1>{{ firstName.slice(0, 1) + lastName.slice(0, 1) }}</h1>
             </span>
           </a>
           <div class="clear m-b">
-            <h3 class="m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
-            <p class="text-muted"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
-            <h5 class="m-a-0 text-md text-muted">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+            <h3 class="text-white m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
+            <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
+            <h5 class="m-a-0 text-md text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
             <br>
-            <h5 class="m-a-0 text-md text-muted" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
-            <h5 class="m-a-0 text-md text-muted" v-else>Ближайшего дня сдачи нет</h5>
+            <h5 class="m-a-0 text-md text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
+            <h5 class="m-a-0 text-md text-white" v-else>Ближайшего дня сдачи нет</h5>
           </div>
         </div>
-        <div class="col-md-4 ad hidden-sm-down">
+        <div class="col-md-4 ad hidden-sm-down" v-if="showAd">
           <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
@@ -47,16 +47,15 @@
     <div class="row hidden-xs-down">
       <div class="col-sm-12">
         <div class="p-y-md clearfix nav-active-primary">
-          <ul class="nav nav-pills nav-sm">
+          <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a>
+              <h5><a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a></h5>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a>
-
+              <h5><a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a></h5>
             </li>
-            <li class="nav-item" v-for="group in user._groups">
-              <a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a>
+            <li class="nav-item .col-md-offset-10" v-for="group in user._groups">
+              <h5><a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a></h5>
             </li>
           </ul>
         </div>
@@ -65,12 +64,12 @@
     <div class="row hidden-sm-up">
       <div class="col-sm-12 col-xs-12">
         <div class="p-y-md clearfix nav-active-primary">
-          <ul class="nav nav-pills nav-sm">
+          <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a>
+              <h5><a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a></h5>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a>
+              <h5><a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a></h5>
             </li>
           </ul>
         </div>
@@ -79,15 +78,16 @@
     <div class="row hidden-sm-up">
       <div class="col-sm-12 col-xs-12">
         <div class="p-y-md">
-          <ul class="nav nav-pills nav-sm">
+          <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item" v-for="group in user._groups">
-              <a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a>
+              <h5><a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a></h5>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+
   <div v-show="showTasks" class="row checkbox">
     <input type="checkbox" id="padding" v-model="showAll">
     <label for="padding">Показать выполненные</label>
@@ -407,6 +407,8 @@ h5.white-text {
 
 .container {
   width: 75%;
+  padding: 5px;
+  padding-bottom: 15px;
 }
 
 .success {
@@ -421,10 +423,15 @@ h5.white-text {
 .avatar {
   width: 130px;
   height: 130px;
-  border: 2px solid #343A3F;
+  border: 2px solid rgb(144, 197, 246);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.google {
+  padding: 0px;
+  margin: 0px;
 }
 
 .ad {
