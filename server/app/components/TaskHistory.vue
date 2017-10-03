@@ -2,41 +2,50 @@
   <div id="history" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">История заданий</h5>
+        <div class="modal-header" style="background:rgb(161, 196, 226);">
+          <h5 class="modal-title text-center text-white">
+            <b>
+              <i class="material-icons">&#xE8DE;</i>
+              ИСТОРИЯ ЗАДАНИЙ
+            </b>
+          </h5>
         </div>
-        <div class="modal-body text-center p-lg table-responsive">
-          <table class="table table-striped b-t b-b box">
-            <thead>
-              <tr>
-                <th>Название задания</th>
-                <th>Выполнили:</th>
-              </tr>
-            </thead>
-            <tbody class="task" v-for="task in group._tests">
-              <tr>
-                <td>{{ task.name }}</td>
-                <td>{{ task.results.length }}/{{ group._students.length }}</td>
-                <td @click="showOrHideWords(task._id)" class="hover">
-                  <i class="fa fa-eercast" aria-hidden="true" v-if="show == task._id"></i>
-                  <i class="fa fa-bandcamp" aria-hidden="true" v-else></i>
-                  Показать слова
-                </td>
-                <td @click="removeTask(task._id)" class="hover"><i class="material-icons">remove_circle</i> Удалить</td>
-              </tr>
-              <tr v-show="show == task._id">
-                <td><b>Слово</b></dh>
-                <td><b>Перевод</b></td>
-              </tr>
-              <tr v-show="show == task._id" v-for="pair in task.tasks[0].content">
-                <td>{{ pair.key }}</td>
-                <td>{{ pair.value }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="modal-body">
+          <div class="table-responsive box">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr class="headers">
+                  <th class="">Название задания</th>
+                  <th>Выполнили:</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="task" v-for="task in group._tests">
+                <tr>
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.results.length }}/{{ group._students.length }}</td>
+                  <td @click="showOrHideWords(task._id)" class="hover">
+                    <i class="material-icons" v-if="show == task._id">&#xE15D;</i>
+                    <i class="material-icons" v-else>&#xE148;</i>
+                    Показать слова
+                  </td>
+                  <td @click="removeTask(task._id)" class="hover"><i class="material-icons">remove_circle</i> Удалить</td>
+                </tr>
+                <tr v-show="show == task._id" class="body-row">
+                  <td><b>Слово</b></dh>
+                  <td><b>Перевод</b></td>
+                </tr>
+                <tr class="body-row" v-show="show == task._id" v-for="pair in task.tasks[0].content">
+                  <td>{{ pair.key }}</td>
+                  <td>{{ pair.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="modal-footer text-center">
-          <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
+          <button type="button" style="background:rgb(207, 208, 209);color:white" class="btn" data-dismiss="modal">Закрыть</button>
         </div>
       </div>
     </div>
@@ -99,8 +108,12 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .hover:hover {
   cursor: pointer;
+}
+
+.body-row:nth-child(odd) {
+  background: rgb(226, 236, 237) !important;
 }
 </style>
