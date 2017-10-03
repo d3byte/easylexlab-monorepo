@@ -50,7 +50,7 @@
               </table>
             </div>
             <center>
-              <button @click="confirm" style="background:rgb(251, 106, 33);color:white" class="btn">Готово</button>
+              <button @click="confirm" style="background:rgb(251, 106, 33);color:white;margin-right:10px" class="btn">Готово</button>
               <button @click="refresh" style="background:rgb(207, 208, 209);color:white" type="button" class="btn" data-dismiss="modal">Отмена</button>
             </center>
           </form>
@@ -99,7 +99,7 @@
                 </div>
               </div>
               <hr>
-              <button @click="post" style="background:rgb(251, 106, 33);color:white" class="btn" v-if="!success">Создать</button>
+              <button @click="post" style="background:rgb(251, 106, 33);color:white;margin-right:10px" class="btn" v-if="!success">Создать</button>
               <button @click="refresh" type="button" style="background:rgb(207, 208, 209);color:white" class="btn" data-dismiss="modal" v-if="!success">Отмена</button>
             </form>
           </div>

@@ -2,14 +2,19 @@
   <div id="regcode" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Код регистрации</h4>
+        <div class="modal-header" style="background:rgb(161, 196, 226);">
+          <h5 class="modal-title text-center text-white">
+            <b>
+              <i class="material-icons">&#xE8D3;</i>
+              КОД РЕГИСТРАЦИИ
+            </b>
+          </h5>
         </div>
-        <div class="modal-body text-center p-lg">
-          <h5>Дайте этот код ученикам и они смогут присоединиться к группе!</h5>
-          <h4><b>{{ groupCode }}</b></h4>
+        <div class="modal-body" style="background:rgb(227, 243, 254)">
+          <h5 class="border">Дайте этот код ученикам и они смогут присоединиться к группе!</h5>
+          <h4 class="text-center" style="margin-bottom:20px;"><b>{{ groupCode }}</b></h4>
           <center>
-            <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
+            <button type="button" style="background:rgb(207, 208, 209);color:white" class="btn" data-dismiss="modal">Закрыть</button>
           </center>
         </div>
       </div>
@@ -50,4 +55,9 @@ export default {
 </script>
 
 <style lang="css">
+.border {
+  padding: 5px;
+  border-bottom: 3px solid rgb(207, 208, 209);
+  margin-bottom: 20px;
+}
 </style>

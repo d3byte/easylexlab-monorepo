@@ -31,7 +31,7 @@
                 <textarea v-model="text" placeholder="Сообщение" required></textarea>
               </div> -->
               <center>
-                <button @click="send" style="background:rgb(251, 106, 33);color:white" class="btn" v-if="!success">Отправить</button>
+                <button @click="send" style="background:rgb(251, 106, 33);color:white;margin-right:10px" class="btn" v-if="!success">Отправить</button>
                 <button @click="refresh" style="background:rgb(207, 208, 209);color:white" type="button" class="btn" data-dismiss="modal">Отмена</button>
               </center>
             </form>
