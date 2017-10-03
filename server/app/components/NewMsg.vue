@@ -2,18 +2,28 @@
     <div id="newmsg" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Новое сообщение</h5>
+          <div class="modal-header" style="background:rgb(161, 196, 226);">
+            <h5 class="modal-title text-center text-white">
+              <b>
+                <i class="material-icons">&#xE0C9;</i>
+                НОВОЕ СООБЩЕНИЕ
+              </b>
+            </h5>
           </div>
-          <div class="modal-body text-center p-lg">
-            <h5 v-if="success && !showPreloader" class="success">Сообщение успешно отправлено.</h5>
+          <div class="modal-header" style="background:rgb(227, 243, 254);padding:5px 10px;padding-top:10px">
+            <h6 style="color:rgb(116, 154, 184)">
+              <i class="material-icons">&#xE150;</i>
+              <b>Текст сообщения</b>
+            </h6>
+          </div>
+          <div class="modal-body p-lg" style="background:rgb(227, 243, 254)">
+            <h5 v-if="success && !showPreloader">Сообщение успешно отправлено.</h5>
             <center>
               <button v-if="success && !showPreloader" @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
             </center>
             <form v-if="!success" class="login-form" onsubmit="return false">
               <div class="form-group row">
-                <label class="col-sm-2 form-control-label">Текст сообщения</label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <textarea class="form-control" rows="5" v-model="text" required></textarea>
                 </div>
               </div>
@@ -21,8 +31,8 @@
                 <textarea v-model="text" placeholder="Сообщение" required></textarea>
               </div> -->
               <center>
-                <button @click="send" class="btn btn-primary p-x-md" v-if="!success">Отправить</button>
-                <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Отмена</button>
+                <button @click="send" style="background:rgb(251, 106, 33);color:white" class="btn" v-if="!success">Отправить</button>
+                <button @click="refresh" style="background:rgb(207, 208, 209);color:white" type="button" class="btn" data-dismiss="modal">Отмена</button>
               </center>
             </form>
           </div>
@@ -36,7 +46,7 @@ export default {
   props: ['group'],
   data() {
     return {
-      text: '',
+      text: `Введите сообщение и нажмите кнопку "Отправить".\nСообщение будет доставлено всем ученикам данной группы.`,
       showPreloader: false,
       success: false,
       groupId: this.$route.params.id
@@ -79,5 +89,9 @@ textarea {
   color: black;
   padding: 10px;
   border-radius: 2px;
+}
+
+.modal-content {
+  border-radius: 5px;
 }
 </style>
