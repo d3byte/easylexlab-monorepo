@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="body">
   <div class="item">
     <div class="item-bg" :style="{ background: background }"></div>
     <div class="container">
@@ -325,6 +325,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+.body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
 #padding {
   margin-left: 20px;
   width: 10px;
