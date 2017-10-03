@@ -3,7 +3,7 @@
   <div class="item">
     <div class="item-bg" :style="{ background: background }"></div>
     <div class="container">
-      <div class="row m-t">
+
         <div class="col-sm-12 hidden-md-up ad">
           <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
@@ -35,7 +35,7 @@
             </center>
           </div>
         </div>
-      </div>
+
     </div>
   </div>
   <router-view></router-view>
@@ -111,7 +111,13 @@ export default {
 
 .container {
   width: 75%;
-  padding: 5px;
-  padding-bottom: 15px;
+  margin-bottom: 10px;
+  padding:5px 25px;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
