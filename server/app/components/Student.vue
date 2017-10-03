@@ -1,8 +1,8 @@
 <template>
 <div>
   <div class="item">
-    <div class="item-bg" :style="{ background: background }">
-    </div>
+    <div class="item-bg" :style="{ background: background }"></div>
+    <div class="container">
     <div class="p-a-md">
       <div class="row m-t">
         <div class="col-sm-12 hidden-md-up ad">
@@ -43,19 +43,20 @@
       </div>
     </div>
   </div>
-  <div style="background: rgb(99, 170, 242)">
+  </div>
+  <div style="background: rgb(99, 170, 242); margin-top: -50px;">
     <div class="row hidden-xs-down">
       <div class="col-sm-12">
-        <div class="p-y-md clearfix nav-active-primary">
+        <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <h5><a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a></h5>
+              <button class="btn btn-md btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1">Задания</button>
             </li>
-            <li class="nav-item">
-              <h5><a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a></h5>
+            <li class="nav-item" style="padding-right:200px">
+              <button class="btn btn-md btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2">Сообщения</button>
             </li>
-            <li class="nav-item .col-md-offset-10" v-for="group in user._groups">
-              <h5><a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a></h5>
+            <li class="nav-item" v-for="group in user._groups">
+              <button class="btn btn-md btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
@@ -66,10 +67,10 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <h5><a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a></h5>
+              <h6><a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a></h6>
             </li>
             <li class="nav-item">
-              <h5><a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a></h5>
+              <h6><a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a></h6>
             </li>
           </ul>
         </div>
@@ -80,7 +81,7 @@
         <div class="p-y-md">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item" v-for="group in user._groups">
-              <h5><a class="nav-link" @click="changeGroup(group)"><b>{{ group.name }}</b></a></h5>
+              <h6><a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a></h6>
             </li>
           </ul>
         </div>
@@ -95,8 +96,10 @@
   <div class="container-fluid">
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
+        <center>
         <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
         <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
+      </center>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
         <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
           <div class="col-lg col-md col-sm col-xs box task">
@@ -364,6 +367,16 @@ h5.white-text {
   padding: 0 !important;
 }
 
+.button-gradient-task {
+  background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+  /*text-color: white !important;*/
+}
+
+.button-gradient-msg {
+  /*background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);*/
+  background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+}
+
 .ava {
   justify-content: center;
   min-height: 160px;
@@ -401,11 +414,18 @@ h5.white-text {
 }
 
 .blue { /* лабуди лабудай */
-  background-color: rgb(29,157,244);
-  color: white;
+  background: linear-gradient(to right, rgb(79, 101, 180), rgb(49, 137, 225));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
+  width: 75%;
+  padding: 5px;
+}
+
+.bicycle {
   width: 75%;
   padding: 5px;
   padding-bottom: 15px;
@@ -432,6 +452,12 @@ h5.white-text {
 .google {
   padding: 0px;
   margin: 0px;
+}
+
+.white {
+  background: white !important;
+  /*border: 2px solid black !important;*/
+  color: #575757;
 }
 
 .ad {
