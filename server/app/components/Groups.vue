@@ -115,6 +115,7 @@ export default {
 .container-sm-xs {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .table-responsive.box {
