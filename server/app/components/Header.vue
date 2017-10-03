@@ -1,6 +1,6 @@
 <template>
     <div class="app-header white box-shadow">
-      <div class="container hidden-xs-down">
+      <div class="container hidden-sm-down">
 
         <div class="navbar-item pull-left h5" id="pageTitle">
           <router-link to="/">
@@ -10,17 +10,17 @@
         </div>
 
         <ul class="nav navbar-nav pull-right text-primary-hover" v-if="logged">
-          <li class="nav-item text-primary-hover hidden-sm-down" v-if="token.permissions === 'student'">
+          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" v-if="token.permissions === 'student'">
             <router-link class="nav-link" to="/stats">
               <span>Мои результаты</span>
             </router-link>
           </li>
-          <li class="nav-item text-primary-hover hidden-sm-down" v-if="token.permissions === 'teacher'">
+          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" v-if="token.permissions === 'teacher'">
             <a class="nav-link" href data-toggle="modal" data-target="#m-a-f">
               <span>Создать группу</span>
             </a>
           </li>
-          <li class="nav-item dropdown pos-stc-xs hidden-sm-down">
+          <li class="nav-item dropdown pos-stc-xs hidden-sm-down border-right-nav">
             <a class="nav-link" href data-toggle="dropdown">
               <i class="material-icons">&#xe7f5;</i>
               <span class="label label-sm up warn">{{ notifications.length }}</span>
@@ -44,7 +44,7 @@
             </div>
             <!-- / dropdown -->
           </li>
-          <li class="nav-item dropdown hidden-sm-down">
+          <li class="nav-item border-right-nav dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
               <span class="avatar w-32" :style="{ backgroundColor: color }">
                   <span>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
@@ -52,16 +52,22 @@
             </a>
             <div class="dropdown-menu pull-right dropdown-menu-scale">
               <router-link class="dropdown-item" to="/profile">
+                <i class="material-icons">&#xE8A6;</i>
                 Профиль
               </router-link>
               <router-link class="dropdown-item" to="/settings">
+                <i class="material-icons">&#xE8B8;</i>
                 Настройки
               </router-link>
               <span class="dropdown-item hover" data-toggle="modal" data-target="#feedback">
+                <i class="material-icons">&#xE0C9;</i>
                 Оставить отзыв
               </span>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" @click="logout">Выход</a>
+              <a class="dropdown-item" @click="logout">
+                <i class="material-icons">&#xE0B2;</i>
+                Выход
+              </a>
             </div>
           </li>
           <li class="nav-item hidden-md-up">
@@ -74,12 +80,18 @@
         <ul class="nav navbar-nav pull-right text-primary-hover hidden-sm-down" v-else>
           <li class="nav-item">
             <router-link to="/login" class="nav-link">
-              <span>Войти</span>
+              <span>
+                <i class="material-icons">&#xE890;</i>
+                Войти
+              </span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/signup" class="nav-link">
-              <span>Зарегистрироваться</span>
+              <span>
+                <i class="material-icons">&#xE895;</i>
+                Зарегистрироваться
+              </span>
             </router-link>
           </li>
         </ul>
@@ -93,7 +105,7 @@
 
       </div>
 
-      <div class="navbar hidden-sm-up">
+      <div class="navbar hidden-md-up">
         <!-- Page title - Bind to $state's title -->
         <div class="navbar-item pull-left h5" id="pageTitle">
           <router-link to="/">
@@ -146,16 +158,22 @@
             </a>
             <div class="dropdown-menu pull-right dropdown-menu-scale">
               <router-link class="dropdown-item" to="/profile">
+                <i class="material-icons">&#xE8A6;</i>
                 Профиль
               </router-link>
               <router-link class="dropdown-item" to="/settings">
+                <i class="material-icons">&#xE8B8;</i>
                 Настройки
               </router-link>
               <span class="dropdown-item hover" data-toggle="modal" data-target="#feedback">
+                <i class="material-icons">&#xE0C9;</i>
                 Оставить отзыв
               </span>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" @click="logout">Выход</a>
+              <a class="dropdown-item" @click="logout">
+                <i class="material-icons">&#xE0B2;</i>
+                Выход
+              </a>
             </div>
           </li>
           <li class="nav-item hidden-md-up">
@@ -167,12 +185,18 @@
         <ul class="nav navbar-nav pull-right text-primary-hover hidden-sm-down" v-else>
           <li class="nav-item">
             <router-link to="/login" class="nav-link">
-              <span>Войти</span>
+              <span>
+                <i class="material-icons">&#xE890;</i>
+                Войти
+              </span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/signup" class="nav-link">
-              <span>Зарегистрироваться</span>
+              <span>
+                <i class="material-icons">&#xE895;</i>
+                Зарегистрироваться
+              </span>
             </router-link>
           </li>
         </ul>
@@ -193,6 +217,7 @@
           <ul class="nav navbar-nav text-primary-hover" v-if="logged">
             <li class="nav-item">
               <router-link class="dropdown-item" to="/profile">
+                <i class="material-icons">&#xE8A6;</i>
                 Профиль
               </router-link>
               <a class="dropdown-item" href data-toggle="dropdown">
@@ -217,6 +242,7 @@
                 </div>
               </div>
               <router-link class="dropdown-item" to="/settings">
+                <i class="material-icons">&#xE8B8;</i>
                 Настройки
               </router-link>
               <router-link class="dropdown-item" to="/stats" v-if="token.permissions === 'student'">
@@ -226,20 +252,30 @@
                 <span>Создать группу</span>
               </a>
               <a class="dropdown-item" data-toggle="modal" data-target="#feedback">
+                <i class="material-icons">&#xE0C9;</i>
                 Оставить отзыв
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" @click="logout">Выход</a>
+              <a class="dropdown-item" @click="logout">
+                <i class="material-icons">&#xE0B2;</i>
+                Выход
+              </a>
             </li>
           </ul>
 
           <ul class="nav navbar-nav" v-else>
             <li class="nav-item">
               <router-link to="/login" class="dropdown-item">
-                <span>Войти</span>
+                <span>
+                  <i class="material-icons">&#xE890;</i>
+                  Войти
+                </span>
               </router-link>
               <router-link to="/signup" class="dropdown-item">
-                <span>Зарегистрироваться</span>
+                <span>
+                  <i class="material-icons">&#xE895;</i>
+                  Зарегистрироваться
+                </span>
               </router-link>
             </li>
           </ul>
@@ -253,6 +289,7 @@
           <ul class="nav navbar-nav text-primary-hover" v-if="logged">
             <li class="nav-item">
               <router-link class="dropdown-item" to="/profile">
+                <i class="material-icons">&#xE8A6;</i>
                 Профиль
               </router-link>
               <a class="dropdown-item" href data-toggle="dropdown">
@@ -277,6 +314,7 @@
                 </div>
               </div>
               <router-link class="dropdown-item" to="/settings">
+                <i class="material-icons">&#xE8B8;</i>
                 Настройки
               </router-link>
               <router-link class="dropdown-item" to="/stats" v-if="token.permissions === 'student'">
@@ -286,20 +324,30 @@
                 <span>Создать группу</span>
               </a>
               <a class="dropdown-item" data-toggle="modal" data-target="#feedback">
+                <i class="material-icons">&#xE0C9;</i>
                 Оставить отзыв
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" @click="logout">Выход</a>
+              <a class="dropdown-item" @click="logout">
+                <i class="material-icons">&#xE0B2;</i>
+                Выход
+              </a>
             </li>
           </ul>
 
           <ul class="nav navbar-nav" v-else>
             <li class="nav-item">
               <router-link to="/login" class="dropdown-item">
-                <span>Войти</span>
+                <span>
+                  <i class="material-icons">&#xE890;</i>
+                  Войти
+                </span>
               </router-link>
               <router-link to="/signup" class="dropdown-item">
-                <span>Зарегистрироваться</span>
+                <span>
+                  <i class="material-icons">&#xE895;</i>
+                  Зарегистрироваться
+                </span>
               </router-link>
             </li>
           </ul>
@@ -437,6 +485,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-right: 15px;
   }
 
  .container {
@@ -445,5 +494,12 @@
    margin-bottom: 0;
    padding:0 30px;
    padding-right: 40px;
+ }
+
+ .border-right-nav {
+   padding: 0 10px;
+   border-right: 1px solid #ccc;
+ } .border-right-nav > .nav-link {
+   border: none;
  }
 </style>
