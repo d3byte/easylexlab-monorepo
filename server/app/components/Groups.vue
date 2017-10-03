@@ -108,6 +108,8 @@ export default {
 
 .container {
   width: 75%;
+  margin-top: 10px;
+  padding:5px 35px;
 }
 
 .container-sm-xs {
