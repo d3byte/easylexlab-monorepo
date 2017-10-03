@@ -6,7 +6,7 @@
         <div class="parent">
           <div class="description">
             <span @click="changeName" v-if="!newName" class="hover group-name-span">
-              <small class="text-muted">Название группы:</small> <b>{{ group.name }}</b>
+              <b>{{ group.name }}</b>
             </span>
             <span class="label label-sm up transparent" v-if="!newName">
               <i class="material-icons" style="font-size:12px;">&#xE254;</i>

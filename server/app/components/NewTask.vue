@@ -25,16 +25,16 @@
                 <tr v-for="pair in tasks[0].content">
                   <td>
                     <div class="form-group row">
-                      <label class="col-sm-2 form-control-label">Слово</label>
-                      <div class="col-sm-10">
+                      <label class="col-sm-3 form-control-label">Слово</label>
+                      <div class="col-sm-9">
                         <input type="text" v-model="pair.key" required>
                       </div>
                     </div>
                   </td>
                   <td>
                     <div class="form-group row">
-                      <label class="col-sm-2 form-control-label">Перевод</label>
-                      <div class="col-sm-10">
+                      <label class="col-sm-3 form-control-label">Перевод</label>
+                      <div class="col-sm-9">
                         <input type="text" v-model="pair.value" required>
                       </div>
                     </div>
@@ -50,8 +50,8 @@
               </table>
             </div>
             <center>
-              <button @click="confirm" class="btn btn-success">Готово</button>
-              <button @click="refresh" type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+              <button @click="confirm" style="background:rgb(251, 106, 33);color:white" class="btn">Готово</button>
+              <button @click="refresh" style="background:rgb(207, 208, 209);color:white" type="button" class="btn" data-dismiss="modal">Отмена</button>
             </center>
           </form>
           <div v-if="this.showPost && !success">
@@ -99,8 +99,8 @@
                 </div>
               </div>
               <hr>
-              <button @click="post" class="btn btn-success" v-if="!success">Создать</button>
-              <button @click="refresh" type="button" class="btn btn-danger" data-dismiss="modal" v-if="!success">Отмена</button>
+              <button @click="post" style="background:rgb(251, 106, 33);color:white" class="btn" v-if="!success">Создать</button>
+              <button @click="refresh" type="button" style="background:rgb(207, 208, 209);color:white" class="btn" data-dismiss="modal" v-if="!success">Отмена</button>
             </form>
           </div>
         </div>
