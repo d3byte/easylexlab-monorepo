@@ -80,7 +80,7 @@
       <div class="col box">
         <div class="row-col danger white-text">
           <center>
-          <h3>Учить</h3>
+          <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> Учить</h3>
         </center>
         </div>
         <div class="p-a block">
@@ -105,7 +105,7 @@
       <div class="col box">
         <div class="row-col warn white-text">
           <center>
-          <h3>Играть</h3>
+          <h3><i class="fa fa-trophy" aria-hidden="true"></i> Играть</h3>
         </center>
         </div>
         <div class="p-a block">
@@ -125,7 +125,7 @@
       <div class="col box">
         <div class="row-col success white-text">
           <center>
-          <h3>Тест</h3>
+          <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Тест</h3>
         </center>
         </div>
         <div class="p-a block">
@@ -142,9 +142,11 @@
   <div class="row" id="translate">
     <div class="col-sm-12 ">
       <div class="box">
-        <div class="row-col grey white-text">
-          <h3>Повторить</h3>
-        </div>
+        <div class="row-col accent white-text">
+              <center>
+                <h3><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
+              </center>
+            </div>
         <div class="p-a table-responsive">
           <table class="table table-striped table-hover">
             <thead>
