@@ -8,19 +8,22 @@
 
     <div class="p-a-md">
       <div class="row m-t">
+        <div class="container">
         <div class="col-sm-7">
           <div class="clear m-b">
             <h3 class="m-a-0 m-b-xs">Название урока: {{ task.name }}</h3><br>
-            <h5 class="hidden-sm-down text-muted" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">Выберите вид деятельности</h5>
+            <h5 class="hidden-sm-down text-muted" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">Выберите задание</h5>
             <h6 class="hidden-md-up text-muted">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
           </div>
         </div>
+      </div>
         <div class="col-sm-5">
         </div>
       </div>
     </div>
   </div>
 
+  <div class="container">
   <div class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
     <div class="row">
       <div class="col-sm-12">
@@ -67,8 +70,9 @@
       </div>
     </div>
   </div>
+</div>
 
-
+  <div class="container">
   <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">
     <div class="row">
 
@@ -159,6 +163,7 @@
       </div>
       </div>
   </div>
+</div>
 </div>
 </div>
 
@@ -302,10 +307,6 @@ export default {
     margin-bottom: 20px;
   }
 
-  .container {
-    margin-bottom: 50px;
-  }
-
   .text.game {
     color: black;
     text-shadow: none;
@@ -349,5 +350,10 @@ export default {
 
   .block {
     height: 153px;
+  }
+
+  .container {
+    width: 75%;
+    padding: 5px;
   }
 </style>
