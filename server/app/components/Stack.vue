@@ -76,17 +76,18 @@
         <div class="row-col success white-text">
           <h3>Учить</h3></div>
         <div class="p-a text-center">
-          <ul class="nav nav-pills nav-sm">
             <li class="nav-item">
               <a class="nav-link" @click="showFlashcards">Выучи слова</a>
             </li>
+            <br>
             <li class="nav-item">
               <a class="nav-link" @click="showMatching">Найди пару</a>
             </li>
+            <br>
             <li class="nav-item">
               <a class="nav-link" @click="showTypein">Введи слово</a>
             </li>
-          </ul>
+            <br>
         </div>
       </div>
     </div>

@@ -18,14 +18,15 @@
         <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
-              <h1>{{ firstName.slice(0, 1) + lastName.slice(0, 1) }}</h1>
+              <h1><b>{{ firstName.slice(0, 1) + lastName.slice(0, 1) }}</b></h1>
             </span>
           </a>
           <div class="clear m-b">
-            <h3 class="text-white m-a-0 m-b-xs">{{ firstName + ' ' + lastName }}</h3>
-            <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
+            <h3 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h3>
+            <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small>{{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</small></p>
             <h5 class="m-a-0 text-md text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
             <br>
+            <h5 class="m-a-0 text-md text-white">Выбранная группа: <b>{{ group.name }}</b></h5><br>
             <h5 class="m-a-0 text-md text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
             <h5 class="m-a-0 text-md text-white" v-else>Ближайшего дня сдачи нет</h5>
           </div>
@@ -44,19 +45,19 @@
     </div>
   </div>
   </div>
-  <div style="margin-top: -50px;"> <!-- was background: rgb(99, 170, 242); -->
+  <div style="margin-top: -90px;"> <!-- was background: rgb(99, 170, 242); -->
     <div class="row hidden-xs-down">
       <div class="col-sm-12" style="background: linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190));">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
           <ul class="nav nav-pills nav-sm text-white" style="margin-left:24px;">
             <li class="nav-item">
-              <button class="btn btn-md btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1">Задания</button>
+              <button class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
             </li>
             <li class="nav-item" style="padding-right:90px">
-              <button class="btn btn-md btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2">Сообщения</button>
+              <button class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
             </li>
             <li class="nav-item" v-for="group in user._groups">
-              <button class="btn btn-md btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
+              <button class="btn btn btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
@@ -67,10 +68,10 @@
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <button class="btn btn-md btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1">Задания</button>
+              <button class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
             </li>
-            <li class="nav-item" style="padding-right:100px">
-              <button class="btn btn-md btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2">Сообщения</button>
+            <li class="nav-item" style="padding-right:90px">
+              <button class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
             </li>
           </ul>
         </div>
@@ -89,11 +90,6 @@
     </div>
   </div>
 
-  <div v-show="showTasks" class="row checkbox container">
-    <center>
-
-  </center>
-  </div>
   <div class="container" style="margin-top:-100px">
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
@@ -112,7 +108,7 @@
               <div class="taskcontent">
                 <center>
                   <h3>{{ test.name }}</h3>
-                  <p>Крайний срок сдачи: {{ test.deadline }}</p>
+                  <p><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Выполнить до: {{ test.deadline }}</p>
                   <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                 </center>
               </div>
