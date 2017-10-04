@@ -71,54 +71,66 @@
 
   <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">
     <div class="row">
+
     <div class="col-sm-4 hidden-sm-down">
       <div class="col box">
-        <div class="row-col success white-text">
-          <h3>Учить</h3></div>
-        <div class="p-a text-center">
-            <li class="nav-item">
-              <a class="nav-link" @click="showFlashcards">Выучи слова</a>
-            </li>
+        <div class="row-col danger white-text">
+          <center>
+          <h3>Учить</h3>
+        </center>
+        </div>
+        <div class="p-a block">
+          <center>
+            <div class="nav-item">
+              <button class="btn btn-sm btn-danger rounded" @click="showFlashcards">Выучи слова</button>
+            </div>
             <br>
-            <li class="nav-item">
-              <a class="nav-link" @click="showMatching">Найди пару</a>
-            </li>
+            <div class="nav-item">
+              <button class="btn btn-sm btn-danger rounded" @click="showMatching">Найди пару</button>
+            </div>
             <br>
-            <li class="nav-item">
-              <a class="nav-link" @click="showTypein">Введи слово</a>
-            </li>
-            <br>
+            <div class="nav-item">
+              <button class="btn btn-sm btn-danger rounded" @click="showTypein">Введи слово</button>
+            </div>
+          </center>
         </div>
       </div>
     </div>
 
     <div class="col-sm-4 hidden-sm-down">
       <div class="col box">
-        <div class="row-col info white-text">
-          <h3>Играть</h3></div>
-        <div class="p-a text-center">
-          <ul class="nav nav-pills nav-sm">
-            <li class="nav-item">
-              <a class="nav-link" @click="showSnake">Змейка</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" @click="showScramble">Скрэмбл</a>
-            </li>
-          </ul>
+        <div class="row-col warn white-text">
+          <center>
+          <h3>Играть</h3>
+        </center>
+        </div>
+        <div class="p-a block">
+          <center>
+            <div class="nav-item">
+              <button class="btn btn-sm btn-warning rounded" @click="showSnake">Змейка</button>
+            </div>
+            <br>
+            <div class="nav-item">
+              <button class="btn btn-sm btn-warning rounded" @click="showScramble">Скрэмбл</button>
+            </div>
+        </center>
         </div>
       </div>
     </div>
     <div class="col-sm-4 hidden-sm-down">
       <div class="col box">
-        <div class="row-col danger white-text">
-          <h3>Тест</h3></div>
-        <div class="p-a text-center">
-          <ul class="nav nav-pills nav-sm">
-            <li class="nav-item">
-              <a class="nav-link" v-if="testAvailable" @click="tryTest">Пройти тест</a>
-              <a class="nav-link" v-else>Выполните все задания</a>
-            </li>
-          </ul>
+        <div class="row-col success white-text">
+          <center>
+          <h3>Тест</h3>
+        </center>
+        </div>
+        <div class="p-a block">
+            <div>
+              <center>
+              <button class="btn btn-sm btn-success rounded" v-if="testAvailable" @click="tryTest">Пройти тест</button>
+              <button class="btn btn-sm btn-success rounded" v-else>Выполните все задания</button>
+              </center>
+            </div>
         </div>
       </div>
     </div>
@@ -329,5 +341,13 @@ export default {
 
   .grey {
     background-color: rgb(117, 117, 117)
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .block {
+    height: 153px;
   }
 </style>
