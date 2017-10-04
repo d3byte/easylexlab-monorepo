@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="body">
   <div class="item">
     <div class="item-bg" :style="{ background: background }"></div>
     <div class="container">
@@ -47,12 +47,12 @@
   <div style="background: rgb(99, 170, 242); margin-top: -50px;">
     <div class="row hidden-xs-down">
       <div class="col-sm-12">
-        <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px">
-          <ul class="nav nav-pills nav-sm text-white">
+        <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
+          <ul class="nav nav-pills nav-sm text-white" style="margin-left:24px;">
             <li class="nav-item">
               <button class="btn btn-md btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1">Задания</button>
             </li>
-            <li class="nav-item" style="padding-right:200px">
+            <li class="nav-item" style="padding-right:90px">
               <button class="btn btn-md btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2">Сообщения</button>
             </li>
             <li class="nav-item" v-for="group in user._groups">
@@ -64,13 +64,13 @@
     </div>
     <div class="row hidden-sm-up">
       <div class="col-sm-12 col-xs-12">
-        <div class="p-y-md clearfix nav-active-primary">
+        <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <h6><a class="nav-link" @click="switchTasks" data-target="#tab_1">Задания</a></h6>
+              <button class="btn btn-md btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1">Задания</button>
             </li>
-            <li class="nav-item">
-              <h6><a class="nav-link" @click="switchMsgs" data-target="#tab_2">Сообщения</a></h6>
+            <li class="nav-item" style="padding-right:100px">
+              <button class="btn btn-md btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2">Сообщения</button>
             </li>
           </ul>
         </div>
@@ -81,7 +81,7 @@
         <div class="p-y-md">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item" v-for="group in user._groups">
-              <h6><a class="nav-link" @click="changeGroup(group)">{{ group.name }}</a></h6>
+              <button class="btn btn-md btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
@@ -89,14 +89,19 @@
     </div>
   </div>
 
-  <div v-show="showTasks" class="row checkbox">
-    <input type="checkbox" id="padding" v-model="showAll">
-    <label for="padding">Показать выполненные</label>
+  <div v-show="showTasks" class="row checkbox container">
+    <center>
+
+  </center>
   </div>
-  <div class="container-fluid">
+  <div class="container" style="margin-top:-100px">
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
         <center>
+          <div class="checkbox">
+          <input type="checkbox" id="padding" v-model="showAll">
+          <label for="padding" id="pad_label">Показать выполненные</label>
+        </div>
         <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
         <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
       </center>
@@ -320,8 +325,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+.body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
 #padding {
-  margin-left: 30px;
+  margin-left: 20px;
   width: 10px;
 }
 
@@ -332,7 +343,7 @@ export default {
 
 .checkbox {
   display: flex;
-  justify-content: start;
+  justify-content: center
 }
 
 .taskcontentouter {
@@ -464,6 +475,10 @@ h5.white-text {
   display: flex;
   vertical-align: center;
   justify-content: center;
+}
+
+#pad_label {
+  padding-left: 20px;
 }
 
 </style>
