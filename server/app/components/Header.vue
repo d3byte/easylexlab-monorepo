@@ -2,7 +2,7 @@
     <div class="app-header white box-shadow">
       <div class="container hidden-sm-down">
 
-        <div class="navbar-item pull-left h5" id="pageTitle">
+        <div class="navbar-item pull-left h4" id="pageTitle">
           <router-link to="/">
             <img src="../pics/logo.png" class="logo">
             EasyLexLab
@@ -502,4 +502,10 @@
  } .border-right-nav > .nav-link {
    border: none;
  }
+
+.h4 {
+  margin-top: 0;
+  font-family: 'Fredericka the Great', cursive;
+  color: rgb(29, 68, 170);
+}
 </style>
