@@ -44,7 +44,7 @@
     </div>
   </div>
   </div>
-  <div style="margin-top: -50px;">
+  <div style="margin-top: -50px;"> <!-- was background: rgb(99, 170, 242); -->
     <div class="row hidden-xs-down">
       <div class="col-sm-12" style="background: linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190));">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
