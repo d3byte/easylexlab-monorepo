@@ -44,9 +44,9 @@
     </div>
   </div>
   </div>
-  <div style="background: rgb(99, 170, 242); margin-top: -50px;">
+  <div style="margin-top: -50px;">
     <div class="row hidden-xs-down">
-      <div class="col-sm-12">
+      <div class="col-sm-12" style="background: linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190));">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
           <ul class="nav nav-pills nav-sm text-white" style="margin-left:24px;">
             <li class="nav-item">
