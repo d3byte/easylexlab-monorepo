@@ -14,7 +14,7 @@
             </center>
           </div>
         </div>
-        <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
+        <div style="padding-top: 10px;" class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
               <h1 class="text-white"><b>{{ firstName.slice(0, 1) + lastName.slice(0, 1) }}</b></h1>
