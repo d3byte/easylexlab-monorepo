@@ -3,21 +3,20 @@
     <div class="container">
     <center>
       <div>
-        <h1>Найди пару</h1>
-        <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-        <br>
-        <div class="dashboard">
-          <button @click="restart" class="flat-btn">Перезапуск</button>
-        </div><br>
+        <h2>
+          <i class="fa fa-tags" aria-hidden="true"></i>
+           Найди пару
+        </h2>
+        <h5 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h5>
+
         <div v-if="done || lose" @click="show()" class="vertical-center box">
           <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
           <h2>{{ Math.round(100 - incorrect * 100 / correct.length) > 0 ? Math.round(100 - incorrect * 100 / correct.length) : 0}}%</h2>
           <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
         </div>
-        <div class="row" v-if="!done && !lose">
-          <center>
-          <div v-for="item in newPairs" class="col-lg-4" id="dju">
-            <div class="box"
+        <div class="row words box" v-if="!done && !lose">
+          <div v-for="item in newPairs" style="z-index:6" class="col-lg-4" id="dju">
+            <div class="box word"
                  :id="item.key"
                  :class="selected.first == item.key ||
                          selected.second == item.key
@@ -26,9 +25,8 @@
               <h2>{{ item.word }}</h2>
             </div>
           </div>
-        </center>
         </div>
-        <br>
+        <button style="margin-bottom:20px" id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
       </div>
     </center>
   </div>
@@ -199,15 +197,15 @@ export default {
   }
 
   .selected {
-    background: #1DA1F2;
+    background: rgb(240, 211, 49) !important;
   }
 
   .correct {
-    background: #307351;
+    background: #307351 !important;
   }
 
   .error {
-    background: #DB5461;
+    background: #DB5461 !important;
   }
 
   .last-menu {
@@ -235,7 +233,34 @@ export default {
   }
 
   .container {
-    width: 75%;
+    width: 60%;
     padding: 0 30px;
+  }
+
+  .words {
+    border-top: 3px solid rgb(123, 227, 170);
+    border-radius: 5px;
+    z-index: 5;
+    min-height: 100px;
+    overflow: hidden;
+  } .words:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: url('../pics/letters-2.jpg') no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+  }
+
+  .word {
+    background: rgb(206, 210, 211);
+  } .word h2 {
+    font-size: 16px;
+    font-weight: bold;
   }
 </style>
