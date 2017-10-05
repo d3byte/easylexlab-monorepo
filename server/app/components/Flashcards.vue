@@ -2,44 +2,40 @@
 <div class="vertical-center">
   <center>
     <div class="container-fluid flashcards">
-      <h1>Выучи слова</h1>
-      <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-      <div class="row" style="margin-bottom:20px;">
-        <button @click="restart" class="flat-btn">Перезапуск</button>
-      </div>
+      <h2 style="margin-bottom:30px"><i class="fa fa-book" aria-hidden="true"></i> Выучи слова</h2>
       <div v-if="done || lose" @click="show()" class="vertical-center box">
         <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
         <h2>{{ Math.round(know.length * 100 / pairs.length) }}%</h2>
         <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
       </div>
       <div class="col-md-4" v-show="!done && !lose">
-        <div class="row-col dark white-text vertical-center cards-left">
+        <div class="row-col red white-text left">
           <h5>Осталось карточек: {{ pairsLeft - 1 }}</h5>
         </div>
-        <div class="p-a vertical-center box cards-left" id="nextkey">
-          <h3>{{ nextKey }}</h3>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div v-show="!done && !lose" class="pair">
-          <div v-show="!showDef" @click="show()" class="vertical-center box task-card game-item">
-            <h1>{{ currentPair.key }}</h1>
-          </div>
-          <div v-show="showDef" @click="show()" class="vertical-center box task-card game-item">
-            <h1>{{ currentPair.value }}</h1>
-          </div>
+        <div class="p-a box cards-left needed-height" id="nextkey">
+          <button style="background:rgb(248, 204, 199)" class="btn btn-md rounded">{{ nextKey }}</button>
         </div>
       </div>
       <div class="col-md-4" v-show="!done && !lose">
-        <div class="game-btns game-item box">
-          <button @click="toKnow()" class="btn btn-success">Знаю</button>
+        <div class="p-a needed-height pair box" style="height:157px;" @click="show()">
+          <button v-show="!showDef" style="background:rgb(234, 205, 156)" class="btn btn-lg rounded">{{ currentPair.key }}</button>
+          <button v-show="showDef" style="background:rgb(234, 205, 156)" class="btn btn-lg rounded">{{ currentPair.value }}</button>
+        </div>
+      </div>
+      <div class="col-md-4" v-show="!done && !lose">
+        <div class="p-a box btns" style="height:157px;">
+          <button @click="toKnow()" class="btn" style="background:rgb(251, 106, 33);color:white;">Знаю</button>
           <br>
-          <button @click="toDontKnow()" class="btn btn-danger">Не знаю</button>
+          <button @click="toDontKnow()" class="btn" style="background:rgb(47, 135, 219);color:white;">Не знаю</button>
         </div>
       </div>
     </div>
     <div v-if="done && showTest" class="row">
       <button @click="tryTest" class="btn">Пройти тест</button>
+    </div>
+    <div class="row" style="margin-bottom:20px;margin-top:10px;">
+      <h5 style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h5>
+      <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
     </div>
   </center>
 </div>
@@ -214,27 +210,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  h1 {
-    margin-bottom: 20px;
-  }
-
   .dashboard {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
   }
 
-  .task-card {
-    height: 238px !important;
-    word-break: break-all;
-  }
-
-  .cards-left {
-    height: 119px !important;
-  }
-
   #nextkey {
-    height: 119px !important;
     word-break: break-all;
   }
 
@@ -261,7 +243,6 @@ export default {
     flex-direction: column;
     align-items: baseline;
     justify-content: center;
-    height: 238px !important;
   }
 
   .last-menu {
@@ -283,11 +264,60 @@ export default {
     background: #1DA1F2;
   }
 
-  .cards-left {
-    height: 119px !important;
-  }
-
   .game-item {
     height: 200px;
+  }
+
+  #restart {
+    background: rgb(207, 233, 254);
+    box-shadow: none;
+  }
+
+  .left {
+    border-top: 3px solid rgb(208, 61, 47);
+    border-radius: 5px;
+  } .left h3 {
+    background: #ccc;
+  } .red {
+    background: rgb(228, 77, 62);
+    padding: 2px;
+  } .red h5 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 3px;
+  }
+
+  .needed-height {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../pics/letters-2.jpg') no-repeat;
+    background-size: cover;
+  }
+
+  .btn.rounded {
+    box-shadow: none;
+    font-weight: bold;
+  }
+
+  .pair {
+    border-top: 3px solid rgb(223, 146, 35);
+    border-radius: 5px;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 3px solid rgb(123, 227, 170);
+    border-radius: 5px;
+    background: url('../pics/letters-2.jpg') no-repeat;
+    background-size: cover;
+  } .btns button {
+    width: 140px;
+    font-size: 14px;
+    font-weight: bold;
   }
 </style>

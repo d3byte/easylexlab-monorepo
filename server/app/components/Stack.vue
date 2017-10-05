@@ -6,73 +6,72 @@
     <div class="item-bg" :style="{ background: background }">
     </div>
 
-    <div class="p-a-md">
-      <div class="row m-t">
+    <div class="p-a-sm main">
+      <div class="row">
         <div class="container">
-          <div class="col-sm-7">
-            <div class="clear m-b text-white">
-              <h3 class="m-a-0 m-b-xs"><i class="fa fa-bookmark-o" aria-hidden="true"></i><b> Название урока: {{ task.name }}</b></h3><br>
-              <h5 class="hidden-sm-down" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"><i class="fa fa-bookmark-o fa-2x" style="visibility:hidden" aria-hidden="true"></i>Выберите задание</h5>
-              <h6 class="hidden-md-up">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
+          <div class="col-sm-12">
+            <div class="text-white">
+              <h4><i class="fa fa-bookmark-o" aria-hidden="true"></i> Название урока: <b>{{ task.name }}</b></h4>
+              <h5 class="no-margin hidden-sm-down" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"><i class="fa fa-bookmark-o fa-2x" style="visibility:hidden" aria-hidden="true"></i>Выберите задание</h5>
+              <h6 class="no-margin hidden-md-up">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
             </div>
           </div>
         </div>
-        <div class="col-sm-5">
+      </div>
+    </div>
+  </div>
+
+
+  <div style="margin-bottom:50px;background:rgb(13, 89, 165);" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
+    <div class="container" style="height: 55px">
+      <div class="row" style="color:white">
+        <div class="col-sm-12">
+          <div class="clearfix nav-active-primary">
+            <ul class="nav nav-pills nav-sm">
+              <li class="nav-item">
+                <a class="nav-link" @click="hideGames">Назад</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" @click="showFlashcards">
+                  Выучи слова <i v-if="games.flashcards.win" class="material-icons">done</i><br>
+                  {{ games.flashcards.done + '/' + games.flashcards.attempts }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" @click="showMatching">
+                  Найди пару <i v-if="games.matching.win" class="material-icons">done</i><br>
+                  {{ games.matching.done + '/' + games.matching.attempts }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" @click="showTypein">
+                  Введи слово <i v-if="games.typein.win" class="material-icons">done</i><br>
+                  {{ games.typein.done + '/' + games.typein.attempts }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" @click="showSnake">
+                  Змейка <i v-if="games.snake.win" class="material-icons">done</i><br>
+                  {{ games.snake.done + '/' + games.snake.attempts }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" @click="showScramble">
+                  Скрэмбл <i v-if="games.scramble.win" class="material-icons">done</i><br>
+                  {{ games.scramble.done + '/' + games.scramble.attempts }}
+                </a>
+              </li>
+              <li class="nav-item" v-if="testAvailable">
+                <a class="nav-link" @click="tryTest">Пройти тест</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container">
-  <div class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="p-y-md clearfix nav-active-primary">
-          <ul class="nav nav-pills nav-sm">
-            <li class="nav-item">
-              <a class="nav-link" @click="hideGames">Назад</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" @click="showFlashcards">
-                Выучи слова <i v-if="games.flashcards.win" class="material-icons">done</i><br>
-                {{ games.flashcards.done + '/' + games.flashcards.attempts }}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" @click="showMatching">
-                Найди пару <i v-if="games.matching.win" class="material-icons">done</i><br>
-                {{ games.matching.done + '/' + games.matching.attempts }}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" @click="showTypein">
-                Введи слово <i v-if="games.typein.win" class="material-icons">done</i><br>
-                {{ games.typein.done + '/' + games.typein.attempts }}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" @click="showSnake">
-                Змейка <i v-if="games.snake.win" class="material-icons">done</i><br>
-                {{ games.snake.done + '/' + games.snake.attempts }}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" @click="showScramble">
-                Скрэмбл <i v-if="games.scramble.win" class="material-icons">done</i><br>
-                {{ games.scramble.done + '/' + games.scramble.attempts }}
-              </a>
-            </li>
-            <li class="nav-item" v-if="testAvailable">
-              <a class="nav-link" @click="tryTest">Пройти тест</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <div class="container" style="margin-top:-50px">
+  <div class="container" style="margin-top:-30px">
   <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">
     <div class="row">
 
@@ -305,7 +304,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
   h2 {
     margin-bottom: 20px;
   }
@@ -357,6 +356,10 @@ export default {
 
   .container {
     width: 75%;
-    padding: 5px;
+    padding: 0 30px;
+  }
+
+  .no-margin {
+    margin: 0;
   }
 </style>

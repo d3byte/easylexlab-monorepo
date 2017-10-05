@@ -9,7 +9,7 @@
           <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
-              <h4>А еще мы сделали приложение</h4>
+              <h6>А еще мы сделали приложение</h6>
               <img src="../pics/googleplay.png" width="135px" height="40px"></img>
               <img src="../pics/appstore.svg"></img>
             </center>
@@ -22,20 +22,20 @@
             </span>
           </a>
           <div class="clear m-b">
-            <h3 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h3>
+            <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
             <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small>{{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</small></p>
-            <h5 class="m-a-0 text-md text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+            <h5 class="m-a-0 text-sm text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
             <br>
-            <h5 class="m-a-0 text-md text-white">Выбранная группа: <b>{{ group.name }}</b></h5><br>
-            <h5 class="m-a-0 text-md text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
-            <h5 class="m-a-0 text-md text-white" v-else>Ближайшего дня сдачи нет</h5>
+            <h5 class="m-a-0 text-sm text-white">Выбранная группа: <b>{{ group.name }}</b></h5><br>
+            <h5 class="m-a-0 text-sm text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
+            <h5 class="m-a-0 text-sm text-white" v-else>Ближайшего дня сдачи нет</h5>
           </div>
         </div>
         <div class="col-md-4 ad hidden-sm-down" v-if="showAd">
           <div class="padding box" v-if="showAd">
             <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
             <center>
-              <h4>А еще мы сделали приложение</h4>
+              <h5>А еще мы сделали приложение</h5>
               <img src="../pics/googleplay.png" width="135px" height="40px"></img>
               <img src="../pics/appstore.svg"></img>
             </center>
@@ -46,25 +46,25 @@
   </div>
   </div>
   <div style="margin-top: -50px;"> <!-- was background: rgb(99, 170, 242); -->
-    <div class="row hidden-xs-down">
-      <div class="col-sm-12" style="background: linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190));">
+    <div class="row hidden-xs-down" style="padding:0;">
+      <div class="col-sm-12" style="background: rgb(98, 171, 242);padding:0;">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
           <ul class="nav nav-pills nav-sm text-white" style="margin-left:24px;">
             <li class="nav-item">
-              <button class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
             </li>
             <li class="nav-item" style="padding-right:90px">
-              <button class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
             </li>
             <li class="nav-item" v-for="group in user._groups">
-              <button class="btn btn btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="row hidden-sm-up">
-      <div class="col-sm-12 col-xs-12">
+      <div class="col-sm-12 col-xs-12" style="background: rgb(98, 171, 242)">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
