@@ -47,7 +47,7 @@
   </div>
   <div style="margin-top: -50px;"> <!-- was background: rgb(99, 170, 242); -->
     <div class="row hidden-xs-down" style="padding:0;">
-      <div class="col-sm-12" style="background: rgb(98, 171, 242);padding:0;">
+      <div class="col-sm-12" style="background: #5a7fb9;padding:0;">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
           <ul class="nav nav-pills nav-sm text-white" style="margin-left:24px;">
             <li class="nav-item">
