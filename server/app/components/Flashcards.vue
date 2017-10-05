@@ -13,20 +13,20 @@
           <h5>Осталось карточек: {{ pairsLeft - 1 }}</h5>
         </div>
         <div class="p-a box cards-left needed-height" id="nextkey">
-          <button style="background:rgb(248, 204, 199)" class="btn btn-md rounded">{{ nextKey }}</button>
+          <button style="background:rgb(248, 204, 199);z-index:6;" class="btn btn-md rounded">{{ nextKey }}</button>
         </div>
       </div>
       <div class="col-md-4" v-show="!done && !lose">
         <div class="p-a needed-height pair box" style="height:157px;" @click="show()">
-          <button v-show="!showDef" style="background:rgb(234, 205, 156)" class="btn btn-lg rounded">{{ currentPair.key }}</button>
-          <button v-show="showDef" style="background:rgb(234, 205, 156)" class="btn btn-lg rounded">{{ currentPair.value }}</button>
+          <button v-show="!showDef" style="background:rgb(234, 205, 156);z-index:6;" class="btn btn-lg rounded">{{ currentPair.key }}</button>
+          <button v-show="showDef" style="background:rgb(234, 205, 156);z-index:6;" class="btn btn-lg rounded">{{ currentPair.value }}</button>
         </div>
       </div>
       <div class="col-md-4" v-show="!done && !lose">
         <div class="p-a box btns" style="height:157px;">
-          <button @click="toKnow()" class="btn" style="background:rgb(251, 106, 33);color:white;">Знаю</button>
+          <button @click="toKnow()" class="btn" style="background:rgb(251, 106, 33);color:white;z-index:6;">Знаю</button>
           <br>
-          <button @click="toDontKnow()" class="btn" style="background:rgb(47, 135, 219);color:white;">Не знаю</button>
+          <button @click="toDontKnow()" class="btn" style="background:rgb(47, 135, 219);color:white;z-index:6;">Не знаю</button>
         </div>
       </div>
     </div>
@@ -292,8 +292,19 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 5;
+  } .needed-height:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
     background: url('../pics/letters-2.jpg') no-repeat;
     background-size: cover;
+    opacity: 0.5;
   }
 
   .btn.rounded {
@@ -313,11 +324,25 @@ export default {
     justify-content: center;
     border-top: 3px solid rgb(123, 227, 170);
     border-radius: 5px;
+    z-index: 5;
+  } .btns:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
     background: url('../pics/letters-2.jpg') no-repeat;
     background-size: cover;
-  } .btns button {
+    opacity: 0.5;
+  }
+
+  .btns button {
     width: 140px;
     font-size: 14px;
     font-weight: bold;
+    opacity: 1;
   }
 </style>
