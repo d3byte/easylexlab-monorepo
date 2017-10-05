@@ -24,11 +24,11 @@
 
   <div style="margin-bottom:50px;background:rgb(13, 89, 165);" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
     <div class="container" style="height: 55px">
-      <div class="row" style="color:white;">
+      <div class="row" style="color:white">
         <div class="col-sm-12">
-          <div class="nav-active-primary">
+          <div class="clearfix nav-active-primary">
             <ul class="nav nav-pills nav-sm">
-              <li class="nav-item" style="margin-left:-15px;">
+              <li class="nav-item">
                 <a class="nav-link" @click="hideGames">Назад</a>
               </li>
               <li class="nav-item">
@@ -72,115 +72,116 @@
   </div>
 
   <div class="container" style="margin-top:-30px">
-  <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">
-    <div class="row">
+    <div class="padding" id="gameblock" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">
+      <div class="row">
 
-    <div class="col-sm-4 hidden-sm-down">
-      <div class="col box">
-        <div class="row-col danger white-text">
-          <center>
-          <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> Учить</h3>
-        </center>
-        </div>
-        <div class="p-a block">
-          <center>
-            <div class="nav-item">
-              <button class="btn btn-sm btn-danger rounded" @click="showFlashcards">Выучи слова</button>
-            </div>
-            <br>
-            <div class="nav-item">
-              <button class="btn btn-sm btn-danger rounded" @click="showMatching">Найди пару</button>
-            </div>
-            <br>
-            <div class="nav-item">
-              <button class="btn btn-sm btn-danger rounded" @click="showTypein">Введи слово</button>
-            </div>
-          </center>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-4 hidden-sm-down">
-      <div class="col box">
-        <div class="row-col warn white-text">
-          <center>
-          <h3><i class="fa fa-trophy" aria-hidden="true"></i> Играть</h3>
-        </center>
-        </div>
-        <div class="p-a block">
-          <center>
-            <div class="nav-item">
-              <button class="btn btn-sm btn-warning rounded" @click="showSnake">Змейка</button>
-            </div>
-            <br>
-            <div class="nav-item">
-              <button class="btn btn-sm btn-warning rounded" @click="showScramble">Скрэмбл</button>
-            </div>
-        </center>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4 hidden-sm-down">
-      <div class="col box">
-        <div class="row-col success white-text">
-          <center>
-          <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Тест</h3>
-        </center>
-        </div>
-        <div class="p-a block">
-            <div>
+        <div class="col-sm-4 hidden-sm-down">
+          <div class="col box">
+            <div class="row-col danger white-text">
               <center>
-              <button class="btn btn-sm btn-success rounded" v-if="testAvailable" @click="tryTest">Пройти тест</button>
-              <button class="btn btn-sm btn-success rounded" v-else>Выполните все задания</button>
+                <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> Учить</h3>
               </center>
             </div>
+            <div class="p-a block">
+              <center>
+                <div class="nav-item">
+                  <button class="btn btn-sm btn-danger rounded" @click="showFlashcards">Выучи слова</button>
+                </div>
+                <br>
+                <div class="nav-item">
+                  <button class="btn btn-sm btn-danger rounded" @click="showMatching">Найди пару</button>
+                </div>
+                <br>
+                <div class="nav-item">
+                  <button class="btn btn-sm btn-danger rounded" @click="showTypein">Введи слово</button>
+                </div>
+              </center>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4 hidden-sm-down">
+          <div class="col box">
+            <div class="row-col warn white-text">
+              <center>
+                <h3><i class="fa fa-trophy" aria-hidden="true"></i> Играть</h3>
+              </center>
+            </div>
+            <div class="p-a block">
+              <center>
+                <div class="nav-item">
+                  <button class="btn btn-sm btn-warning rounded" @click="showSnake">Змейка</button>
+                </div>
+                <br>
+                <div class="nav-item">
+                  <button class="btn btn-sm btn-warning rounded" @click="showScramble">Скрэмбл</button>
+                </div>
+              </center>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 hidden-sm-down">
+          <div class="col box">
+            <div class="row-col success white-text">
+              <center>
+                <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Тест</h3>
+              </center>
+            </div>
+            <div class="p-a block">
+              <div>
+                <center>
+                  <button class="btn btn-sm btn-success rounded" v-if="testAvailable" @click="tryTest">Пройти тест</button>
+                  <button class="btn btn-sm btn-success rounded" v-else>Выполните все задания</button>
+                </center>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row" id="translate">
-    <div class="col-sm-12 ">
-      <div class="box">
-        <div class="row-col accent white-text">
+      <div class="row" id="translate">
+        <div class="col-sm-12">
+          <div class="box">
+            <div class="row-col accent white-text" style="padding-right: 0px;padding-left: 0px;">
               <center>
                 <h3><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
               </center>
             </div>
-        <div class="p-a table-responsive">
-          <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-              <th>Слово</th>
-              <th>Перевод</th>
-            </tr>
-          </thead>
-          <tbody v-for="task in task.tasks">
-            <tr v-for="pair in task.content">
-              <td>{{ pair.key }}</td>
-              <td>{{ pair.value }}</td>
-            </tr>
-          </tbody>
-        </table>
+            <center>
+              <div class="table-responsive">
+                <table class="table table-striped table-hover" v-if="!showPreloader">
+                  <thead>
+                    <tr class="headers">
+                      <th>Слово</th>
+                      <th>Перевод</th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="task in task.tasks">
+                    <tr class="body-row" v-for="pair in task.content">
+                      <td>{{ pair.key }}</td>
+                      <td>{{ pair.value }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </center>
+          </div>
+        </div>
       </div>
-      </div>
+    </div>
   </div>
+
+
+
+  <div class="row">
+    <flashcards v-if="games.flashcards.show" :stack="task"></flashcards>
+    <matching v-if="games.matching.show" :stack="task"></matching>
+    <snake v-if="games.snake.show" :stack="task"></snake>
+    <scramble v-if="games.scramble.show" :stack="task"></scramble>
+    <typein v-if="games.typein.show" :stack="task"></typein>
+    <test v-if="showTest" :stack="task"></test>
+  </div>
+
 </div>
-</div>
-</div>
-
-
-
-      <div class="row">
-      <flashcards v-if="games.flashcards.show" :stack="task"></flashcards>
-      <matching v-if="games.matching.show" :stack="task"></matching>
-      <snake v-if="games.snake.show" :stack="task"></snake>
-      <scramble v-if="games.scramble.show" :stack="task"></scramble>
-      <typein v-if="games.typein.show" :stack="task"></typein>
-      <test v-if="showTest" :stack="task"></test>
-    </div>
-
-    </div>
-
 </template>
 
 <script>
@@ -191,7 +192,9 @@ import Matching from './Matching.vue';
 import Snake from './Snake.vue';
 import Scramble from './Scramble.vue';
 import Test from './Test.vue';
-import { EventBus } from './event';
+import {
+  EventBus
+} from './event';
 import Typein from './Typein.vue';
 
 export default {
@@ -227,9 +230,9 @@ export default {
   created() {
     this.background = localStorage.background ? localStorage.background : 'linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190)';
     EventBus.$once('requested-header', () => {
-      if(!this.$store.getters.loginState)
+      if (!this.$store.getters.loginState)
         this.$router.push('/login');
-      if(this.token.permissions != 'student')
+      if (this.token.permissions != 'student')
         this.$router.push('/profile');
       this.$store.dispatch('hideTest');
       this.$store.dispatch('testNotAvailable');
@@ -255,15 +258,15 @@ export default {
             }
           }
         }
-        if(!haveThisStack)
+        if (!haveThisStack)
           this.$router.push('/profile');
         let done = false;
         this.task.results.map(result => {
-          if(result.userId == this.user._id && result.result >= 80) {
+          if (result.userId == this.user._id && result.result >= 80) {
             done = true;
           }
         });
-        if(done)
+        if (done)
           this.$store.dispatch('testAvailable');
         this.$store.dispatch('setGames', this.task.attempts);
       });
@@ -361,5 +364,17 @@ export default {
 
   .no-margin {
     margin: 0;
+  }
+
+  .table-responsive {
+    /*border-top: 5px solid rgb(144, 197, 246);
+    border-bottom: 5px solid rgb(211, 215, 217);
+    border-radius: 5px;*/
+    width: 1041px !important;
+  }
+
+  .headers {
+    background: #a88add;
+    pointer-events: none;
   }
 </style>
