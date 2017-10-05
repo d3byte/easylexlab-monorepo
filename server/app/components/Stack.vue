@@ -24,11 +24,11 @@
 
   <div style="margin-bottom:50px;background:rgb(13, 89, 165);" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
     <div class="container" style="height: 55px">
-      <div class="row" style="color:white">
+      <div class="row" style="color:white;">
         <div class="col-sm-12">
-          <div class="clearfix nav-active-primary">
+          <div class="nav-active-primary">
             <ul class="nav nav-pills nav-sm">
-              <li class="nav-item">
+              <li class="nav-item" style="margin-left:-15px;">
                 <a class="nav-link" @click="hideGames">Назад</a>
               </li>
               <li class="nav-item">

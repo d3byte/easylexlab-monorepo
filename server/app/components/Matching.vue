@@ -228,4 +228,14 @@ export default {
   .btn.back {
     background: #1DA1F2;
   }
+
+  .col-lg-12 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 75%;
+    padding: 0 30px;
+  }
 </style>
