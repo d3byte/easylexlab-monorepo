@@ -11,8 +11,10 @@
       <h5 @click="start" class="restart">Начать заново?</h5>
     </div>
     <div class="box game" v-if="!win">
-      <h3 class="key"><b>{{ currentPair.value }}</b></h3>
-      <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
+      <div class="higher">
+        <h3 class="key"><b>{{ currentPair.value }}</b></h3>
+        <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
+      </div>
       <draggable v-model="shuffledLetters" @end="onEnd" element="div" class="value" :class="correct ?'correct':'default'">
         <div class="letter" v-for="letter in shuffledLetters" :class="letter == ' ' ? 'empty' : ''">
          {{ letter }}
@@ -128,14 +130,8 @@ export default {
   .correct {
     background: #307351;
     color: white;
-  }
-
-  .key, .flat-btn {
-    margin-bottom: 10px;
-  }
-
-  .default {
-    background: #ccc;
+    z-index: 6 !important;
+    opacity: 1 !important;
   }
 
   .restart:hover {
@@ -143,11 +139,12 @@ export default {
   }
 
   .letter {
-    background: lightgray;
+    background: rgb(207, 232, 253);
     font-size: 24px;
     border: 1px solid darkgray;
     margin-right: 2px;
     width: 34px;
+    z-index: 7 !important;
   }
 
   .empty {
@@ -163,6 +160,7 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 10px;
+    z-index: 6 !important;
   }
 
   .correct > .letter {
@@ -170,5 +168,36 @@ export default {
     border: none;
     margin-right: 0;
     width: 24px;
+    z-index: 7 !important;
+  }
+
+  .game {
+    position: relative;
+    border-top: 3px solid rgb(123, 227, 170);
+    border-radius: 5px;
+    z-index: 3 !important;
+    opacity: 1;
+  } .game:after {
+    z-index: 0 !important;
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../pics/letters-2.jpg') no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+  }
+
+
+  .key, .flat-btn {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .higher {
+    z-index: 7 !important;
   }
 </style>
