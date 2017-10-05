@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="body">
   <app-header></app-header>
 
   <div class="item">
@@ -376,5 +376,10 @@ export default {
   .headers {
     background: #a88add;
     pointer-events: none;
+  }
+
+  .body {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
   }
 </style>
