@@ -68,21 +68,13 @@
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <button class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
+              <button class="btn btn-sm btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
             </li>
-            <li class="nav-item" style="padding-right:90px">
-              <button class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
+            <li class="nav-item" style="margin-bottom:20px">
+              <button class="btn btn-sm btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
             </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row hidden-sm-up">
-      <div class="col-sm-12 col-xs-12">
-        <div class="p-y-md">
-          <ul class="nav nav-pills nav-sm text-white">
-            <li class="nav-item" v-for="group in user._groups">
-              <button class="btn btn-md btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
+            <li class="nav-item" style="margin-top:5px" v-for="group in user._groups">
+              <button class="btn btn-sm btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
