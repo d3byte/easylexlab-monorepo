@@ -21,10 +21,9 @@
       </center>
     </div>
     <div class="row padding box">
-      <div class="md-form-group">
-        <input type="text" v-model="currentPair.test" class="md-input" placeholder="Слово" required>
-        <label>{{ currentPair.value }}</label>
-        <button @click="check">проверь ёба</button>
+      <div class="md-form-group" v-for="pair in pairs">
+        <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
+        <label>{{ pair.value }}</label>
       </div>
       <button @click="allDone" class="btn btn-primary">Готово</button>
     </div>
@@ -39,7 +38,6 @@ export default {
   props: ['stack'],
   data() {
     return {
-      currentPair: {},
       pairs: [],
       typeVal: [],
       correct: 0,
@@ -65,6 +63,7 @@ export default {
   },
   methods: {
     allDone() {
+      this.check();
       if (this.percentage >= 90) {
         this.$store.dispatch('incrementAttempts', 'typein');
         if (this.doneAttempts == this.totalAttempts)
@@ -89,18 +88,11 @@ export default {
       this.lose = false;
     },
     check() {
-      var i = 0;
-      for (this.pair in this.pairs){
-        if (i <= this.pairs.length){
-      if (this.currentPair.test == this.currentPair.key) {
-        this.correct = i + 1;
-        i++;
-        this.currentPair = this.pairs[i];
-      }
-    } else {
-      break;
-    }
-    }
+      this.pairs.map(pair => {
+        if (pair.test == pair.key) {
+          this.correct++;
+        }
+      });
       this.percentage = Math.round(this.correct * 100 / this.pairs.length);
     },
     hideGames() {
@@ -110,7 +102,6 @@ export default {
       this.typeKey = [];
       this.typeVal = [];
       this.pairs = _.shuffle(this.pairs);
-      this.currentPair = this.pairs[0];
     }
   },
   created() {
