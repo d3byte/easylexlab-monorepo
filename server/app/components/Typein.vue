@@ -24,7 +24,7 @@
       <div class="md-form-group">
           <input type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
           <label>{{ currentPair.value }}</label>
-          <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;z-index:6;" @click="check">Дальше</button>
+          <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;" @click="check">Дальше</button>
       </div>
     </div>
   </form>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid box padding">
+  <div class="container box padding" style="margin-top:100px;">
     <center>
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="success" class="signup">
@@ -21,7 +21,7 @@
           <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
           <label>{{ pair.value }}</label>
         </div>
-        <button @click="submit" class="btn btn-primary">Готово</button>
+        <button @click="submit" class="btn" style="background:rgb(251, 106, 33);color:white;">Готово</button>
       </div>
     </form>
   </div>
@@ -155,5 +155,9 @@ export default {
 
   label {
     font-size: 14px;
+  }
+
+  .box {
+    border-top: 3px solid rgb(251, 106, 33);
   }
 </style>
