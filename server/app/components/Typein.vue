@@ -21,11 +21,11 @@
       </center>
     </div>
     <div class="row padding box">
-      <div class="md-form-group" v-for="pair in pairs">
-        <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
-        <label>{{ pair.value }}</label>
+      <div class="md-form-group">
+          <input type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
+          <label>{{ currentPair.value }}</label>
+          <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;z-index:6;" @click="check">Дальше</button>
       </div>
-      <button @click="allDone" class="btn btn-primary">Готово</button>
     </div>
   </form>
 </div>
@@ -41,10 +41,12 @@ export default {
       pairs: [],
       typeVal: [],
       correct: 0,
+      incorrect: 0,
       percentage: 0,
       showPreloader: false,
       done: false,
-      lose: false
+      lose: false,
+      currentPair: {}
     }
   },
   computed: {
@@ -63,7 +65,6 @@ export default {
   },
   methods: {
     allDone() {
-      this.check();
       if (this.percentage >= 90) {
         this.$store.dispatch('incrementAttempts', 'typein');
         if (this.doneAttempts == this.totalAttempts)
@@ -82,38 +83,59 @@ export default {
     },
     restart() {
       this.newPairs = _.shuffle(this.newPairs);
+      this.currentPair = this.pairs[0];
       this.correct = 0;
       this.incorrect = 0;
       this.done = false;
       this.lose = false;
     },
     check() {
-      this.pairs.map(pair => {
-        if (pair.test == pair.key) {
-          this.correct++;
+      if (this.currentPair.test == this.currentPair.key) {
+        this.currentPair.test = '';
+        // Обнуляю тест, чтобы привести пару к исходному состоянию
+        // Потому что в this.pairs поле test пустое изначально
+        let index = this.pairs.indexOf(this.currentPair);
+        this.correct = this.correct + 1;
+        if (index != this.pairs.length - 1) {
+          this.currentPair = this.pairs[index + 1];
+          return;
+        } else {
+          this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+          this.allDone(this.percentage);
         }
-      });
-      this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+      } else if (this.currentPair.test != this.currentPair.key) {
+        this.currentPair.test = '';
+        let index = this.pairs.indexOf(this.currentPair);
+        if (index != this.pairs.length - 1) {
+          this.currentPair = this.pairs[index + 1];
+          return;
+        } else {
+          this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+          this.allDone(this.percentage);
+        }
+      }
+        // this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+      },
+      hideGames() {
+          this.$store.dispatch('hideGames');
+        },
+        start() {
+          this.typeKey = [];
+          this.typeVal = [];
+          this.pairs = _.shuffle(this.pairs);
+          this.currentPair = this.pairs[0]; //Берем первую пару. Нам понадобится цикл.
+        }
     },
-    hideGames() {
-      this.$store.dispatch('hideGames');
+    created() {
+      for (let task of this.stack.tasks) {
+        Array.prototype.push.apply(this.pairs, task.content);
+      }
+      this.start();
     },
-    start() {
-      this.typeKey = [];
-      this.typeVal = [];
-      this.pairs = _.shuffle(this.pairs);
+    http: {
+      root: '//ealapi.tw1.ru/api'
     }
-  },
-  created() {
-    for (let task of this.stack.tasks) {
-      Array.prototype.push.apply(this.pairs, task.content);
-    }
-    this.start();
-  },
-  http: {
-    root: '//ealapi.tw1.ru/api'
   }
-}
 </script>
 
 <style lang="css" scoped>
@@ -128,5 +150,13 @@ export default {
     cursor: pointer;
     color: #5688C7;
     text-decoration: none;
+  }
+
+  .btn-check {
+    margin-top: 40px;
+  }
+
+  .box {
+    border-top: 3px solid rgb(251, 106, 33);
   }
 </style>
