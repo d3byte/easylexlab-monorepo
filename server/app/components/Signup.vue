@@ -41,18 +41,6 @@
           <input v-model="city" type="text" tabindex="6" class="md-input" required>
           <label>Город</label>
         </div>
-        <div class="md-form-group">
-          <label class="md-check">
-            <input type="radio" v-model="role" value="teacher" name="radio" class="has-value">
-            <i class="indigo"></i>
-            Учитель
-          </label>
-          <label class="md-check">
-            <input type="radio" v-model="role" value="student" name="radio" class="has-value">
-            <i class="indigo"></i>
-            Ученик
-          </label>
-        </div>
         <div class="md-form-group" v-if="role == 'student'">
           <input type="text" v-model="groupCode" class="md-input">
           <label>Код группы (необязательно)</label>
@@ -160,6 +148,12 @@
         created() {
             if (this.$store.getters.loginState)
                 this.$router.push('/profile');
+            console.log(this.$route.fullPath);
+            if(this.$route.fullPath == '/signup/teacher') {
+              this.role = 'teacher';
+            } else if(this.$route.fullPath == '/signup/student'){
+              this.role = 'student';
+            }
         },
         components: {
             'app-header': Header

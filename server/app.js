@@ -28,6 +28,12 @@ app.get('/', (req, res) => {
 app.get('/signup', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
+app.get('/signup/student', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
+app.get('/signup/teacher', (req, res) => {
+    res.sendFile(path.join(folder + "index.html"));
+});
 app.get('/profile', (req, res) => {
     res.sendFile(path.join(folder + "index.html"));
 });
@@ -67,6 +73,9 @@ app.get('/task/:id', (req, res) => {
 
 app.use(qt.static(__dirname + '/'));
 app.use('/', express.static(folder));
+app.use('/signup', express.static(folder));
+app.use('/signup/student', express.static(folder));
+app.use('/signup/teacher', express.static(folder));
 app.use('/profile', express.static(folder));
 app.use('/group', express.static(folder));
 app.use('/group/:id', express.static(folder));
