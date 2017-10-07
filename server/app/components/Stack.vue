@@ -29,51 +29,36 @@
     </div>
   </div>
 
-
-  <div style="margin-bottom:50px;background:rgb(13, 89, 165);" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
-    <div class="container" style="height: 55px">
+  <div style="margin-bottom:50px;background:#5a7fb9;" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
+    <div class="container" style="height: 50px">
       <div class="row" style="color:white">
         <div class="col-sm-12">
-          <div class="clearfix nav-active-primary">
-            <ul class="nav nav-pills nav-sm">
-              <li class="nav-item">
-                <a class="nav-link" @click="hideGames">Назад</a>
-              </li>
-              <li class="nav-item">
+          <center>
+          <div class="nav-active-border b-light top">
+                <a class="nav-link" @click="hideGames">Назад<br><span style="visibility:hidden;">джуджи</span></a>
                 <a class="nav-link" @click="showFlashcards">
                   Выучи слова <i v-if="games.flashcards.win" class="material-icons">done</i><br>
                   {{ games.flashcards.done + '/' + games.flashcards.attempts }}
                 </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" @click="showMatching">
                   Найди пару <i v-if="games.matching.win" class="material-icons">done</i><br>
                   {{ games.matching.done + '/' + games.matching.attempts }}
                 </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" @click="showTypein">
                   Введи слово <i v-if="games.typein.win" class="material-icons">done</i><br>
                   {{ games.typein.done + '/' + games.typein.attempts }}
                 </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" @click="showSnake">
                   Змейка <i v-if="games.snake.win" class="material-icons">done</i><br>
                   {{ games.snake.done + '/' + games.snake.attempts }}
                 </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" @click="showScramble">
                   Скрэмбл <i v-if="games.scramble.win" class="material-icons">done</i><br>
                   {{ games.scramble.done + '/' + games.scramble.attempts }}
                 </a>
-              </li>
-              <li class="nav-item" v-if="testAvailable">
-                <a class="nav-link" @click="tryTest">Пройти тест</a>
-              </li>
-            </ul>
+                <a v-if="testAvailable" class="nav-link" @click="tryTest">Пройти тест</a>
           </div>
+        </center>
         </div>
       </div>
     </div>
@@ -396,4 +381,14 @@ export default {
     vertical-align: center;
     justify-content: center;
   }
+
+  .nav-active-border {
+    color:white !important;
+  }
+
+  .nav-link {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
 </style>
