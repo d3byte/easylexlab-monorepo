@@ -40,7 +40,7 @@
     </center>
     <center>
       <div v-if="!dead && !win && !help" class="box game">
-        <div class="table box">
+        <div class="table">
           <h4 v-if="waitForKey" class="text-muted">Нажмите любую клавишу, чтобы начать</h4>
           <table>
             <tr v-for="row in grid">
@@ -60,8 +60,8 @@
             </tr>
           </table>
         </div>
-        <div class="words box">
-          <h5>Слово: <i>{{ currentWordGroup.key }}</i></h5>
+        <div class="words">
+          <h5>Слово: {{ currentWordGroup.key }}</h5>
           <h6 v-for="word in currentWordGroup.words"
               :class="'food food-' + word.index + ' '
               + (word.eaten ? 'eaten ' : '')
@@ -349,7 +349,7 @@
     padding: 0;
     height: 12px;
     width: 12px;
-    background-color: #f4f4f4;
+    background-color: #d3dff8;
     border: 1px solid white;
   }
 
@@ -433,6 +433,8 @@
 
   .words {
     min-width: 150px;
+    margin-top: 10px;
+    margin-left: 10px;
   }
 
   .restart:hover {
