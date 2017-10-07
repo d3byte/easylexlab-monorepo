@@ -378,7 +378,7 @@ export default {
     /*border-top: 5px solid rgb(144, 197, 246);
     border-bottom: 5px solid rgb(211, 215, 217);
     border-radius: 5px;*/
-    width: 1041px !important;
+    /*width: 1041px !important;*/
   }
 
   .headers {
