@@ -1,166 +1,438 @@
 <template>
-<div>
-  <app-header />
-  <div class="page-content" id="home">
-    <div class="h-v white row-col">
-      <div class="row-cell v-b">
-        <div class="container p-y-lg pos-rlt">
-          <h2 class="display-2 _700 l-s-n-3x m-t-lg m-b-md text-primary hidden-xs-down">EasyLexLab</h2>
-          <h2 class="display-4 _700 l-s-n-3x m-t-lg m-b-md text-primary hidden-sm-up">EasyLexLab</h2>
-          <h5 class="text-muted m-b-lg">С нами эффективно учиться и легко учить</h5>
-          <h5 class="text-muted text-center m-b-lg">
-            Наши особенности<br>
-            <i class="material-icons icon">&#xE5C5;</i>
-          </h5>
+  <div class="home">
+    <!-- Start of the first section -->
+    <div class="section section--first">
+
+      <app-header v-if="logged" />
+
+      <div v-else class="navbar-parent">
+        <div class="container">
+          <ul class="nav navbar-nav pull-right text-primary-hover">
+            <li class="nav-item">
+              <router-link to="/signup/student" class="nav-link text-bold">
+                  Регистрация ученика
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/signup/teacher" class="nav-link text-bold">
+                  Регистрация учителя
+              </router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container">
+
+        <div class="page-title">
+          <!-- <object type="image/svg+xml" data="../pics/logo-test.svg" class="logo">
+            <img src="../pics/logo.png" class="logo">
+          </object> -->
+          <!-- <img src="../pics/dju.svg" class="logo"> -->
+          <img src="../pics/logo.png" class="logo">
+          <span class="title">EasyLexLab</span>
+        </div>
+
+        <h5 class="text-bold">
+          <i>
+            С нами эффективно учить<br>
+            и легко учиться
+          </i>
+        </h5>
+
+        <p class="brief-description">
+          <span class="brief-description_name">EasyLexLab</span><br>
+          <span class="brief-description_text">
+            - это образовательная платформа<br>
+            для изучения иностранных слов,<br>
+            предназначенная для учителей<br>
+            и учеников, изучающих языки
+          </span>
+        </p>
+
+        <div class="row">
+          <router-link to="/profile">
+            <button
+              class="large-button large-button--blue col-md-4 col-sm-12 col-xs-12">
+              Личный кабинет
+            </button>
+          </router-link>
+
+          <div class="col-md-8 text-align--right" style="padding-top:15px">
+              <span class="brief-description_name blue-text">Мобильное приложение EasyLexLab,</span><br>
+              <span class="brief-description_text">
+                разработанное для вашего удобства является<br>
+                дополнением к существующей платформе.<br>
+                Выполняйте домашние задание, где бы вы<br>
+                ни находились!
+              </span>
+          </div>
+        </div>
+
+        <div class="row features">
+
+          <div class="col-md-3 feature">
+            <div class="col-md-12 border-top border-top--blue">
+              <div class="feature-header icon-color--blue">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </div>
+              <div class="feature-body">
+                <p>Эффективно усваивать слова, необходимые для использования на уроках</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 feature">
+            <div class="col-md-12 border-top border-top--green">
+              <div class="feature-header icon-color--green">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </div>
+              <div class="feature-body">
+                <p>Выполнять домашнее задание в любом месте в любое время, используя смартфон, компьютер или планшет</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 feature">
+            <div class="col-md-12 border-top border-top--purple">
+              <div class="feature-header icon-color--purple">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </div>
+              <div class="feature-body">
+                <p>В игровой форме запоминать слова, что превращает рутинную работу в интересное и полезное занятие</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 feature">
+            <div class="col-md-12 border-top border-top--orange">
+              <div class="feature-header icon-color--orange">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </div>
+              <div class="feature-body">
+                <p>Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке"</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- End of the first section    -->
+    <!-- ––––––––––––––––––––––––––– -->
+    <!-- Start of the second section -->
+    <div class="section section--second">
+      <div class="container video">
+        <div class="video-header">
+          <h2 class="text-center text-bold">Как работает EasyLexLab?</h2>
+        </div>
+        <div class="video-body">
+          <video class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="" poster="" controls></video>
         </div>
       </div>
     </div>
-    <div class="pos-rlt" id="features">
-      <div class="h-v-5 row-col text-center">
-        <div class="col-sm-6 v-m" style="background: #316672; color: white;">
-          <div class="p-a-lg">
-            <h2 class=" _700 l-s-n-1x m-y m-b-md">Удобно</h2>
-            <p class="h5 text-muted l-h">Выполнение домашнего задания в интуитивно понятном и приятном интерфейсе.</p>
+    <!-- End of the second section -->
+    <!-- –––––––––––––––––––––––––– -->
+    <!-- Start of the third section -->
+    <div class="section section--third">
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-5">
+            <div class="col-md-12 text-right">
+              <h2 class="text-bold" style="margin-bottom:25px">Делитесь<br>знаниями</h2>
+              <p>
+                Успеваемость 95% учеников,
+                использующих EasyLexLab,
+                улучшилась. Узнайте, как простые
+                средства от EasyLexLab позволят Вам
+                максимально эффективно построить
+                процесс обучения и помочь ученикам
+                достичь успеха в изучении
+                иностранных языков
+              </p>
+              <router-link to="/signup/teacher" class="text-right">
+                <button
+                  class="large-button large-button--green large-button--width-70">
+                  Я учитель
+                </button>
+              </router-link>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="col-md-12">
+
+            </div>
           </div>
         </div>
-        <div class="col-sm-6 primary v-m">
-          <div class="p-a-lg">
-            <h2 class=" _700 l-s-n-1x m-y m-b-md hidden-xs-down">Кроссплатформенность</h2>
-            <h3 class=" _700 l-s-n-1x m-y m-b-md hidden-sm-up">Кроссплатформенность</h3>
-            <p class="h5 text-muted l-h">Работайте с планшета, телефона или компьютера.</p>
+
+        <div class="row">
+          <div class="col-md-7">
+            <div class="col-md-12">
+
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="col-md-12 text-left">
+              <h2 class="text-bold" style="margin-bottom:25px">Учеба в<br>удовольствие</h2>
+              <p>
+                Хочешь легко запомнить много слов?
+                EasyLexLab может тебе в этом помочь.
+                Выполняй домашнее задание с удовольствием
+                в любом месте и в любое время. Наблюдай за тем,
+                как пополняется твой словарный запас и не
+                забывай использовать эти слова в речи.
+              </p>
+              <router-link to="/signup/student" class="text-left">
+                <button
+                  class="large-button large-button--green large-button--width-70">
+                  Я ученик
+                </button>
+              </router-link>
+            </div>
           </div>
         </div>
+
       </div>
-      <div class="h-v-5 row-col text-center">
-        <div class="col-sm-6 v-m" style="background: #6F9B80; color: white;">
-          <div class="p-a-lg">
-            <h2 class=" _700 l-s-n-1x m-y m-b-md">Действительно работает</h2>
-            <p class="h5 text-muted l-h">Процесс изучения построен так, что ученик точно выучит большую часть слов в процессе выполнения заданий.</p>
+
+    </div>
+    <!-- End of the second section -->
+    <!-- ––––––––––––––––––––––––––– -->
+    <!-- Start of the fourth section -->
+    <div class="section section--fourth">
+
+      <div class="container box advantages">
+
+        <div class="row">
+
+          <div class="col-md-4 advantage">
+            <div class="col-md-12">
+              <p>
+                Использовать компьютерные технологии,
+                не выходя за рамки образовательной программы
+                и ФГОС
+              </p>
+            </div>
+            <div class="col-md-12">
+              <p>
+                Проводить уроки более эффективно, так как процесс
+                изучения и освоения новых слов вынесен за рамки урока:
+                дети делают всё самостоятельно дома
+              </p>
+            </div>
           </div>
+          <div class="col-md-4">
+            <h2 class="text-center title">EasyLexLab</h2>
+          </div>
+          <div class="col-md-4 advantage">
+            <div class="col-md-12">
+              <p>
+                Более гибко подходить к процессу изучения иностранного языка,
+                учитывая уровень и потребности каждой группы
+              </p>
+            </div>
+            <div class="col-md-12">
+              <p>
+                Контролировать изучение слов, помогая ученикам быстрее
+                достигать успехов в изучении языков
+              </p>
+            </div>
+          </div>
+
         </div>
-        <div class="col-sm-6 v-m" style="background: #E2B100; color: white;">
-          <div class="p-a-lg">
-            <h2 class=" _700 l-s-n-1x m-y m-b-md">Доступно каждому</h2>
-            <p class="h5 l-h">Доступ к сайту может получить каждый абсолютно бесплатно. Так же у нас есть недорогие мобильные приложения для <strong>IOS</strong> и <strong>Android</strong>.</p>
-          </div>
+
+      </div>
+
+    </div>
+    <!-- End of the fourth section -->
+    <!-- ––––––––––––––––––––––––––– -->
+    <!-- Start of footer -->
+    <div class="navbar-parent">
+      <div class="container">
+        <div class="footer">
+          <router-link to="//www.doitnow.co" target="_blank">DoItNow.co © 2017</router-link >
+          <router-link to="">Политика конфиденциальности</router-link>
+          <router-link to="/info/rules" target="_blank">Пользовательское соглашение</router-link>
         </div>
       </div>
     </div>
+    <!-- End of footer -->
+    <!-- ––––––––––––– -->
   </div>
-  <div class="p-y-lg" id="roles">
-    <div class="container p-y-lg text-primary-hover">
-      <h2 class=" _700 l-s-n-1x m-b-md">Разделение на <span class="text-primary">роли</span></h2>
-      <h5 class="text-muted m-b-lg">Вы можете создать аккаунт учителя или ученика.</h5>
-      <h5 class="text-muted m-b-lg">Каждый тип аккаунта предполагает различный набор инструментов для работы</h5>
-      <div class="row m-y-lg">
-        <div class="col-md-12 col-lg-6">
-          <div class="box white box-shadow-z3 text-center">
-            <img src="pics/teacher.png" class="img-responsive b-b m-b">
-            <span class="_800 p-a block h4 m-a-0">Профиль учителя</span>
-            <div class="box-body">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 col-lg-6">
-          <div class="box white box-shadow-z3 text-center">
-            <img src="pics/student.png" class="img-responsive b-b m-b">
-            <span class="_800 p-a block h4 m-a-0">Профиль ученика</span>
-            <div class="box-body">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row m-y-lg">
-        <div class="col-md-6 col-lg-4">
-          <div class="box white box-shadow-z3 text-center">
-            <img src="pics/group.png" class="img-responsive b-b m-b">
-            <span class="_800 p-a block h4 m-a-0">Страница группы</span>
-            <div class="box-body">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="box white box-shadow-z3 text-center">
-            <img src="pics/stats.png" class="img-responsive b-b m-b">
-            <span class="_800 p-a block h4 m-a-0">Статистика ученика</span>
-            <div class="box-body">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="box white box-shadow-z3 text-center">
-            <img src="pics/task.png" class="img-responsive b-b m-b">
-            <span class="_800 p-a block h4 m-a-0">Страница задания</span>
-            <div class="box-body">
-            </div>
-          </div>
-        </div>
-      </div>
-      <h5 class="text-muted text-center m-b-lg">
-        Заведите аккаунт уже сейчас – <router-link to="/signup"><b>зарегистрироваться</b></router-link>
-      </h5>
-    </div>
-  </div>
-  <footer class="pos-rlt" style="background: #4D5E7C; color: white">
-    <div class="footer dk">
-      <div class="text-center container p-y-lg">
-        <div class="clearfix text-lg m-t">
-          <strong>EasyLexLab</strong>
-        </div>
-        <div class="nav m-y text-primary-hover">
-          <a class="nav-link m-x" href="#" ui-scroll-to="" >
-            <span class="nav-text">Наверх</span>
-          </a>
-          <a class="nav-link m-x" href="#features" ui-scroll-to="features" >
-            <span class="nav-text">Особенности</span>
-          </a>
-          <a class="nav-link m-x" href="#roles" ui-scroll-to="#roles">
-            <span class="nav-text">Роли</span>
-          </a>
-          <!-- <a class="nav-link m-x" href="#feedback" ui-scroll-to="#feedback">
-            <span class="nav-text">Отзывы</span>
-          </a> -->
-        </div>
-        <div class="block clearfix">
-          <a href="https://twitter.com" target="_blank" class="btn btn-icon btn-social rounded btn-sm m-r">
-            <i class="fa fa-twitter"></i>
-            <i class="fa fa-twitter light-blue"></i>
-          </a>
-          <a href="https://vk.com" class="btn btn-icon btn-social rounded btn-sm">
-            <i class="fa fa-vk"></i>
-            <i class="fa fa-vk pink"></i>
-          </a>
-        </div>
-      </div>
-      <div class="b b-b"></div>
-      <div class="p-a-md">
-        <div class="row footer-bottom">
-          <div class="col-sm-8">
-            <small class="text-muted"><strong><a href="#" target="_blank">DoItNow.co</a></strong> &copy; Copyright 2017</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-</div>
 </template>
 
 <script>
 import Header from './Header.vue';
 export default {
-    components: {
-        'app-header': Header
-    }
+  computed: {
+    logged() {
+        return this.$store.getters.loginState
+    },
+  },
+  components: {
+      'app-header': Header
+  }
 }
 </script>
 
 <style lang="css" scoped>
-.icon {
-  font-size: 36px;
+.home {
+  background: rgb(244, 248, 251);
 }
 
-.col-md-6.col-lg-4 img,
-.col-md-12.col-lg-6 img {
-  border-bottom: 1px solid black;
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  margin-bottom: 40px;
+} .section:last-child {
+  margin-bottom: 0;
+} .section:first-child {
+  padding-top: 0;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-align--right {
+  text-align: right;
+}
+
+.blue-text {
+  color: rgb(65, 90, 175);
+}
+
+.container {
+  box-sizing: border-box;
+  width: 75%;
+  margin-bottom: 0;
+  padding:0 30px;
+}
+
+.navbar-parent {
+  background: rgb(65, 90, 175);
+  width: 100%;
+}
+
+.nav-link {
+  color: white;
+} .nav-link:hover {
+  background: transparent !important;
+}
+
+
+.page-title {
+  display: flex;
+  align-items: center;
+} .logo {
+  margin-left: -20px;
+  width: 100px;
+  height: 100px;
+} .title {
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(29, 68, 170);
+}
+
+.brief-description {
+  margin-top: 70px;
+  margin-bottom: 40px;
+} .brief-description_name {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.large-button {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 0;
+  border: none;
+  border-radius: 15px;
+} .large-button--blue {
+  background: rgb(13, 89, 164);
+} .large-button--green {
+  background: rgb(69, 207, 207);
+} .large-button--width-70 {
+  width: 70%;
+}
+
+.border-top {
+  border-top: 3px solid #ccc;
+  border-radius: 5px;
+} .border-top--blue {
+  border-color: rgb(13, 89, 164);
+} .border-top--green {
+  border-color: rgb(131, 223, 206);
+} .border-top--purple {
+  border-color: rgb(194, 142, 221);
+} .border-top--orange {
+  border-color: rgb(237, 146, 85);
+}
+
+.features {
+  margin-top: 45px;
+} .features .col-md-12 {
+  background: rgb(239, 240, 241);
+  border-left: 2px solid rgb(233, 235, 236);
+  border-bottom: 2px solid rgb(233, 235, 236);
+  border-right: 2px solid rgb(233, 235, 236);
+  min-height: 185px !important;
+} .feature {
+  overflow: hidden;
+} .feature-header {
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  font-size: 24px;
+}
+
+.icon-color--blue {
+  color: rgb(13, 89, 164);
+} .icon-color--green {
+  color: rgb(131, 223, 206);
+} .icon-color--purple {
+  color: rgb(194, 142, 221);
+} .icon-color--orange {
+  color: rgb(237, 146, 85);
+}
+
+.video-header {
+  height: 10vh;
+  padding: 10px;
+} .video-body {
+  height: 90vh;
+  border: 1px solid #ccc;
+} .video-body video {
+  width: 100%;
+  height: 100%;
+}
+
+.advantages {
+  min-height: 10vh;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 20px 10px;
+} .advantages .advantage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  align-items: center;
+  padding: 10px 0;
+} .footer a {
+  transition: 0.3s;
+} .footer a:hover {
+  text-decoration: underline;
 }
 </style>

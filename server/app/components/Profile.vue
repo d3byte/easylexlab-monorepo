@@ -35,7 +35,7 @@ export default {
   },
   created() {
     if(!this.$store.getters.loginState)
-      this.$router.push('/');
+      this.$router.push('/login');
     this.$http.post('user', {}, {
       headers: {
         'Content-type': 'application/json',
