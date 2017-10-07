@@ -11,15 +11,15 @@
       <h5 @click="start" class="restart">Начать заново?</h5>
     </div>
     <div class="box game" v-if="!win">
-      <div class="higher">
+      <div class="background">
         <h3 class="key"><b>{{ currentPair.value }}</b></h3>
         <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
+        <draggable v-model="shuffledLetters" @end="onEnd" element="div" class="value" :class="correct ?'correct':'default'">
+          <div class="letter" v-for="letter in shuffledLetters" :class="letter == ' ' ? 'empty' : ''">
+           {{ letter }}
+         </div>
+       </draggable>
       </div>
-      <draggable v-model="shuffledLetters" @end="onEnd" element="div" class="value" :class="correct ?'correct':'default'">
-        <div class="letter" v-for="letter in shuffledLetters" :class="letter == ' ' ? 'empty' : ''">
-         {{ letter }}
-       </div>
-     </draggable>
     </div>
   </center>
   </div>
@@ -125,6 +125,9 @@ export default {
     display: inline-block;
     min-width: 360px;
     max-width: 95%;
+    border-top: 3px solid rgb(123, 227, 170);
+    border-radius: 5px;
+    padding: 0;
   }
 
   .correct {
@@ -156,6 +159,7 @@ export default {
   }
 
   .value {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,14 +175,14 @@ export default {
     z-index: 7 !important;
   }
 
-  .game {
-    position: relative;
-    border-top: 3px solid rgb(123, 227, 170);
-    border-radius: 5px;
-    z-index: 3 !important;
-    opacity: 1;
-  } .game:after {
-    z-index: 0 !important;
+  .background {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  } .background:after {
     content : "";
     display: block;
     position: absolute;
@@ -195,6 +199,7 @@ export default {
   .key, .flat-btn {
     margin-bottom: 10px;
     font-weight: bold;
+    z-index: 7;
   }
 
   .higher {
