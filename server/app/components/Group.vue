@@ -15,7 +15,7 @@
               <input type="text" class="form-control" placeholder="Новое имя" id="basic-addon2-input" v-model="name" aria-describedby="basic-addon2">
               <div @click="submitNewName" class="input-group-addon hover primary" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></div>
             </div>
-            <h6>Меню</h6>
+            <br><br>
             <p class="text-muted m-b-sm">Здесь вы можете создать новое задание, написать сообщение, получить код для регистрации учеников и управлять ранее созданными заданиями.</p>
           </div>
         </div>

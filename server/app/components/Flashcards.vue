@@ -304,7 +304,7 @@ export default {
     z-index: 0;
     background: url('../pics/letters-2.jpg') no-repeat;
     background-size: cover;
-    opacity: 0.5;
+    opacity: 0.165;
   }
 
   .btn.rounded {
@@ -336,7 +336,7 @@ export default {
     z-index: 0;
     background: url('../pics/letters-2.jpg') no-repeat;
     background-size: cover;
-    opacity: 0.5;
+    opacity: 0.165;
   }
 
   .btns button {

@@ -201,7 +201,7 @@ export default {
   }
 
   .correct {
-    background: #307351 !important;
+    background: rgb(123, 227, 170) !important;
   }
 
   .error {
@@ -238,7 +238,7 @@ export default {
   }
 
   .words {
-    border-top: 3px solid rgb(123, 227, 170);
+    border-top: 7px solid rgb(123, 227, 170);
     border-radius: 5px;
     z-index: 5;
     min-height: 100px;
