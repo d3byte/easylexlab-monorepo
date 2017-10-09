@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../server/app/components/event.js"],"names":["EventBus"],"mappings":";;;;;;;AAAA;;;;;;AAEO,IAAMA,8BAAW,mBAAjB","file":"event.js","sourcesContent":["import Vue from 'vue'\r\n\r\nexport const EventBus = new Vue()\r\n"]}
