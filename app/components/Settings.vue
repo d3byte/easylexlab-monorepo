@@ -32,8 +32,8 @@
               <div class="form-group">
                 <label>Фотографии</label>
                 <div class="form-file">
-                  <input type="file" id="ava">
-                  <button class="btn white">Фотография профиля</button>
+                    <input @change="uploadImage" name="image" type="file" accept="image/*" id="ava" multiple>
+                    <button class="btn white">Фотография профиля</button>
                 </div><br>
                 <div class="form-file">
                   <input type="file" id="background">
@@ -111,6 +111,7 @@
 <script>
 import jwtDecode from 'jwt-decode';
 import Header from './Header.vue';
+import { upload } from './file-upload.service';
 
 export default {
   data() {
@@ -208,7 +209,7 @@ export default {
       }
     },
     submitInfo() {
-      if(this.firstName || this.lastName || this.groupCode) {
+      if(this.firstName || this.lastName || this.groupCode || this.ava) {
         if(!!this.groupCode) {
           let inGroup = false;
           for(let group of this.user._groups) {
@@ -253,6 +254,23 @@ export default {
       } else {
         this.errorInfo = 'Необходимо заполнить хотя бы одно из полей. Попробуйте еще раз.';
       }
+    },
+    uploadImage: function(e) {
+      var files = e.target.files;
+      if(!files[0]) {
+        return;
+      }
+      var data = new FormData();
+      data.append('image', files[0]);
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageSrc = e.target.result;
+      };
+      axios.post('/uploads', data, {headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+        reader.readAsDataURL(files[0]);
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   },
   created() {

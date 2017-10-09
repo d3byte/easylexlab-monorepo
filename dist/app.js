@@ -63,6 +63,12 @@ app.get('/', function (req, res) {
 app.get('/signup', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
+app.get('/signup/student', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
+app.get('/signup/teacher', function (req, res) {
+    res.sendFile(_path2.default.join(folder + "index.html"));
+});
 app.get('/profile', function (req, res) {
     res.sendFile(_path2.default.join(folder + "index.html"));
 });
@@ -102,6 +108,9 @@ app.get('/task/:id', function (req, res) {
 
 app.use(_quickthumb2.default.static(__dirname + '/'));
 app.use('/', _express2.default.static(folder));
+app.use('/signup', _express2.default.static(folder));
+app.use('/signup/student', _express2.default.static(folder));
+app.use('/signup/teacher', _express2.default.static(folder));
 app.use('/profile', _express2.default.static(folder));
 app.use('/group', _express2.default.static(folder));
 app.use('/group/:id', _express2.default.static(folder));

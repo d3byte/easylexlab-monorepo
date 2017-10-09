@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../server/app/flatkitComponents/scripts/plugins/site.js"],"names":["$","alert","jQuery"],"mappings":";;AAAA,CAAC,UAAUA,CAAV,EAAa;AACZ;;AAEEC,QAAM,KAAN;AAEH,CALD,EAKGC,MALH","file":"site.js","sourcesContent":["(function ($) {\r\n  \"use strict\";\r\n  \r\n    alert('abc');\r\n\r\n})(jQuery);\r\n"]}
