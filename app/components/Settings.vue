@@ -266,11 +266,17 @@ export default {
       reader.onload = (e) => {
         this.imageSrc = e.target.result;
       };
-      axios.post('/uploads', data, {headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
-        reader.readAsDataURL(files[0]);
-      }).catch(function (error) {
-        console.log(error);
-      });
+      this.$http.patch('upload-image', body, {
+          headers: {
+            'Content-type': 'multipart/form-data',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          this.errorInfo = '';
+          this.infoSuccess.push('Информация успешно обновлена!');
+          reader.readAsDataURL(files[0]);
+        })
+      );
     }
   },
   created() {
