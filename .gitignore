@@ -3,3 +3,4 @@
 /npm-debug.log
 /.DS_STORE
 .idea
+server/app/.DS_Store
