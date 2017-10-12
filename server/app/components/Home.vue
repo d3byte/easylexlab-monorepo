@@ -73,8 +73,8 @@
 
           <div class="col-md-3 feature">
             <div class="col-md-12 border-top border-top--blue">
-              <div class="feature-header icon-color--blue">
-                <i class="fa fa-star-o" aria-hidden="true"></i>
+              <div class="feature-header">
+                <img src="../pics/advantage-4.png" class="feature-img">
               </div>
               <div class="feature-body">
                 <p>Эффективно усваивать слова, необходимые для использования на уроках</p>
@@ -83,8 +83,8 @@
           </div>
           <div class="col-md-3 feature">
             <div class="col-md-12 border-top border-top--green">
-              <div class="feature-header icon-color--green">
-                <i class="fa fa-star-o" aria-hidden="true"></i>
+              <div class="feature-header">
+                <img src="../pics/advantage-2.png" class="feature-img">
               </div>
               <div class="feature-body">
                 <p>Выполнять домашнее задание в любом месте в любое время, используя смартфон, компьютер или планшет</p>
@@ -93,8 +93,8 @@
           </div>
           <div class="col-md-3 feature">
             <div class="col-md-12 border-top border-top--purple">
-              <div class="feature-header icon-color--purple">
-                <i class="fa fa-star-o" aria-hidden="true"></i>
+              <div class="feature-header">
+                <img src="../pics/advantage-1.png" class="feature-img">
               </div>
               <div class="feature-body">
                 <p>В игровой форме запоминать слова, что превращает рутинную работу в интересное и полезное занятие</p>
@@ -103,8 +103,8 @@
           </div>
           <div class="col-md-3 feature">
             <div class="col-md-12 border-top border-top--orange">
-              <div class="feature-header icon-color--orange">
-                <i class="fa fa-star-o" aria-hidden="true"></i>
+              <div class="feature-header">
+                <img src="../pics/advantage-3.png" class="feature-img">
               </div>
               <div class="feature-body">
                 <p>Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке"</p>
@@ -160,16 +160,16 @@
             </div>
           </div>
           <div class="col-md-7">
-            <div class="col-md-12">
-
+            <div class="col-md-12 image-container">
+              <img src="../pics/teacher.png" class="img">
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-7">
-            <div class="col-md-12">
-
+            <div class="col-md-12 image-container">
+              <img src="../pics/students-third.png" class="img">
             </div>
           </div>
           <div class="col-md-5">
@@ -203,7 +203,7 @@
 
       <div class="container box advantages">
 
-        <div class="row">
+        <!-- <div class="row">
 
           <div class="col-md-4 advantage">
             <div class="col-md-12">
@@ -239,7 +239,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 
       </div>
 
@@ -250,7 +250,7 @@
     <div class="navbar-parent">
       <div class="container">
         <div class="footer">
-          <router-link to="//www.doitnow.co" target="_blank">DoItNow.co © 2017</router-link >
+          <router-link to="">EasyLexLab © 2017</router-link>
           <router-link to="">Политика конфиденциальности</router-link>
           <router-link to="/info/rules" target="_blank">Пользовательское соглашение</router-link>
         </div>
@@ -389,6 +389,8 @@ export default {
   vertical-align: middle;
   padding: 10px;
   font-size: 24px;
+} .feature-body p {
+  text-align: center;
 }
 
 .icon-color--blue {
@@ -406,23 +408,24 @@ export default {
   padding: 10px;
 } .video-body {
   height: 90vh;
-  border: 1px solid #ccc;
 } .video-body video {
   width: 100%;
   height: 100%;
 }
 
 .advantages {
-  min-height: 10vh;
-  overflow: hidden;
+  height: 70vh;
   border-radius: 20px;
-  padding: 20px 10px;
-} .advantages .advantage {
+  /* padding: 20px 10px; */
+  background: url('../pics/tablet.png') 50% 50% no-repeat;
+  background-size: cover;
+} 
+/* .advantages .advantage {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .footer {
   display: flex;
@@ -434,5 +437,32 @@ export default {
   transition: 0.3s;
 } .footer a:hover {
   text-decoration: underline;
+}
+
+.section--first {
+  background: url('../pics/background-top.png') 50% 50% no-repeat;
+  background-size: cover;
+}
+
+.section--second {
+  background: url('../pics/background-second.png') 35% 100% no-repeat;
+  background-size: 110%;
+}
+
+.section--fourth {
+  min-height: 100vh;
+  overflow: hidden;
+  background: url('../pics/background-bottom.png') 10% 0% no-repeat;
+  background-size: inherit;
+  margin-bottom: 0;
+}
+
+.image-container {
+  display: flex !important;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 10px;
+} .img {
+  height: 300px;
 }
 </style>
