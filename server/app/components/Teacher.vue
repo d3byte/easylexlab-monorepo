@@ -3,17 +3,6 @@
   <div class="item">
     <div class="item-bg" :style="{ background: background }"></div>
     <div class="container">
-
-        <div class="col-sm-12 hidden-md-up ad">
-          <div class="padding box" v-if="showAd">
-            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
-            <center>
-              <h4>А еще мы сделали приложение</h4>
-              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
-              <img src="../pics/appstore.svg"></img>
-            </center>
-          </div>
-        </div>
         <div style="padding-top: 10px;" class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
@@ -25,17 +14,6 @@
             <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span><small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
           </div>
         </div>
-        <div class="col-md-4 ad hidden-sm-down" v-if="showAd">
-          <div class="padding box" v-if="showAd">
-            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
-            <center>
-              <h4>А еще мы сделали приложение</h4>
-              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
-              <img src="../pics/appstore.svg"></img>
-            </center>
-          </div>
-        </div>
-
     </div>
   </div>
   <router-view></router-view>

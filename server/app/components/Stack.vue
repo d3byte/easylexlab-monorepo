@@ -14,14 +14,6 @@
               <h4><i class="fa fa-bookmark-o" aria-hidden="true"></i> Название урока: <b>{{ task.name }}</b></h4>
               <h5 class="no-margin hidden-sm-down" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"><i class="fa fa-bookmark-o fa-2x" style="visibility:hidden" aria-hidden="true"></i>Выберите задание</h5>
               <h6 class="no-margin hidden-md-up" style="padding:5px;">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
-              <div class="ad no-margin">
-                <div class="padding box hidden-md-up">
-                  <center>
-                    <img src="../pics/googleplay.png" width="135px" height="40px"></img>
-                    <img src="../pics/appstore.svg"></img>
-                  </center>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -5,16 +5,6 @@
     <div class="container">
     <div class="p-a-md">
       <div class="row m-t">
-        <div class="col-sm-12 hidden-md-up ad">
-          <div class="padding box" v-if="showAd">
-            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
-            <center>
-              <h6>А еще мы сделали приложение</h6>
-              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
-              <img src="../pics/appstore.svg"></img>
-            </center>
-          </div>
-        </div>
         <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
@@ -29,16 +19,6 @@
             <h5 class="m-a-0 text-sm text-white">Выбранная группа: <b>{{ group.name }}</b></h5><br>
             <h5 class="m-a-0 text-sm text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
             <h5 class="m-a-0 text-sm text-white" v-else>Ближайшего дня сдачи нет</h5>
-          </div>
-        </div>
-        <div class="col-md-4 ad hidden-sm-down" v-if="showAd">
-          <div class="padding box" v-if="showAd">
-            <span class="pull-right m-r hover" @click="hideAd"><i class="material-icons">&#xE5CD;</i></span>
-            <center>
-              <h5>А еще мы сделали приложение</h5>
-              <img src="../pics/googleplay.png" width="135px" height="40px"></img>
-              <img src="../pics/appstore.svg"></img>
-            </center>
           </div>
         </div>
       </div>
