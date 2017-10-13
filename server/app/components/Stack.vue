@@ -62,7 +62,7 @@
 
         <div class="col-sm-4 hidden-sm-down">
           <div class="col box">
-            <div class="row-col danger white-text">
+            <div class="row-col danger white-text headpadding">
               <center>
                 <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> Учить</h3>
               </center>
@@ -87,7 +87,7 @@
 
         <div class="col-sm-4 hidden-sm-down">
           <div class="col box">
-            <div class="row-col warn white-text">
+            <div class="row-col warn white-text headpadding">
               <center>
                 <h3><i class="fa fa-trophy" aria-hidden="true"></i> Играть</h3>
               </center>
@@ -107,7 +107,7 @@
         </div>
         <div class="col-sm-4 hidden-sm-down">
           <div class="col box">
-            <div class="row-col success white-text">
+            <div class="row-col success white-text headpadding">
               <center>
                 <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Тест</h3>
               </center>
@@ -126,7 +126,7 @@
       <div class="row hidden-sm-down" id="translate">
         <div class="col-sm-12">
           <div class="box">
-            <div class="row-col accent white-text" style="padding-right: 0px;padding-left: 0px;">
+            <div class="row-col accent white-text headpadding" style="padding-right: 0px;padding-left: 0px;">
               <center>
                 <h3><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
               </center>
@@ -381,6 +381,10 @@ export default {
   .nav-link {
     padding-left: 5px !important;
     padding-right: 5px !important;
+  }
+
+  .headpadding {
+    padding:10px;
   }
 
 </style>

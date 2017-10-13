@@ -68,7 +68,7 @@
       				<div class="col-sm-6">
       					<div class="box">
       						<div class="box-header msg-header">
-      							<small class="text-muted"><b>{{ !!group.messages ? group.messages.length : 0 }}</b> Cообщений</small>
+      							<small class="text-muted"><i class="fa fa-envelope-o" aria-hidden="true"></i><b>{{ !!group.messages ? group.messages.length : 0 }}</b> Cообщений</small>
                     <div class="pull-right">
 
                     </div>

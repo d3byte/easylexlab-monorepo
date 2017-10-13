@@ -29,7 +29,7 @@
     <div class="row hidden-xs-down" style="padding:0;">
       <div class="col-sm-12" style="background: #5a7fb9;padding:0;">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
-          <ul class="nav nav-pills nav-sm text-white" style="margin-left:24px;">
+          <ul class="nav nav-pills nav-sm text-white" style="margin-left:70px;">
             <li class="nav-item">
               <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
             </li>
@@ -62,13 +62,19 @@
     </div>
   </div>
 
-  <div class="container" style="margin-top:-10px">
+<!-- <div class="container" v-if="showTasks">
+
+</div> -->
+
+  <div class="container" style="margin-top:-40px">
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
         <center>
-          <div class="checkbox">
-          <input type="checkbox" id="padding" v-model="showAll">
-          <label for="padding" id="pad_label">Показать выполненные</label>
+        <div class="form-check" style="margin-right:25px">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" v-model="showAll">
+            Показать выполненные задания
+          </label>
         </div>
         <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
         <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
