@@ -62,13 +62,19 @@
     </div>
   </div>
 
-  <div class="container" style="margin-top:-10px">
+<!-- <div class="container" v-if="showTasks">
+
+</div> -->
+
+  <div class="container" style="margin-top:-40px">
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
         <center>
-          <div class="checkbox">
-          <input type="checkbox" id="padding" v-model="showAll">
-          <label for="padding" id="pad_label">Показать выполненные</label>
+        <div class="form-check" style="margin-right:25px">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" v-model="showAll">
+            Показать выполненные задания
+          </label>
         </div>
         <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
         <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
