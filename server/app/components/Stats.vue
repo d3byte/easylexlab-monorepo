@@ -1,61 +1,59 @@
 <template lang="html">
   <div>
     <app-header />
-    <div class="padding">
-    	<div class="margin">
-    		<h5 class="m-b-0 _300">Статистика</h5>
-    		<small class="text-muted">Здесь вы можете посмотреть свой прогресс и статистику</small>
-    	</div>
+    <div class="row" style="color:white;background:linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190))">
+      <div class="container" style="padding-left:50px;">
+        <h5><b>Статистика</b></h5>
+      </div>
+    </div>
+    <div class="row" style="background:rgb(65, 90, 175)">
+      <div class="container" style="padding-left:50px;">
+        <small class="text-white"><b>Здесь вы можете посмотреть свой прогресс и статистику</b></small>
+      </div>
+    </div>
+    <div class="container" style="margin-top:15px">
     	<div class="row">
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="box-color p-a primary">
-              <div class="pull-right m-l">
-                <span class="w-40 dker text-center rounded">
-                  <i class="material-icons">account_circle</i>
-                </span>
+          <div class="col-sm-6 col-md-3 col-lg-3 col-xs-12">
+            <div class="box-color p-a no-padding" style="background:rgb(228, 77, 62)">
+              <div class="pull-left m-r img-holder">
+                  <img src="../pics/tick.png" class="img-responsive">
               </div>
-              <div class="clear">
-                <h4 class="m-a-0 text-md"><a>{{ date.num }}<span class="text-sm">{{ date.rest }}</span></a></h4>
-                <small class="text-muted">Вы зарегистрировались</small>
+              <div class="clear main-info">
+                <h4 class="m-a-0 text-sm" style="word-break:nowrap"><b>{{ date.num }} {{ date.rest }}</b></h4>
+                <small class="text-muted"><b>Регистрация</b></small>
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="box p-a">
-              <div class="pull-left m-r">
-                <span class="w-40 warn text-center rounded">
-                  <i class="material-icons">feedback</i>
-                </span>
+          <div class="col-sm-6 col-md-3 col-lg-3 col-xs-12">
+            <div class="box p-a no-padding" style="background:rgb(246, 175, 60)">
+              <div class="pull-left m-r img-holder" style="background: rgb(219, 147, 38);">
+                  <img src="../pics/tick.png" class="img-responsive">
               </div>
-              <div class="clear">
-                <h4 class="m-a-0 text-md"><a>{{ wordsLearnt }} <span class="text-sm">Слов</span></a></h4>
-                <small class="text-muted">Выучено за все время</small>
+              <div class="clear main-info">
+                <h4 class="m-a-0 text-md"><b>{{ wordsLearnt }} Слов</b></h4>
+                <small class="text-muted"><b>Выучено</b></small>
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="box-color p-a accent">
-              <div class="pull-left m-r">
-                <span class="w-40 dker text-center rounded">
-                  <i class="material-icons">comment</i>
-                </span>
+          <div class="col-sm-6 col-md-3 col-lg-3 col-xs-12">
+            <div class="box p-a no-padding" style="background:rgb(59, 158, 104)">
+              <div class="pull-left m-r img-holder" style="background: rgb(28, 114, 69);">
+                  <img src="../pics/people.png" class="img-responsive">
               </div>
-              <div class="clear">
-                <h4 class="m-a-0 text-md"><span class="text-sm">К</span> <a href>{{ groupsAmount }} <span class="text-sm">группам</span></a></h4>
-                <small class="text-muted">Вы присоединились</small>
+              <div class="clear main-info">
+                <h4 class="m-a-0 text-md"><b>В {{ groupsAmount }} групп</b></h4>
+                <small class="text-muted"><b>Вступлено</b></small>
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="box p-a">
-              <div class="pull-right m-l">
-                <span class="w-40 accent text-center rounded">
-                  <i class="material-icons">people</i>
-                </span>
+          <div class="col-sm-6 col-md-3 col-lg-3 col-xs-12">
+            <div class="box p-a no-padding" style="background:rgb(94, 123, 190)">
+              <div class="pull-left m-r img-holder" style="background: rgb(13, 89, 164);">
+                  <img src="../pics/msg.png" class="img-responsive">
               </div>
-              <div class="clear">
-                <h4 class="m-a-0 text-md"><router-link to="/profile/msg">{{ messsagesAmount }} <span class="text-sm">Сообщений</span></router-link></h4>
-                <small class="text-muted">Было получено</small>
+              <div class="clear main-info">
+                <h4 class="m-a-0 text-md"><router-link to="/profile/msg"><b>{{ messsagesAmount }} Сообщений</b></router-link></h4>
+                <small class="text-muted"><b>Получено</b></small>
               </div>
             </div>
           </div>
@@ -63,21 +61,21 @@
 
     	<div class="row">
     		<div class="col-lg-8">
-    			<div class="box">
-    				<div class="box-header">
-    					<h3>Все результаты <span class="label success">{{ results.length }}</span></h3>
+    			<div class="box" style="background:rgb(143, 198, 247)">
+    				<div class="box-header text-center text-white">
+    					<h3><b>Все результаты <span class="label" style="background:rgb(228, 77, 62)">{{ results.length }}</span></b></h3>
     				</div>
-    				<div class="box-body">
-              <table class="table table-striped b-t">
+    				<div class="box-body table-responsive no-padding">
+              <table class="table table-striped">
                 <thead>
-                  <tr>
+                  <tr class="headers">
                     <th>Группа</th>
                     <th>Задание</th>
                     <th>Результат</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="result in results">
+                  <tr class="body-row" v-for="result in results">
                     <td>{{ result.groupName }}</td>
                     <td>{{ result.stack.name }}</td>
                     <td>{{ result.result }}%</td>
@@ -91,8 +89,8 @@
     		<div class="col-lg-4 col-md-12 col-xl-4">
           <div class="box">
             <div class="box-header">
-              <h3>Выполненные задания</h3>
-              <small>Результаты группы по заданию <b>{{ currentTask }}</b></small>
+              <h2 style="color: rgb(0, 75, 94)"><b>Статистика</b></h2>
+              <small style="color: rgb(0, 75, 94)">Результаты группы по заданию <b>{{ currentTask }}</b></small>
             </div>
             <div class="box-tool">
             <ul class="nav">
@@ -110,31 +108,35 @@
             <pie-chart
               v-if="!noneResults"
               :data="chartData"
-              :library="{legend: { alignment: 'center', position: 'top', textStyle: { bold: true } }}"/>
+              :library="{legend: { alignment: 'center', position: 'right', textStyle: { bold: true } }}"/>
               <h5 v-else><small>Результатов пока нет.</small></h5>
           </div>
         </div>
         <div class="box">
           <div class="box-header">
-            <h3>Задания</h3>
-            <small>Соотношение завершенных и ожидающих выполнения</small>
+            <h2 style="color: rgb(0, 75, 94)"><b>Задания</b></h2>
+            <small style="color: rgb(0, 75, 94)"><b>Соотношение завершенных и ожидающих выполнения</b></small>
           </div>
           <div class="text-center b-t">
             <div class="row-col">
               <div class="row-cell p-a">
                 <div class="inline m-b">
                 </div>
-                <div>
-                  Выполнено
-                  <small class="block m-b">{{ completedTasks.length }}</small>
+                <div style="color: rgb(0, 75, 94)">
+                  <b>
+                    Выполнено
+                    <small class="block m-b">{{ completedTasks.length }}</small>
+                  </b>
                 </div>
               </div>
               <div class="row-cell p-a dker">
                 <div class="inline m-b">
                 </div>
                 <div>
-                  Ожидают выполнения
-                  <small class="block m-b">{{ uncompletedTasks.length }}</small>
+                  <b>
+                    Ожидают выполнения
+                    <small class="block m-b">{{ uncompletedTasks.length }}</small>
+                  </b>
                 </div>
               </div>
             </div>
@@ -276,4 +278,40 @@ export default {
 </script>
 
 <style lang="css">
+.no-padding {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.img-holder {
+  height: 100%;
+  padding: 10px;
+} .img-holder img {
+  width: 40px;
+} .img-holder:nth-of-type(1) {
+  background: rgb(194, 55, 40);
+}
+
+.main-info {
+  padding: 10px;
+  color: white;
+}
+
+.label {
+  border-radius: 5px;
+  vertical-align: middle !important;
+  padding: 5px;
+}
+
+
+.container {
+  width: 75%;
+  margin-bottom: 10px;
+  padding: 5px 40px;
+}
+
+h5 {
+  margin: 0 !important;
+}
+
 </style>

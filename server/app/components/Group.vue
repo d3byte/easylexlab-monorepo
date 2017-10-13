@@ -156,7 +156,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="body-row" v-for="(student, index) in render">
+                    <tr v-for="(student, index) in render" class="body-row">
                       <td>{{ index + 1 }}</td>
                       <td>{{ student.name }}</td>
                       <td v-show="deleteStudent"><button class="btn btn-xs rounded danger" @click="deleteStud(student.id)">Удалить</button></td>

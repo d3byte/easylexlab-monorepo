@@ -268,7 +268,7 @@ export default {
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
     this.city = localStorage.city;
-    this.background = localStorage.background ? localStorage.background : 'linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190)';
+    this.background = localStorage.background ? localStorage.background : 'linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190))';
     this.color = localStorage.color ? localStorage.color : 'white';
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
