@@ -454,6 +454,9 @@
 </script>
 
 <style lang="css" scoped>
+  .app-header {
+    width: 100%;
+  }
   .h5 {
     margin-top: 0;
   }
