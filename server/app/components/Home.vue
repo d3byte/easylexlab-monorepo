@@ -161,7 +161,7 @@
           </div>
           <div class="col-md-7">
             <div class="col-md-12 image-container">
-              <img src="../pics/teacher.png" class="img">
+              <img src="../pics/teacher.png" class="img-adaptive img">
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@
         <div class="row">
           <div class="col-md-7">
             <div class="col-md-12 image-container">
-              <img src="../pics/students-third.png" class="img">
+              <img src="../pics/students-third.png" class="img-adaptive img">
             </div>
           </div>
           <div class="col-md-5">
@@ -202,45 +202,14 @@
     <div class="section section--fourth">
 
       <div class="container box advantages">
+      </div>
 
-        <!-- <div class="row">
-
-          <div class="col-md-4 advantage">
-            <div class="col-md-12">
-              <p>
-                Использовать компьютерные технологии,
-                не выходя за рамки образовательной программы
-                и ФГОС
-              </p>
-            </div>
-            <div class="col-md-12">
-              <p>
-                Проводить уроки более эффективно, так как процесс
-                изучения и освоения новых слов вынесен за рамки урока:
-                дети делают всё самостоятельно дома
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <h2 class="text-center title">EasyLexLab</h2>
-          </div>
-          <div class="col-md-4 advantage">
-            <div class="col-md-12">
-              <p>
-                Более гибко подходить к процессу изучения иностранного языка,
-                учитывая уровень и потребности каждой группы
-              </p>
-            </div>
-            <div class="col-md-12">
-              <p>
-                Контролировать изучение слов, помогая ученикам быстрее
-                достигать успехов в изучении языков
-              </p>
-            </div>
-          </div>
-
-        </div> -->
-
+      <div class="container center-content">
+        <div class="statistic">
+          <p class="text-center text-bold">В течение нескольких лет учителя и ученики нашей школы используют EasyLexLab</p>
+          <p class="text-center">на уроках английского языка. Интерактивные задания в союзе с традиционными учебниками дают хорошие результаты, повышают степень индивидуализации обучения и стимулируют детей к получению знаний.</p>
+          <button class="large-button large-button--green">Зарегистрироваться</button>
+        </div>
       </div>
 
     </div>
@@ -440,8 +409,9 @@ export default {
 }
 
 .section--first {
-  background: url('../pics/background-top.png') 50% 50% no-repeat;
-  background-size: cover;
+  /* background: url('../pics/background-top.png') 50% 50% no-repeat; */
+  background: url('../pics/about.png') -10% 0% no-repeat;
+
 }
 
 .section--second {
@@ -465,4 +435,12 @@ export default {
 } .img {
   height: 300px;
 }
+
+.center-content {
+  background: url('../pics/1.png') 50% 0% no-repeat;
+  display: flex;
+  justify-content: center;
+  min-height: 50vh;
+}
+
 </style>
