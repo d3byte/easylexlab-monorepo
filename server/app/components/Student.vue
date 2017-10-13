@@ -29,7 +29,7 @@
     <div class="row hidden-xs-down" style="padding:0;">
       <div class="col-sm-12" style="background: #5a7fb9;padding:0;">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
-          <ul class="nav nav-pills nav-sm text-white" style="margin-left:24px;">
+          <ul class="nav nav-pills nav-sm text-white" style="margin-left:70px;">
             <li class="nav-item">
               <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
             </li>
