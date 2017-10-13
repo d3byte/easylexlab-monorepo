@@ -49,26 +49,15 @@
           </div>
 
           <div class="tab-pane" id="tab-3">
-            <div class="p-a-md dker _600">Настройки цветовой гаммы</div>
+            <div class="p-a-md dker _600">Управление фото</div>
             <form onsubmit="return false" class="p-a-md col-md-6">
               <div class="form-group" v-if="colorSuccess">
-                <label class="text-success">Новая цветовая гамма сохранена.</label>
+                <label class="text-success">Фотография успешно загружена.</label>
               </div>
-              <div class="form-group">
-                <label>Цвета</label>
-                <div class="form-file">
-                  <input type="color" v-model="color">
-                  <button class="btn white">Цвет пользователя</button>
-                  <label class="color" :style="{ backgroundColor: color }"></label>
-                </div><br>
-                <div class="form-file">
-                  <input type="color" v-model="background">
-                  <button class="btn white">Цвет фона профиля</button>
-                  <label class="color" :style="{ backgroundColor: background }"></label>
-                </div>
+              <div class="form-file">
+                <input @change="uploadImage" name="image" type="file" accept="image/*" id="ava">
+                <button class="btn white">Аватарка</button>
               </div>
-              <button @click="changeColor" class="btn btn-info m-t">Сменить</button>
-              <button @click="defaultColors" class="btn btn-primary m-t">Стандартные цвета</button>
             </form>
           </div>
 
@@ -276,17 +265,27 @@ export default {
         }
       }
     },
-    changeColor() {
-      if(this.color)
-        localStorage.color = this.color;
-      if(this.background)
-        localStorage.background = this.background
-      this.colorSuccess = true;
-    },
-    defaultColors() {
-      localStorage.color = '';
-      localStorage.background = '';
-      this.colorSuccess = true;
+    uploadImage(e) {
+      var files = e.target.files;
+      if (!files[0]) {
+        return;
+      }
+      var data = new FormData();
+      data.append('image', files[0]);
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageSrc = e.target.result;
+      };
+      this.$http.patch('upload-image', data, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + this.$store.getters.userToken
+        }
+      }).then(res => {
+        this.errorInfo = '';
+        this.infoSuccess.push('Информация успешно обновлена!');
+        reader.readAsDataURL(files[0]);
+      })
     }
   },
   created() {
