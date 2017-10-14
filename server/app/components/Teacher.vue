@@ -9,9 +9,12 @@
               <h1 class="text-white"><b>{{ firstName.slice(0, 1) + lastName.slice(0, 1) }}</b></h1>
             </span>
           </a>
-          <div class="clear m-b">
+          <div class="clear">
             <h5 class="m-a-0 m-b-xs calc text-white"><b>{{ firstName + ' ' + lastName }}</b></h5>
-            <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span><small><i class="fa fa-map-marker m-r-xs"></i>{{ school }}, {{ city }}</small></p>
+            <p class="text-white">
+              <span class="m-r"><b>{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</b></span><br>
+              <small style="margin-right: 10px"><b>{{ school }}</b></small><b><i class="fa fa-map-marker m-r-xs"></i> {{ city }}</b></small>
+            </p>
           </div>
         </div>
     </div>
@@ -90,7 +93,7 @@ export default {
 .container {
   width: 75%;
   margin-bottom: 10px;
-  padding:5px 25px;
+  padding:0px 25px;
 }
 
 .item {
