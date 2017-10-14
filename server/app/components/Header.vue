@@ -15,7 +15,7 @@
               <span>Мои результаты</span>
             </router-link>
           </li>
-          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" v-if="token.permissions === 'teacher'">
+          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" style="border-left:1px solid #ccc" v-if="token.permissions === 'teacher'">
             <a class="nav-link" href data-toggle="modal" data-target="#m-a-f">
               <span>Создать группу</span>
             </a>
@@ -134,7 +134,7 @@
           <li class="nav-item dropdown pos-stc-xs hidden-sm-down">
             <a class="nav-link" href data-toggle="dropdown">
               <i class="material-icons">&#xe7f5;</i>
-              <span v-if="!!notifications.length" class="label label-sm up warn">{{ notifications.length }}</span>
+              <span v-if="user && user.notifications" class="label label-sm up warn">{{ user.notifications.length }}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
@@ -413,8 +413,8 @@
                 }
               }).then(res => {
                 this.$store.dispatch('userInfo', res.body.user);
-                this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
                 this.notifications = res.body.user.notifications;
+                this.$store.dispatch('changeCurrentGroup', res.body.user._groups[0]);
                 EventBus.$emit('requested-header');
                 });
             },

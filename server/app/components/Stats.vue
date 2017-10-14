@@ -108,7 +108,7 @@
             <pie-chart
               v-if="!noneResults"
               :data="chartData"
-              :library="{legend: { alignment: 'center', position: 'right', textStyle: { bold: true } }}"/>
+              :library="{legend: { alignment: 'center', position: 'top', textStyle: { bold: true } }}"/>
               <h5 v-else><small>Результатов пока нет.</small></h5>
           </div>
         </div>
@@ -132,7 +132,7 @@
               <div class="row-cell p-a dker">
                 <div class="inline m-b">
                 </div>
-                <div>
+                <div >
                   <b>
                     Ожидают выполнения
                     <small class="block m-b">{{ uncompletedTasks.length }}</small>
@@ -284,7 +284,8 @@ export default {
 }
 
 .img-holder {
-  height: 100%;
+  display: flex !important;
+  flex-direction: column;
   padding: 10px;
 } .img-holder img {
   width: 40px;
@@ -312,6 +313,10 @@ export default {
 
 h5 {
   margin: 0 !important;
+}
+
+.m-r {
+  margin-right: 5px !important;
 }
 
 </style>
