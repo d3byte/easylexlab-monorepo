@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="blue">
-      <div class="container custom-padding" style="padding-bottom: 0;margin-bottom: 0;">
+      <div class="container custom-padding" style="margin-bottom:0;padding-top:0;margin-top:0;">
         <div class="menu">
           <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#newtask">
             <i class="material-icons menu-icon">&#xE148;</i>
