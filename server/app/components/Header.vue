@@ -15,7 +15,7 @@
               <span>Мои результаты</span>
             </router-link>
           </li>
-          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" v-if="token.permissions === 'teacher'">
+          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" style="border-left:1px solid #ccc" v-if="token.permissions === 'teacher'">
             <a class="nav-link" href data-toggle="modal" data-target="#m-a-f">
               <span>Создать группу</span>
             </a>
