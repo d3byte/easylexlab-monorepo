@@ -10,7 +10,7 @@
         </div>
 
         <ul class="nav navbar-nav pull-right text-primary-hover" v-if="logged">
-          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" v-if="token.permissions === 'student'">
+          <li class="nav-item text-primary-hover hidden-sm-down border-right-nav" style="border-left:1px solid #ccc" v-if="token.permissions === 'student'">
             <router-link class="nav-link" to="/stats">
               <span>Мои результаты</span>
             </router-link>
@@ -20,10 +20,10 @@
               <span>Создать группу</span>
             </a>
           </li>
-          <li class="nav-item dropdown pos-stc-xs hidden-sm-down border-right-nav">
+          <li class="nav-item dropdown pos-stc-xs hidden-sm-down border-right-nav" style="padding-right:25px">
             <a class="nav-link" href data-toggle="dropdown">
               <i class="material-icons">&#xe7f5;</i>
-              <span class="label label-sm up warn">{{ notifications.length }}</span>
+              <span v-if="!!notifications.length" class="label label-sm up warn" style="margin-right:-5px;">{{ notifications.length }}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
@@ -46,26 +46,31 @@
           </li>
           <li class="nav-item border-right-nav dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
-              <span class="avatar w-32" :style="{ backgroundColor: color }">
-                  <span>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
-              </span>
+              <div style="background: rgb(176, 212, 219)" class="circle w-32">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+              </div>
+              <!-- <div class="avatar w-32" >
+                <span>
+                  <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </span>
+              </div> -->
             </a>
-            <div class="dropdown-menu pull-right dropdown-menu-scale">
-              <router-link class="dropdown-item" to="/profile">
-                <i class="material-icons">&#xE8A6;</i>
+            <div class="dropdown-menu pull-right dropdown-menu-scale" style="background: rgb(176, 212, 219)">
+              <router-link class="dropdown-item" to="/profile" style="color:rgb(78, 114, 128)">
+                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE8A6;</i>
                 Профиль
               </router-link>
-              <router-link class="dropdown-item" to="/settings">
-                <i class="material-icons">&#xE8B8;</i>
+              <router-link class="dropdown-item" to="/settings" style="color:rgb(78, 114, 128)">
+                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE8B8;</i>
                 Настройки
               </router-link>
-              <span class="dropdown-item hover" data-toggle="modal" data-target="#feedback">
-                <i class="material-icons">&#xE0C9;</i>
+              <span class="dropdown-item hover" data-toggle="modal" data-target="#feedback" style="color:rgb(78, 114, 128)">
+                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE0C9;</i>
                 Оставить отзыв
               </span>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" @click="logout">
-                <i class="material-icons">&#xE0B2;</i>
+              <a class="dropdown-item" @click="logout" style="color:rgb(78, 114, 128)">
+                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE0B2;</i>
                 Выход
               </a>
             </div>
@@ -129,7 +134,7 @@
           <li class="nav-item dropdown pos-stc-xs hidden-sm-down">
             <a class="nav-link" href data-toggle="dropdown">
               <i class="material-icons">&#xe7f5;</i>
-              <span class="label label-sm up warn">{{ notifications.length }}</span>
+              <span v-if="!!notifications.length" class="label label-sm up warn">{{ notifications.length }}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
@@ -152,7 +157,7 @@
           </li>
           <li class="nav-item dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
-              <span class="avatar w-32" :style="{ backgroundColor: color }">
+              <span class="avatar w-32">
                   <span>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
               </span>
             </a>
@@ -222,7 +227,7 @@
               </router-link>
               <a class="dropdown-item" href data-toggle="dropdown">
                 Оповещения
-                <span class="label label-sm up warn">{{ notifications.length }}</span>
+                <span v-if="!!notifications.length" class="label label-sm up warn">{{ notifications.length }}</span>
               </a>
               <!-- dropdown -->
               <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
@@ -282,7 +287,7 @@
           <!-- / -->
         </div>
       </div>
-      <div class="hidden-sm-up">
+      <div class="hidden-md-up">
         <div class="hidden-md-up collapse navbar-toggleable-sm" id="collapse-xs">
           <div ui-include="'../views/blocks/navbar.form.right.html'"></div>
           <!-- link and dropdown -->
@@ -294,7 +299,7 @@
               </router-link>
               <a class="dropdown-item" href data-toggle="dropdown">
                 Оповещения
-                <span class="label label-sm up warn">{{ notifications.length }}</span>
+                <span v-if="!!notifications.length" class="label label-sm up warn">{{ notifications.length }}</span>
               </a>
               <!-- dropdown -->
               <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
@@ -510,5 +515,14 @@
   margin-top: 0;
   font-family: 'Fredericka the Great', cursive;
   color: rgb(29, 68, 170);
+}
+
+.circle {
+  border-radius: 50%;
+  vertical-center: center;
+  text-align: center;
+  margin-right: 15px;
+  font-size: 20px;
+  color: rgb(227, 239, 243);
 }
 </style>
