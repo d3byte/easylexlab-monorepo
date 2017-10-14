@@ -1,4 +1,4 @@
- <template lang="html">
+   <template lang="html">
   <div>
     <app-header/>
     <div class="gradient">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="blue">
-      <div class="container custom-padding" style="margin-bottom:0;padding-top:0;margin-top:0;">
+      <div class="container custom-padding" style="padding-bottom:0;margin-bottom:0;padding-top:0;margin-top:0;">
         <div class="menu">
           <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#newtask">
             <i class="material-icons menu-icon">&#xE148;</i>
@@ -210,7 +210,7 @@ export default {
       deleteStudent: false,
       chartOptions: {
         height: 250,
-        colors: ['#526A77', '#477C9B', '#6BBFEF', '#074060', '#16A6F9']
+        colors: ['rgb(41, 205, 107)', 'rgb(37, 198, 218)', 'rgb(49, 137, 225)', 'rgb(234, 168, 59)', 'rgb(228, 78, 60)']
       }
     }
   },
