@@ -3,29 +3,30 @@
   <div class="item">
     <div class="item-bg" :style="{ background: background }"></div>
     <div class="container">
-    <div class="p-a-md">
-      <div class="row m-t">
-        <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
-          <a href class="pull-left m-r-md hidden-xs-down">
+      <div class="p-a-md">
+        <div class="row m-t">
+          <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
+            <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
               <h1><b>{{ firstName.slice(0, 1) + lastName.slice(0, 1) }}</b></h1>
             </span>
           </a>
-          <div class="clear m-b">
-            <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
-            <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small>{{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</small></p>
-            <h5 class="m-a-0 text-sm text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
-            <br>
-            <h5 class="m-a-0 text-sm text-white">Выбранная группа: <b>{{ group.name }}</b></h5><br>
-            <h5 class="m-a-0 text-sm text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
-            <h5 class="m-a-0 text-sm text-white" v-else>Ближайшего дня сдачи нет</h5>
+            <div class="clear m-b">
+              <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
+              <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small>ОУ: {{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</small></p>
+              <h5 class="m-a-0 text-sm text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+              <br>
+              <h5 class="m-a-0 text-sm text-white">Выбранная группа: <b>{{ group.name }}</b></h5><br>
+              <h5 class="m-a-0 text-sm text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
+              <h5 class="m-a-0 text-sm text-white" v-else>Ближайшего дня сдачи нет</h5>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-  <div style="margin-top: -50px;"> <!-- was background: rgb(99, 170, 242); -->
+  <div style="margin-top: -50px;">
+    <!-- was background: rgb(99, 170, 242); -->
     <div class="row hidden-xs-down" style="padding:0;">
       <div class="col-sm-12" style="background: #5a7fb9;padding:0;">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
@@ -36,7 +37,7 @@
             <li class="nav-item" style="padding-right:90px">
               <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
             </li>
-            <li class="nav-item" v-for="group in user._groups">
+            <li class="nav-item groupbtn" v-for="group in user._groups">
               <button style="font-size: 13px" class="btn btn btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
             </li>
           </ul>
@@ -62,7 +63,7 @@
     </div>
   </div>
 
-<!-- <div class="container" v-if="showTasks">
+  <!-- <div class="container" v-if="showTasks">
 
 </div> -->
 
@@ -70,46 +71,46 @@
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
         <center>
-        <div class="form-check" style="margin-right:25px">
-          <label class="form-check-label">
+          <div class="form-check" style="margin-right:25px">
+            <label class="form-check-label">
             <input class="form-check-input" type="checkbox" v-model="showAll">
             Показать выполненные задания
           </label>
-        </div>
-        <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
-        <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
-      </center>
-        <i v-if="showPreloader" class="material-icons preloader">cached</i>
-        <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-          <div class="col-lg col-md col-sm col-xs box task">
-            <div class="taskcontentouter">
-              <div class="taskcontent">
-                <center>
-                  <h3>{{ test.name }}</h3>
-                  <p><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Выполнить до: {{ test.deadline }}</p>
-                  <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
-                </center>
-              </div>
-            </div>
           </div>
-        </div>
-        <div v-show="showAll" v-for="test in completedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-          <div class="col-lg col-md col-sm col-xs box task">
-            <div class="taskcontentouter">
-              <div class="taskcontent">
-                <div class="pull-right success">
-                  <i class="material-icons">done</i>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
+          <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
+        </center>
+        <i v-if="showPreloader" class="material-icons preloader">cached</i>
+          <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 taskbox" style="margin-bottom: 10px;">
+            <div class="col-lg col-md col-sm col-xs box task">
+              <div class="taskcontentouter">
+                <div class="taskcontent">
                   <center>
-                    <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
-                    <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
+                    <h3>{{ test.name }}</h3>
+                    <p><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Выполнить до: {{ test.deadline }}</p>
+                    <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                   </center>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          <div v-show="showAll" v-for="test in completedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+            <div class="col-lg col-md col-sm col-xs box task">
+              <div class="taskcontentouter">
+                <div class="taskcontent">
+                  <div class="pull-right success">
+                    <i class="material-icons">done</i>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <center>
+                      <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
+                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
       <div v-if="showMsgs">
         <div class="col-lg-12 col-sm-12">
@@ -162,7 +163,9 @@
 <script>
 import moment from 'moment';
 import jwtDecode from 'jwt-decode';
-import { EventBus } from './event';
+import {
+  EventBus
+} from './event';
 
 export default {
   data() {
@@ -262,11 +265,11 @@ export default {
     }
   },
   created() {
-    if(localStorage.ad == 'true') {
+    if (localStorage.ad == 'true') {
       this.showAd = true;
       localStorage.ad = 'false';
     };
-    if(this.$route.path.slice(9) == 'msg') {
+    if (this.$route.path.slice(9) == 'msg') {
       this.showTasks = false;
       this.showMsgs = true;
     }
@@ -281,12 +284,12 @@ export default {
     this.$store.dispatch('testNotAvailable');
     EventBus.$once('requested', event => {
       this.wordsLearnt = this.user.wordsLearnt;
-      if(this._group) {
+      if (this._group) {
         this.sortTasks();
         this.setDate();
       }
       this.showPreloader = false;
-      if(this.group && this.group.messages) {
+      if (this.group && this.group.messages) {
         for (var group of this.user._groups) {
           group.messages.map(msg => this.messages.push(msg));
         }
@@ -391,6 +394,41 @@ h5.white-text {
 
 .row:first-of-type {
   margin-bottom: 25px;
+}
+
+.taskbox:nth-of-type(1) {
+ border-top: 3px solid rgb(228, 78, 60);
+}
+.taskbox:nth-of-type(2) {
+ border-top: 3px solid rgb(41, 205, 107);
+}
+.taskbox:nth-of-type(3) {
+ border-top: 3px solid rgb(37, 198, 218);
+}
+.taskbox:nth-of-type(4) {
+ border-top: 3px solid rgb(49, 137, 225);
+}
+.taskbox:nth-of-type(5) {
+ border-top: 3px solid rgb(234, 168, 59);
+}
+.taskbox:nth-of-type(6) {
+ border-top: 3px solid rgb(119, 221, 234);
+}
+.taskbox:nth-of-type(7) {
+ border-top: 3px solid rgb(211, 52, 216);
+}
+.taskbox:nth-of-type(8) {
+ border-top: 3px solid rgb(216, 52, 139);
+}
+.taskbox:nth-of-type(9) {
+ border-top: 3px solid rgb(216, 117, 52);
+}
+.taskbox:nth-of-type(10) {
+ border-top: 3px solid rgb(117, 216, 52);
+}
+
+.groupbtn:nth-of-type(6) {
+  color: blue !important;
 }
 
 .row:nth-of-type(2) {
