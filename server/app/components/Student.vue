@@ -81,8 +81,18 @@
           <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
         </center>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
-          <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-            <div class="col-lg col-md col-sm col-xs box task taskbox">
+          <div v-show="!showAll" v-for="(test, index) in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="col-lg col-md col-sm col-xs box task taskbox" v-bind:class="{
+                                                                               'task-1':index == 0,
+                                                                               'task-2':index == 1,
+                                                                               'task-3':index == 2,
+                                                                               'task-4':index == 3,
+                                                                               'task-5':index == 4,
+                                                                               'task-6':index == 5,
+                                                                               'task-7':index == 6,
+                                                                               'task-8':index == 7,
+                                                                               'task-9':index == 8,
+                                                                               'task-10':index == 9}">
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <center>
@@ -396,40 +406,41 @@ h5.white-text {
   margin-bottom: 25px;
 }
 
-.taskbox:nth-of-type(1) {
+/*.taskbox:nth-of-type(1) {
+ border-top: 3px solid rgb(228, 78, 60);
+}*/
+
+.task-1{
  border-top: 3px solid rgb(228, 78, 60);
 }
-.taskbox:nth-of-type(2) {
- border-top: 3px solid rgb(41, 205, 107);
+.task-2{
+ border-top: 3px solid blue;
 }
-.taskbox:nth-of-type(3) {
+.task-3{
  border-top: 3px solid rgb(37, 198, 218);
 }
-.taskbox:nth-of-type(4) {
+.task-4{
  border-top: 3px solid rgb(49, 137, 225);
 }
-.taskbox:nth-of-type(5) {
+.task-5{
  border-top: 3px solid rgb(234, 168, 59);
 }
-.taskbox:nth-of-type(6) {
+.task-6{
  border-top: 3px solid rgb(119, 221, 234);
 }
-.taskbox:nth-of-type(7) {
+.task-7{
  border-top: 3px solid rgb(211, 52, 216);
 }
-.taskbox:nth-of-type(8) {
+.task-8{
  border-top: 3px solid rgb(216, 52, 139);
 }
-.taskbox:nth-of-type(9) {
+.task-9{
  border-top: 3px solid rgb(216, 117, 52);
 }
-.taskbox:nth-of-type(10) {
+.task-10{
  border-top: 3px solid rgb(117, 216, 52);
 }
 
-.groupbtn:nth-of-type(6) {
-  color: blue !important;
-}
 
 .row:nth-of-type(2) {
   display: flex;
