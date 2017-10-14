@@ -68,9 +68,11 @@
       				<div class="col-sm-6">
       					<div class="box">
       						<div class="box-header msg-header">
-      							<small class="text-muted"><i class="fa fa-envelope-o" aria-hidden="true"></i><b>{{ !!group.messages ? group.messages.length : 0 }}</b> Cообщений</small>
                     <div class="pull-right">
-
+                      <i class="fa fa-envelope-o" style="font-size:18px;vertical-align:middle" aria-hidden="true"></i>
+                    </div>
+      						  <div class="clear">
+                      <small class="text-muted"><b>{{ !!group.messages ? group.messages.length : 0 }}</b> Cообщений</small>
                     </div>
       						</div>
       						<div class="box-body msgs-body" style="background: rgb(200, 237, 246);padding-bottom:0;">
