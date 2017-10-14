@@ -55,7 +55,7 @@
                 </span>
               </div> -->
             </a>
-            <div class="dropdown-menu pull-right dropdown-menu-scale" style="background: rgb(176, 212, 219)">
+            <div class="dropdown-menu pull-right dropdown-menu-scale" style="background: rgb(176, 212, 219);border-radius:6px;">
               <router-link class="dropdown-item" to="/profile" style="color:rgb(78, 114, 128)">
                 <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE8A6;</i>
                 Профиль
