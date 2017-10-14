@@ -65,37 +65,37 @@
               <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во дней на выполнение</label>
                 <div class="col-sm-6">
-                  <input type="number" v-model="timeToDo" min="1">
+                  <input type="number" v-model="timeToDo" min="0">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во повторений змейки</label>
                 <div class="col-sm-6">
-                  <input type="number" v-model="snakeAttempts" min="1">
+                  <input type="number" v-model="snakeAttempts" min="0">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во повторений перебора букв</label>
                 <div class="col-sm-6">
-                  <input type="number" v-model="scrambleAttempts" min="1">
+                  <input type="number" v-model="scrambleAttempts" min="0">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во повторений флеш карточек</label>
                 <div class="col-sm-6">
-                  <input type="number" v-model="flashcardsAttempts" min="1">
+                  <input type="number" v-model="flashcardsAttempts" min="0">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во повторений Type In</label>
                 <div class="col-sm-6">
-                  <input type="number" v-model="typeinAttempts" min="1">
+                  <input type="number" v-model="typeinAttempts" min="0">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6 form-control-label">Кол-во повторений соотношения(matching)</label>
                 <div class="col-sm-6">
-                  <input type="number" v-model="matchingAttempts" min="1">
+                  <input type="number" v-model="matchingAttempts" min="0">
                 </div>
               </div>
               <hr>
