@@ -441,6 +441,47 @@ h5.white-text {
  border-top: 3px solid rgb(117, 216, 52);
 }
 
+.task-1 button{
+ background-color:rgb(228, 78, 60) !important;
+ border:none !important;
+}
+.task-2 button{
+ background-color:blue !important;
+ border:none !important;
+}
+.task-3 button{
+ background-color:rgb(37, 198, 218) !important;
+ border:none !important;
+}
+.task-4 button{
+ background-color:rgb(49, 137, 225) !important;
+ border:none !important;
+}
+.task-5 button{
+ background-color:rgb(234, 168, 59) !important;
+ border:none !important;
+}
+.task-6 button{
+ background-color:rgb(119, 221, 234) !important;
+ border:none !important;
+}
+.task-7 button{
+ background-color:rgb(211, 52, 216) !important;
+ border:none !important;
+}
+.task-8 button{
+ background-color:rgb(216, 52, 139) !important;
+ border:none !important;
+}
+.task-9 button{
+ background-color:rgb(216, 117, 52) !important;
+ border:none !important;
+}
+.task-10 button{
+ background-color:rgb(117, 216, 52) !important;
+ border:none !important;
+}
+
 
 .row:nth-of-type(2) {
   display: flex;
