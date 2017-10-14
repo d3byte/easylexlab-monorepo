@@ -37,8 +37,14 @@
             <li class="nav-item" style="padding-right:90px">
               <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
             </li>
-            <li class="nav-item groupbtn" v-for="group in user._groups">
-              <button style="font-size: 13px" class="btn btn btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
+            <li class="nav-item groupbtn" v-for="(group, index) in user._groups">
+              <button style="font-size: 13px" class="btn btn btn-outline rounded" @click="changeGroup(group)" v-bind:class="{
+                                                                                                                                  'group-1':index == 0,
+                                                                                                                                  'group-2':index == 1,
+                                                                                                                                  'group-3':index == 2,
+                                                                                                                                  'group-4':index == 3,
+                                                                                                                                  'group-5':index == 4}">
+                                                                                                                                  <b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
@@ -482,6 +488,21 @@ h5.white-text {
  border:none !important;
 }
 
+.group-1{
+background-color: #039d69 !important;
+}
+.group-2{
+background-color: #5265a9 !important;
+}
+.group-3{
+background-color: #ff6a1f !important;
+}
+.group-4{
+background-color: #f44177 !important;
+}
+.group-5{
+background-color: #58c721 !important;
+}
 
 .row:nth-of-type(2) {
   display: flex;
