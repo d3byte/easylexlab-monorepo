@@ -288,7 +288,7 @@ export default {
   }
 
   .needed-height {
-    height: 120px;
+    height: 133px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -344,5 +344,10 @@ export default {
     font-size: 14px;
     font-weight: bold;
     opacity: 1;
+    text-transform: uppercase !important;
+  }
+
+  button {
+    text-transform: none;
   }
 </style>
