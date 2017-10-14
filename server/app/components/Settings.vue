@@ -150,7 +150,7 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    root: '/api'
   },
   methods: {
     checkPass() {
@@ -276,7 +276,7 @@ export default {
       reader.onload = (e) => {
         this.imageSrc = e.target.result;
       };
-      this.$http.patch('upload-image', data, {
+      this.$http.post('upload-image', data, {
         headers: {
           'Content-type': 'multipart/form-data',
           'Authorization': 'Bearer ' + this.$store.getters.userToken

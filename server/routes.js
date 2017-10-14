@@ -23,6 +23,7 @@ routes.post('/recover', userController.recoverPassword);
 routes.post('/checktoken', userController.checkToken);
 routes.post('/feedback', expressJWT({ secret }), userController.sendFeedback);
 routes.patch('/newinfo', expressJWT({ secret }), userController.updateInfo);
+routes.post('/upload-image', expressJWT({ secret }), userController.uploadImage);
 routes.patch('/newpassword', expressJWT({ secret }), userController.changePassword);
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.post('/user', expressJWT({ secret }), userController.getUser);
