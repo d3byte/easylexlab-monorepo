@@ -81,8 +81,8 @@
           <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
         </center>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
-          <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 taskbox" style="margin-bottom: 10px;">
-            <div class="col-lg col-md col-sm col-xs box task">
+          <div v-show="!showAll" v-for="test in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+            <div class="col-lg col-md col-sm col-xs box task taskbox">
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <center>
@@ -95,7 +95,7 @@
             </div>
           </div>
           <div v-show="showAll" v-for="test in completedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-            <div class="col-lg col-md col-sm col-xs box task">
+            <div class="col-lg col-md col-sm col-xs box task taskbox">
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <div class="pull-right success">
