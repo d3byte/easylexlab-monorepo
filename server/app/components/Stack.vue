@@ -126,10 +126,8 @@
       <div class="row hidden-sm-down" id="translate">
         <div class="col-sm-12">
           <div class="box">
-            <div class="row-col accent white-text headpadding" style="padding-right: 0px;padding-left: 0px;">
-              <center>
-                <h3><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
-              </center>
+            <div class="row-col accent white-text headpadding" style="padding-right: 0px;padding-left: 80px;">
+              <h3><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
             </div>
             <center>
               <div class="table-responsive">
