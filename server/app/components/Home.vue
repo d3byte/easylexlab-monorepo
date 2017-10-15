@@ -202,7 +202,8 @@
       <!-- Start of the fourth section -->
       <section class="section section--fourth">
 
-        <div class="container box advantages">
+        <div class="container advantages">
+          <img class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="../pics/tablet.png">
         </div>
 
         <div class="container center-content">
@@ -390,18 +391,11 @@ export default {
 }
 
 .advantages {
-  height: 70vh;
-  border-radius: 20px;
-  /* padding: 20px 10px; */
-  background: url('../pics/tablet.png') 50% 50% no-repeat;
-  background-size: cover;
-} 
-/* .advantages .advantage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
+  min-height: 1px;
+  overflow: hidden;
+} .advantages img {
+  transform: scale(1.1);
+}
 
 .footer {
   display: flex;
@@ -443,6 +437,7 @@ export default {
 }
 
 .center-content {
+  margin-top: 30px;
   background: url('../pics/last.png') 50% 0% no-repeat;
   background-size: contain;
   display: flex;
