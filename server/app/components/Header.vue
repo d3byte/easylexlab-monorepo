@@ -5,7 +5,6 @@
         <div class="navbar-item pull-left h4" id="pageTitle">
           <router-link to="/">
             <img src="../pics/logo.png" class="logo">
-            EasyLexLab
           </router-link>
         </div>
 
@@ -480,8 +479,8 @@
   }
 
   .logo {
-    width: 50px;
-    height: 50px;
+    width: 140px;
+    height: 45px;
     margin-right: -5px;
   }
 

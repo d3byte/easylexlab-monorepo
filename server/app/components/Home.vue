@@ -31,7 +31,6 @@
             </object> -->
             <!-- <img src="../pics/dju.svg" class="logo"> -->
             <img src="../pics/logo.png" class="logo">
-            <span class="title">EasyLexLab</span>
           </div>
 
           <h5 class="text-bold">
@@ -306,8 +305,8 @@ export default {
   display: flex;
   align-items: center;
 } .logo {
-  margin-left: -20px;
-  width: 100px;
+  margin-left: -5px;
+  width: 230px;
   height: 100px;
 } .title {
   font-size: 28px;
