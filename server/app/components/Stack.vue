@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div style="margin-bottom:50px;background:rgb(13, 89, 165);" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
+  <div style="margin-bottom:50px;background:#5280b5;" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
     <div class="container" style="height: 50px">
       <div class="row" style="color:white">
         <div class="col-sm-12">

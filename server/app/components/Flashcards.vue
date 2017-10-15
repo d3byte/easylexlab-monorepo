@@ -34,7 +34,7 @@
       <button @click="tryTest" class="btn">Пройти тест</button>
     </div>
     <div class="row" style="margin-bottom:20px;margin-top:10px;">
-      <h5 style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h5>
+      <h3 style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
     </div>
   </center>

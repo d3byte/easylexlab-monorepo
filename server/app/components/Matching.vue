@@ -7,7 +7,6 @@
           <i class="fa fa-tags" aria-hidden="true"></i>
            Найди пару
         </h2>
-        <h5 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h5>
 
         <div v-if="done || lose" @click="show()" class="vertical-center box">
           <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
@@ -26,6 +25,7 @@
             </div>
           </div>
         </div>
+        <h3 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <button style="margin-bottom:20px" id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
       </div>
     </center>
@@ -194,6 +194,11 @@ export default {
 
   #dju {
     word-break: break-all;
+  }
+
+  #restart {
+    background: rgb(207, 233, 254);
+    box-shadow: none;
   }
 
   .selected {
