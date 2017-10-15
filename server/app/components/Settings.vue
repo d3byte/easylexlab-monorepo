@@ -55,8 +55,11 @@
                 <label class="text-success">Фотография успешно загружена.</label>
               </div>
               <div class="form-file">
+
                 <input @change="uploadImage" name="image" type="file" accept="image/*" id="ava">
                 <button class="btn white">Аватарка</button>
+
+
               </div>
             </form>
           </div>
@@ -116,6 +119,7 @@
 <script>
 import jwtDecode from 'jwt-decode';
 import Header from './Header.vue';
+import axios from 'axios';
 
 export default {
   data() {
@@ -138,7 +142,10 @@ export default {
       groupCode: '',
       userId: '',
       color: localStorage.color,
-      background: localStorage.background
+      background: localStorage.background,
+      options: {
+        url: '/upload-image'
+      }
     }
   },
   computed: {
@@ -266,17 +273,18 @@ export default {
       }
     },
     uploadImage(e) {
-      var files = e.target.files;
+      const files = e.target.files;
       if (!files[0]) {
         return;
       }
-      var data = new FormData();
+      const data = new FormData();
+      data.append('userName', localStorage.id);
       data.append('image', files[0]);
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = (e) => {
         this.imageSrc = e.target.result;
       };
-      this.$http.post('upload-image', data, {
+      axios.post('/api/upload-image', data, {
         headers: {
           'Content-type': 'multipart/form-data',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
