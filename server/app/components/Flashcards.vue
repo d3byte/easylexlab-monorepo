@@ -2,7 +2,10 @@
 <div class="vertical-center">
   <center>
     <div class="container-fluid flashcards">
-      <h2 style="margin-bottom:30px"><i class="fa fa-book" aria-hidden="true"></i> Выучи слова</h2>
+      <div class="name">
+        <img src="../pics/flashcards.png">
+        <h2>Выучи слова</h2>
+      </div>
       <div v-if="done || lose" @click="show()" class="vertical-center box">
         <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
         <h2>{{ Math.round(know.length * 100 / pairs.length) }}%</h2>
@@ -349,5 +352,16 @@ export default {
 
   button {
     text-transform: none;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  } .name img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
   }
 </style>
