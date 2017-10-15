@@ -1,5 +1,9 @@
 import express from 'express';
 import expressJWT from 'express-jwt';
+import multer from 'multer';
+import path from 'path';
+
+import db from './models';
 
 import secret from './secret';
 
@@ -8,6 +12,17 @@ import basicConstroller from './controllers/basicController';
 import userController from './controllers/userController';
 import groupController from './controllers/groupController';
 import stackController from './controllers/stackController';
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({ storage: storage });
 
 const routes = express();
 
@@ -23,7 +38,21 @@ routes.post('/recover', userController.recoverPassword);
 routes.post('/checktoken', userController.checkToken);
 routes.post('/feedback', expressJWT({ secret }), userController.sendFeedback);
 routes.patch('/newinfo', expressJWT({ secret }), userController.updateInfo);
-routes.post('/upload-image', expressJWT({ secret }), userController.uploadImage);
+routes.post('/upload-image', upload.single('image'), function (req, res) {
+    if(req.file.filename) {
+        db.User.findByIdAndUpdate(req.body.userName, {
+            $set: { backgroundUrl: req.file.filename }
+        }).then(user => {
+            return res.json({
+                success: true
+            });
+        }).catch(err => {
+            return res.status(500).json({
+                message: err
+            });
+        });
+    }
+});
 routes.patch('/newpassword', expressJWT({ secret }), userController.changePassword);
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.post('/user', expressJWT({ secret }), userController.getUser);

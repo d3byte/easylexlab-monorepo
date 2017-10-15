@@ -6,7 +6,8 @@
         <div style="padding-top: 10px;" class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
-              <h1 class="text-white"><b>{{ firstName.slice(0, 1) + lastName.slice(0, 1) }}</b></h1>
+              <!--<img :src="backgroundUrl">-->
+              {{ backgroundUrl }}
             </span>
           </a>
           <div class="clear">
@@ -35,6 +36,7 @@ export default {
       lastName: '',
       school: '',
       city: '',
+        backgroundUrl: '',
       color: '',
       background: '',
       showAd: false,
@@ -59,6 +61,7 @@ export default {
     this.lastName = localStorage.lastName;
     this.school = localStorage.school;
     this.city = localStorage.city;
+    this.backgroundUrl = localStorage.backgroundUrl;
     this.background = localStorage.background ? localStorage.background : 'linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190)';
     this.color = localStorage.color ? localStorage.color : 'rgb(98, 171, 242)';
     if(localStorage.ad == 'true') {

@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import secret from './../secret';
 import helper from './helperFunctions';
 import nodemailer from 'nodemailer';
-import multer from 'multer';
-import path from 'path';
 
 import db from './../models';
 
@@ -249,63 +247,6 @@ userController.updateInfo = (req, res) => {
           });
       });
     }
-};
-
-userController.uploadImage = (req, res) => {
-    const myUser = req.user;
-    const {
-      image
-    } = req.body;
-
-    
-    const storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, 'uploads/')
-        },
-        filename: function (req, file, cb) {
-            cb(null, Date.now() + path.extname(file.originalname))
-        }
-    });
-
-    const upload = multer({ storage: storage });
-
-    // upload.single(image);
-
-    console.log(req.body);
-
-    const query = {};
-
-    // if(query.username) {
-    //     db.User.findOne({ username: query.username }).then(user => {
-    //       if(user)
-    //         return res.json({error: 'Данный логин уже занят'});
-    //       else {
-    //         db.User.findByIdAndUpdate(myUser.id, {
-    //             $set: query
-    //         }).then(user => {
-    //             return res.json({
-    //                 success: true
-    //             });
-    //         }).catch(err => {
-    //             return res.status(500).json({
-    //                 message: err
-    //             });
-    //         });
-    //       }
-    //     })
-    // } else {
-    //   db.User.findByIdAndUpdate(myUser.id, {
-    //       $set: query
-    //   }).then(user => {
-    //       return res.json({
-    //           success: true
-    //       });
-    //   }).catch(err => {
-    //       return res.status(500).json({
-    //           message: err
-    //       });
-    //   });
-    // }
 };
 
 userController.verifyPassword = (req, res) => {
