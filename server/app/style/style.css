@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic');
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'PT Sans', sans-serif;
 }
 
 body {
