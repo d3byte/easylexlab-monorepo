@@ -3,10 +3,10 @@
     <div class="container">
     <center>
       <div>
-        <h2>
-          <i class="fa fa-tags" aria-hidden="true"></i>
-           Найди пару
-        </h2>
+        <div class="name">
+          <img src="../pics/matching.png">
+          <h2>Найди пару</h2>
+        </div>
 
         <div v-if="done || lose" @click="show()" class="vertical-center box">
           <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
@@ -267,5 +267,16 @@ export default {
   } .word h2 {
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  } .name img {
+    width: 50px;
+    height: 25px;
+    margin-right: 10px;
   }
 </style>
