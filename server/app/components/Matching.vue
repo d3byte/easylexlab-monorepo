@@ -3,11 +3,10 @@
     <div class="container">
     <center>
       <div>
-        <h2>
-          <i class="fa fa-tags" aria-hidden="true"></i>
-           Найди пару
-        </h2>
-        <h5 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h5>
+        <div class="name">
+          <img src="../pics/matching.png">
+          <h2>Найди пару</h2>
+        </div>
 
         <div v-if="done || lose" @click="show()" class="vertical-center box">
           <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
@@ -26,6 +25,7 @@
             </div>
           </div>
         </div>
+        <h3 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <button style="margin-bottom:20px" id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
       </div>
     </center>
@@ -196,6 +196,11 @@ export default {
     word-break: break-all;
   }
 
+  #restart {
+    background: rgb(207, 233, 254);
+    box-shadow: none;
+  }
+
   .selected {
     background: rgb(240, 211, 49) !important;
   }
@@ -262,5 +267,16 @@ export default {
   } .word h2 {
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  } .name img {
+    width: 50px;
+    height: 25px;
+    margin-right: 10px;
   }
 </style>

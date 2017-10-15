@@ -1,233 +1,240 @@
 <template>
-  <div class="home">
-    <!-- Start of the first section -->
-    <div class="section section--first">
+  <main id="landing">
+    <div class="home hidden-sm-down">
+      <!-- Start of the first section -->
+      <section class="section section--first">
 
-      <app-header v-if="logged" />
+        <app-header v-if="logged" />
 
-      <div v-else class="navbar-parent">
+        <div v-else class="navbar-parent">
+          <div class="container">
+            <ul class="nav navbar-nav pull-right text-primary-hover">
+              <li class="nav-item">
+                <router-link to="/signup/student" class="nav-link text-bold">
+                    Регистрация ученика
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/signup/teacher" class="nav-link text-bold">
+                    Регистрация учителя
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <div class="container">
-          <ul class="nav navbar-nav pull-right text-primary-hover">
-            <li class="nav-item">
-              <router-link to="/signup/student" class="nav-link text-bold">
-                  Регистрация ученика
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/signup/teacher" class="nav-link text-bold">
-                  Регистрация учителя
-              </router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="container">
-
-        <div class="page-title">
-          <!-- <object type="image/svg+xml" data="../pics/logo-test.svg" class="logo">
+          <div class="page-title">
+            <!-- <object type="image/svg+xml" data="../pics/logo-test.svg" class="logo">
+              <img src="../pics/logo.png" class="logo">
+            </object> -->
+            <!-- <img src="../pics/dju.svg" class="logo"> -->
             <img src="../pics/logo.png" class="logo">
-          </object> -->
-          <!-- <img src="../pics/dju.svg" class="logo"> -->
-          <img src="../pics/logo.png" class="logo">
-          <span class="title">EasyLexLab</span>
+          </div>
+
+          <h5 class="text-bold">
+            <i>
+              С нами эффективно учить<br>
+              и легко учиться
+            </i>
+          </h5>
+
+          <p class="brief-description">
+            <span class="brief-description_name">EasyLexLab</span><br>
+            <span class="brief-description_text">
+              - это образовательная платформа<br>
+              для изучения иностранных слов,<br>
+              предназначенная для учителей<br>
+              и учеников, изучающих языки
+            </span>
+          </p>
+
+          <div class="row">
+            <router-link to="/profile">
+              <button
+                class="large-button large-button--blue col-md-4 col-sm-12 col-xs-12">
+                Личный кабинет
+              </button>
+            </router-link>
+
+            <div class="col-md-8 text-align--right" style="padding-top:15px">
+                <span class="brief-description_name blue-text">Мобильное приложение EasyLexLab,</span><br>
+                <span class="brief-description_text">
+                  разработанное для вашего удобства является<br>
+                  дополнением к существующей платформе.<br>
+                  Выполняйте домашние задание, где бы вы<br>
+                  ни находились!
+                </span>
+            </div>
+          </div>
+
+          <div class="row features">
+
+            <div class="col-md-3 feature">
+              <div class="col-md-12 border-top border-top--blue">
+                <div class="feature-header">
+                  <img src="../pics/advantage-4.png" class="feature-img">
+                </div>
+                <div class="feature-body">
+                  <p>Эффективно усваивать слова, необходимые для использования на уроках</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 feature">
+              <div class="col-md-12 border-top border-top--green">
+                <div class="feature-header">
+                  <img src="../pics/advantage-2.png" class="feature-img">
+                </div>
+                <div class="feature-body">
+                  <p>Выполнять домашнее задание в любом месте в любое время, используя смартфон, компьютер или планшет</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 feature">
+              <div class="col-md-12 border-top border-top--purple">
+                <div class="feature-header">
+                  <img src="../pics/advantage-1.png" class="feature-img">
+                </div>
+                <div class="feature-body">
+                  <p>В игровой форме запоминать слова, что превращает рутинную работу в интересное и полезное занятие</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 feature">
+              <div class="col-md-12 border-top border-top--orange">
+                <div class="feature-header">
+                  <img src="../pics/advantage-3.png" class="feature-img">
+                </div>
+                <div class="feature-body">
+                  <p>Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке"</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
-        <h5 class="text-bold">
-          <i>
-            С нами эффективно учить<br>
-            и легко учиться
-          </i>
-        </h5>
+      </section>
+      <!-- End of the first section    -->
+      <!-- ––––––––––––––––––––––––––– -->
+      <!-- Start of the second section -->
+      <section class="section section--second">
+        <div class="container video">
+          <div class="video-header">
+            <h2 class="text-center text-bold">Как работает EasyLexLab?</h2>
+          </div>
+          <div class="video-body">
+            <video class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="" poster="" controls></video>
+          </div>
+        </div>
+      </section>
+      <!-- End of the second section -->
+      <!-- –––––––––––––––––––––––––– -->
+      <!-- Start of the third section -->
+      <section class="section section--third">
 
-        <p class="brief-description">
-          <span class="brief-description_name">EasyLexLab</span><br>
-          <span class="brief-description_text">
-            - это образовательная платформа<br>
-            для изучения иностранных слов,<br>
-            предназначенная для учителей<br>
-            и учеников, изучающих языки
-          </span>
-        </p>
+        <div class="container">
 
-        <div class="row">
-          <router-link to="/profile">
-            <button
-              class="large-button large-button--blue col-md-4 col-sm-12 col-xs-12">
-              Личный кабинет
-            </button>
-          </router-link>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="col-md-12 text-right">
+                <h2 class="text-bold" style="margin-bottom:25px">Делитесь<br>знаниями</h2>
+                <p>
+                  Успеваемость 95% учеников,
+                  использующих EasyLexLab,
+                  улучшилась. Узнайте, как простые
+                  средства от EasyLexLab позволят Вам
+                  максимально эффективно построить
+                  процесс обучения и помочь ученикам
+                  достичь успеха в изучении
+                  иностранных языков
+                </p>
+                <router-link to="/signup/teacher" class="text-right">
+                  <button
+                    class="large-button large-button--green large-button--width-70">
+                    Я учитель
+                  </button>
+                </router-link>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="col-md-12 image-container">
+                <img src="../pics/teacher.png" class="img-adaptive img">
+              </div>
+            </div>
+          </div>
 
-          <div class="col-md-8 text-align--right" style="padding-top:15px">
-              <span class="brief-description_name blue-text">Мобильное приложение EasyLexLab,</span><br>
-              <span class="brief-description_text">
-                разработанное для вашего удобства является<br>
-                дополнением к существующей платформе.<br>
-                Выполняйте домашние задание, где бы вы<br>
-                ни находились!
-              </span>
+          <div class="row">
+            <div class="col-md-7">
+              <div class="col-md-12 image-container">
+                <img src="../pics/students-third.png" class="img-adaptive img">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="col-md-12 text-left">
+                <h2 class="text-bold" style="margin-bottom:25px">Учеба в<br>удовольствие</h2>
+                <p>
+                  Хочешь легко запомнить много слов?
+                  EasyLexLab может тебе в этом помочь.
+                  Выполняй домашнее задание с удовольствием
+                  в любом месте и в любое время. Наблюдай за тем,
+                  как пополняется твой словарный запас и не
+                  забывай использовать эти слова в речи.
+                </p>
+                <router-link to="/signup/student" class="text-left">
+                  <button
+                    class="large-button large-button--green large-button--width-70">
+                    Я ученик
+                  </button>
+                </router-link>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+      <!-- End of the second section -->
+      <!-- ––––––––––––––––––––––––––– -->
+      <!-- Start of the fourth section -->
+      <section class="section section--fourth">
+
+        <div class="container advantages">
+          <img class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="../pics/tablet.png">
+        </div>
+
+        <div class="container center-content">
+          <div class="statistic">
+            <!-- 
+              <p class="text-center text-bold">В течение нескольких лет учителя и ученики нашей школы используют EasyLexLab</p>
+              <p class="text-center">на уроках английского языка. Интерактивные задания в союзе с традиционными учебниками дают хорошие результаты, повышают степень индивидуализации обучения и стимулируют детей к получению знаний.</p>
+            -->
+            <button class="large-button large-button--green" style="padding-left:10px;padding-right:10px">Зарегистрироваться</button>
           </div>
         </div>
 
-        <div class="row features">
-
-          <div class="col-md-3 feature">
-            <div class="col-md-12 border-top border-top--blue">
-              <div class="feature-header">
-                <img src="../pics/advantage-4.png" class="feature-img">
-              </div>
-              <div class="feature-body">
-                <p>Эффективно усваивать слова, необходимые для использования на уроках</p>
-              </div>
-            </div>
+      </section>
+      <!-- End of the fourth section -->
+      <!-- ––––––––––––––––––––––––––– -->
+      <!-- Start of footer -->
+      <div class="navbar-parent">
+        <div class="container">
+          <div class="footer">
+            <router-link to="">EasyLexLab © 2017</router-link>
+            <router-link to="">Политика конфиденциальности</router-link>
+            <router-link to="/info/rules" target="_blank">Пользовательское соглашение</router-link>
           </div>
-          <div class="col-md-3 feature">
-            <div class="col-md-12 border-top border-top--green">
-              <div class="feature-header">
-                <img src="../pics/advantage-2.png" class="feature-img">
-              </div>
-              <div class="feature-body">
-                <p>Выполнять домашнее задание в любом месте в любое время, используя смартфон, компьютер или планшет</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 feature">
-            <div class="col-md-12 border-top border-top--purple">
-              <div class="feature-header">
-                <img src="../pics/advantage-1.png" class="feature-img">
-              </div>
-              <div class="feature-body">
-                <p>В игровой форме запоминать слова, что превращает рутинную работу в интересное и полезное занятие</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 feature">
-            <div class="col-md-12 border-top border-top--orange">
-              <div class="feature-header">
-                <img src="../pics/advantage-3.png" class="feature-img">
-              </div>
-              <div class="feature-body">
-                <p>Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке"</p>
-              </div>
-            </div>
-          </div>
-
         </div>
-
       </div>
-
+      <!-- End of footer -->
+      <!-- ––––––––––––– -->
     </div>
-    <!-- End of the first section    -->
-    <!-- ––––––––––––––––––––––––––– -->
-    <!-- Start of the second section -->
-    <div class="section section--second">
-      <div class="container video">
-        <div class="video-header">
-          <h2 class="text-center text-bold">Как работает EasyLexLab?</h2>
-        </div>
-        <div class="video-body">
-          <video class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="" poster="" controls></video>
-        </div>
-      </div>
+    <div class="home hidden-md-up">
+      <!--  Мобильная вёрстка -->
     </div>
-    <!-- End of the second section -->
-    <!-- –––––––––––––––––––––––––– -->
-    <!-- Start of the third section -->
-    <div class="section section--third">
-
-      <div class="container">
-
-        <div class="row">
-          <div class="col-md-5">
-            <div class="col-md-12 text-right">
-              <h2 class="text-bold" style="margin-bottom:25px">Делитесь<br>знаниями</h2>
-              <p>
-                Успеваемость 95% учеников,
-                использующих EasyLexLab,
-                улучшилась. Узнайте, как простые
-                средства от EasyLexLab позволят Вам
-                максимально эффективно построить
-                процесс обучения и помочь ученикам
-                достичь успеха в изучении
-                иностранных языков
-              </p>
-              <router-link to="/signup/teacher" class="text-right">
-                <button
-                  class="large-button large-button--green large-button--width-70">
-                  Я учитель
-                </button>
-              </router-link>
-            </div>
-          </div>
-          <div class="col-md-7">
-            <div class="col-md-12 image-container">
-              <img src="../pics/teacher.png" class="img-adaptive img">
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-7">
-            <div class="col-md-12 image-container">
-              <img src="../pics/students-third.png" class="img-adaptive img">
-            </div>
-          </div>
-          <div class="col-md-5">
-            <div class="col-md-12 text-left">
-              <h2 class="text-bold" style="margin-bottom:25px">Учеба в<br>удовольствие</h2>
-              <p>
-                Хочешь легко запомнить много слов?
-                EasyLexLab может тебе в этом помочь.
-                Выполняй домашнее задание с удовольствием
-                в любом месте и в любое время. Наблюдай за тем,
-                как пополняется твой словарный запас и не
-                забывай использовать эти слова в речи.
-              </p>
-              <router-link to="/signup/student" class="text-left">
-                <button
-                  class="large-button large-button--green large-button--width-70">
-                  Я ученик
-                </button>
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-    <!-- End of the second section -->
-    <!-- ––––––––––––––––––––––––––– -->
-    <!-- Start of the fourth section -->
-    <div class="section section--fourth">
-
-      <div class="container box advantages">
-      </div>
-
-      <div class="container center-content">
-        <div class="statistic">
-          <p class="text-center text-bold">В течение нескольких лет учителя и ученики нашей школы используют EasyLexLab</p>
-          <p class="text-center">на уроках английского языка. Интерактивные задания в союзе с традиционными учебниками дают хорошие результаты, повышают степень индивидуализации обучения и стимулируют детей к получению знаний.</p>
-          <button class="large-button large-button--green">Зарегистрироваться</button>
-        </div>
-      </div>
-
-    </div>
-    <!-- End of the fourth section -->
-    <!-- ––––––––––––––––––––––––––– -->
-    <!-- Start of footer -->
-    <div class="navbar-parent">
-      <div class="container">
-        <div class="footer">
-          <router-link to="">EasyLexLab © 2017</router-link>
-          <router-link to="">Политика конфиденциальности</router-link>
-          <router-link to="/info/rules" target="_blank">Пользовательское соглашение</router-link>
-        </div>
-      </div>
-    </div>
-    <!-- End of footer -->
-    <!-- ––––––––––––– -->
-  </div>
+  </main>
 </template>
 
 <script>
@@ -298,9 +305,10 @@ export default {
   display: flex;
   align-items: center;
 } .logo {
-  margin-left: -20px;
-  width: 100px;
+  margin-left: -5px;
+  width: 300px;
   height: 100px;
+  margin-bottom: 10px;
 } .title {
   font-size: 28px;
   font-weight: bold;
@@ -383,18 +391,11 @@ export default {
 }
 
 .advantages {
-  height: 70vh;
-  border-radius: 20px;
-  /* padding: 20px 10px; */
-  background: url('../pics/tablet.png') 50% 50% no-repeat;
-  background-size: cover;
-} 
-/* .advantages .advantage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
+  min-height: 1px;
+  overflow: hidden;
+} .advantages img {
+  transform: scale(1.1);
+}
 
 .footer {
   display: flex;
@@ -410,8 +411,7 @@ export default {
 
 .section--first {
   /* background: url('../pics/background-top.png') 50% 50% no-repeat; */
-  background: url('../pics/about.png') -10% 0% no-repeat;
-
+  background: url('../pics/background-top.png') 80% 10% no-repeat;
 }
 
 .section--second {
@@ -437,10 +437,15 @@ export default {
 }
 
 .center-content {
-  background: url('../pics/1.png') 50% 0% no-repeat;
+  margin-top: 30px;
+  background: url('../pics/last.png') 50% 0% no-repeat;
+  background-size: contain;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   min-height: 50vh;
+} .center-content button {
+  margin-bottom: 50px;
 }
 
 </style>
