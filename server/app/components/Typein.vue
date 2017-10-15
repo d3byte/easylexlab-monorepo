@@ -108,18 +108,21 @@ export default {
           this.currentPair = this.pairs[index + 1];
           return;
         } else {
-          this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+          this.percentage = Math.round(100 - this.incorrect * 100 / this.pairs.length);
           this.allDone(this.percentage);
         }
       } else if (this.currentPair.test != this.currentPair.key) {
         this.currentPair.test = '';
+        if(!this.wrong) {
+           this.incorrect++;
+        }
         this.wrong = true;
         let index = this.pairs.indexOf(this.currentPair);
         if (index != this.pairs.length - 1) {
           // this.currentPair = this.pairs[index + 1];
           return;
         } else {
-          this.percentage = Math.round(this.correct * 100 / this.pairs.length);
+          this.percentage = Math.round(100 - this.incorrect * 100 / this.pairs.length);
           this.allDone(this.percentage);
         }
       }
@@ -166,7 +169,7 @@ export default {
   }
 
   .box {
-    border-top: 3px solid rgb(251, 106, 33);
+    border-top: 3px solid #5ee6af;
   }
 
   input {

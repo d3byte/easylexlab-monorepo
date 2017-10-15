@@ -61,8 +61,8 @@
       <div class="row">
 
         <div class="col-sm-4 hidden-sm-down">
-          <div class="col box">
-            <div class="row-col danger white-text headpadding">
+          <div class="col box" style="border-radius:4px;">
+            <div class="row-col danger white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;">
               <center>
                 <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> Учить</h3>
               </center>
@@ -70,13 +70,11 @@
             <div class="p-a block">
               <center>
                 <div class="nav-item">
-                  <button class="btn btn-sm btn-danger rounded" @click="showFlashcards">Выучи слова</button>
+                  <button style="margin:0;" class="btn btn-sm btn-danger rounded" @click="showFlashcards">Выучи слова</button>
                 </div>
-                <br>
                 <div class="nav-item">
                   <button class="btn btn-sm btn-danger rounded" @click="showMatching">Найди пару</button>
                 </div>
-                <br>
                 <div class="nav-item">
                   <button class="btn btn-sm btn-danger rounded" @click="showTypein">Введи слово</button>
                 </div>
@@ -86,8 +84,8 @@
         </div>
 
         <div class="col-sm-4 hidden-sm-down">
-          <div class="col box">
-            <div class="row-col warn white-text headpadding">
+          <div class="col box" style="border-radius:4px;">
+            <div class="row-col warn white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;">
               <center>
                 <h3><i class="fa fa-trophy" aria-hidden="true"></i> Играть</h3>
               </center>
@@ -97,7 +95,6 @@
                 <div class="nav-item">
                   <button class="btn btn-sm btn-warning rounded" @click="showSnake">Змейка</button>
                 </div>
-                <br>
                 <div class="nav-item">
                   <button class="btn btn-sm btn-warning rounded" @click="showScramble">Скрэмбл</button>
                 </div>
@@ -106,8 +103,8 @@
           </div>
         </div>
         <div class="col-sm-4 hidden-sm-down">
-          <div class="col box">
-            <div class="row-col success white-text headpadding">
+          <div class="col box" style="border-radius:4px;">
+            <div class="row-col success white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;">
               <center>
                 <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Тест</h3>
               </center>
@@ -124,18 +121,18 @@
         </div>
       </div>
       <div class="row hidden-sm-down" id="translate">
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="border-radius:4px;">
           <div class="box">
-            <div class="row-col accent white-text headpadding" style="padding-right: 0px;padding-left: 80px;">
-              <h3><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
+            <div class="row-col white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;background:rgb(113,108,183)">
+              <h3 class="text-center"><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
             </div>
             <center>
               <div class="table-responsive">
                 <table class="table table-striped table-hover" v-if="!showPreloader">
                   <thead>
-                    <tr class="headers">
-                      <th>Слово</th>
-                      <th>Перевод</th>
+                    <tr class="headers" style="background:rgb(221,236,252);">
+                      <th style="color:black;">Слово</th>
+                      <th style="color:black;">Перевод</th>
                     </tr>
                   </thead>
                   <tbody v-for="task in task.tasks">
@@ -337,7 +334,7 @@ export default {
   }
 
   .block {
-    height: 153px;
+    height: 105px;
   }
 
   .container {
@@ -383,6 +380,20 @@ export default {
 
   .headpadding {
     padding:10px;
+  }
+
+  .btn {
+    background: transparent !important;
+    color: black;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    text-transform: none !important;
+  } .btn-danger:hover {
+    background: rgb(241, 70, 89) !important;
+  } .btn-warning:hover {
+    background: rgb(251, 192, 45) !important;
+  } .btn-success:hover {
+    background: rgb(107, 191, 133) !important;
   }
 
 </style>

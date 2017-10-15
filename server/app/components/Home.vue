@@ -2,9 +2,8 @@
   <main id="landing">
     <div class="home hidden-sm-down">
       <!-- Start of the first section -->
-      <section class="section section--first">
 
-        <app-header v-if="logged" />
+      <app-header v-if="logged" />
 
         <div v-else class="navbar-parent">
           <div class="container">
@@ -22,6 +21,7 @@
             </ul>
           </div>
         </div>
+      <section class="section section--first">
 
         <div class="container">
 
@@ -412,6 +412,7 @@ export default {
 .section--first {
   /* background: url('../pics/background-top.png') 50% 50% no-repeat; */
   background: url('../pics/background-top.png') 80% 10% no-repeat;
+  padding-top: 0px;
 }
 
 .section--second {

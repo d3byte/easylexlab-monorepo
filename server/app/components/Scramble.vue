@@ -6,9 +6,6 @@
       <h2>Скрэмбл</h2>
     </div>
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-    <div class="dashboard">
-      <button @click="start" class="flat-btn">Перезапуск</button>
-    </div>
     <div v-if="win" class="win box">
       <h3 class="text-success">Победа!</h3>
       <h5 @click="start" class="restart">Начать заново?</h5>
@@ -23,6 +20,9 @@
          </div>
        </draggable>
       </div>
+    </div>
+    <div class="dashboard">
+      <button id="restart" class="btn btn-sm rounded" @click="start">Перезапуск</button>
     </div>
   </center>
   </div>
@@ -195,7 +195,7 @@ export default {
     height: 100%;
     background: url('../pics/letters-2.jpg') no-repeat;
     background-size: cover;
-    opacity: 0.5;
+    opacity: 0.165;
   }
 
 
@@ -218,5 +218,17 @@ export default {
     width: 70px;
     height: 25px;
     margin-right: 10px;
+  }
+
+  button {
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 1;
+    text-transform: capitilized !important;
+  }
+
+  #restart {
+    background: rgb(207, 233, 254);
+    box-shadow: none;
   }
 </style>

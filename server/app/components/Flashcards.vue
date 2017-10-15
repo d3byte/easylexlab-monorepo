@@ -6,6 +6,7 @@
         <img src="../pics/flashcards.png">
         <h2>Выучи слова</h2>
       </div>
+      <h3 style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <div v-if="done || lose" @click="show()" class="vertical-center box">
         <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
         <h2>{{ Math.round(know.length * 100 / pairs.length) }}%</h2>
@@ -37,7 +38,6 @@
       <button @click="tryTest" class="btn">Пройти тест</button>
     </div>
     <div class="row" style="margin-bottom:20px;margin-top:10px;">
-      <h3 style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
     </div>
   </center>

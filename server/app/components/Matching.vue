@@ -7,7 +7,7 @@
           <img src="../pics/matching.png">
           <h2>Найди пару</h2>
         </div>
-
+        <h3 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <div v-if="done || lose" @click="show()" class="vertical-center box">
           <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
           <h2>{{ Math.round(100 - incorrect * 100 / correct.length) > 0 ? Math.round(100 - incorrect * 100 / correct.length) : 0}}%</h2>
@@ -25,7 +25,6 @@
             </div>
           </div>
         </div>
-        <h3 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <button style="margin-bottom:20px" id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
       </div>
     </center>
@@ -259,11 +258,11 @@ export default {
     z-index: 0;
     background: url('../pics/letters-2.jpg') no-repeat;
     background-size: cover;
-    opacity: 0.5;
+    opacity: 0.165;
   }
 
   .word {
-    background: rgb(206, 210, 211);
+    background: rgb(207, 232, 253);
   } .word h2 {
     font-size: 16px;
     font-weight: bold;
@@ -278,5 +277,12 @@ export default {
     width: 50px;
     height: 25px;
     margin-right: 10px;
+  }
+
+  button {
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 1;
+    text-transform: uppercase !important;
   }
 </style>
