@@ -27,16 +27,15 @@
     </div>
   </div>
   <div style="margin-top: -50px;">
-    <!-- was background: rgb(99, 170, 242); -->
     <div class="row hidden-xs-down" style="padding:0;">
       <div class="col-sm-12" style="background: #5a7fb9;padding:0;">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
-          <ul class="nav nav-pills nav-sm text-white" style="margin-left:70px;">
+          <ul class="nav nav-pills nav-sm text-white" style="margin-left:95px;">
             <li class="nav-item">
-              <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded button-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> <b>Задания</b></button>
             </li>
             <li class="nav-item" style="padding-right:90px">
-              <button style="font-size: 13px" class="btn btn btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> <b>Сообщения</b></button>
             </li>
             <li class="nav-item groupbtn" v-for="(group, index) in user._groups">
               <button style="font-size: 13px" class="btn btn btn-outline rounded" @click="changeGroup(group)" v-bind:class="{
@@ -56,13 +55,19 @@
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px">
           <ul class="nav nav-pills nav-sm text-white">
             <li class="nav-item">
-              <button class="btn btn-sm btn-outline rounded button-gradient-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</button>
+              <button class="btn btn-sm btn-outline rounded button-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> <b>Задания</b></button>
             </li>
             <li class="nav-item" style="margin-bottom:20px">
-              <button class="btn btn-sm btn-outline rounded button-gradient-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</button>
+              <button class="btn btn-sm btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> <b>Сообщения</b></button>
             </li>
             <li class="nav-item" style="margin-top:5px" v-for="group in user._groups">
-              <button class="btn btn-sm btn-outline rounded white" @click="changeGroup(group)"><b>{{ group.name }}</b></button>
+              <button class="btn btn-sm btn-outline rounded" @click="changeGroup(group)" v-bind:class="{
+                                                                                                                                  'group-1':index == 0,
+                                                                                                                                  'group-2':index == 1,
+                                                                                                                                  'group-3':index == 2,
+                                                                                                                                  'group-4':index == 3,
+                                                                                                                                  'group-5':index == 4}">
+                                                                                                                                  <b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
@@ -372,14 +377,12 @@ h5.white-text {
   padding: 0 !important;
 }
 
-.button-gradient-task {
-  background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
-  /*text-color: white !important;*/
+.button-task {
+ background-color: #f45c42 !important;
 }
 
-.button-gradient-msg {
-  /*background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);*/
-  background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+.button-msg {
+ background-color: #f9ca20 !important;
 }
 
 .ava {
