@@ -306,8 +306,9 @@ export default {
   align-items: center;
 } .logo {
   margin-left: -5px;
-  width: 230px;
+  width: 250px;
   height: 100px;
+  margin-bottom: 10px;
 } .title {
   font-size: 28px;
   font-weight: bold;
