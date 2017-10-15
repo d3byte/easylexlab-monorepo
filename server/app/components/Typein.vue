@@ -21,10 +21,15 @@
       </center>
     </div>
     <div class="row padding box">
+      <center>
+      <h3 style="color: #0062b0">{{ currentPair.value }}</h3>
+    </center>
       <div class="md-form-group">
-          <input type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
-          <label>{{ currentPair.value }}</label>
+        <center>
+          <input id="formItem" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
           <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;" @click="check">Дальше</button>
+          <h3 v-if="wrong" class="danger"> Неверно! Исправь ошибку!</h3>
+        </center>
       </div>
     </div>
   </form>
@@ -46,6 +51,7 @@ export default {
       showPreloader: false,
       done: false,
       lose: false,
+      wrong: false,
       currentPair: {}
     }
   },
@@ -88,10 +94,12 @@ export default {
       this.incorrect = 0;
       this.done = false;
       this.lose = false;
+      this.wrong = false;
     },
     check() {
       if (this.currentPair.test == this.currentPair.key) {
         this.currentPair.test = '';
+        this.wrong = false;
         // Обнуляю тест, чтобы привести пару к исходному состоянию
         // Потому что в this.pairs поле test пустое изначально
         let index = this.pairs.indexOf(this.currentPair);
@@ -105,9 +113,10 @@ export default {
         }
       } else if (this.currentPair.test != this.currentPair.key) {
         this.currentPair.test = '';
+        this.wrong = true;
         let index = this.pairs.indexOf(this.currentPair);
         if (index != this.pairs.length - 1) {
-          this.currentPair = this.pairs[index + 1];
+          // this.currentPair = this.pairs[index + 1];
           return;
         } else {
           this.percentage = Math.round(this.correct * 100 / this.pairs.length);
@@ -159,4 +168,8 @@ export default {
   .box {
     border-top: 3px solid rgb(251, 106, 33);
   }
+
+  input {
+   text-align:center;
+}
 </style>
