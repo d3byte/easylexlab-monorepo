@@ -306,7 +306,7 @@ export default {
   align-items: center;
 } .logo {
   margin-left: -5px;
-  width: 250px;
+  width: 300px;
   height: 100px;
   margin-bottom: 10px;
 } .title {
@@ -411,7 +411,7 @@ export default {
 
 .section--first {
   /* background: url('../pics/background-top.png') 50% 50% no-repeat; */
-  background: url('../pics/about.png') 55% 0% no-repeat;
+  background: url('../pics/background-top.png') 80% 10% no-repeat;
 }
 
 .section--second {
