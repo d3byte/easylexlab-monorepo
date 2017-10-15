@@ -89,16 +89,16 @@
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
           <div v-show="!showAll" v-for="(test, index) in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="col-lg col-md col-sm col-xs box task taskbox" v-bind:class="{
-                                                                               'task-1':index == 0,
-                                                                               'task-2':index == 1,
-                                                                               'task-3':index == 2,
-                                                                               'task-4':index == 3,
-                                                                               'task-5':index == 4,
-                                                                               'task-6':index == 5,
-                                                                               'task-7':index == 6,
-                                                                               'task-8':index == 7,
-                                                                               'task-9':index == 8,
-                                                                               'task-10':index == 9}">
+                                                                               'task-1':  index % 10 == 0,
+                                                                               'task-2':  index % 10 == 1,
+                                                                               'task-3':  index % 10 == 2,
+                                                                               'task-4':  index % 10 == 3,
+                                                                               'task-5':  index % 10 == 4,
+                                                                               'task-6':  index % 10 == 5,
+                                                                               'task-7':  index % 10 == 6,
+                                                                               'task-8':  index % 10 == 7,
+                                                                               'task-9':  index % 10 == 8,
+                                                                               'task-10':  index % 10 == 9}">
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <center>
@@ -416,76 +416,76 @@ h5.white-text {
  border-top: 3px solid rgb(228, 78, 60);
 }*/
 
-.task-1{
+.task-1 {
  border-top: 3px solid rgb(228, 78, 60);
 }
-.task-2{
+.task-2 {
  border-top: 3px solid blue;
 }
-.task-3{
+.task-3 {
  border-top: 3px solid rgb(37, 198, 218);
 }
-.task-4{
+.task-4 {
  border-top: 3px solid rgb(49, 137, 225);
 }
-.task-5{
+.task-5 {
  border-top: 3px solid rgb(234, 168, 59);
 }
-.task-6{
- border-top: 3px solid rgb(119, 221, 234);
+.task-6 {
+ border-top: 3px solid #59C3C3;
 }
-.task-7{
+.task-7 {
  border-top: 3px solid rgb(211, 52, 216);
 }
-.task-8{
+.task-8 {
  border-top: 3px solid rgb(216, 52, 139);
 }
-.task-9{
+.task-9 {
  border-top: 3px solid rgb(216, 117, 52);
 }
-.task-10{
+.task-10 {
  border-top: 3px solid rgb(117, 216, 52);
 }
 
-.task-1 button{
- background-color:rgb(228, 78, 60) !important;
- border:none !important;
+.task-1 button {
+ background-color: rgb(228, 78, 60) !important;
+ border: none !important;
 }
-.task-2 button{
- background-color:blue !important;
- border:none !important;
+.task-2 button {
+ background-color: blue !important;
+ border: none !important;
 }
-.task-3 button{
- background-color:rgb(37, 198, 218) !important;
- border:none !important;
+.task-3 button {
+ background-color: rgb(37, 198, 218) !important;
+ border: none !important;
 }
-.task-4 button{
- background-color:rgb(49, 137, 225) !important;
- border:none !important;
+.task-4 button {
+ background-color: rgb(49, 137, 225) !important;
+ border: none !important;
 }
-.task-5 button{
- background-color:rgb(234, 168, 59) !important;
- border:none !important;
+.task-5 button {
+ background-color: rgb(234, 168, 59) !important;
+ border: none !important;
 }
-.task-6 button{
- background-color:rgb(119, 221, 234) !important;
- border:none !important;
+.task-6 button {
+ background-color: #59C3C3 !important;
+ border: none !important;
 }
-.task-7 button{
- background-color:rgb(211, 52, 216) !important;
- border:none !important;
+.task-7 button {
+ background-color: rgb(211, 52, 216) !important;
+ border: none !important;
 }
-.task-8 button{
+.task-8 button {
  background-color:rgb(216, 52, 139) !important;
  border:none !important;
 }
-.task-9 button{
- background-color:rgb(216, 117, 52) !important;
- border:none !important;
+.task-9 button {
+ background-color: rgb(216, 117, 52) !important;
+ border: none !important;
 }
-.task-10 button{
- background-color:rgb(117, 216, 52) !important;
- border:none !important;
+.task-10 button {
+ background-color: rgb(117, 216, 52) !important;
+ border: none !important;
 }
 
 .group-1{
