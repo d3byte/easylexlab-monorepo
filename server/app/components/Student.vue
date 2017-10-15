@@ -13,12 +13,13 @@
           </a>
             <div class="clear m-b">
               <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
-              <p class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span> <small>ОУ: {{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</small></p>
-              <h5 class="m-a-0 text-sm text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+              <h6 class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик,' : 'Учитель,' }}</span>ОУ: {{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</h6>
               <br>
-              <h5 class="m-a-0 text-sm text-white">Выбранная группа: <b>{{ group.name }}</b></h5><br>
-              <h5 class="m-a-0 text-sm text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
-              <h5 class="m-a-0 text-sm text-white" v-else>Ближайшего дня сдачи нет</h5>
+              <h5 class="m-a-0 text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+              <br>
+              <h5 class="m-a-0 text-white">Выбранная группа: <b>{{ group.name }}</b></h5>
+              <h5 class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
+              <h5 class="m-a-0 text-white" v-else>Ближайшего дня сдачи нет</h5>
             </div>
           </div>
         </div>
