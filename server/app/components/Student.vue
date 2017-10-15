@@ -75,10 +75,6 @@
     </div>
   </div>
 
-  <!-- <div class="container" v-if="showTasks">
-
-</div> -->
-
   <div class="container" style="margin-top:-40px">
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
@@ -177,7 +173,6 @@
     </div>
   </div>
 </div>
-<!-- </div> -->
 </div>
 </div>
 </template>
@@ -416,9 +411,6 @@ h5.white-text {
   margin-bottom: 25px;
 }
 
-/*.taskbox:nth-of-type(1) {
- border-top: 3px solid rgb(228, 78, 60);
-}*/
 
 .task-1 {
  border-top: 3px solid rgb(228, 78, 60);
@@ -556,7 +548,6 @@ background-color: #58c721 !important;
 
 .white {
   background: white !important;
-  /*border: 2px solid black !important;*/
   color: #575757;
 }
 
