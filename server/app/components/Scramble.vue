@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <center>
-    <h1>Скрэмбл</h1>
+    <div class="name">
+      <img src="../pics/scramble.png">
+      <h2>Скрэмбл</h2>
+    </div>
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
     <div class="dashboard">
       <button @click="start" class="flat-btn">Перезапуск</button>
@@ -204,5 +207,16 @@ export default {
 
   .higher {
     z-index: 7 !important;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  } .name img {
+    width: 70px;
+    height: 25px;
+    margin-right: 10px;
   }
 </style>
