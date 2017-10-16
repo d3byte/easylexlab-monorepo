@@ -20,11 +20,11 @@
         <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
       </center>
     </div>
-    <div class="row padding box">
+    <div class="row padding box background">
       <center>
       <h3 style="color: #0062b0">{{ currentPair.value }}</h3>
     </center>
-      <div class="md-form-group">
+      <div class="md-form-group" style="z-index:6">
         <center>
           <input id="formItem" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
           <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;" @click="check">Дальше</button>
@@ -174,6 +174,26 @@ export default {
 
   input {
    text-align:center;
-   font-size: 20px;
+   font-size: 22px;
 }
+
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  } .background:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: url('../pics/letters-2.jpg') no-repeat;
+    background-size: cover;
+    opacity: 0.165;
+  }
 </style>
