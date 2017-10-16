@@ -163,3 +163,7 @@ table {
   background: rgb(98, 171, 242) !important;
   color: white !important;
 }
+
+.text-bold {
+  font-weight: bold;
+}

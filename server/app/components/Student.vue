@@ -219,7 +219,8 @@ export default {
       showAd: false,
       showAdContainer: false,
       currentGroup: {
-        name: ''
+        name: '',
+        _tests: []
       }
     }
   },
@@ -229,9 +230,6 @@ export default {
     },
     token() {
       return jwtDecode(this.$store.getters.userToken)
-    },
-    group() {
-      return this.$store.getters.currentGroup
     }
   },
   methods: {
@@ -315,9 +313,11 @@ export default {
     this.$store.dispatch('testNotAvailable');
     EventBus.$once('requested', event => {
       this.wordsLearnt = this.user.wordsLearnt;
-      this.currentGroup = this.user._groups[0];
-      this.sortTasks();
-      this.setDate();
+      if(this.user._groups[0]) {
+        this.currentGroup = this.user._groups[0];
+        this.sortTasks();
+        this.setDate();
+      }
       this.showPreloader = false;
       if (this.group && this.group.messages) {
         for (var group of this.user._groups) {

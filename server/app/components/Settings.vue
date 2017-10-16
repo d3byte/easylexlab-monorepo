@@ -10,10 +10,13 @@
                 <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Профиль</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Настройки аккаунта</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Управление фото</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Настройки аккаунта</a>
+                <a class="nav-link block" href data-toggle="tab" data-target="#tab-4">Управление группами</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link block" href data-toggle="tab" data-target="#tab-5">Безопасность</a>
@@ -65,7 +68,7 @@
           </div>
 
           <div class="tab-pane" id="tab-2">
-            <div class="p-a-md dker _600">Account settings</div>
+            <div class="p-a-md dker _600">Настройки аккаунта</div>
             <form role="form" class="p-a-md col-md-6" onsubmit="return false">
               <div class="form-group" v-if="!!errorLogin">
                 <label class="text-danger">{{ errorLogin }}</label>
@@ -79,6 +82,30 @@
               </div>
               <button type="submit" class="btn btn-info m-t" @click="changeUsername">Обновить</button>
             </form>
+          </div>
+
+          <div class="tab-pane" id="tab-4">
+            <div class="p-a-md dker _600">Управление группами</div>
+            <div class="p-a-md">
+              <div class="clearfix m-b-lg">
+                <div class="row" v-for="group in groups">
+                  <div class="box group p-a">
+                    <div class="icon">
+                      <i class="material-icons">&#xE7FB;</i>
+                    </div>
+                    <div class="group-info">
+                      <span class="text-bold">
+                        {{ group.name }} <br>
+                        <span class="text-muted">Дата создания: {{ group.createdAt }}</span>
+                      </span>
+                    </div>
+                    <button class="flat-btn text-bold" style="margin-left:10px" @click="leaveGroup(group._id)">
+                      <i class="material-icons">&#xE879;</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="tab-pane" id="tab-5">
@@ -117,6 +144,7 @@
 </template>
 
 <script>
+import { EventBus } from './event';
 import jwtDecode from 'jwt-decode';
 import Header from './Header.vue';
 import axios from 'axios';
@@ -145,7 +173,12 @@ export default {
       background: localStorage.background,
       options: {
         url: '/upload-image'
-      }
+      },
+      groups: [{
+        name: '',
+        id: '',
+        createdAt: ''
+      }]
     }
   },
   computed: {
@@ -294,9 +327,38 @@ export default {
         this.infoSuccess.push('Информация успешно обновлена!');
         reader.readAsDataURL(files[0]);
       })
+    },
+    leaveGroup(id) {
+      if(confirm('Вы действительно хотите покинуть группу?')) {
+        const body = {
+          groupId: id
+        };
+        this.$http.post('leavegroup', body, {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.$store.getters.userToken
+          }
+        }).then(res => {
+          this.groups = this.groups.filter(group => group._id != id);
+        })
+      }
     }
   },
   created() {
+    if(!this.$store.getters.loginState)
+      this.$router.push('/login');
+    this.$http.post('user', {}, {
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + this.$store.getters.userToken
+      }
+    }).then(res => {
+      this.$store.dispatch('userInfo', res.body.user);
+      EventBus.$emit('requested');
+    });
+    EventBus.$once('requested', event => {
+      this.groups = this.user._groups;
+    });
     this.$store.dispatch('hideGames');
     this.$store.dispatch('zeroAttempts');
     this.$store.dispatch('testNotAvailable');
@@ -323,5 +385,17 @@ export default {
 .form-file {
   display: flex;
   align-items: center;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  width: 340px;
+} .group .icon {
+  margin-right: 15px; 
+} .icon i {
+  font-size: 24px;
+} .group button {
+  font-size: 24px;
 }
 </style>
