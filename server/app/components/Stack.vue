@@ -158,7 +158,7 @@
     <snake v-if="games.snake.show" :stack="task"></snake>
     <scramble v-if="games.scramble.show" :stack="task"></scramble>
     <typein v-if="games.typein.show" :stack="task"></typein>
-    <test v-if="showTest" :stack="task"></test>
+    <test v-if="showTest && !games.typein.show && !games.scramble.show && !games.snake.show && !games.matching.show && !games.flashcards.show" :stack="task"></test>
   </div>
 
 </div>
@@ -274,6 +274,7 @@ export default {
     },
     hideGames() {
       this.$store.dispatch('hideGames');
+      this.$store.dispatch('hideTest');
     }
   },
   components: {
