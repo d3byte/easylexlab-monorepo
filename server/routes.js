@@ -57,6 +57,7 @@ routes.patch('/newpassword', expressJWT({ secret }), userController.changePasswo
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.post('/user', expressJWT({ secret }), userController.getUser);
 routes.patch('/words', expressJWT({ secret }), userController.learnWords);
+routes.post('/leavegroup', expressJWT({ secret }), userController.leaveGroup);
 
 // Group routes
 routes.post('/regcode', expressJWT({ secret }), groupController.regCode);
