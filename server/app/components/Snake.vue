@@ -1,36 +1,46 @@
 <template>
   <div>
     <center>
-      <h1>Змейка</h1>
+      <div class="name">
+        <img src="../pics/snake.png">
+        <h2>Змейка</h2>
+      </div>
       <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <div class="box help" v-if="help">
-        <p>
-          <!-- В этой игре вам нужно смотреть на то, какое слово показано и варианты перевода и отыскать по цвету нужную клетку. -->
-          Змейка должна собрать квадрат того цвета, которым обозначен правильный перевод слова, показанного в меню справа.
-        </p>
-        <p>
-          Управление змейкой производится нажатием на кнопки:
-          <br>
-          W - вверх
-          <br>
-          A - влево
-          <br>
-          S - вниз
-          <br>
-          D - вправо
-        </p>
-        <div class="form-group row">
-          <label class="col-sm-2 form-control-label">Уровень сложности</label>
-          <div class="col-sm-10">
-            <select class="form-control input-c" v-model="ms">
-              <option value="400">Легкий</option>
-              <option value="300">Средний</option>
-              <option value="200">Тяжелый</option>
-            </select>
-          </div>
+        <p>В этой игре Вы должны выбрать подходящий вариант перевода для слова, показанного в меню слева. Каждый вариант перевода - отдельная клетка, выделенная своим цветом.</p>
+        <p>Управление змейкой производится нажатием на кнопки:</p>
+        <div class="btns">
+          <button class="btn rounded controls">
+            <i class="material-icons">&#xE316;</i>
+            <b>W</b> - <span class="text-muted">вверх</span>
+          </button>
+          <button class="btn rounded controls">
+            <i class="material-icons">&#xE313;</i>
+            <b>S</b> - <span class="text-muted">вниз</span>
+          </button>
+          <button class="btn rounded controls">
+            <i class="material-icons">&#xE314;</i>
+            <b>A</b> - <span class="text-muted">влево</span>
+          </button>
+          <button class="btn rounded controls">
+            <i class="material-icons">&#xE315;</i>
+            <b>D</b> - <span class="text-muted">вправо</span>
+          </button>
         </div>
-        <button class="btn btn-info" @click="start">Начать</button>
+        <div class="level">
+          <div class="labeled-select">
+              <div class="label">
+                Уровень сложности
+              </div>
+              <select class="select" v-model="ms">
+                <option value="400">Легкий</option>
+                <option value="300">Средний</option>
+                <option value="200">Тяжелый</option>
+              </select>
+            </div>
+        </div>
       </div>
+      <button v-if="help" class="btn" style="padding-left:50px;padding-right:50px;background:rgb(252, 105, 33);box-shadow:none;color:white;" @click="start">Начать</button>
       <div v-if="win && !dead && !help" class="win box">
         <h1 class="text-success">Победа!</h1>
         <br>
@@ -39,36 +49,33 @@
       </div>
     </center>
     <center>
+      <h5 v-if="!dead && !win && !help && waitForKey" class="text-muted">Нажмите любую клавишу, чтобы начать</h5>
       <div v-if="!dead && !win && !help" class="box game">
         <div class="table">
-          <h4 v-if="waitForKey" class="text-muted">Нажмите любую клавишу, чтобы начать</h4>
-          <table>
+          <table style="margin:0">
             <tr v-for="row in grid">
               <td v-for="cell in row" class="grid-cell"
                   :class="{ snake: cell.snake > 0,
                     'food-0': cell.food.exists && cell.food.index == 0,
                     'food-1': cell.food.exists && cell.food.index == 1,
-                    'food-2': cell.food.exists && cell.food.index == 2,
-                    'food-3': cell.food.exists && cell.food.index == 3,
-                    'food-4': cell.food.exists && cell.food.index == 4,
-                    'food-5': cell.food.exists && cell.food.index == 5,
-                    'food-6': cell.food.exists && cell.food.index == 6,
-                    'food-7': cell.food.exists && cell.food.index == 7,
-                    'food-8': cell.food.exists && cell.food.index == 8,
-                    'food-9': cell.food.exists && cell.food.index == 9 }">
+                    'food-2': cell.food.exists && cell.food.index == 2 }">
               </td>
             </tr>
           </table>
         </div>
-        <div class="words">
-          <h5>Слово: {{ currentWordGroup.key }}</h5>
-          <h6 v-for="word in currentWordGroup.words"
+        <div class="words" style="padding:0 20px">
+          <h5 style="margin-bottom:10px">Слово: {{ currentWordGroup.key }}</h5>
+          <div class="row" v-for="word in currentWordGroup.words" >
+            <button
+              style="box-shadow:none;text-transform:none;border:none;width:100%;margin-bottom:10px;border-radius:10px;"
+              class="btn rounded"
               :class="'food food-' + word.index + ' '
               + (word.eaten ? 'eaten ' : '')
               + (word.correct ? 'correct' : '')">
 
             <b>{{ word.value }}</b>
-          </h6>
+          </button>
+          </div>
         </div>
       </div>
     </center>
@@ -260,7 +267,7 @@
         let oldRandomIndexes = [];
         for(let i = 0; i < 3; i++) {
           let randomIndex = randomize('0', 1);
-          while(oldRandomIndexes.includes(randomIndex)) {
+          while(oldRandomIndexes.includes(randomIndex) || randomIndex > 2) {
             randomIndex = randomize('0', 1);
           }
           oldRandomIndexes.push(randomIndex);
@@ -344,6 +351,12 @@
     border-collapse: collapse;
   }
 
+  .table {
+    width: auto;
+    padding-left: 0;
+    padding-right: 10px;
+  }
+
   .grid-cell {
     margin: 0;
     padding: 0;
@@ -358,43 +371,18 @@
   }
 
   .food-0 {
-    background: #DBC0F7;
+    background: rgb(252, 105, 33);
+    color: white;
   }
 
   .food-1 {
-    background: #801096;
+    background: rgb(15, 123, 59);
+    color: white;
   }
 
   .food-2 {
-    background: #8C8C55;
-  }
-
-  .food-3 {
-    background: #56b0bb;
-  }
-
-  .food-4 {
-    background: #6D213C;
-  }
-
-  .food-5 {
-    background: #041389;
-  }
-
-  .food-6 {
-    background: #7B3E19;
-  }
-
-  .food-7 {
-    background: #006CB5;
-  }
-
-  .food-8 {
-    background: #D8918F;
-  }
-
-  .food-9 {
-    background: #CC9B33;
+    background: rgb(51, 136, 223);
+    color: white;
   }
 
   .eaten {
@@ -404,7 +392,7 @@
   }
 
   .correct {
-    background: #307351;
+    background: rgb(242, 210, 48);
     text-decoration: none;
     color: white;
   }
@@ -419,16 +407,13 @@
   }
 
   .game {
-    padding: 10px;
+    padding: 15px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 560px;
-  }
-
-  .help {
-    width: 560px;
-    padding: 10px;
+    width: 530px;
+    border-top: 5px solid #5ee6af;
+    border-radius: 5px;
   }
 
   .words {
@@ -438,6 +423,85 @@
   }
 
   .restart:hover {
+    cursor: pointer;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } .name img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  } .name h2 {
+    margin: 0;
+  }
+
+  .help {
+    width: 560px;
+    padding: 15px;
+    border-top: 5px solid #5ee6af;
+    border-radius: 5px;
+  }
+
+  .btns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 30px;
+    margin-bottom: 10px;
+  } .btns button {
+    font-size: 14px;
+    padding: 5px 10px;
+    background: rgb(200, 230, 253);
+    text-transform: none !important;
+    box-shadow: none;
+    vertical-align: middle;
+  } .btns button i {
+    font-size: 20px;
+    color: rgb(227, 167, 40);
+    font-weight: bold;
+  }
+
+  .level {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 30px;
+  }
+
+  .labeled-select {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+  } .label {
+    float: left;
+    margin: 0;
+    background: rgb(175, 176, 230);
+    color: rgb(84, 84, 91);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    width: 40%;
+  } .select {
+    display: block;
+    margin: 0;
+    background: rgb(221, 222, 244);
+    color: rgb(102, 102, 107);
+    font-size: 16px;
+    padding: 1px 20%;
+    width: 60%;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  } .select:hover {
     cursor: pointer;
   }
 </style>
