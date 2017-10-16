@@ -3,7 +3,7 @@
   <center>
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
     <div v-if="done" class="signup">
-      <h3 class="success">Победа!</h3>
+      <h3 class="text-success">Победа!</h3>
       <h4>Ваш результат: {{ percentage }}%</h4>
       <h5 @click="hideGames">Вернуться</h5>
     </div>
@@ -27,8 +27,8 @@
       <div class="md-form-group" style="z-index:6">
         <center>
           <input id="formItem" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
-          <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;" @click="check">Дальше</button>
-          <h3 v-if="wrong" class="danger"> Неверно! Исправь ошибку!</h3>
+          <h4 v-if="wrong" class="text-danger" style="margin:10px 0"><b>Неверно! Исправь ошибку!</b></h4>
+          <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;margin-top: 15px;" @click="check">Дальше</button>
         </center>
       </div>
     </div>
