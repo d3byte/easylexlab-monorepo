@@ -157,7 +157,7 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
   },
   methods: {
     checkPass() {
@@ -278,13 +278,13 @@ export default {
         return;
       }
       const data = new FormData();
-      data.append('userName', localStorage.id);
+      data.append('userName', this.user._id);
       data.append('image', files[0]);
       const reader = new FileReader();
       reader.onload = (e) => {
         this.imageSrc = e.target.result;
       };
-      axios.post('/api/upload-image', data, {
+      axios.post('//ealapi.tw1.ru/api/upload-image', data, {
         headers: {
           'Content-type': 'multipart/form-data',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
