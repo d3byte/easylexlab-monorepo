@@ -10,7 +10,7 @@
                 <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Профиль</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Цвета</a>
+                <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Управление фото</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Настройки аккаунта</a>
