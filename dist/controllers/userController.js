@@ -463,5 +463,21 @@ userController.sendFeedback = function (req, res) {
     });
 };
 
+userController.leaveGroup = function (req, res) {
+    var user = req.user;
+    var groupId = req.body.groupId;
+    _models2.default.User.findById(user.id).then(function (myUser) {
+        myUser._groups = myUser._groups.filter(function (group) {
+            return group != groupId;
+        });
+        console.log(myUser._groups);
+        myUser.save().then(function (success) {
+            res.json({
+                success: true
+            });
+        });
+    });
+};
+
 exports.default = userController;
 //# sourceMappingURL=userController.js.map

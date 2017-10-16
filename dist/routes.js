@@ -91,6 +91,7 @@ routes.patch('/newpassword', (0, _expressJwt2.default)({ secret: _secret2.defaul
 routes.patch('/addgroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.addGroup);
 routes.post('/user', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getUser);
 routes.patch('/words', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.learnWords);
+routes.post('/leavegroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.leaveGroup);
 
 // Group routes
 routes.post('/regcode', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.regCode);
