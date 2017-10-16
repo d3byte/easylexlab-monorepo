@@ -21,8 +21,8 @@
           </li>
           <li class="nav-item dropdown pos-stc-xs hidden-sm-down border-right-nav" style="padding-right:25px">
             <a class="nav-link" href data-toggle="dropdown">
-              <i class="material-icons">&#xe7f5;</i>
-              <span v-if="!!notifications.length" class="label label-sm up warn" style="margin-right:-5px;">{{ notifications.length }}</span>
+              <img src="../pics/notification.png" style="width:20px;height:20px;">
+              <span v-if="!!notifications.length" class="label label-sm up" style="margin-right:-10px;background:rgb(252,105,33);border-radius:50%;">{{ notifications.length }}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
