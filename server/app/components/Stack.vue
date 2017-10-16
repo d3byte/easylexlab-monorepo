@@ -21,13 +21,13 @@
     </div>
   </div>
 
-  <div style="margin-bottom:50px;background:#5280b5;" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show">
+  <div style="margin-bottom:50px;background:#5280b5;" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show || showTest">
     <div class="container" style="height: 50px">
       <div class="row" style="color:white">
         <div class="col-sm-12">
           <center>
           <div class="nav-active-border b-light top">
-                <a class="nav-link" @click="hideGames">Назад<br><span style="visibility:hidden;">джуджи</span></a>
+                <a class="nav-link" @click="hideGames">Назад<br><span style="visibility:hidden;">DoItNow inc.</span></a>
                 <a class="nav-link" @click="showFlashcards">
                   Выучи слова <i v-if="games.flashcards.win" class="material-icons">done</i><br>
                   {{ games.flashcards.done + '/' + games.flashcards.attempts }}
@@ -48,7 +48,7 @@
                   Скрэмбл <i v-if="games.scramble.win" class="material-icons">done</i><br>
                   {{ games.scramble.done + '/' + games.scramble.attempts }}
                 </a>
-                <a v-if="testAvailable" class="nav-link" @click="tryTest">Пройти тест</a>
+                <a v-if="testAvailable" class="nav-link" @click="tryTest">Пройти тест<br><span style="visibility:hidden;">DoItNow inc.</span></a>
           </div>
         </center>
         </div>
@@ -269,6 +269,7 @@ export default {
       this.$store.dispatch('showTypein');
     },
     tryTest() {
+      this.$store.dispatch('hideGames');
       this.$store.dispatch('showTest');
     },
     hideGames() {

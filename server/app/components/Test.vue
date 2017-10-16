@@ -1,5 +1,5 @@
 <template>
-  <div class="container box padding" style="margin-top:100px;">
+  <div class="container box padding" style="margin-top:50px;">
     <center>
       <i v-if="showPreloader" class="material-icons preloader">cached</i>
       <div v-if="success" class="signup">
@@ -9,7 +9,7 @@
         <h5 @click="toProfile">Вернуться</h5>
       </div>
     </center>
-    <form v-if="!showPreloader && !success" class="padding" onsubmit="return false">
+    <form v-if="!showPreloader && !success" onsubmit="return false">
       <div class="row padding">
         <h1>Тест</h1>
         <hr>
@@ -21,7 +21,7 @@
           <input type="text" v-model="pair.test" class="md-input" placeholder="Слово" required>
           <label>{{ pair.value }}</label>
         </div>
-        <button @click="submit" class="btn" style="background:rgb(251, 106, 33);color:white;">Готово</button>
+        <button @click="submit" class="btn" style="background:rgb(251, 106, 33);color:white;box-shadow:none;padding-left:40px;padding-right:40px;">Готово</button>
       </div>
     </form>
   </div>
@@ -158,6 +158,7 @@ export default {
   }
 
   .box {
-    border-top: 3px solid rgb(251, 106, 33);
+    border-top: 5px solid #5ee6af;
+    border-radius: 4px;
   }
 </style>
