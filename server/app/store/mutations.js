@@ -125,9 +125,6 @@ export default {
   requestedIsTrue(state) {
     state.user.requested = true;
   },
-  changeCurrentGroup(state, newGroup) {
-    state.currentGroup = newGroup;
-  },
   userInfo(state, userInfo) {
     _.assign(state.user, userInfo);
     state.requested = true;

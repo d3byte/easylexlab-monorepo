@@ -56,9 +56,6 @@ export default {
   requestedIsTrue({ commit }) {
     commit('requestedIsTrue');
   },
-  changeCurrentGroup({ commit }, newGroup) {
-    commit('changeCurrentGroup', newGroup);
-  },
   userInfo({ commit }, userInfo) {
     commit('userInfo', userInfo);
   }

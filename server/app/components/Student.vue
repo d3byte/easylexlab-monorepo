@@ -17,7 +17,7 @@
               <br>
               <h5 class="m-a-0 text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
               <br>
-              <h5 class="m-a-0 text-white">Выбранная группа: <b>{{ group.name }}</b></h5>
+              <h5 class="m-a-0 text-white">Выбранная группа: <b>{{ currentGroup.name }}</b></h5>
               <h5 class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
               <h5 class="m-a-0 text-white" v-else>Ближайшего дня сдачи нет</h5>
             </div>
@@ -90,17 +90,17 @@
         </center>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
           <div v-show="!showAll" v-for="(test, index) in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="col-lg col-md col-sm col-xs box task taskbox" v-bind:class="{
-                                                                               'task-1':  index % 10 == 0,
-                                                                               'task-2':  index % 10 == 1,
-                                                                               'task-3':  index % 10 == 2,
-                                                                               'task-4':  index % 10 == 3,
-                                                                               'task-5':  index % 10 == 4,
-                                                                               'task-6':  index % 10 == 5,
-                                                                               'task-7':  index % 10 == 6,
-                                                                               'task-8':  index % 10 == 7,
-                                                                               'task-9':  index % 10 == 8,
-                                                                               'task-10':  index % 10 == 9}">
+            <div class="col-lg col-md col-sm col-xs box task taskbox" :class="{
+                                                                        'task-1':  index % 10 == 0,
+                                                                        'task-2':  index % 10 == 1,
+                                                                        'task-3':  index % 10 == 2,
+                                                                        'task-4':  index % 10 == 3,
+                                                                        'task-5':  index % 10 == 4,
+                                                                        'task-6':  index % 10 == 5,
+                                                                        'task-7':  index % 10 == 6,
+                                                                        'task-8':  index % 10 == 7,
+                                                                        'task-9':  index % 10 == 8,
+                                                                        'task-10':  index % 10 == 9 }">
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <center>
@@ -112,8 +112,18 @@
               </div>
             </div>
           </div>
-          <div v-show="showAll" v-for="test in completedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-            <div class="col-lg col-md col-sm col-xs box task taskbox">
+          <div v-show="showAll" v-for="(test, index) in completedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+            <div class="col-lg col-md col-sm col-xs box task taskbox" :class="{
+                                                                        'task-1':  index % 10 == 0,
+                                                                        'task-2':  index % 10 == 1,
+                                                                        'task-3':  index % 10 == 2,
+                                                                        'task-4':  index % 10 == 3,
+                                                                        'task-5':  index % 10 == 4,
+                                                                        'task-6':  index % 10 == 5,
+                                                                        'task-7':  index % 10 == 6,
+                                                                        'task-8':  index % 10 == 7,
+                                                                        'task-9':  index % 10 == 8,
+                                                                        'task-10':  index % 10 == 9 }">
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <div class="pull-right success">
@@ -207,7 +217,10 @@ export default {
       color: '',
       background: '',
       showAd: false,
-      showAdContainer: false
+      showAdContainer: false,
+      currentGroup: {
+        name: ''
+      }
     }
   },
   computed: {
@@ -250,14 +263,14 @@ export default {
       this.showMsgs = true;
     },
     changeGroup(group) {
-      this.$store.dispatch('changeCurrentGroup', group);
+      this.currentGroup = group;
       this.sortTasks();
       this.setDate();
     },
     sortTasks() {
       this.completedTasks = [];
       this.uncompletedTasks = [];
-      for (var test of this.group._tests) {
+      for (var test of this.currentGroup._tests) {
         var done = false;
         if (test.results) {
           for (let result of test.results) {
@@ -302,10 +315,9 @@ export default {
     this.$store.dispatch('testNotAvailable');
     EventBus.$once('requested', event => {
       this.wordsLearnt = this.user.wordsLearnt;
-      if (this._group) {
-        this.sortTasks();
-        this.setDate();
-      }
+      this.currentGroup = this.user._groups[0];
+      this.sortTasks();
+      this.setDate();
       this.showPreloader = false;
       if (this.group && this.group.messages) {
         for (var group of this.user._groups) {
@@ -474,7 +486,7 @@ h5.white-text {
 }
 .task-8 button {
  background-color:rgb(216, 52, 139) !important;
- border:none !important;
+ border:none !important; 
 }
 .task-9 button {
  background-color: rgb(216, 117, 52) !important;
@@ -485,19 +497,19 @@ h5.white-text {
  border: none !important;
 }
 
-.group-1{
+.group-1 {
 background-color: #039d69 !important;
 }
-.group-2{
+.group-2 {
 background-color: #5265a9 !important;
 }
-.group-3{
+.group-3 {
 background-color: #ff6a1f !important;
 }
-.group-4{
+.group-4 {
 background-color: #f44177 !important;
 }
-.group-5{
+.group-5 {
 background-color: #58c721 !important;
 }
 
