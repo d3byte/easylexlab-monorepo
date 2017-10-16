@@ -11,9 +11,9 @@
         <div class="container">
           <div class="col-sm-12">
             <div class="text-white">
-              <h4><i class="fa fa-bookmark-o" aria-hidden="true"></i> Название урока: <b>{{ task.name }}</b></h4>
+              <h4> <img src="../pics/task.png" style="margin-left:12px"> Название урока: <b>{{ task.name }}</b></h4>
               <h5 class="no-margin hidden-sm-down" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"><i class="fa fa-bookmark-o fa-2x" style="visibility:hidden" aria-hidden="true"></i>Выберите задание</h5>
-              <h6 class="no-margin hidden-md-up" style="padding:5px;">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
+              <h6 class="no-margin hidden-md-up" style="padding:5px">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
   </div>
 
   <div style="margin-bottom:50px;background:#5280b5;" class="dker p-x" v-show="games.matching.show || games.flashcards.show || games.snake.show || games.scramble.show || games.typein.show || showTest">
-    <div class="container" style="height: 50px">
+    <div class="container" style="height: 50px;">
       <div class="row" style="color:white">
         <div class="col-sm-12">
           <center>
@@ -64,7 +64,7 @@
           <div class="col box" style="border-radius:4px;">
             <div class="row-col danger white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;">
               <center>
-                <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> Учить</h3>
+                <h3><img src="../pics/learn.png" style="width:25px;height:30"> Учить</h3>
               </center>
             </div>
             <div class="p-a block">
@@ -87,7 +87,7 @@
           <div class="col box" style="border-radius:4px;">
             <div class="row-col warn white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;">
               <center>
-                <h3><i class="fa fa-trophy" aria-hidden="true"></i> Играть</h3>
+                <h3><img src="../pics/play.png" style="width:25px;height:30"> Играть</h3>
               </center>
             </div>
             <div class="p-a block">
@@ -106,7 +106,7 @@
           <div class="col box" style="border-radius:4px;">
             <div class="row-col success white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;">
               <center>
-                <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Тест</h3>
+                <h3><img src="../pics/test.png" style="width:25px;height:30"> Тест</h3>
               </center>
             </div>
             <div class="p-a block">
@@ -124,7 +124,7 @@
         <div class="col-sm-12" style="border-radius:4px;">
           <div class="box">
             <div class="row-col white-text headpadding" style="border-top-left-radius:4px;border-top-right-radius:4px;background:rgb(113,108,183)">
-              <h3 class="text-center"><i class="fa fa-refresh" aria-hidden="true"></i> Повторить</h3>
+              <h3 class="text-center"><img src="../pics/repeat.png" style="width:25px;height:30"> Повторить</h3>
             </div>
             <center>
               <div class="table-responsive">
@@ -341,7 +341,7 @@ export default {
 
   .container {
     width: 75%;
-    padding: 0 30px;
+    padding: 0 20px;
   }
 
   .no-margin {
