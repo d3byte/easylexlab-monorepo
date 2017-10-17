@@ -41,7 +41,7 @@ routes.patch('/newinfo', expressJWT({ secret }), userController.updateInfo);
 routes.post('/upload-image', upload.single('image'), function (req, res) {
     if(req.file.filename) {
         db.User.findByIdAndUpdate(req.body.userName, {
-            $set: { backgroundUrl: req.file.filename }
+            $set: { picUrl: req.file.filename }
         }).then(user => {
             return res.json({
                 success: true
@@ -58,6 +58,7 @@ routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.post('/user', expressJWT({ secret }), userController.getUser);
 routes.patch('/words', expressJWT({ secret }), userController.learnWords);
 routes.post('/leavegroup', expressJWT({ secret }), userController.leaveGroup);
+routes.post('/getavatar', expressJWT({ secret }), userController.getAvatar);
 
 // Group routes
 routes.post('/regcode', expressJWT({ secret }), groupController.regCode);

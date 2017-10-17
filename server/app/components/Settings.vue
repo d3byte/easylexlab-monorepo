@@ -190,7 +190,8 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    // root: '//ealapi.tw1.ru/api'
+    root: '/api'
   },
   methods: {
     checkPass() {
@@ -317,7 +318,8 @@ export default {
       reader.onload = (e) => {
         this.imageSrc = e.target.result;
       };
-      axios.post('//ealapi.tw1.ru/api/upload-image', data, {
+      // //ealapi.tw1.ru/
+      axios.post('api/upload-image', data, {
         headers: {
           'Content-type': 'multipart/form-data',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
@@ -326,6 +328,7 @@ export default {
         this.errorInfo = '';
         this.infoSuccess.push('Информация успешно обновлена!');
         reader.readAsDataURL(files[0]);
+        EventBus.$emit('new-image');
       })
     },
     leaveGroup(id) {

@@ -8,7 +8,8 @@
           <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
             <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar w-96" :style="{ backgroundColor: color }">
-              <img :src="backgroundUrl">
+              <span v-if="!!!image.length">{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
+              <img v-else :src="`data:image/${ext};base64,${image}`">
             </span>
           </a>
             <div class="clear m-b">
@@ -62,12 +63,12 @@
             </li>
             <li class="nav-item" style="margin-top:5px" v-for="group in user._groups">
               <button class="btn btn-sm btn-outline rounded" @click="changeGroup(group)" v-bind:class="{
-                                                                                                                                  'group-1':index == 0,
-                                                                                                                                  'group-2':index == 1,
-                                                                                                                                  'group-3':index == 2,
-                                                                                                                                  'group-4':index == 3,
-                                                                                                                                  'group-5':index == 4}">
-                                                                                                                                  <b>{{ group.name }}</b></button>
+                                                                                                          'group-1':index == 0,
+                                                                                                          'group-2':index == 1,
+                                                                                                          'group-3':index == 2,
+                                                                                                          'group-4':index == 3,
+                                                                                                          'group-5':index == 4}">
+                                                                                                          <b>{{ group.name }}</b></button>
             </li>
           </ul>
         </div>
@@ -221,7 +222,9 @@ export default {
       currentGroup: {
         name: '',
         _tests: []
-      }
+      },
+      image: localStorage.img ? localStorage.img : '',
+      ext: localStorage.ext ? localStorage.ext : ''
     }
   },
   computed: {

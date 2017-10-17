@@ -1,4 +1,4 @@
-<template>
+  <template>
     <div class="app-header white box-shadow">
       <div class="container hidden-sm-down">
 
@@ -46,7 +46,8 @@
           <li class="nav-item border-right-nav dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
               <div style="background: rgb(176, 212, 219)" class="circle w-32">
-                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <i v-if="!!!image.length" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <img v-else :src="`data:image/${ext};base64,${image}`" class="avatar">
               </div>
               <!-- <div class="avatar w-32" >
                 <span>
@@ -114,7 +115,6 @@
         <div class="navbar-item pull-left h5" id="pageTitle">
           <router-link to="/">
             <img src="../pics/logo.png" class="logo">
-            EasyLexLab
           </router-link>
         </div>
 
@@ -157,7 +157,8 @@
           <li class="nav-item dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
               <span class="avatar w-32">
-                  <span>{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
+                <i v-if="!!!image.length" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <img v-else :src="`data:image/${ext};base64,${image}`" class="avatar">
               </span>
             </a>
             <div class="dropdown-menu pull-right dropdown-menu-scale">
@@ -374,7 +375,9 @@
                 isCurrentGr: false,
                 notifications: [],
                 newNotifsInt: 0,
-                color: ''
+                color: '',
+                image: localStorage.img ? localStorage.img : '',
+                ext: localStorage.ext ? localStorage.ext : ''
             }
         },
         computed: {
@@ -423,6 +426,24 @@
             changeGroup(group) {
               this.$store.dispatch('changeCurrentGroup', group);
             },
+            getAvatar() {
+              if(this.user.picUrl && localStorage.img == '' && localStorage.ext == '') {
+                const body = {
+                  picName: this.user.picUrl
+                };
+                this.$http.post('getavatar', body, {
+                  headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': 'Bearer ' + this.$store.getters.userToken
+                  }
+                }).then(res => {
+                  this.image = res.body.img;
+                  this.ext = res.body.ext;
+                  localStorage.img = this.image;
+                  localStorage.ext = this.ext;
+                })
+              }
+            },
             removeNotif(id) {
               const body = {
                 id
@@ -438,17 +459,23 @@
             }
         },
         http: {
-            root: '//ealapi.tw1.ru/api'
+            // root: '//ealapi.tw1.ru/api'
+            root: '/api'
         },
         created() {
-          this.color = localStorage.color  ? localStorage.color : '#ccc';
           EventBus.$once('requested', event => {
             this.notifications = this.user.notifications.reverse();
+            this.getAvatar();
+          });
+          EventBus.$on('new-image', event => {
+            this.getAvatar();
           });
           if(this.$route.path.slice(0, 5) == '/task') {
             this.fetchUserInfo();
+            this.getAvatar();
           } else if(this.$route.path.slice(0, 6) == '/group') {
             this.fetchUserInfo();
+            this.getAvatar();
           }
         },
         components: {

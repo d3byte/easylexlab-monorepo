@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import secret from './../secret';
 import helper from './helperFunctions';
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
 
 import db from './../models';
 
@@ -478,6 +480,30 @@ userController.leaveGroup = (req, res) => {
             })
         })
     })
+}
+
+userController.getAvatar = (req, res) => {
+    const user = req.user;
+    const picName = req.body.picName;
+    var filePath = `uploads/${picName}`;
+    if(user && picName) {
+        fs.exists(filePath, exists => {
+            if(exists) {
+                fs.readFile(filePath, { encoding: "base64" }, (err, data) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    let ext = path.extname(filePath);
+                    // res.writeHead(200, { 'Content-Type': `image/${ext}` })
+                    // res.end(data, 'binary');
+                    return res.json({
+                        img: data,
+                        ext
+                    })
+                })
+            }
+        });
+    }
 }
 
 export default userController;

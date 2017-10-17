@@ -16,6 +16,8 @@ export default {
     localStorage.city = '';
     localStorage.firstName = '';
     localStorage.lastName = '';
+    localStorage.img = '';
+    localStorage.ext = '';
   },
   hideOrShowLogin(state) {
     state.header.showLogin = !state.header.showLogin;

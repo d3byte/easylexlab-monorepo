@@ -26,7 +26,6 @@ const userSchema = new Schema({
   notifications: { type: Array, default: null },
   permissions: { type: String, required: true },
   picUrl: { type: String, default: null },
-  backgroundUrl: { type: String, default: null },
   city: { type: String, required: true },
   recoverToken: { type: String, default: null },
   createdAt: { type: String, default: moment().format('LL') },
