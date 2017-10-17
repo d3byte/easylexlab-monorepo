@@ -194,8 +194,8 @@ export default {
     }
   },
   http: {
-    // root: '//ealapi.tw1.ru/api'
-    root: '/api'
+    root: '//ealapi.tw1.ru/api'
+    // root: '/api'
   },
   methods: {
     checkPass() {
@@ -324,8 +324,8 @@ export default {
         this.image = '';
         this.ext = '';
       };
-      // //ealapi.tw1.ru/
-      axios.post('api/upload-image', data, {
+      
+      axios.post('//ealapi.tw1.ru/api/upload-image', data, {
         headers: {
           'Content-type': 'multipart/form-data',
           'Authorization': 'Bearer ' + this.$store.getters.userToken
