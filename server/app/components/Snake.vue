@@ -246,9 +246,13 @@
             if(this.correct == this.wordGroups.length) {
               this.win = true;
               clearInterval(ticking);
-              this.$store.dispatch('incrementAttempts', 'snake');
+              const props = {
+                game: 'snake',
+                id: this.$route.params.id
+              };
+              this.$store.dispatch('incrementAttempts', props);
               if(this.doneAttempts== this.totalAttempts)
-                this.$store.dispatch('gameFinished', 'snake');
+                this.$store.dispatch('gameFinished', props);
                 if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
                   this.$store.dispatch('testAvailable');
                   setTimeout(() => {

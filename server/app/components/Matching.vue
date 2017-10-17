@@ -90,8 +90,12 @@ export default {
     },
     allDone() {
       if(Math.round(this.incorrect * 100 / this.correct.length) <= 10) {
-        this.$store.dispatch('incrementAttempts', 'matching');
-        this.$store.dispatch('gameFinished', 'matching');
+        const props = {
+          game: 'matching',
+          id: this.$route.params.id
+        };
+        this.$store.dispatch('incrementAttempts', props);
+        this.$store.dispatch('gameFinished', props);
         this.done = true;
         return;
       }

@@ -79,6 +79,9 @@ export default {
           localStorage.city = res.body.user.city;
           localStorage.id = res.body.user._id;
           localStorage.ad = 'true';
+          if(!!!localStorage.games) {
+            localStorage.games = JSON.stringify([]);
+          }
           this.$router.push({ path: '/profile' });
         });
     },

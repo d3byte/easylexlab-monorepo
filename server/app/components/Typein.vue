@@ -72,9 +72,13 @@ export default {
   methods: {
     allDone() {
       if (this.percentage >= 90) {
-        this.$store.dispatch('incrementAttempts', 'typein');
+        const props = {
+          game: 'typein',
+          id: this.$route.params.id
+        };
+        this.$store.dispatch('incrementAttempts', props);
         if (this.doneAttempts == this.totalAttempts)
-          this.$store.dispatch('gameFinished', 'typein');
+          this.$store.dispatch('gameFinished', props);
         if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
           this.$store.dispatch('testAvailable');
           setTimeout(() => {

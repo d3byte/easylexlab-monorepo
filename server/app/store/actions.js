@@ -29,6 +29,12 @@ export default {
   setGames({ commit }, attempts) {
     commit('setGames', attempts);
   },
+  saveGames({ commit }) {
+    commit('saveGames');
+  },
+  loadGames({ commit }, game) {
+    commit('loadGames', game);
+  },
   gameFinished({ commit }, game) {
     commit('gameFinished', game);
   },

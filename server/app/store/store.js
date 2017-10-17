@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
     token: (localStorage.token ? localStorage.token : ''),
     logged: (localStorage.token ? true : false),
     games: {
+      id: '',
       matching: {
         show: false,
         win: false,

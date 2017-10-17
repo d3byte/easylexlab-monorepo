@@ -128,8 +128,12 @@ export default {
         if (this.index + 1 == this.pairs.length &&
           this.doneAttempts + 1 >= this.totalAttempts) {
           if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-            this.$store.dispatch('incrementAttempts', 'flashcards');
-            this.$store.dispatch('gameFinished', 'flashcards');
+            const props = {
+              game: 'flashcards',
+              id: this.$route.params.id
+            };
+            this.$store.dispatch('incrementAttempts', props);
+            this.$store.dispatch('gameFinished', props);
           } else {
             this.lose = true;
             return;
@@ -144,7 +148,11 @@ export default {
           break;
         } else if (this.index + 1 == this.pairs.length) {
           if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-            this.$store.dispatch('incrementAttempts', 'flashcards');
+            const props = {
+              game: 'flashcards',
+              id: this.$route.params.id
+            };
+            this.$store.dispatch('incrementAttempts', props);
           } else {
             this.lose = true;
             return;
@@ -171,8 +179,12 @@ export default {
         if (this.index + 1 == this.pairs.length &&
           this.doneAttempts + 1 >= this.totalAttempts) {
           if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-            this.$store.dispatch('incrementAttemps', 'flashcards');
-            this.$store.dispatch('gameFinished', 'flashcards');
+            const props = {
+              game: 'flashcards',
+              id: this.$route.params.id
+            };
+            this.$store.dispatch('incrementAttempts', props);
+            this.$store.dispatch('gameFinished', props);
           } else {
             this.lose = true;
             return;
@@ -186,7 +198,11 @@ export default {
           break;
         } else if (this.index + 1 == this.pairs.length) {
           if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
-            this.$store.dispatch('incrementAttemps', 'flashcards');
+            const props = {
+              game: 'flashcards',
+              id: this.$route.params.id
+            };
+            this.$store.dispatch('incrementAttempts', props);
           } else {
             this.lose = true;
             return;

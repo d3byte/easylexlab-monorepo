@@ -18,6 +18,7 @@ export default {
     localStorage.lastName = '';
     localStorage.img = '';
     localStorage.ext = '';
+    localStorage.games = [];
   },
   hideOrShowLogin(state) {
     state.header.showLogin = !state.header.showLogin;
@@ -60,12 +61,29 @@ export default {
     state.games.scramble.show = false;
     state.games.typein.show = true;
   },
-  setGames(state, attempts) {
-    state.games.flashcards.attempts = attempts.flashcards;
-    state.games.matching.attempts = attempts.matching;
-    state.games.snake.attempts = attempts.snake;
-    state.games.scramble.attempts = attempts.scramble;
-    state.games.typein.attempts = attempts.typein;
+  setGames(state, props) {
+    state.games.id = props.id;
+    state.games.flashcards.attempts = props.attempts.flashcards;
+    state.games.matching.attempts = props.attempts.matching;
+    state.games.snake.attempts = props.attempts.snake;
+    state.games.scramble.attempts = props.attempts.scramble;
+    state.games.typein.attempts = props.attempts.typein;
+    var games = JSON.parse(localStorage.games);
+    games = games.filter(game => game.games.id != props.id);
+    var savedGames = {
+      games: state.games
+    };
+    games.push(savedGames);
+    localStorage.games = JSON.stringify(games);
+  },
+  loadGames(state, props) {
+    var myState = JSON.parse(localStorage.games);
+    myState.map(game => {
+      if(game.games.id == props.id) {
+        state.games = game.games;
+        state.gameConditions = game.gameConditions;
+      }
+    });
   },
   hideGames(state) {
     state.games.flashcards.show = false;
@@ -80,30 +98,44 @@ export default {
   hideTest(state) {
     state.games.showTest = false;
   },
-  incrementAttempts(state, game) {
-    if(game == 'matching')
+  incrementAttempts(state, props) {
+    if(props.game == 'matching')
       state.games.matching.done++;
-    else if(game == 'snake')
+    else if(props.game == 'snake')
       state.games.snake.done++;
-    else if(game == 'flashcards')
+    else if(props.game == 'flashcards')
       state.games.flashcards.done++;
-    else if(game == 'scramble')
+    else if(props.game == 'scramble')
       state.games.scramble.done++;
-    else if(game == 'typein')
+    else if(props.game == 'typein')
       state.games.typein.done++;
+    var games = JSON.parse(localStorage.games);
+    games.map(game => {
+      if (game.games.id == props.id) {
+        game.games = state.games;
+      }
+    })
+    localStorage.games = JSON.stringify(games);
   },
-  gameFinished(state, game) {
-    if(game == 'matching')
+  gameFinished(state, props) {
+    if(props.game == 'matching')
       state.games.matching.win = true
-    else if(game == 'snake')
+    else if(props.game == 'snake')
       state.games.snake.win = true;
-    else if(game == 'flashcards')
+    else if(props.game == 'flashcards')
       state.games.flashcards.win = true;
-    else if(game == 'scramble')
+    else if(props.game == 'scramble')
       state.games.scramble.win = true;
-    else if (game == 'typein') {
+    else if(props.game == 'typein')
       state.games.typein.win = true;
-    }
+    var games = localStorage.games;
+    var games = JSON.parse(localStorage.games);
+    games.map(game => {
+      if (game.games.id == props.id) {
+        game.games = state.games;
+      }
+    })
+    localStorage.games = JSON.stringify(games);
   },
   zeroAttempts(state) {
     state.games.flashcards.done = 0;

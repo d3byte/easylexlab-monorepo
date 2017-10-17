@@ -74,17 +74,27 @@ export default {
         this.correct = true;
         this.totalCorrect++;
         if(this.totalCorrect == this.pairs.length) {
-          this.$store.dispatch('incrementAttempts', 'scramble');
+          const props = {
+            game: 'scramble',
+            id: this.$route.params.id
+          };
+          this.$store.dispatch('incrementAttempts', props);
           this.win = true;
         }
-        if(this.doneAttempts == this.totalAttempts)
-          this.$store.dispatch('gameFinished', 'scramble');
-          if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
-            this.$store.dispatch('testAvailable');
-            setTimeout(() => {
-              $('#testavailable').modal('show');
-            }, 50)
-          }
+        if(this.doneAttempts == this.totalAttempts) {
+          const props = {
+            game: 'scramble',
+            id: this.$route.params.id
+          };
+          this.$store.dispatch('gameFinished', props);
+        }
+          
+        if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
+          this.$store.dispatch('testAvailable');
+          setTimeout(() => {
+            $('#testavailable').modal('show');
+          }, 50)
+        }
       }
     },
     start() {

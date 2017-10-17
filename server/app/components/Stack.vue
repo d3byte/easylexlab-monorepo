@@ -242,13 +242,33 @@ export default {
           this.$router.push('/profile');
         let done = false;
         this.task.results.map(result => {
-          if (result.userId == this.user._id && result.result >= 80) {
+          if(result.userId == this.user._id && result.result >= 80) {
             done = true;
           }
         });
-        if (done)
+        if(done)
           this.$store.dispatch('testAvailable');
-        this.$store.dispatch('setGames', this.task.attempts);
+        var state = JSON.parse(localStorage.games);
+        console.log('State: ', state);
+        const id = this.$route.params.id;
+        const props = {
+          id,
+          attempts: this.task.attempts
+        };
+        console.log('Prepared props: ', props);
+        if(!!state.length) {
+          var found = false;
+          state.map(item => {
+            if(item.games.id == props.id) {
+              this.$store.dispatch('loadGames', props);
+            }
+          })
+          if(!found) {
+            this.$store.dispatch('setGames', props);
+          }
+        } else {
+          this.$store.dispatch('setGames', props);
+        }
       });
     });
   },
