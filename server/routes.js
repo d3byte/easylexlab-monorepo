@@ -1,3 +1,4 @@
+import fs from 'fs';
 import express from 'express';
 import expressJWT from 'express-jwt';
 import multer from 'multer';
@@ -40,11 +41,30 @@ routes.post('/feedback', expressJWT({ secret }), userController.sendFeedback);
 routes.patch('/newinfo', expressJWT({ secret }), userController.updateInfo);
 routes.post('/upload-image', upload.single('image'), function (req, res) {
     if(req.file.filename) {
-        db.User.findByIdAndUpdate(req.body.userName, {
-            $set: { picUrl: req.file.filename }
-        }).then(user => {
-            return res.json({
-                success: true
+        db.User.findById(req.body.userName).then(user => {
+            var filePath = `uploads/${user.picUrl}`;
+            fs.exists(filePath, exists => {
+                if(exists) {
+                    fs.unlink(filePath, err => {
+                        if (err) {
+                            console.log("failed to delete local image: " + err);
+                            return
+                        }
+                        user.picUrl = req.file.filename;
+                        user.save().then(() => {
+                            return res.json({
+                                success: true
+                            });
+                        })
+                    })
+                } else {
+                    user.picUrl = req.file.filename;
+                    user.save().then(() => {
+                        return res.json({
+                            success: true
+                        });
+                    })
+                }
             });
         }).catch(err => {
             return res.status(500).json({

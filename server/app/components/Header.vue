@@ -45,7 +45,7 @@
           </li>
           <li class="nav-item border-right-nav dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
-              <div style="background: rgb(176, 212, 219)" class="circle w-32">
+              <div class="circle w-32" :class="!!image.length ? 'no-bg' : ''">
                 <i v-if="!!!image.length" class="fa fa-user-circle-o" aria-hidden="true"></i>
                 <img v-else :src="`data:image/${ext};base64,${image}`" class="avatar">
               </div>
@@ -427,7 +427,7 @@
               this.$store.dispatch('changeCurrentGroup', group);
             },
             getAvatar() {
-              if(this.user.picUrl && localStorage.img == '' && localStorage.ext == '') {
+              if(this.user.picUrl) {
                 const body = {
                   picName: this.user.picUrl
                 };
@@ -467,15 +467,10 @@
             this.notifications = this.user.notifications.reverse();
             this.getAvatar();
           });
-          EventBus.$on('new-image', event => {
-            this.getAvatar();
-          });
           if(this.$route.path.slice(0, 5) == '/task') {
             this.fetchUserInfo();
-            this.getAvatar();
           } else if(this.$route.path.slice(0, 6) == '/group') {
             this.fetchUserInfo();
-            this.getAvatar();
           }
         },
         components: {
@@ -515,13 +510,6 @@
     cursor: pointer;
   }
 
-  .avatar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-  }
-
  .container {
    box-sizing: border-box;
    width: 75%;
@@ -550,5 +538,12 @@
   margin-right: 15px;
   font-size: 20px;
   color: rgb(227, 239, 243);
+  background: rgb(176, 212, 219);
+} .avatar {
+  width: 100%;
+}
+
+.no-bg {
+  background: transparent;
 }
 </style>

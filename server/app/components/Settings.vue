@@ -57,12 +57,13 @@
               <div class="form-group" v-if="colorSuccess">
                 <label class="text-success">Фотография успешно загружена.</label>
               </div>
+              <span class="avatar w-96">
+                <img v-if="!!image.length" :src="`data:image/${ext};base64,${image}`">
+                <img v-else :src="imageSrc">
+              </span>
               <div class="form-file">
-
                 <input @change="uploadImage" name="image" type="file" accept="image/*" id="ava">
                 <button class="btn white">Аватарка</button>
-
-
               </div>
             </form>
           </div>
@@ -178,7 +179,10 @@ export default {
         name: '',
         id: '',
         createdAt: ''
-      }]
+      }],
+      image: localStorage.img ? localStorage.img : '',
+      imageSrc: '',
+      ext: localStorage.ext ? localStorage.ext : ''
     }
   },
   computed: {
@@ -317,6 +321,8 @@ export default {
       const reader = new FileReader();
       reader.onload = (e) => {
         this.imageSrc = e.target.result;
+        this.image = '';
+        this.ext = '';
       };
       // //ealapi.tw1.ru/
       axios.post('api/upload-image', data, {
@@ -328,7 +334,7 @@ export default {
         this.errorInfo = '';
         this.infoSuccess.push('Информация успешно обновлена!');
         reader.readAsDataURL(files[0]);
-        EventBus.$emit('new-image');
+        this.colorSuccess = true;
       })
     },
     leaveGroup(id) {
@@ -400,5 +406,17 @@ export default {
   font-size: 24px;
 } .group button {
   font-size: 24px;
+}
+
+.avatar img {
+  width: 200px;
+  height: 200px;
+} .avatar {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background: rgb(177, 212, 218);
 }
 </style>
