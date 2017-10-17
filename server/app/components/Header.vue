@@ -540,7 +540,8 @@
   color: rgb(227, 239, 243);
   background: rgb(176, 212, 219);
 } .avatar {
-  width: 100%;
+  width: 32px;
+  height: 32px;
 }
 
 .no-bg {
