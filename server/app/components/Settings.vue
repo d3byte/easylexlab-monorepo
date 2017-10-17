@@ -63,7 +63,7 @@
               </span>
               <div class="form-file">
                 <input @change="uploadImage" name="image" type="file" accept="image/*" id="ava">
-                <button class="btn white">Аватарка</button>
+                <button class="btn white">Загрузить фотографию</button>
               </div>
             </form>
           </div>
@@ -324,7 +324,7 @@ export default {
         this.image = '';
         this.ext = '';
       };
-      
+
       axios.post('//ealapi.tw1.ru/api/upload-image', data, {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -401,7 +401,7 @@ export default {
   align-items: center;
   width: 340px;
 } .group .icon {
-  margin-right: 15px; 
+  margin-right: 15px;
 } .icon i {
   font-size: 24px;
 } .group button {
@@ -418,5 +418,10 @@ export default {
   border-radius: 50%;
   border: 1px solid black;
   background: rgb(177, 212, 218);
+}
+
+.btn.white {
+  background-color: rgb(60, 192, 220) !important;
+  color: white !important;
 }
 </style>
