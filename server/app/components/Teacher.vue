@@ -5,7 +5,7 @@
     <div class="container">
         <div style="padding-top: 10px;" class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
-            <span class="avatar w-96" :style="{ backgroundColor: color }">
+            <span class="avatar" :style="{ backgroundColor: color }">
               <!--<img :src="backgroundUrl">-->
               <span v-if="!!!image.length">{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
               <img v-else :src="`data:image/${ext};base64,${image}`">
@@ -76,12 +76,15 @@ export default {
 
 <style lang="css" scoped>
 .avatar {
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   border: 2px solid rgb(144, 197, 246);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+} .avatar img {
+  width: 140px;
+  height: 140px;
 }
 
 .google {
