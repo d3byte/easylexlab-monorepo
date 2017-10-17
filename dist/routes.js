@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -74,11 +78,30 @@ routes.post('/feedback', (0, _expressJwt2.default)({ secret: _secret2.default })
 routes.patch('/newinfo', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.updateInfo);
 routes.post('/upload-image', upload.single('image'), function (req, res) {
     if (req.file.filename) {
-        _models2.default.User.findByIdAndUpdate(req.body.userName, {
-            $set: { backgroundUrl: req.file.filename }
-        }).then(function (user) {
-            return res.json({
-                success: true
+        _models2.default.User.findById(req.body.userName).then(function (user) {
+            var filePath = 'uploads/' + user.picUrl;
+            _fs2.default.exists(filePath, function (exists) {
+                if (exists) {
+                    _fs2.default.unlink(filePath, function (err) {
+                        if (err) {
+                            console.log("failed to delete local image: " + err);
+                            return;
+                        }
+                        user.picUrl = req.file.filename;
+                        user.save().then(function () {
+                            return res.json({
+                                success: true
+                            });
+                        });
+                    });
+                } else {
+                    user.picUrl = req.file.filename;
+                    user.save().then(function () {
+                        return res.json({
+                            success: true
+                        });
+                    });
+                }
             });
         }).catch(function (err) {
             return res.status(500).json({
@@ -92,6 +115,7 @@ routes.patch('/addgroup', (0, _expressJwt2.default)({ secret: _secret2.default }
 routes.post('/user', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getUser);
 routes.patch('/words', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.learnWords);
 routes.post('/leavegroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.leaveGroup);
+routes.post('/getavatar', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getAvatar);
 
 // Group routes
 routes.post('/regcode', (0, _expressJwt2.default)({ secret: _secret2.default }), _groupController2.default.regCode);

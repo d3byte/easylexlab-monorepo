@@ -22,6 +22,14 @@ var _nodemailer = require('nodemailer');
 
 var _nodemailer2 = _interopRequireDefault(_nodemailer);
 
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 var _models = require('./../models');
 
 var _models2 = _interopRequireDefault(_models);
@@ -477,6 +485,30 @@ userController.leaveGroup = function (req, res) {
             });
         });
     });
+};
+
+userController.getAvatar = function (req, res) {
+    var user = req.user;
+    var picName = req.body.picName;
+    var filePath = 'uploads/' + picName;
+    if (user && picName) {
+        _fs2.default.exists(filePath, function (exists) {
+            if (exists) {
+                _fs2.default.readFile(filePath, { encoding: "base64" }, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    var ext = _path2.default.extname(filePath);
+                    // res.writeHead(200, { 'Content-Type': `image/${ext}` })
+                    // res.end(data, 'binary');
+                    return res.json({
+                        img: data,
+                        ext: ext
+                    });
+                });
+            }
+        });
+    }
 };
 
 exports.default = userController;
