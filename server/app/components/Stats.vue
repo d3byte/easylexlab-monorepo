@@ -91,7 +91,7 @@
 
     		<div class="col-lg-4 col-md-12 col-xl-4">
           <div class="box">
-            <div class="box-header">
+            <div class="box-header" style="border-bottom:1px solid #ccc">
               <h2 style="color: rgb(0, 75, 94)"><b>Статистика</b></h2>
               <small style="color: rgb(0, 75, 94)">Результаты группы по заданию <b>{{ currentTask }}</b></small>
             </div>
@@ -116,9 +116,9 @@
           </div>
         </div>
         <div class="box">
-          <div class="box-header">
-            <h2 style="color: rgb(0, 75, 94)"><b>Задания</b></h2>
-            <small style="color: rgb(0, 75, 94)"><b>Соотношение завершенных и ожидающих выполнения</b></small>
+          <div class="box-header" style="background:rgb(60,157,102)">
+            <h2 class="text-white"><b>Задания</b></h2>
+            <small class="text-white"><b>Соотношение завершенных и ожидающих выполнения</b></small>
           </div>
           <div class="text-center b-t">
             <div class="row-col">
