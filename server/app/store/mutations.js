@@ -68,6 +68,16 @@ export default {
     state.games.snake.attempts = props.attempts.snake;
     state.games.scramble.attempts = props.attempts.scramble;
     state.games.typein.attempts = props.attempts.typein;
+    if(props.attempts.flashcards == 0)
+      state.games.flashcards.win = true;
+    if(props.attempts.matching == 0)
+      state.games.matching.win = true;
+    if(props.attempts.snake == 0)
+      state.games.snake.win = true;
+    if(props.attempts.scramble == 0)
+      state.games.scramble.win = true;
+    if(props.attempts.typein == 0)
+      state.games.typein.win = true;
     var games = JSON.parse(localStorage.games);
     games = games.filter(game => game.games.id != props.id);
     var savedGames = {
@@ -81,7 +91,6 @@ export default {
     myState.map(game => {
       if(game.games.id == props.id) {
         state.games = game.games;
-        state.gameConditions = game.gameConditions;
       }
     });
   },

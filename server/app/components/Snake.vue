@@ -253,7 +253,7 @@
               this.$store.dispatch('incrementAttempts', props);
               if(this.doneAttempts== this.totalAttempts)
                 this.$store.dispatch('gameFinished', props);
-                if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
+                if (this.$store.state.games.flashcards.win && this.$store.state.games.matching.win && this.$store.state.games.typein.win && this.$store.state.games.snake.win && this.$store.state.games.scramble.win) {
                   this.$store.dispatch('testAvailable');
                   setTimeout(() => {
                     $('#testavailable').modal('show');
