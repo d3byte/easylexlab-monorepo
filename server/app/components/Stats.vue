@@ -3,7 +3,10 @@
     <app-header />
     <div class="row" style="color:white;background:linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190))">
       <div class="container" style="padding-left:50px;">
-        <h5><b>Статистика</b></h5>
+        <h5 style="margin-top:5px;">
+          <img src="../pics/stats.png" width="30px" height="30px">
+          <b>Статистика</b>
+        </h5>
       </div>
     </div>
     <div class="row" style="background:rgb(65, 90, 175)">
