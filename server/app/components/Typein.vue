@@ -26,7 +26,7 @@
     </center>
       <div class="md-form-group" style="z-index:6">
         <center>
-          <input id="formItem" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
+          <input id="formItem" autocomplete="off" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
           <h4 v-if="wrong" class="text-danger" style="margin:10px 0"><b>Неверно! Исправь ошибку!</b></h4>
           <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;margin-top: 15px;" @click="check">Дальше</button>
         </center>
