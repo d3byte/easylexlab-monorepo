@@ -39,13 +39,16 @@
               <button style="font-size: 13px" class="btn btn btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> <b>Сообщения</b></button>
             </li>
             <li class="nav-item groupbtn" v-for="(group, index) in user._groups">
-              <button style="font-size: 13px" class="btn btn btn-outline rounded" @click="changeGroup(group)" v-bind:class="{
-                                                                                                                                  'group-1':index == 0,
-                                                                                                                                  'group-2':index == 1,
-                                                                                                                                  'group-3':index == 2,
-                                                                                                                                  'group-4':index == 3,
-                                                                                                                                  'group-5':index == 4}">
-                                                                                                                                  <b>{{ group.name }}</b></button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded" @click="changeGroup(group)" 
+                v-bind:class="{
+                  'group-1':index == 0,
+                  'group-2':index == 1,
+                  'group-3':index == 2,
+                  'group-4':index == 3,
+                  'group-5':index == 4}"
+                  >
+                <b>{{ group.name }}</b>
+              </button>
             </li>
           </ul>
         </div>
@@ -62,13 +65,16 @@
               <button class="btn btn-sm btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> <b>Сообщения</b></button>
             </li>
             <li class="nav-item" style="margin-top:5px" v-for="group in user._groups">
-              <button class="btn btn-sm btn-outline rounded" @click="changeGroup(group)" v-bind:class="{
-                                                                                                          'group-1':index == 0,
-                                                                                                          'group-2':index == 1,
-                                                                                                          'group-3':index == 2,
-                                                                                                          'group-4':index == 3,
-                                                                                                          'group-5':index == 4}">
-                                                                                                          <b>{{ group.name }}</b></button>
+              <button class="btn btn-sm btn-outline rounded" @click="changeGroup(group)" 
+                v-bind:class="{
+                  'group-1':index == 0,
+                  'group-2':index == 1,
+                  'group-3':index == 2,
+                  'group-4':index == 3,
+                  'group-5':index == 4}"
+                  >
+                <b>{{ group.name }}</b>
+              </button>
             </li>
           </ul>
         </div>
@@ -91,22 +97,27 @@
         </center>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
           <div v-show="!showAll" v-for="(test, index) in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="col-lg col-md col-sm col-xs box task taskbox" :class="{
-                                                                        'task-1':  index % 10 == 0,
-                                                                        'task-2':  index % 10 == 1,
-                                                                        'task-3':  index % 10 == 2,
-                                                                        'task-4':  index % 10 == 3,
-                                                                        'task-5':  index % 10 == 4,
-                                                                        'task-6':  index % 10 == 5,
-                                                                        'task-7':  index % 10 == 6,
-                                                                        'task-8':  index % 10 == 7,
-                                                                        'task-9':  index % 10 == 8,
-                                                                        'task-10':  index % 10 == 9 }">
+            <div class="col-lg col-md col-sm col-xs box task taskbox" 
+              :class="{
+                'task-1':  index % 10 == 0,
+                'task-2':  index % 10 == 1,
+                'task-3':  index % 10 == 2,
+                'task-4':  index % 10 == 3,
+                'task-5':  index % 10 == 4,
+                'task-6':  index % 10 == 5,
+                'task-7':  index % 10 == 6,
+                'task-8':  index % 10 == 7,
+                'task-9':  index % 10 == 8,
+                'task-10':  index % 10 == 9 }"
+              >
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <center>
-                    <h3>{{ test.name }}</h3>
-                    <p><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Выполнить до: {{ test.deadline }}</p>
+                    <h3>
+                    <img src="../pics/task-icon.png" class="task-icon">
+                    {{ test.name }}
+                    </h3>
+                    <p> Выполнить до: {{ test.deadline }}</p>
                     <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Перейти</router-link></button>
                   </center>
                 </div>
@@ -114,17 +125,19 @@
             </div>
           </div>
           <div v-show="showAll" v-for="(test, index) in completedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-            <div class="col-lg col-md col-sm col-xs box task taskbox" :class="{
-                                                                        'task-1':  index % 10 == 0,
-                                                                        'task-2':  index % 10 == 1,
-                                                                        'task-3':  index % 10 == 2,
-                                                                        'task-4':  index % 10 == 3,
-                                                                        'task-5':  index % 10 == 4,
-                                                                        'task-6':  index % 10 == 5,
-                                                                        'task-7':  index % 10 == 6,
-                                                                        'task-8':  index % 10 == 7,
-                                                                        'task-9':  index % 10 == 8,
-                                                                        'task-10':  index % 10 == 9 }">
+            <div class="col-lg col-md col-sm col-xs box task taskbox" 
+              :class="{
+                'task-1':  index % 10 == 0,
+                'task-2':  index % 10 == 1,
+                'task-3':  index % 10 == 2,
+                'task-4':  index % 10 == 3,
+                'task-5':  index % 10 == 4,
+                'task-6':  index % 10 == 5,
+                'task-7':  index % 10 == 6,
+                'task-8':  index % 10 == 7,
+                'task-9':  index % 10 == 8,
+                'task-10':  index % 10 == 9 }"
+              >
               <div class="taskcontentouter">
                 <div class="taskcontent">
                   <div class="pull-right success">
@@ -580,4 +593,9 @@ background-color: #58c721 !important;
   padding-left: 20px;
 }
 
+.task-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
 </style>
