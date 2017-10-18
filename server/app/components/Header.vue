@@ -57,20 +57,20 @@
             </a>
             <div class="dropdown-menu pull-right dropdown-menu-scale" style="background: rgb(176, 212, 219);border-radius:6px;">
               <router-link class="dropdown-item" to="/profile" style="color:rgb(78, 114, 128)">
-                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE8A6;</i>
+                <img src="../pics/profile.png" class="menu-icon">
                 Профиль
               </router-link>
               <router-link class="dropdown-item" to="/settings" style="color:rgb(78, 114, 128)">
-                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE8B8;</i>
+                <img src="../pics/settings.png" class="menu-icon">
                 Настройки
               </router-link>
               <span class="dropdown-item hover" data-toggle="modal" data-target="#feedback" style="color:rgb(78, 114, 128)">
-                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE0C9;</i>
+                <img src="../pics/feedback.png" class="menu-icon">
                 Оставить отзыв
               </span>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" @click="logout" style="color:rgb(78, 114, 128)">
-                <i class="material-icons" style="color: rgb(227, 239, 243)">&#xE0B2;</i>
+                <img src="../pics/exit.png" class="menu-icon">
                 Выход
               </a>
             </div>
@@ -546,5 +546,12 @@
 
 .no-bg {
   background: transparent;
+}
+
+.menu-icon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  margin-right: 5px;
 }
 </style>
