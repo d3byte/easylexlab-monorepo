@@ -27,7 +27,7 @@
           <div class="col-sm-6 col-md-3 col-lg-3 col-xs-12">
             <div class="box p-a no-padding" style="background:rgb(246, 175, 60)">
               <div class="pull-left m-r img-holder" style="background: rgb(219, 147, 38);">
-                  <img src="../pics/tick.png" class="img-responsive">
+                  <img src="../pics/abc.png" class="img-responsive">
               </div>
               <div class="clear main-info">
                 <h4 class="m-a-0 text-xs"><b>{{ wordsLearnt }} Слов</b></h4>
@@ -289,6 +289,8 @@ export default {
   padding: 10px;
 } .img-holder img {
   width: 40px;
+  height: 40px;
+  object-fit: contain;
 } .img-holder:nth-of-type(1) {
   background: rgb(194, 55, 40);
 }
