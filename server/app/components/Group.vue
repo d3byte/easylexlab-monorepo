@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="blue">
+    <div class="blue" style="padding:0;">
       <div class="container custom-padding" style="padding-bottom:0;margin-bottom:0;padding-top:0;margin-top:0;">
         <div class="menu">
           <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#newtask">
@@ -63,7 +63,7 @@
     <div class="row-col b-b padding">
     	<div class="container">
         <div class="row">
-      		<div class="padding">
+      		<div class="">
       			<div class="row">
       				<div class="col-sm-6">
       					<div class="box">
@@ -480,6 +480,8 @@ export default {
 
 .container {
   width: 75%;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .headers > th {
@@ -561,7 +563,7 @@ export default {
 }
 
 .menu {
-  padding: 0 25px;
+  padding: 0px;
   height: 50px;
   padding-bottom: 0 !important;
 }
