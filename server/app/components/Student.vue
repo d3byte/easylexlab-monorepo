@@ -33,10 +33,10 @@
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
           <ul class="nav nav-pills nav-sm text-white" style="margin-left:95px;">
             <li class="nav-item">
-              <button style="font-size: 13px" class="btn btn btn-outline rounded button-task" @click="switchTasks" data-target="#tab_1"><i class="fa fa-file-text-o" aria-hidden="true"></i> <b>Задания</b></button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded button-task" @click="switchTasks" data-target="#tab_1"><b><i class="fa fa-file-text-o" aria-hidden="true"></i> Задания</b></button>
             </li>
             <li class="nav-item" style="padding-right:90px">
-              <button style="font-size: 13px" class="btn btn btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> <b>Сообщения</b></button>
+              <button style="font-size: 13px" class="btn btn btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><b><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</b></button>
             </li>
             <li class="nav-item groupbtn" v-for="(group, index) in user._groups">
               <button style="font-size: 13px" class="btn btn btn-outline rounded" @click="changeGroup(group)" 
@@ -85,16 +85,14 @@
   <div class="container" style="margin-top:-40px">
     <div class="row padding">
       <div v-if="showTasks" class="p-v-sm padding">
-        <center>
-          <div class="form-check" style="margin-right:25px">
-            <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" v-model="showAll">
-            Показать выполненные задания
-          </label>
-          </div>
-          <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
-          <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
-        </center>
+        <div class="form-check" style="margin-right:25px">
+          <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" v-model="showAll">
+          Показать выполненные задания
+        </label>
+        </div>
+        <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
+        <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
           <div v-show="!showAll" v-for="(test, index) in uncompletedTasks" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div class="col-lg col-md col-sm col-xs box task taskbox" 
@@ -145,7 +143,10 @@
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <center>
-                      <h3>{{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></h3>
+                      <h3>
+                        <img src="../pics/task-icon.png" class="task-icon">
+                        {{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span>
+                      </h3>
                       <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
                     </center>
                   </div>
