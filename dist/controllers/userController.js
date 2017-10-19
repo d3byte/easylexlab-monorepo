@@ -372,11 +372,11 @@ userController.learnWords = function (req, res) {
             var difference = Math.abs(result[0].result - userResult);
             var newAmount = Math.round(pairsLength * (difference / 100));
             _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(function (success) {
-                return res.json({ success: true });
+                return res.json({ wordsLearnt: newAmount });
             });
         } else {
             _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(function (success) {
-                return res.json({ success: true });
+                return res.json({ wordsLearnt: amount });
             });
         }
     });

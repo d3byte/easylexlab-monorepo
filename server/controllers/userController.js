@@ -366,11 +366,11 @@ userController.learnWords = (req, res) => {
       let difference = Math.abs(result[0].result - userResult);
       let newAmount = Math.round(pairsLength * (difference / 100));
       db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: newAmount } }).then(success => {
-        return res.json({ success: true });
+        return res.json({ wordsLearnt: newAmount });
       })
     } else {
       db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(success => {
-        return res.json({ success: true });
+        return res.json({ wordsLearnt: amount });
       })
     }
   })
