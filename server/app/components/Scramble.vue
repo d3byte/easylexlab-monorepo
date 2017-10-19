@@ -13,7 +13,6 @@
     <div class="box game" v-if="!win">
       <div class="background">
         <h3 class="key"><b>{{ currentPair.value }}</b></h3>
-        <button class="flat-btn" @click="next" v-if="correct">Следующее слово</button>
         <draggable v-model="shuffledLetters" @end="onEnd" element="div" class="value" :class="correct ?'correct':'default'">
           <div class="letter" v-for="letter in shuffledLetters" :class="letter == ' ' ? 'empty' : ''">
            {{ letter }}
@@ -22,7 +21,8 @@
       </div>
     </div>
     <div class="dashboard">
-      <button id="restart" class="btn btn-sm rounded" @click="start">Перезапуск</button>
+      <button style="text-transform:none;" id="restart" class="btn btn-sm rounded" @click="start">Перезапуск</button>
+      <button style="background:rgb(249, 106, 48);box-shadow: none;text-transform:none;" class="btn btn-sm rounded" @click="next" v-if="correct">Следующее слово</button>
     </div>
   </center>
   </div>
