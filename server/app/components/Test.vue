@@ -69,6 +69,7 @@ export default {
           done = true;
       })
       if(!done) {
+        this.wordsLearnt = Math.round(this.pairs.length * (this.percentage / 100));
         const body = {
           result: this.percentage,
           stackId: this.stack._id,
@@ -76,15 +77,28 @@ export default {
           username: this.user.username,
           userId: this.user._id
         };
-        this.$http.patch('addresult', body, {
+        this.$http.patch('words', {
+          amount: this.wordsLearnt,
+          stackId: this.stack._id,
+          userResult: this.percentage,
+          pairsLength: this.pairs.length
+        }, {
           headers: {
             'Content-type' : 'application/json',
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(res => {
-          this.success = true;
-          this.showPreloader = false;
-        });
+          this.wordsLearnt = res.body.wordsLearnt;
+          this.$http.patch('addresult', body, {
+            headers: {
+              'Content-type' : 'application/json',
+              'Authorization': 'Bearer ' + this.$store.getters.userToken
+            }
+          }).then(response => {
+            this.success = true;
+            this.showPreloader = false;
+          });
+        })
       } else {
         const body = {
           result: this.percentage,
@@ -102,12 +116,13 @@ export default {
             'Authorization': 'Bearer ' + this.$store.getters.userToken
           }
         }).then(res => {
+          this.wordsLearnt = res.body.wordsLearnt;
           this.$http.patch('updateresult', body, {
             headers: {
               'Content-type' : 'application/json',
               'Authorization': 'Bearer ' + this.$store.getters.userToken
             }
-          }).then(res => {
+          }).then(response => {
             this.success = true;
             this.showPreloader = false;
             this.$store.dispatch('zeroAttempts');
