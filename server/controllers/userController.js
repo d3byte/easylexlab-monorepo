@@ -370,7 +370,7 @@ userController.learnWords = (req, res) => {
       })
     } else {
       db.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(success => {
-        return res.json({ wordsLearnt: amount });
+        return res.json({ wordsLearnt: amount, firstTime: true });
       })
     }
   })
