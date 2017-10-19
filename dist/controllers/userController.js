@@ -376,7 +376,7 @@ userController.learnWords = function (req, res) {
             });
         } else {
             _models2.default.User.findByIdAndUpdate(user.id, { $inc: { wordsLearnt: amount } }).then(function (success) {
-                return res.json({ wordsLearnt: amount });
+                return res.json({ wordsLearnt: amount, firstTime: true });
             });
         }
     });
