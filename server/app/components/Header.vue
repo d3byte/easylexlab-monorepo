@@ -3,7 +3,7 @@
       <div class="container hidden-sm-down">
 
         <div class="navbar-item pull-left h4" id="pageTitle">
-          <router-link to="/">
+          <router-link to="/profile">
             <img src="../pics/logo.png" class="logo">
           </router-link>
         </div>
@@ -113,7 +113,7 @@
       <div class="navbar hidden-md-up">
         <!-- Page title - Bind to $state's title -->
         <div class="navbar-item pull-left h5" id="pageTitle">
-          <router-link to="/">
+          <router-link to="/profile">
             <img src="../pics/logo.png" class="logo">
           </router-link>
         </div>
