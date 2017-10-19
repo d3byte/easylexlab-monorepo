@@ -147,7 +147,7 @@
                         <img src="../pics/task-icon.png" class="task-icon">
                         {{ test.name }}
                       </h3>
-                      <small>Результат: <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></small>
+                      <smallщ>Результат: <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></small>
                       <button style="margin-top:10px" class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
                     </center>
                   </div>
@@ -374,7 +374,9 @@ export default {
 .taskcontentouter {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 5% 0;
+  min-height: 230px
 }
 
 .taskcontent {
@@ -434,8 +436,7 @@ h5.white-text {
 
 .box {
   background-color: #fff;
-  min-height: 160px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .row:first-of-type {
@@ -600,4 +601,5 @@ background-color: #58c721 !important;
   height: 25px;
   object-fit: contain;
 }
+
 </style>
