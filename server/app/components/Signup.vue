@@ -1,7 +1,7 @@
 <template>
   <div class="center-block w-xxl w-auto-xs p-y-md">
-    <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
-      <div v-if="!success" class="m-b text-sm">
+    <div class="p-a-md box-color r box-shadow-z1 text-color m-a" style="border-top:4px solid rgb(65, 159, 225);border-radius:5px;">
+      <div v-if="!success" class="m-b text-md">
         Регистрация
       </div>
       <div v-if="success" class="m-b text-sm">
@@ -41,12 +41,18 @@
           <input v-model="city" type="text" tabindex="6" class="md-input" required>
           <label>Город</label>
         </div>
+        <div class="md-form-group" v-if="both">
+          <input id="student" type="radio" v-model="role" value="student">
+          <label for="student" style="margin-right:10px">Ученик</label>
+          <input id="teacher" type="radio" v-model="role" value="teacher">
+          <label for="teacher">Учитель</label>
+        </div>
         <div class="md-form-group" v-if="role == 'student'">
           <input type="text" v-model="groupCode" class="md-input">
           <label>Код группы (необязательно)</label>
         </div>
         <div class="m-b-md">
-          <label class="md-check">
+          <label class="md-check" style="font-size: 12px">
             <input type="checkbox" v-model="agree" required><i class="primary"></i>
             Я ознакомлен с <router-link to="/info/rules" target="_blank"><u>пользовательским соглашением</u></router-link> и разрешаю обработку персональных данных
           </label>
@@ -110,7 +116,8 @@
                         permissions: this.role,
                         groupCode: this.groupCode,
                         school: this.school,
-                        city: this.city
+                        city: this.city,
+                        both: false
                     };
                     this.$http.post('signup', body).then(res => {
                         if (res.body.success) {
@@ -148,11 +155,12 @@
         created() {
             if (this.$store.getters.loginState)
                 this.$router.push('/profile');
-            console.log(this.$route.fullPath);
             if(this.$route.fullPath == '/signup/teacher') {
               this.role = 'teacher';
             } else if(this.$route.fullPath == '/signup/student'){
               this.role = 'student';
+            } else if(this.$route.fullPath == '/signup') {
+              this.both = true;
             }
         },
         components: {
@@ -167,5 +175,9 @@
     }
     .btn {
         text-transform: none;
+    }
+    
+    label {
+        font-size: 14px;
     }
 </style>
