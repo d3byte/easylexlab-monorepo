@@ -111,6 +111,7 @@
             <pie-chart
               v-if="!noneResults"
               :data="chartData"
+              :colors="chartOptions.colors"
               :library="{legend: { alignment: 'center', position: 'top', textStyle: { bold: true } }}"/>
               <h5 v-else><small>Результатов пока нет.</small></h5>
           </div>
@@ -170,7 +171,10 @@ export default {
       chartData: {},
       completedTasks: [],
       uncompletedTasks: [],
-      currentTask: ''
+      currentTask: '',
+      chartOptions: {
+        colors: ['rgb(41, 205, 107)', 'rgb(37, 198, 218)', 'rgb(49, 137, 225)', 'rgb(234, 168, 59)', 'rgb(228, 78, 60)']
+      }
     }
   },
   computed: {
