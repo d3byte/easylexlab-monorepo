@@ -15,9 +15,9 @@
           <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:7px"><b>ПЕРЕВОД</b></h5>
         </div>
         <div class="modal-body text-center p-lg" style="margin-top:0;">
-          <h5 v-if="success" class="success">Задание успешно создано.</h5>
+          <h5 v-if="success" class="text-success">Задание успешно создано.</h5>
           <center>
-            <button @click="pageUpdate" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="success">Ок</button>
+            <button style="margin-top:20px;" @click="pageUpdate" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="success">Ок</button>
           </center>
           <form class="login-form" onsubmit="return false" v-if="this.showEditor" style="margin-top:0">
             <div class="table-responsive">
