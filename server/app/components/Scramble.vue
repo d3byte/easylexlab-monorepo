@@ -161,6 +161,7 @@ export default {
     margin-right: 2px;
     width: 34px;
     z-index: 7 !important;
+    border-radius: 5px;
   }
 
   .empty {
