@@ -256,7 +256,7 @@ export default {
           attempts: this.task.attempts
         };
         console.log('Prepared props: ', props);
-        if(!!state.length) {
+        if(!!state.length && !done) {
           var found = false;
           state.map(item => {
             if(item.games.id == props.id) {
@@ -266,7 +266,7 @@ export default {
           if(!found) {
             this.$store.dispatch('setGames', props);
           }
-        } else {
+        } else if(!!!state.length && !done) {
           this.$store.dispatch('setGames', props);
         }
       });
