@@ -145,9 +145,10 @@
                     <center>
                       <h3>
                         <img src="../pics/task-icon.png" class="task-icon">
-                        {{ test.name }} – <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span>
+                        {{ test.name }}
                       </h3>
-                      <button class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
+                      <small>Результат: <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></small>
+                      <button style="margin-top:10px" class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
                     </center>
                   </div>
                 </div>

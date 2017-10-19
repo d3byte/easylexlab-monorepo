@@ -29,6 +29,7 @@ Vue.use(VueChartkick, { Chartkick });
 
 const routes = [
   { path: '/', component: Home },
+  { path: '/signup', component: Signup },
   { path: '/signup/student', component: Signup },
   { path: '/signup/teacher', component: Signup },
   { path: '/login', component: Login },
