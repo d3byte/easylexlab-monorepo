@@ -8,10 +8,16 @@
           <h2>Найди пару</h2>
         </div>
         <h3 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-        <div v-if="done || lose" @click="show()" class="vertical-center box">
-          <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
-          <h2>{{ Math.round(100 - incorrect * 100 / correct.length) > 0 ? Math.round(100 - incorrect * 100 / correct.length) : 0}}%</h2>
-          <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
+        <div v-if="done" @click="show()" class="box done">
+          <div class="done-header">
+            <h3 v-if="msg.slice(0, 6) != 'Хорошо'">{{ msg }}!</h3>
+            <h3 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(0, 6) }}</h3>
+          </div>
+          <div class="done-body">
+            <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5>
+            <h5 class="text-bold">Ваш результат: {{ percent }}%</h5>
+            <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
+          </div>
         </div>
         <div class="row words box" v-if="!done && !lose">
           <div v-for="item in newPairs" style="z-index:6" class="col-lg-4" id="dju">
@@ -25,7 +31,6 @@
             </div>
           </div>
         </div>
-        <button style="margin-bottom:20px" id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
       </div>
     </center>
   </div>
@@ -44,12 +49,14 @@ export default {
       newPairs: [],
       correct: [],
       incorrect: 0,
+      percent: 0,
       selected: {
         first: null,
         second: null
       },
       done: false,
-      lose: false
+      lose: false,
+      msg: ''
     }
   },
   computed: {
@@ -82,6 +89,7 @@ export default {
         this.newPairs = _.shuffle(this.newPairs);
         this.correct = [];
         this.incorrect = 0;
+        this.msg = '';
         this.done = false;
         this.lose = false;
         this.selected.first = null;
@@ -89,7 +97,13 @@ export default {
       }, 10);
     },
     allDone() {
-      if(Math.round(this.incorrect * 100 / this.correct.length) <= 10) {
+      this.percent = Math.round(100 - this.incorrect * 100 / this.correct.length);
+      if (this.percent >= 90){
+        if (this.percent == 100) {
+          this.msg = 'Отлично!';
+        } else {
+          this.msg = 'Очень хорошо!';
+        }
         const props = {
           game: 'matching',
           id: this.$route.params.id
@@ -97,9 +111,18 @@ export default {
         this.$store.dispatch('incrementAttempts', props);
         this.$store.dispatch('gameFinished', props);
         this.done = true;
+      } else if (this.percent < 90 && this.percent >= 60) {
+        this.msg = 'Хорошо, но необходимо пройти задание повторно!';
+        this.done = true;
+        return;
+      } else if (this.percent < 60) {
+        this.msg = 'Пройди задание повторно!';
+        this.done = true;
+        if (this.percent < 0) {
+          this.percent = 0;
+        }
         return;
       }
-      this.lose = true;
     },
     tryTest() {
       this.$store.dispatch('hideGames');
