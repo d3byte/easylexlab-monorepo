@@ -253,4 +253,9 @@ export default {
   } .done-body h5 {
     margin-bottom: 10px !important;
   }
+
+  #restart {
+    background: rgb(207, 233, 254);
+    box-shadow: none;
+  }
 </style>
