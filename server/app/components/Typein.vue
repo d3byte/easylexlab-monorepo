@@ -2,15 +2,16 @@
 <div class="container padding">
   <center>
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
-    <div v-if="done" class="signup">
-      <h3 class="text-success">Победа!</h3>
-      <h4>Ваш результат: {{ percentage }}%</h4>
-      <h5 @click="hideGames">Вернуться</h5>
-    </div>
-    <div v-if="lose" class="signup">
-      <h3 class="text-danger"> Неудача ;c </h3>
-      <h4>Ваш результат: {{ percentage }}%</h4>
-      <button @click="restart" class="btn btn-primary"> Попробовать еще раз </button>
+    <div v-if="done" @click="show()" class="box done">
+      <div class="done-header">
+        <h3 v-if="msg.slice(0, 6) != 'Хорошо'">{{ msg }}!</h3>
+        <h3 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(0, 6) }}</h3>
+      </div>
+      <div class="done-body">
+        <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5>
+        <h5 class="text-bold">Ваш результат: {{ percentage }}%</h5>
+        <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
+      </div>
     </div>
   </center>
   <form v-if="!showPreloader && !done && !lose" class="padding" onsubmit="return false">
@@ -71,23 +72,50 @@ export default {
   },
   methods: {
     allDone() {
+      // if (this.percentage >= 90) {
+      //   const props = {
+      //     game: 'typein',
+      //     id: this.$route.params.id
+      //   };
+      //   this.$store.dispatch('incrementAttempts', props);
+      //   if (this.doneAttempts == this.totalAttempts)
+      //     this.$store.dispatch('gameFinished', props);
+      //   if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
+      //     this.$store.dispatch('testAvailable');
+      //     setTimeout(() => {
+      //       $('#testavailable').modal('show');
+      //     }, 50)
+      //   }
+      //   this.done = true;
+      // } else {
+      //   this.lose = true;
+      // }
       if (this.percentage >= 90) {
+        if (this.percentage == 100) {
+          this.msg = 'Отлично!';
+        } else {
+          this.msg = 'Очень хорошо!';
+        }
         const props = {
-          game: 'typein',
+          game: 'flashcards',
           id: this.$route.params.id
         };
         this.$store.dispatch('incrementAttempts', props);
-        if (this.doneAttempts == this.totalAttempts)
-          this.$store.dispatch('gameFinished', props);
-        if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
-          this.$store.dispatch('testAvailable');
-          setTimeout(() => {
-            $('#testavailable').modal('show');
-          }, 50)
-        }
+        this.$store.dispatch('gameFinished', props);
         this.done = true;
-      } else {
-        this.lose = true;
+      } else if (this.percentage < 90 && this.percentage >= 60) {
+        this.msg = 'Хорошо, но необходимо пройти задание повторно!';
+        this.done = true;
+        return;
+      } else if (this.percentage < 60) {
+        this.msg = 'Пройди задание повторно!';
+        this.done = true;
+      }
+      if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
+        this.$store.dispatch('testAvailable');
+        setTimeout(() => {
+          $('#testavailable').modal('show');
+        }, 50)
       }
       this.stack.tasks[0].content.map(pair => pair.test = '');
     },
@@ -199,5 +227,30 @@ export default {
     background: url('../pics/letters-2.jpg') no-repeat;
     background-size: cover;
     opacity: 0.165;
+  }
+
+  .done {
+    display: inline-block;
+    min-width: 300px;
+    border-radius: 4px;
+  } .done-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(34, 166, 69);
+    border-top: 5px solid rgb(17, 131, 47);
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  } .done-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  } .done-body h5 {
+    margin-bottom: 10px !important;
   }
 </style>
