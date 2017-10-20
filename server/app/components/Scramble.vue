@@ -6,9 +6,17 @@
       <h2>Скрэмбл</h2>
     </div>
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-    <div v-if="win" class="win box">
+    <!-- <div v-if="win" class="win box">
       <h3 class="text-success">Победа!</h3>
       <h5 @click="start" class="restart">Начать заново?</h5>
+    </div> -->
+    <div v-if="win" class="box done">
+      <div class="done-header">
+        <h3 class="text-bold">Победа!</h3>
+      </div>
+      <div class="done-body">
+        <button id="restart" class="btn btn-sm rounded" @click="start">Перезапуск</button>
+      </div>
     </div>
     <div class="box game" v-if="!win">
       <div class="background">
@@ -20,7 +28,7 @@
        </draggable>
       </div>
     </div>
-    <div class="dashboard">
+    <div class="dashboard" v-if="!win">
       <button style="text-transform:none;" id="restart" class="btn btn-sm rounded" @click="start">Перезапуск</button>
       <button style="background:rgb(249, 106, 48);box-shadow: none;text-transform:none;" class="btn btn-sm rounded" @click="next" v-if="correct">Следующее слово</button>
     </div>
@@ -88,7 +96,7 @@ export default {
           };
           this.$store.dispatch('gameFinished', props);
         }
-          
+
         if(this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
           this.$store.dispatch('testAvailable');
           setTimeout(() => {
@@ -241,5 +249,30 @@ export default {
   #restart {
     background: rgb(207, 233, 254);
     box-shadow: none;
+  }
+
+  .done {
+    display: inline-block;
+    min-width: 300px;
+    border-radius: 4px;
+  } .done-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(34, 166, 69);
+    border-top: 5px solid rgb(17, 131, 47);
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  } .done-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  } .done-body h5 {
+    margin-bottom: 10px !important;
   }
 </style>
