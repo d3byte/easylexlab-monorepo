@@ -455,6 +455,5 @@ export default {
     padding: 20px;
   } .done-body h5 {
     margin-bottom: 10px !important;
-    text-transform: uppercase;
   }
 </style>
