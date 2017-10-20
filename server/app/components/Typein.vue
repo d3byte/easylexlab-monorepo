@@ -72,24 +72,6 @@ export default {
   },
   methods: {
     allDone() {
-      // if (this.percentage >= 90) {
-      //   const props = {
-      //     game: 'typein',
-      //     id: this.$route.params.id
-      //   };
-      //   this.$store.dispatch('incrementAttempts', props);
-      //   if (this.doneAttempts == this.totalAttempts)
-      //     this.$store.dispatch('gameFinished', props);
-      //   if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
-      //     this.$store.dispatch('testAvailable');
-      //     setTimeout(() => {
-      //       $('#testavailable').modal('show');
-      //     }, 50)
-      //   }
-      //   this.done = true;
-      // } else {
-      //   this.lose = true;
-      // }
       if (this.percentage >= 90) {
         if (this.percentage == 100) {
           this.msg = 'Отлично!';
@@ -97,7 +79,7 @@ export default {
           this.msg = 'Очень хорошо!';
         }
         const props = {
-          game: 'flashcards',
+          game: 'typein',
           id: this.$route.params.id
         };
         this.$store.dispatch('incrementAttempts', props);
