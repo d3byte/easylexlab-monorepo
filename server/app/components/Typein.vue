@@ -4,8 +4,8 @@
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
     <div v-if="done" @click="show()" class="box done">
       <div class="done-header">
-        <h3 v-if="msg.slice(0, 6) != 'Хорошо'">{{ msg }}!</h3>
-        <h3 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(0, 6) }}</h3>
+        <h3 v-if="msg.slice(0, 6) != 'Хорошо'" class="text-bold">{{ msg }}!</h3>
+        <h3 v-if="msg.slice(0, 6) == 'Хорошо'" class="text-bold">{{ msg.slice(0, 6) }}</h3>
       </div>
       <div class="done-body">
         <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5>

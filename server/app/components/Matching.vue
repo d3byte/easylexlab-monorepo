@@ -1,6 +1,6 @@
 <template>
-  <div class="col-lg-12">
-    <div class="container">
+<div class="col-lg-12">
+  <div class="container-fluid">
     <center>
       <div>
         <div class="name">
@@ -8,10 +8,10 @@
           <h2>Найди пару</h2>
         </div>
         <h3 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-        <div v-if="done" @click="show()" class="box done">
+        <div v-if="done" @click="show()" class="done">
           <div class="done-header">
-            <h3 v-if="msg.slice(0, 6) != 'Хорошо'">{{ msg }}!</h3>
-            <h3 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(0, 6) }}</h3>
+            <h3 v-if="msg.slice(0, 6) != 'Хорошо'" class="text-bold">{{ msg }}!</h3>
+            <h3 v-if="msg.slice(0, 6) == 'Хорошо'" class="text-bold">{{ msg.slice(0, 6) }}</h3>
           </div>
           <div class="done-body">
             <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5>
@@ -21,12 +21,9 @@
         </div>
         <div class="row words box" v-if="!done && !lose">
           <div v-for="item in newPairs" style="z-index:6" class="col-lg-4" id="dju">
-            <div class="box word"
-                 :id="item.key"
-                 :class="selected.first == item.key ||
+            <div class="box word" :id="item.key" :class="selected.first == item.key ||
                          selected.second == item.key
-                         ? item.index + ' selected' : item.index"
-                 @click="select(item.key)">
+                         ? item.index + ' selected' : item.index" @click="select(item.key)">
               <h2>{{ item.word }}</h2>
             </div>
           </div>
@@ -98,7 +95,7 @@ export default {
     },
     allDone() {
       this.percent = Math.round(100 - this.incorrect * 100 / this.correct.length);
-      if (this.percent >= 90){
+      if (this.percent >= 90) {
         if (this.percent == 100) {
           this.msg = 'Отлично!';
         } else {
@@ -129,18 +126,18 @@ export default {
       this.$store.dispatch('showTest');
     },
     checkConditions() {
-      if(this.correct.length == this.oldPairs.length &&
-         this.doneAttempts + 1 < this.totalAttempts) {
-          this.allDone();
-      } else if(this.correct.length == this.oldPairs.length &&
-                this.doneAttempts + 1 >= this.totalAttempts) {
-                  this.allDone();
-                  if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
-                    this.$store.dispatch('testAvailable');
-                    setTimeout(() => {
-                      $('#testavailable').modal('show');
-                    }, 50)
-                  }
+      if (this.correct.length == this.oldPairs.length &&
+        this.doneAttempts + 1 < this.totalAttempts) {
+        this.allDone();
+      } else if (this.correct.length == this.oldPairs.length &&
+        this.doneAttempts + 1 >= this.totalAttempts) {
+        this.allDone();
+        if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
+          this.$store.dispatch('testAvailable');
+          setTimeout(() => {
+            $('#testavailable').modal('show');
+          }, 50)
+        }
       }
     },
     select(key) {
@@ -150,7 +147,7 @@ export default {
       });
       $('.selected').off();
       $('.error').removeClass('error');
-      if(this.selected.first && this.selected.first != key && !this.correct.includes(check.index)) {
+      if (this.selected.first && this.selected.first != key && !this.correct.includes(check.index)) {
         this.selected.second = key;
         const first = _.find(this.newPairs, word => {
           return word.key == this.selected.first
@@ -158,7 +155,7 @@ export default {
         const second = _.find(this.newPairs, word => {
           return word.key == this.selected.second
         });
-        if(first.index == second.index) {
+        if (first.index == second.index) {
           this.correct.push(second.index);
           setTimeout(() => {
             $(`.${second.index}`).addClass('correct');
@@ -168,7 +165,7 @@ export default {
           }, 10);
           this.selected.first = null;
           this.selected.second = null;
-        } else if(first.index != second.index) {
+        } else if (first.index != second.index) {
           setTimeout(() => {
             $(`#${first.key}`).addClass('error');
             $(`#${second.key}`).addClass('error');
@@ -177,18 +174,18 @@ export default {
           this.selected.first = null;
           this.selected.second = null;
         }
-      } else if(!this.selected.first && !this.correct.includes(check.index)) {
+      } else if (!this.selected.first && !this.correct.includes(check.index)) {
         this.selected.first = key;
       }
     }
   },
   created() {
-    for(let task of this.stack.tasks) {
-      if(this.oldPairs.length == 8)
+    for (let task of this.stack.tasks) {
+      if (this.oldPairs.length == 8)
         break;
       Array.prototype.push.apply(this.oldPairs, task.content);
     }
-    for(let pair of this.oldPairs) {
+    for (let pair of this.oldPairs) {
       let index = randomize('0', 10);
       let key = {
         word: pair.key,
@@ -310,13 +307,16 @@ export default {
     font-size: 14px;
     font-weight: bold;
     opacity: 1;
-    text-transform: uppercase !important;
+    text-transform: none;
   }
 
   .done {
     display: inline-block;
     min-width: 300px;
     border-radius: 4px;
+    background-color:#fff;
+    box-shadow: 0 3px 6px #ccc;
+    /*border-radius: 2px;*/
   } .done-header {
     display: flex;
     align-items: center;
@@ -333,7 +333,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 40px;
   } .done-body h5 {
     margin-bottom: 10px !important;
   }

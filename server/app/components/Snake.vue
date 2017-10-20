@@ -43,7 +43,7 @@
     <button v-if="help" class="btn" style="padding-left:50px;padding-right:50px;background:rgb(252, 105, 33);box-shadow:none;color:white;" @click="start">Начать</button>
     <div v-if="win && !dead && !help" @click="show()" class="box done">
       <div class="done-header">
-        <h3>Победа!</h3>
+        <h3 class="text-bold">Победа!</h3>
       </div>
       <div class="done-body">
         <br>
@@ -84,7 +84,7 @@
   <center>
     <div v-if="dead && !win && !help" class="box done">
       <div class="lose-header">
-        <h3>Вы проиграли.</h3>
+        <h3 class="text-bold">Вы проиграли.</h3>
       </div>
       <div class="done-body">
         <button id="restart" class="btn btn-sm rounded" @click="start">Перезапуск</button>
