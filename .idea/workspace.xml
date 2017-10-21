@@ -190,12 +190,12 @@
       <workItem from="1502971616849" duration="2428000" />
       <workItem from="1503329052869" duration="19000" />
       <workItem from="1503642663769" duration="10684000" />
-      <workItem from="1508089755369" duration="4025000" />
+      <workItem from="1508089755369" duration="4106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29066000" />
+    <option name="totallyTimeSpent" value="29147000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -208,7 +208,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="ReactNative" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
