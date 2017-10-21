@@ -7,7 +7,19 @@
 
         <div v-else class="navbar-parent">
           <div class="container">
-            <ul class="nav navbar-nav pull-right text-primary-hover">
+            <ul class="nav navbar-nav pull-right text-primary-hover hidden-sm-down">
+              <li class="nav-item">
+                <router-link to="/signup/student" class="nav-link text-bold">
+                    Регистрация ученика
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/signup/teacher" class="nav-link text-bold">
+                    Регистрация учителя
+                </router-link>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav text-primary-hover hidden-md-up">
               <li class="nav-item">
                 <router-link to="/signup/student" class="nav-link text-bold">
                     Регистрация ученика
@@ -25,40 +37,75 @@
 
         <div class="container">
 
-          <div class="page-title">
+          <div class="row">
+
+            <div class="col-md-5">
+              <div class="page-title">
             <!-- <object type="image/svg+xml" data="../pics/logo-test.svg" class="logo">
               <img src="../pics/logo.png" class="logo">
             </object> -->
             <!-- <img src="../pics/dju.svg" class="logo"> -->
-            <img src="../pics/logo.png" class="logo">
+                <img src="../pics/logo.png" class="logo">
+              </div>
+
+              <h5 class="text-bold hidden-sm-down">
+                <i>
+                  С нами эффективно учить
+                  и легко учиться
+                </i>
+              </h5>
+
+              <p class="brief-description">
+                <span class="brief-description_name">EasyLexLab</span><br>
+                <span class="brief-description_text">
+                  - это образовательная платформа
+                  для изучения иностранных слов,
+                  предназначенная для учителей
+                  и учеников, изучающих языки
+                </span>
+              </p>
+            </div>
+
+            <div class="col-md-7 hidden-sm-down">
+              <!--
+                <div class="col-md-6">
+                  <img class="children" src="../pics/дети.png">
+                </div>
+              -->
+              <div class="pull-right">
+                <img class="phone" src="../pics/учить.png">
+                <div class="row" style="padding-right:10px">
+                  <router-link to="#" target="_blank">
+                    <img class="store-link" src="../pics/appstore.png">
+                  </router-link>
+                  <router-link to="#" target="_blank">
+                    <img class="store-link" src="../pics/gplay.png">
+                  </router-link>
+                </div>
+              </div>
+            </div>
+
           </div>
-
-          <h5 class="text-bold">
-            <i>
-              С нами эффективно учить
-              и легко учиться
-            </i>
-          </h5>
-
-          <p class="brief-description">
-            <span class="brief-description_name">EasyLexLab</span><br>
-            <span class="brief-description_text">
-              - это образовательная платформа
-              для изучения иностранных слов,
-              предназначенная для учителей
-              и учеников, изучающих языки
-            </span>
-          </p>
 
           <div class="row">
             <router-link to="/profile">
               <button
-                class="large-button large-button--blue col-md-4 col-sm-12 col-xs-12">
+                style="margin-bottom:20px"
+                class="large-button large-button--blue col-md-4 hidden-sm-down">
                 Личный кабинет
               </button>
             </router-link>
+            <center class="hidden-md-up">
+              <router-link to="/profile"> 
+                <button
+                  style="margin-bottom:20px;width:50%;"
+                  class="large-button large-button--blue">
+                  Личный кабинет
+                </button>
+            </router-link>
+            </center>
 
-            <div class="col-md-8 text-align--right" style="padding-top:15px">
+            <div class="col-md-8 text-align--right" style="padding-top:15px;">
                 <span class="brief-description_name blue-text">Мобильное приложение EasyLexLab,</span><br>
                 <span class="brief-description_text">
                   разработанное для вашего удобства является
@@ -66,6 +113,14 @@
                   Выполняйте домашние задание, где бы вы
                   ни находились!
                 </span>
+            </div>
+            <div class="center" style="margin-top:10px">
+              <router-link class="hidden-md-up" style="margin-right:20px" to="#" target="_blank">
+                <img class="store-link" src="../pics/appstore.png">
+              </router-link>
+              <router-link class="hidden-md-up" to="#" target="_blank">
+                <img class="store-link" src="../pics/gplay.png">
+              </router-link>
             </div>
           </div>
 
@@ -201,11 +256,49 @@
       <!-- Start of the fourth section -->
       <section class="section section--fourth">
 
-        <div class="container advantages">
+        <div class="container advantages hidden-sm-down">
           <img class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="../pics/tablet.png">
         </div>
+        <div class="advantages-mobile hidden-md-up">
+          <h3 class="text-center text-bold">Использовать EasyLexLab значит</h3>
+          <div class="row">
+            <div class="col-xs-12 advantage">
+              <p>
+                Использовать компьютерные технологии 
+                не выходя за рамки образовательной
+                программы и ФГОС
+              </p>
+            </div>
+            <div class="col-xs-12 advantage">
+              <p>
+                Проводить уроки более эффективно, 
+так как процесс изучения и усвоения 
+новых слов вынесен за рамки урока 
+(дети делают все самостоятельно, дома)
+              </p>
+            </div>
+            <div class="col-xs-12 advantage">
+              <p>
+                Более гибко подходить к процессу 
+изучения иностранного языка, 
+учитывая уровень и потребности
+каждой группы.
+              </p>
+            </div>
+            <div class="col-xs-12 advantage">
+              <p>
+                Контролировать изучение слов, 
+помогая ученикам быстрее
+достигать успехов в изучении 
+языков
+              </p>
+            </div>
+          </div>
+            
 
-        <div class="container center-content">
+        </div>
+
+        <div class="container center-content hidden-sm-down">
           <div class="statistic">
             <!-- 
               <p class="text-center text-bold">В течение нескольких лет учителя и ученики нашей школы используют EasyLexLab</p>
@@ -213,6 +306,11 @@
             -->
             <button class="large-button large-button--green" style="padding-left:10px;padding-right:10px">Зарегистрироваться</button>
           </div>
+        </div>
+        <div class="container hidden-md-up">
+          <center>
+            <button class="large-button large-button--green" style="padding-left:10px;padding-right:10px">Зарегистрироваться</button>
+          </center>
         </div>
 
       </section>
@@ -223,7 +321,6 @@
         <div class="container">
           <div class="footer">
             <router-link to="">EasyLexLab © 2017</router-link>
-            <router-link to="">Политика конфиденциальности</router-link>
             <router-link to="/info/rules" target="_blank">Пользовательское соглашение</router-link>
           </div>
         </div>
@@ -384,9 +481,10 @@ export default {
 .video-header {
   height: 10vh;
   padding: 10px;
+  margin-bottom: 10px;
 } .video-body {
-  max-height: 90vh;
-  min-height: auto;
+  min-height: 1px;
+  overflow: hidden;
 } .video-body video {
   width: 100%;
   height: 100%;
@@ -413,8 +511,8 @@ export default {
 
 .section--first {
   /* background: url('../pics/background-top.png') 50% 50% no-repeat; */
-  background: url('../pics/background-top.png') 80% 10% no-repeat;
-  padding-top: 0px;
+  background: url('../pics/буквы.png') 20% 10% no-repeat;
+  background-size: contain;
 }
 
 .section--second {
@@ -452,6 +550,41 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .section .container {
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  .advantages-mobile {
+    padding: 20px;
+  } .advantage {
+    background: rgb(239, 240, 241);
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    text-align: center;
+    vertical-align: middle;
+  } .advantage p {
+    margin: 5px 0;
+  }
+
+  .video-body {
+    margin-bottom: 30px;
+  } .video-body video {
+    margin: 30px 0;
+  }
+
+  .text-right, .text-align--right, .text-left {
+    text-align: center !important;;
+  }
+
+  .navbar-parent .container {
+    width: 100%;
+    text-align: center;
+  } .navbar-parent .container ul li {
+    text-align: center;
+  }
+
   .section--first {
     background: none;
   }
@@ -484,6 +617,24 @@ export default {
     width: 100%;
     display: block;
   }
+
+  h1, h2, h3, h4, h5, p {
+    text-align: center !important;
+  }
+
+  .brief-description {
+    margin-top: 0px !important;
+  }
+
+  .section--fourth {
+    min-height: 50px !important;
+    overflow: hidden;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 
 </style>
