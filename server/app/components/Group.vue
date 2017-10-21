@@ -1,4 +1,4 @@
-   <template lang="html">
+<template lang="html">
   <div>
     <app-header/>
     <div class="gradient">
