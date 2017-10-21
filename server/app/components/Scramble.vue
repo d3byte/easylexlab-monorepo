@@ -243,7 +243,7 @@ export default {
     font-size: 14px;
     font-weight: bold;
     opacity: 1;
-    text-transform: capitilized !important;
+    text-transform: none !important;
   }
 
   #restart {

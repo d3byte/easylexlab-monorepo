@@ -21,7 +21,7 @@
         <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
       </center>
     </div>
-    <div class="row padding box background">
+    <div class="row padding box game background">
       <center>
       <h3 style="color: #0062b0">{{ currentPair.value }}</h3>
     </center>
@@ -182,7 +182,7 @@ export default {
     margin-top: 40px;
   }
 
-  .box {
+  .box.game {
     border-top: 3px solid #5ee6af;
   }
 
@@ -239,5 +239,6 @@ export default {
   #restart {
     background: rgb(207, 233, 254);
     box-shadow: none;
+    text-transform: none !important;
   }
 </style>

@@ -578,11 +578,13 @@ table {
 #restart {
   background: rgb(207, 233, 254);
   box-shadow: none;
+  text-transform: none !important;
 }
 
 #changediff {
   margin-top: 10px;
   background: rgb(207, 233, 254);
   box-shadow: none;
+  text-transform: none !important;
 }
 </style>
