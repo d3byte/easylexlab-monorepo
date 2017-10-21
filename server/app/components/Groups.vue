@@ -6,7 +6,7 @@
         <div class="table-responsive box">
           <table class="table table-striped table-hover" v-if="!showPreloader">
             <thead>
-              <tr class="headers">
+              <tr class="headers text-white">
                 <th>Название</th>
                 <th>Класс</th>
                 <th>Ученики</th>
@@ -130,4 +130,14 @@ export default {
   background: rgb(98, 171, 242) !important;
   color: white !important;
 }
+
+/*.body-row:hover{
+  background: none !important;
+  border: 2px rgb(241, 167, 141) !important;
+}*/
+
+tr:hover td {
+  background: white !important;
+}
+
 </style>

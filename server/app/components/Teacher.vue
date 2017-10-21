@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="item">
-    <div class="item-bg" :style="{ background: background }"></div>
+    <div class="item-bg" style="background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ce5488 66%, #c64f81 100%);"></div>
     <div class="container">
         <div style="padding-top: 10px;" class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
@@ -11,11 +11,11 @@
               <img v-else :src="`data:image/${ext};base64,${image}`">
             </span>
           </a>
-          <div class="clear">
-            <h5 class="m-a-0 m-b-xs calc text-white"><b>{{ firstName + ' ' + lastName }}</b></h5>
+          <div class="clear text-white teacher-info">
+            <h6 class="m-a-0 m-b-xs calc text-white"><b>{{ firstName + ' ' + lastName }}</b></h6>
             <p class="text-white">
-              <span class="m-r"><b>{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</b></span><br>
-              <small style="margin-right: 10px"><b>{{ school }}</b></small><b><i class="fa fa-map-marker m-r-xs"></i> {{ city }}</b></small>
+              <h6 class="m-r"><b>{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</b></h6>
+              <h6 style="margin-right: 10px">ОУ: <b>{{ school }}</b><b><i class="fa fa-map-marker m-r-xs"></i> {{ city }}</b></h6>
             </p>
           </div>
         </div>
@@ -108,5 +108,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.teacher-info {
+  margin-top: 30px;
 }
 </style>
