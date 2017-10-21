@@ -10,9 +10,9 @@
             </b>
           </h5>
         </div>
-        <div class="modal-body" style="background:rgb(227, 243, 254)">
-          <h5 class="border">Дайте этот код ученикам и они смогут присоединиться к группе!</h5>
-          <h4 class="text-center" style="margin-bottom:20px;"><b>{{ groupCode }}</b></h4>
+        <div class="modal-body text-center" style="background:rgb(227, 243, 254)">
+          <h6 class="border">Сообщите этот код ученикам и они смогут присоединиться к группе!</h6>
+          <h3 class="regcode text-center" style="margin-bottom:20px;"><b>{{ groupCode }}</b></h3>
           <center>
             <button type="button" style="background:rgb(207, 208, 209);color:white" class="btn" data-dismiss="modal">Закрыть</button>
           </center>
@@ -58,6 +58,9 @@ export default {
 .border {
   padding: 5px;
   border-bottom: 3px solid rgb(207, 208, 209);
-  margin-bottom: 20px;
+}
+
+.regcode {
+  color: rgb(54, 66, 78) !important;
 }
 </style>
