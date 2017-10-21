@@ -4,6 +4,11 @@
     <div class="gradient">
       <div class="container custom-padding hidden-sm-down">
         <div class="parent">
+          <div class="group-circle" :style="{ backgroundColor: color }">
+            <h3 style="margin-top: 10px;">
+              {{ group.grade }}
+            </h3>
+          </div>
           <div class="description">
             <span @click="changeName" v-if="!newName" class="hover group-name-span">
               <b>{{ group.name }}</b>
@@ -16,7 +21,7 @@
               <div @click="submitNewName" class="input-group-addon hover primary" id="basic-addon2"><i class="fa fa-check" aria-hidden="true"></i></div>
             </div>
             <br><br>
-            <p class="text-muted m-b-sm">Здесь вы можете создать новое задание, написать сообщение, получить код для регистрации учеников и управлять ранее созданными заданиями.</p>
+            <p class="m-b-sm">Здесь вы можете создать новое задание, написать сообщение, <br />получить код для регистрации учеников и управлять ранее созданными заданиями.</p>
           </div>
         </div>
       </div>
@@ -548,6 +553,19 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 50px;
+}
+
+.group-circle {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  /*border: 2px solid rgb(144, 197, 246);*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgb(253, 105, 0)
 }
 
 .transparent {

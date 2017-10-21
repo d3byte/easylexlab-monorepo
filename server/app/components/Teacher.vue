@@ -6,7 +6,6 @@
         <div style="padding-top: 10px;" class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
           <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar" :style="{ backgroundColor: color }">
-              <!--<img :src="backgroundUrl">-->
               <span v-if="!!!image.length">{{ token.permissions == 'teacher' ? 'T' : 'S' }}</span>
               <img v-else :src="`data:image/${ext};base64,${image}`">
             </span>
