@@ -2,17 +2,23 @@
 <div class="vertical-center">
   <center>
     <div class="container-fluid flashcards">
-      <div class="name">
+      <div class="name" v-if="!done">
         <img src="../pics/flashcards.png">
         <h2>Выучи слова</h2>
       </div>
-      <h3 style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
-      <div v-if="done || lose" @click="show()" class="vertical-center box">
-        <h1 :class="done ? 'text-success': 'text-danger'">{{ lose ? 'Неудача :(' : 'Победа!' }}!</h1>
-        <h2>{{ Math.round(know.length * 100 / pairs.length) }}%</h2>
-        <p v-if="lose" @click="restart">Попробуйте еще раз.</p>
+      <h3 v-if="!done" style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
+      <div v-if="done" @click="show()" class="box done">
+        <div class="done-header">
+          <h3 v-if="msg.slice(0, 6) != 'Хорошо'">{{ msg }}!</h3>
+          <h3 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(0, 6) }}</h3>
+        </div>
+        <div class="done-body">
+          <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5>
+          <h5 class="text-bold">Ваш результат: {{ Math.round(know.length * 100 / pairs.length) }}%</h5>
+          <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
+        </div>
       </div>
-      <div class="col-md-4" v-show="!done && !lose">
+      <div class="col-md-4" v-show="!done">
         <div class="row-col red white-text left">
           <h5>Осталось карточек: {{ pairsLeft - 1 }}</h5>
         </div>
@@ -20,13 +26,13 @@
           <button style="background:rgb(248, 204, 199);z-index:6;" class="btn btn-md rounded">{{ nextKey }}</button>
         </div>
       </div>
-      <div class="col-md-4" v-show="!done && !lose">
+      <div class="col-md-4" v-show="!done">
         <div class="p-a needed-height pair box" style="height:157px;" @click="show()">
           <button v-show="!showDef" style="background:rgb(234, 205, 156);z-index:6;" class="btn btn-lg rounded">{{ currentPair.key }}</button>
           <button v-show="showDef" style="background:rgb(234, 205, 156);z-index:6;" class="btn btn-lg rounded">{{ currentPair.value }}</button>
         </div>
       </div>
-      <div class="col-md-4" v-show="!done && !lose">
+      <div class="col-md-4" v-show="!done">
         <div class="p-a box btns" style="height:157px;">
           <button @click="toKnow()" class="btn" style="background:rgb(251, 106, 33);color:white;z-index:6;">Знаю</button>
           <br>
@@ -38,7 +44,7 @@
       <button @click="tryTest" class="btn">Пройти тест</button>
     </div>
     <div class="row" style="margin-bottom:20px;margin-top:10px;">
-      <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
+      <button v-if="!done" id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
     </div>
   </center>
 </div>
@@ -63,7 +69,7 @@ export default {
       dontKnow: [],
       showDef: false,
       done: false,
-      lose: false
+      msg: ''
     }
   },
   computed: {
@@ -127,16 +133,26 @@ export default {
         }
         if (this.index + 1 == this.pairs.length &&
           this.doneAttempts + 1 >= this.totalAttempts) {
-          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+          var percent = Math.round(this.know.length * 100 / this.pairs.length);
+          if (percent >= 90) {
+            if(percent == 100) {
+              this.msg = 'Отлично!';
+            } else {
+              this.msg = 'Очень хорошо!';
+            }
             const props = {
               game: 'flashcards',
               id: this.$route.params.id
             };
             this.$store.dispatch('incrementAttempts', props);
             this.$store.dispatch('gameFinished', props);
-          } else {
-            this.lose = true;
+          } else if(percent < 90 && percent >= 60) {
+            this.msg = 'Хорошо, но необходимо пройти задание повторно!';
+            this.done = true;
             return;
+          } else if(percent < 60) {
+            this.msg = 'Пройди задание повторно!';
+            this.done = true;
           }
           if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
             this.$store.dispatch('testAvailable');
@@ -147,14 +163,26 @@ export default {
           this.done = true;
           break;
         } else if (this.index + 1 == this.pairs.length) {
-          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+          var percent = Math.round(this.know.length * 100 / this.pairs.length);
+          if (percent >= 90) {
+            if(percent == 100) {
+              this.msg = 'Отлично!';
+            } else {
+              this.msg = 'Очень хорошо!';
+            }
             const props = {
               game: 'flashcards',
               id: this.$route.params.id
             };
             this.$store.dispatch('incrementAttempts', props);
-          } else {
-            this.lose = true;
+            this.$store.dispatch('gameFinished', props);
+          } else if(percent < 90 && percent >= 60) {
+            this.msg = 'Хорошо, но необходимо пройти задание повторно!';
+            this.done = true;
+            return;
+          } else if(percent < 60) {
+            this.msg = 'Пройди задание повторно!';
+            this.done = true;
             return;
           }
           this.done = true;
@@ -178,15 +206,26 @@ export default {
         }
         if (this.index + 1 == this.pairs.length &&
           this.doneAttempts + 1 >= this.totalAttempts) {
-          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+          var percent = Math.round(this.know.length * 100 / this.pairs.length);
+          if (percent >= 90) {
+            if(percent == 100) {
+              this.msg = 'Отлично!';
+            } else {
+              this.msg = 'Очень хорошо!';
+            }
             const props = {
               game: 'flashcards',
               id: this.$route.params.id
             };
             this.$store.dispatch('incrementAttempts', props);
             this.$store.dispatch('gameFinished', props);
-          } else {
-            this.lose = true;
+          } else if(percent < 90 && percent >= 60) {
+            this.msg = 'Хорошо, но необходимо пройти задание повторно!';
+            this.done = true;
+            return;
+          } else if(percent < 60) {
+            this.msg = 'Пройди задание повторно!';
+            this.done = true;
             return;
           }
           if (this.gamesConditions[0] && this.gamesConditions[1] && this.gamesConditions[2] && this.gamesConditions[3] && this.gamesConditions[4]) {
@@ -197,14 +236,26 @@ export default {
           this.done = true;
           break;
         } else if (this.index + 1 == this.pairs.length) {
-          if (Math.round(this.know.length * 100 / this.pairs.length) >= 90) {
+          var percent = Math.round(this.know.length * 100 / this.pairs.length);
+          if (percent >= 90) {
+            if(percent == 100) {
+              this.msg = 'Отлично!';
+            } else {
+              this.msg = 'Очень хорошо!';
+            }
             const props = {
               game: 'flashcards',
               id: this.$route.params.id
             };
             this.$store.dispatch('incrementAttempts', props);
-          } else {
-            this.lose = true;
+            this.$store.dispatch('gameFinished', props);
+          } else if(percent < 90 && percent >= 60) {
+            this.msg = 'Хорошо, но необходимо пройти задание повторно!';
+            this.done = true;
+            return;
+          } else if(percent < 60) {
+            this.msg = 'Пройди задание повторно!';
+            this.done = true;
             return;
           }
           this.done = true;
@@ -379,5 +430,30 @@ export default {
     width: 40px;
     height: 40px;
     margin-right: 10px;
+  }
+
+  .done {
+    display: inline-block;
+    min-width: 300px;
+    border-radius: 4px;
+  } .done-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(34, 166, 69);
+    border-top: 5px solid rgb(17, 131, 47);
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  } .done-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  } .done-body h5 {
+    margin-bottom: 10px !important;
   }
 </style>
