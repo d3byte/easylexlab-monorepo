@@ -1,6 +1,6 @@
 <template>
   <main id="landing">
-    <div class="home hidden-sm-down">
+    <div class="home">
       <!-- Start of the first section -->
 
       <app-header v-if="logged" />
@@ -35,7 +35,7 @@
 
           <h5 class="text-bold">
             <i>
-              С нами эффективно учить<br>
+              С нами эффективно учить
               и легко учиться
             </i>
           </h5>
@@ -43,9 +43,9 @@
           <p class="brief-description">
             <span class="brief-description_name">EasyLexLab</span><br>
             <span class="brief-description_text">
-              - это образовательная платформа<br>
-              для изучения иностранных слов,<br>
-              предназначенная для учителей<br>
+              - это образовательная платформа
+              для изучения иностранных слов,
+              предназначенная для учителей
               и учеников, изучающих языки
             </span>
           </p>
@@ -61,9 +61,9 @@
             <div class="col-md-8 text-align--right" style="padding-top:15px">
                 <span class="brief-description_name blue-text">Мобильное приложение EasyLexLab,</span><br>
                 <span class="brief-description_text">
-                  разработанное для вашего удобства является<br>
-                  дополнением к существующей платформе.<br>
-                  Выполняйте домашние задание, где бы вы<br>
+                  разработанное для вашего удобства является
+                  дополнением к существующей платформе.
+                  Выполняйте домашние задание, где бы вы
                   ни находились!
                 </span>
             </div>
@@ -71,7 +71,7 @@
 
           <div class="row features">
 
-            <div class="col-md-3 feature">
+            <div class="col-sm-6 col-xs-12 col-md-3 feature">
               <div class="col-md-12 border-top border-top--blue">
                 <div class="feature-header">
                   <img src="../pics/advantage-4.png" class="feature-img">
@@ -81,7 +81,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3 feature">
+            <div class="col-sm-6 col-xs-12 col-md-3 feature">
               <div class="col-md-12 border-top border-top--green">
                 <div class="feature-header">
                   <img src="../pics/advantage-2.png" class="feature-img">
@@ -91,7 +91,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3 feature">
+            <div class="col-sm-6 col-xs-12 col-md-3 feature">
               <div class="col-md-12 border-top border-top--purple">
                 <div class="feature-header">
                   <img src="../pics/advantage-1.png" class="feature-img">
@@ -101,7 +101,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3 feature">
+            <div class="col-sm-6 col-xs-12 col-md-3 feature">
               <div class="col-md-12 border-top border-top--orange">
                 <div class="feature-header">
                   <img src="../pics/advantage-3.png" class="feature-img">
@@ -161,7 +161,7 @@
             </div>
             <div class="col-md-7">
               <div class="col-md-12 image-container">
-                <img src="../pics/teacher.png" class="img-adaptive img">
+                <img src="../pics/teacher.png" class="img-adaptive img" id="teacher">
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@
           <div class="row">
             <div class="col-md-7">
               <div class="col-md-12 image-container">
-                <img src="../pics/students-third.png" class="img-adaptive img">
+                <img src="../pics/students-third.png" class="img-adaptive img" id="student">
               </div>
             </div>
             <div class="col-md-5">
@@ -231,9 +231,6 @@
       <!-- End of footer -->
       <!-- ––––––––––––– -->
     </div>
-    <div class="home hidden-md-up">
-      <!--  Мобильная вёрстка -->
-    </div>
   </main>
 </template>
 
@@ -261,7 +258,6 @@ export default {
   flex-direction: column;
   padding: 20px 0;
   align-items: center;
-  min-height: 100vh;
   overflow: hidden;
   margin-bottom: 40px;
 } .section:last-child {
@@ -313,6 +309,11 @@ export default {
   font-size: 28px;
   font-weight: bold;
   color: rgb(29, 68, 170);
+}
+
+.section--first .brief-description {
+  width: 250px;
+  display: block;
 }
 
 .brief-description {
@@ -384,7 +385,8 @@ export default {
   height: 10vh;
   padding: 10px;
 } .video-body {
-  height: 90vh;
+  max-height: 90vh;
+  min-height: auto;
 } .video-body video {
   width: 100%;
   height: 100%;
@@ -447,6 +449,41 @@ export default {
   min-height: 50vh;
 } .center-content button {
   margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .section--first {
+    background: none;
+  }
+
+  .section--first .logo {
+    display: none;
+  }
+
+  .section--first .text-bold {
+    width: 100%;
+    margin-top: 100px;
+    display: block;
+  }
+
+  .section--first .brief-description {
+    width: 100%;
+  }
+
+  #teacher, #student {
+    display: none;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .footer a {
+    margin: 10px 0;
+    float: left;
+    width: 100%;
+    display: block;
+  }
 }
 
 </style>
