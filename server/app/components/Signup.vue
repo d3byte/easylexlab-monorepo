@@ -6,7 +6,7 @@
       </div>
       <div v-if="success" class="m-b text-sm">
         <span class="text-success">
-          Вы успешно зарегистрировались.
+          Вы зарегистрировались.
           <router-link to="/login" class="text-primary _600">Войти</router-link>
         </span>
       </div>

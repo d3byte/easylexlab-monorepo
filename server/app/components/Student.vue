@@ -16,7 +16,7 @@
               <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
               <h6 class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик,' : 'Учитель,' }}</span>ОУ: {{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</h6>
               <br>
-              <h5 class="m-a-0 text-white">Слов выучено: <b>{{ wordsLearnt }}</b></h5>
+              <h5 class="m-a-0 text-white">Слов выучено за всё время: <b>{{ wordsLearnt }}</b></h5>
               <br>
               <h5 class="m-a-0 text-white">Выбранная группа: <b>{{ currentGroup.name }}</b></h5>
               <h5 class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>

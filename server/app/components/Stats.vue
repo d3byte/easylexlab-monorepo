@@ -23,7 +23,7 @@
               </div>
               <div class="clear main-info">
                 <h4 class="m-a-0 text-xs" style="word-break:nowrap"><b>{{ date.num }} {{ date.rest }}</b></h4>
-                <small class="text-muted"><b>Регистрация</b></small>
+                <small class="text-muted" style="font-size:10px"><b>Вы зарегистрировались</b></small>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
               </div>
               <div class="clear main-info">
                 <h4 class="m-a-0 text-xs"><b>{{ wordsLearnt }} Слов</b></h4>
-                <small class="text-muted"><b>Выучено</b></small>
+                <small class="text-muted" style="font-size:10px"><b>Выучено за всё время</b></small>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
               </div>
               <div class="clear main-info">
                 <h4 class="m-a-0 text-xs"><b>В {{ groupsAmount }} групп</b></h4>
-                <small class="text-muted"><b>Вступлено</b></small>
+                <small class="text-muted" style="font-size:10px"><b>Вы вступили</b></small>
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
               </div>
               <div class="clear main-info">
                 <h4 class="m-a-0 text-xs"><router-link to="/profile/msg"><b>{{ messsagesAmount }} Сообщений</b></router-link></h4>
-                <small class="text-muted"><b>Получено</b></small>
+                <small class="text-muted" style="font-size:10px"><b>Получено</b></small>
               </div>
             </div>
           </div>
