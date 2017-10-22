@@ -136,8 +136,16 @@ export default {
   border: 2px rgb(241, 167, 141) !important;
 }*/
 
-tr:hover td {
+tr.body-row:hover {
+  border-top: 1px solid rgb(233, 103, 44) !important;
+} .body-row:hover td {
   background: white !important;
+  border-bottom: 1px solid rgb(233, 103, 44) !important;
+  border-top: 1px solid rgb(233, 103, 44) !important;
+} .body-row:hover td:last-child {
+  border-right: 1px solid rgb(233, 103, 44) !important;
+} .body-row:hover td:first-child {
+  border-left: 1px solid rgb(233, 103, 44) !important;
 }
 
 </style>
