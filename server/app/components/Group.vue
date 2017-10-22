@@ -101,7 +101,10 @@
                         <span style="padding-left:10px" class="pull-right m-r hover" @click="removeMsg(msg.id)">
                           <img src="../pics/trash.png" class="dashboard-icon">
                         </span>
-                        <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
+                        <router-link to="/profile" class="pull-left w-40 m-r">
+                          <img v-if="!!!image.length" class="avatar-icon" src="../pics/female.png">
+                          <img v-else :src="`data:image/${ext};base64,${image}`" class="avatar">
+                        </router-link>
                         <div class="clear">
                           <a href="" class="_500 block">{{ msg.author }}</a>
                           <span class="text-muted">{{ msg.text }}</span><br>
@@ -675,8 +678,8 @@ export default {
   color: rgb(227, 239, 243);
   background: rgb(176, 212, 219);
 } .avatar {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
 }
 </style>
 
