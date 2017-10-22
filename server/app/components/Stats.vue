@@ -107,12 +107,12 @@
               </li>
             </ul>
           </div>
-          <div class="box-body">
+          <div class="box-body" style="height:240px;overlay:hidden;">
             <pie-chart
               v-if="!noneResults"
               :data="chartData"
               :colors="chartOptions.colors"
-              :library="{legend: { alignment: 'center', position: 'top', textStyle: { bold: true } }}"/>
+              :library="{ height: 200 , legend: { alignment: 'start', position: 'bottom', textStyle: { bold: true, fontSize: 7 } }}"/>
               <h5 v-else><small>Результатов пока нет.</small></h5>
           </div>
         </div>
