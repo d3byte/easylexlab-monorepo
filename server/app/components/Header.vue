@@ -46,7 +46,7 @@
           <li class="nav-item border-right-nav dropdown hidden-sm-down">
             <a class="nav-link clear" href data-toggle="dropdown">
               <div class="circle w-32" :class="!!image.length ? 'no-bg' : ''">
-                <i v-if="!!!image.length" class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <img v-if="!!!image.length" class="avatar-icon" src="../pics/female.png">
                 <img v-else :src="`data:image/${ext};base64,${image}`" class="avatar">
               </div>
               <!-- <div class="avatar w-32" >
@@ -501,9 +501,10 @@
   }
 
   .logo {
-    width: 140px;
-    height: 45px;
+    width: 165px;
+    height: 55px;
     margin-right: -5px;
+    margin-bottom: 1px;
   }
 
   .hover:hover {
@@ -533,8 +534,6 @@
 
 .circle {
   border-radius: 50%;
-  vertical-center: center;
-  text-align: center;
   margin-right: 15px;
   font-size: 20px;
   color: rgb(227, 239, 243);
@@ -553,5 +552,12 @@
   height: 15px;
   object-fit: contain;
   margin-right: 5px;
+}
+
+.avatar-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  margin-bottom: 3px;
 }
 </style>
