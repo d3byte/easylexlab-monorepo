@@ -1,13 +1,14 @@
-<template lang="html">
+   <template lang="html">
   <div>
     <app-header/>
     <div class="gradient">
       <div class="container custom-padding hidden-sm-down">
-        <div class="parent pull-left">
+        <div style="display:flex;align-items:center;padding-left:30px">
           <div class="group-circle" :style="{ backgroundColor: color }">
             <h3 style="margin-top: 10px;">
-              {{ group.grade }} класс
+              {{ group.grade }}
             </h3>
+            <span style="margin-top:-15px;" class="text-white text-md">класс</span>
           </div>
           <div class="description">
             <span @click="changeName" v-if="!newName" class="hover group-name-span">
@@ -44,19 +45,19 @@
       <div class="container custom-padding" style="padding-bottom:0;margin-bottom:0;padding-top:0;margin-top:0;">
         <div class="menu">
           <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#newtask">
-            <i class="material-icons menu-icon">&#xE148;</i>
+            <img class="dashboard-icon" src="../pics/newtask.png">
             <span>Новое задание</span>
           </div>
           <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#newmsg">
-            <i class="material-icons menu-icon">&#xE150;</i>
+            <img class="dashboard-icon" src="../pics/pencil.png">
             <span>Новое сообщение</span>
           </div>
           <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#regcode">
-            <i class="material-icons menu-icon">&#xE8D3;</i>
+            <img class="dashboard-icon" src="../pics/regcode.png" style="width:40px;height:10px">
             <span>Код регистрации</span>
           </div>
           <div class="menu-item col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#history">
-            <i class="material-icons menu-icon">&#xE8DE;</i>
+            <img class="dashboard-icon" src="../pics/taskhistory.png">
             <span>История заданий</span>
           </div>
           <!-- Удаление группы -->
@@ -66,54 +67,61 @@
       </div>
     </div>
     <div class="row-col b-b padding">
-    	<div class="container">
+      <div class="container">
         <div class="row">
-      		<div class="">
-      			<div class="row">
-      				<div class="col-sm-6">
-      					<div class="box">
-      						<div class="box-header msg-header">
+          <div class="">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="box">
+                  <div class="box-header msg-header">
                     <div class="pull-right">
-                      <i class="fa fa-envelope-o" style="font-size:18px;vertical-align:middle" aria-hidden="true"></i>
+                      <img src="../pics/sentmsg.png" class="dashboard-icon">
                     </div>
-      						  <div class="clear">
+                    <div class="clear">
                       <small class="text-muted"><b>{{ !!group.messages ? group.messages.length : 0 }}</b> Cообщений</small>
                     </div>
-      						</div>
-      						<div class="box-body msgs-body" style="background: rgb(200, 237, 246);padding-bottom:0;">
+                  </div>
+                  <div class="box-body msgs-body" style="background: rgb(200, 237, 246);padding-bottom:0;">
                     <ul class="list-group m-b">
-      				        <li v-if="showAll" class="list-group-item msg" v-for="msg in group.messages">
-                        <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
-      				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
-      				          <div class="clear">
-      				            <a href="" class="_500 block">{{ msg.author }}</a>
-      				            <span class="text-muted">{{ msg.text }}</span><br>
+                      <li v-if="showAll" class="list-group-item msg" v-for="msg in group.messages">
+                        <span class="pull-right m-r hover" @click="removeMsg(msg.id)">
+                          <img style="margin-left:10px" src="../pics/trash.png" class="dashboard-icon">
+                        </span>
+                        <router-link to="/profile" class="pull-left w-40 m-r">
+                          <img v-if="!!!image.length" class="avatar-icon" src="../pics/female.png">
+                          <img v-else :src="`data:image/${ext};base64,${image}`" class="avatar">
+                        </router-link>
+                        <div class="clear">
+                          <a href="" class="_500 block">{{ msg.author }}</a>
+                          <span class="text-muted">{{ msg.text }}</span><br>
                           <span class="text-muted"><small>{{ msg.date }}</small></span>
-      				          </div>
-      				        </li>
+                        </div>
+                      </li>
                       <li v-if="!showAll" class="list-group-item msg" v-for="msg in slicedMessages">
-                        <span class="pull-right m-r hover" @click="removeMsg(msg.id)"><i class="material-icons">delete</i></span>
-      				          <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
-      				          <div class="clear">
-      				            <a href="" class="_500 block">{{ msg.author }}</a>
-      				            <span class="text-muted">{{ msg.text }}</span><br>
+                        <span style="padding-left:10px" class="pull-right m-r hover" @click="removeMsg(msg.id)">
+                          <img src="../pics/trash.png" class="dashboard-icon">
+                        </span>
+                        <router-link to="/profile" class="pull-left w-40 m-r"><img :src="msg.pic" class="img-responsive img-circle"></router-link>
+                        <div class="clear">
+                          <a href="" class="_500 block">{{ msg.author }}</a>
+                          <span class="text-muted">{{ msg.text }}</span><br>
                           <span class="text-muted"><small>{{ msg.date }}</small></span>
-      				          </div>
-      				        </li>
+                        </div>
+                      </li>
                       <li class="list-group-item checkbox">
                         <input type="checkbox" id="padding" v-model="showAll">
                         <label for="padding">Посмотреть все</label>
                       </li>
-      					    </ul>
-      						</div>
-      			    </div>
-      				</div>
-      				<div class="col-sm-6">
-      	        <div class="lt" id="color">
-              		<div class="box-header" style="background:white">
-        	          <h3>Статистика</h3>
-        	          <small>Результаты за {{ currentTask }}</small>
-        	        </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="lt" id="color">
+                  <div class="box-header" style="background:white">
+                    <h3>Статистика</h3>
+                    <small>Результаты за {{ currentTask }}</small>
+                  </div>
                   <div class="box-tool">
                   <ul class="nav">
                     <li class="nav-item inline dropdown">
@@ -126,7 +134,7 @@
                     </li>
                   </ul>
                 </div>
-        	        <div class="box-body" style="background:white;min-height:270px;padding-bottom:0;padding-top:13px;">
+                  <div class="box-body" style="background:white;min-height:270px;padding-bottom:0;padding-top:13px;">
                     <pie-chart
                       v-if="!noneResults"
                       :data="chartData"
@@ -134,10 +142,10 @@
                       :library="{backgroundColor: '#fff', legend: { textStyle: { color: 'black' } }}"
                       />
                       <h5 v-else><small>Результатов пока нет.</small></h5>
-        	        </div>
-      	        </div>
-      				</div>
-      			</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="row-col">
               <div class="row checkbox">
                 <input type="checkbox" class="deleteCheckbox" id="padding_delete" v-model="deleteStudent">
@@ -179,9 +187,9 @@
                 </table>
               </div>
             </div>
-      		</div>
-      	</div>
-    	</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -218,7 +226,9 @@ export default {
       chartOptions: {
         height: 250,
         colors: ['rgb(41, 205, 107)', 'rgb(37, 198, 218)', 'rgb(49, 137, 225)', 'rgb(234, 168, 59)', 'rgb(228, 78, 60)']
-      }
+      },
+      image: localStorage.img ? localStorage.img : '',
+      ext: localStorage.ext ? localStorage.ext : ''
     }
   },
   computed: {
@@ -465,10 +475,6 @@ export default {
   padding-left: 28px;
 }
 
-.description {
-  margin-left: 50px;
-}
-
 .icono-caretLeft {
   color: black !important;
 }
@@ -557,16 +563,16 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 50px;
-  margin-left: 34px;
 }
 
 .group-circle {
-  margin-right: 10px;
+  margin-right: 20px;
   margin-bottom: 10px;
   width: 100px;
   height: 100px;
   /*border: 2px solid rgb(144, 197, 246);*/
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -647,4 +653,30 @@ export default {
 } .list-group-item:first-of-type {
   border-top: none !important;
 }
+
+.dashboard-icon {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  object-contain: fit;
+}
+
+.avatar-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  margin-bottom: 3px;
+}
+
+.circle {
+  border-radius: 50%;
+  margin-right: 15px;
+  font-size: 20px;
+  color: rgb(227, 239, 243);
+  background: rgb(176, 212, 219);
+} .avatar {
+  width: 32px;
+  height: 32px;
+}
 </style>
+
