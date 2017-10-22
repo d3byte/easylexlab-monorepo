@@ -3,10 +3,10 @@
     <app-header/>
     <div class="gradient">
       <div class="container custom-padding hidden-sm-down">
-        <div class="parent">
+        <div class="parent pull-left">
           <div class="group-circle" :style="{ backgroundColor: color }">
             <h3 style="margin-top: 10px;">
-              {{ group.grade }}
+              {{ group.grade }} класс
             </h3>
           </div>
           <div class="description">
@@ -465,6 +465,10 @@ export default {
   padding-left: 28px;
 }
 
+.description {
+  margin-left: 50px;
+}
+
 .icono-caretLeft {
   color: black !important;
 }
@@ -553,10 +557,11 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 50px;
+  margin-left: 34px;
 }
 
 .group-circle {
-  margin-right: 20px;
+  margin-right: 10px;
   margin-bottom: 10px;
   width: 100px;
   height: 100px;
