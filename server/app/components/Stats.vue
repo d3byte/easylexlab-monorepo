@@ -65,7 +65,7 @@
     	<div class="row">
     		<div class="col-lg-8">
     			<div class="box" style="background:rgb(143, 198, 247)">
-    				<div class="box-header text-center text-white">
+    				<div class="box-header text-center text-white" style="padding:5px">
     					<h3><b>Все результаты <span class="label" style="background:rgb(228, 77, 62)">{{ results.length }}</span></b></h3>
     				</div>
     				<div class="box-body table-responsive no-padding">
