@@ -80,7 +80,7 @@ userController.post = (req, res) => {
                                             '– Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке\n\n' +
                                             'Удачного вам обучения!\n\n' +
                                             'С уважением,\n' +
-                                            'Команда EasyLexLab"'
+                                            'Команда EasyLexLab'
                                     };
                                     transporter.sendMail(HelperOptions, (error, info) => {
                                         if (error) {
@@ -108,7 +108,7 @@ userController.post = (req, res) => {
                                             '- Контролировать изучение слов, помогая ученикам быстрее достигать успехов в изучении языков.\n\n' +
                                             'С нами эффективно учить и легко учиться!\n\n' +
                                             'С уважением,\n' +
-                                            'Команда EasyLexLab"'
+                                            'Команда EasyLexLab'
                                     };
                                     transporter.sendMail(HelperOptions, (error, info) => {
                                         if (error) {
@@ -172,7 +172,7 @@ userController.post = (req, res) => {
                                     '– Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке\n\n' +
                                     'Удачного вам обучения!\n\n' +
                                     'С уважением,\n' +
-                                    'Команда EasyLexLab"'
+                                    'Команда EasyLexLab'
                               };
                               transporter.sendMail(HelperOptions, (error, info) => {
                                   if (error) {
@@ -200,7 +200,7 @@ userController.post = (req, res) => {
                                     '- Контролировать изучение слов, помогая ученикам быстрее достигать успехов в изучении языков.\n\n' +
                                     'С нами эффективно учить и легко учиться!\n\n' +
                                     'С уважением,\n' +
-                                    'Команда EasyLexLab"'
+                                    'Команда EasyLexLab'
                               };
                               transporter.sendMail(HelperOptions, (error, info) => {
                                   if (error) {
