@@ -61,18 +61,61 @@ userController.post = (req, res) => {
                                     rejectUnauthorized: false
                                   }
                                 });
-                                let HelperOptions = {
-                                  from: '"EasyLexLab" <easylexlab@gmail.com>',
-                                  to: newUser.email,
-                                  // to: 'easylexlab@gmail.com',
-                                  subject: 'Регистрация на EasyLexLab',
-                                  text: `
-                                  Вы успешно зарегистрировались на EasyLexLab, ${newUser.firstName} ${newUser.lastName}.
+                                if(newUser.permissions == 'student') {
+                                    let HelperOptions = {
+                                        from: '"EasyLexLab" <easylexlab@gmail.com>',
+                                        to: newUser.email,
+                                        // to: 'easylexlab@gmail.com',
+                                        subject: 'Регистрация на EasyLexLab',
+                                        text:
+                                        `Здравствуйте, ${newUser.firstName} ${newUser.lastName}!
+                                    
+                                    Благодарим вас за то, что вы стали пользователем EasyLexLab!
 
-                                  Логин: ${newUser.username}
-                                  Пароль: ${password}
-                                  `
-                                };
+                                    Логин: ${newUser.username}
+                                    Пароль: ${password}
+
+                                    EasyLexLab – это образовательная платформа для изучения иностранных слов, предназначенная для учителей и учеников, изучающих языки.
+
+                                    EasyLexLab может Вам помочь:
+                                        - Эффективно усваивать слова, необходимые для использования на уроках.
+                                        - Выполнять домашнее задание в любом месте в любое время, используя смартфон, компьютер или планшет.
+                                        - В игровой форме запоминать слова, что превращает рутинную работу в интересное и полезное занятие.
+                                        - Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке".
+
+                                    Удачного вам обучения!
+
+                                    С уважением, 
+                                    Команда EasyLexLab`
+                                    };
+                                } else if(newUser.permissions == 'teacher') {
+                                    let HelperOptions = {
+                                        from: '"EasyLexLab" <easylexlab@gmail.com>',
+                                        to: newUser.email,
+                                        // to: 'easylexlab@gmail.com',
+                                        subject: 'Регистрация на EasyLexLab',
+                                        text:
+                                            `Здравствуйте, ${newUser.firstName} ${newUser.lastName}!
+                                        
+                                            Благодарим вас за то, что вы стали пользователем EasyLexLab!
+
+                                            Логин: ${newUser.username}
+                                            Пароль: ${password}
+
+                                            EasyLexLab – это образовательная платформа для изучения иностранных слов, предназначенная для учителей и учеников, изучающих языки.
+
+                                            EasyLexLab может Вам помочь:
+                                                - Использовать компьютерные технологии не выходя за рамки образовательной программы и ФГОС.
+                                                - Проводить уроки более эффективно, так как процесс изучения и усвоения новых слов вынесен за рамки урока (дети делают все самостоятельно, дома).
+                                                - Более гибко подходить к процессу изучения иностранного языка, учитывая уровень и потребность каждой группы.
+                                                - Контролировать изучение слов, помогая ученикам быстрее достигать успехов в изучении языков.
+
+                                            С нами эффективно учить и легко учиться!
+
+                                            С уважением, 
+                                            Команда EasyLexLab`
+                                    };
+                                }
                                 transporter.sendMail(HelperOptions, (error, info) => {
                                   if(error) {
                                     console.log(error);
@@ -410,7 +453,18 @@ userController.recoverPassword = (req, res) => {
         to: user.email,
         // to: 'easylexlab@gmail.com',
         subject: 'Восстановление пароля',
-        text: `Чтобы восстановить пароль, перейдите по этой ссылке: easylexlab.ru/recover/${token}`
+        text: 
+        `Здравствуйте, ${user.firstName + ' ' + user.lastName}!
+        
+        Чтобы восстановить пароль, перейдите по этой ссылке:
+        easylexlab.ru/recover/${token}
+        
+        Если ссылка недоступна, скопируйте URL-адрес и вставьте его в браузер.
+
+        Если вы не запрашивали восстановление пароля, просто пропустите это сообщение.
+
+        С уважением, 
+        Команда EasyLexLab`
       };
       transporter.sendMail(HelperOptions, (error, info) => {
         if(error) {
