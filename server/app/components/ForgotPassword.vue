@@ -15,7 +15,7 @@
     </div>
     <div class="p-a-md box-color r box-shadow-z1 text-color m-a" v-else>
       <div class="m-b">
-        <span class="text-success">Письмо успешно отправлено!</span>
+        <span class="text-success text-bold">Письмо успешно отправлено!</span>
         <p class="text-xs m-t">Следуйте инструкциям из письма, чтобы восстановить пароль.</p>
       </div>
     </div>
@@ -38,8 +38,9 @@ export default {
         email: this.email
       };
       this.$http.post('recover', body).then(res => {
-          this.done = true;
+
       });
+      this.done = true;
     },
     changePassword() {
       if(this.password.length > 5) {
