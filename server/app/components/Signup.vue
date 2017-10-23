@@ -4,11 +4,11 @@
       <div v-if="!success" class="m-b text-md">
         Регистрация
       </div>
-      <div v-if="success" class="m-b text-sm">
-        <span class="text-success">
-          Вы зарегистрировались.
-          <router-link to="/login" class="text-primary _600">Войти</router-link>
+      <div v-if="success" class="">
+        <span class="text-success text-bold" style="font-size:16px">
+          Вы успешно зарегистрировались.
         </span>
+        <center><button class="btn btn-primary text-white text-bold" style="text-transform:uppercase;margin-top:10px">Войти</button></center>
       </div>
       <div v-if="error" class="alert ng-scope ng-isolate-scope alert-danger alert-dismissible">{{ errorMsg }}
       </div>
@@ -62,7 +62,7 @@
       </form>
     </div>
 
-    <div class="p-v-lg text-center">
+    <div class="p-v-lg text-center" v-if="!success">
       <div>Уже есть аккаунт?
         <router-link to="/login" class="text-primary _600">Войти</router-link>
       </div>
