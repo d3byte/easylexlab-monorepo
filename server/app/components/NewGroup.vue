@@ -12,11 +12,10 @@
           </h5>
         </div>
         <div class="modal-body text-center p-lg">
-          <h5 class="success" v-if="success">
-            Группа успешно создана!
+          <h5 v-if="success">
+            <span style="color:#307351">Группа успешно создана!</span>
             <br>
-            <button class="btn btn-primary goto" id="hide" data-dismiss="modal" @click="goto(newGroupId)"> Перейти</button>
-            <br>
+            <button class="btn btn-primary goto" id="hide" data-dismiss="modal" @click="goto(newGroupId)">Перейти</button>
             <button @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Назад</button>
           </h5>
           <form class="login-form" onsubmit="return false" v-if="!success">
@@ -64,6 +63,7 @@ export default {
       this.error = false;
       this.errormsg = '';
       this.newGroupId = '';
+      window.location.reload()
     },
     hideModal() {
       $('.ui.basic.modal').modal('hide');
@@ -71,6 +71,7 @@ export default {
     goto(id) {
       const path = '/group/' + id;
       this.$router.push({ path, alias: '/group' });
+      window.location.reload()
     },
     create() {
       if(this.name.length > 0 && this.grade >= 1 && this.grade <= 11) {
