@@ -4,7 +4,7 @@
     <div class="container-fluid flashcards">
       <div class="name" v-if="!done">
         <img src="../pics/flashcards.png">
-        <h2>Выучи слова</h2>
+        <h2><b>Выучи слова</b></h2>
       </div>
       <h3 v-if="!done" style="margin-bottom:10px;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
       <div v-if="done" @click="show()" class="box done">
@@ -123,6 +123,7 @@ export default {
       this.nextKey = this.pairs[1].key;
     },
     toKnow() {
+      this.showDef = false;
       this.pairsLeft--;
       this.know.push(this.currentPair);
       for (let i = 0; i < this.pairs.length; i++) {
@@ -196,6 +197,7 @@ export default {
       }
     },
     toDontKnow() {
+      this.showDef = false;
       this.pairsLeft--;
       this.dontKnow.push(this.currentPair);
       for (let i = 0; i < this.pairs.length; i++) {

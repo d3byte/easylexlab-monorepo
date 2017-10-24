@@ -3,7 +3,7 @@
     <center>
     <div class="name">
       <img src="../pics/scramble.png">
-      <h2>Скрэмбл</h2>
+      <h2><b>Скрэмбл</b></h2>
     </div>
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
     <!-- <div v-if="win" class="win box">

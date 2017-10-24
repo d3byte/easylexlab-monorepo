@@ -3,7 +3,7 @@
   <center>
     <div class="name">
       <img src="../pics/snake.png">
-      <h2>Змейка</h2>
+      <h2><b>Змейка</b></h2>
     </div>
     <h3>Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
     <div class="box help" v-if="help">
