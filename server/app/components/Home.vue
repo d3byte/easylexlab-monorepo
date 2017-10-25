@@ -321,7 +321,6 @@
         <div class="container">
           <div class="footer">
             <router-link to="">EasyLexLab © 2017</router-link>
-            <router-link to="/info/rules" target="_blank">Пользовательское соглашение</router-link>
           </div>
         </div>
       </div>

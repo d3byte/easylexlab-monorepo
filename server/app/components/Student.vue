@@ -16,18 +16,19 @@
               <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
               <h6 class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик,' : 'Учитель,' }}</span>ОУ: {{ school }}, <i class="fa fa-map-marker "></i> {{ city }}</h6>
               <br>
-              <h5 class="m-a-0 text-white">Слов выучено за всё время: <b>{{ wordsLearnt }}</b></h5>
+              <h6 class="m-a-0 text-white">Слов выучено за всё время: <b>{{ wordsLearnt }}</b></h6>
               <br>
-              <h5 class="m-a-0 text-white">Выбранная группа: <b>{{ currentGroup.name }}</b></h5>
-              <h5 class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h5>
-              <h5 class="m-a-0 text-white" v-else>Ближайшего дня сдачи нет</h5>
+              <h6 class="m-a-0 text-white">Выбранная группа: <b>{{ currentGroup.name }}</b></h6>
+              <br>
+              <h6 class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h6>
+              <h6 class="m-a-0 text-white" v-else>Ближайшего дня сдачи нет</h6>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div style="margin-top: -50px;">
+  <div style="margin-top: -38px;">
     <div class="row hidden-xs-down" style="padding:0;">
       <div class="col-sm-12" style="background: #5a7fb9;padding:0;">
         <div class="p-y-md clearfix nav-active-primary container" style="margin-bottom:-5px;">
@@ -601,5 +602,6 @@ background-color: #58c721 !important;
   height: 25px;
   object-fit: contain;
 }
+
 
 </style>

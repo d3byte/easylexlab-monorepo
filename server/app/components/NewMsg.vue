@@ -11,15 +11,17 @@
             </h5>
           </div>
           <div class="modal-header" style="background:rgb(227, 243, 254);padding:5px 10px;padding-top:10px">
-            <h6 style="color:rgb(116, 154, 184)">
+            <h6 v-if="!success" style="color:rgb(116, 154, 184)">
               <i class="material-icons">&#xE150;</i>
-              <b>Текст сообщения</b>
+              <b>Введите сообщение и нажмите кнопку "Отправить". <br> <span style="margin-left:22px;">Сообщение будет доставлено всем ученикам данной группы.</span></b>
             </h6>
           </div>
           <div class="modal-body p-lg" style="background:rgb(227, 243, 254)">
-            <h5 v-if="success && !showPreloader">Сообщение успешно отправлено.</h5>
             <center>
-              <button v-if="success && !showPreloader" @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
+            <h5 v-if="success && !showPreloader">Сообщение успешно отправлено.</h5>
+            </center>
+            <center>
+              <button style="margin-top:20px;" v-if="success && !showPreloader" @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
             </center>
             <form v-if="!success" class="login-form" onsubmit="return false">
               <div class="form-group row">
@@ -46,7 +48,8 @@ export default {
   props: ['group'],
   data() {
     return {
-      text: `Введите сообщение и нажмите кнопку "Отправить".\nСообщение будет доставлено всем ученикам данной группы.`,
+      // text: `Введите сообщение и нажмите кнопку "Отправить".\nСообщение будет доставлено всем ученикам данной группы.`,
+      text: 'Текст сообщения',
       showPreloader: false,
       success: false,
       groupId: this.$route.params.id
@@ -73,6 +76,7 @@ export default {
       });
     },
     refresh() {
+      window.location.reload()
       this.success = false;
       this.text = '';
       this.showPreloader = false;

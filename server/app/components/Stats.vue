@@ -3,14 +3,14 @@
     <app-header />
     <div class="row" style="color:white;background:linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190))">
       <div class="container" style="padding-left:50px;">
-        <h5 style="margin-top:5px;">
-          <img src="../pics/stats.png" width="30px" height="30px">
+        <h4 style="margin-top:24px;">
+          <img src="../pics/stats.png" width="30px" height="40px" style="padding-bottom:9px">
           <b>Статистика</b>
-        </h5>
+        </h4>
       </div>
     </div>
     <div class="row" style="background:rgb(65, 90, 175)">
-      <div class="container" style="padding-left:50px;">
+      <div class="container" style="padding-left:50px; margin-top:5px;">
         <small class="text-white"><b>Здесь вы можете посмотреть свой прогресс и статистику</b></small>
       </div>
     </div>
@@ -319,6 +319,7 @@ export default {
   margin-bottom: 10px;
   padding: 5px 40px;
 }
+
 
 h5 {
   margin: 0 !important;

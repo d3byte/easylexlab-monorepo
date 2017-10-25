@@ -5,7 +5,7 @@
       <div>
         <div class="name">
           <img src="../pics/matching.png">
-          <h2>Найди пару</h2>
+          <h2><b>Найди пару</b></h2>
         </div>
         <h3 style="margin:10px 0 20px 0;">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
         <div v-if="done" @click="show()" class="done">
