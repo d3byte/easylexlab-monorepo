@@ -9,7 +9,7 @@
           <!-- <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5> -->
           <h5 class="text-bold">Ваш результат: {{ percentage }}%</h5>
           <h5>Вы выучили {{ wordsLearnt }} слов</h5>
-          <button id="restart" class="btn btn-sm rounded" @click="toProfile">Перезапуск</button>
+          <button id="restart" class="btn btn-sm rounded" @click="toProfile">Ок</button>
         </div>
       </div>
     </center>
