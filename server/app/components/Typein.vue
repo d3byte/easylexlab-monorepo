@@ -11,6 +11,7 @@
         <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5>
         <h5 class="text-bold">Ваш результат: {{ percentage }}%</h5>
         <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
+        <button v-if="doneAttempts >= totalAttempts" style="background:rgb(111,198,138);margin-top:10px;text-transform:none" class="btn btn-sm rounded" @click="nextGame('Snake')">Следующее задание</button>
       </div>
     </div>
   </center>
@@ -41,7 +42,7 @@
 import _ from 'lodash';
 
 export default {
-  props: ['stack'],
+  props: ['stack', 'nextGame'],
   data() {
     return {
       pairs: [],

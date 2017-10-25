@@ -153,11 +153,11 @@
 
 
   <div class="row">
-    <flashcards v-if="games.flashcards.show" :stack="task"></flashcards>
-    <matching v-if="games.matching.show" :stack="task"></matching>
-    <snake v-if="games.snake.show" :stack="task"></snake>
-    <scramble v-if="games.scramble.show" :stack="task"></scramble>
-    <typein v-if="games.typein.show" :stack="task"></typein>
+    <flashcards v-if="games.flashcards.show" :stack="task" :nextGame="nextGame"></flashcards>
+    <matching v-if="games.matching.show" :stack="task" :nextGame="nextGame"></matching>
+    <snake v-if="games.snake.show" :stack="task" :nextGame="nextGame"></snake>
+    <scramble v-if="games.scramble.show" :stack="task" :nextGame="nextGame"></scramble>
+    <typein v-if="games.typein.show" :stack="task" :nextGame="nextGame"></typein>
     <test v-if="showTest && !games.typein.show && !games.scramble.show && !games.snake.show && !games.matching.show && !games.flashcards.show" :stack="task"></test>
   </div>
 
@@ -249,13 +249,11 @@ export default {
         if(done)
           this.$store.dispatch('testAvailable');
         var state = JSON.parse(localStorage.games);
-        console.log('State: ', state);
         const id = this.$route.params.id;
         const props = {
           id,
           attempts: this.task.attempts
         };
-        console.log('Prepared props: ', props);
         if(!!state.length && !done) {
           var found = false;
           state.map(item => {
@@ -295,6 +293,9 @@ export default {
     hideGames() {
       this.$store.dispatch('hideGames');
       this.$store.dispatch('hideTest');
+    },
+    nextGame(name) {
+      this.$store.dispatch('show' + name);
     }
   },
   components: {

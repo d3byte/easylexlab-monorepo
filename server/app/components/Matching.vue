@@ -16,7 +16,8 @@
           <div class="done-body">
             <h5 v-if="msg.slice(0, 6) == 'Хорошо'">{{ msg.slice(7, msg.length) }}</h5>
             <h5 class="text-bold">Ваш результат: {{ percent }}%</h5>
-            <button id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
+            <button style="margin-bottom:10px" id="restart" class="btn btn-sm rounded" @click="restart">Перезапуск</button>
+            <button v-if="doneAttempts >= totalAttempts" style="background:rgb(111,198,138)" class="btn btn-sm rounded" @click="nextGame('Typein')">Следующее задание</button>
           </div>
         </div>
         <div class="row words box" v-if="!done && !lose">
@@ -39,7 +40,7 @@ import _ from 'lodash';
 import randomize from 'randomatic';
 
 export default {
-  props: ['stack'],
+  props: ['stack', 'nextGame'],
   data() {
     return {
       oldPairs: [],

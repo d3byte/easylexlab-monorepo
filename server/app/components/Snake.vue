@@ -48,8 +48,8 @@
       <div class="done-body">
         <br>
         <button id="restart" class="btn btn-sm rounded" @click="start">Перезапуск</button>
-        <br />
         <button id="changediff" class="btn btn-sm rounded" @click="help = true">Сменить уровень сложности</button>
+        <button v-if="doneAttempts >= totalAttempts" style="background:rgb(111,198,138);margin-top:10px" class="btn btn-sm rounded" @click="nextGame('Scramble')">Следующее задание</button>
         <!-- <a @click="start"><b>Сыграйте еще раз</b></a> или смените <a @click="help = true"><b>уровень сложности</b>.</a> -->
       </div>
     </div>
@@ -116,7 +116,7 @@ let keyMap = {
 let snakePos, snakeCells, length, ticking, userActions = [];
 
 export default {
-  props: ['stack'],
+  props: ['stack', 'nextGame'],
   data() {
     return {
       help: true,
