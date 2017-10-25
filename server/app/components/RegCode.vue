@@ -5,7 +5,8 @@
         <div class="modal-header" style="background:rgb(161, 196, 226);">
           <h5 class="modal-title text-center text-white">
             <b>
-              <i class="material-icons">&#xE8D3;</i>
+              <!-- <i class="material-icons">&#xE8D3;</i> -->
+              <img src="../pics/groupregcode.png">
               КОД РЕГИСТРАЦИИ
             </b>
           </h5>

@@ -5,7 +5,8 @@
           <div class="modal-header" style="background:rgb(161, 196, 226);">
             <h5 class="modal-title text-center text-white">
               <b>
-                <i class="material-icons">&#xE0C9;</i>
+                <!-- <i class="material-icons">&#xE0C9;</i> -->
+                <img src="../pics/newmsg.png">
                 НОВОЕ СООБЩЕНИЕ
               </b>
             </h5>
