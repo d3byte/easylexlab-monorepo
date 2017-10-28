@@ -1,0 +1,591 @@
+@charset 'utf-8';
+
+*
+{
+    -webkit-appearance: none;
+}
+
+html
+{
+    background: #fff;
+}
+
+body
+{
+    font-family: 'Open Sans';
+
+    background: #d8e1e8;
+    background:    -moz-linear-gradient(top, #d8e1e8 0%, #f8fafb 100%);
+    background: -webkit-linear-gradient(top, #d8e1e8 0%,#f8fafb 100%);
+    background:         linear-gradient(to bottom, #d8e1e8 0%,#f8fafb 100%);
+
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8e1e8', endColorstr='#f8fafb',GradientType=0 );
+}
+
+a
+{
+    text-decoration: none;
+
+    color: inherit;
+    outline: none;
+}
+
+.clear
+{
+    clear: both;
+}
+
+.wrapper
+{
+    position: relative;
+
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.main
+{
+    position: relative;
+
+    min-height: 100vh;
+    padding: 50px 0 0;
+
+    background: url(img/bg-icons.png) no-repeat center 70px;
+}
+
+.main .top-bar
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 50px;
+
+    text-align: right;
+
+    color: #fff;
+    background: #4257b2;
+}
+
+.main .top-bar ul
+{
+    display: inline-block;
+}
+
+.main .top-bar ul li
+{
+    position: relative;
+
+    float: left;
+
+    margin-left: 1px;
+}
+
+.main .top-bar ul li::before
+{
+    position: absolute;
+    top: 50%;
+    left: -1px;
+
+    width: 1px;
+    height: 60%;
+
+    content: '';
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+
+    background: #5f74ce;
+}
+
+.main .top-bar ul li:first-of-type
+{
+    margin-left: 0;
+}
+
+.main .top-bar ul li:first-of-type::before
+{
+    display: none;
+}
+
+.main .top-bar ul li a
+{
+    font-size: 16px;
+    line-height: 50px;
+
+    display: block;
+
+    height: 50px;
+    padding: 0 30px;
+
+    transition: background .2s linear;
+}
+
+.main .top-bar ul li a:hover
+{
+    background: rgba(255, 255, 255, .2);
+}
+
+.about-app
+{
+    display:         flex;
+    display: -webkit-flex;
+
+    padding: 20px 0 40px;
+
+    background: url(img/kids.png) no-repeat 120% calc(100% + 80px);
+
+            justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+
+.about-app .column
+{
+            flex-basis: 50%;
+            flex-shrink: 0;
+    -webkit-flex-basis: 50%;
+    -webkit-flex-shrink: 0;
+}
+
+.about-app .column.last
+{
+    padding: 70px 0 0;
+}
+
+.about-app .logo
+{
+    display: block;
+
+    width: 352px;
+    height: 108px;
+
+    background: url(img/logo.png) no-repeat center;
+    background-size: contain;
+}
+
+.about-app .slogan
+{
+    font-family: 'Bliss Pro';
+    font-size: 32px;
+    font-weight: 900;
+    font-style: italic;
+
+    position: relative;
+
+    padding: 10px 0 40px;
+
+    color: #404040;
+}
+
+.about-app .slogan::after
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 65px;
+    height: 1px;
+
+    content: '';
+
+    background: #ffd42a;
+}
+
+.about-app .about
+{
+    font-size: 14px;
+    line-height: 23px;
+
+    max-width: 235px;
+    padding: 40px 0 65px;
+
+    color: #595959;
+}
+
+.about-app .about span
+{
+    font-size: 21px;
+    font-weight: 800;
+
+    display: block;
+}
+
+.about-app .button
+{
+    font-size: 20px;
+    line-height: 75px;
+
+    display: block;
+
+    max-width: 330px;
+    height: 75px;
+
+    transition: opacity .2s linear;
+    text-align: center;
+
+    color: #fff;
+    border-radius: 10px;
+    background: #0357a7;
+}
+
+.about-app .button:hover
+{
+    opacity: .7;
+}
+
+.about-app .phones
+{
+    width: 100%;
+    max-width: 355px;
+    height: 325px;
+    margin-left: auto;
+
+    background: url(img/phones.png) no-repeat center;
+    background-size: contain;
+}
+
+.about-app .app-links
+{
+    display:         flex;
+    display: -webkit-flex;
+
+            justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+}
+
+.about-app .app-links .g-play,
+.about-app .app-links .a-store
+{
+    display: block;
+
+    width: 170px;
+    height: 62px;
+}
+
+.about-app .app-links .g-play
+{
+    background: url(img/g-play.png) no-repeat center;
+    background-size: contain;
+}
+
+.about-app .app-links .a-store
+{
+    margin-left: 15px;
+
+    background: url(img/a-store.png) no-repeat center;
+    background-size: contain;
+}
+
+.about-app .notice
+{
+    font-size: 14px;
+    line-height: 21px;
+
+    max-width: 340px;
+    margin-left: auto;
+    padding: 20px 0 0;
+
+    text-align: right;
+
+    color: #242424;
+}
+
+.about-app .notice span
+{
+    font-size: 17px;
+    font-weight: 800;
+
+    display: block;
+
+    color: #0357a7;
+}
+
+.benefits
+{
+    display:         flex;
+    display: -webkit-flex;
+
+    margin: 0 -5px;
+
+            justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+
+.benefit
+{
+    margin: 0 5px 10px;
+    padding: 6px 6px 15px;
+
+    border-right: 1px solid #e3e1e1;
+    border-bottom: 1px solid #e3e1e1;
+    border-left: 1px solid #e3e1e1;
+    border-radius: 8px;
+    background: #f0f0f0;
+
+            flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+}
+
+.benefit .icon
+{
+    width: 100%;
+    height: 35px;
+}
+
+.benefit .text
+{
+    font-size: 14px;
+    line-height: 20px;
+
+    max-width: 235px;
+    margin: 10px auto 0;
+
+    text-align: center;
+
+    color: #5c5c5c;
+}
+
+.benefit-1
+{
+    border-top: 4px solid #51a1ed;
+
+            flex-basis: calc(20% - 10px);
+    -webkit-flex-basis: calc(20% - 10px);
+}
+
+.benefit-2
+{
+    border-top: 4px solid #79decd;
+
+            flex-basis: calc(25% - 10px);
+    -webkit-flex-basis: calc(25% - 10px);
+}
+
+.benefit-3
+{
+    border-top: 4px solid #c386df;
+
+            flex-basis: calc(25% - 10px);
+    -webkit-flex-basis: calc(25% - 10px);
+}
+
+.benefit-4
+{
+    border-top: 4px solid #f08c3c;
+
+            flex-basis: calc(30% - 10px);
+    -webkit-flex-basis: calc(30% - 10px);
+}
+
+.benefit-1 .icon
+{
+    background: url(img/benefit-1.png) no-repeat center;
+}
+
+.benefit-2 .icon
+{
+    background: url(img/benefit-2.png) no-repeat center;
+}
+
+.benefit-3 .icon
+{
+    background: url(img/benefit-3.png) no-repeat center;
+}
+
+.benefit-4 .icon
+{
+    background: url(img/benefit-4.png) no-repeat center;
+}
+
+@media (max-width: 1000px)
+{
+    .about-app
+    {
+        background-size: 90%;
+    }
+}
+
+@media (max-width: 750px)
+{
+    .main
+    {
+        padding: 30px 0 0;
+
+        background: url(img/bg-icons.png) no-repeat center 50px;
+        background-size: contain;
+    }
+
+    .main .top-bar
+    {
+        height: 30px;
+
+        text-align: center;
+    }
+
+    .main .top-bar ul li a
+    {
+        font-size: 12px;
+        line-height: 30px;
+
+        height: 30px;
+        padding: 0 10px;
+    }
+
+    .about-app
+    {
+        padding: 10px 0 200px;
+
+        background: url(img/kids.png) no-repeat center calc(100% + 20px);
+        background-size: 100%;
+
+                flex-wrap: wrap;
+                justify-content: flex-start;
+        -webkit-flex-wrap: wrap;
+        -webkit-justify-content: flex-start;
+    }
+
+    .about-app .column
+    {
+                flex-basis: 100%;
+        -webkit-flex-basis: 100%;
+    }
+
+    .about-app .column.last
+    {
+        padding: 10px 0 0;
+    }
+
+    .about-app .logo
+    {
+        width: 250px;
+        height: 60px;
+        margin: 0 auto;
+    }
+
+    .about-app .slogan
+    {
+        font-size: 16px;
+
+        padding: 10px 0;
+
+        text-align: center;
+    }
+
+    .about-app .slogan::after
+    {
+        right: 0;
+
+        margin: 0 auto;
+    }
+
+    .about-app .about
+    {
+        font-size: 14px;
+        line-height: 22px;
+
+        max-width: none;
+        padding: 10px 0;
+
+        text-align: center;
+    }
+
+    .about-app .about span
+    {
+        font-size: 18px;
+    }
+
+    .about-app .button
+    {
+        font-size: 18px;
+        line-height: 50px;
+
+        max-width: none;
+        height: 50px;
+    }
+
+    .about-app .phones
+    {
+        max-width: none;
+        height: 170px;
+        margin: 0 auto 10px;
+    }
+
+    .about-app .app-links .g-play,
+    .about-app .app-links .a-store
+    {
+        display: block;
+
+        width: 130px;
+        height: 40px;
+    }
+
+    .about-app .app-links
+    {
+                justify-content: center;
+        -webkit-justify-content: center;
+    }
+
+    .about-app .app-links .a-store
+    {
+        margin-left: 10px;
+    }
+
+    .about-app .notice
+    {
+        font-size: 14px;
+        line-height: 18px;
+
+        max-width: none;
+        margin-left: inherit;
+        padding: 10px 0 0;
+
+        text-align: center;
+    }
+
+    .about-app .notice span
+    {
+        font-size: 16px;
+    }
+
+    .benefits
+    {
+        margin: 0;
+
+                flex-wrap: wrap;
+                justify-content: flex-start;
+        -webkit-flex-wrap: wrap;
+        -webkit-justify-content: flex-start;
+    }
+
+    .benefit
+    {
+        display:         flex;
+        display: -webkit-flex;
+
+        margin: 0 0 10px;
+
+                align-items: center;
+                flex-basis: 100%;
+        -webkit-align-items: center;
+        -webkit-flex-basis: 100%;
+    }
+
+    .benefit .icon
+    {
+        margin: inherit;
+
+                flex-basis: 50px;
+                flex-shrink: 0;
+        -webkit-flex-basis: 50px;
+        -webkit-flex-shrink: 0;
+    }
+
+    .benefit .text
+    {
+        max-width: none;
+        padding-left: 20px;
+
+        text-align: left;
+    }
+}

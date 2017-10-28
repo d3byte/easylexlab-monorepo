@@ -3,175 +3,81 @@
     <div class="home">
       <!-- Start of the first section -->
 
-      <app-header v-if="logged" />
+        <app-header v-if="logged" />
 
-        <div v-else class="navbar-parent">
-          <div class="container">
-            <ul class="nav navbar-nav pull-right text-primary-hover hidden-sm-down">
-              <li class="nav-item">
-                <router-link to="/signup/student" class="nav-link text-bold">
-                    Регистрация ученика
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/signup/teacher" class="nav-link text-bold">
-                    Регистрация учителя
-                </router-link>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav text-primary-hover hidden-md-up">
-              <li class="nav-item">
-                <router-link to="/signup/student" class="nav-link text-bold">
-                    Регистрация ученика
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/signup/teacher" class="nav-link text-bold">
-                    Регистрация учителя
-                </router-link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      <section class="section section--first">
+        <div v-else class="main">
 
-        <div class="container">
-
-          <div class="row">
-
-            <div class="col-md-5">
-              <div class="page-title">
-            <!-- <object type="image/svg+xml" data="../pics/logo-test.svg" class="logo">
-              <img src="../pics/logo.png" class="logo">
-            </object> -->
-            <!-- <img src="../pics/dju.svg" class="logo"> -->
-                <img src="../pics/logo.png" class="logo">
-              </div>
-
-              <h5 class="text-bold hidden-sm-down">
-                <i>
-                  С нами эффективно учить
-                  и легко учиться
-                </i>
-              </h5>
-
-              <p class="brief-description">
-                <span class="brief-description_name">EasyLexLab</span><br>
-                <span class="brief-description_text">
-                  - это образовательная платформа
-                  для изучения иностранных слов,
-                  предназначенная для учителей
-                  и учеников, изучающих языки
-                </span>
-              </p>
-            </div>
-
-            <div class="col-md-7 hidden-sm-down">
-              <!--
-                <div class="col-md-6">
-                  <img class="children" src="../pics/дети.png">
-                </div>
-              -->
-              <div class="pull-right">
-                <img class="phone" src="../pics/учить.png">
-                <div class="row" style="padding-right:10px">
-                  <router-link to="#" target="_blank">
-                    <img class="store-link" src="../pics/appstore.png">
-                  </router-link>
-                  <router-link to="#" target="_blank">
-                    <img class="store-link" src="../pics/gplay.png">
-                  </router-link>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <router-link to="/profile">
-              <button
-                style="margin-bottom:20px"
-                class="large-button large-button--blue col-md-4 hidden-sm-down">
-                Личный кабинет
-              </button>
-            </router-link>
-            <center class="hidden-md-up">
-              <router-link to="/profile"> 
-                <button
-                  style="margin-bottom:20px;width:50%;"
-                  class="large-button large-button--blue">
-                  Личный кабинет
-                </button>
-            </router-link>
-            </center>
-
-            <div class="col-md-8 text-align--right" style="padding-top:15px;">
-                <span class="brief-description_name blue-text">Мобильное приложение EasyLexLab,</span><br>
-                <span class="brief-description_text">
-                  разработанное для вашего удобства является
-                  дополнением к существующей платформе.
-                  Выполняйте домашние задание, где бы вы
-                  ни находились!
-                </span>
-            </div>
-            <div class="center" style="margin-top:10px">
-              <router-link class="hidden-md-up" style="margin-right:20px" to="#" target="_blank">
-                <img class="store-link" src="../pics/appstore.png">
-              </router-link>
-              <router-link class="hidden-md-up" to="#" target="_blank">
-                <img class="store-link" src="../pics/gplay.png">
-              </router-link>
+          <div class="top-bar">
+            <div class="wrapper">
+              <ul>
+                <li><router-link to="/signup/teacher">Регистрация учителя</router-link></li>
+                <li><router-link to="/signup/student">Регистрация ученика</router-link></li>
+              </ul>
             </div>
           </div>
 
-          <div class="row features">
+          <div class="wrapper">
 
-            <div class="col-sm-6 col-xs-12 col-md-3 feature">
-              <div class="col-md-12 border-top border-top--blue">
-                <div class="feature-header">
-                  <img src="../pics/advantage-4.png" class="feature-img">
+            <div class="about-app">
+              <div class="column">
+                <a href="/" class="logo"></a>
+                <div class="slogan">С нами эффективно учить и&nbsp;легко учиться</div>
+
+                <div class="about">
+                  <span>EasyLexLab</span>
+                  - это образовательная платформа для изучения иностранных слов, предназначенная для учителей и учеников, изучающих языки."
                 </div>
-                <div class="feature-body">
-                  <p>Эффективно усваивать слова, необходимые для использования на уроках</p>
-                </div>
+
+
+                <a href="javascript:;" class="button">Личный кабинет</a>
+
               </div>
-            </div>
-            <div class="col-sm-6 col-xs-12 col-md-3 feature">
-              <div class="col-md-12 border-top border-top--green">
-                <div class="feature-header">
-                  <img src="../pics/advantage-2.png" class="feature-img">
+              <div class="column last">
+
+                <div class="phones"></div>
+
+                <div class="app-links">
+                  <a href="javascript:;" class="g-play"></a>
+                  <a href="javascript:;" class="a-store"></a>
                 </div>
-                <div class="feature-body">
-                  <p>Выполнять домашнее задание в любом месте в любое время, используя смартфон, компьютер или планшет</p>
+
+                <div class="notice">
+                  <span>Мобильное приложение EasyLexLab,</span>
+                  разработанное для вашего удобства, является дополнением к существующей платформе. Выполняйте домашнее задание, где бы вы ни находились!
                 </div>
+
               </div>
-            </div>
-            <div class="col-sm-6 col-xs-12 col-md-3 feature">
-              <div class="col-md-12 border-top border-top--purple">
-                <div class="feature-header">
-                  <img src="../pics/advantage-1.png" class="feature-img">
-                </div>
-                <div class="feature-body">
-                  <p>В игровой форме запоминать слова, что превращает рутинную работу в интересное и полезное занятие</p>
-                </div>
+            </div><!-- /.about-app -->
+
+            <div class="benefits">
+
+              <div class="benefit benefit-1">
+                <div class="icon"></div>
+                <div class="text">Эффективно усваивать слова, необходимые для использования на уроках</div>
               </div>
-            </div>
-            <div class="col-sm-6 col-xs-12 col-md-3 feature">
-              <div class="col-md-12 border-top border-top--orange">
-                <div class="feature-header">
-                  <img src="../pics/advantage-3.png" class="feature-img">
-                </div>
-                <div class="feature-body">
-                  <p>Ежедневно наблюдать прогресс и становиться всё ближе к цели – "свободно общаться на иностранном языке"</p>
-                </div>
+
+              <div class="benefit benefit-2">
+                <div class="icon"></div>
+                <div class="text">Выполнять домашнее задание в любом месте, в любое время, используя смартфон или планшет</div>
               </div>
+
+              <div class="benefit benefit-3">
+                <div class="icon"></div>
+                <div class="text">В игровой форме запоминать слова, что превращает рутинную работу в интересное и полезное занятие</div>
+              </div>
+
+              <div class="benefit benefit-4">
+                <div class="icon"></div>
+                <div class="text">Ежедневно наблюдать прогресс и становиться все ближе к цели - “свободно общаться на иностранном языке”</div>
+              </div>
+
             </div>
 
-          </div>
 
-        </div>
 
-      </section>
+          </div><!-- /.wrapper -->
+
+        </div><!-- /.main -->
       <!-- End of the first section    -->
       <!-- ––––––––––––––––––––––––––– -->
       <!-- Start of the second section -->
@@ -345,6 +251,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+ol,ul{list-style: none;}
+*{-webkit-appearance:none}html{background:#fff}body{font-family:'Open Sans';background:#d8e1e8;background:-moz-linear-gradient(top,#d8e1e8 0%,#f8fafb 100%);background:-webkit-linear-gradient(top,#d8e1e8 0%,#f8fafb 100%);background:linear-gradient(to bottom,#d8e1e8 0%,#f8fafb 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8e1e8', endColorstr='#f8fafb',GradientType=0 )}a{text-decoration:none;color:inherit;outline:none}.clear{clear:both}.main,.wrapper{position:relative}.wrapper{max-width:980px;margin:0 auto;padding:0 10px}.main{min-height:100vh;padding:50px 0 0;background:url(../img/bg-icons.png) no-repeat center 70px}.main .top-bar{position:absolute;top:0;left:0;width:100%;height:50px;text-align:right;color:#fff;background:#4257b2}.main .top-bar ul{display:inline-block}.main .top-bar ul li{position:relative;float:left;margin-left:1px}.main .top-bar ul li::before{position:absolute;top:50%;left:-1px;width:1px;height:60%;content:'';-webkit-transform:translateY(-50%);transform:translateY(-50%);background:#5f74ce}.main .top-bar ul li:first-of-type{margin-left:0}.main .top-bar ul li:first-of-type::before{display:none}.main .top-bar ul li a{font-size:16px;line-height:50px;display:block;height:50px;padding:0 30px;transition:background .2s linear}.main .top-bar ul li a:hover{background:rgba(255,255,255,.2)}.about-app{display:flex;display:-webkit-flex;padding:20px 0 40px;background:url(../img/kids.png) no-repeat 120% calc(100% + 80px);justify-content:space-between;-webkit-justify-content:space-between}.about-app .column{flex-basis:50%;flex-shrink:0;-webkit-flex-basis:50%;-webkit-flex-shrink:0}.about-app .column.last{padding:70px 0 0}.about-app .logo{display:block;width:352px;height:108px;background:url(../img/logo.png) no-repeat center;background-size:contain}.about-app .slogan{font-family:'Bliss Pro';font-size:32px;font-weight:900;font-style:italic;position:relative;padding:10px 0 40px;color:#404040}.about-app .slogan::after{position:absolute;bottom:0;left:0;width:65px;height:1px;content:'';background:#ffd42a}.about-app .about{font-size:14px;line-height:23px;max-width:235px;padding:40px 0 65px;color:#595959}.about-app .about span,.about-app .notice span{font-size:21px;font-weight:800;display:block}.about-app .button{font-size:20px;line-height:75px;display:block;max-width:330px;height:75px;transition:opacity .2s linear;text-align:center;color:#fff;border-radius:10px;background:#0357a7}.about-app .button:hover{opacity:.7}.about-app .phones{width:100%;max-width:355px;height:325px;margin-left:auto;background:url(../img/phones.png) no-repeat center;background-size:contain}.about-app .app-links,.benefits{display:flex;display:-webkit-flex;justify-content:flex-end;-webkit-justify-content:flex-end}.about-app .app-links .a-store,.about-app .app-links .g-play{display:block;width:170px;height:62px}.about-app .app-links .g-play{background:url(../img/g-play.png) no-repeat center;background-size:contain}.about-app .app-links .a-store{margin-left:15px;background:url(../img/a-store.png) no-repeat center;background-size:contain}.about-app .notice{font-size:14px;line-height:21px;max-width:340px;margin-left:auto;padding:20px 0 0;text-align:right;color:#242424}.about-app .notice span{font-size:17px;color:#0357a7}.benefits{margin:0 -5px;justify-content:space-between;-webkit-justify-content:space-between}.benefit{margin:0 5px 10px;padding:6px 6px 15px;border-right:1px solid #e3e1e1;border-bottom:1px solid #e3e1e1;border-left:1px solid #e3e1e1;border-radius:8px;background:#f0f0f0;flex-shrink:0;-webkit-flex-shrink:0}.benefit .icon{width:100%;height:35px}.benefit .text{font-size:14px;line-height:20px;max-width:235px;margin:10px auto 0;text-align:center;color:#5c5c5c}.benefit-1{border-top:4px solid #51a1ed;flex-basis:calc(20% - 10px);-webkit-flex-basis:calc(20% - 10px)}.benefit-2,.benefit-3{border-top:4px solid #79decd;flex-basis:calc(25% - 10px);-webkit-flex-basis:calc(25% - 10px)}.benefit-3{border-top:4px solid #c386df}.benefit-4{border-top:4px solid #f08c3c;flex-basis:calc(30% - 10px);-webkit-flex-basis:calc(30% - 10px)}.benefit-1 .icon{background:url(../img/benefit-1.png) no-repeat center}.benefit-2 .icon{background:url(../img/benefit-2.png) no-repeat center}.benefit-3 .icon{background:url(../img/benefit-3.png) no-repeat center}.benefit-4 .icon{background:url(../img/benefit-4.png) no-repeat center}@media (max-width:1000px){.about-app{background-size:90%}}@media (max-width:750px){.main{padding:30px 0 0;background:url(../img/bg-icons.png) no-repeat center 50px;background-size:contain}.main .top-bar{height:30px;text-align:center}.main .top-bar ul li a{font-size:12px;line-height:30px;height:30px;padding:0 10px}.about-app,.benefits{flex-wrap:wrap;justify-content:flex-start;-webkit-flex-wrap:wrap;-webkit-justify-content:flex-start}.about-app{padding:10px 0 200px;background:url(../img/kids.png) no-repeat center calc(100% + 20px);background-size:100%}.about-app .column{flex-basis:100%;-webkit-flex-basis:100%}.about-app .column.last{padding:10px 0 0}.about-app .logo{width:250px;height:60px;margin:0 auto}.about-app .about,.about-app .slogan{font-size:16px;padding:10px 0;text-align:center}.about-app .slogan::after{right:0;margin:0 auto}.about-app .about{font-size:14px;line-height:22px;max-width:none}.about-app .about span{font-size:18px}.about-app .button{font-size:18px;line-height:50px;max-width:none;height:50px}.about-app .phones{max-width:none;height:170px;margin:0 auto 10px}.about-app .app-links .a-store,.about-app .app-links .g-play{display:block;width:130px;height:40px}.about-app .app-links{justify-content:center;-webkit-justify-content:center}.about-app .app-links .a-store{margin-left:10px}.about-app .notice{font-size:14px;line-height:18px;max-width:none;margin-left:inherit;padding:10px 0 0;text-align:center}.about-app .notice span{font-size:16px}.benefits{margin:0}.benefit{display:flex;display:-webkit-flex;margin:0 0 10px;align-items:center;flex-basis:100%;-webkit-align-items:center;-webkit-flex-basis:100%}.benefit .icon{margin:inherit;flex-basis:50px;flex-shrink:0;-webkit-flex-basis:50px;-webkit-flex-shrink:0}.benefit .text{max-width:none;padding-left:20px;text-align:left}}
+
+
 .home {
   background: rgb(244, 248, 251);
 }
