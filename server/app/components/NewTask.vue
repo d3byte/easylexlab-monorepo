@@ -10,9 +10,9 @@
             </b>
           </h5>
         </div>
-        <div class="modal-header" style="background:rgb(227, 243, 254);padding:5px">
-          <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:7px"><b>СЛОВО</b></h5>
-          <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:7px"><b>ПЕРЕВОД</b></h5>
+        <div class="modal-header" style="background:rgb(227, 243, 254);padding:15px">
+          <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:10px"><b>СЛОВО</b></h5>
+          <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:10px;"><b>ПЕРЕВОД</b></h5>
         </div>
         <div class="modal-body text-center p-lg" style="margin-top:0;">
           <h5 v-if="success" class="text-success">Задание успешно создано.</h5>
@@ -25,7 +25,7 @@
                 <tr v-for="pair in tasks[0].content">
                   <td>
                     <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Слово</label>
+                      <label class="col-sm-3 form-control-label" style="color:#8ca6c0">Слово</label>
                       <div class="col-sm-9">
                         <input type="text" v-model="pair.key" required>
                       </div>
@@ -33,7 +33,7 @@
                   </td>
                   <td>
                     <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Перевод</label>
+                      <label class="col-sm-3 form-control-label" style="color:#8ca6c0">Перевод</label>
                       <div class="col-sm-9">
                         <input type="text" v-model="pair.value" required>
                       </div>
@@ -49,10 +49,12 @@
                 </tr>
               </table>
             </div>
+            <div style="margin-top:20px;">
             <center>
-              <button @click="confirm" style="background:rgb(251, 106, 33);color:white;margin-right:10px" class="btn">Готово</button>
-              <button @click="refresh" style="background:rgb(207, 208, 209);color:white" type="button" class="btn" data-dismiss="modal">Отмена</button>
+              <button @click="confirm" style="background:rgb(251, 106, 33);color:white;margin-right:10px;width:220px !important;height:50px !important;" class="btn">Готово</button>
+              <button @click="refresh" style="background:rgb(207, 208, 209);color:white;width:220px !important;height:50px !important;" type="button" class="btn" data-dismiss="modal">Отмена</button>
             </center>
+            </div>
           </form>
           <div v-if="this.showPost && !success">
             <form onsubmit="return false">
