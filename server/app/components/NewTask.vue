@@ -10,7 +10,7 @@
             </b>
           </h5>
         </div>
-        <div class="modal-header" style="background:rgb(227, 243, 254);padding:15px">
+        <div v-if="!showPost" class="modal-header" style="background:rgb(227, 243, 254);padding:15px">
           <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:10px"><b>СЛОВО</b></h5>
           <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:10px;"><b>ПЕРЕВОД</b></h5>
         </div>
@@ -19,7 +19,7 @@
           <center>
             <button style="margin-top:20px;" @click="pageUpdate" type="button" class="btn dark-white p-x-md" data-dismiss="modal" v-if="success">Ок</button>
           </center>
-          <form class="login-form" onsubmit="return false" v-if="this.showEditor" style="margin-top:0">
+          <form class="login-form" onsubmit="return false" v-if="showEditor" style="margin-top:0">
             <div class="table-responsive">
               <table class="table table-striped b-t b-b no-border">
                 <tr v-for="pair in tasks[0].content">
