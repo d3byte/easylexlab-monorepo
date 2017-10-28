@@ -476,7 +476,7 @@ export default {
 #padding_delete {
   margin-left: 15px;
   width: 10px;
-}f
+}
 
 .deleteCheckbox {
 
