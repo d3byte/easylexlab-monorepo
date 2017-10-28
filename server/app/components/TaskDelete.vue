@@ -2,10 +2,13 @@
   <div id="delete" class="modal fade" data-backdrop="true" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Удаление группы</h5>
-          <h6 class="errormsg" v-if="!!error.length">{{ error }}</h6>
-        </div>
+        <div class="modal-header" style="background:rgb(161, 196, 226);">
+            <h5 class="modal-title text-center text-white">
+              <b>
+                УДАЛЕНИЕ ГРУППЫ
+              </b>
+            </h5>
+          </div>
         <div class="modal-body text-center p-lg">
           <h3>
             Подтвердите удаление группы, введя название группы.
