@@ -20,7 +20,7 @@
 
             <div class="about-app">
               <div class="column">
-                <a href="/" class="logo"></a>
+                <router-link to="/" class="logo"></router-link>
                 <div class="slogan">С нами эффективно учить и&nbsp;легко учиться</div>
 
                 <div class="about">
@@ -29,7 +29,7 @@
                 </div>
 
 
-                <a href="javascript:;" class="button">Личный кабинет</a>
+                <router-link to="/login" class="button">Личный кабинет</router-link>
 
               </div>
               <div class="column last">
@@ -317,19 +317,6 @@ ol,ul{list-style: none;}
   color: rgb(29, 68, 170);
 }
 
-.section--first .brief-description {
-  width: 250px;
-  display: block;
-}
-
-.brief-description {
-  margin-top: 70px;
-  margin-bottom: 40px;
-} .brief-description_name {
-  font-weight: bold;
-  font-size: 18px;
-}
-
 .large-button {
   color: white;
   font-size: 18px;
@@ -416,12 +403,6 @@ ol,ul{list-style: none;}
   transition: 0.3s;
 } .footer a:hover {
   text-decoration: underline;
-}
-
-.section--first {
-  /* background: url('../pics/background-top.png') 50% 50% no-repeat; */
-  background: url('../pics/буквы.png') 20% 10% no-repeat;
-  background-size: contain;
 }
 
 .section--second {
