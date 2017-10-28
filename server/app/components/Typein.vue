@@ -1,5 +1,13 @@
 <template>
 <div class="container padding">
+  <div class="name">
+  
+    <h2>
+      <i class="material-icons" style="font-size:36px">&#xE875;</i>
+      <b>Введи слово</b>
+    </h2>
+  </div>
+  <h3 style="margin:10px 0 20px 0;" class="text-center">Пройдено раз: {{ doneAttempts }}/{{ totalAttempts }}</h3>
   <center>
     <i v-if="showPreloader" class="material-icons preloader">cached</i>
     <div v-if="done" @click="show()" class="box done">
@@ -16,12 +24,6 @@
     </div>
   </center>
   <form v-if="!showPreloader && !done && !lose" class="padding" onsubmit="return false">
-    <div class="row padding">
-      <center>
-        <h1><b>Введи слово</b></h1>
-        <h4>Пройдено раз: {{ doneAttempts}}/{{ totalAttempts }}</h4>
-      </center>
-    </div>
     <div class="row padding box game background">
       <center>
       <h3 style="color: #0062b0">{{ currentPair.value }}</h3>
@@ -245,5 +247,12 @@ export default {
 
   .wrong {
     background: #ccc !important;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
   }
 </style>
