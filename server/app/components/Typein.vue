@@ -30,7 +30,7 @@
         <center>
           <input style="width:100%;border-bottom:2px solid rgb(50,124,191);" id="formItem" autocomplete="off" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
           <h4 v-if="wrong" class="text-danger" style="margin:10px 0"><b>Неверно! Исправь ошибку!</b></h4>
-          <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;margin-top: 15px;" @click="check">Дальше</button>
+          <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;margin-top: 15px;" @click="check" :class="wrong ? 'wrong' : ''">Далее</button>
         </center>
       </div>
     </div>
@@ -241,5 +241,9 @@ export default {
     background: rgb(207, 233, 254);
     box-shadow: none;
     text-transform: none !important;
+  }
+
+  .wrong {
+    background: #ccc !important;
   }
 </style>
