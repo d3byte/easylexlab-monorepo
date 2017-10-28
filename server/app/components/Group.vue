@@ -189,6 +189,10 @@
                   </tbody>
                 </table>
               </div>
+              <div class="pull-right rm-group" data-toggle="modal" data-target="#delete">
+                <i class="fa fa-ban" aria-hidden="true"></i>
+                <span class="text-center">Удалить группу</span>
+              </div>
             </div>
           </div>
         </div>
@@ -680,6 +684,17 @@ export default {
 } .avatar {
   width: 40px;
   height: 40px;
+}
+
+.rm-group {
+  opacity: 0.5;
+  transition: 0.3s;
+} .rm-group i {
+  color: red;
+} .rm-group:hover {
+  cursor: pointer;
+  opacity: 1;
+  color: red;
 }
 </style>
 
