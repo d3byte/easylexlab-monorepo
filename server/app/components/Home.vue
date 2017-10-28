@@ -5,9 +5,9 @@
 
         <app-header v-if="logged" />
 
-        <div v-else class="main">
+        <div class="main">
 
-          <div class="top-bar">
+          <div class="top-bar" v-if="!logged">
             <div class="wrapper">
               <ul>
                 <li><router-link to="/signup/teacher">Регистрация учителя</router-link></li>

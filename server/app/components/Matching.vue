@@ -281,9 +281,9 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 0;
-    background: url('../pics/letters-2.jpg') no-repeat;
+    background: url('../pics/letters-2.png') no-repeat;
     background-size: cover;
-    opacity: 0.165;
+    opacity: 1;
   }
 
   .word {

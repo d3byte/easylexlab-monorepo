@@ -26,9 +26,9 @@
       <center>
       <h3 style="color: #0062b0">{{ currentPair.value }}</h3>
     </center>
-      <div class="md-form-group" style="z-index:6">
+      <div class="md-form-group" style="z-index:6;width:100%">
         <center>
-          <input id="formItem" autocomplete="off" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
+          <input style="width:100%;border-bottom:2px solid rgb(50,124,191);" id="formItem" autocomplete="off" type="text" v-model="currentPair.test" class="md-input" placeholder="Слово">
           <h4 v-if="wrong" class="text-danger" style="margin:10px 0"><b>Неверно! Исправь ошибку!</b></h4>
           <button class="btn btn-check" style="background:rgb(251, 106, 33);color:white;margin-top: 15px;" @click="check">Дальше</button>
         </center>
@@ -207,9 +207,9 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 0;
-    background: url('../pics/letters-2.jpg') no-repeat;
+    background: url('../pics/letters-2.png') no-repeat;
     background-size: cover;
-    opacity: 0.165;
+    opacity: 1;
   }
 
   .done {
