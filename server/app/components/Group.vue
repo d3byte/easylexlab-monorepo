@@ -474,12 +474,12 @@ export default {
 }
 
 #padding_delete {
-  margin-left: 0px;
+  margin-left: 15px;
   width: 10px;
-}
+}f
 
 .deleteCheckbox {
-  padding-left: 28px;
+
 }
 
 .icono-caretLeft {
