@@ -11,10 +11,10 @@
             </span>
           </a>
           <div class="clear text-white teacher-info">
-            <h6 class="m-a-0 m-b-xs calc text-white"><b>{{ firstName + ' ' + lastName }}</b></h6>
+            <h5 class="m-a-0 m-b-xs calc text-white"><b>{{ firstName + ' ' + lastName }}</b></h5>
             <p class="text-white">
-              <h6 class="m-r"><b>{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</b></h6>
-              <h6 style="margin-right: 10px">ОУ: <b>{{ school }} </b> <b> <i class="fa fa-map-marker m-r-xs"></i> {{ city }}</b></h6>
+              <h7 class="m-r"><b>{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</b></h7>
+              <h7 style="margin-right: 10px">ОУ: <b>{{ school }} </b> <b> <i class="fa fa-map-marker m-r-xs"></i> {{ city }}</b></h7>
             </p>
           </div>
         </div>
