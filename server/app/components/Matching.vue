@@ -267,6 +267,7 @@ export default {
   }
 
   .words {
+    width: 60%;
     border-top: 7px solid rgb(123, 227, 170);
     border-radius: 5px;
     z-index: 5;
