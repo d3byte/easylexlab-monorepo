@@ -3,8 +3,8 @@
   <div class="item">
     <div class="item-bg" :style="{ background: background }"></div>
     <div class="container">
-      <div class="p-a-md">
-        <div class="row m-t">
+      <div class="p-a-md" style="padding-top: 5px !important">
+        <div class="row" style="margin-bottom:0">
           <div class="col-sm-12" :class="showAd ? 'col-md-8' : 'col-md-12'">
             <a href class="pull-left m-r-md hidden-xs-down">
             <span class="avatar" :style="{ backgroundColor: color }">
@@ -16,10 +16,7 @@
               <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
               <h6 class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span><br>
               ОУ: <b>{{ school }} <i class="fa fa-map-marker "></i> {{ city }}</b></h6>
-              <br>
               <h6 class="m-a-0 text-white">Слов выучено за всё время: <b>{{ wordsLearnt }}</b></h6>
-              <br>
-              <h6 class="m-a-0 text-white">Выбранная группа: <b>{{ currentGroup.name }}</b></h6>
               <br>
               <h6 class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h6>
               <h6 class="m-a-0 text-white" v-else>Ближайшего дня сдачи нет</h6>
@@ -41,13 +38,14 @@
               <button style="font-size: 13px" class="btn btn btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><b><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Сообщения</b></button>
             </li>
             <li class="nav-item groupbtn" v-for="(group, index) in user._groups">
-              <button style="font-size: 13px" class="btn btn btn-outline rounded" @click="changeGroup(group)" 
-                v-bind:class="{
+              <button style="font-size: 13px" class="btn btn btn-outline rounded" @click="changeGroup(group, index)" 
+                :class="{
                   'group-1':index == 0,
                   'group-2':index == 1,
                   'group-3':index == 2,
                   'group-4':index == 3,
-                  'group-5':index == 4}"
+                  'group-5':index == 4,
+                  'active-group': index == activeGroup}"
                   >
                 <b>{{ group.name }}</b>
               </button>
@@ -73,7 +71,8 @@
                   'group-2':index == 1,
                   'group-3':index == 2,
                   'group-4':index == 3,
-                  'group-5':index == 4}"
+                  'group-5':index == 4,
+                  'active-group': index == activeGroup}"
                   >
                 <b>{{ group.name }}</b>
               </button>
@@ -241,7 +240,8 @@ export default {
         _tests: []
       },
       image: localStorage.img ? localStorage.img : '',
-      ext: localStorage.ext ? localStorage.ext : ''
+      ext: localStorage.ext ? localStorage.ext : '',
+      activeGroup: 0
     }
   },
   computed: {
@@ -280,8 +280,9 @@ export default {
       this.showTasks = false;
       this.showMsgs = true;
     },
-    changeGroup(group) {
+    changeGroup(group, index) {
       this.currentGroup = group;
+      this.activeGroup = index;
       this.sortTasks();
       this.setDate();
     },
@@ -604,5 +605,9 @@ background-color: #58c721 !important;
   object-fit: contain;
 }
 
+.active-group {
+  border: 2px solid white;
+} .active-group {
 
+}
 </style>
