@@ -213,11 +213,6 @@
             <button class="large-button large-button--green" style="padding-left:10px;padding-right:10px">Зарегистрироваться</button>
           </div>
         </div>
-        <div class="container hidden-md-up">
-          <center>
-            <button class="large-button large-button--green" style="padding-left:10px;padding-right:10px">Зарегистрироваться</button>
-          </center>
-        </div>
 
       </section>
       <!-- End of the fourth section -->
