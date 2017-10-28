@@ -13,12 +13,11 @@
             </span>
           </a>
             <div class="clear m-b">
-              <h4 class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
+              <h4 style="margin-top:15px !important" class="text-white m-a-0 m-b-xs"><b>{{ firstName + ' ' + lastName }}</b></h4>
               <h6 class="text-white"><span class="m-r">{{ token.permissions == 'student' ? 'Ученик' : 'Учитель' }}</span><br>
               ОУ: <b>{{ school }} <i class="fa fa-map-marker "></i> {{ city }}</b></h6>
               <h6 class="m-a-0 text-white">Слов выучено за всё время: <b>{{ wordsLearnt }}</b></h6>
-              <br>
-              <h6 class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h6>
+              <h6 style="" class="m-a-0 text-white" v-if="date">Ближайший день сдачи: <b> {{ date }}</b></h6>
               <h6 class="m-a-0 text-white" v-else>Ближайшего дня сдачи нет</h6>
             </div>
           </div>
