@@ -122,6 +122,7 @@ export default {
       this.lose = false;
       this.pairsLeft = this.pairs.length;
       this.nextKey = this.pairs[1].key;
+      this.showDef = false;
     },
     toKnow() {
       this.showDef = false;

@@ -3,7 +3,7 @@
     <div class="p-a-md box-color r box-shadow-z1 text-color m-a" v-if="!done">
       <div class="m-b">
         Забыли пароль?
-        <p class="text-xs m-t">Введите ваш email адрес, и мы отправим вам инструкции, как поменять пароль.</p>
+        <p class="text-xs m-t">Введите электронную почту, на которую зарегистрирован Ваш аккаунт, и мы отправим вам инструкции, как поменять пароль.</p>
       </div>
       <form name="reset" onsubmit="return false">
         <div class="md-form-group">
