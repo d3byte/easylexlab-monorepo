@@ -12,7 +12,7 @@
           <div class="col-sm-12">
             <div class="text-white">
               <h4> <img src="../pics/task.png" style="margin-left:12px"> Название урока: <b>{{ task.name }}</b></h4>
-              <h5 class="no-margin hidden-sm-down" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show"><i class="fa fa-bookmark-o fa-2x" style="visibility:hidden" aria-hidden="true"></i>Выберите задание</h5>
+              <h5 class="hidden-sm-down" style="margin-left:59px !important;" v-show="!showTest && !games.matching.show && !games.flashcards.show && !games.snake.show && !games.scramble.show && !games.typein.show">Выберите задание</h5>
               <h6 class="no-margin hidden-md-up" style="padding:5px">Чтобы проходить задание с мобильного устройства, воспользуйтесь нашим мобильным приложением.</h6>
             </div>
           </div>

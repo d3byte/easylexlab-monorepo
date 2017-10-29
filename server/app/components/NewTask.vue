@@ -10,7 +10,7 @@
             </b>
           </h5>
         </div>
-        <div v-if="!showPost" class="modal-header" style="background:rgb(227, 243, 254);padding:15px">
+        <div v-if="!showPost && !success" class="modal-header" style="background:rgb(227, 243, 254);padding:15px">
           <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:10px"><b>СЛОВО</b></h5>
           <h5 class="col-md-6 text-center" style="color:rgb(116, 154, 184);margin-top:10px;"><b>ПЕРЕВОД</b></h5>
         </div>
@@ -101,8 +101,8 @@
                 </div>
               </div>
               <hr>
-              <button @click="post" style="background:rgb(251, 106, 33);color:white;margin-right:10px" class="btn" v-if="!success">Создать</button>
-              <button @click="refresh" type="button" style="background:rgb(207, 208, 209);color:white" class="btn" data-dismiss="modal" v-if="!success">Отмена</button>
+              <button @click="post" style="background:rgb(251, 106, 33);color:white;margin-right:10px;width:220px !important;height:50px !important;" class="btn" v-if="!success">Создать</button>
+              <button @click="refresh" type="button" style="background:rgb(207, 208, 209);color:white;width:220px !important;height:50px !important;" class="btn" data-dismiss="modal" v-if="!success">Отмена</button>
             </form>
           </div>
         </div>
@@ -175,11 +175,16 @@ export default {
       }
     },
     confirm() {
-      this.tasks[0].content = this.tasks[0].content.filter(pair => pair.key.length != 0 && pair.value.length != 0
+      if (this.pair.key == 0 || this.pair.value == 0){
+        this.empty = true;
+      } else {
+        this.tasks[0].content = this.tasks[0].content.filter(pair => pair.key.length != 0 && pair.value.length != 0
         || pair.key.length == 0 && pair.value.length != 0 || pair.key.length != 0 && pair.value.length == 0);
       this.errorMsg = '';
       this.showEditor = false;
       this.showPost = true;
+      }
+      
     },
     post() {
       const body = {
