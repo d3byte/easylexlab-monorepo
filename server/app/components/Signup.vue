@@ -8,7 +8,9 @@
         <span class="text-success text-bold" style="font-size:16px">
           Вы успешно зарегистрировались.
         </span>
-        <center><button class="btn btn-primary text-white text-bold" style="text-transform:uppercase;margin-top:10px">Войти</button></center>
+        <center>
+            <button @click="toLogin" class="btn btn-primary text-white text-bold" style="text-transform:uppercase;margin-top:10px">Войти</button>
+        </center>
       </div>
       <div v-if="error" class="alert ng-scope ng-isolate-scope alert-danger alert-dismissible">{{ errorMsg }}
       </div>
@@ -96,6 +98,9 @@
             root: '//ealapi.tw1.ru/api'
         },
         methods: {
+            toLogin() {
+                this.$router.replace('/login');
+            },
             check() {
                 if (this.username.length < 5) {
                     this.errorMsg = 'Длина логина должна быть не меньше 5 символов';
