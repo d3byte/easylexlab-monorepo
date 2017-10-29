@@ -87,7 +87,14 @@
             <h2 class="text-center text-bold">Как работает EasyLexLab?</h2>
           </div>
           <div class="video-body">
-            <video class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="" poster="" controls></video>
+            <iframe 
+              class="col-lg-12 col-md-12 col-sm-12 col-xs-12" 
+              height="520"
+              src="https://www.youtube.com/embed/2o2B51LBFCg" 
+              frameborder="0" 
+              gesture="media" 
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </section>
