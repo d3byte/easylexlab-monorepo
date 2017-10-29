@@ -564,7 +564,6 @@ userController.leaveGroup = (req, res) => {
     const groupId = req.body.groupId;
     db.User.findById(user.id).then(myUser => {
         myUser._groups = myUser._groups.filter(group => group != groupId);
-        console.log(myUser._groups);
         myUser.save().then(success => {
             res.json({
                 success: true

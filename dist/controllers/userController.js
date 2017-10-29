@@ -511,7 +511,6 @@ userController.leaveGroup = function (req, res) {
         myUser._groups = myUser._groups.filter(function (group) {
             return group != groupId;
         });
-        console.log(myUser._groups);
         myUser.save().then(function (success) {
             res.json({
                 success: true
