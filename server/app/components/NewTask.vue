@@ -175,17 +175,12 @@ export default {
       }
     },
     confirm() {
-      if (this.pair.key == 0 || this.pair.value == 0){
-        this.empty = true;
-      } else {
         this.tasks[0].content = this.tasks[0].content.filter(pair => pair.key.length != 0 && pair.value.length != 0
         || pair.key.length == 0 && pair.value.length != 0 || pair.key.length != 0 && pair.value.length == 0);
       this.errorMsg = '';
       this.showEditor = false;
       this.showPost = true;
-      }
-      
-    },
+       },
     post() {
       const body = {
         name: this.name,
