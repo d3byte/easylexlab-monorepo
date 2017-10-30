@@ -97,7 +97,7 @@ app.use('/info/rules', express.static(folder));
 //         }
 //     }
 // }
-app.use(cors(corsOptions));
+app.use(cors());
 // app.use(cors(corsOptions));
 app.use(cors());
 app.use('/api', routes);
