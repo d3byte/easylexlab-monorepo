@@ -199,7 +199,6 @@ userController.login = function (req, res) {
         username = _req$body2.username,
         password = _req$body2.password;
 
-    console.log(username, password);
     _models2.default.User.findOne({ username: username }).then(function (user) {
         user.verifyPassword(password).then(function (valid) {
             if (valid) {
