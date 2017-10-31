@@ -46,6 +46,7 @@ export default {
         "username": username,
         "password": password
       };
+      console.log(body)
       this.$http.post('login', body).then(res => {
         if(res.body.success) {
           this.$store.dispatch('login', res.body.token);

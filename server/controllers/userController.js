@@ -228,7 +228,7 @@ userController.post = (req, res) => {
 
 userController.login = (req, res) => {
     const { username, password } = req.body;
-
+    console.log(username, password);
     db.User.findOne({username}).then(user => {
         user.verifyPassword(password).then(valid => {
             if (valid) {
