@@ -121,17 +121,17 @@ app.use('/recover/:token', _express2.default.static(folder));
 app.use('/info', _express2.default.static(folder));
 app.use('/info/rules', _express2.default.static(folder));
 
-// Middleware
-// var whitelist = ['http://cf82612.tmweb.ru', 'http://easylexlab.ru'];
-// var corsOptions = {
-//     origin: function (origin, callback) {
-//         if (whitelist.indexOf(origin) !== -1) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error('Not allowed by CORS'))
-//         }
-//     }
-// }
+Middleware;
+var whitelist = ['http://cf82612.tmweb.ru', 'http://easylexlab.ru'];
+var corsOptions = {
+    origin: function origin(_origin, callback) {
+        if (whitelist.indexOf(_origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+};
 app.use((0, _cors2.default)(corsOptions));
 // app.use(cors(corsOptions));
 app.use('/api', _routes2.default);
