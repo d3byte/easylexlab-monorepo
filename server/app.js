@@ -86,18 +86,19 @@ app.use('/recover/:token', express.static(folder));
 app.use('/info', express.static(folder));
 app.use('/info/rules', express.static(folder));
 
-var whitelist = ['http://cf82612.tmweb.ru', 'http://easylexlab.ru'];
-var corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
-app.use(cors(corsOptions));
+// Middleware
+// var whitelist = ['http://cf82612.tmweb.ru', 'http://easylexlab.ru'];
+// var corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// }
 // app.use(cors(corsOptions));
+app.use(cors());
 app.use('/api', routes);
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
 
