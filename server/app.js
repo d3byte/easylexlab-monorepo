@@ -12,9 +12,9 @@ import secret from './secret';
 import routes from './routes';
 
 mongoose.connect('mongodb://localhost:27017/eng_proj', {
-  useMongoClient: true
+    useMongoClient: true
 }, () => {
-  console.log('Connected to mongodb');
+    console.log('Connected to mongodb');
 });
 
 const app = express();
@@ -97,8 +97,8 @@ app.use('/info/rules', express.static(folder));
 //         }
 //     }
 // }
+app.use(cors(corsOptions));
 // app.use(cors(corsOptions));
-app.use(cors());
 app.use('/api', routes);
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
 

@@ -132,8 +132,8 @@ app.use('/info/rules', _express2.default.static(folder));
 //         }
 //     }
 // }
+app.use((0, _cors2.default)(corsOptions));
 // app.use(cors(corsOptions));
-app.use((0, _cors2.default)());
 app.use('/api', _routes2.default);
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
 
