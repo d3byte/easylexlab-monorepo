@@ -121,7 +121,6 @@ app.use('/recover/:token', _express2.default.static(folder));
 app.use('/info', _express2.default.static(folder));
 app.use('/info/rules', _express2.default.static(folder));
 
-Middleware;
 var whitelist = ['http://cf82612.tmweb.ru', 'http://easylexlab.ru'];
 var corsOptions = {
     origin: function origin(_origin, callback) {
