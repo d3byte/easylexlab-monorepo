@@ -13,15 +13,9 @@
         </div>
       </div>
     </center>
-    <div class="container box padding" v-if="!success" style="margin-top:50px;">
+    <div class="container box game padding" v-if="!success" style="margin-top:50px;">
       <center>
         <i v-if="showPreloader" class="material-icons preloader">cached</i>
-        <!-- <div v-if="success" class="signup">
-          <h3 class="success">Вы прошли тест</h3>
-          <h4>Ваш результат: {{ percentage }}%</h4>
-          <h4>Вы выучили {{ wordsLearnt }} слов</h4>
-          <h5 @click="toProfile">Вернуться</h5>
-        </div> -->
       </center>
       <form v-if="!showPreloader && !success" onsubmit="return false">
         <div class="row padding">
@@ -202,7 +196,7 @@ export default {
     font-size: 14px;
   }
 
-  .box {
+  .box.game {
     border-top: 5px solid #5ee6af;
     border-radius: 4px;
   }
