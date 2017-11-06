@@ -37,7 +37,10 @@ a {
 
 input {
   background: transparent;
-  border: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: #3aa0de;
   color: white;
   font-size: 16px;
   transition: 0.3s;
