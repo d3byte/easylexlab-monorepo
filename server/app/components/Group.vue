@@ -113,7 +113,7 @@
                       </li>
                       <li class="list-group-item checkbox">
                         <input type="checkbox" id="padding" v-model="showAll">
-                        <label for="padding">Посмотреть все</label>
+                        <label style="margin-top:-5px;margin-left:5px;" for="padding">Посмотреть все</label>
                       </li>
                     </ul>
                   </div>
@@ -152,7 +152,7 @@
             <div class="row-col">
               <div class="row checkbox">
                 <input type="checkbox" class="deleteCheckbox" id="padding_delete" v-model="deleteStudent">
-                <label for="padding_delete">Редактировать группу</label>
+                <label style="margin-top:-5px;margin-left:5px;" for="padding_delete">Редактировать группу</label>
               </div>
               <div class="table-responsive box">
                 <table class="table table-striped table-hover">
@@ -478,9 +478,6 @@ export default {
   width: 10px;
 }
 
-.deleteCheckbox {
-
-}
 
 .icono-caretLeft {
   color: black !important;

@@ -87,7 +87,7 @@
       <div v-if="showTasks" class="p-v-sm padding">
         <div class="checkbox" style="justify-content:flex-start;margin-left:40px;margin-bottom:20px">
           <input type="checkbox" id="showAllCheckbox" class="deleteCheckbox" v-model="showAll">
-          <label style="margin-left:-10px" for="showAllCheckbox">Показать выполненные</label>
+          <label style="margin-top:-3px;margin-left:5px;" for="showAllCheckbox">Показать выполненные</label>
         </div>
         <h3 v-if="!!!uncompletedTasks.length && !showPreloader && !showAll">Невыполненных заданий нет</h3>
         <h3 v-if="!!!tasks.length && !showPreloader && showAll">Выполненных заданий нет</h3>
