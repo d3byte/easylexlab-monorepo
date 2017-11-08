@@ -113,7 +113,7 @@
                       </li>
                       <li class="list-group-item checkbox">
                         <input type="checkbox" id="padding" v-model="showAll">
-                        <label style="margin-top:-5px;margin-left:5px;" for="padding">Посмотреть все</label>
+                        <label class="checkbox_label" for="padding">Посмотреть все</label>
                       </li>
                     </ul>
                   </div>
@@ -152,7 +152,7 @@
             <div class="row-col">
               <div class="row checkbox">
                 <input type="checkbox" class="deleteCheckbox" id="padding_delete" v-model="deleteStudent">
-                <label style="margin-top:-5px;margin-left:5px;" for="padding_delete">Редактировать группу</label>
+                <label class="checkbox_label" for="padding_delete">Редактировать группу</label>
               </div>
               <div class="table-responsive box">
                 <table class="table table-striped table-hover">
@@ -693,5 +693,11 @@ export default {
   opacity: 1;
   color: red;
 }
+
+.checkbox_label {
+  margin-top:-5px !important;
+  margin-left:5px !important;
+}
+
 </style>
 
