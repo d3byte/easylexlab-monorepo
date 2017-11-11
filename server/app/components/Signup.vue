@@ -51,7 +51,7 @@
         </div>
         <div class="md-form-group" v-if="role == 'student'">
           <input type="text" v-model="groupCode" class="md-input">
-          <label>Код группы (необязательно)</label>
+          <label><b>Код регистрации (латинскими буквами)</b></label>
         </div>
         <div class="m-b-md">
           <label class="md-check" style="font-size: 12px">
