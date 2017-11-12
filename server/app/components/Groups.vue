@@ -69,6 +69,7 @@ export default {
   },
   http: {
     root: '//ealapi.tw1.ru/api'
+    // root: '/api'
   },
   methods: {
     goto(id) {

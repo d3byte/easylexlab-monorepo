@@ -251,6 +251,7 @@ export default {
   },
   http: {
     root: '//ealapi.tw1.ru/api'
+    // root: '/api'
   },
   created() {
     if(!this.$store.getters.loginState)

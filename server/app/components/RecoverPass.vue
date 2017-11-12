@@ -59,6 +59,7 @@ export default {
   },
   http: {
     root: '//ealapi.tw1.ru/api'
+    // root: '/api'
   },
   created() {
     const token = this.$route.params.token;

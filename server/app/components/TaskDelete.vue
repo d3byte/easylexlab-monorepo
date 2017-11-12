@@ -26,6 +26,8 @@
              </div>
              <div class="col-sm-4"></div>
              <div class="col-sm-4">
+               <label class="errormsg">{{ error }}</label>
+               <label class="success">{{ success }}</label>
                <input type="name" class="form-control" v-model="name">
              </div>
              <div class="col-sm-4"></div>
@@ -55,6 +57,7 @@ export default {
   },
   http: {
     root: '//ealapi.tw1.ru/api'
+    // root: '/api'
   },
   methods: {
     submit() {

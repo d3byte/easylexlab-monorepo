@@ -30,10 +30,10 @@
           <div class="tab-pane active" id="tab-1">
             <form role="form" class="p-a-md col-md-6" enctype="multipart/form-data" onsubmit="return false">
               <div class="form-group" v-if="!!errorInfo">
-                <label class="text-danger">{{ errorInfo }}</label>
+                <label class="text-danger"><b>{{ errorInfo }}</b></label>
               </div>
               <div class="form-group" v-for="success in infoSuccess">
-                <label class="text-success">{{ success }}</label>
+                <label class="text-success"><b>{{ success }}</b></label>
               </div>
               <div class="form-group">
                 <label>Имя</label>
@@ -47,7 +47,10 @@
                 <label>Присоединиться к группе</label>
                 <input v-model="groupCode" type="text" class="form-control">
               </div>
-              <button type="submit" class="btn btn-info m-t" @click="submitInfo">Обновить</button>
+              <button :disabled="updatingInfo ? true : false" type="submit" class="btn btn-info m-t" @click="submitInfo">
+                <i v-if="updatingInfo" class="material-icons preloader">cached</i>
+                <span v-else>Обновить</span>
+              </button>
             </form>
           </div>
 
@@ -156,6 +159,7 @@ export default {
       errorInfo: '',
       errorLogin: '',
       errorPassword: '',
+      updatingInfo: false,
       infoSuccess: [],
       loginSuccess: '',
       passwordSuccess: '',
@@ -267,6 +271,7 @@ export default {
     },
     submitInfo() {
       if(this.firstName || this.lastName || this.groupCode) {
+        this.updatingInfo = true;
         if(!!this.groupCode) {
           let inGroup = false;
           for(let group of this.user._groups) {
@@ -283,13 +288,21 @@ export default {
               }
             }).then(res => {
               this.errorInfo = '';
-              this.infoSuccess.push('Вы успешно присоединились к группе!');
+              this.groupCode = '';
+              this.updatingInfo = false;
+              if(res.body.success) {
+                this.infoSuccess.push('Вы успешно присоединились к группе!');
+              } else {
+                this.errorInfo = 'Вы уже состоите в этой группе!'
+              }
             });
           } else {
+            this.updatingInfo = false;
             this.errorInfo = 'Вы уже состоите в этой группе!';
           }
         }
         if(!!this.firstName || !!this.lastName) {
+          this.updatingInfo = true;
           const body = {
             firstName: this.firstName,
             lastName: this.lastName
@@ -300,6 +313,7 @@ export default {
               'Authorization': 'Bearer ' + this.$store.getters.userToken
             }
           }).then(res => {
+            this.updatingInfo = false;
             this.errorInfo = '';
             this.infoSuccess.push('Информация успешно обновлена!');
             if(this.firstName)

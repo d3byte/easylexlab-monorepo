@@ -206,6 +206,7 @@ export default {
   },
   http: {
     root: '//ealapi.tw1.ru/api'
+    // root: '/api'
   },
   created() {
     this.background = localStorage.background ? localStorage.background : 'linear-gradient(to right, rgb(56, 155, 180), rgb(121, 101, 190)';
