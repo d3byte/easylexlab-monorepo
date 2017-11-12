@@ -50,7 +50,7 @@ groupController.post = function (req, res) {
                     if (i != index) {
                         newCode += code[i];
                     } else {
-                        newCode += (0, _randomatic2.default)('A0', 1);
+                        newCode += (0, _randomatic2.default)('a0', 1);
                     }
                 }
                 var _group = new _models2.default.Group({

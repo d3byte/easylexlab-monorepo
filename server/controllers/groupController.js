@@ -29,7 +29,7 @@ groupController.post = (req, res) => {
                     if (i != index) {
                         newCode += code[i];
                     } else {
-                        newCode += randomize('A0', 1);
+                        newCode += randomize('a0', 1);
                     }
                 }
                 const group = new db.Group({
