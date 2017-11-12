@@ -305,7 +305,7 @@ groupController.deleteGroup = (req, res) => {
             { $pull: { _groups: groupId } }, {
             multi: true
         }).then(success => {
-            res.json({ success: true, message })
+            return res.json({ success: true })
         })
     });
   }
