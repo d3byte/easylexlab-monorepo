@@ -300,7 +300,14 @@ groupController.deleteGroup = (req, res) => {
   const user = req.user;
 
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
-    db.Group.findByIdAndRemove(groupId).then(success => res.json({ success }));
+    db.Group.findByIdAndRemove(groupId).then(success => {
+        db.User.update({ _groups: { $in: [groupId] } },
+            { $pull: { _groups: groupId } }, {
+            multi: true
+        }).then(success => {
+            res.json({ success: true, message })
+        })
+    });
   }
 };
 
@@ -314,7 +321,11 @@ groupController.removeStudent = (req, res) => {
   if(user.permissions == 'teacher' || user.permissions == 'admin') {
     db.Group.findByIdAndUpdate(groupId, {
       $pull: { '_students': userId }
-    }).then(success => { res.json({ success: true }) });
+    }).then(success => { 
+        db.User.findByIdAndUpdate(userId, { $pull: { '_groups': groupId } }).then(r => {
+            res.json({ success: true })
+        })
+    });
   }
 };
 
