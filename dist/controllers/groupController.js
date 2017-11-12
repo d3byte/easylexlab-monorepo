@@ -55,7 +55,7 @@ groupController.post = function (req, res) {
                 }
                 var _group = new _models2.default.Group({
                     name: name,
-                    code: newCode,
+                    code: newCode.toLowerCase(),
                     grade: grade,
                     _teacher: user.id
                 });

@@ -34,7 +34,7 @@ groupController.post = (req, res) => {
                 }
                 const group = new db.Group({
                     name,
-                    code: newCode,
+                    code: newCode.toLowerCase(),
                     grade,
                     _teacher: user.id
                 });
