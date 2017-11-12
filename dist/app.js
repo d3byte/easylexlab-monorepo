@@ -121,6 +121,7 @@ app.use('/recover/:token', _express2.default.static(folder));
 app.use('/info', _express2.default.static(folder));
 app.use('/info/rules', _express2.default.static(folder));
 
+app.use((0, _cors2.default)());
 app.use(_bodyParser2.default.json());
 app.use('/api', _routes2.default);
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));

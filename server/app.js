@@ -86,6 +86,7 @@ app.use('/recover/:token', express.static(folder));
 app.use('/info', express.static(folder));
 app.use('/info/rules', express.static(folder));
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use('/api', routes)
 // app.use(expressJWT({ secret: secret }).unless({ path: ['api/login', '/'] }));
