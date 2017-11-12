@@ -327,18 +327,27 @@ userController.addGroup = function (req, res) {
     var groupCode = req.body.groupCode;
     var user = req.user;
 
-    _models2.default.Group.findOneAndUpdate({ code: groupCode }, { $push: { '_students': user.id } }).then(function (group) {
-        _models2.default.User.findByIdAndUpdate(user.id, { $push: { '_groups': group._id } }).then(function (myUser) {
-            res.json({ success: true });
-        }).catch(function (err) {
-            res.status(500).json({
-                body: err
+    _models2.default.Group.findOne({ code: groupCode }).then(function (group) {
+        var includes = false;
+        group._students.map(function (student) {
+            if (student == user.id) {
+                includes = true;
+            }
+        });
+        if (!includes) {
+            group._students.push(user.id);
+            group.save().then(function (r) {
+                _models2.default.User.findByIdAndUpdate(user.id, { $push: { '_groups': group._id } }).then(function (myUser) {
+                    res.json({ success: true });
+                }).catch(function (err) {
+                    res.status(500).json({
+                        body: err
+                    });
+                });
             });
-        });
-    }).catch(function (err) {
-        res.status(500).json({
-            body: err
-        });
+        } else {
+            return res.json({ success: false });
+        }
     });
 };
 

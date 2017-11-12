@@ -314,7 +314,11 @@ groupController.deleteGroup = function (req, res) {
 
     if (user.permissions == 'teacher' || user.permissions == 'admin') {
         _models2.default.Group.findByIdAndRemove(groupId).then(function (success) {
-            return res.json({ success: success });
+            _models2.default.User.update({ _groups: { $in: [groupId] } }, { $pull: { _groups: groupId } }, {
+                multi: true
+            }).then(function (success) {
+                return res.json({ success: true });
+            });
         });
     }
 };
@@ -330,7 +334,9 @@ groupController.removeStudent = function (req, res) {
         _models2.default.Group.findByIdAndUpdate(groupId, {
             $pull: { '_students': userId }
         }).then(function (success) {
-            res.json({ success: true });
+            _models2.default.User.findByIdAndUpdate(userId, { $pull: { '_groups': groupId } }).then(function (r) {
+                res.json({ success: true });
+            });
         });
     }
 };
