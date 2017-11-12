@@ -366,22 +366,30 @@ userController.addGroup = (req, res) => {
     const groupCode = req.body.groupCode;
     const user = req.user;
 
-    db.Group.findOneAndUpdate({ code: groupCode },
-    { $push: {'_students': user.id} }).then(group => {
-        db.User.findByIdAndUpdate(
-            user.id,
-            { $push: {'_groups': group._id }}).then(myUser => {
-            res.json({ success: true });
-        }).catch(err => {
-            res.status(500).json({
-                body: err
-            });
-        });
-    }).catch(err => {
-      res.status(500).json({
-           body: err
-      });
-    });
+    db.Group.findOne({ code: groupCode }).then(group => {
+        let includes = false;
+        group._students.map(student => {
+            if(student == user.id) {
+                includes = true;
+            }
+        })
+        if(!includes) {
+            group._students.push(user.id);
+            group.save().then(r => {
+                db.User.findByIdAndUpdate(
+                    user.id,
+                    { $push: { '_groups': group._id } }).then(myUser => {
+                        res.json({ success: true });
+                    }).catch(err => {
+                        res.status(500).json({
+                            body: err
+                        });
+                    });
+            })
+        } else {
+            return res.json({ success: false })
+        }
+    })
 };
 
 
