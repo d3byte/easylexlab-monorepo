@@ -40,7 +40,7 @@ groupController.post = function (req, res) {
     var user = req.user;
 
     if (user.permissions == "admin" || user.permissions == "teacher") {
-        var code = (0, _randomatic2.default)('A0', 5);
+        var code = (0, _randomatic2.default)('a0', 5);
         _models2.default.Group.findOne({ code: code }, function (err, group) {
             if (err) throw err;
             if (group) {
@@ -55,7 +55,7 @@ groupController.post = function (req, res) {
                 }
                 var _group = new _models2.default.Group({
                     name: name,
-                    code: newCode.toLowerCase(),
+                    code: newCode,
                     grade: grade,
                     _teacher: user.id
                 });

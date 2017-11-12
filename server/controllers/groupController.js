@@ -18,7 +18,7 @@ groupController.post = (req, res) => {
     const user = req.user;
 
     if (user.permissions == "admin" || user.permissions == "teacher") {
-        const code = randomize('A0', 5);
+        const code = randomize('a0', 5);
         db.Group.findOne({code}, (err, group) => {
             if (err)
                 throw err;
@@ -34,7 +34,7 @@ groupController.post = (req, res) => {
                 }
                 const group = new db.Group({
                     name,
-                    code: newCode.toLowerCase(),
+                    code: newCode,
                     grade,
                     _teacher: user.id
                 });
