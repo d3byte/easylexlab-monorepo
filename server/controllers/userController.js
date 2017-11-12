@@ -243,8 +243,9 @@ userController.login = (req, res) => {
                     token
                 });
             } else {
-                res.status(200).json({
-                    success: valid
+                res.json({
+                    error: true,
+                    type: 'passwordNotValid'
                 });
             }
         }).catch(err => {
@@ -253,8 +254,9 @@ userController.login = (req, res) => {
             });
         });
     }).catch((err) => {
-        res.status(500).json({
-            message: err
+        res.json({
+            error: true,
+            type: 'loginNotFound'
         });
     });
 };
