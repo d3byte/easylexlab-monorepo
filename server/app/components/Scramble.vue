@@ -67,7 +67,7 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    // root: '/api'
   },
   methods: {
     tryTest() {

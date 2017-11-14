@@ -33,7 +33,7 @@ export default {
     }
   },
   http: {
-    root: '/api'
+    // root: '/api'
   },
   created() {
     const body = {
