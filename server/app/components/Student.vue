@@ -63,9 +63,9 @@
             <li class="nav-item" style="margin-bottom:20px">
               <button class="btn btn-sm btn-outline rounded button-msg" @click="switchMsgs" data-target="#tab_2"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> <b>Сообщения</b></button>
             </li>
-            <li class="nav-item" style="margin-top:5px" v-for="group in user._groups">
-              <button class="btn btn-sm btn-outline rounded" @click="changeGroup(group)" 
-                v-bind:class="{
+            <li class="nav-item groupbtn" style="margin-top:5px" v-for="(group, index) in user._groups">
+              <button class="btn btn-sm btn-outline rounded" @click="changeGroup(group, index)" 
+                :class="{
                   'group-1':index == 0,
                   'group-2':index == 1,
                   'group-3':index == 2,
@@ -145,7 +145,7 @@
                         <img src="../pics/task-icon.png" class="task-icon">
                         {{ test.name }}
                       </h3>
-                      <smallщ>Результат: <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></small>
+                      <small>Результат: <span v-for="result in test.results" v-if="result.userId == user._id">{{ result.result }}%</span></small>
                       <button style="margin-top:10px" class="btn btn-primary"><router-link :to="'/task/' + test._id">Улучшить результат</router-link></button>
                     </center>
                   </div>
@@ -155,10 +155,12 @@
           </div>
       </div>
       <div v-if="showMsgs">
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-12 col-sm-12 msgblock">
           <div class="padding">
             <div class="tab-pane p-v-sm" id="tab_2">
+              <center>
               <h3 v-if="!!!messages.length && !showPreloader">Сообщений нет</h3>
+              </center>
               <i v-if="showPreloader" class="material-icons preloader">cached</i>
               <div v-if="!!messages.length && !showPreloader" class="row">
                 <div class="box">
@@ -359,6 +361,10 @@ export default {
 #padding {
   margin-left: 20px;
   width: 10px;
+}
+
+.msgblock {
+  padding-top: 50px;
 }
 
 #msg_card {
@@ -604,7 +610,6 @@ background-color: #58c721 !important;
 
 .active-group {
   border: 2px solid white;
-} .active-group {
-
+  pointer-events: none;
 }
 </style>
