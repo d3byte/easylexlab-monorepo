@@ -440,6 +440,29 @@ userController.getUser = (req, res) => {
         });
 };
 
+userController.getUserMobile = (req, res) => {
+    const user = req.user;
+
+    db.User.findById(user.id)
+        .populate({
+            path: '',
+            select: '_id firstName lastName username email permissions createdAt picUrl wordsLearnt _groups'
+        })
+        .populate({
+            path: '_groups',
+            model: 'Group',
+            select: '_id name _tests',
+            populate: {
+                path: '_tests',
+                model: 'Stack',
+                select: '_id name tasks timeToDo _group attempts results deadline'
+            }
+        })
+        .then(user => {
+            return res.json({ user })
+        });
+};
+
 userController.learnWords = (req, res) => {
   const user = req.user;
   const {

@@ -398,6 +398,26 @@ userController.getUser = function (req, res) {
     });
 };
 
+userController.getUserMobile = function (req, res) {
+    var user = req.user;
+
+    _models2.default.User.findById(user.id).populate({
+        path: '',
+        select: '_id firstName lastName username email permissions createdAt picUrl wordsLearnt _groups'
+    }).populate({
+        path: '_groups',
+        model: 'Group',
+        select: '_id name _tests',
+        populate: {
+            path: '_tests',
+            model: 'Stack',
+            select: '_id name tasks timeToDo _group attempts results deadline'
+        }
+    }).then(function (user) {
+        return res.json({ user: user });
+    });
+};
+
 userController.learnWords = function (req, res) {
     var user = req.user;
     var _req$body4 = req.body,

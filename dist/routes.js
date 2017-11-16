@@ -113,6 +113,7 @@ routes.post('/upload-image', upload.single('image'), function (req, res) {
 routes.patch('/newpassword', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.changePassword);
 routes.patch('/addgroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.addGroup);
 routes.post('/user', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getUser);
+routes.post('/user-mobile', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getUserMobile);
 routes.patch('/words', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.learnWords);
 routes.post('/leavegroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.leaveGroup);
 routes.post('/getavatar', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getAvatar);

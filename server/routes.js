@@ -76,6 +76,7 @@ routes.post('/upload-image', upload.single('image'), function (req, res) {
 routes.patch('/newpassword', expressJWT({ secret }), userController.changePassword);
 routes.patch('/addgroup', expressJWT({ secret }), userController.addGroup);
 routes.post('/user', expressJWT({ secret }), userController.getUser);
+routes.post('/user-mobile', expressJWT({ secret }), userController.getUserMobile);
 routes.patch('/words', expressJWT({ secret }), userController.learnWords);
 routes.post('/leavegroup', expressJWT({ secret }), userController.leaveGroup);
 routes.post('/getavatar', expressJWT({ secret }), userController.getAvatar);
