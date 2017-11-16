@@ -83,6 +83,8 @@
               <div class="form-group">
                 <label>Логин</label>
                 <input v-model="newUsername" type="text" class="form-control">
+                <label style="margin-top:15px;">Электронная почта</label>
+                <input type="text" class="form-control">
               </div>
               <button type="submit" class="btn btn-info m-t" @click="changeUsername">Обновить</button>
             </form>
@@ -198,7 +200,7 @@ export default {
     }
   },
   http: {
-    root: '//ealapi.tw1.ru/api'
+    // root: '//ealapi.tw1.ru/api'
     // root: '/api'
   },
   methods: {

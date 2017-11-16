@@ -66,7 +66,7 @@ export default {
   },
   http: {
     // root: '//ealapi.tw1.ru/api'
-    root: '/api'
+    // root: '/api'
   }
 }
 </script>
