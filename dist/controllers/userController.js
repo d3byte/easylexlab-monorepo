@@ -245,6 +245,16 @@ userController.getGroups = function (req, res) {
     }
 };
 
+userController.changeEmail = function (req, res) {
+    var user = req.user;
+    var email = req.body.email;
+
+
+    _models2.default.findByIdAndUpdate(user.id, { $set: { email: email } }).then(function (done) {
+        res.json({ success: true });
+    });
+};
+
 userController.updateInfo = function (req, res) {
     var myUser = req.user;
     var _req$body3 = req.body,

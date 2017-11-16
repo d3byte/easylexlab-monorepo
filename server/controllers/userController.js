@@ -277,6 +277,15 @@ userController.getGroups = (req, res) => {
     }
 };
 
+userController.changeEmail = (req, res) => {
+    const user = req.user
+    const { email } = req.body
+    
+    db.findByIdAndUpdate(user.id, { $set: { email } }).then(done => {
+        res.json({ success: true })
+    })
+}
+
 userController.updateInfo = (req, res) => {
     const myUser = req.user;
     const {

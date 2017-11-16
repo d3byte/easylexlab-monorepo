@@ -116,6 +116,7 @@ routes.post('/user', (0, _expressJwt2.default)({ secret: _secret2.default }), _u
 routes.post('/user-mobile', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getUserMobile);
 routes.patch('/words', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.learnWords);
 routes.post('/leavegroup', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.leaveGroup);
+routes.post('/change-email', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.changeEmail);
 routes.post('/getavatar', (0, _expressJwt2.default)({ secret: _secret2.default }), _userController2.default.getAvatar);
 
 // Group routes

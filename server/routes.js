@@ -79,6 +79,7 @@ routes.post('/user', expressJWT({ secret }), userController.getUser);
 routes.post('/user-mobile', expressJWT({ secret }), userController.getUserMobile);
 routes.patch('/words', expressJWT({ secret }), userController.learnWords);
 routes.post('/leavegroup', expressJWT({ secret }), userController.leaveGroup);
+routes.post('/change-email', expressJWT({ secret }), userController.changeEmail);
 routes.post('/getavatar', expressJWT({ secret }), userController.getAvatar);
 
 // Group routes
