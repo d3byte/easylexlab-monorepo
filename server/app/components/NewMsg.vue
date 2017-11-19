@@ -22,7 +22,7 @@
             <h5 v-if="success && !showPreloader">Сообщение успешно отправлено.</h5>
             </center>
             <center>
-              <button style="margin-top:20px;" v-if="success && !showPreloader" @click="refresh" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
+              <button style="margin-top:20px;" v-if="success && !showPreloader" @click="modal_dismiss" type="button" class="btn dark-white p-x-md" data-dismiss="modal">Закрыть</button>
             </center>
             <form v-if="!success" class="login-form" onsubmit="return false">
               <div class="form-group row">
@@ -30,9 +30,6 @@
                   <textarea class="form-control" rows="5" v-model="text" required></textarea>
                 </div>
               </div>
-              <!-- <div class="white-text">
-                <textarea v-model="text" placeholder="Сообщение" required></textarea>
-              </div> -->
               <center>
                 <button @click="send" style="background:rgb(251, 106, 33);color:white;margin-right:10px;width:220px !important;height:50px !important;" class="btn" v-if="!success">Отправить</button>
                 <button @click="refresh" style="background:rgb(207, 208, 209);color:white;width:220px !important;height:50px !important;" type="button" class="btn" data-dismiss="modal">Отмена</button>
@@ -77,6 +74,12 @@ export default {
       });
     },
     refresh() {
+      this.success = false;
+      this.text = '';
+      this.showPreloader = false;
+    },
+    modal_dismiss() {
+      window.location.reload()
       this.success = false;
       this.text = '';
       this.showPreloader = false;

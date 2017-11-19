@@ -118,4 +118,11 @@ export default {
 .body-row:nth-child(odd) {
   background: rgb(226, 236, 237) !important;
 }
+
+.headers > th {
+  vertical-align: middle;
+} .headers:hover {
+  background: rgb(98, 171, 242) !important;
+  color: white !important;
+}
 </style>

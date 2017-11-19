@@ -5,24 +5,21 @@
         <div class="modal-header" style="background:rgb(161, 196, 226);">
             <h5 class="modal-title text-center text-white">
               <b>
-                УДАЛЕНИЕ ГРУППЫ
+                Подтвердите удаление группы, введя название группы.
               </b>
             </h5>
           </div>
         <div class="modal-body text-center p-lg">
-          <h3>
-            Подтвердите удаление группы, введя название группы.
-           </h3>
-           <p>
+           <h4>
              При удалении группы удалятся все задания,<br>
              созданные для этой группы.
-           </p>
+           </h4>
            <form role="form" class="" onsubmit="return false">
              <div class="form-group">
                <center>
                <div class="row flexme">
                  <div class="col-sm-12">
-               <label>Введите название группы:</label>
+               <label><h5>Введите название группы:</h5></label>
              </div>
              <div class="col-sm-4"></div>
              <div class="col-sm-4">
