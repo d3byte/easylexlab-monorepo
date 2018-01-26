@@ -27,8 +27,8 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueChartkick, { Chartkick });
 
-Vue.http.options.root = '//ealapi.tw1.ru/api';
-// Vue.http.options.root = '/api';
+//Vue.http.options.root = '//ealapi.tw1.ru/api';
+Vue.http.options.root = '/api';
 // 
 const routes = [
   { path: '/', component: Home },
