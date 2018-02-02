@@ -31,7 +31,7 @@ Vue.use(VueChartkick, { Chartkick });
 Vue.http.options.root = '/api';
 // 
 const routes = [
-  { path: '/', component: Home },
+  { path: '/', component: Login },
   { path: '/signup', component: Signup },
   { path: '/signup/student', component: Signup },
   { path: '/signup/teacher', component: Signup },
