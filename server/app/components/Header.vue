@@ -3,9 +3,9 @@
       <div class="container hidden-sm-down">
 
         <div class="navbar-item pull-left h4" id="pageTitle">
-          <!-- <router-link to="/profile">
+          <router-link to="/profile">
             <img src="../pics/logo.png" class="logo">
-          </router-link> -->
+          </router-link> 
         </div>
 
         <ul class="nav navbar-nav pull-right text-primary-hover" v-if="logged">
@@ -482,6 +482,7 @@
 <style lang="css" scoped>
   .app-header {
     width: 100%;
+    padding: 10px 0;
   }
   .h5 {
     margin-top: 0;
@@ -501,10 +502,8 @@
   }
 
   .logo {
-    width: 165px;
     height: 55px;
     margin-right: -5px;
-    margin-bottom: 1px;
   }
 
   .hover:hover {
