@@ -2,7 +2,7 @@
   <div class="center-block w-xxl w-auto-xs p-y-md">
     <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
       <div class="m-b text-sm">
-        Вход в EasyLexLab
+        Вход в Lexium
       </div>
       <div v-if="!!this.error" class="m-b text-sm text-danger">
         {{ this.error }}

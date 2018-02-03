@@ -24,7 +24,7 @@
                 <div class="slogan">С нами эффективно учить и&nbsp;легко учиться</div>
 
                 <div class="about">
-                  <span>EasyLexLab</span>
+                  <span>Lexium</span>
                   - это образовательная платформа для изучения иностранных слов, предназначенная для учителей и учеников, изучающих языки."
                 </div>
 
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="notice">
-                  <span>Мобильное приложение EasyLexLab,</span>
+                  <span>Мобильное приложение Lexium,</span>
                   разработанное для вашего удобства, является дополнением к существующей платформе. Выполняйте домашнее задание, где бы вы ни находились!
                 </div>
 
@@ -84,7 +84,7 @@
       <section class="section section--second">
         <div class="container video">
           <div class="video-header">
-            <h2 class="text-center text-bold">Как работает EasyLexLab?</h2>
+            <h2 class="text-center text-bold">Как работает Lexium?</h2>
           </div>
           <div class="video-body">
             <iframe 
@@ -110,7 +110,7 @@
               <div class="col-md-12 text-right">
                 <h2 class="text-bold" style="margin-bottom:25px">Делитесь<br>знаниями</h2>
                 <p>
-                  Постройте для своих учеников<br>максимально легкий и эффективный процесс обучения<br>иностранному языку с помощью платформы EasyLexLab.
+                  Постройте для своих учеников<br>максимально легкий и эффективный процесс обучения<br>иностранному языку с помощью платформы Lexium.
                 </p>
                 <router-link to="/signup/teacher" class="text-right">
                   <button
@@ -138,7 +138,7 @@
                 <h2 class="text-bold" style="margin-bottom:25px">Учеба в<br>удовольствие</h2>
                 <p>
                   Хочешь легко запомнить много слов?<br>
-                  EasyLexLab может тебе в этом помочь.<br>
+                  Lexium может тебе в этом помочь.<br>
                   Выполняй домашнее задание с удовольствием<br>
                   в любом месте и в любое время. Наблюдай за тем,<br>
                   как пополняется твой словарный запас и<br>
@@ -166,7 +166,7 @@
           <img class="col-lg-12 col-md-12 col-sm-12 col-xs-12" src="../pics/tablet.png">
         </div>
         <div class="advantages-mobile hidden-md-up">
-          <h3 class="text-center text-bold">Использовать EasyLexLab значит</h3>
+          <h3 class="text-center text-bold">Использовать Lexium значит</h3>
           <div class="row">
             <div class="col-xs-12 advantage">
               <p>
@@ -207,7 +207,7 @@
         <div class="container center-content hidden-sm-down">
           <div class="statistic">
             <!-- 
-              <p class="text-center text-bold">В течение нескольких лет учителя и ученики нашей школы используют EasyLexLab</p>
+              <p class="text-center text-bold">В течение нескольких лет учителя и ученики нашей школы используют Lexium</p>
               <p class="text-center">на уроках английского языка. Интерактивные задания в союзе с традиционными учебниками дают хорошие результаты, повышают степень индивидуализации обучения и стимулируют детей к получению знаний.</p>
             -->
           </div>
@@ -220,7 +220,7 @@
       <div class="navbar-parent">
         <div class="container">
           <div class="footer">
-            <router-link to="">EasyLexLab © 2017</router-link>
+            <router-link to="">Lexium © 2017</router-link>
           </div>
         </div>
       </div>
